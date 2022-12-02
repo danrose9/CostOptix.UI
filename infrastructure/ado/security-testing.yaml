@@ -1,0 +1,35 @@
+schedules:
+  - cron: '0 0 * * 0'
+    displayName: Weekly midnight build
+    branches:
+      include:
+        - develop
+
+stages:
+  - stage: 'SecurityTesting'
+    jobs:
+      - job: 'OwaspZapBaselineScan'
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - bash: |
+              chmod -R 777  ./
+              docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t https://dev.costoptix.com/ -x xml_report.xml
+              true
+            displayName: 'Owasp Container Scan'
+
+          - powershell: |
+              $XslPath = "$(System.DefaultWorkingDirectory)/security_testing/xml_to_nunit.xslt"
+              $XmlInputPath = "xml_report.xml"
+              $XmlOutputPath = "converted_report.xml"
+              $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
+              $XslTransform.Load($XslPath)
+              $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
+              # Get-ChildItem -Path $(System.DefaultWorkingDirectory)/tests -recurse
+            displayName: 'Generate Results'
+
+          - task: PublishTestResults@2
+            displayName: 'Publish Test Results'
+            inputs:
+              testResultsFormat: 'NUnit'
+              testResultsFiles: '**/converted_report.xml'
