@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="28" failures="0" errors="0" time="10.552">
+  <testsuite name="Service Provider" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="3.66" tests="2">
+    <testcase classname="Service Provider should render correct image for AWS" name="Service Provider should render correct image for AWS" time="0.05">
+    </testcase>
+    <testcase classname="Service Provider should render correct image for Azure" name="Service Provider should render correct image for Azure" time="0.018">
+    </testcase>
+  </testsuite>
+  <testsuite name="Messages" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="3.695" tests="3">
+    <testcase classname="Messages should render message" name="Messages should render message" time="0.047">
+    </testcase>
+    <testcase classname="Messages should render message" name="Messages should render message" time="0.005">
+    </testcase>
+    <testcase classname="Messages should render message" name="Messages should render message" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Button" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="3.79" tests="3">
+    <testcase classname="Login Button render without crashing" name="Login Button render without crashing" time="0.071">
+    </testcase>
+    <testcase classname="Login Button renders button correctly" name="Login Button renders button correctly" time="0.138">
+    </testcase>
+    <testcase classname="Login Button matches snapshot" name="Login Button matches snapshot" time="0.027">
+    </testcase>
+  </testsuite>
+  <testsuite name="Tooltips" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="3.968" tests="3">
+    <testcase classname="Tooltips should render Standard Tooltip" name="Tooltips should render Standard Tooltip" time="0.091">
+    </testcase>
+    <testcase classname="Tooltips should render Chart Tooltip" name="Tooltips should render Chart Tooltip" time="0.018">
+    </testcase>
+    <testcase classname="Tooltips matches snapshot" name="Tooltips matches snapshot" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="Home Page" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="4.198" tests="3">
+    <testcase classname="Home Page should render Home Page" name="Home Page should render Home Page" time="0.122">
+    </testcase>
+    <testcase classname="Home Page should contain buttons" name="Home Page should contain buttons" time="0.028">
+    </testcase>
+    <testcase classname="Home Page matches snapshot" name="Home Page matches snapshot" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="Terms of Service" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="4.463" tests="2">
+    <testcase classname="Terms of Service should render Terms of Service button" name="Terms of Service should render Terms of Service button" time="0.116">
+    </testcase>
+    <testcase classname="Terms of Service should render Terms of Service on button click" name="Terms of Service should render Terms of Service on button click" time="0.073">
+    </testcase>
+  </testsuite>
+  <testsuite name="Navbar" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="4.969" tests="3">
+    <testcase classname="Navbar should render Navbar" name="Navbar should render Navbar" time="0.071">
+    </testcase>
+    <testcase classname="Navbar Dropdown Items should render Organization Mode" name="Navbar Dropdown Items should render Organization Mode" time="0.007">
+    </testcase>
+    <testcase classname="Navbar Dropdown Items Logout option should be disabled in Demo mode" name="Navbar Dropdown Items Logout option should be disabled in Demo mode" time="0.011">
+    </testcase>
+  </testsuite>
+  <testsuite name="Cost Dashboard" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="5.306" tests="5">
+    <testcase classname="Cost Dashboard should render Cost Dashboard" name="Cost Dashboard should render Cost Dashboard" time="0.23">
+    </testcase>
+    <testcase classname="Cost Dashboard matches snapshot" name="Cost Dashboard matches snapshot" time="0.02">
+    </testcase>
+    <testcase classname="Most Expensive resource widget should render widget" name="Most Expensive resource widget should render widget" time="0.005">
+    </testcase>
+    <testcase classname="Most Expensive resource widget column width is correct" name="Most Expensive resource widget column width is correct" time="0.009">
+    </testcase>
+    <testcase classname="Fastest Growing resource widget should render widget" name="Fastest Growing resource widget should render widget" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="404 Page not found" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="6.23" tests="3">
+    <testcase classname="404 Page not found should render 404 page" name="404 Page not found should render 404 page" time="0.035">
+    </testcase>
+    <testcase classname="404 Page not found should contain return-home button" name="404 Page not found should contain return-home button" time="0.007">
+    </testcase>
+    <testcase classname="404 Page not found should return to home when clicking the button" name="404 Page not found should return to home when clicking the button" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2022-12-02T18:11:04" time="7.255" tests="1">
+    <testcase classname=" Application renders without crashing" name=" Application renders without crashing" time="1.075">
+    </testcase>
+  </testsuite>
+</testsuites>
