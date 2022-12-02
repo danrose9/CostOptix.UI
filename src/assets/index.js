@@ -1,0 +1,10 @@
+export { default as AZURE96 } from './azure-96.png';
+export { default as AWS96 } from './amazon-web-services-96.png';
+export { default as MICROSOFT96 } from './microsoft-96.png';
+export { default as SALESFORCE96 } from './salesforce-96.png';
+export { default as GOOGLE96 } from './google-cloud-96.png';
+export { default as LOGOBLUE } from './logo-blue.png';
+export { default as LOGOWHITE } from './logo-white.png';
+export { default as ERROR404 } from './404-error.png';
+export { default as BROKENPAGE } from './broken-page.png';
+export { default as HOME_BACKGROUND } from './home-background.png';

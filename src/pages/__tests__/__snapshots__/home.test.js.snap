@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Page matches snapshot 1`] = `
+<div
+  className="ui fluid container sc-bcXHqe dhjKQY"
+  data-testid="homePage-2"
+>
+  <div
+    className="sc-gswNZR jhQnwC"
+  >
+    <div
+      className="ui green fluid secondary menu"
+    >
+      <div
+        className="item"
+        onClick={[Function]}
+      >
+        <div>
+          <img
+            className="ui medium image"
+            src="logo-blue.png"
+          />
+        </div>
+      </div>
+      <div
+        className="right menu"
+      >
+        <div
+          className="item"
+          onClick={[Function]}
+        >
+          <form
+            action="undefinedAccount/ExternalLogin?provider=Azure&returnUrl=/"
+            method="POST"
+          >
+            <button
+              className="ui black big button"
+              data-testid="login-ext-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "fontSize": "1.7em",
+                }
+              }
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-dkrFOg OtyIt"
+  >
+    <div
+      className="sc-gKPRtg KMOBR"
+    >
+      <div
+        className="sc-iBYQkv gteEYk"
+      >
+        <h1
+          className="sc-eDvSVe bjdFaS"
+        >
+          Stop Over-Spending on Cloud Services
+        </h1>
+      </div>
+      <div
+        className="sc-ftTHYK cNqCNO"
+      >
+        <p
+          className="sc-jSUZER gXDBhM"
+        >
+          A powerful and insightful software suite to explore, understand and take action on cloud services spending
+        </p>
+      </div>
+      <div
+        className="sc-pyfCe eOXOaq"
+      >
+        <div
+          className="ui one column grid"
+        >
+          <div
+            className="column"
+          >
+            <button
+              className="ui huge positive button"
+              data-testid="get-started-button"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "fontSize": "1.7em",
+                }
+              }
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+        <form
+          action="undefinedAccount/DemoLogin?returnUrl=/"
+          method="POST"
+        >
+          <button
+            className="ui huge primary button"
+            data-testid="login-demo-button"
+            onClick={[Function]}
+            style={
+              Object {
+                "fontSize": "1.7em",
+              }
+            }
+          >
+            View Demo
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-hLBbgP hKculh"
+  />
+</div>
+`;

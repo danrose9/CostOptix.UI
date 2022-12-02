@@ -1,0 +1,27 @@
+
+.light-theme {
+    --button-bg: #e2e8f0;
+    --button-bg-hover: #cdd7e5;
+    --background: #fff;
+    --headings: #000;
+    --text: #38393e;
+    --highlight: #e2e8f0;
+}
+
+.dark-theme {
+    --button-bg: rgb(255 255 255 / 0.08);
+    --button-bg-hover: rgb(255 255 255 / 0.16);
+    --background: #171923;
+    --headings: #f9fafa;
+    --text: #a0aec0;
+    --highlight: #e2e8f0;
+}
+
+.default-theme {
+    --button-bg: #D9BBF9;
+    --button-bg-hover: #cdd7e5;
+    --background: #F9E9EC;
+    --headings: #111F2C;
+    --text: #0B151D;
+    --highlight: #FFA630;
+}

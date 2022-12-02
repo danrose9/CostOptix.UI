@@ -1,0 +1,22 @@
+  .dropdown {
+      right: 0;
+      left: auto;
+      font-size: 0.9rem;
+      z-index: 9999;
+      padding: 0.5rem 0;
+      list-style: none;
+      display: none;
+  }
+
+  .dropdown a {
+      padding-left: 3rem !important;
+  }
+
+  .dropdown.show {
+      display: block;
+  }
+
+  .dropdown .dropdown-submenu {
+      position: absolute;
+      top: -7px;
+  }
