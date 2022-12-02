@@ -1,0 +1,25 @@
+trigger:
+  - develop
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: BuildValidationDev
+    displayName: Build Validation
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
+    jobs:
+      - job: TestJob
+        displayName: Build and Test
+        steps:
+          - script: |
+              npm run test
+            displayName: 'Npm test'
+          - task: PublishTestResults@2
+            displayName: Publish Test Results
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/junit.xml'
+              failTaskOnFailedTests: true
+              mergeTestResults: true
