@@ -3,7 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import AppContent from '../src/app/AppContent';
 
-// require('dotenv').config();
+require('dotenv').config();
+console.log(process.env);
 
 export const App = () => {
   sessionStorage.setItem('application version', process.env.REACT_APP_VERSION);
