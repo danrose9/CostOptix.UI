@@ -39,11 +39,6 @@ export const isAuthCookieAvailable = () => {
   }
 };
 
-export const setUser = () => {
-  store.dispatch(fetchUserProfile());
-  return true;
-};
-
 export const removeAuthCookie = () => {
   let cookie_name = 'AuthCookie=';
   document.cookie = cookie_name + '=; Max-Age=0';

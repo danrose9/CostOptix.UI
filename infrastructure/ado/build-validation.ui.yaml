@@ -1,20 +1,23 @@
-trigger:
-  - develop
+trigger: none
 
 pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: BuildValidationDev
-    displayName: Build Validation
+  - stage: BuildAndTestStageDev
+    displayName: Build and Test Dev
     condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
-      - job: TestJob
+      - job: BuildAndTestJob
         displayName: Build and Test
         steps:
           - script: |
+              npm install
+              npm run build-dev
+            displayName: npm install, build
+          - script: |
               npm run test
-            displayName: 'Npm test'
+            displayName: 'Test'
           - task: PublishTestResults@2
             displayName: Publish Test Results
             condition: succeededOrFailed()
@@ -23,3 +26,6 @@ stages:
               testResultsFiles: '**/junit.xml'
               failTaskOnFailedTests: true
               mergeTestResults: true
+          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-dev.zip .)
+            displayName: Zip Deployment
+            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))

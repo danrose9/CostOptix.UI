@@ -6,7 +6,7 @@ import { isAuthCookieAvailable } from '../utils/processToken';
 const InitializeApp = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  console.log('environment: ', process.env);
+  console.log('vars', process.env);
   useMemo(() => {
     if (isAuthCookieAvailable()) {
       setIsAuthenticated(true);
