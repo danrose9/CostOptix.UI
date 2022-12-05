@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import AppContent from '../src/app/AppContent';
+import AppContent from './app/AppContent';
 console.log('REACT_APP_TEST: ', process.env.REACT_APP_TEST);
 
 export const App = () => {
