@@ -2,6 +2,11 @@ import React from 'react';
 import { Image } from 'semantic-ui-react';
 import * as images from '../assets/index';
 
+// export interface IProviderImage {
+//   provider: string;
+//   image: string;
+// }
+
 export const ProviderImage = (props) => {
   const Providers = {
     AWS: images.AWS96,

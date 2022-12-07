@@ -1,12 +1,6 @@
 import React from 'react';
 import { Message } from 'semantic-ui-react';
-
-interface IMessageBox {
-  title: string;
-  message: string;
-  color: undefined;
-  size: undefined;
-}
+import { IMessageBox } from '../types';
 
 export const MessageBox = (props: IMessageBox) => {
   const {title, message, color, size} = props;
@@ -18,3 +12,5 @@ export const MessageBox = (props: IMessageBox) => {
     </Message>
   );
 };
+
+export default MessageBox;
