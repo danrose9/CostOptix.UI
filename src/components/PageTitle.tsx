@@ -4,7 +4,9 @@ import {
   DashboardTitle,
 } from '../pages/__styles__/DefaultPageStyles';
 
-export const PageTitle = (props) => {
+import { IPageTitle } from '../types';
+
+export const PageTitle = (props: IPageTitle) => {
   return (
     <DashboardHeader>
       <DashboardTitle>{props.title}</DashboardTitle>
