@@ -2,7 +2,9 @@ import React from 'react';
 import { Image } from 'semantic-ui-react';
 import * as images from '../assets/index';
 
-export const ProviderImage = (props) => {
+import { IProviderImage } from '../types';
+
+export const ProviderImage = (props: IProviderImage) => {
   const Providers = {
     AWS: images.AWS96,
     Azure: images.AZURE96,
@@ -11,7 +13,7 @@ export const ProviderImage = (props) => {
     Microsoft: images.MICROSOFT96,
   };
 
-  const image = Providers[props.provider];
+  const image = Providers[props.provider] ;
 
   return (
     <Image

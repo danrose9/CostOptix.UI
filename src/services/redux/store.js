@@ -44,5 +44,3 @@ const store = configureStore({
 let persistor = persistStore(store);
 
 export { store, persistor };
-
-// export type AppDispatch = typeof store.dispatch
