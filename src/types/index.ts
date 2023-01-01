@@ -21,3 +21,10 @@ export interface IMessageBox {
 export interface IProvider {
   provider: keyof typeof Image;
 }
+
+export interface IServiceConnectionModal {
+  disabled: boolean;
+  title: string;
+  name: string;
+  vendor: string;
+}
