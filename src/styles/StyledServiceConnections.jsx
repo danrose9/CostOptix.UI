@@ -1,10 +1,20 @@
 import styled from 'styled-components';
-import { Button } from 'semantic-ui-react';
+import { Button, Card, Table } from 'semantic-ui-react';
 
 export const StyledContent = styled.p`
-    font-size: 1.2em;
+    font-size: 1em;
 `;
 
-export const AddConnectionButton = styled(Button)`
-    float: right;
+export const ServiceConnectionPage = styled.div`
+    padding: 1rem;
 `;
+
+export const StyledCard = styled(Card)`
+    margin-top: 0;
+`
+
+export const StyledTable = styled.div`
+    max-height: 230px;
+    overflow-x: auto;
+    // border: 1px solid #D3D3D3;
+`

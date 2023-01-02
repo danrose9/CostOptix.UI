@@ -1,57 +1,97 @@
-import React from 'react';
-import ServiceConnections from './ServiceConnections';
-import { Card, Divider } from 'semantic-ui-react';
-import { ServiceConnectionContent } from './ServiceConnectionContent';
-import { useSelector } from 'react-redux';
-import { reduxState } from '../../services/redux/reduxState';
-import { PageContent } from '../../pages/__styles__/DefaultPageStyles';
+import React, { useReducer } from 'react';
+import { Card, Button, Divider } from 'semantic-ui-react';
+import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
+import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
+import ServiceConnectionTable from './ServiceConnectionTable';
 import { ProviderImage } from '../ProviderImage';
+import AddServiceAzure from './AddServiceAzure';
+import AddServiceAWS from './AddServiceAWS';
+
+function ExtraContentAccordionClosed({ content, onClick }) {
+  return (
+    <>
+      <Card.Content extra>
+        <ServiceConnectionTable card={content} />
+      </Card.Content>
+      <Card.Content extra>
+        <Button onClick={onClick}>Add New Connection</Button>
+      </Card.Content>
+    </>
+  );
+}
+
+const RenderAddService = (props) => {
+  switch (props.provider) {
+    case 'Azure':
+      return <AddServiceAzure />;
+    case 'AWS':
+      return <AddServiceAWS />;
+    default:
+      return null;
+  }
+};
+
+function ExtraContentAccordionOpened({ content, onClick }) {
+  return (
+    <>
+      <Card.Content>
+        <RenderAddService provider={content} />
+      </Card.Content>
+      <Card.Content extra>
+        <Button onClick={onClick}>Close</Button>
+      </Card.Content>
+    </>
+  );
+}
+
+function ExtraContentAccordion({ open, content, onToggle }) {
+  return open === true ? (
+    <ExtraContentAccordionOpened content={content.provider} onClick={onToggle} />
+  ) : (
+    <ExtraContentAccordionClosed content={content} onClick={onToggle} />
+  );
+}
+
+function cardStateReducer(state, { type, payload }) {
+  if (type === 'TOGGLE') {
+    var index = payload.card;
+    var value = state[index];
+    return [...state.slice(0, index), !value, ...state.slice(index + 1, Infinity)];
+  }
+
+  return state;
+}
 
 const ServiceConnection = () => {
-  const ServiceProviders = useSelector(
-    (state) => state[reduxState.SERVICE_PROVIDERS].providers
-  );
+  const [state, dispatch] = useReducer(cardStateReducer, [false]);
+
+  function toggleCard(card) {
+    return function () {
+      dispatch({ type: 'TOGGLE', payload: { card } });
+    };
+  }
 
   return (
-    <PageContent>
+    <ServiceConnectionPage>
       <PageTitle title="Service Connections" />
       <Divider />
       <Card.Group itemsPerRow={2}>
-        {ServiceConnections.filter((item) => item.active).map((item, index) => {
-          console.log(item);
+        {ServiceConnectionCards.filter((card) => card.active).map((card, index) => {
           return (
-            <Card key={index} color={item.color}>
+            <Card key={index} color={card.color} style={{ height: '100%' }}>
               <Card.Content>
-                <ProviderImage
-                  floated="left"
-                  provider={item.provider}
-                  size="tiny"
-                />
-                <Card.Header>{item.name}</Card.Header>
-                <Card.Meta>{item.description}</Card.Meta>
-                <Card.Meta>{item.details}</Card.Meta>
+                <ProviderImage floated="left" provider={card.provider} size="tiny" />
+                <Card.Header>{card.name}</Card.Header>
+                <Card.Meta>{card.description}</Card.Meta>
+                <Card.Meta>{card.details}</Card.Meta>
               </Card.Content>
-              <Card.Content extra>
-                {ServiceProviders.filter(
-                  (provider) => provider.type === item.provider
-                ).map((provider, index) => {
-                  return (
-                    <ServiceConnectionContent
-                      key={index}
-                      platform={item.name}
-                      vendor={item.vendor}
-                      connectionName={item.connectionName}
-                      // connectionCount={provider.billingAccounts.length}
-                    />
-                  );
-                })}
-              </Card.Content>
+              <ExtraContentAccordion content={card} onToggle={toggleCard(index)} open={state[index]} />
             </Card>
           );
         })}
       </Card.Group>
-    </PageContent>
+    </ServiceConnectionPage>
   );
 };
 
