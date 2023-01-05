@@ -1,7 +1,21 @@
-import React from 'react';
-import { Form, Segment, Input } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Form, Segment, Input, Button } from 'semantic-ui-react';
 
 export const AzureDefaultForm = ({ children }: any) => {
+  const [validForm, setValidForm] = useState(false);
+
+  const [applicationId, setApplicationId] = useState();
+  const [secretValue, setSecretValue] = useState();
+
+  const validateForm = (e: any) => {
+    if (e.target.id === 'appId') {
+      setApplicationId(e.target.value);
+    }
+    if (e.target.id === 'secret') {
+      setSecretValue(e.target.value);
+    }
+  };
+
   return (
     <Segment>
       <Form>
@@ -25,7 +39,15 @@ export const AzureDefaultForm = ({ children }: any) => {
         <Form.Group>
           <Form.Field>
             6. Once the new application has been created, enter the <i>Application (Client) ID</i> here.{' '}
-            <Input focus placeholder="Application ID" />
+            <Input
+              focus
+              placeholder="Application ID"
+              required
+              id="appId"
+              value={applicationId}
+              // control={Input}
+              onChange={validateForm}
+            />
           </Form.Field>
         </Form.Group>
         <Form.Field>
@@ -40,10 +62,17 @@ export const AzureDefaultForm = ({ children }: any) => {
         <Form.Group>
           <Form.Field>
             10. Copy the <i>Value</i> into the box below.
-            <Input focus placeholder="Secret Value" />
+            <Input
+              focus
+              placeholder="Secret Value"
+              required
+              id="secret"
+              value={secretValue}
+              // control={Input}
+              onChange={validateForm}
+            />
           </Form.Field>
         </Form.Group>
-
         <Form.Field inline></Form.Field>
         {children}
       </Form>

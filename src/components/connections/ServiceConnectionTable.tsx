@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Dropdown, Icon, Card } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
-import { StyledTable } from '../../styles/StyledServiceConnections';
+import { ICustomerServiceConnections, ICustomerConnectedProviders } from '../../types';
 
 const CustomerConnectedProviders = [
   {
@@ -54,7 +54,7 @@ const CustomerConnectedProviders = [
   },
 ];
 
-export const ServiceConnectionTable = (props) => {
+export const ServiceConnectionTable = (props: ICustomerServiceConnections) => {
   return (
     <Card.Content>
       <Table size="small">
@@ -67,34 +67,34 @@ export const ServiceConnectionTable = (props) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {CustomerConnectedProviders.filter((provider) => provider.type === props.card.provider).map(
-            (provider, index) => {
-              return (
-                <Table.Row key={index}>
-                  <Table.Cell>{provider.accountName}</Table.Cell>
-                  <Table.Cell>
-                    <Dropdown icon="ellipsis horizontal" upward>
-                      <Dropdown.Menu>
-                        <Dropdown.Item icon="settings" text="Manage Service" />
-                        <Dropdown.Item icon="sync" text="Re-sync" />
-                        <Dropdown.Item icon="mute" text="Disable" />
-                        <Dropdown.Item icon="trash" text="Remove" />
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Table.Cell>
-                  <Table.Cell>{formatDateFull(provider.createdDate)}</Table.Cell>
+          {CustomerConnectedProviders.filter(
+            (provider: ICustomerConnectedProviders) => provider.type === props.card.provider
+          ).map((provider, index) => {
+            return (
+              <Table.Row key={index}>
+                <Table.Cell>{provider.accountName}</Table.Cell>
+                <Table.Cell>
+                  <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} simple>
+                    <Dropdown.Menu>
+                      <Dropdown.Item icon="settings" text="Manage Service" />
+                      <Dropdown.Item icon="sync" text="Re-sync" />
+                      <Dropdown.Item icon="mute" text="Disable" />
+                      <Dropdown.Item icon="trash" text="Remove" />
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Table.Cell>
+                <Table.Cell>{formatDateFull(provider.createdDate)}</Table.Cell>
 
-                  <Table.Cell textAlign="center">
-                    {provider.connected ? (
-                      <Icon color="green" name="checkmark" size="large" />
-                    ) : (
-                      <Icon color="red" name="cancel" size="large" />
-                    )}
-                  </Table.Cell>
-                </Table.Row>
-              );
-            }
-          )}
+                <Table.Cell textAlign="center">
+                  {provider.connected ? (
+                    <Icon color="green" name="checkmark" size="large" />
+                  ) : (
+                    <Icon color="red" name="cancel" size="large" />
+                  )}
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
         </Table.Body>
       </Table>
     </Card.Content>

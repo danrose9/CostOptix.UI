@@ -1,57 +1,72 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Card, Button, Divider } from 'semantic-ui-react';
-import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
+import { ServiceConnectionPage, ButtonGroup } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
 import ServiceConnectionTable from './ServiceConnectionTable';
 import { ProviderImage } from '../ProviderImage';
 import AddServiceAzure from './AddServiceAzure';
 import AddServiceAWS from './AddServiceAWS';
+import ValidateServiceButton from '../buttons/ValidateServiceButton';
+import ServiceConnectionModal from './ServiceConnectionModal';
 
-function ExtraContentAccordionClosed({ content, onClick }) {
+const ExtraContentAccordionClosed = ({ content, onClick }) => {
   return (
     <>
       <Card.Content extra>
         <ServiceConnectionTable card={content} />
       </Card.Content>
       <Card.Content extra>
-        <Button onClick={onClick}>Add New Connection</Button>
+        <Button onClick={onClick}>Accordian</Button>
+        <ServiceConnectionModal />
       </Card.Content>
     </>
   );
-}
-
-const RenderAddService = (props) => {
-  switch (props.provider) {
-    case 'Azure':
-      return <AddServiceAzure />;
-    case 'AWS':
-      return <AddServiceAWS />;
-    default:
-      return null;
-  }
 };
 
-function ExtraContentAccordionOpened({ content, onClick }) {
+const ExtraContentAccordionOpened = ({ content, onClick }) => {
+  const { provider } = content;
+
+  const [disableValidation, setDisableValidation] = useState(true);
+  const [showValidation, setShowValidation] = useState(false);
+
+  const handleSelect = () => setShowValidation(true);
+
+  const RenderAddService = () => {
+    switch (provider) {
+      case 'Azure':
+        return <AddServiceAzure handleSelect={handleSelect} />;
+      case 'AWS':
+        return <AddServiceAWS />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Card.Content>
-        <RenderAddService provider={content} />
+        <RenderAddService />
       </Card.Content>
       <Card.Content extra>
-        <Button onClick={onClick}>Close</Button>
+        <ButtonGroup>
+          <Button onClick={onClick}>Close</Button>
+          {showValidation ? (
+            <ValidateServiceButton positive={true} disabled={disableValidation} label="Validate" />
+          ) : null}
+        </ButtonGroup>
       </Card.Content>
     </>
   );
-}
+};
 
-function ExtraContentAccordion({ open, content, onToggle }) {
+const ExtraContentAccordion = ({ open, content, onToggle }) => {
   return open === true ? (
-    <ExtraContentAccordionOpened content={content.provider} onClick={onToggle} />
+    <ExtraContentAccordionOpened content={content} onClick={onToggle} />
   ) : (
     <ExtraContentAccordionClosed content={content} onClick={onToggle} />
   );
-}
+};
 
 function cardStateReducer(state, { type, payload }) {
   if (type === 'TOGGLE') {
