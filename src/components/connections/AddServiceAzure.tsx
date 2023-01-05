@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Segment, Dropdown, Form, Button } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import {
   AzureDefaultForm,
@@ -16,7 +16,7 @@ const options = [
   { key: 'Microsoft Partner Agreement', text: 'Microsoft Partner Agreement', value: 'partner' },
 ];
 
-export const AddServiceAzure = () => {
+export const AddServiceAzure = ({ handleSelect }: any) => {
   const [value, setValue] = useState();
   const [showForm, setShowForm] = useState(false);
 
@@ -38,6 +38,7 @@ export const AddServiceAzure = () => {
   const handleOnChange = (event: any, data: any) => {
     setValue(data.value);
     setShowForm(true);
+    // handleSelect();
   };
 
   return (

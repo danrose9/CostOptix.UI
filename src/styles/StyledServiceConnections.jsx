@@ -18,3 +18,7 @@ export const StyledTable = styled.div`
     overflow-x: auto;
     // border: 1px solid #D3D3D3;
 `
+export const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
