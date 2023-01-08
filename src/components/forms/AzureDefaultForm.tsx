@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Segment, Input, Button } from 'semantic-ui-react';
+import { Form, Segment, Input } from 'semantic-ui-react';
 
 export const AzureDefaultForm = ({ children }: any) => {
-  const [validForm, setValidForm] = useState(false);
+  // const [validForm, setValidForm] = useState(false);
 
   const [applicationId, setApplicationId] = useState();
   const [secretValue, setSecretValue] = useState();
