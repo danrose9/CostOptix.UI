@@ -1,60 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { reduxState } from '../../services/redux/reduxState';
 import { Table, Dropdown, Icon, Card } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import { ICustomerServiceConnections, ICustomerConnectedProviders } from '../../types';
-
-const CustomerConnectedProviders = [
-  {
-    id: 'e7a8e7cc-9f6d-48f3-90e4-281c193d98e7',
-    createdDate: '2021-10-18T18:01:40.717247',
-    accountId: 'DemoAzureProvider',
-    accountName: 'CostOptix (costoptix.onmicrosoft.com)',
-    connected: true,
-    type: 'Azure',
-  },
-  {
-    id: 'aec9f3e1-f68e-4ad4-8667-7cb9b71b5545',
-    createdDate: '2021-09-08T12:21:44.717247',
-    accountId: 'DemoAzureProvider2',
-    accountName: 'CostOptix Dev(costoptix.onmicrosoft.com)',
-    connected: false,
-    type: 'Azure',
-  },
-  {
-    id: 'aec9f3e1-f68e-4ad4-8667-7cb9b71b5545',
-    createdDate: '2021-09-08T12:21:44.717247',
-    accountId: 'DemoAzureProvider3',
-    accountName: 'CostOptix QA(costoptix.onmicrosoft.com)',
-    connected: false,
-    type: 'Azure',
-  },
-  {
-    id: 'aec9f3e1-f68e-4ad4-8667-7cb9b71b5545',
-    createdDate: '2021-09-08T12:21:44.717247',
-    accountId: 'DemoAzureProvider4',
-    accountName: 'CostOptix Staging(costoptix.onmicrosoft.com)',
-    connected: true,
-    type: 'Azure',
-  },
-  {
-    id: 'aec9f3e1-f68e-4ad4-8667-7cb9b71b5545',
-    createdDate: '2021-09-08T12:21:44.717247',
-    accountId: 'DemoAzureProvider5',
-    accountName: 'CostOptix EU(costoptix.onmicrosoft.com)',
-    connected: true,
-    type: 'Azure',
-  },
-  {
-    id: 'aec9f9e1-f68e-4ad4-8667-7cb9b71b5545',
-    createdDate: '2021-09-08T12:21:44.717247',
-    accountId: 'AWSOrg',
-    accountName: 'AWS Organization',
-    connected: true,
-    type: 'AWS',
-  },
-];
+import { IRootState } from '../../services/redux/rootReducer';
 
 export const ServiceConnectionTable = (props: ICustomerServiceConnections) => {
+  const CustomerConnectedProviders = useSelector(
+    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
+  );
+
   return (
     <Card.Content>
       <Table size="small">
@@ -68,11 +24,11 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnections) => {
         </Table.Header>
         <Table.Body>
           {CustomerConnectedProviders.filter(
-            (provider: ICustomerConnectedProviders) => provider.type === props.card.provider
-          ).map((provider, index) => {
+            (account: ICustomerConnectedProviders) => account.provider === props.card.provider
+          ).map((account: ICustomerConnectedProviders, index: any) => {
             return (
               <Table.Row key={index}>
-                <Table.Cell>{provider.accountName}</Table.Cell>
+                <Table.Cell>{account.accountName}</Table.Cell>
                 <Table.Cell>
                   <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} simple>
                     <Dropdown.Menu>
@@ -83,10 +39,10 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnections) => {
                     </Dropdown.Menu>
                   </Dropdown>
                 </Table.Cell>
-                <Table.Cell>{formatDateFull(provider.createdDate)}</Table.Cell>
+                <Table.Cell>{formatDateFull(account.createdDate)}</Table.Cell>
 
                 <Table.Cell textAlign="center">
-                  {provider.connected ? (
+                  {account.connected ? (
                     <Icon color="green" name="checkmark" size="large" />
                   ) : (
                     <Icon color="red" name="cancel" size="large" />

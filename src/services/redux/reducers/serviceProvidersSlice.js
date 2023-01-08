@@ -1,9 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import {
-  fetchServiceProviders,
-  fetchBillingAccounts,
-} from '../thunks/serviceProvidersThunk';
+import { fetchServiceProviders, fetchBillingAccounts } from '../thunks/serviceProvidersThunk';
 
 const initialState = {
   isCurrencyConflict: false,
@@ -23,9 +20,7 @@ const serviceProviderSlice = createSlice({
     updateBillingAccountLoading(state, action) {
       const { id } = action.payload;
 
-      const billingAccount = state.billingAccounts.find(
-        (item) => item.id === id
-      );
+      const billingAccount = state.billingAccounts.find((item) => item.id === id);
 
       if (billingAccount) {
         billingAccount.isLoading = false;
@@ -84,10 +79,7 @@ const serviceProviderSlice = createSlice({
   },
 });
 
-export const {
-  updateBillingAccountLoading,
-  resetIsBillingAccountsAvailable,
-  resetServiceProviders,
-} = serviceProviderSlice.actions;
+export const { updateBillingAccountLoading, resetIsBillingAccountsAvailable, resetServiceProviders } =
+  serviceProviderSlice.actions;
 
 export default serviceProviderSlice.reducer;

@@ -12,7 +12,7 @@ export interface IPageTitle {
 }
 
 export interface IProviderImage {
-  provider: keyof typeof Image;
+  provider: string;
   image: string;
   size: SemanticSIZES;
   floated: SemanticFLOATS;
@@ -54,5 +54,5 @@ export interface ICustomerConnectedProviders {
   accountId: string;
   accountName: string;
   connected: boolean;
-  type: string;
+  provider: string;
 }

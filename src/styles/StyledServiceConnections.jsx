@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Card, Table } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 export const StyledContent = styled.p`
     font-size: 1em;

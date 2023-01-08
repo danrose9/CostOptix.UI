@@ -17,7 +17,7 @@ const appReducer = combineReducers({
   [reduxState.APPLICATION]: applicationReducer,
 });
 
-export const rootReducer = (state, action) => {
+export const rootReducer = (state: any, action: any) => {
   if (action.type === 'USER_LOGOUT') {
     state = undefined;
   }
@@ -25,4 +25,4 @@ export const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
 
-// export type RootState = ReturnType<typeof rootReducer>
+export type IRootState = ReturnType<typeof rootReducer>;
