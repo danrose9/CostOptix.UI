@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { SemanticFLOATS, SemanticSIZES } from 'semantic-ui-react';
 
 export interface IMessageBox {
@@ -55,4 +56,8 @@ export interface ICustomerConnectedProviders {
   accountName: string;
   connected: boolean;
   provider: string;
+}
+
+export interface Children {
+  children?: ReactNode;
 }
