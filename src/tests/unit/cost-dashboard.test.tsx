@@ -1,13 +1,10 @@
 import React from 'react';
-
 import { render, cleanup } from '@testing-library/react';
-import CostDashboard from '../cost-dashboard/CostDashboard';
-import {
-  MostExpensiveInstance,
-  FastestGrowingInstance,
-} from '../cost-dashboard';
+import CostDashboard from '../../pages/cost-dashboard/CostDashboard';
+import { MostExpensiveInstance, FastestGrowingInstance } from '../../pages/cost-dashboard';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ApplicationWrapper } from '../helpers';
 
 import { Provider } from 'react-redux';
 import { store } from '../../services/redux/store';
@@ -18,13 +15,7 @@ afterEach(() => {
 
 describe('Cost Dashboard', () => {
   test('should render Cost Dashboard', () => {
-    render(
-      <Provider store={store}>
-        <Router>
-          <CostDashboard />
-        </Router>
-      </Provider>
-    );
+    render(<CostDashboard />, { wrapper: ApplicationWrapper });
   });
 
   test('matches snapshot', () => {
@@ -43,23 +34,13 @@ describe('Cost Dashboard', () => {
 
 describe('Most Expensive resource widget', () => {
   test('should render widget', () => {
-    render(
-      <Provider store={store}>
-        <Router>
-          <MostExpensiveInstance isCurrencyConflict={false} />
-        </Router>
-      </Provider>
-    );
+    render(<MostExpensiveInstance isCurrencyConflict={false} />, { wrapper: ApplicationWrapper });
   });
 
   test('column width is correct', () => {
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <Router>
-          <MostExpensiveInstance isCurrencyConflict={true} />
-        </Router>
-      </Provider>
-    );
+    const { getByTestId } = render(<MostExpensiveInstance isCurrencyConflict={true} />, {
+      wrapper: ApplicationWrapper,
+    });
 
     expect(getByTestId('header-cell-1')).toHaveProperty('colSpan', 4);
   });
@@ -67,13 +48,9 @@ describe('Most Expensive resource widget', () => {
 
 describe('Fastest Growing resource widget', () => {
   test('should render widget', () => {
-    render(
-      <Provider store={store}>
-        <Router>
-          <FastestGrowingInstance />
-        </Router>
-      </Provider>
-    );
+    render(<FastestGrowingInstance />, {
+      wrapper: ApplicationWrapper,
+    });
   });
 
   // test click header

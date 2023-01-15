@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { SemanticFLOATS, SemanticSIZES } from 'semantic-ui-react';
 
 export interface IMessageBox {
@@ -29,7 +30,7 @@ export interface IServiceConnectionModal {
   vendor: string;
 }
 
-export interface IServiceConnectionCards {
+export interface IServiceConnectionCard {
   vendor: string;
   provider: string;
   name: string;
@@ -44,8 +45,8 @@ export interface IServiceConnectionCards {
   color: string;
 }
 
-export interface ICustomerServiceConnections {
-  card: IServiceConnectionCards;
+export interface ICustomerServiceConnection {
+  card: IServiceConnectionCard;
 }
 
 export interface ICustomerConnectedProviders {
@@ -55,4 +56,8 @@ export interface ICustomerConnectedProviders {
   accountName: string;
   connected: boolean;
   provider: string;
+}
+
+export interface IChildren {
+  children?: ReactNode;
 }

@@ -1,16 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  render,
-  cleanup,
-  screen,
-  fireEvent,
-  getByTestId,
-  waitFor,
-} from '@testing-library/react';
+import { render, cleanup, screen, fireEvent, getByTestId, waitFor } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { PageNotFound404 } from '../index';
+import { PageNotFound404 } from '../../pages/index';
 
 import renderer from 'react-test-renderer';
 

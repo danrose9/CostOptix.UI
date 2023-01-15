@@ -4,7 +4,7 @@ import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import HomePage from '../../pages/home/HomePage';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { ApplicationWrapper } from '../helpers';
 import renderer from 'react-test-renderer';
 
 afterEach(() => {
@@ -13,19 +13,11 @@ afterEach(() => {
 
 describe('Home Page', () => {
   test('should render Home Page', () => {
-    render(
-      <Router>
-        <HomePage />
-      </Router>
-    );
+    render(<HomePage />, { wrapper: ApplicationWrapper });
   });
 
   test('should contain buttons', () => {
-    const { getByTestId } = render(
-      <Router>
-        <HomePage />
-      </Router>
-    );
+    const { getByTestId } = render(<HomePage />, { wrapper: ApplicationWrapper });
 
     expect(getByTestId('login-ext-button')).toBeEnabled();
     expect(getByTestId('login-demo-button')).toBeEnabled();

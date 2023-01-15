@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Login, LoginDemo } from '../auth/Login';
+import { Login, LoginDemo } from '../../components/auth/Login';
 
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';

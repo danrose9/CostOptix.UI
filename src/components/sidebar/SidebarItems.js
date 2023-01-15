@@ -134,11 +134,6 @@ export const menuItems = [
         path: appRoutes.SIGNUP,
         active: false,
       },
-      {
-        title: 'Service Connections',
-        path: appRoutes.SERVICE_PROVIDERS,
-        active: true,
-      },
     ],
   },
   {
@@ -147,6 +142,13 @@ export const menuItems = [
     icon: 'help',
     active: false,
     dev: true,
+    extra: true,
+  },
+  {
+    title: 'Service Connections',
+    path: appRoutes.SERVICE_PROVIDERS,
+    icon: 'handshake outline',
+    active: true,
     extra: true,
   },
   {
