@@ -30,7 +30,7 @@ export interface IServiceConnectionModal {
   vendor: string;
 }
 
-export interface IServiceConnectionCards {
+export interface IServiceConnectionCard {
   vendor: string;
   provider: string;
   name: string;
@@ -45,8 +45,8 @@ export interface IServiceConnectionCards {
   color: string;
 }
 
-export interface ICustomerServiceConnections {
-  card: IServiceConnectionCards;
+export interface ICustomerServiceConnection {
+  card: IServiceConnectionCard;
 }
 
 export interface ICustomerConnectedProviders {
@@ -58,6 +58,6 @@ export interface ICustomerConnectedProviders {
   provider: string;
 }
 
-export interface Children {
+export interface IChildren {
   children?: ReactNode;
 }

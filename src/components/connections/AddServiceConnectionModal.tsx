@@ -4,6 +4,8 @@ import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
 import styled from 'styled-components';
+import ValidateServiceButton from '../buttons/ValidateServiceButton';
+import { ICustomerServiceConnection, IServiceConnectionCard } from '../../types/index';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -12,20 +14,42 @@ const ModalHeader = styled(Header)`
   }
 `;
 
-const AddServiceConnectionModal = (props: any) => {
+const ActionButtons = styled(Modal.Content)`
+  &&& {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [open, setOpen] = useState(false);
+  const [isButtonDisabled, setIsButonDisabled] = useState(true);
+
+  const childToParent = (childdata: boolean) => {
+    setIsButonDisabled(childdata);
+  };
+
+  console.log('isButtonDisabled', isButtonDisabled);
 
   const provider = props.provider.provider as string;
 
-  const RenderAddService = () => {
+  const RenderAddService = ({ childToParent }: any) => {
     switch (provider) {
       case 'Azure':
-        return <AddServiceAzure />;
+        return (
+          <>
+            <AddServiceAzure childToParent={childToParent} />{' '}
+          </>
+        );
       case 'AWS':
         return <AddServiceAWS />;
       default:
         return null;
     }
+  };
+
+  const handleOnClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -59,9 +83,13 @@ const AddServiceConnectionModal = (props: any) => {
             <br />
             <br />
           </StyledContent>
-          <RenderAddService />
+          <RenderAddService childToParent={(v: boolean) => setIsButonDisabled(v)} />
         </Modal.Description>
       </Modal.Content>
+      <ActionButtons>
+        <Button onClick={handleOnClose}>Close</Button>
+        <ValidateServiceButton disabled={isButtonDisabled} positive={true} label="Continue" />
+      </ActionButtons>
     </Modal>
   );
 };

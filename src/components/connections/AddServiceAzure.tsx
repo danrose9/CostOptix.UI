@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Button, Form, Segment, Input } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import {
   AzureDefaultForm,
@@ -8,6 +8,7 @@ import {
   AzureEnterpriseAgreement,
   AzurePartnerAgreement,
 } from '../forms';
+import { isValid } from '../../utils/formValidation';
 
 const options = [
   { key: 'Microsoft Online Services Program', text: 'Microsoft Online Services Program', value: 'online' },
@@ -16,9 +17,21 @@ const options = [
   { key: 'Microsoft Partner Agreement', text: 'Microsoft Partner Agreement', value: 'partner' },
 ];
 
-export const AddServiceAzure = ({ handleSelect }: any) => {
+export const AddServiceAzure = ({ childToParent }: any) => {
   const [value, setValue] = useState();
   const [showForm, setShowForm] = useState(false);
+
+  const [formData, setFormData] = useState({
+    applicationId: null,
+    secretValue: null,
+  });
+
+  const handleChange = (e: { target: { name: string; value: string } }) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // childToParent = isValid(formData);
+  console.log('isButtonDisabled', isValid(formData));
 
   const RenderForm = (billingType: string | undefined) => {
     switch (billingType) {
@@ -43,10 +56,9 @@ export const AddServiceAzure = ({ handleSelect }: any) => {
 
   return (
     <>
-      <StyledContent>
+      {/* <StyledContent>
         Select the Azure <i>Billing account type</i> for your tenant
       </StyledContent>
-
       <Dropdown
         placeholder="Billing Account Type"
         fluid
@@ -54,8 +66,51 @@ export const AddServiceAzure = ({ handleSelect }: any) => {
         options={options}
         onChange={handleOnChange}
         value={value}
-      />
-      {showForm ? <AzureDefaultForm children={RenderForm(value)} /> : null}
+      /> */}
+      <Segment>
+        <Form>
+          <Form.Field>
+            1. Log into your
+            <i>Azure</i> account. <a href="https://portal.azure.com">https://portal.azure.com</a>
+          </Form.Field>
+          <Form.Field>
+            2. Navigate to <i>App registrations</i>
+          </Form.Field>
+          <Form.Field>
+            3. Select <i>New registration</i> and choose a name for this application
+          </Form.Field>
+          <Form.Field>
+            4. Set <i>Supported account types</i> to{' '}
+            <b>Accounts in this organizational directory only (TenantName only - Single tenant)</b>
+          </Form.Field>
+          <Form.Field>
+            5. Select <i>Register</i>
+          </Form.Field>
+          <Form.Group>
+            <Form.Field>
+              6. Once the new application has been created, enter the <i>Application (Client) ID</i> here.{' '}
+              <Input placeholder="Application ID" required name="applicationId" onChange={handleChange} />
+            </Form.Field>
+          </Form.Group>
+          <Form.Field>
+            7. Select <i>Manage, Certificates & Secrets</i>
+          </Form.Field>
+          <Form.Field>
+            8. Click <i>New client secret</i>
+          </Form.Field>
+          <Form.Field>
+            9. Enter a Description for the client secret, an expiry period then click <i>Add</i>
+          </Form.Field>
+          <Form.Group>
+            <Form.Field>
+              10. Copy the <i>Value</i> into the box below.
+              <Input placeholder="Secret Value" required name="secretValue" onChange={handleChange} />
+            </Form.Field>
+          </Form.Group>
+          <Form.Field inline></Form.Field>
+          {/* {children} */}
+        </Form>
+      </Segment>
     </>
   );
 };

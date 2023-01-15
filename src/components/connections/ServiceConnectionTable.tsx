@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { Table, Dropdown, Icon, Card } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
-import { ICustomerServiceConnections, ICustomerConnectedProviders } from '../../types';
+import { ICustomerServiceConnection, ICustomerConnectedProviders } from '../../types';
 import { IRootState } from '../../services/redux/rootReducer';
 
-export const ServiceConnectionTable = (props: ICustomerServiceConnections) => {
+export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
   const CustomerConnectedProviders = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );
