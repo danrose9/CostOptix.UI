@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { StandardTooltip, TooltipDescription, ChartTooltip } from '../index';
+import { StandardTooltip, TooltipDescription, ChartTooltip } from '../../components/tooltips/index';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import renderer from 'react-test-renderer';
-import { AWS96 } from '../../../assets';
+import { AWS96 } from '../../assets';
 
 afterEach(() => {
   cleanup();
@@ -21,12 +21,8 @@ const instance = [
 describe('Tooltips', () => {
   const TestComponent = () => {
     return (
-      <StandardTooltip
-        instance={{ provider: 'Provider', accountName: 'Account Name' }}
-      >
-        <TooltipDescription
-          instance={{ service: 'Service', resourceName: 'Resource Name' }}
-        />
+      <StandardTooltip instance={{ provider: 'Provider', accountName: 'Account Name' }}>
+        <TooltipDescription instance={{ service: 'Service', resourceName: 'Resource Name' }} />
       </StandardTooltip>
     );
   };

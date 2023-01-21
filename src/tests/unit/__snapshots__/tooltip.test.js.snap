@@ -11,6 +11,11 @@ exports[`Tooltips matches snapshot 1`] = `
     <img
       alt="ServiceProviderLogo"
       className="ui mini right floated image"
+      style={
+        Object {
+          "margin": 0,
+        }
+      }
     />
     <div
       className="header"
