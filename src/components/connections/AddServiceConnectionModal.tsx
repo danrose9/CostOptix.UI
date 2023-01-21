@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
@@ -6,6 +6,7 @@ import { ProviderImage } from '../ProviderImage';
 import styled from 'styled-components';
 import ValidateServiceButton from '../buttons/ValidateServiceButton';
 import { ICustomerServiceConnection, IServiceConnectionCard } from '../../types/index';
+import { isValid } from '../../utils/formValidation';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -24,29 +25,22 @@ const ActionButtons = styled(Modal.Content)`
 const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [open, setOpen] = useState(false);
   const [isButtonDisabled, setIsButonDisabled] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
-  const childToParent = (childdata: boolean) => {
-    setIsButonDisabled(childdata);
-  };
-
-  console.log('isButtonDisabled', isButtonDisabled);
+  const [formData, setFormData] = useState({
+    applicationId: null,
+    secretValue: null,
+  });
 
   const provider = props.provider.provider as string;
 
-  const RenderAddService = ({ childToParent }: any) => {
-    switch (provider) {
-      case 'Azure':
-        return (
-          <>
-            <AddServiceAzure childToParent={childToParent} />{' '}
-          </>
-        );
-      case 'AWS':
-        return <AddServiceAWS />;
-      default:
-        return null;
-    }
+  const handleChange = (e: { target: { name: string; value: string } }) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    setIsButonDisabled(isValid(formData));
+  }, [formData]);
 
   const handleOnClose = () => {
     setOpen(false);
@@ -83,7 +77,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
             <br />
             <br />
           </StyledContent>
-          <RenderAddService childToParent={(v: boolean) => setIsButonDisabled(v)} />
+          {provider === 'Azure' ? <AddServiceAzure handleChange={handleChange} /> : <AddServiceAWS />}
         </Modal.Description>
       </Modal.Content>
       <ActionButtons>

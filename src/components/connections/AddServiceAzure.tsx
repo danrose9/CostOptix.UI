@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import { Dropdown, Button, Form, Segment, Input } from 'semantic-ui-react';
-import { StyledContent } from '../../styles/StyledServiceConnections';
-import {
-  AzureDefaultForm,
-  AzureCustomerAgreement,
-  AzureOnlineServices,
-  AzureEnterpriseAgreement,
-  AzurePartnerAgreement,
-} from '../forms';
-import { isValid } from '../../utils/formValidation';
+import { Form, Segment, Input } from 'semantic-ui-react';
+import { AzureCustomerAgreement, AzureOnlineServices, AzureEnterpriseAgreement, AzurePartnerAgreement } from '../forms';
 
 const options = [
   { key: 'Microsoft Online Services Program', text: 'Microsoft Online Services Program', value: 'online' },
@@ -17,21 +9,8 @@ const options = [
   { key: 'Microsoft Partner Agreement', text: 'Microsoft Partner Agreement', value: 'partner' },
 ];
 
-export const AddServiceAzure = ({ childToParent }: any) => {
+export const AddServiceAzure = ({ handleChange }: any) => {
   const [value, setValue] = useState();
-  const [showForm, setShowForm] = useState(false);
-
-  const [formData, setFormData] = useState({
-    applicationId: null,
-    secretValue: null,
-  });
-
-  const handleChange = (e: { target: { name: string; value: string } }) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // childToParent = isValid(formData);
-  console.log('isButtonDisabled', isValid(formData));
 
   const RenderForm = (billingType: string | undefined) => {
     switch (billingType) {
@@ -48,25 +27,8 @@ export const AddServiceAzure = ({ childToParent }: any) => {
     }
   };
 
-  const handleOnChange = (event: any, data: any) => {
-    setValue(data.value);
-    setShowForm(true);
-    // handleSelect();
-  };
-
   return (
     <>
-      {/* <StyledContent>
-        Select the Azure <i>Billing account type</i> for your tenant
-      </StyledContent>
-      <Dropdown
-        placeholder="Billing Account Type"
-        fluid
-        selection
-        options={options}
-        onChange={handleOnChange}
-        value={value}
-      /> */}
       <Segment>
         <Form>
           <Form.Field>
@@ -108,7 +70,7 @@ export const AddServiceAzure = ({ childToParent }: any) => {
             </Form.Field>
           </Form.Group>
           <Form.Field inline></Form.Field>
-          {/* {children} */}
+          <AzureCustomerAgreement />
         </Form>
       </Segment>
     </>
