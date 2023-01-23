@@ -30,7 +30,7 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
               <Table.Row key={index}>
                 <Table.Cell>{account.accountName}</Table.Cell>
                 <Table.Cell>
-                  <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} simple>
+                  <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} data-testid="sc-dropdown">
                     <Dropdown.Menu>
                       <Dropdown.Item icon="settings" text="Manage Service" />
                       <Dropdown.Item icon="sync" text="Re-sync" />
