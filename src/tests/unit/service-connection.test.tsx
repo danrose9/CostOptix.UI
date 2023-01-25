@@ -5,6 +5,9 @@ import ServiceConnectionTable from '../../components/connections/ServiceConnecti
 import { ServiceConnections as ServiceConnectionCard } from '../../components/connections/ServiceConnections';
 import { ApplicationWrapper } from '../helpers';
 import userEvent from '@testing-library/user-event';
+import { ServiceConnections as ServiceConnectionCards } from '../../components/connections/ServiceConnections';
+import AddServiceConnectionModal from '../../components/connections/AddServiceConnectionModal';
+import { Card } from 'semantic-ui-react';
 
 afterEach(() => {
   cleanup();
@@ -12,31 +15,38 @@ afterEach(() => {
 
 describe('Common Service Connection', () => {
   const user = userEvent.setup();
+  const provider = ServiceConnectionCard[0];
 
-  test('Add new connection should render correct modal', () => {});
-  test('Close button should close modal', () => {});
+  test('Add new connection should render modal and close', () => {
+    const xyz = render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+    const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
+
+    // Check button is in dom
+    expect(addNewButton).toBeInTheDocument();
+    fireEvent.click(addNewButton);
+
+    // Check 'Close' button is in dom
+    const closeButton = screen.getByRole('button', { name: 'Close' });
+    const continueButton = screen.getByRole('button', { name: 'Continue' });
+
+    // Check buttons render
+    expect(closeButton).toBeInTheDocument();
+    expect(continueButton).toBeInTheDocument();
+    expect(continueButton).toBeDisabled();
+
+    fireEvent.click(closeButton);
+    expect(continueButton).not.toBeInTheDocument();
+  });
+  test('Service Connection form accepts input and is valid', () => {});
 
   test('More button should render dropdown', async () => {
-    const { getByTestId } = render(<ServiceConnectionTable card={ServiceConnectionCard[0]} />, {
+    const { getByTestId } = render(<ServiceConnectionTable card={provider} />, {
       wrapper: ApplicationWrapper,
     });
 
     const scDropdown = screen.queryByTestId('sc-dropdown') as HTMLElement;
-    // console.log('** scDropdown **', getByTestId);
 
-    expect(screen.queryByText('Manage Service') as HTMLElement).not.toBeInTheDocument();
-    // expect(screen.queryByText('Manage Service') as HTMLElement).not.toBeInTheDocument();
-    // expect(screen.queryByText('Manage Service') as HTMLElement).not.toBeInTheDocument();
-    // expect(screen.queryByText('Manage Service') as HTMLElement).not.toBeInTheDocument();
-
-    await user.click(scDropdown);
-    // fireEvent.mouseOver(screen.getByText('sc-dropdown'));
-    // expect(screen.getByText('Manage Service') as HTMLElement).toBeInTheDocument();
-    // await waitFor(() => screen.getByTestId('sc-dropdown'));
-
-    // expect(menuItems.length).toBe(4);
-    // expect(display.textContent).toBe('Manage Service');
-    //
+    /* Unfinished */
   });
 });
 

@@ -5,6 +5,7 @@ import { Table, Dropdown, Icon, Card } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import { ICustomerServiceConnection, ICustomerConnectedProviders } from '../../types';
 import { IRootState } from '../../services/redux/rootReducer';
+import ServiceConnectionOptions from './ServiceConnectionOptions';
 
 export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
   const CustomerConnectedProviders = useSelector(
@@ -30,12 +31,11 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
               <Table.Row key={index}>
                 <Table.Cell>{account.accountName}</Table.Cell>
                 <Table.Cell>
-                  <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} data-testid="sc-dropdown">
+                  <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} simple item data-testid="sc-dropdown">
                     <Dropdown.Menu>
-                      <Dropdown.Item icon="settings" text="Manage Service" />
-                      <Dropdown.Item icon="sync" text="Re-sync" />
-                      <Dropdown.Item icon="mute" text="Disable" />
-                      <Dropdown.Item icon="trash" text="Remove" />
+                      {ServiceConnectionOptions.map((option, index) => {
+                        return <Dropdown.Item key={index} icon={option.icon} text={option.text} />;
+                      })}
                     </Dropdown.Menu>
                   </Dropdown>
                 </Table.Cell>

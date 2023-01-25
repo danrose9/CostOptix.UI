@@ -55,7 +55,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
       trigger={<Button positive>Add new connection</Button>}
     >
       <ModalHeader>
-        <ProviderImage provider={props.provider.provider} size="big" floated="left" />
+        <ProviderImage provider={props.provider.provider} size="big" floated="left" data-testid="sc-provider-image" />
         <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }}>
           Add a new {props.provider.provider} Service Connection
         </p>
@@ -77,7 +77,11 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
             <br />
             <br />
           </StyledContent>
-          {provider === 'Azure' ? <AddServiceAzure handleChange={handleChange} /> : <AddServiceAWS />}
+          {provider === 'Azure' ? (
+            <AddServiceAzure handleChange={handleChange} />
+          ) : (
+            <AddServiceAWS handleChange={handleChange} />
+          )}
         </Modal.Description>
       </Modal.Content>
       <ActionButtons>
