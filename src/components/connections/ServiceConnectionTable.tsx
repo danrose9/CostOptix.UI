@@ -20,7 +20,7 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
             <Table.HeaderCell>Billing Name</Table.HeaderCell>
             <Table.HeaderCell />
             <Table.HeaderCell>Registration Date</Table.HeaderCell>
-            <Table.HeaderCell>Connected</Table.HeaderCell>
+            <Table.HeaderCell textAlign="center">Connected</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import * as appRoutes from './appRoutes';
 import { Container, MainPage, Main } from '../styles/AppContent';
 import Navbar from '../components/navbar/Navbar';
@@ -14,6 +14,7 @@ import ErrorDefault from '../pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ApplicationContextProvider } from './ApplicationContext';
+import { DemoContextProvider } from './DemoContext';
 
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
 const NavbarWithAuth = withAuth(Navbar);
@@ -26,9 +27,8 @@ export const AppContent = () => {
     setSidebarState(!sidebarState);
   };
 
-  const { isAuthenticated } = useSelector(
-    (state) => state[reduxState.USER_PROFILE]
-  );
+  const { isAuthenticated } = useSelector((state) => state[reduxState.USER_PROFILE]);
+
   const [sidebarState, setSidebarState] = useState(true);
   const handleOnIdle = () => {
     navigate(appRoutes.SESSION_EXPIRED);
@@ -52,25 +52,27 @@ export const AppContent = () => {
 
   return (
     <>
-      <ApplicationContextProvider>
-        <ErrorBoundary
-          FallbackComponent={ErrorDefault}
-          onReset={() => {
-            console.warn('Application Reset');
-            navigate(appRoutes.COST_DASHBOARD);
-          }}
-        >
-          <Container>
-            <SidebarWithAuth sidebarState={sidebarState} />
-            <Main>
-              <NavbarWithAuth onClick={showSidebar} />
-              <MainPage>
-                <ApplicationRoutes />
-              </MainPage>
-            </Main>
-          </Container>
-        </ErrorBoundary>
-      </ApplicationContextProvider>
+      <DemoContextProvider>
+        <ApplicationContextProvider>
+          <ErrorBoundary
+            FallbackComponent={ErrorDefault}
+            onReset={() => {
+              console.warn('Application Reset');
+              navigate(appRoutes.COST_DASHBOARD);
+            }}
+          >
+            <Container>
+              <SidebarWithAuth sidebarState={sidebarState} />
+              <Main>
+                <NavbarWithAuth onClick={showSidebar} />
+                <MainPage>
+                  <ApplicationRoutes />
+                </MainPage>
+              </Main>
+            </Container>
+          </ErrorBoundary>
+        </ApplicationContextProvider>
+      </DemoContextProvider>
     </>
   );
 };
