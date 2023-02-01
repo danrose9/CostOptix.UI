@@ -78,23 +78,9 @@ stages:
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-prod
 
-  - stage: TFPlanDevStage
-    displayName: Terraform Plan DEV
-    dependsOn: BuildAndTestStageDev
-    jobs:
-      - job: TerraformPlanDevJob
-        displayName: Terraform Plan
-        steps:
-          - template: _template-tf-plan.yaml
-            parameters:
-              Env: $(envDev)
-              SubscriptionId: $(subscriptionIdDev)
-              KVServiceConnection: $(kvServiceConnectionDev)
-              ApiUrl: $(apiUrlDev)
-
   - stage: DeployDevStage
     displayName: Deploy DEV
-    dependsOn: TFPlanDevStage
+    dependsOn: BuildAndTestStageDev
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployDevJob
@@ -110,24 +96,9 @@ stages:
                     SubscriptionId: $(subscriptionIdDev)
                     KVServiceConnection: $(kvServiceConnectionDev)
 
-  - stage: TFPlanProdStage
-    displayName: Terraform Plan PROD
-    dependsOn: BuildAndTestStageProd
-    condition: and(succeeded(), eq(variables.isMain, 'true'))
-    jobs:
-      - job: TerraformPlanProdJob
-        displayName: Terraform Plan
-        steps:
-          - template: _template-tf-plan.yaml
-            parameters:
-              Env: $(envProd)
-              SubscriptionId: $(subscriptionIdProd)
-              KVServiceConnection: $(kvServiceConnectionProd)
-              ApiUrl: $(apiUrlProd)
-
   - stage: DeployProdStage
     displayName: Deploy PROD
-    dependsOn: TFPlanProdStage
+    dependsOn: BuildAndTestStageProd
     condition: and(succeeded(), eq(variables.isMain, 'true'))
     jobs:
       - deployment: DeployProdJob

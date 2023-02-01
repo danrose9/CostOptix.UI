@@ -13,25 +13,6 @@ steps:
       connectedServiceName: ${{ Parameters.KVServiceConnection }}
       KeyVaultName: costoptix-${{ Parameters.Env }}-devops-kv
 
-  #TF Apply
-  - template: _template-pin-tf-version.yaml
-
-  - script: |
-      mkdir -p $(Pipeline.Workspace)/infrastructure/tf
-      unzip $(Pipeline.Workspace)/TF-${{ Parameters.Env }}/tfplan-${{ Parameters.Env }}.zip -d $(Pipeline.Workspace)/infrastructure/tf
-    displayName: Unzip TF Plan
-  - bash: |
-      terraform -chdir=$(Pipeline.Workspace)/infrastructure/tf apply \
-        -auto-approve \
-        ${{ Parameters.Env }}.tfplan
-    displayName: Terraform Apply
-    env:
-      ARM_SUBSCRIPTION_ID: ${{ Parameters.SubscriptionId }}
-      ARM_CLIENT_ID: $(devops-app-clientid)
-      ARM_CLIENT_SECRET: $(devops-app-clientsecret)
-      ARM_TENANT_ID: $(tenantId)
-      ARM_SKIP_PROVIDER_REGISTRATION: true
-
   # App Deploy
   - script: az login --service-principal -u $SERVICE_CONNECTION_CLIENT_ID -p $SERVICE_CONNECTION_CLIENT_SECRET -t $TENANT_ID
     displayName: AZ Login
