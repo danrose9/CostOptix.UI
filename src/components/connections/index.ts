@@ -1,2 +1,2 @@
-export { default as AddServiceAzure } from './AddServiceAzure';
-export { default as AddServiceAWS } from './AddServiceAWS';
+export { default as AddServiceAzure } from './providers/AddServiceAzure';
+export { default as AddServiceAWS } from './providers/AddServiceAWS';

@@ -50,12 +50,16 @@ export interface ICustomerServiceConnection {
 }
 
 export interface ICustomerConnectedProviders {
-  id: string;
-  createdDate: string;
   accountId: string;
   accountName: string;
+  createdDate: string;
+  currency: string;
+  id: string;
+  isTransient: boolean;
   connected: boolean;
   provider: string;
+  providerId: string;
+  status: string;
 }
 
 export interface IChildren {

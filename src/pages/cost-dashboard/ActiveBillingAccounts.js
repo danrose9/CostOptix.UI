@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Segment } from 'semantic-ui-react';
+import { Table, Segment, Icon } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchServiceProviders,
-  fetchBillingAccounts,
-} from '../../services/redux/thunks/serviceProvidersThunk';
+import { fetchServiceProviders, fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
 import { reduxState } from '../../services/redux/reduxState';
 import BillingAccount from './BillingAccount';
 import { fetchBillingAccountCosts } from '../../services/redux/thunks/costDashboardThunk';
@@ -19,11 +16,10 @@ import {
   addBillingAccount,
 } from '../../services/redux/reducers/costDashboardSlice';
 import { resetServiceProviders } from '../../services/redux/reducers/serviceProvidersSlice';
-import { StyledRefreshButton } from '../../styles/StyledDashboardHeader';
-import {
-  CurrencyConflictWarning,
-  NoBillingAccountMessage,
-} from '../../components/messages/index';
+import { StyledIconButton } from '../../styles/StyledDashboardHeader';
+import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../components/messages/index';
+import * as appRoutes from '../../app/appRoutes';
+import { useNavigate } from 'react-router-dom';
 
 const BillingAccounts = ({ billingAccounts }) => {
   return (
@@ -38,23 +34,17 @@ const BillingAccounts = ({ billingAccounts }) => {
 const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
   const dispatch = useDispatch();
 
-  const billingAccounts = useSelector(
-    (state) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
-  );
+  const billingAccounts = useSelector((state) => state[reduxState.SERVICE_PROVIDERS].billingAccounts);
 
-  const isBillingAccountsAvailable = useSelector(
-    (state) => state[reduxState.SERVICE_PROVIDERS].isAvailable
-  );
+  const isBillingAccountsAvailable = useSelector((state) => state[reduxState.SERVICE_PROVIDERS].isAvailable);
 
-  const isComplete = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].isComplete
-  );
+  const isComplete = useSelector((state) => state[reduxState.COST_DASHBOARD].isComplete);
 
-  const billingAccountCount = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].count
-  );
+  const billingAccountCount = useSelector((state) => state[reduxState.COST_DASHBOARD].count);
 
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   const refreshPage = () => {
     setIsLoading(true);
@@ -67,25 +57,15 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
   };
 
   const LastUpdated = () => {
-    const lastUpdated = useSelector(
-      (state) => state[reduxState.COST_DASHBOARD].lastUpdated
-    );
+    const lastUpdated = useSelector((state) => state[reduxState.COST_DASHBOARD].lastUpdated);
 
     return (
-      <>
-        {isNoBillingAccount() ? null : (
-          <Table.HeaderCell colSpan="5">
-            Last Updated: {lastUpdated}
-          </Table.HeaderCell>
-        )}
-      </>
+      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="5">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
     );
   };
 
   const LoadingStatus = () => {
-    const fetchStatus = useSelector(
-      (state) => state[reduxState.COST_DASHBOARD].fetchStatus
-    );
+    const fetchStatus = useSelector((state) => state[reduxState.COST_DASHBOARD].fetchStatus);
 
     return (
       <>
@@ -106,9 +86,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
     return <>{isNoBillingAccount() ? <NoBillingAccountMessage /> : null}</>;
   };
 
-  const { isCurrencyConflict } = useSelector(
-    (state) => state[reduxState.SERVICE_PROVIDERS]
-  );
+  const { isCurrencyConflict } = useSelector((state) => state[reduxState.SERVICE_PROVIDERS]);
 
   const CurrencyConflict = () => {
     return <>{isCurrencyConflict ? <CurrencyConflictWarning /> : null}</>;
@@ -120,11 +98,10 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
         <Table selectable>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan="2">
-                Active Billing Accounts
-              </Table.HeaderCell>
+              <Table.HeaderCell colSpan="2">Active Billing Accounts</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">
-                <StyledRefreshButton
+                {/* <StyledIconButton onClick={() => navigate(appRoutes.SERVICE_PROVIDERS)} name="plus" /> */}
+                <StyledIconButton
                   name="refresh"
                   onClick={refreshPage}
                   loading={!isComplete}
@@ -134,11 +111,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>
-            {isLoading ? null : (
-              <BillingAccounts billingAccounts={billingAccounts} />
-            )}
-          </Table.Body>
+          <Table.Body>{isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}</Table.Body>
           <LoadingStatus />
         </Table>
         <CurrencyConflict />
@@ -163,9 +136,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
         });
         setIsLoading(false);
 
-        dispatch(
-          updateBillingAccountCount(response.payload?.billingAccounts.length)
-        );
+        dispatch(updateBillingAccountCount(response.payload?.billingAccounts.length));
 
         // Get billing costs for each billing account
         if (response.payload?.billingAccounts.length > 0) {

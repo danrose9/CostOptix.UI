@@ -5,8 +5,8 @@ import { Card, Button } from 'semantic-ui-react';
 import { ButtonGroup } from '../../styles/StyledServiceConnections';
 import ServiceConnectionTable from './ServiceConnectionTable';
 import AddServiceAzure from './AddServiceAzure';
-import AddServiceAWS from './AddServiceAWS';
-import ValidateServiceButton from '../buttons/ValidateServiceButton';
+import AddServiceAWS from './providers/AddServiceAWS';
+import ValidateServiceButton from '../buttons/StandardButton';
 
 const ExtraContentAccordionClosed = ({ content, onClick }) => {
   return (

@@ -1,12 +1,13 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
 import styled from 'styled-components';
-import ValidateServiceButton from '../buttons/ValidateServiceButton';
+import StandardButton from '../buttons/StandardButton';
 import { ICustomerServiceConnection, IServiceConnectionCard } from '../../types/index';
 import { isValid } from '../../utils/formValidation';
+import { DemoContext } from '../../app/DemoContext';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -46,13 +47,15 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
     setOpen(false);
   };
 
+  const isDemo = useContext(DemoContext);
+
   return (
     <Modal
       centered
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button positive>Add new connection</Button>}
+      trigger={<StandardButton disabled={isDemo} positive={true} label="Add new connection" />}
     >
       <ModalHeader>
         <ProviderImage provider={props.provider.provider} size="big" floated="left" data-testid="sc-provider-image" />
@@ -85,8 +88,8 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
         </Modal.Description>
       </Modal.Content>
       <ActionButtons>
-        <Button onClick={handleOnClose}>Close</Button>
-        <ValidateServiceButton disabled={isButtonDisabled} positive={true} label="Continue" />
+        <StandardButton onClick={handleOnClose} label="Close" />
+        <StandardButton disabled={isButtonDisabled} positive={true} label="Continue" />
       </ActionButtons>
     </Modal>
   );

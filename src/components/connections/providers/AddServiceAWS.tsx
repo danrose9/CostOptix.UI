@@ -1,7 +1,7 @@
 import React from 'react';
-import { Segment, Form, Input, Container } from 'semantic-ui-react';
+import { Segment, Form, Icon, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
-import './codeStyles.css';
+import CodeText from '../../CodeText';
 
 const AWSPolicy = `{
   "Version": "2012-10-17",
@@ -52,9 +52,7 @@ export const AddServiceAWS = ({ handleChange }: any) => {
           7. Select the <i>JSON</i> tab and copy/paste the below policy into the editor
         </Form.Field>
         <Form.Field>
-          <pre>
-            <code>{AWSPolicy}</code>
-          </pre>
+          <CodeText children={AWSPolicy} />
         </Form.Field>
         <Form.Field>
           8. Click Next twice and when on the <i>Review Policy</i> page add a Name & Description then click{' '}

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Segment, Input } from 'semantic-ui-react';
-import { AzureCustomerAgreement, AzureOnlineServices, AzureEnterpriseAgreement, AzurePartnerAgreement } from '../forms';
+import {
+  AzureCustomerAgreement,
+  AzureOnlineServices,
+  AzureEnterpriseAgreement,
+  AzurePartnerAgreement,
+} from '../../forms';
 
 const options = [
   { key: 'Microsoft Online Services Program', text: 'Microsoft Online Services Program', value: 'online' },
