@@ -1,11 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
-import { Table, Dropdown, Icon, Card } from 'semantic-ui-react';
+import { Table, Dropdown, Icon, Card, DropdownItemProps, Modal, SemanticICONS } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import { ICustomerServiceConnection, ICustomerConnectedProviders } from '../../types';
 import { IRootState } from '../../services/redux/rootReducer';
 import ServiceConnectionOptions from './ServiceConnectionOptions';
+
+interface IOptions {
+  event: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  text: DropdownItemProps;
+}
+
+interface IServiceConnectionOptions {
+  icon: SemanticICONS;
+  text: string;
+  service: JSX.Element;
+}
 
 export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
   const CustomerConnectedProviders = useSelector(
@@ -31,11 +42,16 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
               <Table.Row key={index}>
                 <Table.Cell>{account.accountName}</Table.Cell>
                 <Table.Cell>
-                  <Dropdown icon="ellipsis horizontal" style={{ zIndex: 'auto' }} simple item data-testid="sc-dropdown">
+                  <Dropdown
+                    icon="ellipsis horizontal"
+                    style={{ zIndex: 'auto' }}
+                    simple
+                    item
+                    data-testid="sc-dropdown"
+                    direction="left"
+                  >
                     <Dropdown.Menu>
-                      {ServiceConnectionOptions.map((option, index) => {
-                        return <Dropdown.Item key={index} icon={option.icon} text={option.text} />;
-                      })}
+                      <ServiceConnectionOptions />
                     </Dropdown.Menu>
                   </Dropdown>
                 </Table.Cell>

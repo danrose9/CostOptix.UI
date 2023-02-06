@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-interface Props {
+interface IProps {
   positive?: boolean;
   disabled?: boolean;
   label?: string;
   onClick?: () => void;
 }
 
-const StandardButton = ({ positive, disabled, label, ...rest }: Props) => {
+const StandardButton = ({ positive, disabled, label, ...rest }: IProps) => {
   return (
     <Button positive={positive} disabled={disabled} {...rest} data-testid="standard-button">
       {label}

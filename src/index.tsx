@@ -1,3 +1,10 @@
+// ============================================================================================================
+// <copyright file="Index.tsx"
+//  © 2023 DDI Software
+//  ALL RIGHTS RESERVED.
+// </copyright>
+// ============================================================================================================
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -9,7 +16,7 @@ import './App.css';
 import { store, persistor } from './services/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const root = createRoot(document.getElementById('root') as HTMLElement) ;
+const root = createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <Provider store={store}>
