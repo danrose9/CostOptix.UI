@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchServiceProviders, fetchBillingAccounts } from '../thunks/serviceProvidersThunk';
+import { fetchServiceProviders, fetchBillingAccounts, deleteBillingAccount } from '../thunks/serviceProvidersThunk';
 
 const initialState = {
   isCurrencyConflict: false,
@@ -75,7 +75,10 @@ const serviceProviderSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
         state.isAvailable = false;
-      });
+      })
+      .addCase(deleteBillingAccount.pending, (state) => {})
+      .addCase(deleteBillingAccount.fulfilled, (state, action) => {})
+      .addCase(deleteBillingAccount.rejected, (state, action) => {});
   },
 });
 

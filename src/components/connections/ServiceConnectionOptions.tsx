@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { Modal, Button, Icon, SemanticICONS, Dropdown } from 'semantic-ui-react';
+import { useAppDispatch } from '../../services/redux/store';
+import { Modal, Button, Dropdown } from 'semantic-ui-react';
+import {
+  deleteBillingAccount,
+  enableBillingAccount,
+  disableBillingAccount,
+} from '../../services/redux/thunks/serviceProvidersThunk';
+import { ICustomerConnectedProviders } from '../../types';
 
-interface IServiceConnectionOptions {
-  icon: SemanticICONS;
-  text: string;
-  service: JSX.Element;
+interface IProps {
+  billingAccount: ICustomerConnectedProviders;
 }
 
-export const ServiceConnectionOptions = () => {
+export const ServiceConnectionOptions = (props: IProps) => {
+  const { id, providerId } = props.billingAccount;
+
   return (
     <>
       <Dropdown.Item icon="settings" text="Manage Service" />
       <Dropdown.Item icon="sync" text="ReSync" />
-      <Dropdown.Item icon="mute" text="Disable" />
-      <Remove />
+      <Disable providerId={providerId} id={id} />
+      <Remove providerId={providerId} id={id} />
       {/* {options.map((option, index) => {
         return (
           <Dropdown.Item key={index} onClick={option.service}>
@@ -26,42 +33,47 @@ export const ServiceConnectionOptions = () => {
   );
 };
 
-export const options = [
-  {
-    icon: 'settings' as SemanticICONS,
-    text: 'Manage Service',
-    service: () => Manage(),
-  },
-  {
-    icon: 'sync' as SemanticICONS,
-    text: 'Re-Sync',
-    service: () => Sync(),
-  },
-  {
-    icon: 'mute' as SemanticICONS,
-    text: 'Disable',
-    service: () => Disable(),
-  },
-  {
-    icon: 'trash' as SemanticICONS,
-    text: 'Remove',
-    service: () => Remove(),
-  },
-];
+// export const options = [
+//   {
+//     icon: 'settings' as SemanticICONS,
+//     text: 'Manage Service',
+//     service: () => Manage(),
+//   },
+//   {
+//     icon: 'sync' as SemanticICONS,
+//     text: 'Re-Sync',
+//     service: () => Sync(),
+//   },
+//   {
+//     icon: 'mute' as SemanticICONS,
+//     text: 'Disable',
+//     service: () => Disable(),
+//   },
+//   {
+//     icon: 'trash' as SemanticICONS,
+//     text: 'Remove',
+//     service: () => Remove(),
+//   },
+// ];
 
-const Remove = () => {
+const Remove = (props: { providerId: string; id: string }) => {
   const [open, setOpen] = useState(false);
 
-  const handleRemoveConnection = () => {};
+  const dispatch = useAppDispatch();
+
+  const handleRemoveConnection = () => {
+    const args = {
+      id: props.id,
+      providerId: props.providerId,
+    };
+
+    dispatch(deleteBillingAccount(args));
+    setOpen(false);
+  };
 
   return (
     <>
-      <Modal
-        trigger={<Dropdown.Item icon="trash" text="Remove" />}
-        onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
-        open={open}
-      >
+      <Modal trigger={<Dropdown.Item icon="trash" text="Remove" />} onOpen={() => setOpen(true)} open={open}>
         <Modal.Header>Remove Service Connection</Modal.Header>
         <Modal.Content>
           <p>Are you sure you want to permanently remove this service connection?</p>
@@ -84,14 +96,32 @@ const Remove = () => {
   );
 };
 
-const Disable = () => {
-  console.log('Disable');
+const Disable = (props: { providerId: string; id: string }) => {
+  const [enabled, setEnabled] = useState(true);
+
+  const dispatch = useAppDispatch();
+
+  const handleOnClick = () => {
+    const args = {
+      id: props.id,
+      providerId: props.providerId,
+    };
+
+    setEnabled(!enabled);
+    if (enabled) {
+      dispatch(disableBillingAccount(args));
+    } else {
+      dispatch(enableBillingAccount(args));
+    }
+  };
+
   return (
     <>
-      <Modal.Header>Disable</Modal.Header>
-      <Modal.Content>
-        <Modal.Description>Your subscription has been confirmed</Modal.Description>
-      </Modal.Content>
+      {enabled ? (
+        <Dropdown.Item icon="bell slash outline" text="Disable" onClick={handleOnClick} />
+      ) : (
+        <Dropdown.Item icon="bell outline" text="Enable" onClick={handleOnClick} />
+      )}
     </>
   );
 };

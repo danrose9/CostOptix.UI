@@ -49,9 +49,10 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
                     item
                     data-testid="sc-dropdown"
                     direction="left"
+                    open={false}
                   >
                     <Dropdown.Menu>
-                      <ServiceConnectionOptions />
+                      <ServiceConnectionOptions billingAccount={account} />
                     </Dropdown.Menu>
                   </Dropdown>
                 </Table.Cell>
