@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../services/redux/store';
 import { Modal, Button, Dropdown } from 'semantic-ui-react';
+
+import { ICustomerConnectedProviders } from '../../types';
+
 import {
   deleteBillingAccount,
-  enableBillingAccount,
   disableBillingAccount,
+  enableBillingAccount,
 } from '../../services/redux/thunks/serviceProvidersThunk';
-import { ICustomerConnectedProviders } from '../../types';
 
 interface IProps {
   billingAccount: ICustomerConnectedProviders;

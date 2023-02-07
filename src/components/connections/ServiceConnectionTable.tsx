@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
-import { Table, Dropdown, Icon, Card, DropdownItemProps, Modal, SemanticICONS } from 'semantic-ui-react';
+import { Table, Dropdown, Popup, Card, DropdownItemProps, Modal, SemanticICONS } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import { ICustomerServiceConnection, ICustomerConnectedProviders } from '../../types';
 import { IRootState } from '../../services/redux/rootReducer';
 import ServiceConnectionOptions from './ServiceConnectionOptions';
+import { billingAccountStatus, statusType } from '../shared';
 
 interface IOptions {
   event: React.MouseEvent<HTMLDivElement, MouseEvent>;
@@ -38,6 +39,8 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
           {CustomerConnectedProviders.filter(
             (account: ICustomerConnectedProviders) => account.provider === props.card.provider
           ).map((account: ICustomerConnectedProviders, index: any) => {
+            const statusIcon = billingAccountStatus[account.status as keyof statusType];
+
             return (
               <Table.Row key={index}>
                 <Table.Cell>{account.accountName}</Table.Cell>
@@ -57,14 +60,16 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
                   </Dropdown>
                 </Table.Cell>
                 <Table.Cell>{formatDateFull(account.createdDate)}</Table.Cell>
-
-                <Table.Cell textAlign="center">
-                  {account.connected ? (
-                    <Icon color="green" name="checkmark" size="large" />
-                  ) : (
-                    <Icon color="red" name="cancel" size="large" />
-                  )}
-                </Table.Cell>
+                <Popup
+                  trigger={
+                    <Table.Cell textAlign="center" style={{ cursor: 'pointer' }}>
+                      {statusIcon}
+                    </Table.Cell>
+                  }
+                  position="right center"
+                  basic
+                  content={account.status}
+                />
               </Table.Row>
             );
           })}
