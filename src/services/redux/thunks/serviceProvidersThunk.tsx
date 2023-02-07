@@ -36,11 +36,9 @@ export const disableBillingAccount = createAsyncThunk(
   'Profile/DisableBillingAccount',
   async (args: { providerId: string; id: string }, { rejectWithValue }) => {
     const { providerId, id } = args;
-    const url = '/' + providerId + '/BillingAccounts/' + id;
-    console.log('disable', url);
-    //   return await fetchInstance(PROVIDERS + url, { method: 'POST' })
-    //     .then((response) => response)
-    //     .catch((e) => rejectWithValue(e.response.data));
+    return await fetchInstance(PROVIDERS + `/${providerId}/BillingAccounts/${id}/DisableCollection`, { method: 'POST' })
+      .then((response) => response.json())
+      .catch((e) => rejectWithValue(e.response.data));
   }
 );
 
@@ -48,10 +46,8 @@ export const enableBillingAccount = createAsyncThunk(
   'Profile/EnableBillingAccount',
   async (args: { providerId: string; id: string }, { rejectWithValue }) => {
     const { providerId, id } = args;
-    const url = '/' + providerId + '/BillingAccounts/' + id;
-    console.log('enable', url);
-    //   return await fetchInstance(PROVIDERS + url, { method: 'POST' })
-    //     .then((response) => response)
-    //     .catch((e) => rejectWithValue(e.response.data));
+    return await fetchInstance(PROVIDERS + `/${providerId}/BillingAccounts/${id}/EnableCollection`, { method: 'POST' })
+      .then((response) => response.json())
+      .catch((e) => rejectWithValue(e.response.data));
   }
 );

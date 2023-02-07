@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchServiceProviders, fetchBillingAccounts } from '../thunks/serviceProvidersThunk';
+import {
+  fetchServiceProviders,
+  fetchBillingAccounts,
+  disableBillingAccount,
+  enableBillingAccount,
+} from '../thunks/serviceProvidersThunk';
 
 const initialState = {
   isCurrencyConflict: false,
@@ -76,6 +81,32 @@ const serviceProviderSlice = createSlice({
         state.error = action.error.message;
         state.isAvailable = false;
       });
+    // Disable Billing Accounts
+    builder
+      .addCase(disableBillingAccount.pending, (state) => {})
+      .addCase(disableBillingAccount.fulfilled, (state, action) => {
+        const { id } = action.payload;
+
+        const billingAccount = state.billingAccounts.find((item) => item.id === id);
+
+        if (billingAccount) {
+          billingAccount.status = 'Disabled';
+        }
+      })
+      .addCase(disableBillingAccount.rejected, (state, action) => {});
+    // Enable Billing Accounts
+    builder
+      .addCase(enableBillingAccount.pending, (state) => {})
+      .addCase(enableBillingAccount.fulfilled, (state, action) => {
+        const { id } = action.payload;
+
+        const billingAccount = state.billingAccounts.find((item) => item.id === id);
+
+        if (billingAccount) {
+          billingAccount.status = 'Connected';
+        }
+      })
+      .addCase(enableBillingAccount.rejected, (state, action) => {});
   },
 });
 
