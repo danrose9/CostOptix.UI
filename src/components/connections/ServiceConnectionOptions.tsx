@@ -1,25 +1,34 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../services/redux/store';
 import { Modal, Button, Dropdown } from 'semantic-ui-react';
+
+import { ICustomerConnectedProviders } from '../../types';
+
 import {
   deleteBillingAccount,
-  enableBillingAccount,
   disableBillingAccount,
+  enableBillingAccount,
 } from '../../services/redux/thunks/serviceProvidersThunk';
-import { ICustomerConnectedProviders } from '../../types';
 
 interface IProps {
   billingAccount: ICustomerConnectedProviders;
 }
 
 export const ServiceConnectionOptions = (props: IProps) => {
-  const { id, providerId } = props.billingAccount;
+  const { id, providerId, status } = props.billingAccount;
+
+  var accountEnabled;
+  if (status === 'Disabled') {
+    accountEnabled = false;
+  } else {
+    accountEnabled = true;
+  }
 
   return (
     <>
       <Dropdown.Item icon="settings" text="Manage Service" />
       <Dropdown.Item icon="sync" text="ReSync" />
-      <Disable providerId={providerId} id={id} />
+      <Disable providerId={providerId} id={id} accountStatus={accountEnabled as boolean} />
       <Remove providerId={providerId} id={id} />
       {/* {options.map((option, index) => {
         return (
@@ -96,8 +105,12 @@ const Remove = (props: { providerId: string; id: string }) => {
   );
 };
 
-const Disable = (props: { providerId: string; id: string }) => {
-  const [enabled, setEnabled] = useState(true);
+const Disable = (props: { providerId: string; id: string; accountStatus: boolean }) => {
+  const [enabled, setEnabled] = useState(props.accountStatus);
+
+  // if (props.status === 'Disabled') {
+  //   setEnabled(false);
+  // }
 
   const dispatch = useAppDispatch();
 
