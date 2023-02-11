@@ -55,7 +55,7 @@ export const ServiceConnectionTable = (props: ICustomerServiceConnection) => {
                     open={false}
                   >
                     <Dropdown.Menu>
-                      <ServiceConnectionOptions billingAccount={account} />
+                      <ServiceConnectionOptions billingAccounts={account} />
                     </Dropdown.Menu>
                   </Dropdown>
                 </Table.Cell>
