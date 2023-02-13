@@ -5,7 +5,6 @@ import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
 import styled from 'styled-components';
 import StandardButton from '../buttons/StandardButton';
-import { ICustomerServiceConnection, IServiceConnectionCard } from '../../types/index';
 import { isValid } from '../../utils/formValidation';
 import { DemoContext } from '../../app/DemoContext';
 
@@ -26,7 +25,6 @@ const ActionButtons = styled(Modal.Content)`
 const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [open, setOpen] = useState(false);
   const [isButtonDisabled, setIsButonDisabled] = useState(true);
-  const [showForm, setShowForm] = useState(false);
 
   const [formData, setFormData] = useState({
     applicationId: null,

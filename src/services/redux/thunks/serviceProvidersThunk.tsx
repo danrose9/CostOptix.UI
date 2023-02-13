@@ -24,11 +24,14 @@ export const deleteBillingAccount = createAsyncThunk(
   'Profile/DeleteBillingAccount',
   async (args: { providerId: string; id: string }, { rejectWithValue }) => {
     const { providerId, id } = args;
-    const url = '/' + providerId + '/BillingAccounts/' + id;
-    console.log('delete', url);
-    //   return await fetchInstance(PROVIDERS + url, { method: 'DELETE' })
-    //     .then((response) => response)
-    //     .catch((e) => rejectWithValue(e.response.data));
+    return await fetchInstance(PROVIDERS + `/${providerId}/BillingAccounts/${id}`, { method: 'DELETE' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return args;
+      })
+      .catch((e) => rejectWithValue(e.response.data));
   }
 );
 

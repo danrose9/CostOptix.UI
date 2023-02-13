@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useAppDispatch } from '../../services/redux/store';
-import { Modal, Button, Dropdown } from 'semantic-ui-react';
-
+import { Modal, Button, Dropdown, Label, Container, Divider, Table } from 'semantic-ui-react';
 import { ICustomerConnectedProviders } from '../../types';
-
 import {
   deleteBillingAccount,
   disableBillingAccount,
   enableBillingAccount,
 } from '../../services/redux/thunks/serviceProvidersThunk';
+import { ProviderImage } from '../ProviderImage';
+import styled from 'styled-components';
+import { formatDateFull } from '../../utils/helper';
 
 interface IProps {
-  billingAccount: ICustomerConnectedProviders;
+  billingAccounts: ICustomerConnectedProviders;
 }
 
-export const ServiceConnectionOptions = (props: IProps) => {
-  const { id, providerId, status } = props.billingAccount;
+export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {
+  const { id, providerId, status, accountName, provider, createdDate } = billingAccounts.billingAccounts;
 
   var accountEnabled;
   if (status === 'Disabled') {
@@ -26,7 +27,7 @@ export const ServiceConnectionOptions = (props: IProps) => {
 
   return (
     <>
-      <Dropdown.Item icon="settings" text="Manage Service" />
+      <Manage accountName={accountName} provider={provider} id={id} status={status} createdDate={createdDate} />
       <Dropdown.Item icon="sync" text="ReSync" />
       <Disable providerId={providerId} id={id} accountStatus={accountEnabled as boolean} />
       <Remove providerId={providerId} id={id} />
@@ -67,7 +68,6 @@ export const ServiceConnectionOptions = (props: IProps) => {
 
 const Remove = (props: { providerId: string; id: string }) => {
   const [open, setOpen] = useState(false);
-
   const dispatch = useAppDispatch();
 
   const handleRemoveConnection = () => {
@@ -144,9 +144,59 @@ const Sync = () => {
   return null;
 };
 
-const Manage = () => {
-  console.log('MANAGE');
-  return null;
+const Manage = (props: { accountName: string; provider: string; id: string; status: string; createdDate: string }) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Modal
+        trigger={<Dropdown.Item icon="settings" text="Manage Service" />}
+        onOpen={() => setOpen(true)}
+        open={open}
+        size="small"
+      >
+        <Modal.Header>Manage Service Connection</Modal.Header>
+        <Modal.Content style={{ padding: '1em' }}>
+          <ProviderImage provider={props.provider} size="tiny" floated="left" />
+          <div>
+            <h2 style={{ margin: '0.5rem' }}>{props.accountName}</h2>
+
+            <div>{props.id}</div>
+            <Divider />
+            <Table fixed>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>Status</Table.Cell>
+                  <Table.Cell>
+                    <Label size="medium" horizontal color="orange">
+                      {props.status}
+                    </Label>
+                  </Table.Cell>
+                  <Table.Cell></Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>Created</Table.Cell>
+                  <Table.Cell>{formatDateFull(props.createdDate)}</Table.Cell>
+                  <Table.Cell></Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            </Table>
+          </div>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button
+            negative
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
+          <Button>Validate</Button>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
 };
 
 export default ServiceConnectionOptions;
