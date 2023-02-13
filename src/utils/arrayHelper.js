@@ -46,8 +46,7 @@ export const upsert = (array, payload, isCurrencyConflict) => {
 
     if (objectToUpdateIndex > -1) {
       // add old provider value to new provider value
-      const newValue =
-        newArray[objectToUpdateIndex][provider] + newObject[provider];
+      const newValue = newArray[objectToUpdateIndex][provider] + newObject[provider];
 
       // check to see if provider is in the object
       if (provider in newArray[objectToUpdateIndex]) {
@@ -72,4 +71,10 @@ export const upsert = (array, payload, isCurrencyConflict) => {
   });
 
   return newArray;
+};
+
+export const findBillingAccount = (state, payload) => {
+  const { id } = payload;
+
+  return state.billingAccounts.find((item) => item.id === id);
 };
