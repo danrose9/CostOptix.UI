@@ -10,9 +10,9 @@ export interface statusType {
 }
 
 export const billingAccountStatus = {
-  Pending: <Icon color="grey" name="sync" size="large" loading />,
+  Pending: <Icon color="grey" name="wait" size="large" />,
   Connected: <Icon color="green" name="checkmark" size="large" />,
-  Disabled: <Icon color="orange" name="bell slash outline" size="large" />,
-  Failed: <Icon color="red" name="cancel" size="large" />,
-  Expired: <Icon color="orange" name="cancel" size="large" />,
+  Disabled: <Icon color="orange" name="close" size="large" />,
+  Failed: <Icon color="red" name="close" size="large" />,
+  Expired: <Icon color="orange" name="clock outline" size="large" />,
 } as statusType;

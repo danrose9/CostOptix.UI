@@ -70,7 +70,7 @@ export const AddServiceAWS = ({ handleChange }: any) => {
         <Form.Field>12. Select the policy that you created in step 8. Click Next</Form.Field>
         <Form.Field>13. Click Create User</Form.Field>
         <Form.Field>
-          14. Once the new user has been created. Choose the user and navigate to the <i>Service credentials</i> tab
+          14. Once the new user has been created. Choose the user and navigate to the <i>Security credentials</i> tab
         </Form.Field>
         <Form.Field>
           15. Create an access key and select <i>Third-party service</i>
