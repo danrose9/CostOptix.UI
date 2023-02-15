@@ -3,9 +3,9 @@ import { render, cleanup, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { store } from '../../services/redux/store';
 import { Provider } from 'react-redux';
-import Navbar from '../../components/navbar/Navbar';
-import { NavbarMode } from '../../components/navbar/NavbarMode';
-import NavbarItems from '../../components/navbar/NavbarItems';
+import Navbar from '../navbar/Navbar';
+import { NavbarMode } from '../navbar/NavbarMode';
+import NavbarItems from '../navbar/NavbarItems';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 afterEach(() => {

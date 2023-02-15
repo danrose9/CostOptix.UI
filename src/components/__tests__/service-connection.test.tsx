@@ -3,11 +3,9 @@ import { render, cleanup, screen, fireEvent, within, waitFor } from '@testing-li
 import '@testing-library/jest-dom';
 import ServiceConnectionTable from '../../components/connections/ServiceConnectionTable';
 import { ServiceConnections as ServiceConnectionCard } from '../../components/connections/ServiceConnections';
-import { ApplicationWrapper } from '../helpers';
+import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
-import { ServiceConnections as ServiceConnectionCards } from '../../components/connections/ServiceConnections';
 import AddServiceConnectionModal from '../../components/connections/AddServiceConnectionModal';
-import { Card } from 'semantic-ui-react';
 
 afterEach(() => {
   cleanup();

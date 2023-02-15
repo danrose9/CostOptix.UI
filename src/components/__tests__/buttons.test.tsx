@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { render, cleanup, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import StandardButton from '../../components/buttons/StandardButton';
-import renderer from 'react-test-renderer';
+import StandardButton from '../buttons/StandardButton';
 
 afterEach(() => {
   cleanup();

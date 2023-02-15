@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import CodeText from '../../components/CodeText';
+import CodeText from '../CodeText';
 import userEvent from '@testing-library/user-event';
 
 afterEach(() => {
