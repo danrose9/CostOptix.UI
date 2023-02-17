@@ -1,13 +1,21 @@
 import React from 'react';
-import { Card, Divider } from 'semantic-ui-react';
+import { Card, Divider, Table } from 'semantic-ui-react';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
 import ServiceConnectionTable from './ServiceConnectionTable';
 import { ProviderImage } from '../ProviderImage';
 import AddServiceConnectionModal from './AddServiceConnectionModal';
+import { useSelector } from 'react-redux';
+import { reduxState } from '../../services/redux/reduxState';
+import { IRootState } from '../../services/redux/rootReducer';
+import { CustomerConnectedProvidersType } from 'billingaccount-types';
 
 const ServiceConnection = () => {
+  const CustomerConnectedProviders = useSelector(
+    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
+  );
+
   return (
     <ServiceConnectionPage>
       <PageTitle title="Service Connections" />
@@ -23,7 +31,23 @@ const ServiceConnection = () => {
                 <Card.Meta>{card.details}</Card.Meta>
               </Card.Content>
               <Card.Content extra>
-                <ServiceConnectionTable card={card} />
+                <Table size="small">
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>Billing Name</Table.HeaderCell>
+                      <Table.HeaderCell />
+                      <Table.HeaderCell>Registration Date</Table.HeaderCell>
+                      <Table.HeaderCell textAlign="center">Status</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {CustomerConnectedProviders.filter(
+                      (account: CustomerConnectedProvidersType) => account.provider === card.provider
+                    ).map((account: CustomerConnectedProvidersType, index: any) => {
+                      return <ServiceConnectionTable account={account} key={index} />;
+                    })}
+                  </Table.Body>
+                </Table>
               </Card.Content>
               <Card.Content extra>
                 <AddServiceConnectionModal provider={card} />

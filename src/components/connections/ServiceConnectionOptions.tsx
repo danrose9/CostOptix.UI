@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICustomerConnectedProviders } from '../../types';
+import { CustomerConnectedProvidersType } from 'billingaccount-types';
 import {
   ManageServiceConnection,
   DisableServiceConnection,
@@ -8,7 +8,7 @@ import {
 } from './options/index';
 
 interface IProps {
-  billingAccounts: ICustomerConnectedProviders;
+  billingAccounts: CustomerConnectedProvidersType;
 }
 
 export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {

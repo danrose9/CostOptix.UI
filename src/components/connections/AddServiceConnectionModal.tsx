@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Header, Modal } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
