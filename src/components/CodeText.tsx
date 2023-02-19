@@ -24,10 +24,6 @@ const Code = styled.code`
   font-style: italic;
 `;
 
-const StyledIcon = styled(Icon)`
-  cursor: pointer;
-`;
-
 const tooltipStyle = {
   height: 'fit-content',
 };
@@ -41,7 +37,7 @@ const CodeText = ({ children }: IChildren) => {
     navigator.clipboard.writeText(children as string);
     setIsOpen(true);
 
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setIsOpen(false);
     }, timeoutLength);
   };

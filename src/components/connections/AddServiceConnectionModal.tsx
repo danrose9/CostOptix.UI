@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Header, Modal } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
@@ -29,6 +29,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [formData, setFormData] = useState({
     applicationId: null,
     secretValue: null,
+    directoryId: null,
   });
 
   const provider = props.provider.provider as string;
@@ -57,7 +58,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
     >
       <ModalHeader>
         <ProviderImage provider={props.provider.provider} size="big" floated="left" data-testid="sc-provider-image" />
-        <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }}>
+        <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }} data-testid="sc-provider-header">
           Add a new {props.provider.provider} Service Connection
         </p>
       </ModalHeader>

@@ -38,7 +38,7 @@ export const AddServiceAzure = ({ handleChange }: any) => {
         <Form>
           <Form.Field>
             1. Log into your
-            <i>Azure</i> account. <a href="https://portal.azure.com">https://portal.azure.com</a>
+            <i>Azure</i> account. <a href="https://portal.azure.com/#settings/directory">https://portal.azure.com</a>
           </Form.Field>
           <Form.Field>
             2. Navigate to <i>App registrations</i>
@@ -72,6 +72,13 @@ export const AddServiceAzure = ({ handleChange }: any) => {
             <Form.Field>
               10. Copy the <i>Value</i> into the box below.
               <Input placeholder="Secret Value" required name="secretValue" onChange={handleChange} />
+            </Form.Field>
+          </Form.Group>
+          <Form.Group>
+            <Form.Field>
+              11. From the new registered App, copy the <i>Directory (tenant) ID</i>Directory <i>Value</i> into the box
+              below.
+              <Input placeholder="Directory ID" required name="directoryId" onChange={handleChange} />
             </Form.Field>
           </Form.Group>
           <Form.Field inline></Form.Field>

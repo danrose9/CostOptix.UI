@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ProviderImage } from '../../components/ProviderImage';
+import { ProviderImage } from '../ProviderImage';
 import * as images from '../../assets/index';
 
 afterEach(() => {

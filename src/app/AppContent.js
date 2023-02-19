@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as appRoutes from './appRoutes';
 import { Container, MainPage, Main } from '../styles/AppContent';
 import Navbar from '../components/navbar/Navbar';

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import CostDashboard from '../../pages/cost-dashboard/CostDashboard';
-import { MostExpensiveInstance, FastestGrowingInstance } from '../../pages/cost-dashboard';
+import CostDashboard from '../cost-dashboard/CostDashboard';
+import { MostExpensiveInstance, FastestGrowingInstance } from '../cost-dashboard';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ApplicationWrapper } from '../helpers';
+import { ApplicationWrapper } from '../../tests/helpers';
 
 import { Provider } from 'react-redux';
 import { store } from '../../services/redux/store';

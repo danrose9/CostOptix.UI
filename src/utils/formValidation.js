@@ -11,7 +11,7 @@ export const validateEmail = (email) => {
 export const isValid = (formData) => {
   const fd = { ...formData };
 
-  if (fd.applicationId && fd.secretValue) {
+  if (fd.applicationId && fd.secretValue && fd.directoryId) {
     return false;
   } else {
     return true;

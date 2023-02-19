@@ -49,19 +49,6 @@ export interface ICustomerServiceConnection {
   card: IServiceConnectionCard;
 }
 
-export interface ICustomerConnectedProviders {
-  accountId: string;
-  accountName: string;
-  createdDate: string;
-  currency: string;
-  id: string;
-  isTransient: boolean;
-  connected: boolean;
-  provider: string;
-  providerId: string;
-  status: string;
-}
-
 export interface IChildren {
   children?: ReactNode;
 }
