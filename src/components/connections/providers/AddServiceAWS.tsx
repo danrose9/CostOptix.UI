@@ -1,6 +1,5 @@
 import React from 'react';
-import { Segment, Form, Icon, Container } from 'semantic-ui-react';
-import styled from 'styled-components';
+import { Segment, Form } from 'semantic-ui-react';
 import CodeText from '../../CodeText';
 
 const AWSPolicy = `{
