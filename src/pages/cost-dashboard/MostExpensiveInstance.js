@@ -10,13 +10,7 @@ import { StyledHeaderCell } from '../__styles__/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../components/tooltips';
 
 const ToolTipData = (instance) => {
-  const {
-    currency,
-    amount30Day,
-    convertedCurrency,
-    amount30DayConverted,
-    isCurrencyConflict,
-  } = instance.instance;
+  const { currency, amount30Day, convertedCurrency, amount30DayConverted, isCurrencyConflict } = instance.instance;
   return (
     <>
       <Card.Content textAlign="right">
@@ -40,13 +34,9 @@ const ToolTipData = (instance) => {
 };
 
 export const MostExpensiveInstance = (props) => {
-  const mostExpensiveService = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].mostExpensive.data
-  );
+  const mostExpensiveService = useSelector((state) => state[reduxState.COST_DASHBOARD].mostExpensive.data);
 
-  const isLoading = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].mostExpensive.isLoading
-  );
+  const isLoading = useSelector((state) => state[reduxState.COST_DASHBOARD].mostExpensive.isLoading);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -60,10 +50,7 @@ export const MostExpensiveInstance = (props) => {
       <Table fixed selectable>
         <Table.Header onClick={handleOnClick}>
           <Table.Row>
-            <StyledHeaderCell
-              data-testid="header-cell-1"
-              colSpan={props.isCurrencyConflict ? 4 : 3}
-            >
+            <StyledHeaderCell data-testid="header-cell-1" colSpan={props.isCurrencyConflict ? 4 : 3}>
               Most Expensive Resources Last 30 days
             </StyledHeaderCell>
           </Table.Row>
@@ -73,9 +60,7 @@ export const MostExpensiveInstance = (props) => {
             <Table.HeaderCell>Resource</Table.HeaderCell>
             <Table.HeaderCell>Service</Table.HeaderCell>
             <Table.HeaderCell textAlign="right">Cost</Table.HeaderCell>
-            {props.isCurrencyConflict ? (
-              <Table.HeaderCell textAlign="right">Converted</Table.HeaderCell>
-            ) : null}
+            {props.isCurrencyConflict ? <Table.HeaderCell textAlign="right">Converted</Table.HeaderCell> : null}
           </Table.Row>
         </Table.Header>
 
@@ -84,9 +69,7 @@ export const MostExpensiveInstance = (props) => {
             .filter((instance) => instance.amount30Day > 0)
             .map((instance, index) => {
               const currencySymbol = getSymbolFromCurrency(instance.currency);
-              const convertedCurrencySymbol = getSymbolFromCurrency(
-                instance.convertedCurrency
-              );
+              const convertedCurrencySymbol = getSymbolFromCurrency(instance.convertedCurrency);
 
               return (
                 <Popup
@@ -101,9 +84,7 @@ export const MostExpensiveInstance = (props) => {
                         });
                       }}
                     >
-                      <Table.Cell singleLine>
-                        {instance.resourceName}
-                      </Table.Cell>
+                      <Table.Cell singleLine>{instance.resourceName}</Table.Cell>
                       <Table.Cell singleLine>{instance.service}</Table.Cell>
                       <Table.Cell textAlign="right">
                         {currencySymbol}

@@ -41,14 +41,14 @@ export const AddServiceAzure = ({ handleChange }: any) => {
             <i>Azure</i> account. <a href="https://portal.azure.com/#settings/directory">https://portal.azure.com</a>
           </Form.Field>
           <Form.Field>
-            2. Navigate to <i>App registrations</i>
+            2. Navigate to <b>App registrations</b>
           </Form.Field>
           <Form.Field>
             3. Select <i>New registration</i> and choose a name for this application
           </Form.Field>
           <Form.Field>
             4. Set <i>Supported account types</i> to{' '}
-            <b>Accounts in this organizational directory only (TenantName only - Single tenant)</b>
+            <i>Accounts in this organizational directory only (TenantName only - Single tenant)</i>
           </Form.Field>
           <Form.Field>
             5. Select <i>Register</i>
@@ -74,10 +74,21 @@ export const AddServiceAzure = ({ handleChange }: any) => {
               <Input placeholder="Secret Value" required name="secretValue" onChange={handleChange} />
             </Form.Field>
           </Form.Group>
+          <Form.Field>
+            11. Select <i>API Permissions</i> from the left nav
+          </Form.Field>
+          <Form.Field>
+            12. Click <i>Add a permission</i>
+          </Form.Field>
+          <Form.Field>
+            13. Under <i>Microsoft APIs </i> select <i>Azure Service Management</i>
+          </Form.Field>
+          <Form.Field>
+            14. Check <i>user_impersonation</i> and the <i>Add permission</i>
+          </Form.Field>
           <Form.Group>
             <Form.Field>
-              11. From the new registered App, copy the <i>Directory (tenant) ID</i>Directory <i>Value</i> into the box
-              below.
+              15. From the new registered App, copy the <i>Directory (tenant) ID</i> value into the box below.
               <Input placeholder="Directory ID" required name="directoryId" onChange={handleChange} />
             </Form.Field>
           </Form.Group>
