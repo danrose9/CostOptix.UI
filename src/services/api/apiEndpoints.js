@@ -1,6 +1,5 @@
 export const BASE = process.env.REACT_APP_API_URI;
-export const EXTERNAL_LOGIN =
-  'Account/ExternalLogin?provider=Azure&returnUrl=/';
+export const EXTERNAL_LOGIN = 'Account/ExternalLogin?provider=Azure&returnUrl=/';
 export const DEMO_LOGIN = 'Account/DemoLogin?returnUrl=/';
 export const USER_ME = 'user/me';
 export const AZURE_SUBSCRIPTIONS = 'AzureManagement/subscriptions';
@@ -16,3 +15,4 @@ export const BILLING_ACCOUNT_COSTS = 'CostDashboardData';
 export const UPDATE_ORGANIZATION_NAME = 'Account/UpdateOrganization';
 export const RESOURCES = 'Resources';
 export const REFRESH_TOKEN = 'Account/RefreshToken';
+export const CLOUD_BILLING_ACCOUNTS = 'Providers/CloudBillingAccounts';

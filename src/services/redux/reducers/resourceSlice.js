@@ -76,6 +76,5 @@ const resourceSlice = createSlice({
   },
 });
 
-export const { RESET, CLEAN_QUERY, SEARCH_CLICK, RESET_ISAVAILABLE } =
-  resourceSlice.actions;
+export const { RESET, CLEAN_QUERY, SEARCH_CLICK, RESET_ISAVAILABLE } = resourceSlice.actions;
 export default resourceSlice.reducer;

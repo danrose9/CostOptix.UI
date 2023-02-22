@@ -38,9 +38,7 @@ export const ResourceView = () => {
   const resource = location.state.resource;
 
   const dispatch = useDispatch();
-  const { data, isLoading, isAvailable } = useSelector(
-    (state) => state[reduxState.RESOURCES]
-  ).view;
+  const { data, isLoading, isAvailable } = useSelector((state) => state[reduxState.RESOURCES]).view;
 
   const args = `${resource.billingAccountId}/${resource.id}`;
 
