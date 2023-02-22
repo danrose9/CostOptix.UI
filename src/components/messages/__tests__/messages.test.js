@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {
   FailedToLoadBillingAccount,
   CurrencyConflictWarning,
   NoBillingAccountMessage,
+  ServiceConnectionWarning,
 } from '../index';
 
 afterEach(() => {
@@ -23,5 +23,13 @@ describe('Messages', () => {
 
   test('should render message', () => {
     render(<NoBillingAccountMessage onDismiss={null} />);
+  });
+});
+
+describe('ServiceConnectionWarning', () => {
+  test('should render message correct text', () => {
+    const scWarning = render(<ServiceConnectionWarning content="Hello World!" />);
+    expect(scWarning).toBeTruthy;
+    expect(scWarning.baseElement).toHaveTextContent('Hello World!');
   });
 });
