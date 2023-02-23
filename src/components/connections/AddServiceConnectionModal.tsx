@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Header, Modal, Message } from 'semantic-ui-react';
+import { Header, Modal, Message, Table, Checkbox, Button, Icon } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
@@ -9,7 +9,6 @@ import { isValid } from '../../utils/formValidation';
 import { DemoContext } from '../../app/DemoContext';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { ServiceConnectionWarning } from '../messages';
-import ListServiceConnectionModal from './ListServiceConnectionModal';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -31,15 +30,23 @@ const StyledStandardButton = styled(StandardButton)`
   }
 `;
 
+type CloudBillingAccountsType = {
+  billingAccountId: string;
+  billingAccountName: string;
+  currency: string;
+};
+
 const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [open, setOpen] = useState(false);
   const [secondOpen, setSecondOpen] = useState(false);
   const [isButtonDisabled, setIsButonDisabled] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
+  const [billingAccounts, setBillingAccount] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
 
   const [error, setError] = useState({
     isError: false,
-    errorMessage: null,
+    errorMessage: '',
   });
 
   const [formData, setFormData] = useState({
@@ -65,9 +72,14 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
       provider: provider,
     };
     const accounts = await fetchCloudBillingAccounts(args);
+    if (accounts.error) {
+      setError({ isError: true, errorMessage: accounts.error });
+    } else {
+      setError({ isError: false, errorMessage: '' });
+      setBillingAccount(accounts.billingAccounts);
+      setSecondOpen(true);
+    }
     setIsFetching(false);
-    setSecondOpen(true);
-    console.log(accounts);
   };
 
   const isDemo = useContext(DemoContext);
@@ -87,7 +99,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
             Add a new {props.provider.provider} Service Connection
           </p>
         </ModalHeader>
-        <Modal.Content>
+        <Modal.Content scrolling>
           <Modal.Description>
             <StyledContent>
               By clicking proceed you will be redirect to {props.provider.vendor} where you will be asked to grant
@@ -119,7 +131,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
             label="Close"
           />
           <div style={{ display: 'inline-flex' }}>
-            {error.isError ? <ServiceConnectionWarning content="Invalid Thingy ma jiggery" /> : null}
+            {error.isError ? <ServiceConnectionWarning content={error.errorMessage} /> : null}
             <StyledStandardButton
               disabled={isButtonDisabled}
               positive={true}
@@ -130,16 +142,50 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
           </div>
         </ActionButtons>
       </Modal>
-      {/* <ListServiceConnectionModal onClose={false} open={secondOpen} /> */}
+
       <Modal onClose={() => setSecondOpen(false)} open={secondOpen} size="small">
-        <Header icon>Billing Accounts found</Header>
+        <Header icon>Billing Accounts</Header>
         <Modal.Content>
           <p>
             We've found the folllowing billing accounts associated with your service provider. Select the accounts you
-            would like to add to CostOptix
+            would like to add to CostOptix.
           </p>
         </Modal.Content>
-        <Modal.Actions></Modal.Actions>
+        <Modal.Content>
+          <Table celled>
+            <Table.Header fullWidth>
+              <Table.Row>
+                <Table.HeaderCell width={2}>
+                  <Checkbox onChange={() => setSelectAll(!selectAll)} />
+                </Table.HeaderCell>
+                <Table.HeaderCell width={4}>Account Name</Table.HeaderCell>
+                <Table.HeaderCell width={8}>Account Id</Table.HeaderCell>
+                <Table.HeaderCell width={2}>Currency</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+
+            <Table.Body>
+              {billingAccounts.map((account: CloudBillingAccountsType, index) => {
+                return (
+                  <Table.Row key={index}>
+                    <Table.Cell>
+                      <Checkbox />
+                    </Table.Cell>
+                    <Table.Cell>{account.billingAccountName}</Table.Cell>
+                    <Table.Cell>{account.billingAccountId}</Table.Cell>
+                    <Table.Cell>{account.currency}</Table.Cell>
+                  </Table.Row>
+                );
+              })}
+            </Table.Body>
+          </Table>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button floated="right" icon labelPosition="left" primary size="small">
+            <Icon name="id card outline" /> Add Accounts
+          </Button>
+          <Button size="small">Cancel</Button>
+        </Modal.Actions>
       </Modal>
     </>
   );
