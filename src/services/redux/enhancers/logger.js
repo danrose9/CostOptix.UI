@@ -1,9 +1,8 @@
 const logger = (store) => (next) => (action) => {
-  const env = process.env.REACT_APP_ENV;
-
+  const enableLogger = process.env.REACT_APP_ENABLE_REDUX_LOGGER;
   let result = next(action);
 
-  if (env !== 'production') {
+  if (enableLogger) {
     console.group(action.type);
     console.info('dispatching', action);
 

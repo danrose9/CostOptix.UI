@@ -39,10 +39,12 @@ type CloudBillingAccountsType = {
 const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [open, setOpen] = useState(false);
   const [secondOpen, setSecondOpen] = useState(false);
-  const [isButtonDisabled, setIsButonDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
-  const [billingAccounts, setBillingAccount] = useState([]);
+
   const [selectAll, setSelectAll] = useState(false);
+
+  const [billingAccounts, setBillingAccount] = useState([]);
 
   const [error, setError] = useState({
     isError: false,
@@ -62,7 +64,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
   };
 
   useEffect(() => {
-    setIsButonDisabled(isValid(formData));
+    setIsButtonDisabled(isValid(formData));
   }, [formData]);
 
   const handleOnSubmit = async () => {
@@ -72,6 +74,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
       provider: provider,
     };
     const accounts = await fetchCloudBillingAccounts(args);
+
     if (accounts.error) {
       setError({ isError: true, errorMessage: accounts.error });
     } else {
@@ -84,6 +87,11 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
 
   const isDemo = useContext(DemoContext);
 
+  const handleOpenModal = () => {
+    // clear error state
+    setError({ isError: false, errorMessage: '' });
+    setIsButtonDisabled(true);
+  };
   return (
     <>
       <Modal
@@ -91,7 +99,9 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<StandardButton disabled={isDemo} positive={true} label="Add new connection" />}
+        trigger={
+          <StandardButton disabled={isDemo} positive={true} label="Add new connection" onClick={handleOpenModal} />
+        }
       >
         <ModalHeader>
           <ProviderImage provider={props.provider.provider} size="big" floated="left" data-testid="sc-provider-image" />
@@ -165,26 +175,36 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
             </Table.Header>
 
             <Table.Body>
-              {billingAccounts.map((account: CloudBillingAccountsType, index) => {
-                return (
-                  <Table.Row key={index}>
-                    <Table.Cell>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell>{account.billingAccountName}</Table.Cell>
-                    <Table.Cell>{account.billingAccountId}</Table.Cell>
-                    <Table.Cell>{account.currency}</Table.Cell>
-                  </Table.Row>
-                );
-              })}
+              <>
+                {billingAccounts.map((account: CloudBillingAccountsType, index) => {
+                  return (
+                    <Table.Row key={index}>
+                      <Table.Cell>
+                        <Checkbox />
+                      </Table.Cell>
+                      <Table.Cell>{account.billingAccountName}</Table.Cell>
+                      <Table.Cell>{account.billingAccountId}</Table.Cell>
+                      <Table.Cell>{account.currency}</Table.Cell>
+                    </Table.Row>
+                  );
+                })}
+              </>
             </Table.Body>
           </Table>
         </Modal.Content>
+
         <Modal.Actions>
           <Button floated="right" icon labelPosition="left" primary size="small">
             <Icon name="id card outline" /> Add Accounts
           </Button>
-          <Button size="small">Cancel</Button>
+          <Button
+            size="small"
+            onClick={() => {
+              setSecondOpen(false);
+            }}
+          >
+            Cancel
+          </Button>
         </Modal.Actions>
       </Modal>
     </>
