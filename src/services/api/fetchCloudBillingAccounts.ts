@@ -9,7 +9,7 @@ interface ICloudBillingAccountsArgs {
 }
 
 export const fetchCloudBillingAccounts = async (args: ICloudBillingAccountsArgs) => {
-  let response = await fetchInstance(CLOUD_BILLING_ACCOUNTS, {
+  const response = await fetchInstance(CLOUD_BILLING_ACCOUNTS, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -19,9 +19,19 @@ export const fetchCloudBillingAccounts = async (args: ICloudBillingAccountsArgs)
       cloudProvider: args.provider,
     }),
   });
-  let data = response.json();
 
-  return data;
+  if (response.ok) {
+    let data = await response.json();
+    let count;
+    try {
+      count = data.billingAccounts.length;
+    } catch {
+      return { error: 'Found 0 accounts, please check settings' };
+    }
+    return { ...data, count: count };
+  } else {
+    return await response.json();
+  }
 };
 
 export default fetchCloudBillingAccounts;
