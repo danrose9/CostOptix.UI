@@ -133,3 +133,15 @@ describe('Service Connection Options', () => {
     /* Unfinished */
   });
 });
+
+describe('Billing Account selection', () => {
+  test('selection array is correctly update on selection', () => {
+    /* Unfinished */
+  });
+  test('selection array is correctly update on de-selection', () => {
+    /* Unfinished */
+  });
+  test('cancel button clears selection array', () => {
+    /* Unfinished */
+  });
+});

@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Header, Modal, Message, Table, Checkbox, Button, Icon } from 'semantic-ui-react';
+import React, { useState, useContext, useEffect, FormEvent } from 'react';
+import { Header, Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
@@ -37,14 +37,12 @@ type CloudBillingAccountsType = {
 };
 
 const AddServiceConnectionModal: React.FC<any> = (props) => {
-  const [open, setOpen] = useState(false);
-  const [secondOpen, setSecondOpen] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [secondOpen, setSecondOpen] = useState<boolean>(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
-  const [selectAll, setSelectAll] = useState(false);
-
-  const [billingAccounts, setBillingAccount] = useState([]);
+  const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountsType[]>([]);
 
   const [error, setError] = useState({
     isError: false,
@@ -92,6 +90,52 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
     setError({ isError: false, errorMessage: '' });
     setIsButtonDisabled(true);
   };
+
+  const [billingAccountSelection, setBillingAccountSelection] = useState<CloudBillingAccountsType[]>([]);
+
+  const handleSelection = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
+    let newState = [...billingAccountSelection];
+
+    // find billingAccount in checked accounts
+    let obj = newState.find((x) => x.billingAccountName === data.id);
+    let indexOfChecked = newState.indexOf(obj as any);
+
+    // if it doesn't exist, copy from billingAccount array
+    if (indexOfChecked === -1) {
+      let obj = billingAccounts.find((x) => x.billingAccountName === data.id);
+      let indexOfBillingAccounts = billingAccounts.indexOf(obj as any);
+      newState.push(billingAccounts[indexOfBillingAccounts]);
+    } else {
+      newState.splice(indexOfChecked, 1);
+    }
+    setBillingAccountSelection(newState);
+  };
+
+  const handleIsChecked = (billingAccountName: string) => {
+    let obj = billingAccountSelection.find((x) => x.billingAccountName === billingAccountName);
+
+    let indexOfChecked = billingAccountSelection.indexOf(obj as any);
+
+    if (indexOfChecked === -1) {
+      return false;
+    } else return true;
+  };
+
+  const handleCancelButton = () => {
+    setSecondOpen(false);
+    setBillingAccountSelection([]);
+  };
+
+  const handleSelectAll = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
+    if (data.checked) {
+      setBillingAccountSelection(billingAccounts);
+    } else {
+      setBillingAccountSelection([]);
+    }
+  };
+
+  const handleAddBillingAccounts = () => {};
+
   return (
     <>
       <Modal
@@ -157,8 +201,8 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
         <Header icon>Billing Accounts</Header>
         <Modal.Content>
           <p>
-            We've found the folllowing billing accounts associated with your service provider. Select the accounts you
-            would like to add to CostOptix.
+            We've found some billing accounts associated with your Azure organization. Select the accounts you would
+            like to add to CostOptix.
           </p>
         </Modal.Content>
         <Modal.Content>
@@ -166,7 +210,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
             <Table.Header fullWidth>
               <Table.Row>
                 <Table.HeaderCell width={2}>
-                  <Checkbox onChange={() => setSelectAll(!selectAll)} />
+                  <Checkbox onChange={handleSelectAll} toggle />
                 </Table.HeaderCell>
                 <Table.HeaderCell width={4}>Account Name</Table.HeaderCell>
                 <Table.HeaderCell width={8}>Account Id</Table.HeaderCell>
@@ -180,7 +224,13 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
                   return (
                     <Table.Row key={index}>
                       <Table.Cell>
-                        <Checkbox />
+                        <Checkbox
+                          toggle
+                          onChange={handleSelection}
+                          id={account.billingAccountName}
+                          value={account.billingAccountName}
+                          checked={handleIsChecked(account.billingAccountName)}
+                        />
                       </Table.Cell>
                       <Table.Cell>{account.billingAccountName}</Table.Cell>
                       <Table.Cell>{account.billingAccountId}</Table.Cell>
@@ -194,15 +244,10 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
         </Modal.Content>
 
         <Modal.Actions>
-          <Button floated="right" icon labelPosition="left" primary size="small">
+          <Button floated="right" icon labelPosition="left" primary size="small" onClick={handleAddBillingAccounts}>
             <Icon name="id card outline" /> Add Accounts
           </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              setSecondOpen(false);
-            }}
-          >
+          <Button size="small" onClick={handleCancelButton}>
             Cancel
           </Button>
         </Modal.Actions>
