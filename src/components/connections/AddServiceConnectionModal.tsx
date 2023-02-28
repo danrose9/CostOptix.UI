@@ -9,6 +9,7 @@ import { isValid } from '../../utils/formValidation';
 import { DemoContext } from '../../app/DemoContext';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { ServiceConnectionWarning } from '../messages';
+import { getIndex } from '../../utils/arrayHelper';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -97,14 +98,13 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
     let newState = [...billingAccountSelection];
 
     // find billingAccount in checked accounts
-    let obj = newState.find((x) => x.billingAccountName === data.id);
-    let indexOfChecked = newState.indexOf(obj as any);
+    var indexOfChecked = getIndex(newState as [], 'billingAccountName', data.id as string);
 
     // if it doesn't exist, copy from billingAccount array
     if (indexOfChecked === -1) {
-      let obj = billingAccounts.find((x) => x.billingAccountName === data.id);
-      let indexOfBillingAccounts = billingAccounts.indexOf(obj as any);
-      newState.push(billingAccounts[indexOfBillingAccounts]);
+      var index = getIndex(billingAccounts as [], 'billingAccountName', data.id as string);
+
+      newState.push(billingAccounts[index]);
     } else {
       newState.splice(indexOfChecked, 1);
     }
@@ -112,11 +112,9 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
   };
 
   const handleIsChecked = (billingAccountName: string) => {
-    let obj = billingAccountSelection.find((x) => x.billingAccountName === billingAccountName);
+    var index = getIndex(billingAccountSelection as [], 'billingAccountName', billingAccountName);
 
-    let indexOfChecked = billingAccountSelection.indexOf(obj as any);
-
-    if (indexOfChecked === -1) {
+    if (index === -1) {
       return false;
     } else return true;
   };
@@ -197,7 +195,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
         </ActionButtons>
       </Modal>
 
-      <Modal onClose={() => setSecondOpen(false)} open={secondOpen} size="small">
+      <Modal onClose={() => setSecondOpen(false)} open={secondOpen} size="small" data-testid={'second-modal'}>
         <Header icon>Billing Accounts</Header>
         <Modal.Content>
           <p>

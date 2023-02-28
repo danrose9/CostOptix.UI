@@ -29,6 +29,29 @@ const mockBillingAccounts = {
   provider: 'Azure',
 } as CustomerConnectedProvidersType;
 
+const mockCloudBillingAccounts = {
+  providerAccountId: '73bf9c05-bd27-4332-a610-bb1a50300369',
+  providerName: '73bf9c05-bd27-4332-a610-bb1a50300369',
+  providerType: 'Azure',
+  billingAccounts: [
+    {
+      billingAccountId: 'KODF-MKVG-BG7-PGB',
+      billingAccountName: 'Development',
+      currency: 'GBP',
+    },
+    {
+      billingAccountId: '2420669c-1b60-4463-9b29-d6a844c84119',
+      billingAccountName: 'Staging',
+      currency: 'EUR',
+    },
+    {
+      billingAccountId: '08a3054c-eec3-4040-98f3-e927ba3f3209',
+      billingAccountName: 'Production',
+      currency: 'USD',
+    },
+  ],
+};
+
 describe('Service Connection Modal', () => {
   const user = userEvent.setup();
   const provider = ServiceConnectionCard[0];
@@ -135,13 +158,16 @@ describe('Service Connection Options', () => {
 });
 
 describe('Billing Account selection', () => {
-  test('selection array is correctly update on selection', () => {
+  test('test all elements are selected when select all is checked', () => {
     /* Unfinished */
   });
-  test('selection array is correctly update on de-selection', () => {
+  test('test all elements are selected when select all is unchecked', () => {
     /* Unfinished */
   });
   test('cancel button clears selection array', () => {
-    /* Unfinished */
+    // render(<AddServiceConnectionModal provider={ServiceConnectionCard[0]}></AddServiceConnectionModal>);
+    // fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+    // fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
+    // const secondModal = screen.getByTestId('second-modal');
   });
 });
