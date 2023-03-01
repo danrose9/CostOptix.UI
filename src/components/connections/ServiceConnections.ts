@@ -1,20 +1,21 @@
-
 export const ServiceConnections = [
-  {  
+  {
     vendor: 'Microsoft',
     provider: 'Microsoft',
     name: 'Microsoft 365',
     connectionName: '365OFF',
     img: require('../../assets/microsoft-96.png'),
     href: 'https://portal.office.com/',
-    consentUrl: 'https://login.microsoftonline.com/{organizationId}/adminconsent?client_id={clientId}&state={state}&redirect_uri={redirectUrl}',
+    consentUrl:
+      'https://login.microsoftonline.com/{organizationId}/adminconsent?client_id={clientId}&state={state}&redirect_uri={redirectUrl}',
     description: 'Microsft 365 Subscription & Service Plan license and costs',
-    details: 'Connect to Microsft 365. Report on subscriptions associated to your tenant and each user. Understand which users are not effectively using their complete service plans and how to reduce costs.',
+    details:
+      'Connect to Microsft 365. Report on subscriptions associated to your tenant and each user. Understand which users are not effectively using their complete service plans and how to reduce costs.',
     active: false,
     colorHex: '#008AD7',
-    color: 'purple',    
+    color: 'purple',
   },
-  {  
+  {
     vendor: 'Microsoft',
     provider: 'Azure',
     name: 'Microsoft Azure',
@@ -23,12 +24,13 @@ export const ServiceConnections = [
     href: 'https://portal.azure.com/',
     consentUrl: '',
     description: 'Microsoft Azure Billing and Usage',
-    details: 'Create a connection to Azure\'s Billing APIs. These allow access to see usage, costs and resource information within your organization.',
+    details:
+      "Create a connection to Azure's Billing APIs. These allow access to see usage, costs and resource information within your organization.",
     active: true,
     colorHex: '#7FBA00',
     color: 'blue',
   },
-  {  
+  {
     vendor: 'Amazon',
     provider: 'AWS',
     name: 'Amazon Web Services',
@@ -37,12 +39,13 @@ export const ServiceConnections = [
     href: 'https://aws.amazon.com/',
     consentUrl: '',
     description: 'Amazon Web Service costs and expenditure',
-    details: 'Connect to your AWS organization giving access to show subscription costs, resources and usage information across each of your regions.',
+    details:
+      'Connect to your AWS organization giving access to show subscription costs, resources and usage information across each of your regions.',
     active: true,
     colorHex: '#FF9900',
     color: 'orange',
   },
-  {  
+  {
     vendor: 'Salesforce',
     provider: 'Salesforce',
     name: 'Salesforce',
@@ -51,12 +54,13 @@ export const ServiceConnections = [
     href: 'https://www.salesforce.com/',
     consentUrl: '',
     description: 'Salesforce costs and subscriptions',
-    details: 'Connect to your Salesforce subscription, gather service costs and subscription usage with this connection',
+    details:
+      'Connect to your Salesforce subscription, gather service costs and subscription usage with this connection',
     active: false,
     colorHex: '#ADCEFF',
     color: 'violet',
   },
-  {  
+  {
     vendor: 'Google',
     provider: 'Google',
     name: 'Google Cloud',
@@ -65,7 +69,8 @@ export const ServiceConnections = [
     href: 'https://cloud.google.com/',
     consentUrl: '',
     description: 'Google Cloud cost analytics',
-    details: 'Connect to your Google Cloud subscription, gather service costs and subscription usage with this connection',
+    details:
+      'Connect to your Google Cloud subscription, gather service costs and subscription usage with this connection',
     active: false,
     colorHex: '#FFC658',
     color: 'yellow',

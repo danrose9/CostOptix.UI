@@ -22,9 +22,8 @@ export const AddServiceAWS = ({ handleChange }: any) => {
   return (
     <Segment>
       <Form>
-        <Form.Field>
-          1. Log into your
-          <i>AWS</i> account. <a href="https://aws.amazon.com">https://aws.amazon.com</a>
+        <Form.Field data-testid={'provider-steps-1'}>
+          1. Log into your <i>AWS</i> account. <a href="https://aws.amazon.com/">https://aws.amazon.com/</a>
         </Form.Field>
         <Form.Field>
           2. Navigate to <i>AWS Cost Explorer</i>

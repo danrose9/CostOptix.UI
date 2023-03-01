@@ -12,6 +12,7 @@ import { ServiceConnections as ServiceConnectionCard } from '../../components/co
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 import { CustomerConnectedProvidersType } from 'billingaccount-types';
+import { CloudProviderType } from 'cloud-billing-accounts';
 
 afterEach(() => {
   cleanup();
@@ -28,6 +29,29 @@ const mockBillingAccounts = {
   status: 'Disabled',
   provider: 'Azure',
 } as CustomerConnectedProvidersType;
+
+const mockCloudBillingAccounts = {
+  providerAccountId: '73bf9c05-bd27-4332-a610-bb1a50300369',
+  providerName: '73bf9c05-bd27-4332-a610-bb1a50300369',
+  providerType: 'Azure',
+  billingAccounts: [
+    {
+      billingAccountId: 'KODF-MKVG-BG7-PGB',
+      billingAccountName: 'Development',
+      currency: 'GBP',
+    },
+    {
+      billingAccountId: '2420669c-1b60-4463-9b29-d6a844c84119',
+      billingAccountName: 'Staging',
+      currency: 'EUR',
+    },
+    {
+      billingAccountId: '08a3054c-eec3-4040-98f3-e927ba3f3209',
+      billingAccountName: 'Production',
+      currency: 'USD',
+    },
+  ],
+} as CloudProviderType;
 
 describe('Service Connection Modal', () => {
   const user = userEvent.setup();
@@ -59,51 +83,30 @@ describe('Service Connection Modal', () => {
     fireEvent.click(closeButton);
     expect(continueButton).not.toBeInTheDocument();
   });
-
+  /*
   test('Service Connection form accepts input and is valid', () => {
-    /* Unfinished */
+    // Unfinished
   });
 
   test('Continue button should be enabled on valid fill', () => {
-    /* Unfinished */
+    // Unfinished
   });
 
   test('Continue button should be disabled on invalid form', () => {
-    /* Unfinished */
+    // Unfinished
+  });
+
+  test('Continue button should remove all errors on click', () => {
+    // Unfinished
   });
 
   test('Manage modal should render and close', () => {
-    /* Unfinished */
+    // Unfinished
   });
-});
-
-describe('Correct modal should show for each provider', () => {
-  var providerArray = [1, 2];
-
-  providerArray.forEach((n) => {
-    const provider = ServiceConnectionCard[n];
-    test('Testing modal for ' + provider.provider, async () => {
-      render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
-      fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-      expect(screen.getByTestId('sc-provider-header')).toHaveTextContent(
-        `Add a new ${provider.provider} Service Connection`
-      );
-    });
-
-    test('Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card', () => {
-      /* Unfinished */
-    });
-  });
-});
-
-describe('AWS Service Connection', () => {
-  test('href links should work', () => {
-    /* Unfinished */
-  });
+  */
 });
 
 describe('Service Connection Options', () => {
-  beforeEach(() => {});
   test('More button should render dropdown', async () => {
     const { getByTestId, getAllByTestId } = render(
       <Table>
@@ -130,18 +133,46 @@ describe('Service Connection Options', () => {
   });
 
   test('Disable/enable should toggle', () => {
-    /* Unfinished */
+    // Unfinished
+  });
+});
+
+describe('Correct modal should show for each provider', () => {
+  // 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
+  var providerArray = [1, 2];
+
+  providerArray.forEach((n) => {
+    const provider = ServiceConnectionCard[n];
+
+    test(
+      'Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card',
+      async () => {
+        render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+        fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+
+        expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${provider.provider} account`);
+      }
+    );
+
+    test('href links should work', () => {
+      render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+      fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+      expect(screen.getByRole('link', { name: provider.href })).toHaveAttribute('href', provider.href);
+    });
   });
 });
 
 describe('Billing Account selection', () => {
-  test('selection array is correctly update on selection', () => {
-    /* Unfinished */
+  test('test all elements are selected when select all is checked', () => {
+    // Unfinished
   });
-  test('selection array is correctly update on de-selection', () => {
-    /* Unfinished */
+  test('test all elements are selected when select all is unchecked', () => {
+    // Unfinished
   });
   test('cancel button clears selection array', () => {
-    /* Unfinished */
+    // render(<AddServiceConnectionModal provider={ServiceConnectionCard[0]}></AddServiceConnectionModal>);
+    // fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+    // fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
+    // const secondModal = screen.getByTestId('second-modal');
   });
 });

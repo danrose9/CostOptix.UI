@@ -78,3 +78,9 @@ export const findBillingAccount = (state, payload) => {
 
   return state.billingAccounts.find((item) => item.id === id);
 };
+
+export const getIndex = (inputArray, propertyToCheck, valueToFind) => {
+  let obj = inputArray.find((x) => x[propertyToCheck] === valueToFind);
+
+  return inputArray.indexOf(obj);
+};
