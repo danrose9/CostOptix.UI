@@ -5,14 +5,14 @@ import { changeLogItems } from '../../components/changeLogData';
 import { formatDateFull } from '../../utils/helper';
 import { SectionHeader, SectionTitle } from './__styles__/StyledSettingsPage';
 
+const { version } = require('../../../package.json');
+
 const ListItem = styled.li`
   font-weight: 400;
   padding-left: 2rem;
 `;
 
 export const ChangeLog = () => {
-  const appVersion = sessionStorage.getItem('application version');
-
   return (
     <>
       <Tab.Pane color="blue">
@@ -20,7 +20,7 @@ export const ChangeLog = () => {
           <SectionTitle>Change Log</SectionTitle>
 
           <Label size="large" color="teal">
-            Application Version: {appVersion}
+            Application Version: {version}
           </Label>
         </SectionHeader>
         <Divider />
