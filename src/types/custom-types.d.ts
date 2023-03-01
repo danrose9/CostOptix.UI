@@ -37,3 +37,18 @@ declare module 'provider-types' {
     provider: ServiceConnectionProviderType;
   }
 }
+
+declare module 'cloud-billing-accounts-types' {
+  export type CloudProviderType = {
+    providerAccountId: string;
+    providerName: string;
+    providerType: string;
+    billingAccounts: CloudBillingAccountType[];
+  };
+
+  export type CloudBillingAccountType = {
+    billingAccountId: string;
+    billingAccountName: string;
+    currency: string;
+  };
+}

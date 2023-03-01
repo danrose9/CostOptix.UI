@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, FormEvent } from 'react';
+import React, { useState, useContext, useEffect, FormEvent, Fragment } from 'react';
 import { Header, Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
@@ -10,6 +10,7 @@ import { DemoContext } from '../../app/DemoContext';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { ServiceConnectionWarning } from '../messages';
 import { getIndex } from '../../utils/arrayHelper';
+import { CloudBillingAccountType } from 'cloud-billing-accounts-types';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -31,19 +32,13 @@ const StyledStandardButton = styled(StandardButton)`
   }
 `;
 
-type CloudBillingAccountsType = {
-  billingAccountId: string;
-  billingAccountName: string;
-  currency: string;
-};
-
 const AddServiceConnectionModal: React.FC<any> = (props) => {
   const [open, setOpen] = useState<boolean>(false);
   const [secondOpen, setSecondOpen] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
-  const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountsType[]>([]);
+  const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountType[]>([]);
 
   const [error, setError] = useState({
     isError: false,
@@ -92,7 +87,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
     setIsButtonDisabled(true);
   };
 
-  const [billingAccountSelection, setBillingAccountSelection] = useState<CloudBillingAccountsType[]>([]);
+  const [billingAccountSelection, setBillingAccountSelection] = useState<CloudBillingAccountType[]>([]);
 
   const handleSelection = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
     let newState = [...billingAccountSelection];
@@ -134,6 +129,19 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
 
   const handleAddBillingAccounts = () => {};
 
+  const ProviderSteps = () => {
+    switch (provider as string) {
+      case 'Azure':
+        return <AddServiceAzure handleChange={handleChange} />;
+
+      case 'AWS':
+        return <AddServiceAWS handleChange={handleChange} />;
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Modal
@@ -168,11 +176,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
               <br />
               <br />
             </StyledContent>
-            {provider === 'Azure' ? (
-              <AddServiceAzure handleChange={handleChange} />
-            ) : (
-              <AddServiceAWS handleChange={handleChange} />
-            )}
+            <Fragment>{ProviderSteps()}</Fragment>
           </Modal.Description>
         </Modal.Content>
         <ActionButtons>
@@ -218,7 +222,7 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
 
             <Table.Body>
               <>
-                {billingAccounts.map((account: CloudBillingAccountsType, index) => {
+                {billingAccounts.map((account: CloudBillingAccountType, index) => {
                   return (
                     <Table.Row key={index}>
                       <Table.Cell>

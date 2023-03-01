@@ -12,6 +12,7 @@ import { ServiceConnections as ServiceConnectionCard } from '../../components/co
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 import { CustomerConnectedProvidersType } from 'billingaccount-types';
+import { CloudProviderType } from 'cloud-billing-accounts';
 
 afterEach(() => {
   cleanup();
@@ -50,9 +51,8 @@ const mockCloudBillingAccounts = {
       currency: 'USD',
     },
   ],
-};
+} as CloudProviderType;
 
-/*
 describe('Service Connection Modal', () => {
   const user = userEvent.setup();
   const provider = ServiceConnectionCard[0];
@@ -83,7 +83,7 @@ describe('Service Connection Modal', () => {
     fireEvent.click(closeButton);
     expect(continueButton).not.toBeInTheDocument();
   });
-
+  /*
   test('Service Connection form accepts input and is valid', () => {
     // Unfinished
   });
@@ -103,36 +103,10 @@ describe('Service Connection Modal', () => {
   test('Manage modal should render and close', () => {
     // Unfinished
   });
-});
-*/
-
-describe('Correct modal should show for each provider', () => {
-  // 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
-  var providerArray = [1, 2];
-
-  providerArray.forEach((n) => {
-    const provider = ServiceConnectionCard[n];
-
-    test(
-      'Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card',
-      async () => {
-        render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
-        fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-
-        expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${provider.provider} account`);
-      }
-    );
-
-    test('href links should work', () => {
-      render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
-      fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-      expect(screen.getByRole('link', { name: provider.href })).toHaveAttribute('href', provider.href);
-    });
-  });
+  */
 });
 
 describe('Service Connection Options', () => {
-  beforeEach(() => {});
   test('More button should render dropdown', async () => {
     const { getByTestId, getAllByTestId } = render(
       <Table>
@@ -163,7 +137,31 @@ describe('Service Connection Options', () => {
   });
 });
 
-/*
+describe('Correct modal should show for each provider', () => {
+  // 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
+  var providerArray = [1, 2];
+
+  providerArray.forEach((n) => {
+    const provider = ServiceConnectionCard[n];
+
+    test(
+      'Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card',
+      async () => {
+        render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+        fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+
+        expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${provider.provider} account`);
+      }
+    );
+
+    test('href links should work', () => {
+      render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+      fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+      expect(screen.getByRole('link', { name: provider.href })).toHaveAttribute('href', provider.href);
+    });
+  });
+});
+
 describe('Billing Account selection', () => {
   test('test all elements are selected when select all is checked', () => {
     // Unfinished
@@ -178,4 +176,3 @@ describe('Billing Account selection', () => {
     // const secondModal = screen.getByTestId('second-modal');
   });
 });
-*/
