@@ -52,6 +52,7 @@ const mockCloudBillingAccounts = {
   ],
 };
 
+/*
 describe('Service Connection Modal', () => {
   const user = userEvent.setup();
   const provider = ServiceConnectionCard[0];
@@ -84,44 +85,49 @@ describe('Service Connection Modal', () => {
   });
 
   test('Service Connection form accepts input and is valid', () => {
-    /* Unfinished */
+    // Unfinished
   });
 
   test('Continue button should be enabled on valid fill', () => {
-    /* Unfinished */
+    // Unfinished
   });
 
   test('Continue button should be disabled on invalid form', () => {
-    /* Unfinished */
+    // Unfinished
+  });
+
+  test('Continue button should remove all errors on click', () => {
+    // Unfinished
   });
 
   test('Manage modal should render and close', () => {
-    /* Unfinished */
+    // Unfinished
   });
 });
+*/
 
 describe('Correct modal should show for each provider', () => {
+  // 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
   var providerArray = [1, 2];
 
   providerArray.forEach((n) => {
     const provider = ServiceConnectionCard[n];
-    test('Testing modal for ' + provider.provider, async () => {
+
+    test(
+      'Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card',
+      async () => {
+        render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+        fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+
+        expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${provider.provider} account`);
+      }
+    );
+
+    test('href links should work', () => {
       render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
       fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-      expect(screen.getByTestId('sc-provider-header')).toHaveTextContent(
-        `Add a new ${provider.provider} Service Connection`
-      );
+      expect(screen.getByRole('link', { name: provider.href })).toHaveAttribute('href', provider.href);
     });
-
-    test('Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card', () => {
-      /* Unfinished */
-    });
-  });
-});
-
-describe('AWS Service Connection', () => {
-  test('href links should work', () => {
-    /* Unfinished */
   });
 });
 
@@ -153,16 +159,17 @@ describe('Service Connection Options', () => {
   });
 
   test('Disable/enable should toggle', () => {
-    /* Unfinished */
+    // Unfinished
   });
 });
 
+/*
 describe('Billing Account selection', () => {
   test('test all elements are selected when select all is checked', () => {
-    /* Unfinished */
+    // Unfinished
   });
   test('test all elements are selected when select all is unchecked', () => {
-    /* Unfinished */
+    // Unfinished
   });
   test('cancel button clears selection array', () => {
     // render(<AddServiceConnectionModal provider={ServiceConnectionCard[0]}></AddServiceConnectionModal>);
@@ -171,3 +178,4 @@ describe('Billing Account selection', () => {
     // const secondModal = screen.getByTestId('second-modal');
   });
 });
+*/

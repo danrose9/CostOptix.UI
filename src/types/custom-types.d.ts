@@ -16,3 +16,24 @@ declare module 'billingaccount-types' {
     account: CustomerConnectedProvidersType;
   }
 }
+
+declare module 'provider-types' {
+  export type ServiceConnectionProviderType = {
+    vendor: string;
+    provider: string;
+    name: string;
+    connectionName: string;
+    img: any;
+    href: string;
+    consentUrl: string;
+    description: string;
+    details: string;
+    active: boolean;
+    colorHex: string;
+    color: string;
+  };
+
+  interface ProviderProps {
+    provider: ServiceConnectionProviderType;
+  }
+}

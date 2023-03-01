@@ -36,9 +36,8 @@ export const AddServiceAzure = ({ handleChange }: any) => {
     <>
       <Segment>
         <Form>
-          <Form.Field>
-            1. Log into your
-            <i>Azure</i> account. <a href="https://portal.azure.com/#settings/directory">https://portal.azure.com</a>
+          <Form.Field data-testid={'provider-steps-1'}>
+            1. Log into your <i>Azure</i> account. <a href="https://portal.azure.com/">https://portal.azure.com/</a>
           </Form.Field>
           <Form.Field>
             2. Navigate to <b>App registrations</b>
