@@ -12,8 +12,6 @@ const InitializeApp = () => {
     }
   }, []);
 
-  return (
-    <>{isAuthenticated ? <Navigate to="/lp" /> : <Navigate to="/home" />}</>
-  );
+  return <>{isAuthenticated ? <Navigate to="/lp" /> : <Navigate to="/home" />}</>;
 };
 export default InitializeApp;

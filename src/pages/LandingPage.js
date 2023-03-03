@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Button,
-  Grid,
-  Modal,
-  Segment,
-  Icon,
-  Divider,
-  Header,
-} from 'semantic-ui-react';
+import { Button, Grid, Modal, Segment, Icon, Divider, Header } from 'semantic-ui-react';
 import * as appRoutes from '../app/appRoutes';
 import { StyledModal, BtnGroup, Border } from '../styles/StyledLandingPage';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,9 +24,7 @@ const TrialMode = (props) => {
       <Header icon>
         <Icon name="paper plane outline" />
         Continue with your trial
-        <Header.Subheader>
-          Remember, you only have {props.trialsLeft} free login left!
-        </Header.Subheader>
+        <Header.Subheader>Remember, you only have {props.trialsLeft} free login left!</Header.Subheader>
       </Header>
 
       <Button primary onClick={() => handleAcceptTrialMode()}>
@@ -62,7 +52,7 @@ const AlphaMode = (props) => {
       <Grid.Column>
         <Header icon>
           <Icon name="world" />
-          Join the Alpha program
+          Join the Beta program
           <Header.Subheader>We'd love to hear your feedback.</Header.Subheader>
         </Header>
         <BtnGroup>
@@ -99,9 +89,7 @@ const LandingPage = () => {
     setIsOpen(value);
   };
 
-  const remainingLogins = useSelector(
-    (state) => state[reduxState.USER_PROFILE].organization.remainingLogins
-  );
+  const remainingLogins = useSelector((state) => state[reduxState.USER_PROFILE].organization.remainingLogins);
   const { isDemo } = useSelector((state) => state[reduxState.USER_PROFILE]);
 
   useEffect(() => {
@@ -113,12 +101,7 @@ const LandingPage = () => {
     <>
       <Grid columns={1}>
         <Grid.Column>
-          <StyledModal
-            closeOnEscape={false}
-            closeOnDimmerClick={false}
-            open={isOpen}
-            size="large"
-          >
+          <StyledModal closeOnEscape={false} closeOnDimmerClick={false} open={isOpen} size="large">
             <Modal.Header>Welcome to CostOptix</Modal.Header>
             <Border>
               <Segment placeholder>
@@ -127,17 +110,11 @@ const LandingPage = () => {
                     <>
                       <Divider vertical>Or</Divider>
                       <Grid.Row verticalAlign="middle"></Grid.Row>
-                      <TrialMode
-                        dismissModal={dismissModal}
-                        trialsLeft={remainingLogins}
-                      />
+                      <TrialMode dismissModal={dismissModal} trialsLeft={remainingLogins} />
                       <AlphaMode dismissModal={dismissModal} />
                     </>
                   ) : (
-                    <AlphaMode
-                      dismissModal={dismissModal}
-                      showExitButton={true}
-                    />
+                    <AlphaMode dismissModal={dismissModal} showExitButton={true} />
                   )}
                 </Grid>
               </Segment>
