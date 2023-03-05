@@ -34,12 +34,12 @@ const TrialMode = (props) => {
   );
 };
 
-const AlphaMode = (props) => {
+const BetaMode = (props) => {
   const navigate = useNavigate();
 
-  const handleAcceptAlphaMode = () => {
+  const handleAcceptBetaMode = () => {
     props.dismissModal(false);
-    navigate(appRoutes.ALPHA_PROGRAM_SIGNUP);
+    navigate(appRoutes.BETA_PROGRAM_SIGNUP);
   };
 
   const handleLogout = () => {
@@ -59,7 +59,7 @@ const AlphaMode = (props) => {
           <Button
             primary
             onClick={() => {
-              handleAcceptAlphaMode();
+              handleAcceptBetaMode();
             }}
           >
             Yep, I'm in
@@ -111,10 +111,10 @@ const LandingPage = () => {
                       <Divider vertical>Or</Divider>
                       <Grid.Row verticalAlign="middle"></Grid.Row>
                       <TrialMode dismissModal={dismissModal} trialsLeft={remainingLogins} />
-                      <AlphaMode dismissModal={dismissModal} />
+                      <BetaMode dismissModal={dismissModal} />
                     </>
                   ) : (
-                    <AlphaMode dismissModal={dismissModal} showExitButton={true} />
+                    <BetaMode dismissModal={dismissModal} showExitButton={true} />
                   )}
                 </Grid>
               </Segment>

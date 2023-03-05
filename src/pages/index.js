@@ -8,7 +8,7 @@ export { default as Components } from './Components';
 export { default as Signup } from '../components/auth/Signup';
 export { default as InitializeApp } from '../app/InitializeApp';
 export { default as landingPage } from './LandingPage';
-export { default as alphaProgramSignup } from '../components/modals/AlphaProgramSignup';
+export { default as betaProgramSignup } from '../components/modals/BetaProgramSignup';
 export { default as LogoutPage } from './LogoutPage';
 export { default as SessionExpired } from './SessionExpired';
 export { default as ResourceList } from './resource-view/ResourceList';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import AlphaProgramSignup from '../AlphaProgramSignup';
+import BetaProgramSignup from '../BetaProgramSignup';
 import TermsOfServiceModal from '../TermsOfServiceModal';
 
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -14,7 +14,7 @@ describe('Terms of Service', () => {
   test('should render Terms of Service button', () => {
     const { queryByText } = render(
       <Router>
-        <AlphaProgramSignup />
+        <BetaProgramSignup />
       </Router>
     );
     const termsButton = screen.getByTestId('terms-01');
@@ -26,7 +26,7 @@ describe('Terms of Service', () => {
   test('should render Terms of Service on button click', () => {
     render(
       <Router>
-        <AlphaProgramSignup />
+        <BetaProgramSignup />
       </Router>
     );
     const termsButton = screen.getByTestId('terms-01');
