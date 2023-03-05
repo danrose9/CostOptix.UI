@@ -83,17 +83,14 @@ export const ApplicationRoutes = () => {
         }
       />
       <Route
-        path={appRoutes.ALPHA_PROGRAM_SIGNUP}
+        path={appRoutes.BETA_PROGRAM_SIGNUP}
         element={
           <PrivateRoute>
-            <page.alphaProgramSignup />
+            <page.betaProgramSignup />
           </PrivateRoute>
         }
       />
-      <Route
-        path={appRoutes.SESSION_EXPIRED}
-        element={<page.SessionExpired />}
-      />
+      <Route path={appRoutes.SESSION_EXPIRED} element={<page.SessionExpired />} />
       <Route path="*" element={<page.PageNotFound404 />} />
     </Routes>
   );
