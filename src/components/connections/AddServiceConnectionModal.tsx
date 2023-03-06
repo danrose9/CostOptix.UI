@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, FormEvent, Fragment } from 'react';
+import React, { useState, useContext, useEffect, FormEvent, Fragment, FC } from 'react';
 import { Header, Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
@@ -11,6 +11,7 @@ import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccou
 import { ServiceConnectionWarning } from '../messages';
 import { getIndex } from '../../utils/arrayHelper';
 import { CloudBillingAccountType } from 'cloud-billing-accounts-types';
+import { ProviderProps, ServiceConnectionProviderType } from 'provider-types';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -32,7 +33,9 @@ const StyledStandardButton = styled(StandardButton)`
   }
 `;
 
-const AddServiceConnectionModal: React.FC<any> = (props) => {
+const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
+  const { provider, vendor, name } = cloudProvider;
+
   const [open, setOpen] = useState<boolean>(false);
   const [secondOpen, setSecondOpen] = useState<boolean>(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
@@ -50,8 +53,6 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
     secretValue: '',
     directoryId: '',
   });
-
-  const provider = props.provider.provider as string;
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -154,17 +155,16 @@ const AddServiceConnectionModal: React.FC<any> = (props) => {
         }
       >
         <ModalHeader>
-          <ProviderImage provider={props.provider.provider} size="big" floated="left" data-testid="sc-provider-image" />
+          <ProviderImage provider={provider} size="big" floated="left" data-testid="sc-provider-image" />
           <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }} data-testid="sc-provider-header">
-            Add a new {props.provider.provider} Service Connection
+            Add a new {provider} Service Connection
           </p>
         </ModalHeader>
         <Modal.Content scrolling>
           <Modal.Description>
             <StyledContent>
-              By clicking proceed you will be redirect to {props.provider.vendor} where you will be asked to grant
-              access for this application to {props.provider.name}. This authorization will need to be approved by an
-              administrator.
+              By clicking proceed you will be redirect to {vendor} where you will be asked to grant access for this
+              application to {name}. This authorization will need to be approved by an administrator.
               <br />
               <br />
               The information that we collect will be used by this application to report and analyse subscription and
