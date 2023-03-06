@@ -34,7 +34,7 @@ declare module 'provider-types' {
   };
 
   interface ProviderProps {
-    provider: ServiceConnectionProviderType;
+    cloudProvider: ServiceConnectionProviderType;
   }
 }
 

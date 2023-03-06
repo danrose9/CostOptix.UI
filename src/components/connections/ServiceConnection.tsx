@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
 import { CustomerConnectedProvidersType } from 'billingaccount-types';
+import { ServiceConnectionProviderType, ProviderProps } from 'provider-types';
 
 const ServiceConnection = () => {
   const CustomerConnectedProviders = useSelector(
@@ -50,7 +51,7 @@ const ServiceConnection = () => {
                 </Table>
               </Card.Content>
               <Card.Content extra>
-                <AddServiceConnectionModal provider={card} />
+                <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType} />
               </Card.Content>
             </Card>
           );
