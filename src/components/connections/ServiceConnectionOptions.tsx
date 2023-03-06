@@ -31,7 +31,7 @@ export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {
         createdDate={createdDate}
         currency={currency}
       />
-      <SyncServiceConnection />
+      {/* <SyncServiceConnection /> */}
       <DisableServiceConnection providerId={providerId} id={id} accountStatus={accountEnabled as boolean} />
       <RemoveServiceConnection providerId={providerId} id={id} />
     </>

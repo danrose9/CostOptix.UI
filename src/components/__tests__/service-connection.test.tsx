@@ -12,7 +12,8 @@ import { ServiceConnections as ServiceConnectionCard } from '../../components/co
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 import { CustomerConnectedProvidersType } from 'billingaccount-types';
-import { CloudProviderType } from 'cloud-billing-accounts';
+import { ServiceConnectionProviderType } from 'provider-types';
+import { CloudProviderType } from 'cloud-billing-accounts-types';
 
 afterEach(() => {
   cleanup();
@@ -55,11 +56,11 @@ const mockCloudBillingAccounts = {
 
 describe('Service Connection Modal', () => {
   const user = userEvent.setup();
-  const provider = ServiceConnectionCard[0];
+  const card = ServiceConnectionCard[0];
 
   beforeEach(() => {
     render(
-      <AddServiceConnectionModal provider={provider}>
+      <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}>
         <AddServiceAzure />
       </AddServiceConnectionModal>
     );
@@ -129,7 +130,7 @@ describe('Service Connection Options', () => {
     expect(element.firstChild).toHaveTextContent('Manage Service');
 
     //test number of child nodes
-    expect(element.childElementCount).toBe(4);
+    expect(element.childElementCount).toBe(3);
   });
 
   test('Disable/enable should toggle', () => {
@@ -142,22 +143,23 @@ describe('Correct modal should show for each provider', () => {
   var providerArray = [1, 2];
 
   providerArray.forEach((n) => {
-    const provider = ServiceConnectionCard[n];
+    const card = ServiceConnectionCard[n];
 
-    test(
-      'Test that the modal showing for ' + provider.provider + ', is for the ' + provider.provider + ' card',
-      async () => {
-        render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
-        fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+    test('Test that the modal showing for ' + card.provider + ', is for the ' + card.provider + ' card', async () => {
+      render(
+        <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
 
-        expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${provider.provider} account`);
-      }
-    );
+      expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${card.provider} account`);
+    });
 
     test('href links should work', () => {
-      render(<AddServiceConnectionModal provider={provider}></AddServiceConnectionModal>);
+      render(
+        <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>
+      );
       fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-      expect(screen.getByRole('link', { name: provider.href })).toHaveAttribute('href', provider.href);
+      expect(screen.getByRole('link', { name: card.href })).toHaveAttribute('href', card.href);
     });
   });
 });

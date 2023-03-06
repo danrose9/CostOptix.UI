@@ -35,7 +35,8 @@
     "build-dev": "dotenv -e .env.development npm run build",
     "build-prod": "dotenv -e .env.production npm run build",
     "dpdm": "dpdm --no-warning --no-tree ./src/index.js",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -62,6 +63,7 @@
     "@types/jest": "^29.4.0",
     "@types/react-test-renderer": "^18.0.0",
     "@types/styled-components": "^5.1.26",
+    "cypress": "^12.7.0",
     "dpdm": "^3.10.0",
     "jest": "^29.3.1",
     "jest-junit": "^15.0.0",
