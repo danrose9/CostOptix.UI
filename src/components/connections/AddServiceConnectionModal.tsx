@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, FormEvent, Fragment, FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { Header, Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
@@ -10,8 +11,11 @@ import { DemoContext } from '../../app/DemoContext';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { ServiceConnectionWarning } from '../messages';
 import { getIndex } from '../../utils/arrayHelper';
-import { CloudBillingAccountType } from 'cloud-billing-accounts-types';
-import { ProviderProps, ServiceConnectionProviderType } from 'provider-types';
+import { CloudBillingAccountType, AddBillingAccountType } from 'cloud-billingaccounts-types';
+import { ErrorType } from 'error-types';
+import { IProviderProps } from 'provider-types';
+import { addBillingAccount } from '../../services/redux/thunks/serviceProvidersThunk';
+import { AppDispatch } from '../../services/redux/store';
 
 const ModalHeader = styled(Header)`
   &&& {
@@ -33,7 +37,15 @@ const StyledStandardButton = styled(StandardButton)`
   }
 `;
 
-const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
+type AzureFormDataType = {
+  applicationId: string;
+  secretValue: string;
+  directoryId: string;
+};
+
+const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { provider, vendor, name } = cloudProvider;
 
   const [open, setOpen] = useState<boolean>(false);
@@ -42,13 +54,23 @@ const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountType[]>([]);
+  const [billingAccountSelection, setBillingAccountSelection] = useState<CloudBillingAccountType[]>([]);
 
-  const [error, setError] = useState({
+  const [error, setError] = useState<ErrorType>({
     isError: false,
     errorMessage: '',
   });
 
-  const [formData, setFormData] = useState({
+  const [providerData, setProviderData] = useState<AddBillingAccountType>({
+    providerAccountId: '',
+    providerName: '',
+    cloudProvider: '',
+    username: '',
+    password: '',
+    billingAccounts: billingAccountSelection,
+  });
+
+  const [formData, setFormData] = useState<AzureFormDataType>({
     applicationId: '',
     secretValue: '',
     directoryId: '',
@@ -62,19 +84,36 @@ const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
     setIsButtonDisabled(isValid(formData));
   }, [formData]);
 
+  // process form and return billingaccounts
   const handleOnSubmit = async () => {
     setIsFetching(true);
     const args = {
       ...formData,
       provider: provider,
     };
+
     const accounts = await fetchCloudBillingAccounts(args);
 
     if (accounts.error) {
       setError({ isError: true, errorMessage: accounts.error });
     } else {
+      // update state with formdata
+      setProviderData({
+        providerAccountId: '',
+        providerName: '',
+        cloudProvider: args.provider,
+        username: args.applicationId,
+        password: args.secretValue,
+        billingAccounts: [],
+      });
+
+      // reset error state
       setError({ isError: false, errorMessage: '' });
+
+      // update state with all biling accounts returned
       setBillingAccount(accounts.billingAccounts);
+
+      // open second modal
       setSecondOpen(true);
     }
     setIsFetching(false);
@@ -87,8 +126,6 @@ const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
     setError({ isError: false, errorMessage: '' });
     setIsButtonDisabled(true);
   };
-
-  const [billingAccountSelection, setBillingAccountSelection] = useState<CloudBillingAccountType[]>([]);
 
   const handleSelection = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
     let newState = [...billingAccountSelection];
@@ -104,7 +141,13 @@ const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
     } else {
       newState.splice(indexOfChecked, 1);
     }
+
+    // probably have to update this to use setProviderData instead
     setBillingAccountSelection(newState);
+    setProviderData({
+      ...providerData,
+      billingAccounts: newState,
+    });
   };
 
   const handleIsChecked = (billingAccountName: string) => {
@@ -123,12 +166,20 @@ const AddServiceConnectionModal: FC<ProviderProps> = ({ cloudProvider }) => {
   const handleSelectAll = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
     if (data.checked) {
       setBillingAccountSelection(billingAccounts);
+      setProviderData({
+        ...providerData,
+        billingAccounts: billingAccounts,
+      });
     } else {
       setBillingAccountSelection([]);
     }
   };
 
-  const handleAddBillingAccounts = () => {};
+  const handleAddBillingAccounts = async () => {
+    console.log(providerData);
+
+    // dispatch(addBillingAccount(args));
+  };
 
   const ProviderSteps = () => {
     switch (provider as string) {

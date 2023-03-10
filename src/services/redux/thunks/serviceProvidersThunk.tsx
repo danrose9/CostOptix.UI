@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PROVIDERS, BILLING_ACCOUNTS } from '../../api/apiEndpoints';
 import fetchInstance from '../../api/fetchInstance';
+import { AddBillingAccountType } from 'cloud-billingaccounts-types';
 
 export const fetchServiceProviders = createAsyncThunk(
   'Providers/Providers',
@@ -52,5 +53,16 @@ export const enableBillingAccount = createAsyncThunk(
     return await fetchInstance(PROVIDERS + `/${providerId}/BillingAccounts/${id}/EnableCollection`, { method: 'POST' })
       .then((response) => response.json())
       .catch((e) => rejectWithValue(e.response.data));
+  }
+);
+
+export const addBillingAccount = createAsyncThunk(
+  'Profile/AddBillingAccount',
+  async (args: AddBillingAccountType, { rejectWithValue }) => {
+    console.log(args);
+    // const { providerId, id } = args;
+    // return await fetchInstance(PROVIDERS + `/${providerId}/BillingAccounts/${id}/EnableCollection`, { method: 'POST' })
+    //   .then((response) => response.json())
+    //   .catch((e) => rejectWithValue(e.response.data));
   }
 );
