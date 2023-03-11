@@ -45,6 +45,7 @@ type AzureFormDataType = {
 
 const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const isDemo = useContext(DemoContext);
 
   const { provider, vendor, name } = cloudProvider;
 
@@ -54,7 +55,6 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountType[]>([]);
-  const [billingAccountSelection, setBillingAccountSelection] = useState<CloudBillingAccountType[]>([]);
 
   const [error, setError] = useState<ErrorType>({
     isError: false,
@@ -67,7 +67,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     cloudProvider: '',
     username: '',
     password: '',
-    billingAccounts: billingAccountSelection,
+    billingAccounts: [],
   });
 
   const [formData, setFormData] = useState<AzureFormDataType>({
@@ -79,10 +79,6 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
   const handleChange = (e: { target: { name: string; value: string } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    setIsButtonDisabled(isValid(formData));
-  }, [formData]);
 
   // process form and return billingaccounts
   const handleOnSubmit = async () => {
@@ -104,13 +100,13 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
         cloudProvider: args.provider,
         username: args.applicationId,
         password: args.secretValue,
-        billingAccounts: [],
+        billingAccounts: accounts.billingAccounts,
       });
 
       // reset error state
       setError({ isError: false, errorMessage: '' });
 
-      // update state with all biling accounts returned
+      // update state with all billing accounts returned
       setBillingAccount(accounts.billingAccounts);
 
       // open second modal
@@ -119,16 +115,20 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     setIsFetching(false);
   };
 
-  const isDemo = useContext(DemoContext);
-
-  const handleOpenModal = () => {
+  // handle when initial modeal should open
+  const handleOpenInitialModal = () => {
     // clear error state
     setError({ isError: false, errorMessage: '' });
+
+    console.log(provider);
+
+    // disabled continue button
     setIsButtonDisabled(true);
   };
 
+  // handle when each billing accunt is selected
   const handleSelection = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
-    let newState = [...billingAccountSelection];
+    let newState = [...providerData.billingAccounts];
 
     // find billingAccount in checked accounts
     var indexOfChecked = getIndex(newState as [], 'billingAccountName', data.id as string);
@@ -143,44 +143,50 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     }
 
     // probably have to update this to use setProviderData instead
-    setBillingAccountSelection(newState);
     setProviderData({
       ...providerData,
       billingAccounts: newState,
     });
   };
 
+  // logic when each element is selected
   const handleIsChecked = (billingAccountName: string) => {
-    var index = getIndex(billingAccountSelection as [], 'billingAccountName', billingAccountName);
+    var index = getIndex(providerData.billingAccounts as [], 'billingAccountName', billingAccountName);
 
     if (index === -1) {
       return false;
     } else return true;
   };
 
+  // close second modal
   const handleCancelButton = () => {
     setSecondOpen(false);
-    setBillingAccountSelection([]);
+    setProviderData({
+      ...providerData,
+      billingAccounts: [],
+    });
   };
 
+  // logic when choosing select/deselect all
   const handleSelectAll = (e: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
     if (data.checked) {
-      setBillingAccountSelection(billingAccounts);
       setProviderData({
         ...providerData,
         billingAccounts: billingAccounts,
       });
     } else {
-      setBillingAccountSelection([]);
+      setProviderData({ ...providerData, billingAccounts: [] });
     }
   };
 
+  // send api request for adding billing accounts
   const handleAddBillingAccounts = async () => {
     console.log(providerData);
 
     // dispatch(addBillingAccount(args));
   };
 
+  // for each provider supply a new component exposing configuration steps
   const ProviderSteps = () => {
     switch (provider as string) {
       case 'Azure':
@@ -194,6 +200,10 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     }
   };
 
+  useEffect(() => {
+    setIsButtonDisabled(isValid(formData));
+  }, [formData]);
+
   return (
     <>
       <Modal
@@ -202,7 +212,12 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <StandardButton disabled={isDemo} positive={true} label="Add new connection" onClick={handleOpenModal} />
+          <StandardButton
+            disabled={isDemo}
+            positive={true}
+            label="Add new connection"
+            onClick={handleOpenInitialModal}
+          />
         }
       >
         <ModalHeader>
@@ -263,7 +278,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
             <Table.Header fullWidth>
               <Table.Row>
                 <Table.HeaderCell width={2}>
-                  <Checkbox onChange={handleSelectAll} toggle />
+                  <Checkbox onChange={handleSelectAll} toggle defaultChecked={true} />
                 </Table.HeaderCell>
                 <Table.HeaderCell width={4}>Account Name</Table.HeaderCell>
                 <Table.HeaderCell width={8}>Account Id</Table.HeaderCell>
