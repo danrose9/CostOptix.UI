@@ -1,41 +1,23 @@
 import React, { useState, useContext, useEffect, FormEvent, Fragment, FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { Header, Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
+
+import { Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
 import { AddServiceAzure, AddServiceAWS } from './index';
 import { ProviderImage } from '../ProviderImage';
-import styled from 'styled-components';
 import StandardButton from '../buttons/StandardButton';
 import { isValid } from '../../utils/formValidation';
 import { DemoContext } from '../../app/DemoContext';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { ServiceConnectionWarning } from '../messages';
 import { getIndex } from '../../utils/arrayHelper';
-import { CloudBillingAccountType, AddBillingAccountType } from 'cloud-billingaccounts-types';
+
+import { CloudBillingAccountType, CloudProviderType, AddBillingAccountType } from 'cloud-billingaccounts-types';
 import { ErrorType } from 'error-types';
 import { IProviderProps } from 'provider-types';
 import { addBillingAccount } from '../../services/redux/thunks/serviceProvidersThunk';
 import { AppDispatch } from '../../services/redux/store';
-
-const ModalHeader = styled(Header)`
-  &&& {
-    display: flex;
-    align-items: center;
-  }
-`;
-
-const ActionButtons = styled(Modal.Content)`
-  &&& {
-    display: flex;
-    justify-content: space-between;
-  }
-`;
-
-const StyledStandardButton = styled(StandardButton)`
-  &&& {
-    margin-left: 1em;
-  }
-`;
+import { ModalHeader, ActionButtons } from '../__styles__/StyledModal';
 
 type AzureFormDataType = {
   applicationId: string;
@@ -51,7 +33,9 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
 
   const [open, setOpen] = useState<boolean>(false);
   const [secondOpen, setSecondOpen] = useState<boolean>(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [isFormButtonDisabled, setIsFormButtonDisabled] = useState<boolean>(true);
+  const [numberOfBillingAccountsReturned, setNumberOfBillingAccountsReturned] = useState<number>(0);
+
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
   const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountType[]>([]);
@@ -88,15 +72,17 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
       provider: provider,
     };
 
-    const accounts = await fetchCloudBillingAccounts(args);
+    const accounts: CloudProviderType = await fetchCloudBillingAccounts(args);
+
+    setNumberOfBillingAccountsReturned(accounts.count);
 
     if (accounts.error) {
       setError({ isError: true, errorMessage: accounts.error });
     } else {
       // update state with formdata
       setProviderData({
-        providerAccountId: '',
-        providerName: '',
+        providerAccountId: accounts.providerAccountId,
+        providerName: accounts.providerName,
         cloudProvider: args.provider,
         username: args.applicationId,
         password: args.secretValue,
@@ -123,7 +109,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     console.log(provider);
 
     // disabled continue button
-    setIsButtonDisabled(true);
+    setIsFormButtonDisabled(true);
   };
 
   // handle when each billing accunt is selected
@@ -179,6 +165,11 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     }
   };
 
+  const checkifSelectAllIsChecked = () => {
+    if (providerData.billingAccounts.length === 0) return false;
+    if (providerData.billingAccounts.length === numberOfBillingAccountsReturned) return true;
+  };
+
   // send api request for adding billing accounts
   const handleAddBillingAccounts = async () => {
     console.log(providerData);
@@ -200,8 +191,14 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     }
   };
 
+  const checkIfSubmitButtonIsDisabled = () => {
+    if (providerData.billingAccounts.length === 0) {
+      return true;
+    } else return false;
+  };
+
   useEffect(() => {
-    setIsButtonDisabled(isValid(formData));
+    setIsFormButtonDisabled(isValid(formData));
   }, [formData]);
 
   return (
@@ -254,8 +251,8 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
           />
           <div style={{ display: 'inline-flex' }}>
             {error.isError ? <ServiceConnectionWarning content={error.errorMessage} /> : null}
-            <StyledStandardButton
-              disabled={isButtonDisabled}
+            <StandardButton
+              disabled={isFormButtonDisabled}
               positive={true}
               label="Continue"
               onClick={handleOnSubmit}
@@ -266,7 +263,10 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
       </Modal>
 
       <Modal onClose={() => setSecondOpen(false)} open={secondOpen} size="small" data-testid={'second-modal'}>
-        <Header icon>Billing Accounts</Header>
+        <ModalHeader>
+          <ProviderImage provider={provider} size="small" floated="left" data-testid="sc-provider-image" />
+          <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }}>Billing Accounts</p>
+        </ModalHeader>
         <Modal.Content>
           <p>
             We've found some billing accounts associated with your Azure organization. Select the accounts you would
@@ -278,7 +278,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
             <Table.Header fullWidth>
               <Table.Row>
                 <Table.HeaderCell width={2}>
-                  <Checkbox onChange={handleSelectAll} toggle defaultChecked={true} />
+                  <Checkbox onChange={handleSelectAll} toggle checked={checkifSelectAllIsChecked()} />
                 </Table.HeaderCell>
                 <Table.HeaderCell width={4}>Account Name</Table.HeaderCell>
                 <Table.HeaderCell width={8}>Account Id</Table.HeaderCell>
@@ -312,7 +312,15 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
         </Modal.Content>
 
         <Modal.Actions>
-          <Button floated="right" icon labelPosition="left" primary size="small" onClick={handleAddBillingAccounts}>
+          <Button
+            floated="right"
+            icon
+            labelPosition="left"
+            primary
+            size="small"
+            onClick={handleAddBillingAccounts}
+            disabled={checkIfSubmitButtonIsDisabled()}
+          >
             <Icon name="id card outline" /> Add Accounts
           </Button>
           <Button size="small" onClick={handleCancelButton}>

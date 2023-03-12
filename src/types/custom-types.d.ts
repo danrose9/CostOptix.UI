@@ -40,10 +40,12 @@ declare module 'provider-types' {
 
 declare module 'cloud-billingaccounts-types' {
   export type CloudProviderType = {
+    count: number;
     providerAccountId: string;
     providerName: string;
     providerType: string;
     billingAccounts: CloudBillingAccountType[];
+    error: string;
   };
 
   export type AddBillingAccountType = {
