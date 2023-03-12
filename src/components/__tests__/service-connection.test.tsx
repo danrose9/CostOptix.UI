@@ -13,7 +13,7 @@ import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 import { CustomerConnectedProvidersType } from 'billingaccount-types';
 import { ServiceConnectionProviderType } from 'provider-types';
-import { CloudProviderType } from 'cloud-billing-accounts-types';
+import { CloudProviderType } from 'cloud-billingaccounts-types';
 
 afterEach(() => {
   cleanup();

@@ -12,7 +12,7 @@ declare module 'billingaccount-types' {
     status: string;
   };
 
-  interface AccountProps {
+  interface IAccountProps {
     account: CustomerConnectedProvidersType;
   }
 }
@@ -33,22 +33,40 @@ declare module 'provider-types' {
     color: string;
   };
 
-  interface ProviderProps {
+  interface IProviderProps {
     cloudProvider: ServiceConnectionProviderType;
   }
 }
 
-declare module 'cloud-billing-accounts-types' {
+declare module 'cloud-billingaccounts-types' {
   export type CloudProviderType = {
+    count: number;
     providerAccountId: string;
     providerName: string;
     providerType: string;
     billingAccounts: CloudBillingAccountType[];
+    error: string;
   };
 
-  export type CloudBillingAccountType = {
+  export type AddBillingAccountType = {
+    providerAccountId: string;
+    providerName: string;
+    cloudProvider: string;
+    username: string;
+    password: string;
+    billingAccounts: CloudBillingAccountType[];
+  };
+
+  type CloudBillingAccountType = {
     billingAccountId: string;
     billingAccountName: string;
     currency: string;
+  };
+}
+
+declare module 'error-types' {
+  export type ErrorType = {
+    isError: boolean;
+    errorMessage: string;
   };
 }

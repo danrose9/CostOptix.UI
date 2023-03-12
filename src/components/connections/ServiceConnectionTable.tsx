@@ -3,7 +3,7 @@ import { Table, Dropdown, Popup } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import ServiceConnectionOptions from './ServiceConnectionOptions';
 import { billingAccountStatus, statusType } from '../shared';
-import { AccountProps } from 'billingaccount-types';
+import { IAccountProps } from 'billingaccount-types';
 
 // interface IOptions {
 //   event: React.MouseEvent<HTMLDivElement, MouseEvent>;
@@ -16,7 +16,7 @@ import { AccountProps } from 'billingaccount-types';
 //   service: JSX.Element;
 // }
 
-export const ServiceConnectionTable = ({ account }: AccountProps, index: any) => {
+export const ServiceConnectionTable = ({ account }: IAccountProps, index: any) => {
   const statusIcon = billingAccountStatus[account.status as keyof statusType];
 
   return (
