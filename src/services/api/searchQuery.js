@@ -10,7 +10,5 @@ export const searchQuery = (pageNumber = 1, searchValue = null, pageSize) => {
     query = `?$top=${pageSize}&$skip=${skip}&$search="${searchValue}"`;
   }
 
-  console.log('query', query);
-
   store.dispatch(FINISH_SEARCH(query));
 };

@@ -4,12 +4,7 @@ import { ProductName } from '../ProductName';
 // import { MessageBox } from '../MessageBox';
 // import { handleAzureLogin } from '../../auth/AzureSignIn';
 import { AzureSignInButton } from '../../components/buttons/AzureButton';
-import {
-  StyledForm,
-  StyledDivider,
-  StyledColumn,
-  StyledHeader,
-} from '../../styles/StyledLogin';
+import { StyledForm, StyledDivider, StyledColumn, StyledHeader } from '../../styles/StyledLogin';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -28,7 +23,6 @@ const Signup = () => {
     //Removing errors from console
     setPassword('password');
     setOrganization('org');
-    console.log(showMessage);
 
     // await checkValidlogin(username);
   };
