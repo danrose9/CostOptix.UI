@@ -5,10 +5,7 @@ import { reduxState } from '../services/redux/reduxState';
 import * as appRoutes from './appRoutes';
 
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useSelector(
-    (state) => state[reduxState.USER_PROFILE]
-  );
-  // console.log('checking', children.type.name);
+  const { isAuthenticated } = useSelector((state) => state[reduxState.USER_PROFILE]);
   return isAuthenticated ? children : <Navigate to={appRoutes.HOME} />;
 };
 

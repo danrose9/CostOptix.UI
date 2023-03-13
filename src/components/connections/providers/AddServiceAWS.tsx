@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Segment, Form } from 'semantic-ui-react';
 import CodeText from '../../CodeText';
+import { AWSFormDataType } from 'provider-types';
 
 const AWSPolicy = `{
   "Version": "2012-10-17",
@@ -18,7 +19,28 @@ const AWSPolicy = `{
   ]
 }`;
 
-export const AddServiceAWS = ({ handleChange }: any) => {
+const isFormValid = (formData: AWSFormDataType) => {
+  const fd = { ...formData };
+
+  if (fd.applicationId && fd.secretValue) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const AddServiceAWS = ({ DisableButtonOnInvalidForm, updateFormData }: any) => {
+  const [formData, setFormData] = useState<AWSFormDataType | undefined>(undefined);
+
+  const handleChange = (e: { target: { name: string; value: string } }) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    DisableButtonOnInvalidForm(isFormValid(formData as AWSFormDataType));
+    updateFormData(formData);
+  });
+
   return (
     <Segment>
       <Form>

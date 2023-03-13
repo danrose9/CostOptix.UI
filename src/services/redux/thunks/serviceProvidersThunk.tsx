@@ -59,7 +59,6 @@ export const enableBillingAccount = createAsyncThunk(
 export const addBillingAccount = createAsyncThunk(
   'Profile/AddBillingAccount',
   async (args: AddBillingAccountType, { rejectWithValue }) => {
-    console.log(args);
     // const { providerId, id } = args;
     // return await fetchInstance(PROVIDERS + `/${providerId}/BillingAccounts/${id}/EnableCollection`, { method: 'POST' })
     //   .then((response) => response.json())

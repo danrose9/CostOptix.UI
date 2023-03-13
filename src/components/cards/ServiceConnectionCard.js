@@ -16,16 +16,13 @@ export class ServiceConnectionCard extends Component {
   fetchServices = (organizationId) => {
     this.setState({ ...this.state, isFetching: true });
     const url =
-      process.env.REACT_APP_API_URI +
-      'ServiceConnections/customerConnections?organizationId=' +
-      organizationId;
+      process.env.REACT_APP_API_URI + 'ServiceConnections/customerConnections?organizationId=' + organizationId;
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ servicesCount: result.length, isFetching: false });
       })
       .catch((e) => {
-        console.log(e);
         this.setState({ ...this.state, isFetching: false });
       });
   };
@@ -38,10 +35,7 @@ export class ServiceConnectionCard extends Component {
     var organizationId = sessionStorageGetValue('me', 'organizationId');
 
     this.fetchServices(organizationId);
-    this.timer = setInterval(
-      () => this.fetchServices(organizationId),
-      process.env.REACT_APP_APPLICATION_REFRESH
-    );
+    this.timer = setInterval(() => this.fetchServices(organizationId), process.env.REACT_APP_APPLICATION_REFRESH);
   }
 
   componentWillUnmount() {
