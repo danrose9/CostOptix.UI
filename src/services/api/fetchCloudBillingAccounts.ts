@@ -1,14 +1,9 @@
 import { CLOUD_BILLING_ACCOUNTS } from './apiEndpoints';
 import fetchInstance from './fetchInstance';
-
-interface ICloudBillingAccountsArgs {
-  directoryId: string;
-  applicationId: string;
-  secretValue: string;
-  provider: string;
-}
+import { ICloudBillingAccountsArgs } from 'cloud-billingaccounts-types';
 
 export const fetchCloudBillingAccounts = async (args: ICloudBillingAccountsArgs) => {
+  console.log('args', args);
   const response = await fetchInstance(CLOUD_BILLING_ACCOUNTS, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

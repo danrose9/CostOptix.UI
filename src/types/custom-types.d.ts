@@ -62,6 +62,13 @@ declare module 'cloud-billingaccounts-types' {
     billingAccountName: string;
     currency: string;
   };
+
+  export interface ICloudBillingAccountsArgs {
+    directoryId: string;
+    applicationId: string;
+    secretValue: string;
+    provider: string;
+  }
 }
 
 declare module 'error-types' {

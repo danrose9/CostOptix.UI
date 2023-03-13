@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Segment, Input } from 'semantic-ui-react';
 import {
   AzureCustomerAgreement,
@@ -7,6 +7,12 @@ import {
   AzurePartnerAgreement,
 } from '../../forms';
 
+type AzureFormDataType = {
+  applicationId?: string;
+  secretValue?: string;
+  directoryId?: string;
+};
+
 const options = [
   { key: 'Microsoft Online Services Program', text: 'Microsoft Online Services Program', value: 'online' },
   { key: "Microsoft Customer Agreement'", text: 'Microsoft Customer Agreement', value: 'customer' },
@@ -14,8 +20,27 @@ const options = [
   { key: 'Microsoft Partner Agreement', text: 'Microsoft Partner Agreement', value: 'partner' },
 ];
 
-export const AddServiceAzure = ({ handleChange }: any) => {
-  const [value, setValue] = useState();
+const isFormValid = (formData: AzureFormDataType) => {
+  const fd = { ...formData };
+
+  if (fd.applicationId && fd.secretValue && fd.directoryId) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const AddServiceAzure = ({ DisableButtonOnInvalidForm, updateFormData }: any) => {
+  const [formData, setFormData] = useState<AzureFormDataType | undefined>(undefined);
+
+  const handleChange = (e: { target: { name: string; value: string } }) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    DisableButtonOnInvalidForm(isFormValid(formData as AzureFormDataType));
+    updateFormData(formData);
+  });
 
   const RenderForm = (billingType: string | undefined) => {
     switch (billingType) {
