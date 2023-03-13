@@ -11,9 +11,19 @@ import {
   AddBillingAccountType,
   ICloudBillingAccountsArgs,
 } from 'cloud-billingaccounts-types';
+import { ServiceConnectionProviderType } from 'provider-types';
 import { AppDispatch } from '../../services/redux/store';
+import { AzureFormDataType, AWSFormDataType } from 'provider-types';
+import { ErrorType } from 'error-types';
 
-const ListServiceConnectionModal: React.FC<any> = ({ disabled, cloudProvider, formData, updateSetError }) => {
+interface IModalProps {
+  disabled: boolean;
+  cloudProvider: ServiceConnectionProviderType;
+  formData: AzureFormDataType | AWSFormDataType;
+  updateSetError: any;
+}
+
+const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProvider, formData, updateSetError }) => {
   const { provider } = cloudProvider;
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [numberOfBillingAccountsReturned, setNumberOfBillingAccountsReturned] = useState<number>(0);

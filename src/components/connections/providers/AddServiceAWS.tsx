@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Segment, Form } from 'semantic-ui-react';
 import CodeText from '../../CodeText';
-
-type AWSFormDataType = {
-  applicationId?: string;
-  secretValue?: string;
-};
+import { AWSFormDataType } from 'provider-types';
 
 const AWSPolicy = `{
   "Version": "2012-10-17",

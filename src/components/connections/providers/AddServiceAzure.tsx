@@ -6,12 +6,7 @@ import {
   AzureEnterpriseAgreement,
   AzurePartnerAgreement,
 } from '../../forms';
-
-type AzureFormDataType = {
-  applicationId?: string;
-  secretValue?: string;
-  directoryId?: string;
-};
+import { AzureFormDataType } from 'provider-types';
 
 const options = [
   { key: 'Microsoft Online Services Program', text: 'Microsoft Online Services Program', value: 'online' },

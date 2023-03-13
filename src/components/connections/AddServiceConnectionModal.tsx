@@ -50,8 +50,8 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
     setIsFormButtonDisabled(true);
   };
 
-  const updateFormData = (data: any) => {
-    setFormData(data);
+  const updateFormData = (formData: any) => {
+    setFormData(formData);
   };
 
   // for each provider supply a new component exposing configuration steps
