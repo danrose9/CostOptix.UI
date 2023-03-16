@@ -25,7 +25,12 @@ const isFormValid = (formData: AzureFormDataType) => {
   }
 };
 
-export const AddServiceAzure = ({ DisableButtonOnInvalidForm, updateFormData }: any) => {
+interface IProviderFormProps {
+  DisableButtonOnInvalidForm: any;
+  updateFormData: any;
+}
+
+export const AddServiceAzure: React.FC<IProviderFormProps> = ({ DisableButtonOnInvalidForm, updateFormData }) => {
   const [formData, setFormData] = useState<AzureFormDataType | undefined>(undefined);
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
@@ -75,7 +80,13 @@ export const AddServiceAzure = ({ DisableButtonOnInvalidForm, updateFormData }: 
           <Form.Group>
             <Form.Field>
               6. Once the new application has been created, enter the <i>Application (Client) ID</i> here.{' '}
-              <Input placeholder="Application ID" required name="applicationId" onChange={handleChange} />
+              <Input
+                placeholder="Application ID"
+                required
+                name="applicationId"
+                onChange={handleChange}
+                aria-label="applicationId"
+              />
             </Form.Field>
           </Form.Group>
           <Form.Field>
@@ -90,7 +101,13 @@ export const AddServiceAzure = ({ DisableButtonOnInvalidForm, updateFormData }: 
           <Form.Group>
             <Form.Field>
               10. Copy the <i>Value</i> into the box below.
-              <Input placeholder="Secret Value" required name="secretValue" onChange={handleChange} />
+              <Input
+                placeholder="Secret Value"
+                required
+                name="secretValue"
+                onChange={handleChange}
+                aria-label="secretValue"
+              />
             </Form.Field>
           </Form.Group>
           <Form.Field>
@@ -108,7 +125,13 @@ export const AddServiceAzure = ({ DisableButtonOnInvalidForm, updateFormData }: 
           <Form.Group>
             <Form.Field>
               15. From the new registered App, copy the <i>Directory (tenant) ID</i> value into the box below.
-              <Input placeholder="Directory ID" required name="directoryId" onChange={handleChange} />
+              <Input
+                placeholder="Directory ID"
+                required
+                name="directoryId"
+                onChange={handleChange}
+                aria-label="directoryId"
+              />
             </Form.Field>
           </Form.Group>
           <Form.Field inline></Form.Field>
