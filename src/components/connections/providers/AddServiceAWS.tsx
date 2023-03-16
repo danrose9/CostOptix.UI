@@ -29,7 +29,12 @@ const isFormValid = (formData: AWSFormDataType) => {
   }
 };
 
-export const AddServiceAWS = ({ DisableButtonOnInvalidForm, updateFormData }: any) => {
+interface IProviderFormProps {
+  DisableButtonOnInvalidForm: any;
+  updateFormData: any;
+}
+
+export const AddServiceAWS: React.FC<IProviderFormProps> = ({ DisableButtonOnInvalidForm, updateFormData }) => {
   const [formData, setFormData] = useState<AWSFormDataType | undefined>(undefined);
 
   const handleChange = (e: { target: { name: string; value: string } }) => {

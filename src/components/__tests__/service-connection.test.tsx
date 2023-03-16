@@ -54,9 +54,9 @@ const mockCloudBillingAccounts = {
   ],
 } as CloudProviderType;
 
-describe('Service Connection Modal', () => {
+describe('test service connection modal form', () => {
   const user = userEvent.setup();
-  const card = ServiceConnectionCard[0];
+  const card = ServiceConnectionCard[1];
 
   beforeEach(() => {
     render(
@@ -66,7 +66,7 @@ describe('Service Connection Modal', () => {
     );
   });
 
-  test('Add new connection should render modal and close modal', () => {
+  test('should render initial modal and close modal', () => {
     const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
     // Check button is in dom
     expect(addNewButton).toBeInTheDocument();
@@ -84,15 +84,24 @@ describe('Service Connection Modal', () => {
     fireEvent.click(closeButton);
     expect(continueButton).not.toBeInTheDocument();
   });
+
+  test('Azure service connection form accepts input and is valid', () => {
+    const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
+    fireEvent.click(addNewButton);
+
+    const applicationId = screen.getByRole('textbox', { name: /applicationId/i });
+    const secretValue = screen.getByRole('textbox', { name: /secretValue/i });
+    const directoryId = screen.getByRole('textbox', { name: /directoryId/i });
+
+    expect(applicationId).toBeInTheDocument();
+    expect(secretValue).toBeInTheDocument();
+    expect(directoryId).toBeInTheDocument();
+
+    fireEvent.change(applicationId, { target: { value: '123' } });
+  });
+
+  test('Continue button should be enabled on valid fill', () => {});
   /*
-  test('Service Connection form accepts input and is valid', () => {
-    // Unfinished
-  });
-
-  test('Continue button should be enabled on valid fill', () => {
-    // Unfinished
-  });
-
   test('Continue button should be disabled on invalid form', () => {
     // Unfinished
   });
@@ -107,7 +116,7 @@ describe('Service Connection Modal', () => {
   */
 });
 
-describe('Service Connection Options', () => {
+describe('test service connection options', () => {
   test('More button should render dropdown', async () => {
     const { getByTestId, getAllByTestId } = render(
       <Table>
@@ -138,7 +147,7 @@ describe('Service Connection Options', () => {
   });
 });
 
-describe('Correct modal should show for each provider', () => {
+describe('correct modal should show for each provider', () => {
   // 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
   var providerArray = [1, 2];
 
@@ -164,7 +173,7 @@ describe('Correct modal should show for each provider', () => {
   });
 });
 
-describe('Billing Account selection', () => {
+describe('billing account selection modal', () => {
   test('test all elements are selected when select all is checked', () => {
     // Unfinished
   });
