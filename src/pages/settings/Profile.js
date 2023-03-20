@@ -3,12 +3,7 @@ import { Tab, Form, Button, Grid } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { setOrganizationName } from '../../services/redux/thunks/userProfileThunk';
-import {
-  SectionTitle,
-  StyledFormField,
-  StyledAvatar,
-  AvatarDiv,
-} from './__styles__/StyledSettingsPage';
+import { SectionTitle, StyledFormField, StyledAvatar, AvatarDiv } from '../__styles__/settings.styles';
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -17,9 +12,7 @@ export const Profile = () => {
   const [disableButton, setDisableButton] = useState(true);
   const [organization, setOrganization] = useState('');
 
-  const userAvatar = useSelector(
-    (state) => state[reduxState.USER_PROFILE].photo.image
-  );
+  const userAvatar = useSelector((state) => state[reduxState.USER_PROFILE].photo.image);
 
   const handleOnChange = (e) => {
     e.target.value ? setDisableButton(false) : setDisableButton(true);
@@ -38,18 +31,8 @@ export const Profile = () => {
         <Grid>
           <Grid.Column width={10}>
             <Form size="small">
-              <StyledFormField
-                label="Name"
-                placeholder={profile.name}
-                readOnly
-                icon="user"
-              />
-              <StyledFormField
-                label="Email Address"
-                readOnly
-                placeholder={profile.email}
-                icon="mail"
-              />
+              <StyledFormField label="Name" placeholder={profile.name} readOnly icon="user" />
+              <StyledFormField label="Email Address" readOnly placeholder={profile.email} icon="mail" />
             </Form>
           </Grid.Column>
           <Grid.Column width={6}>
@@ -86,3 +69,5 @@ export const Profile = () => {
     </>
   );
 };
+
+export default Profile;

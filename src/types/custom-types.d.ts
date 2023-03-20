@@ -60,16 +60,16 @@ declare module 'cloud-billingaccounts-types' {
     error: string;
   };
 
-  export type AddBillingAccountType = {
+  export type AddProviderType = {
     providerAccountId: string;
     providerName: string;
     cloudProvider: string;
     username: string;
     password: string;
-    billingAccounts: CloudBillingAccountType[];
+    billingAccounts: AddBillingAccountType[];
   };
 
-  type CloudBillingAccountType = {
+  type AddBillingAccountType = {
     billingAccountId: string;
     billingAccountName: string;
     currency: string;
