@@ -62,7 +62,8 @@ describe('test service connection modal form', () => {
     render(
       <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}>
         <AddServiceAzure />
-      </AddServiceConnectionModal>
+      </AddServiceConnectionModal>,
+      { wrapper: ApplicationWrapper }
     );
   });
 
@@ -154,9 +155,10 @@ describe('correct modal should show for each provider', () => {
   providerArray.forEach((n) => {
     const card = ServiceConnectionCard[n];
 
-    test('Test that the modal showing for ' + card.provider + ', is for the ' + card.provider + ' card', async () => {
+    test('the modal showing for ' + card.provider + ', is for the ' + card.provider + ' card', async () => {
       render(
-        <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>
+        <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>,
+        { wrapper: ApplicationWrapper }
       );
       fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
 
@@ -165,7 +167,8 @@ describe('correct modal should show for each provider', () => {
 
     test('href links should work', () => {
       render(
-        <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>
+        <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>,
+        { wrapper: ApplicationWrapper }
       );
       fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
       expect(screen.getByRole('link', { name: card.href })).toHaveAttribute('href', card.href);

@@ -3,7 +3,7 @@ import { Tab, Label, List, Divider, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { changeLogItems } from '../../components/changeLogData';
 import { formatDateFull } from '../../utils/helper';
-import { SectionHeader, SectionTitle } from './__styles__/StyledSettingsPage';
+import { SectionHeader, SectionTitle } from '../__styles__/settings.styles';
 
 const { version } = require('../../../package.json');
 

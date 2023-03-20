@@ -4,15 +4,16 @@ import StandardButton from '../buttons/StandardButton';
 import { ModalHeader } from '../__styles__/StyledModal';
 import { ProviderImage } from '../ProviderImage';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
+import { addBillingAccount } from '../../services/redux/thunks/serviceProvidersThunk';
 import { getIndex } from '../../utils/arrayHelper';
 import {
-  CloudBillingAccountType,
+  AddProviderType,
   CloudProviderType,
   AddBillingAccountType,
   ICloudBillingAccountsArgs,
 } from 'cloud-billingaccounts-types';
 import { ServiceConnectionProviderType } from 'provider-types';
-import { AppDispatch } from '../../services/redux/store';
+import { useAppDispatch } from '../../services/redux/store';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { ErrorType } from 'error-types';
 
@@ -27,10 +28,12 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
   const { provider } = cloudProvider;
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [numberOfBillingAccountsReturned, setNumberOfBillingAccountsReturned] = useState<number>(0);
-  const [billingAccounts, setBillingAccount] = useState<CloudBillingAccountType[]>([]);
+  const [billingAccounts, setBillingAccount] = useState<AddBillingAccountType[]>([]);
   const [secondOpen, setSecondOpen] = useState<boolean>(false);
 
-  const [providerData, setProviderData] = useState<AddBillingAccountType>({
+  const dispatch = useAppDispatch();
+
+  const [providerData, setProviderData] = useState<AddProviderType>({
     providerAccountId: '',
     providerName: '',
     cloudProvider: '',
@@ -136,9 +139,18 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
 
   // send api request for adding billing accounts
   const handleAddBillingAccounts = async () => {
-    console.log(providerData);
+    var newBillingAccount = {
+      providerAccountId: providerData.providerAccountId,
+      providerName: providerData.providerName,
+      cloudProvider: providerData.cloudProvider,
+      username: providerData.username,
+      password: providerData.password,
+    };
 
-    // dispatch(addBillingAccount(args));
+    providerData.billingAccounts.forEach((billingAccount) => {
+      var data = { ...newBillingAccount, billingAccount };
+      // dispatch(addBillingAccount(data));
+    });
   };
 
   const checkIfSubmitButtonIsDisabled = () => {
@@ -186,7 +198,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
 
           <Table.Body>
             <>
-              {billingAccounts.map((account: CloudBillingAccountType, index) => {
+              {billingAccounts.map((account: AddBillingAccountType, index) => {
                 return (
                   <Table.Row key={index}>
                     <Table.Cell>
