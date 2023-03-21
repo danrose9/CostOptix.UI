@@ -26,7 +26,7 @@ export const Profile = () => {
 
   return (
     <>
-      <Tab.Pane color="olive">
+      <Tab.Pane color="blue">
         <SectionTitle>Personal Information</SectionTitle>
         <Grid>
           <Grid.Column width={10}>

@@ -5,7 +5,6 @@ declare module 'billingaccount-types' {
     createdDate: string;
     currency: string;
     id: string;
-    isTransient: boolean;
     connected: boolean;
     provider: string;
     providerId: string;

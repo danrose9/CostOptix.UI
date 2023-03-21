@@ -32,7 +32,7 @@ const userList = [
 
 const Users = (props: IUsersProps) => {
   return (
-    <Tab.Pane>
+    <Tab.Pane color="blue">
       <SectionHeader>
         <SectionTitle>Users</SectionTitle>
       </SectionHeader>

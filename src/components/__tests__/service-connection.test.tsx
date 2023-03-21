@@ -26,7 +26,6 @@ const mockBillingAccounts = {
   accountId: '13dc79ec-8c00-5a6e-aa52-2bf50657f5c9:0859969d-5dea-47cb-a0a2-3b49bd471e2c_2019-05-31',
   accountName: 'ddiware',
   currency: 'USD',
-  isTransient: true,
   status: 'Disabled',
   provider: 'Azure',
 } as CustomerConnectedProvidersType;
