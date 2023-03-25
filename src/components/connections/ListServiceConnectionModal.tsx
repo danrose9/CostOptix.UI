@@ -136,8 +136,9 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
   };
 
   const checkifSelectAllIsChecked = () => {
-    if (providerData.billingAccounts.length === 0) return false;
-    if (providerData.billingAccounts.length === numberOfBillingAccountsReturned) return true;
+    if (providerData.billingAccounts.length === numberOfBillingAccountsReturned) {
+      return true;
+    } else return false;
   };
 
   // send api request for adding billing accounts

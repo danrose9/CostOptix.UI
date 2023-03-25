@@ -29,7 +29,6 @@ stages:
         steps:
           - script: |
               npm install
-              npm version patch
               npm run build-dev
             displayName: npm install, build
           - script: |
