@@ -7,7 +7,7 @@ const { version } = require('../../../package.json');
 export const ApplicationSettings = () => {
   return (
     <>
-      <Tab.Pane>
+      <Tab.Pane color="blue">
         <SectionHeader>
           <SectionTitle>Application</SectionTitle>
 

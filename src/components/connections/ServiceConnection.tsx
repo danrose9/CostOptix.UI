@@ -3,17 +3,17 @@ import { Card, Divider, Table } from 'semantic-ui-react';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
-import ServiceConnectionTable from './ServiceConnectionTable';
+import ServiceConnectionRow from './ServiceConnectionRow';
 import { ProviderImage } from '../ProviderImage';
 import AddServiceConnectionModal from './AddServiceConnectionModal';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
-import { CustomerConnectedProvidersType } from 'billingaccount-types';
+import { ConnectedBillingAccountType } from 'billingaccount-types';
 import { ServiceConnectionProviderType } from 'provider-types';
 
 const ServiceConnection = () => {
-  const CustomerConnectedProviders = useSelector(
+  const CustomerConnectedBillingAccounts = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );
 
@@ -42,10 +42,10 @@ const ServiceConnection = () => {
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    {CustomerConnectedProviders.filter(
-                      (account: CustomerConnectedProvidersType) => account.provider === card.provider
-                    ).map((account: CustomerConnectedProvidersType, index: any) => {
-                      return <ServiceConnectionTable account={account} key={index} />;
+                    {CustomerConnectedBillingAccounts.filter(
+                      (account: ConnectedBillingAccountType) => account.provider === card.provider
+                    ).map((account: ConnectedBillingAccountType, index: any) => {
+                      return <ServiceConnectionRow account={account} key={index} />;
                     })}
                   </Table.Body>
                 </Table>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { CustomerConnectedProvidersType } from 'billingaccount-types';
+import { ConnectedBillingAccountType } from 'billingaccount-types';
 import { ManageServiceConnection, DisableServiceConnection, RemoveServiceConnection } from './options/index';
 
 interface IProps {
-  billingAccounts: CustomerConnectedProvidersType;
+  billingAccounts: ConnectedBillingAccountType;
 }
 
 export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {
@@ -16,6 +16,7 @@ export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {
     accountEnabled = true;
   }
 
+  console.log(status);
   return (
     <>
       <ManageServiceConnection
@@ -27,8 +28,12 @@ export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {
         currency={currency}
       />
       {/* <SyncServiceConnection /> */}
-      <DisableServiceConnection providerId={providerId} id={id} accountStatus={accountEnabled as boolean} />
-      <RemoveServiceConnection providerId={providerId} id={id} />
+      {status === 'Transient' ? null : (
+        <>
+          <DisableServiceConnection providerId={providerId} id={id} accountStatus={accountEnabled as boolean} />
+          <RemoveServiceConnection providerId={providerId} id={id} />{' '}
+        </>
+      )}
     </>
   );
 };

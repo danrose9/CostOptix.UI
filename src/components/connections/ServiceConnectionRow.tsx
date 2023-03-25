@@ -2,22 +2,11 @@ import React from 'react';
 import { Table, Dropdown, Popup } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import ServiceConnectionOptions from './ServiceConnectionOptions';
-import { billingAccountStatus, statusType } from '../shared';
-import { IAccountProps } from 'billingaccount-types';
+import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
+import { IConnectedBillingAccountProps } from 'billingaccount-types';
 
-// interface IOptions {
-//   event: React.MouseEvent<HTMLDivElement, MouseEvent>;
-//   text: DropdownItemProps;
-// }
-
-// interface IServiceConnectionOptions {
-//   icon: SemanticICONS;
-//   text: string;
-//   service: JSX.Element;
-// }
-
-export const ServiceConnectionTable = ({ account }: IAccountProps, index: any) => {
-  const statusIcon = billingAccountStatus[account.status as keyof statusType];
+export const ServiceConnectionRow = ({ account }: IConnectedBillingAccountProps, index: any) => {
+  const statusIcon = billingAccountStatusType[account.status as keyof IBillingAccountStatus];
 
   return (
     <>
@@ -54,4 +43,4 @@ export const ServiceConnectionTable = ({ account }: IAccountProps, index: any) =
   );
 };
 
-export default ServiceConnectionTable;
+export default ServiceConnectionRow;
