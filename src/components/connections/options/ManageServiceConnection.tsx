@@ -25,7 +25,7 @@ export const ManageServiceConnection = (props: {
           {props.status}
         </Label>
       ),
-      extra: <>Awaiting Validation</>,
+      extra: <StatusExtra />,
     },
     { name: 'Created', value: <Fragment>{formatDateFull(props.createdDate)}</Fragment>, extra: <></> },
     {
@@ -84,6 +84,10 @@ export const ManageServiceConnection = (props: {
       </Modal>
     </>
   );
+};
+
+const StatusExtra = () => {
+  return <></>;
 };
 
 export default ManageServiceConnection;

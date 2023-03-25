@@ -56,10 +56,19 @@ export const enableBillingAccount = createAsyncThunk(
   }
 );
 
+interface IAddBillingAccount {
+  billingAccounts: AddBillingAccountType[];
+  providerAccountId: string;
+  providerName: string;
+  cloudProvider: string;
+  username: string;
+  password: string;
+}
+
 export const addBillingAccount = createAsyncThunk(
   'Profile/AddBillingAccount',
-  async (args: AddBillingAccountType, { rejectWithValue }) => {
-    return await fetchInstance(BILLING_ACCOUNTS, { method: 'POST' })
+  async (args: IAddBillingAccount, { rejectWithValue }) => {
+    return await fetchInstance(BILLING_ACCOUNTS, { method: 'POST', body: JSON.stringify({ ...args }) })
       .then((response) => response.json())
       .catch((e) => rejectWithValue(e.response.data));
   }

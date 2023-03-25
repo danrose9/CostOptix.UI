@@ -1,5 +1,5 @@
 declare module 'billingaccount-types' {
-  export type CustomerConnectedProvidersType = {
+  export type ConnectedBillingAccountType = {
     accountId: string;
     accountName: string;
     createdDate: string;
@@ -11,8 +11,8 @@ declare module 'billingaccount-types' {
     status: string;
   };
 
-  interface IAccountProps {
-    account: CustomerConnectedProvidersType;
+  interface IConnectedBillingAccountProps {
+    account: ConnectedBillingAccountType;
   }
 }
 

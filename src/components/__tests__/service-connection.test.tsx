@@ -11,7 +11,7 @@ import AddServiceConnectionModal from '../connections/AddServiceConnectionModal'
 import { ServiceConnections as ServiceConnectionCard } from '../../components/connections/ServiceConnections';
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
-import { CustomerConnectedProvidersType } from 'billingaccount-types';
+import { ConnectedBillingAccountType } from 'billingaccount-types';
 import { ServiceConnectionProviderType } from 'provider-types';
 import { CloudProviderType } from 'cloud-billingaccounts-types';
 
@@ -28,7 +28,7 @@ const mockBillingAccounts = {
   currency: 'USD',
   status: 'Disabled',
   provider: 'Azure',
-} as CustomerConnectedProvidersType;
+} as ConnectedBillingAccountType;
 
 const mockCloudBillingAccounts = {
   providerAccountId: '73bf9c05-bd27-4332-a610-bb1a50300369',
