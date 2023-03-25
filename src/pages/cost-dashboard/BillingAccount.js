@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProviderImage } from '../../components/ProviderImage';
-import { Table, Icon, Loader, Card, Popup } from 'semantic-ui-react';
+import { Table, Icon, Loader, Card, Popup, Label } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { StandardTooltip } from '../../components/tooltips';
@@ -49,6 +49,9 @@ export const BillingAccount = ({ billingAccount }) => {
             </Table.Cell>
 
             <Table.Cell>{billingAccount.accountName}</Table.Cell>
+            <Table.Cell>
+              {billingAccount.status === 'Transient' ? <Label color="blue">Transient</Label> : null}
+            </Table.Cell>
             <Table.Cell textAlign="center">
               <LoadingIndicator
                 isLoading={billingAccountData.isLoading}
@@ -60,9 +63,7 @@ export const BillingAccount = ({ billingAccount }) => {
         }
         content={
           <StandardTooltip instance={billingAccount}>
-            {billingAccountData.isError ? (
-              <FailedToLoadBillingAccount size="mini" />
-            ) : null}
+            {billingAccountData.isError ? <FailedToLoadBillingAccount size="mini" /> : null}
             <ToolTipData instance={billingAccount} />
           </StandardTooltip>
         }

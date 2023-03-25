@@ -98,7 +98,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
         <Table selectable>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan="2">Active Billing Accounts</Table.HeaderCell>
+              <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">
                 {/* <StyledIconButton onClick={() => navigate(appRoutes.SERVICE_PROVIDERS)} name="plus" /> */}
                 <StyledIconButton
