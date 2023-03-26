@@ -9,7 +9,6 @@ const TestPage = () => {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    console.log('click');
     navigate({ to: '/resource-view' });
   };
 
