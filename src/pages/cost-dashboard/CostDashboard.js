@@ -14,9 +14,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 export const CostDashboard = () => {
   const application = useContext(ApplicationContext);
 
-  const billingAccountCurrency = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].currency
-  );
+  const billingAccountCurrency = useSelector((state) => state[reduxState.COST_DASHBOARD].currency);
 
   const [isCurrencyConflict, setIsCurrencyConflict] = useState(false);
   const [currency, setCurrency] = useState(null);
@@ -45,26 +43,19 @@ export const CostDashboard = () => {
             <Widget.CostDashboardChart currency={currencySymbol} />
           </Grid.Column>
           <Grid.Column width={4}>
-            <Widget.CostDasboardEstimates
-              isCurrencyConflict={isCurrencyConflict}
-              currency={currencySymbol}
-            />
+            <Widget.CostDasboardEstimates isCurrencyConflict={isCurrencyConflict} currency={currencySymbol} />
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row columns="equal">
           <Grid.Column>
-            <Widget.MostExpensiveInstance
-              isCurrencyConflict={isCurrencyConflict}
-            />
+            <Widget.MostExpensiveInstance isCurrencyConflict={isCurrencyConflict} />
           </Grid.Column>
           <Grid.Column>
             <Widget.FastestGrowingInstance />
           </Grid.Column>
-          <Grid.Column width={6}>
-            <Widget.BillingAccounts
-              isCurrencyConflictCallback={isCurrencyConflictCallback}
-            />
+          <Grid.Column width={5}>
+            <Widget.BillingAccounts isCurrencyConflictCallback={isCurrencyConflictCallback} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

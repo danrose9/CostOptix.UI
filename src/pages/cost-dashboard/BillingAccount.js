@@ -2,9 +2,11 @@ import React from 'react';
 import { ProviderImage } from '../../components/ProviderImage';
 import { Table, Icon, Loader, Card, Popup, Label } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { reduxState } from '../../services/redux/reduxState';
 import { StandardTooltip } from '../../components/tooltips';
 import { FailedToLoadBillingAccount } from '../../components/messages';
+import * as appRoutes from '../../app/appRoutes';
 
 const ToolTipData = (instance) => {
   const { currency } = instance.instance;
@@ -16,6 +18,8 @@ const ToolTipData = (instance) => {
 };
 
 export const BillingAccount = ({ billingAccount }) => {
+  const navigate = useNavigate();
+
   const provider = billingAccount.provider;
 
   const billingAccountData = useSelector((state) =>
@@ -43,6 +47,9 @@ export const BillingAccount = ({ billingAccount }) => {
             error={billingAccountData.isError}
             disabled={billingAccountData.isLoading}
             data-testid="billingAccounts-2"
+            onClick={() => {
+              navigate(appRoutes.SERVICE_PROVIDERS);
+            }}
           >
             <Table.Cell>
               <ProviderImage provider={provider} size="mini" />

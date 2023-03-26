@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Menu, Button } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
 
 export const PageContainer = styled(Container)`
@@ -9,7 +9,8 @@ export const PageContainer = styled(Container)`
   flex-direction: column;
   background-image: url(${backgroundImage});
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 100%;
+  // background-position:center;
 `;
 
 export const HomePageNav = styled.div`
@@ -60,7 +61,7 @@ export const HomePageSubTitle = styled.div`
 `;
 
 export const HomePageActions = styled.div`
-  flex-grow: 4;
+  flex-grow: 3;
   display: flex;
   justify-content: space-evenly;
 `;

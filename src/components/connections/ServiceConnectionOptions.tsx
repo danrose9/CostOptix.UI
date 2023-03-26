@@ -16,7 +16,6 @@ export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {
     accountEnabled = true;
   }
 
-  console.log(status);
   return (
     <>
       <ManageServiceConnection
