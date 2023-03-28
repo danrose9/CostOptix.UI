@@ -17,6 +17,7 @@ import { useAppDispatch } from '../../services/redux/store';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { ErrorType } from 'error-types';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
+import { StyledIconButton } from '../../styles/StyledDashboardHeader';
 
 interface IModalProps {
   disabled: boolean;
@@ -182,7 +183,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
         <ProviderImage provider={provider} size="small" floated="left" data-testid="sc-provider-image" />
         <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }}>Billing Accounts</p>
       </ModalHeader>
-      <Modal.Content>
+      <Modal.Content scrolling>
         <p>
           We've found some billing accounts associated with your Azure organization. Select the accounts you would like
           to add to CostOptix.
@@ -222,7 +223,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
                     <Popup
                       content="New"
                       key={account.billingAccountId}
-                      trigger={<Table.Cell>{billingAccountStatusType.New}</Table.Cell>}
+                      trigger={<Table.Cell textAlign="center">{billingAccountStatusType.New}</Table.Cell>}
                       basic
                       position="left center"
                     />
@@ -234,7 +235,10 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
         </Table>
       </Modal.Content>
 
-      <Modal.Actions>
+      <Modal.Actions style={{ display: 'flex', flexDirection: 'row' }}>
+        <Button size="small" icon style={{ marginRight: 'auto' }} onClick={handleOnSubmit}>
+          <Icon name="refresh" loading={isFetching} />
+        </Button>
         <Button
           floated="right"
           icon
