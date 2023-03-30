@@ -205,7 +205,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
         </div>
       </div>
       <div
-        className="six wide column"
+        className="five wide column"
       >
         <div
           className="ui green segment"

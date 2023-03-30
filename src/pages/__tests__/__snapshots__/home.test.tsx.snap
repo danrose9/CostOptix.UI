@@ -2,7 +2,7 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-bcXHqe dhjKQY"
+  className="ui fluid container sc-bcXHqe iiplrq"
   data-testid="homePage-2"
 >
   <div
@@ -75,7 +75,7 @@ exports[`Home Page matches snapshot 1`] = `
         </p>
       </div>
       <div
-        className="sc-pyfCe eOXOaq"
+        className="sc-pyfCe dfjFtl"
       >
         <div
           className="ui one column grid"

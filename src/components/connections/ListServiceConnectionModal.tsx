@@ -17,6 +17,7 @@ import { useAppDispatch } from '../../services/redux/store';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { ErrorType } from 'error-types';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
+import { StyledIconButton } from '../../styles/StyledDashboardHeader';
 
 interface IModalProps {
   disabled: boolean;
@@ -188,7 +189,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
           to add to CostOptix.
         </p>
       </Modal.Content>
-      <Modal.Content>
+      <Modal.Content scrolling>
         <Table celled size="small">
           <Table.Header>
             <Table.Row>
@@ -222,7 +223,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
                     <Popup
                       content="New"
                       key={account.billingAccountId}
-                      trigger={<Table.Cell>{billingAccountStatusType.New}</Table.Cell>}
+                      trigger={<Table.Cell textAlign="center">{billingAccountStatusType.New}</Table.Cell>}
                       basic
                       position="left center"
                     />
@@ -234,7 +235,16 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
         </Table>
       </Modal.Content>
 
-      <Modal.Actions>
+      <Modal.Actions style={{ display: 'flex', flexDirection: 'row' }}>
+        <Popup
+          content="Refresh"
+          basic
+          trigger={
+            <Button size="small" icon style={{ marginRight: 'auto' }} onClick={handleOnSubmit}>
+              <Icon name="refresh" loading={isFetching} />
+            </Button>
+          }
+        />
         <Button
           floated="right"
           icon
