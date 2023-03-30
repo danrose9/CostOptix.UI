@@ -183,13 +183,13 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
         <ProviderImage provider={provider} size="small" floated="left" data-testid="sc-provider-image" />
         <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }}>Billing Accounts</p>
       </ModalHeader>
-      <Modal.Content scrolling>
+      <Modal.Content>
         <p>
           We've found some billing accounts associated with your Azure organization. Select the accounts you would like
           to add to CostOptix.
         </p>
       </Modal.Content>
-      <Modal.Content>
+      <Modal.Content scrolling>
         <Table celled size="small">
           <Table.Header>
             <Table.Row>
@@ -236,9 +236,15 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
       </Modal.Content>
 
       <Modal.Actions style={{ display: 'flex', flexDirection: 'row' }}>
-        <Button size="small" icon style={{ marginRight: 'auto' }} onClick={handleOnSubmit}>
-          <Icon name="refresh" loading={isFetching} />
-        </Button>
+        <Popup
+          content="Refresh"
+          basic
+          trigger={
+            <Button size="small" icon style={{ marginRight: 'auto' }} onClick={handleOnSubmit}>
+              <Icon name="refresh" loading={isFetching} />
+            </Button>
+          }
+        />
         <Button
           floated="right"
           icon
