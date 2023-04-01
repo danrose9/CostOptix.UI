@@ -2,23 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchBillingAccountCosts } from '../thunks/costDashboardThunk';
 import { combineSortSliceArray, upsert } from '../../../utils/arrayHelper';
 
-// interface CostDashboardState {
-//   billingAccounts: any
-//   mostExpensive: any
-//   monthToDateCost: any
-//   monthlySpend: any
-//   fastestGrowing: any
-//   updatedCount: number
-//   count: number
-//   isComplete: boolean
-//   lastUpdated?: string | null
-//   currency?: number | null
-//   fetchStatus?: string | null
-//   isLoading: boolean
-//   status?: string | null
-//   error?: string | null
-// }
-
 const initialState = {
   billingAccounts: [],
   mostExpensive: { isLoading: true, data: [] },
@@ -63,9 +46,7 @@ const costDashboardSlice = createSlice({
         payloadCost = payload.response.monthToDateCost;
       }
 
-      const provider = state.monthToDateCost.data.find(
-        (item) => item.name === payloadProvider
-      );
+      const provider = state.monthToDateCost.data.find((item) => item.name === payloadProvider);
 
       if (provider) {
         provider.cost = provider.cost + payloadCost;
@@ -107,11 +88,7 @@ const costDashboardSlice = createSlice({
       state.fastestGrowing.isLoading = false;
     },
     updateMonthlySpend(state, action) {
-      const newState = upsert(
-        state.monthlySpend.data,
-        action.payload.response,
-        action.payload.isCurrencyConflict
-      );
+      const newState = upsert(state.monthlySpend.data, action.payload.response, action.payload.isCurrencyConflict);
 
       state.monthlySpend.data = newState.sort(function (a, b) {
         return new Date(a.name) - new Date(b.name);
@@ -134,7 +111,7 @@ const costDashboardSlice = createSlice({
         state.isComplete = true;
       }
     },
-    resetCostDashboard(state) {
+    resetCostDashboard() {
       return { ...initialState };
     },
   },
@@ -146,11 +123,9 @@ const costDashboardSlice = createSlice({
         state.fetchStatus = `Found ${state.count} billing accounts, fetching data ..`;
       })
       .addCase(fetchBillingAccountCosts.fulfilled, (state, action) => {
-        const billingAccountIndex = state.billingAccounts.findIndex(
-          (element) => {
-            return element.id === action.payload.id;
-          }
-        );
+        const billingAccountIndex = state.billingAccounts.findIndex((element) => {
+          return element.id === action.payload.id;
+        });
 
         state.currency = action.payload.currency;
 
@@ -168,11 +143,9 @@ const costDashboardSlice = createSlice({
         state.lastUpdated = new Date().toLocaleString();
       })
       .addCase(fetchBillingAccountCosts.rejected, (state, action) => {
-        const billingAccountIndex = state.billingAccounts.findIndex(
-          (element) => {
-            return element.id === action.meta.arg;
-          }
-        );
+        const billingAccountIndex = state.billingAccounts.findIndex((element) => {
+          return element.id === action.meta.arg;
+        });
 
         state.billingAccounts[billingAccountIndex].isLoading = false;
         state.billingAccounts[billingAccountIndex].isError = true;

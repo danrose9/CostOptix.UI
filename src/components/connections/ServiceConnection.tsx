@@ -45,7 +45,7 @@ const ServiceConnection = () => {
                     {CustomerConnectedBillingAccounts.filter(
                       (account: ConnectedBillingAccountType) => account.provider === card.provider
                     ).map((account: ConnectedBillingAccountType, index: any) => {
-                      return <ServiceConnectionRow account={account} key={index} />;
+                      return <ServiceConnectionRow billingAccount={account} key={index} />;
                     })}
                   </Table.Body>
                 </Table>

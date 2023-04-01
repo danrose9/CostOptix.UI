@@ -9,6 +9,7 @@ export const AzureCustomerAgreement = () => {
       </Form.Field>
       <Form.Field>17. For each subscription that you would like to report on complete steps 18-21</Form.Field>
       <Form.Field>
+        <Form.Field>18. Select a subscription</Form.Field>
         19. Select <i>Role Assignments</i> and then <i>Add</i> followed by <i>Add role assignment</i>
       </Form.Field>
       <Form.Field>

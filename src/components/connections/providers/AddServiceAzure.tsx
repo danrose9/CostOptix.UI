@@ -89,18 +89,30 @@ export const AddServiceAzure: React.FC<IProviderFormProps> = ({ DisableButtonOnI
               />
             </Form.Field>
           </Form.Group>
+          <Form.Group>
+            <Form.Field>
+              7. Also copy the <i>Directory (tenant) ID</i> value into the box below.
+              <Input
+                placeholder="Directory ID"
+                required
+                name="directoryId"
+                onChange={handleChange}
+                aria-label="directoryId"
+              />
+            </Form.Field>
+          </Form.Group>
           <Form.Field>
-            7. Select <i>Manage, Certificates & Secrets</i>
+            8. Select <i>Manage, Certificates & Secrets</i>
           </Form.Field>
           <Form.Field>
-            8. Click <i>New client secret</i>
+            9. Click <i>New client secret</i>
           </Form.Field>
           <Form.Field>
-            9. Enter a Description for the client secret, an expiry period then click <i>Add</i>
+            10. Enter a Description for the client secret, an expiry period then click <i>Add</i>
           </Form.Field>
           <Form.Group>
             <Form.Field>
-              10. Copy the <i>Value</i> into the box below.
+              11. Copy the <i>Value</i> into the box below.
               <Input
                 placeholder="Secret Value"
                 required
@@ -111,29 +123,18 @@ export const AddServiceAzure: React.FC<IProviderFormProps> = ({ DisableButtonOnI
             </Form.Field>
           </Form.Group>
           <Form.Field>
-            11. Select <i>API Permissions</i> from the left nav
+            12. Select <i>API Permissions</i> from the left nav
           </Form.Field>
           <Form.Field>
-            12. Click <i>Add a permission</i>
+            13. Click <i>Add a permission</i>
           </Form.Field>
           <Form.Field>
-            13. Under <i>Microsoft APIs </i> select <i>Azure Service Management</i>
+            14. Under <i>Microsoft APIs </i> select <i>Azure Service Management</i>
           </Form.Field>
           <Form.Field>
-            14. Check <i>user_impersonation</i> and the <i>Add permission</i>
+            15. Check <i>user_impersonation</i> and the <i>Add permission</i>
           </Form.Field>
-          <Form.Group>
-            <Form.Field>
-              15. From the new registered App, copy the <i>Directory (tenant) ID</i> value into the box below.
-              <Input
-                placeholder="Directory ID"
-                required
-                name="directoryId"
-                onChange={handleChange}
-                aria-label="directoryId"
-              />
-            </Form.Field>
-          </Form.Group>
+
           <Form.Field inline></Form.Field>
           <AzureCustomerAgreement />
         </Form>

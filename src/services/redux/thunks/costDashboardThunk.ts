@@ -4,10 +4,8 @@ import fetchInstance from '../../api/fetchInstance';
 
 export const fetchBillingAccountCosts = createAsyncThunk(
   'billingAccount/Costs',
-  async (billingAccountId, { rejectWithValue }) => {
-    return await fetchInstance(
-      'Costs/' + billingAccountId + '/' + BILLING_ACCOUNT_COSTS
-    )
+  async (billingAccountId: string, { rejectWithValue }) => {
+    return await fetchInstance('Costs/' + billingAccountId + '/' + BILLING_ACCOUNT_COSTS)
       .then((response) => {
         if (!response.ok) throw Error(response.statusText);
 

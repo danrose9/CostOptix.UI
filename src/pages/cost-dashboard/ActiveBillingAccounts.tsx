@@ -20,35 +20,41 @@ import { StyledIconButton } from '../../styles/StyledDashboardHeader';
 import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../components/messages/index';
 import * as appRoutes from '../../app/appRoutes';
 import { useNavigate } from 'react-router-dom';
+import { IRootState } from '../../services/redux/rootReducer';
+import { IConnectedBillingAccountProps, ConnectedBillingAccountType } from 'billingaccount-types';
+import { AddBillingAccountType } from 'cloud-billingaccounts-types';
+import { AppDispatch } from '../../services/redux/store';
 
-const BillingAccounts = ({ billingAccounts }) => {
+const BillingAccounts = ({ billingAccount }: IConnectedBillingAccountProps) => {
   return (
     <>
-      {billingAccounts.map((billingAccount, index) => {
-        return <BillingAccount key={index} billingAccount={billingAccount} />;
+      {billingAccount.map((account: ConnectedBillingAccountType, index: any) => {
+        return <BillingAccount key={index} billingAccount={account} />;
       })}
     </>
   );
 };
 
-const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
+const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
   const dispatch = useDispatch();
 
-  const billingAccounts = useSelector((state) => state[reduxState.SERVICE_PROVIDERS].billingAccounts);
+  const billingAccounts = useSelector((state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts);
 
-  const isBillingAccountsAvailable = useSelector((state) => state[reduxState.SERVICE_PROVIDERS].isAvailable);
+  const isBillingAccountsAvailable = useSelector(
+    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].isAvailable
+  );
 
-  const isComplete = useSelector((state) => state[reduxState.COST_DASHBOARD].isComplete);
+  const isComplete = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].isComplete);
 
-  const billingAccountCount = useSelector((state) => state[reduxState.COST_DASHBOARD].count);
+  const billingAccountCount = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].count);
 
   const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  const refreshPage = () => {
+  const refreshPage = (payload: any) => {
     setIsLoading(true);
-    dispatch(resetCostDashboard());
+    dispatch(resetCostDashboard(payload));
     dispatch(resetServiceProviders());
   };
 
@@ -57,7 +63,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
   };
 
   const LastUpdated = () => {
-    const lastUpdated = useSelector((state) => state[reduxState.COST_DASHBOARD].lastUpdated);
+    const lastUpdated = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].lastUpdated);
 
     return (
       <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="5">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
@@ -65,7 +71,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
   };
 
   const LoadingStatus = () => {
-    const fetchStatus = useSelector((state) => state[reduxState.COST_DASHBOARD].fetchStatus);
+    const fetchStatus = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].fetchStatus);
 
     return (
       <>
@@ -86,7 +92,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
     return <>{isNoBillingAccount() ? <NoBillingAccountMessage /> : null}</>;
   };
 
-  const { isCurrencyConflict } = useSelector((state) => state[reduxState.SERVICE_PROVIDERS]);
+  const { isCurrencyConflict } = useSelector((state: IRootState) => state[reduxState.SERVICE_PROVIDERS]);
 
   const CurrencyConflict = () => {
     return <>{isCurrencyConflict ? <CurrencyConflictWarning /> : null}</>;
@@ -111,7 +117,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>{isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}</Table.Body>
+          <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body>
           <LoadingStatus />
         </Table>
         <CurrencyConflict />
@@ -126,12 +132,12 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
     } else {
       // Fetch a list of billing accounts
       dispatch(updateFetchStatus('Searching for billing accounts ..'));
-      dispatch(fetchServiceProviders());
-      dispatch(fetchBillingAccounts()).then((response) => {
+      dispatch<AppDispatch>(fetchServiceProviders());
+      dispatch<AppDispatch>(fetchBillingAccounts()).then((response: any) => {
         const payloadIsCurrencyConflict = response.payload?.isCurrencyConflict;
 
         // Add each billing account to state
-        response.payload?.billingAccounts.forEach((billingAccount) => {
+        response.payload?.billingAccounts.forEach((billingAccount: any) => {
           dispatch(addBillingAccount(billingAccount.id));
         });
         setIsLoading(false);
@@ -141,10 +147,10 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }) => {
         // Get billing costs for each billing account
         if (response.payload?.billingAccounts.length > 0) {
           // eslint-disable-next-line array-callback-return
-          response.payload?.billingAccounts.map((billingAccount, index) => {
-            dispatch(fetchBillingAccountCosts(billingAccount.id))
+          response.payload?.billingAccounts.map((billingAccount: any, index: any) => {
+            dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id))
               .unwrap()
-              .then((response) => {
+              .then((response: any) => {
                 dispatch(
                   updateMonthToDateCost({
                     isCurrencyConflict: payloadIsCurrencyConflict,
