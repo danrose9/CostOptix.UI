@@ -121,7 +121,7 @@ describe('test service connection options', () => {
     const { getByTestId, getAllByTestId } = render(
       <Table>
         <Table.Body>
-          <ServiceConnectionTable account={mockBillingAccounts} />
+          <ServiceConnectionTable billingAccount={mockBillingAccounts} />
         </Table.Body>
       </Table>,
       {

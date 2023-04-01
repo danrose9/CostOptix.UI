@@ -10,17 +10,18 @@ import { PageContent } from '../__styles__/DefaultPageStyles';
 
 import { ApplicationContext } from '../../app/ApplicationContext';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import { IRootState } from '../../services/redux/rootReducer';
 
 export const CostDashboard = () => {
   const application = useContext(ApplicationContext);
 
-  const billingAccountCurrency = useSelector((state) => state[reduxState.COST_DASHBOARD].currency);
+  const billingAccountCurrency = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].currency);
 
-  const [isCurrencyConflict, setIsCurrencyConflict] = useState(false);
-  const [currency, setCurrency] = useState(null);
-  const [currencySymbol, setCurrencySymbol] = useState(null);
+  const [isCurrencyConflict, setIsCurrencyConflict] = useState<boolean>(false);
+  const [currency, setCurrency] = useState<string>('');
+  const [currencySymbol, setCurrencySymbol] = useState<string | undefined>('');
 
-  const isCurrencyConflictCallback = (isConflict) => {
+  const isCurrencyConflictCallback = (isConflict: boolean) => {
     const currencySymbol = () => {
       setIsCurrencyConflict(isConflict);
       if (isConflict) {
