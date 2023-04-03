@@ -1,8 +1,14 @@
 import React, { useState, FormEvent } from 'react';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../services/redux/store';
+import { IRootState } from '../../services/redux/rootReducer';
+import { reduxState } from '../../services/redux/reduxState';
+
 import { Modal, Table, Checkbox, Button, Icon, CheckboxProps, Popup } from 'semantic-ui-react';
 import StandardButton from '../buttons/StandardButton';
 import { ModalHeader } from '../__styles__/StyledModal';
 import { ProviderImage } from '../ProviderImage';
+
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { addBillingAccount } from '../../services/redux/thunks/serviceProvidersThunk';
 import { getIndex } from '../../utils/arrayHelper';
@@ -12,8 +18,8 @@ import {
   AddBillingAccountType,
   ICloudBillingAccountsArgs,
 } from 'cloud-billingaccounts-types';
+
 import { ServiceConnectionProviderType } from 'provider-types';
-import { useAppDispatch } from '../../services/redux/store';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { ErrorType } from 'error-types';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
@@ -24,9 +30,16 @@ interface IModalProps {
   cloudProvider: ServiceConnectionProviderType;
   formData: AzureFormDataType | AWSFormDataType;
   updateSetError: any;
+  closeFormModal: any;
 }
 
-const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProvider, formData, updateSetError }) => {
+const ListServiceConnectionModal: React.FC<IModalProps> = ({
+  disabled,
+  cloudProvider,
+  formData,
+  updateSetError,
+  closeFormModal,
+}) => {
   const { provider } = cloudProvider;
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isAdding, setIsAdding] = useState<boolean>(false);
@@ -35,6 +48,10 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
   const [secondOpen, setSecondOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+
+  const existingBillingAccounts = useSelector(
+    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
+  );
 
   const [providerData, setProviderData] = useState<AddProviderType>({
     providerAccountId: '',
@@ -60,7 +77,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
     if (accounts.error) {
       updateSetError({ isError: true, errorMessage: accounts.error });
     } else {
-      console.log('foundAccounts : ', accounts);
       // update state with formdata
       setProviderData({
         providerAccountId: accounts.providerAccountId,
@@ -153,9 +169,13 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
       password: providerData.password,
     };
 
-    const addBillingAcounts = await dispatch(addBillingAccount(providerData));
-
+    const addBillingAccounts = await dispatch(addBillingAccount(providerData));
+    console.log('return from addBillingAccounts', addBillingAccounts);
     setIsAdding(false);
+
+    // Return to service connection page
+    setSecondOpen(false);
+    closeFormModal(false);
   };
 
   const checkIfSubmitButtonIsDisabled = () => {
@@ -164,7 +184,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
     } else return false;
   };
 
-  console.log(providerData.billingAccounts);
   return (
     <Modal
       open={secondOpen}
@@ -197,15 +216,19 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
                 <Checkbox onChange={handleSelectAll} toggle checked={checkifSelectAllIsChecked()} />
               </Table.HeaderCell>
               <Table.HeaderCell width={6}>Account Name</Table.HeaderCell>
-              <Table.HeaderCell width={6}>Account Id</Table.HeaderCell>
+              <Table.HeaderCell width={7}>Account Id</Table.HeaderCell>
               <Table.HeaderCell width={1}>Currency</Table.HeaderCell>
-              <Table.HeaderCell width={1}>Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
             <>
               {billingAccounts.map((account: AddBillingAccountType, index) => {
+                const status = 'New';
+                const billingAccountStatus = billingAccountStatusType[status];
+                // const result = existingBillingAccounts.find(
+                //   ({ account }: any) => account.billingAccounId === existingBillingAccounts.accountId
+                // );
                 return (
                   <Table.Row key={index}>
                     <Table.Cell>
@@ -220,13 +243,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({ disabled, cloudProv
                     <Table.Cell>{account.billingAccountName}</Table.Cell>
                     <Table.Cell>{account.billingAccountId}</Table.Cell>
                     <Table.Cell>{account.currency}</Table.Cell>
-                    <Popup
-                      content="New"
-                      key={account.billingAccountId}
-                      trigger={<Table.Cell textAlign="center">{billingAccountStatusType.New}</Table.Cell>}
-                      basic
-                      position="left center"
-                    />
                   </Table.Row>
                 );
               })}

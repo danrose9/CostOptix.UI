@@ -34,6 +34,10 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
 
   const [formData, setFormData] = useState({});
 
+  const closeFormModal = () => {
+    setOpen(false);
+  };
+
   const DisableButtonOnInvalidForm = useCallback(
     (val: boolean) => {
       setIsFormButtonDisabled(!val);
@@ -127,6 +131,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
               cloudProvider={cloudProvider}
               formData={formData}
               updateSetError={updateSetError}
+              closeFormModal={closeFormModal}
             />
           </div>
         </ActionButtons>

@@ -29,6 +29,7 @@ export const BillingAccount = ({ billingAccount }) => {
   );
 
   const LoadingIndicator = () => {
+    console.log('*******', billingAccountData);
     if (billingAccountData.isError) {
       return <Icon color="red" name="close" size="large" />;
     } else if (billingAccountData.isLoading) {
@@ -44,8 +45,8 @@ export const BillingAccount = ({ billingAccount }) => {
         trigger={
           <Table.Row
             style={{ cursor: 'pointer' }}
-            error={billingAccountData.isError}
-            disabled={billingAccountData.isLoading}
+            // error={billingAccountData.isError}
+            // disabled={billingAccountData.isLoading}
             data-testid="billingAccounts-2"
             onClick={() => {
               navigate(appRoutes.SERVICE_PROVIDERS);
@@ -60,17 +61,17 @@ export const BillingAccount = ({ billingAccount }) => {
               {billingAccount.status === 'Transient' ? <Label color="blue">Transient</Label> : null}
             </Table.Cell>
             <Table.Cell textAlign="center">
-              <LoadingIndicator
+              {/* <LoadingIndicator
                 isLoading={billingAccountData.isLoading}
                 isError={billingAccountData.isError}
                 data-testid="billingAccounts-3"
-              />
+              /> */}
             </Table.Cell>
           </Table.Row>
         }
         content={
           <StandardTooltip instance={billingAccount}>
-            {billingAccountData.isError ? <FailedToLoadBillingAccount size="mini" /> : null}
+            {/* {billingAccountData.isError ? <FailedToLoadBillingAccount size="mini" /> : null} */}
             <ToolTipData instance={billingAccount} />
           </StandardTooltip>
         }

@@ -7,6 +7,7 @@ import {
   disableBillingAccount,
   enableBillingAccount,
   deleteBillingAccount,
+  addBillingAccount,
 } from '../thunks/serviceProvidersThunk';
 
 const initialState = {
@@ -111,6 +112,16 @@ const serviceProviderSlice = createSlice({
         state.billingAccounts.splice(billingAccount, 1);
       }
     });
+    builder
+      .addCase(addBillingAccount.pending, (state) => {
+        console.log('AddBillingAccounts.pending');
+      })
+      .addCase(addBillingAccount.fulfilled, (state, action) => {
+        console.log('AddBillingAccounts.fulfilled');
+      })
+      .addCase(addBillingAccount.rejected, (state, action) => {
+        console.log('AddBillingAccounts.rejected');
+      });
   },
 });
 
