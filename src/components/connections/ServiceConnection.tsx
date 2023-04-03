@@ -20,25 +20,21 @@ const ServiceConnection = () => {
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );
 
+  const [pollingInterval, setPollingInterval] = useState<number>(5000);
+
   const dispatch = useAppDispatch();
 
-  const pollForBillingAccountChanges = () => {
-    // on page load poll
-    // fetchBillingAccounts
-    // if any are 'Pending' => poll
-    // if no pending stop polling
-    // dispatch(fetchBillingAccounts()); // this error when returning to cost dashboard
-  };
+  useInterval(async () => {
+    const billingAccounts = await dispatch(fetchBillingAccounts());
 
-  useInterval(() => {
-    // Your custom logic here
-    console.log('poll..');
-    dispatch(fetchBillingAccounts());
-  }, 5000);
+    const found: boolean = billingAccounts.payload.billingAccounts.some(
+      ({ status }: { status: string }) => status === 'Pending'
+    );
 
-  useEffect(() => {
-    pollForBillingAccountChanges();
-  });
+    if (!found) {
+      setPollingInterval(30000);
+    }
+  }, pollingInterval);
 
   return (
     <ServiceConnectionPage>
@@ -75,7 +71,7 @@ const ServiceConnection = () => {
               </Card.Content>
               <Card.Content extra>
                 <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType} />
-                <Button onClick={pollForBillingAccountChanges}>Fetch</Button>
+                {/* <Button onClick={pollForBillingAccountChanges}>Fetch</Button> */}
               </Card.Content>
             </Card>
           );
