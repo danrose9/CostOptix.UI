@@ -20,19 +20,24 @@ const ServiceConnection = () => {
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );
 
-  const [pollingInterval, setPollingInterval] = useState<number>(5000);
+  const [pollingInterval, setPollingInterval] = useState<number>(3000);
+  const [isPolling, setIsPolling] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
+  const startPolling = () => setIsPolling(true);
+
   useInterval(async () => {
-    const billingAccounts = await dispatch(fetchBillingAccounts());
+    if (isPolling) {
+      const billingAccounts = await dispatch(fetchBillingAccounts());
 
-    const found: boolean = billingAccounts.payload.billingAccounts.some(
-      ({ status }: { status: string }) => status === 'Pending'
-    );
+      const pending: boolean = billingAccounts.payload.billingAccounts.some(
+        ({ status }: { status: string }) => status === 'Pending'
+      );
 
-    if (!found) {
-      setPollingInterval(30000);
+      if (!pending) {
+        setIsPolling(false);
+      }
     }
   }, pollingInterval);
 
@@ -70,8 +75,11 @@ const ServiceConnection = () => {
                 </Table>
               </Card.Content>
               <Card.Content extra>
-                <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType} />
-                {/* <Button onClick={pollForBillingAccountChanges}>Fetch</Button> */}
+                <AddServiceConnectionModal
+                  cloudProvider={card as ServiceConnectionProviderType}
+                  startPolling={startPolling}
+                />
+                {/* <Button onClick={() => setIsPolling(!isPolling)}>Poll</Button> */}
               </Card.Content>
             </Card>
           );

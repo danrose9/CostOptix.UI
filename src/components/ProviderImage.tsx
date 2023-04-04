@@ -5,8 +5,8 @@ import { SemanticFLOATS, SemanticSIZES } from 'semantic-ui-react';
 
 interface IProps {
   provider: string;
-  size: SemanticSIZES;
-  floated: SemanticFLOATS;
+  size?: SemanticSIZES;
+  floated?: SemanticFLOATS;
 }
 
 export const ProviderImage = (props: IProps) => {

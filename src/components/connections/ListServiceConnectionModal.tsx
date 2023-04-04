@@ -24,6 +24,9 @@ import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { ErrorType } from 'error-types';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
 import { StyledIconButton } from '../../styles/StyledDashboardHeader';
+import { resetCostDashboard } from '../../services/redux/reducers/costDashboardSlice';
+import { resetServiceProviders } from '../../services/redux/reducers/serviceProvidersSlice';
+import { fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
 
 interface IModalProps {
   disabled: boolean;
@@ -31,6 +34,7 @@ interface IModalProps {
   formData: AzureFormDataType | AWSFormDataType;
   updateSetError: any;
   closeFormModal: any;
+  startPolling: any;
 }
 
 const ListServiceConnectionModal: React.FC<IModalProps> = ({
@@ -39,6 +43,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
   formData,
   updateSetError,
   closeFormModal,
+  startPolling,
 }) => {
   const { provider } = cloudProvider;
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -174,6 +179,8 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
     setIsAdding(false);
 
     // Return to service connection page
+
+    startPolling(true);
     setSecondOpen(false);
     closeFormModal(false);
   };

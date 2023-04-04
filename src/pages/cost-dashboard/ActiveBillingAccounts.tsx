@@ -117,7 +117,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body>
+          {/* <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body> */}
           <LoadingStatus />
         </Table>
         <CurrencyConflict />

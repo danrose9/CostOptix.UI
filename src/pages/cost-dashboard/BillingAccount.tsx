@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { reduxState } from '../../services/redux/reduxState';
 import { StandardTooltip } from '../../components/tooltips';
-import { FailedToLoadBillingAccount } from '../../components/messages';
 import * as appRoutes from '../../app/appRoutes';
+import { ConnectedBillingAccountType, IConnectedBillingAccountProps } from 'billingaccount-types';
+import { IRootState } from '../../services/redux/rootReducer';
 
-const ToolTipData = (instance) => {
+const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;
   return (
     <Card.Content textAlign="right">
@@ -17,19 +18,18 @@ const ToolTipData = (instance) => {
   );
 };
 
-export const BillingAccount = ({ billingAccount }) => {
+export const BillingAccount = ({ billingAccount }: IConnectedBillingAccountProps) => {
   const navigate = useNavigate();
 
   const provider = billingAccount.provider;
 
-  const billingAccountData = useSelector((state) =>
-    state[reduxState.COST_DASHBOARD].billingAccounts.find((element) => {
+  const billingAccountData: ConnectedBillingAccountType = useSelector((state: IRootState) =>
+    state[reduxState.COST_DASHBOARD].billingAccounts.find((element: { id: string }) => {
       return element.id === billingAccount.id;
     })
   );
 
   const LoadingIndicator = () => {
-    console.log('*******', billingAccountData);
     if (billingAccountData.isError) {
       return <Icon color="red" name="close" size="large" />;
     } else if (billingAccountData.isLoading) {
