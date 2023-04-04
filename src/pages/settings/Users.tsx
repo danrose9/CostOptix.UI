@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Tab, Table, Divider } from 'semantic-ui-react';
-import { SectionTitle, SectionHeader } from '../__styles__/settings.styles';
+import { Tab, Table, Divider, Button } from 'semantic-ui-react';
+import { SectionTitle, SectionHeader, SimpleButton } from '../__styles__/settings.styles';
 
 interface IUsersProps {}
 
@@ -35,6 +35,7 @@ const Users = (props: IUsersProps) => {
     <Tab.Pane color="blue">
       <SectionHeader>
         <SectionTitle>Users</SectionTitle>
+        <SimpleButton>+ Invite</SimpleButton>
       </SectionHeader>
       <Divider />
 

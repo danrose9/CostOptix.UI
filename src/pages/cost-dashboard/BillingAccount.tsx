@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { reduxState } from '../../services/redux/reduxState';
 import { StandardTooltip } from '../../components/tooltips';
-import { FailedToLoadBillingAccount } from '../../components/messages';
 import * as appRoutes from '../../app/appRoutes';
+import { ConnectedBillingAccountType, IConnectedBillingAccountProps } from 'billingaccount-types';
+import { IRootState } from '../../services/redux/rootReducer';
 
-const ToolTipData = (instance) => {
+const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;
   return (
     <Card.Content textAlign="right">
@@ -17,13 +18,13 @@ const ToolTipData = (instance) => {
   );
 };
 
-export const BillingAccount = ({ billingAccount }) => {
+export const BillingAccount = ({ billingAccount }: IConnectedBillingAccountProps) => {
   const navigate = useNavigate();
 
   const provider = billingAccount.provider;
 
-  const billingAccountData = useSelector((state) =>
-    state[reduxState.COST_DASHBOARD].billingAccounts.find((element) => {
+  const billingAccountData: ConnectedBillingAccountType = useSelector((state: IRootState) =>
+    state[reduxState.COST_DASHBOARD].billingAccounts.find((element: { id: string }) => {
       return element.id === billingAccount.id;
     })
   );
@@ -44,8 +45,8 @@ export const BillingAccount = ({ billingAccount }) => {
         trigger={
           <Table.Row
             style={{ cursor: 'pointer' }}
-            error={billingAccountData.isError}
-            disabled={billingAccountData.isLoading}
+            // error={billingAccountData.isError}
+            // disabled={billingAccountData.isLoading}
             data-testid="billingAccounts-2"
             onClick={() => {
               navigate(appRoutes.SERVICE_PROVIDERS);
@@ -60,17 +61,17 @@ export const BillingAccount = ({ billingAccount }) => {
               {billingAccount.status === 'Transient' ? <Label color="blue">Transient</Label> : null}
             </Table.Cell>
             <Table.Cell textAlign="center">
-              <LoadingIndicator
+              {/* <LoadingIndicator
                 isLoading={billingAccountData.isLoading}
                 isError={billingAccountData.isError}
                 data-testid="billingAccounts-3"
-              />
+              /> */}
             </Table.Cell>
           </Table.Row>
         }
         content={
           <StandardTooltip instance={billingAccount}>
-            {billingAccountData.isError ? <FailedToLoadBillingAccount size="mini" /> : null}
+            {/* {billingAccountData.isError ? <FailedToLoadBillingAccount size="mini" /> : null} */}
             <ToolTipData instance={billingAccount} />
           </StandardTooltip>
         }

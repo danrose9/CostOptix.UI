@@ -13,7 +13,7 @@ export interface IBillingAccountStatus {
 
 export const billingAccountStatusType = {
   New: <Icon color="olive" name="file alternate outline" size="large" />,
-  Pending: <Icon color="orange" name="sync" size="large" />,
+  Pending: <Icon color="orange" name="sync" size="large" loading />,
   Connected: <Icon color="green" name="checkmark" size="large" />,
   Disabled: <Icon color="teal" name="warning sign" size="large" />,
   Failed: <Icon color="red" name="close" size="large" />,

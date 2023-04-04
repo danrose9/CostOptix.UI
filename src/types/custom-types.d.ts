@@ -36,6 +36,7 @@ declare module 'provider-types' {
   interface IProviderProps {
     cloudProvider: ServiceConnectionProviderType;
     children?: Element;
+    startPolling?: any;
   }
 
   export type AzureFormDataType = {

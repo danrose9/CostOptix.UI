@@ -1,10 +1,6 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
-import {
-  BASE,
-  EXTERNAL_LOGIN,
-  DEMO_LOGIN,
-} from '../../services/api/apiEndpoints';
+import { BASE, EXTERNAL_LOGIN, DEMO_LOGIN } from '../../services/api/apiEndpoints';
 
 export const Login = (props) => {
   return (

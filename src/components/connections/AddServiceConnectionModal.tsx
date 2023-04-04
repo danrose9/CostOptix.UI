@@ -15,7 +15,7 @@ import { IProviderProps } from 'provider-types';
 import { AppDispatch } from '../../services/redux/store';
 import { ModalHeader, ActionButtons } from '../__styles__/StyledModal';
 
-const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
+const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider, startPolling }) => {
   const isDemo = useContext(DemoContext);
 
   const { provider, vendor, name } = cloudProvider;
@@ -33,6 +33,10 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
   };
 
   const [formData, setFormData] = useState({});
+
+  const closeFormModal = () => {
+    setOpen(false);
+  };
 
   const DisableButtonOnInvalidForm = useCallback(
     (val: boolean) => {
@@ -127,6 +131,8 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
               cloudProvider={cloudProvider}
               formData={formData}
               updateSetError={updateSetError}
+              closeFormModal={closeFormModal}
+              startPolling={startPolling}
             />
           </div>
         </ActionButtons>

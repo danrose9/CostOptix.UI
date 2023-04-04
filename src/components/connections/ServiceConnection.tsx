@@ -1,5 +1,6 @@
-import React from 'react';
-import { Card, Divider, Table } from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import { useInterval } from '../../hooks/useInterval';
+import { Card, Divider, Table, Button } from 'semantic-ui-react';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
@@ -11,11 +12,34 @@ import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
 import { ConnectedBillingAccountType } from 'billingaccount-types';
 import { ServiceConnectionProviderType } from 'provider-types';
+import { useAppDispatch } from '../../services/redux/store';
+import { disableBillingAccount, fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
 
 const ServiceConnection = () => {
   const CustomerConnectedBillingAccounts = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );
+
+  const [pollingInterval, setPollingInterval] = useState<number>(3000);
+  const [isPolling, setIsPolling] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+
+  const startPolling = () => setIsPolling(true);
+
+  useInterval(async () => {
+    if (isPolling) {
+      const billingAccounts = await dispatch(fetchBillingAccounts());
+
+      const pending: boolean = billingAccounts.payload.billingAccounts.some(
+        ({ status }: { status: string }) => status === 'Pending'
+      );
+
+      if (!pending) {
+        setIsPolling(false);
+      }
+    }
+  }, pollingInterval);
 
   return (
     <ServiceConnectionPage>
@@ -51,7 +75,11 @@ const ServiceConnection = () => {
                 </Table>
               </Card.Content>
               <Card.Content extra>
-                <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType} />
+                <AddServiceConnectionModal
+                  cloudProvider={card as ServiceConnectionProviderType}
+                  startPolling={startPolling}
+                />
+                {/* <Button onClick={() => setIsPolling(!isPolling)}>Poll</Button> */}
               </Card.Content>
             </Card>
           );

@@ -12,6 +12,17 @@ export const SectionHeader = styled.div`
   height: 3em;
 `;
 
+export const SimpleButton = styled.button`
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 1.2em;
+  color: #1678c1;
+  font-family: 'poppins';
+  align-self: flex-end;
+  cursor: pointer;
+`;
+
 export const StyledFormField = styled(Form.Input)`
   font-size: 1.1rem;
   font-style: normal;
