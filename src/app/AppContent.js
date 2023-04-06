@@ -58,7 +58,7 @@ export const AppContent = () => {
             FallbackComponent={ErrorDefault}
             onReset={() => {
               console.warn('Application Reset');
-              navigate(appRoutes.COST_DASHBOARD);
+              navigate(appRoutes.ROOT);
             }}
           >
             <Container>

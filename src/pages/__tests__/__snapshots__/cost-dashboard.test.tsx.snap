@@ -237,6 +237,9 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 </th>
               </tr>
             </thead>
+            <tbody
+              className=""
+            />
             <tfoot
               className="full-width"
             >

@@ -21,12 +21,8 @@ import {
 
 import { ServiceConnectionProviderType } from 'provider-types';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
-import { ErrorType } from 'error-types';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
-import { StyledIconButton } from '../../styles/StyledDashboardHeader';
-import { resetCostDashboard } from '../../services/redux/reducers/costDashboardSlice';
-import { resetServiceProviders } from '../../services/redux/reducers/serviceProvidersSlice';
-import { fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
+import { resetIsBillingAccountsAvailable } from '../../services/redux/reducers/serviceProvidersSlice';
 
 interface IModalProps {
   disabled: boolean;
@@ -174,8 +170,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
       password: providerData.password,
     };
 
-    const addBillingAccounts = await dispatch(addBillingAccount(providerData));
-    console.log('return from addBillingAccounts', addBillingAccounts);
+    await dispatch(addBillingAccount(providerData));
     setIsAdding(false);
 
     // Return to service connection page
@@ -183,6 +178,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
     startPolling(true);
     setSecondOpen(false);
     closeFormModal(false);
+    dispatch(resetIsBillingAccountsAvailable);
   };
 
   const checkIfSubmitButtonIsDisabled = () => {

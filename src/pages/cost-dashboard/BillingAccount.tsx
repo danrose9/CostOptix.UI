@@ -8,6 +8,7 @@ import { StandardTooltip } from '../../components/tooltips';
 import * as appRoutes from '../../app/appRoutes';
 import { ConnectedBillingAccountType, IConnectedBillingAccountProps } from 'billingaccount-types';
 import { IRootState } from '../../services/redux/rootReducer';
+import { ICostDashboardBillingAccountProps, CostDashboardBillingAccountType } from 'cost-dashboard-types';
 
 const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;
@@ -18,26 +19,29 @@ const ToolTipData = (instance: { instance: { currency: string } }) => {
   );
 };
 
-export const BillingAccount = ({ billingAccount }: IConnectedBillingAccountProps) => {
+export const BillingAccount = ({ billingAccount }: ICostDashboardBillingAccountProps) => {
   const navigate = useNavigate();
 
   const provider = billingAccount.provider;
 
-  const billingAccountData: ConnectedBillingAccountType = useSelector((state: IRootState) =>
-    state[reduxState.COST_DASHBOARD].billingAccounts.find((element: { id: string }) => {
-      return element.id === billingAccount.id;
-    })
-  );
+  // const billingAccountData: ConnectedBillingAccountType = useSelector((state: IRootState) =>
+  //   state[reduxState.COST_DASHBOARD].billingAccounts.find((element: { id: string }) => {
+  //     return element.id === billingAccount.id;
+  //   })
+  // );
+  // const costDashboardBillingAccount: CostDashboardBillingAccountType = useSelector(
+  //   (state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts
+  // );
 
-  const LoadingIndicator = () => {
-    if (billingAccountData.isError) {
-      return <Icon color="red" name="close" size="large" />;
-    } else if (billingAccountData.isLoading) {
-      return <Loader size="medium" active inline="centered" />;
-    } else {
-      return <Icon color="green" name="checkmark" size="large" />;
-    }
-  };
+  // const LoadingIndicator = () => {
+  //   if (billingAccountData.isError) {
+  //     return <Icon color="red" name="close" size="large" />;
+  //   } else if (billingAccountData.isLoading) {
+  //     return <Loader size="medium" active inline="centered" />;
+  //   } else {
+  //     return <Icon color="green" name="checkmark" size="large" />;
+  //   }
+  // };
 
   return (
     <>
@@ -45,8 +49,7 @@ export const BillingAccount = ({ billingAccount }: IConnectedBillingAccountProps
         trigger={
           <Table.Row
             style={{ cursor: 'pointer' }}
-            // error={billingAccountData.isError}
-            // disabled={billingAccountData.isLoading}
+            disabled={billingAccount.isLoading}
             data-testid="billingAccounts-2"
             onClick={() => {
               navigate(appRoutes.SERVICE_PROVIDERS);
@@ -57,15 +60,15 @@ export const BillingAccount = ({ billingAccount }: IConnectedBillingAccountProps
             </Table.Cell>
 
             <Table.Cell>{billingAccount.accountName}</Table.Cell>
-            <Table.Cell>
+            {/* <Table.Cell>
               {billingAccount.status === 'Transient' ? <Label color="blue">Transient</Label> : null}
-            </Table.Cell>
-            <Table.Cell textAlign="center">
-              {/* <LoadingIndicator
-                isLoading={billingAccountData.isLoading}
-                isError={billingAccountData.isError}
-                data-testid="billingAccounts-3"
-              /> */}
+            </Table.Cell> */}
+            <Table.Cell textAlign="center" data-testid="billingAccounts-3">
+              {billingAccount.isLoading ? (
+                <Loader size="medium" active inline="centered" />
+              ) : (
+                <Icon color="green" name="checkmark" size="large" />
+              )}
             </Table.Cell>
           </Table.Row>
         }

@@ -21,16 +21,18 @@ import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../componen
 import * as appRoutes from '../../app/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import { IRootState } from '../../services/redux/rootReducer';
-import { IConnectedBillingAccountProps, ConnectedBillingAccountType } from 'billingaccount-types';
+import { ICostDashboardBillingAccountProps, CostDashboardBillingAccountType } from 'cost-dashboard-types';
 import { AddBillingAccountType } from 'cloud-billingaccounts-types';
 import { AppDispatch } from '../../services/redux/store';
 
-const BillingAccounts = ({ billingAccount }: IConnectedBillingAccountProps) => {
+const BillingAccounts = ({ billingAccount }: ICostDashboardBillingAccountProps) => {
   return (
     <>
-      {billingAccount.map((account: ConnectedBillingAccountType, index: any) => {
-        return <BillingAccount key={index} billingAccount={account} />;
-      })}
+      {billingAccount
+        .filter((account: CostDashboardBillingAccountType) => account.isError === false)
+        .map((account: CostDashboardBillingAccountType, index: any) => {
+          return <BillingAccount key={index} billingAccount={account} />;
+        })}
     </>
   );
 };
@@ -38,15 +40,15 @@ const BillingAccounts = ({ billingAccount }: IConnectedBillingAccountProps) => {
 const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
   const dispatch = useDispatch();
 
-  const billingAccounts = useSelector((state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts);
+  const billingAccounts: CostDashboardBillingAccountType = useSelector(
+    (state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts
+  );
 
   const isBillingAccountsAvailable = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].isAvailable
   );
 
-  const isComplete = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].isComplete);
-
-  const billingAccountCount = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].count);
+  const { isComplete, billingAccountCount } = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD]);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -104,7 +106,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         <Table selectable>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
+              <Table.HeaderCell colSpan="2">Active Billing Accounts</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">
                 {/* <StyledIconButton onClick={() => navigate(appRoutes.SERVICE_PROVIDERS)} name="plus" /> */}
                 <StyledIconButton
@@ -117,7 +119,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          {/* <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body> */}
+          <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body>
           <LoadingStatus />
         </Table>
         <CurrencyConflict />
