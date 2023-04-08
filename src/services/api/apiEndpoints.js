@@ -12,6 +12,7 @@ export const INCREMENT_LOGIN_COUNT = 'Account/IncrementLoginCount';
 export const PROVIDERS = 'Providers';
 export const BILLING_ACCOUNTS = 'Providers/BillingAccounts';
 export const BILLING_ACCOUNT_COSTS = 'CostDashboardData';
+export const TRANSIENT_BILLING_ACCOUNT_COSTS = 'GetAzureCostDashboardData';
 export const UPDATE_ORGANIZATION_NAME = 'Account/UpdateOrganization';
 export const RESOURCES = 'Resources';
 export const REFRESH_TOKEN = 'Account/RefreshToken';

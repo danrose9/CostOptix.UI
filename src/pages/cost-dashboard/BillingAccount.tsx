@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { reduxState } from '../../services/redux/reduxState';
 import { StandardTooltip } from '../../components/tooltips';
 import * as appRoutes from '../../app/appRoutes';
-import { ConnectedBillingAccountType, IConnectedBillingAccountProps } from 'billingaccount-types';
+import { ServiceProviderBillingAccountType, IConnectedBillingAccountProps } from 'service-provider-types';
 import { IRootState } from '../../services/redux/rootReducer';
 import { ICostDashboardBillingAccountProps, CostDashboardBillingAccountType } from 'cost-dashboard-types';
 
@@ -24,7 +24,7 @@ export const BillingAccount = ({ billingAccount }: ICostDashboardBillingAccountP
 
   const provider = billingAccount.provider;
 
-  // const billingAccountData: ConnectedBillingAccountType = useSelector((state: IRootState) =>
+  // const billingAccountData: ServiceProviderBillingAccountType = useSelector((state: IRootState) =>
   //   state[reduxState.COST_DASHBOARD].billingAccounts.find((element: { id: string }) => {
   //     return element.id === billingAccount.id;
   //   })

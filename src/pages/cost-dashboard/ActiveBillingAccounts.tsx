@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchServiceProviders, fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
 import { reduxState } from '../../services/redux/reduxState';
 import BillingAccount from './BillingAccount';
-import { fetchBillingAccountCosts } from '../../services/redux/thunks/costDashboardThunk';
+import {
+  fetchBillingAccountCosts,
+  fetchTransientBillingAccountCosts,
+} from '../../services/redux/thunks/costDashboardThunk';
 import {
   updateMonthToDateCost,
   updateMostExpensiveInstance,
@@ -22,7 +25,7 @@ import * as appRoutes from '../../app/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import { IRootState } from '../../services/redux/rootReducer';
 import { ICostDashboardBillingAccountProps, CostDashboardBillingAccountType } from 'cost-dashboard-types';
-import { AddBillingAccountType } from 'cloud-billingaccounts-types';
+import { ServiceProviderBillingAccountType } from 'service-provider-types';
 import { AppDispatch } from '../../services/redux/store';
 
 const BillingAccounts = ({ billingAccount }: ICostDashboardBillingAccountProps) => {
@@ -43,6 +46,8 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
   const billingAccounts: CostDashboardBillingAccountType = useSelector(
     (state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts
   );
+
+  const [accountStatus, setAccountStatus] = useState<string>('');
 
   const isBillingAccountsAvailable = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].isAvailable
@@ -72,15 +77,15 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     );
   };
 
-  const LoadingStatus = () => {
-    const fetchStatus = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].fetchStatus);
+  const AccountStatusMessage = () => {
+    // const fetchStatus = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].fetchStatus);
 
     return (
       <>
         <Table.Footer fullWidth>
           <Table.Row>
-            {fetchStatus && !isComplete ? (
-              <Table.HeaderCell colSpan="5">{fetchStatus}</Table.HeaderCell>
+            {accountStatus && !isComplete ? (
+              <Table.HeaderCell colSpan="5">{accountStatus}</Table.HeaderCell>
             ) : (
               <LastUpdated />
             )}
@@ -120,7 +125,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
             </Table.Row>
           </Table.Header>
           <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body>
-          <LoadingStatus />
+          <AccountStatusMessage />
         </Table>
         <CurrencyConflict />
         <NoBillingAccounts />
@@ -128,51 +133,47 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     );
   };
 
+  const regex = /[^/]+$/g;
+
+  const fetchBillingAccountData = async (billingAccount: any) => {
+    // const id = accountId.match(regex)?.toString();
+    let response: any = [];
+
+    if (billingAccount.status === 'Transient') {
+      response = await dispatch<AppDispatch>(fetchTransientBillingAccountCosts(billingAccount.accountId));
+    } else {
+      response = await dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id));
+    }
+
+    return response;
+  };
+
   useEffect(() => {
     if (isBillingAccountsAvailable) {
       setIsLoading(false);
     } else {
       // Fetch a list of billing accounts
-      dispatch(updateFetchStatus('Searching for billing accounts ..'));
+      setAccountStatus('Searching for billing accounts ..');
       dispatch<AppDispatch>(fetchServiceProviders());
-      dispatch<AppDispatch>(fetchBillingAccounts()).then((response: any) => {
-        const payloadIsCurrencyConflict = response.payload?.isCurrencyConflict;
+      dispatch<AppDispatch>(fetchBillingAccounts()).then((response: ServiceProviderBillingAccountType) => {
+        const payloadIsCurrencyConflict: boolean = response.payload?.isCurrencyConflict;
 
-        // Add each billing account to state
-        response.payload?.billingAccounts.forEach((billingAccount: any) => {
+        // Add each billing account to billing-account array in cost dashboard state
+        response.payload?.billingAccounts.forEach((billingAccount: ServiceProviderBillingAccountType) => {
+          // const id = billingAccount.accountId.match(regex)?.toString();
           dispatch(addBillingAccount(billingAccount.id));
         });
+
         setIsLoading(false);
 
+        //update billing account count in Cost Dashboard state
         dispatch(updateBillingAccountCount(response.payload?.billingAccounts.length));
 
         // Get billing costs for each billing account
         if (response.payload?.billingAccounts.length > 0) {
           // eslint-disable-next-line array-callback-return
-          response.payload?.billingAccounts.map((billingAccount: any, index: any) => {
-            dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id))
-              .unwrap()
-              .then((response: any) => {
-                dispatch(
-                  updateMonthToDateCost({
-                    isCurrencyConflict: payloadIsCurrencyConflict,
-                    response,
-                  })
-                );
-                dispatch(
-                  updateMostExpensiveInstance({
-                    isCurrencyConflict: payloadIsCurrencyConflict,
-                    response,
-                  })
-                );
-                dispatch(updateFastestGrowingInstance(response));
-                dispatch(
-                  updateMonthlySpend({
-                    isCurrencyConflict: payloadIsCurrencyConflict,
-                    response,
-                  })
-                );
-              });
+          response.payload?.billingAccounts.map((billingAccount: ServiceProviderBillingAccountType, index: any) => {
+            fetchBillingAccountData(billingAccount);
           });
         }
       });

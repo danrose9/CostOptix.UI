@@ -10,7 +10,7 @@ import AddServiceConnectionModal from './AddServiceConnectionModal';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
-import { ConnectedBillingAccountType } from 'billingaccount-types';
+import { ServiceProviderBillingAccountType } from 'service-provider-types';
 import { ServiceConnectionProviderType } from 'provider-types';
 import { useAppDispatch } from '../../services/redux/store';
 import { disableBillingAccount, fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
@@ -67,8 +67,8 @@ const ServiceConnection = () => {
                   </Table.Header>
                   <Table.Body>
                     {CustomerConnectedBillingAccounts.filter(
-                      (account: ConnectedBillingAccountType) => account.provider === card.provider
-                    ).map((account: ConnectedBillingAccountType, index: any) => {
+                      (account: ServiceProviderBillingAccountType) => account.provider === card.provider
+                    ).map((account: ServiceProviderBillingAccountType, index: any) => {
                       return <ServiceConnectionRow billingAccount={account} key={index} />;
                     })}
                   </Table.Body>
