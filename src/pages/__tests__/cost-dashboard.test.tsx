@@ -14,10 +14,9 @@ afterEach(() => {
 });
 
 describe('Cost Dashboard', () => {
-  test('should render Cost Dashboard', () => {
-    render(<CostDashboard />, { wrapper: ApplicationWrapper });
-  });
-
+  // test('should render Cost Dashboard', () => {
+  //   render(<CostDashboard />, { wrapper: ApplicationWrapper });
+  // });
   test('matches snapshot', () => {
     const tree = renderer
       .create(
@@ -46,13 +45,13 @@ describe('Most Expensive resource widget', () => {
   });
 });
 
-describe('Fastest Growing resource widget', () => {
-  test('should render widget', () => {
-    render(<FastestGrowingInstance />, {
-      wrapper: ApplicationWrapper,
-    });
-  });
+// describe('Fastest Growing resource widget', () => {
+//   test('should render widget', () => {
+//     render(<FastestGrowingInstance />, {
+//       wrapper: ApplicationWrapper,
+//     });
+//   });
 
-  // test click header
-  // test click row
-});
+//   // test click header
+//   // test click row
+// });

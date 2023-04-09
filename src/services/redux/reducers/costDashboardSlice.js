@@ -17,6 +17,7 @@ const initialState = {
   isLoading: true,
   status: null,
   error: null,
+  refreshData: false,
 };
 
 const costDashboardSlice = createSlice({
@@ -26,11 +27,15 @@ const costDashboardSlice = createSlice({
     state = initialState;
   },
   reducers: {
+    refreshCostDashboard(state, action) {
+      state.refreshData = action.payload;
+    },
     addBillingAccount(state, action) {
       state.billingAccounts.push({
         id: action.payload,
         isLoading: true,
         isError: false,
+        error: '',
       });
     },
     updateMonthToDateCost(state, action) {
@@ -70,7 +75,7 @@ const costDashboardSlice = createSlice({
         state.mostExpensive,
         action.payload,
         'mostExpensive',
-        orderBy,
+        'amount30Day',
         10
       );
 
@@ -160,6 +165,7 @@ const costDashboardSlice = createSlice({
           state.mostExpensive.isLoading = false;
           state.monthToDateCost.isLoading = false;
           state.fastestGrowing.isLoading = false;
+          state.refreshData = false;
         }
       })
       .addCase(fetchTransientBillingAccountCosts.pending, (state) => {
@@ -183,6 +189,7 @@ export const {
   resetCostDashboard,
   updateBillingAccountCount,
   addBillingAccount,
+  refreshCostDashboard,
 } = costDashboardSlice.actions;
 
 export default costDashboardSlice.reducer;
