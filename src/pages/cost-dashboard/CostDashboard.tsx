@@ -34,6 +34,10 @@ export const CostDashboard = () => {
     setCurrencySymbol(currencySymbol);
   };
 
+  // const isCurrencyConflictCallback = (isConflict: boolean) => {
+  //   setIsCurrencyConflict(isConflict);
+  // };
+
   return (
     <PageContent>
       <PageTitle title="Cost Dashboard" />

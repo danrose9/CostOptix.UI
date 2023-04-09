@@ -222,7 +222,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
               >
                 <th
                   className=""
-                  colSpan="3"
+                  colSpan="2"
                 >
                   Active Billing Accounts
                 </th>
@@ -231,12 +231,15 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    className="refresh disabled fitted loading icon sc-gKPRtg dZtRqz"
+                    className="refresh fitted icon sc-gKPRtg dZtRqz"
                     onClick={[Function]}
                   />
                 </th>
               </tr>
             </thead>
+            <tbody
+              className=""
+            />
             <tfoot
               className="full-width"
             >
@@ -247,7 +250,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                   className=""
                   colSpan="5"
                 >
-                  Searching for billing accounts ..
+                  Last Updated: 
                 </th>
               </tr>
             </tfoot>

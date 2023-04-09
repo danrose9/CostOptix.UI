@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchBillingAccountCosts } from '../thunks/costDashboardThunk';
+import { createSlice, current } from '@reduxjs/toolkit';
+import { fetchBillingAccountCosts, fetchTransientBillingAccountCosts } from '../thunks/costDashboardThunk';
 import { combineSortSliceArray, upsert } from '../../../utils/arrayHelper';
 
 const initialState = {
@@ -31,19 +31,20 @@ const costDashboardSlice = createSlice({
         id: action.payload,
         isLoading: true,
         isError: false,
+        error: '',
       });
     },
     updateMonthToDateCost(state, action) {
       const payload = action.payload;
 
-      const payloadProvider = payload.response.provider;
+      const payloadProvider = payload.provider;
 
       let payloadCost;
 
       if (payload.isCurrencyConflict) {
-        payloadCost = payload.response.monthToDateCostConverted;
+        payloadCost = payload.monthToDateCostConverted;
       } else {
-        payloadCost = payload.response.monthToDateCost;
+        payloadCost = payload.monthToDateCost;
       }
 
       const provider = state.monthToDateCost.data.find((item) => item.name === payloadProvider);
@@ -68,9 +69,9 @@ const costDashboardSlice = createSlice({
 
       state.mostExpensive.data = combineSortSliceArray(
         state.mostExpensive,
-        action.payload.response,
+        action.payload,
         'mostExpensive',
-        orderBy,
+        'amount30Day',
         10
       );
 
@@ -88,7 +89,7 @@ const costDashboardSlice = createSlice({
       state.fastestGrowing.isLoading = false;
     },
     updateMonthlySpend(state, action) {
-      const newState = upsert(state.monthlySpend.data, action.payload.response, action.payload.isCurrencyConflict);
+      const newState = upsert(state.monthlySpend.data, action.payload, action.payload.isCurrencyConflict);
 
       state.monthlySpend.data = newState.sort(function (a, b) {
         return new Date(a.name) - new Date(b.name);
@@ -160,7 +161,17 @@ const costDashboardSlice = createSlice({
           state.mostExpensive.isLoading = false;
           state.monthToDateCost.isLoading = false;
           state.fastestGrowing.isLoading = false;
+          state.refreshData = false;
         }
+      })
+      .addCase(fetchTransientBillingAccountCosts.pending, (state) => {
+        console.log('fetchTransientBillingAccountCosts.pending');
+      })
+      .addCase(fetchTransientBillingAccountCosts.fulfilled, (state, action) => {
+        console.log('fetchTransientBillingAccountCosts.fulfilled');
+      })
+      .addCase(fetchTransientBillingAccountCosts.rejected, (state, action) => {
+        console.log('fetchTransientBillingAccountCosts.rejected');
       });
   },
 });

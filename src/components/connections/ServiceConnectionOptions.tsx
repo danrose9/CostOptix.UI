@@ -1,9 +1,9 @@
 import React from 'react';
-import { ConnectedBillingAccountType } from 'billingaccount-types';
+import { ServiceProviderBillingAccountType } from 'service-provider-types';
 import { ManageServiceConnection, DisableServiceConnection, RemoveServiceConnection } from './options/index';
 
 interface IProps {
-  billingAccounts: ConnectedBillingAccountType;
+  billingAccounts: ServiceProviderBillingAccountType;
 }
 
 export const ServiceConnectionOptions = ({ ...billingAccounts }: IProps) => {

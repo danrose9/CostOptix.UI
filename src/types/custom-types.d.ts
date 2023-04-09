@@ -1,5 +1,5 @@
-declare module 'billingaccount-types' {
-  export type ConnectedBillingAccountType = {
+declare module 'service-provider-types' {
+  export type ServiceProviderBillingAccountType = {
     [x: string]: any;
     accountId: string;
     accountName: string;
@@ -13,7 +13,7 @@ declare module 'billingaccount-types' {
   };
 
   interface IConnectedBillingAccountProps {
-    billingAccount: ConnectedBillingAccountType;
+    billingAccount: ServiceProviderBillingAccountType;
   }
 }
 
@@ -89,4 +89,22 @@ declare module 'error-types' {
     isError: boolean;
     errorMessage: string;
   };
+}
+
+declare module 'cost-dashboard-types' {
+  export type CostDashboardBillingAccountType = {
+    filter: any;
+    id: string;
+    accountName: string;
+    provider: string;
+    billingAccountId: string;
+    currency: string;
+    convertedCurrency: string;
+    isLoading: boolean;
+    isError: boolean;
+  };
+
+  export interface ICostDashboardBillingAccountProps {
+    billingAccount: CostDashboardBillingAccountType;
+  }
 }
