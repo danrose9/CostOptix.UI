@@ -17,7 +17,6 @@ const initialState = {
   isLoading: true,
   status: null,
   error: null,
-  refreshData: false,
 };
 
 const costDashboardSlice = createSlice({
@@ -27,9 +26,6 @@ const costDashboardSlice = createSlice({
     state = initialState;
   },
   reducers: {
-    refreshCostDashboard(state, action) {
-      state.refreshData = action.payload;
-    },
     addBillingAccount(state, action) {
       state.billingAccounts.push({
         id: action.payload,
@@ -189,7 +185,6 @@ export const {
   resetCostDashboard,
   updateBillingAccountCount,
   addBillingAccount,
-  refreshCostDashboard,
 } = costDashboardSlice.actions;
 
 export default costDashboardSlice.reducer;
