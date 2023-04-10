@@ -26,7 +26,7 @@ const BillingAccounts = ({ billingAccount }: ICostDashboardBillingAccountProps) 
   return (
     <>
       {billingAccount
-        .filter((account: CostDashboardBillingAccountType) => account.isError === false)
+        // .filter((account: CostDashboardBillingAccountType) => account.isError === false)
         .map((account: CostDashboardBillingAccountType, index: any) => {
           return <BillingAccount key={index} billingAccount={account} />;
         })}
@@ -65,7 +65,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const LastUpdated = () => {
     return (
-      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="5">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
+      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="16">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
     );
   };
 
@@ -77,7 +77,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         <Table.Footer fullWidth>
           <Table.Row>
             {accountStatus && !isComplete ? (
-              <Table.HeaderCell colSpan="5">{accountStatus}</Table.HeaderCell>
+              <Table.HeaderCell colSpan="16">{accountStatus}</Table.HeaderCell>
             ) : (
               <LastUpdated />
             )}
@@ -103,8 +103,8 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         <Table selectable>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan="2">Active Billing Accounts</Table.HeaderCell>
-              <Table.HeaderCell textAlign="center">
+              <Table.HeaderCell colSpan="14">Active Billing Accounts</Table.HeaderCell>
+              <Table.HeaderCell colSpan="2" textAlign="center">
                 <StyledIconButton
                   name="refresh"
                   onClick={refreshPage}
@@ -130,9 +130,11 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     // const id = accountId.match(regex)?.toString();
 
     if (billingAccount.status === 'Transient') {
-      await dispatch<AppDispatch>(fetchTransientBillingAccountCosts(billingAccount.accountId));
+      // await dispatch<AppDispatch>(fetchTransientBillingAccountCosts(billingAccount.accountId));
+      console.log('xxxx', 'transient');
     } else {
-      await dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id));
+      // await dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id));
+      console.log('xxxx', 'non-transient');
     }
   };
 

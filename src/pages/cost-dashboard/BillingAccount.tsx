@@ -9,6 +9,7 @@ import * as appRoutes from '../../app/appRoutes';
 import { ServiceProviderBillingAccountType, IConnectedBillingAccountProps } from 'service-provider-types';
 import { IRootState } from '../../services/redux/rootReducer';
 import { ICostDashboardBillingAccountProps, CostDashboardBillingAccountType } from 'cost-dashboard-types';
+import { FailedToLoadBillingAccount } from '../../components/messages';
 
 const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;
@@ -60,9 +61,9 @@ export const BillingAccount = ({ billingAccount }: ICostDashboardBillingAccountP
             </Table.Cell>
 
             <Table.Cell>{billingAccount.accountName}</Table.Cell>
-            {/* <Table.Cell>
-              {billingAccount.status === 'Transient' ? <Label color="blue">Transient</Label> : null}
-            </Table.Cell> */}
+            <Table.Cell></Table.Cell>
+            {/* {billingAccount.status === 'Transient' ? <Label color="blue">Transient</Label> : null} */}
+
             <Table.Cell textAlign="center" data-testid="billingAccounts-3">
               {billingAccount.isLoading ? (
                 <Loader size="medium" active inline="centered" />
@@ -74,7 +75,7 @@ export const BillingAccount = ({ billingAccount }: ICostDashboardBillingAccountP
         }
         content={
           <StandardTooltip instance={billingAccount}>
-            {/* {billingAccountData.isError ? <FailedToLoadBillingAccount size="mini" /> : null} */}
+            {/* {billingAccount.isError ? <FailedToLoadBillingAccount size="mini" /> : null} */}
             <ToolTipData instance={billingAccount} />
           </StandardTooltip>
         }

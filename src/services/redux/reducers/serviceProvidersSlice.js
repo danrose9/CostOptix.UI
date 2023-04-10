@@ -98,7 +98,7 @@ const serviceProviderSlice = createSlice({
     builder.addCase(enableBillingAccount.fulfilled, (state, action) => {
       const billingAccount = findBillingAccount(state, action.payload);
       if (billingAccount) {
-        billingAccount.status = 'Connected';
+        billingAccount.status = 'Pending';
       }
     });
 
