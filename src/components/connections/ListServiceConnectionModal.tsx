@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../services/redux/store';
 import { IRootState } from '../../services/redux/rootReducer';
@@ -24,13 +24,14 @@ import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
 import { resetIsBillingAccountsAvailable } from '../../services/redux/reducers/serviceProvidersSlice';
 
+import { PollingContext } from './ServiceConnection';
+
 interface IModalProps {
   disabled: boolean;
   cloudProvider: ServiceConnectionProviderType;
   formData: AzureFormDataType | AWSFormDataType;
   updateSetError: any;
   closeFormModal: any;
-  startPolling: any;
 }
 
 const ListServiceConnectionModal: React.FC<IModalProps> = ({
@@ -39,7 +40,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
   formData,
   updateSetError,
   closeFormModal,
-  startPolling,
 }) => {
   const { provider } = cloudProvider;
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -49,6 +49,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
   const [secondOpen, setSecondOpen] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+  const setIsPolling = useContext(PollingContext);
 
   const existingBillingAccounts = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
@@ -175,7 +176,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
 
     // Return to service connection page
 
-    startPolling(true);
+    setIsPolling(true);
     setSecondOpen(false);
     closeFormModal(false);
     dispatch(resetIsBillingAccountsAvailable);

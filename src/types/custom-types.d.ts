@@ -36,7 +36,6 @@ declare module 'provider-types' {
   interface IProviderProps {
     cloudProvider: ServiceConnectionProviderType;
     children?: Element;
-    startPolling?: any;
   }
 
   export type AzureFormDataType = {
@@ -93,6 +92,7 @@ declare module 'error-types' {
 
 declare module 'cost-dashboard-types' {
   export type CostDashboardBillingAccountType = {
+    map: any;
     filter: any;
     id: string;
     accountName: string;
@@ -102,6 +102,7 @@ declare module 'cost-dashboard-types' {
     convertedCurrency: string;
     isLoading: boolean;
     isError: boolean;
+    status: string;
   };
 
   export interface ICostDashboardBillingAccountProps {

@@ -222,7 +222,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
               >
                 <th
                   className=""
-                  colSpan="2"
+                  colSpan="3"
                 >
                   Active Billing Accounts
                 </th>
@@ -248,7 +248,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
               >
                 <th
                   className=""
-                  colSpan="5"
+                  colSpan="16"
                 >
                   Last Updated: 
                 </th>

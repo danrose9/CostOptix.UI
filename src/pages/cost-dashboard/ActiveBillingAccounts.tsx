@@ -8,11 +8,7 @@ import {
   fetchBillingAccountCosts,
   fetchTransientBillingAccountCosts,
 } from '../../services/redux/thunks/costDashboardThunk';
-import {
-  resetCostDashboard,
-  updateBillingAccountCount,
-  addBillingAccount,
-} from '../../services/redux/reducers/costDashboardSlice';
+import { resetCostDashboard, addBillingAccount } from '../../services/redux/reducers/costDashboardSlice';
 import { resetServiceProviders } from '../../services/redux/reducers/serviceProvidersSlice';
 import { StyledIconButton } from '../../styles/StyledDashboardHeader';
 import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../components/messages/index';
@@ -25,11 +21,9 @@ import { AppDispatch } from '../../services/redux/store';
 const BillingAccounts = ({ billingAccount }: ICostDashboardBillingAccountProps) => {
   return (
     <>
-      {billingAccount
-        .filter((account: CostDashboardBillingAccountType) => account.isError === false)
-        .map((account: CostDashboardBillingAccountType, index: any) => {
-          return <BillingAccount key={index} billingAccount={account} />;
-        })}
+      {billingAccount.map((account: CostDashboardBillingAccountType, index: any) => {
+        return <BillingAccount key={index} billingAccount={account} />;
+      })}
     </>
   );
 };
@@ -65,19 +59,17 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const LastUpdated = () => {
     return (
-      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="5">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
+      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="16">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
     );
   };
 
   const AccountStatusMessage = () => {
-    // const fetchStatus = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].fetchStatus);
-
     return (
       <>
         <Table.Footer fullWidth>
           <Table.Row>
             {accountStatus && !isComplete ? (
-              <Table.HeaderCell colSpan="5">{accountStatus}</Table.HeaderCell>
+              <Table.HeaderCell colSpan="16">{accountStatus}</Table.HeaderCell>
             ) : (
               <LastUpdated />
             )}
@@ -103,7 +95,9 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         <Table selectable>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan="2">Active Billing Accounts</Table.HeaderCell>
+              <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
+              {/* <Table.HeaderCell></Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell> */}
               <Table.HeaderCell textAlign="center">
                 <StyledIconButton
                   name="refresh"
@@ -124,11 +118,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     );
   };
 
-  const regex = /[^/]+$/g;
-
   const fetchBillingAccountData = async (billingAccount: any) => {
-    // const id = accountId.match(regex)?.toString();
-
     if (billingAccount.status === 'Transient') {
       await dispatch<AppDispatch>(fetchTransientBillingAccountCosts(billingAccount.accountId));
     } else {
@@ -149,7 +139,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         response.payload.billingAccounts
           .filter((billingAccount: ServiceProviderBillingAccountType) => billingAccount.status !== 'Disabled')
           .map((billingAccount: ServiceProviderBillingAccountType, index: any) => {
-            dispatch(addBillingAccount(billingAccount.id));
+            dispatch(addBillingAccount(billingAccount));
             fetchBillingAccountData(billingAccount);
           });
 

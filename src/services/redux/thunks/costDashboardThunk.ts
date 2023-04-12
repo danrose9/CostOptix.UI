@@ -26,13 +26,20 @@ export const fetchBillingAccountCosts = createAsyncThunk(
 
 export const fetchTransientBillingAccountCosts = createAsyncThunk(
   'transientBillingAccount/Costs',
-  async (billingAccountId: string, { rejectWithValue }) => {
+  async (billingAccountId: string, thunkAPI) => {
     return await fetchInstance(`Costs/${TRANSIENT_BILLING_ACCOUNT_COSTS}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ billingAccountId: billingAccountId }),
     })
       .then((response) => response.json())
-      .catch((e) => rejectWithValue(e.response.data));
+      .then((data) => {
+        thunkAPI.dispatch(updateMonthToDateCost(data));
+        thunkAPI.dispatch(updateMostExpensiveInstance(data));
+        thunkAPI.dispatch(updateFastestGrowingInstance(data));
+        thunkAPI.dispatch(updateMonthlySpend(data));
+
+        return data;
+      });
   }
 );
