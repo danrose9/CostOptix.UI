@@ -102,6 +102,7 @@ declare module 'cost-dashboard-types' {
     convertedCurrency: string;
     isLoading: boolean;
     isError: boolean;
+    status: string;
   };
 
   export interface ICostDashboardBillingAccountProps {

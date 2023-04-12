@@ -13,10 +13,31 @@ const initialState = {
   isComplete: false,
   lastUpdated: null,
   currency: null,
-  fetchStatus: null,
   isLoading: true,
   status: null,
   error: null,
+};
+
+const returnId = (accountId) => {
+  /*
+  this regex will return the trailing id from a billingAccountId
+  "..9-05-31/billingProfiles/KODF-MKVG-BG7-PGB" => "KODF-MKVG-BG7-PGB"
+  "c_2019-05-31/billingProfiles/60dffedd-d0cd-40c5-a2bf-783383d52ba6" => "60dffedd-d0cd-40c5-a2bf-783383d52ba6"
+*/
+
+  const regex = /[^/]+$/g;
+  var Id = accountId.match(regex)?.toString();
+  return Id;
+};
+
+const findBillingAccountIndex = (billingAccounts, billingAccountId) => {
+  /* this function will return the array index number for the billing account */
+
+  const index = billingAccounts.findIndex((element) => {
+    return element.id === billingAccountId;
+  });
+
+  return index;
 };
 
 const costDashboardSlice = createSlice({
@@ -27,12 +48,25 @@ const costDashboardSlice = createSlice({
   },
   reducers: {
     addBillingAccount(state, action) {
+      state.count = state.count + 1;
+      var id = '';
+
+      if (action.payload.status === 'Transient') {
+        id = returnId(action.payload.accountId);
+      } else {
+        id = action.payload.id;
+      }
+
+      // action for non-transient
       state.billingAccounts.push({
-        id: action.payload,
+        id: id,
         isLoading: true,
         isError: false,
         error: '',
+        status: '',
       });
+
+      // action for transient accounts
     },
     updateMonthToDateCost(state, action) {
       const payload = action.payload;
@@ -97,21 +131,6 @@ const costDashboardSlice = createSlice({
 
       state.monthlySpend.isLoading = false;
     },
-    updateFetchStatus(state, action) {
-      state.fetchStatus = action.payload;
-    },
-    updateBillingAccountCount(state, action) {
-      state.count = action.payload;
-
-      if (action.payload === 0) {
-        state.fastestGrowing.isLoading = false;
-        state.monthlySpend.isLoading = false;
-        state.mostExpensive.isLoading = false;
-        state.monthToDateCost.isLoading = false;
-        state.fetchStatus = null;
-        state.isComplete = true;
-      }
-    },
     resetCostDashboard() {
       return { ...initialState };
     },
@@ -120,22 +139,20 @@ const costDashboardSlice = createSlice({
     builder
       .addCase(fetchBillingAccountCosts.pending, (state) => {
         state.status = 'loading';
-        state.error = null;
-        state.fetchStatus = `Found ${state.count} billing accounts, fetching data ..`;
       })
       .addCase(fetchBillingAccountCosts.fulfilled, (state, action) => {
-        const billingAccountIndex = state.billingAccounts.findIndex((element) => {
-          return element.id === action.payload.id;
-        });
+        console.log('fetchBillingAccountCosts.fulfilled', action);
+        const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, action.payload.id);
 
         state.currency = action.payload.currency;
 
         state.status = 'success';
         state.updatedCount = state.updatedCount + 1;
-        state.fetchStatus = `Updating dashboard .. ${state.updatedCount} of ${state.count}`;
+
         state.billingAccounts[billingAccountIndex] = action.payload;
         state.billingAccounts[billingAccountIndex].isLoading = false;
         state.billingAccounts[billingAccountIndex].isError = false;
+        state.billingAccounts[billingAccountIndex].status = 'non-transient';
 
         if (state.updatedCount === state.count) {
           state.isComplete = true;
@@ -144,9 +161,7 @@ const costDashboardSlice = createSlice({
         state.lastUpdated = new Date().toLocaleString();
       })
       .addCase(fetchBillingAccountCosts.rejected, (state, action) => {
-        const billingAccountIndex = state.billingAccounts.findIndex((element) => {
-          return element.id === action.meta.arg;
-        });
+        const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, action.meta.arg);
 
         state.billingAccounts[billingAccountIndex].isLoading = false;
         state.billingAccounts[billingAccountIndex].isError = true;
@@ -165,13 +180,24 @@ const costDashboardSlice = createSlice({
         }
       })
       .addCase(fetchTransientBillingAccountCosts.pending, (state) => {
-        console.log('fetchTransientBillingAccountCosts.pending');
+        state.status = 'loading';
       })
       .addCase(fetchTransientBillingAccountCosts.fulfilled, (state, action) => {
-        console.log('fetchTransientBillingAccountCosts.fulfilled');
+        console.log('fetchTransientBillingAccountCosts.fulfilled', action);
+        const Id = returnId(action.payload.billingAccountId);
+
+        const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, Id);
+
+        state.updatedCount = state.updatedCount + 1;
+
+        state.billingAccounts[billingAccountIndex] = action.payload;
+        state.billingAccounts[billingAccountIndex].isLoading = false;
+        state.billingAccounts[billingAccountIndex].isError = false;
+        state.billingAccounts[billingAccountIndex].status = 'transient';
       })
       .addCase(fetchTransientBillingAccountCosts.rejected, (state, action) => {
-        console.log('fetchTransientBillingAccountCosts.rejected');
+        console.log('fetchTransientBillingAccountCosts.rejected', action);
+        state.updatedCount = state.updatedCount + 1;
       });
   },
 });
@@ -181,9 +207,7 @@ export const {
   updateMostExpensiveInstance,
   updateFastestGrowingInstance,
   updateMonthlySpend,
-  updateFetchStatus,
   resetCostDashboard,
-  updateBillingAccountCount,
   addBillingAccount,
 } = costDashboardSlice.actions;
 
