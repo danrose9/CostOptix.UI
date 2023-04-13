@@ -4,8 +4,8 @@ import { Table, Icon, Loader, Card, Popup, Label } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { StandardTooltip } from '../../components/tooltips';
 import * as appRoutes from '../../app/appRoutes';
-import { ICostDashboardBillingAccountProps } from 'cost-dashboard-types';
 import { FailedToLoadBillingAccount } from '../../components/messages';
+import { IBillingAccountCostDashboardProps } from '../../types';
 
 const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;
@@ -16,7 +16,7 @@ const ToolTipData = (instance: { instance: { currency: string } }) => {
   );
 };
 
-export const BillingAccount = ({ billingAccount }: ICostDashboardBillingAccountProps) => {
+export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ billingAccount }) => {
   const navigate = useNavigate();
 
   const provider = billingAccount.provider;

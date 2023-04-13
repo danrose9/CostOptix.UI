@@ -1,6 +1,14 @@
 import { ReactNode } from 'react';
 import { SemanticFLOATS, SemanticSIZES } from 'semantic-ui-react';
 
+export {
+  IBillingAccount,
+  IBillingAccountProps,
+  IBillingAccountCostDashboard,
+  IBillingAccountsCostDashboard,
+  IBillingAccountCostDashboardProps,
+} from './billing-account-types';
+
 export interface IMessageBox {
   title: string;
   message: string;

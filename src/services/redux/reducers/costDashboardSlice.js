@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchBillingAccountCosts, fetchTransientBillingAccountCosts } from '../thunks/costDashboardThunk';
 import { combineSortSliceArray, upsert } from '../../../utils/arrayHelper';
 
@@ -95,7 +95,7 @@ const costDashboardSlice = createSlice({
       state.monthToDateCost.isLoading = false;
     },
     updateMostExpensiveInstance(state, action) {
-      let orderBy = 'amount30day';
+      var orderBy = 'amount30day';
 
       if (action.payload.isCurrencyConflict) {
         orderBy = 'amount30dayConverted';

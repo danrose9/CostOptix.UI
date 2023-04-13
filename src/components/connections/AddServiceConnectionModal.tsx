@@ -1,5 +1,4 @@
 import React, { useState, useContext, Fragment, FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { Modal } from 'semantic-ui-react';
 import { StyledContent } from '../../styles/StyledServiceConnections';
@@ -12,7 +11,6 @@ import ListServiceConnectionModal from './ListServiceConnectionModal';
 
 import { ErrorType } from 'error-types';
 import { IProviderProps } from 'provider-types';
-import { AppDispatch } from '../../services/redux/store';
 import { ModalHeader, ActionButtons } from '../__styles__/StyledModal';
 
 const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {

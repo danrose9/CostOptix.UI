@@ -1,27 +1,30 @@
 import React, { Fragment, useState } from 'react';
-import { Modal, Button, Dropdown, Label, Divider, Table } from 'semantic-ui-react';
+import { Modal, Button, Dropdown, Label, Divider, Table, SemanticCOLORS } from 'semantic-ui-react';
 import { ProviderImage } from '../../ProviderImage';
 import { formatDateFull } from '../../../utils/helper';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import { billingAccountColorType } from '../../../types/shared';
 
 export const ManageServiceConnection = (props: {
   accountName: string;
   provider: string;
   id: string;
   status: string;
-  createdDate: string;
+  createdDate: Date;
   currency: string;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const { status } = props;
 
   const currencySymbol = getSymbolFromCurrency(props.currency);
+  const color = billingAccountColorType[status as keyof typeof billingAccountColorType];
 
   const TableRows = [
     { name: 'Tenant', value: 'My Tenant', extra: <></> },
     {
       name: 'Status',
       value: (
-        <Label size="medium" horizontal color="orange">
+        <Label size="medium" horizontal color={color as SemanticCOLORS}>
           {props.status}
         </Label>
       ),
@@ -72,14 +75,12 @@ export const ManageServiceConnection = (props: {
         </Modal.Content>
         <Modal.Actions>
           <Button
-            negative
             onClick={() => {
               setOpen(false);
             }}
           >
             Cancel
           </Button>
-          <Button>Validate</Button>
         </Modal.Actions>
       </Modal>
     </>

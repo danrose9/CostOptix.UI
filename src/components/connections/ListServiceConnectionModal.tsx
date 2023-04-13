@@ -1,8 +1,5 @@
 import React, { useState, FormEvent, useContext } from 'react';
-import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../services/redux/store';
-import { IRootState } from '../../services/redux/rootReducer';
-import { reduxState } from '../../services/redux/reduxState';
 
 import { Modal, Table, Checkbox, Button, Icon, CheckboxProps, Popup } from 'semantic-ui-react';
 import StandardButton from '../buttons/StandardButton';
@@ -21,7 +18,6 @@ import {
 
 import { ServiceConnectionProviderType } from 'provider-types';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
-import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
 import { resetIsBillingAccountsAvailable } from '../../services/redux/reducers/serviceProvidersSlice';
 
 import { PollingContext } from './ServiceConnection';
@@ -50,10 +46,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
 
   const dispatch = useAppDispatch();
   const setIsPolling = useContext(PollingContext);
-
-  const existingBillingAccounts = useSelector(
-    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
-  );
 
   const [providerData, setProviderData] = useState<AddProviderType>({
     providerAccountId: '',
@@ -163,13 +155,13 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
   // send api request for adding billing accounts
   const handleAddBillingAccounts = async () => {
     setIsAdding(true);
-    var newBillingAccount = {
-      providerAccountId: providerData.providerAccountId,
-      providerName: providerData.providerName,
-      cloudProvider: providerData.cloudProvider,
-      username: providerData.username,
-      password: providerData.password,
-    };
+    // var newBillingAccount = {
+    //   providerAccountId: providerData.providerAccountId,
+    //   providerName: providerData.providerName,
+    //   cloudProvider: providerData.cloudProvider,
+    //   username: providerData.username,
+    //   password: providerData.password,
+    // };
 
     await dispatch(addBillingAccount(providerData));
     setIsAdding(false);
@@ -228,8 +220,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
           <Table.Body>
             <>
               {billingAccounts.map((account: AddBillingAccountType, index) => {
-                const status = 'New';
-                const billingAccountStatus = billingAccountStatusType[status];
                 // const result = existingBillingAccounts.find(
                 //   ({ account }: any) => account.billingAccounId === existingBillingAccounts.accountId
                 // );

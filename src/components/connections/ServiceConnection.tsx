@@ -1,6 +1,6 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import React, { useState, createContext } from 'react';
 import { useInterval } from '../../hooks/useInterval';
-import { Card, Divider, Table, Button } from 'semantic-ui-react';
+import { Card, Divider, Table } from 'semantic-ui-react';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
@@ -10,10 +10,10 @@ import AddServiceConnectionModal from './AddServiceConnectionModal';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
-import { ServiceProviderBillingAccountType } from 'service-provider-types';
 import { ServiceConnectionProviderType } from 'provider-types';
 import { useAppDispatch } from '../../services/redux/store';
-import { disableBillingAccount, fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
+import { fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
+import { IBillingAccount } from '../../types';
 
 export const PollingContext = createContext<any>(false);
 
@@ -22,12 +22,12 @@ const ServiceConnection = () => {
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );
 
-  const [pollingInterval, setPollingInterval] = useState<number>(5000);
+  const [pollingInterval] = useState<number>(5000);
   const [isPolling, setIsPolling] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
-  const startPolling = () => setIsPolling(true);
+  // const startPolling = () => setIsPolling(true);
 
   useInterval(async () => {
     if (isPolling) {
@@ -71,8 +71,8 @@ const ServiceConnection = () => {
                     </Table.Header>
                     <Table.Body>
                       {CustomerConnectedBillingAccounts.filter(
-                        (account: ServiceProviderBillingAccountType) => account.provider === card.provider
-                      ).map((account: ServiceProviderBillingAccountType, index: any) => {
+                        (account: IBillingAccount) => account.provider === card.provider
+                      ).map((account: IBillingAccount, index: any) => {
                         return <ServiceConnectionRow billingAccount={account} key={index} />;
                       })}
                     </Table.Body>

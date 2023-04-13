@@ -1,4 +1,4 @@
-export { default as Home } from './home/HomePage';
+export { default as Home } from './HomePage';
 export { default as AzureBillingDashboard } from './azure-billing/AzureBillingDashboard';
 export { default as CostDashboard } from './cost-dashboard/CostDashboard';
 export { default as Subscriptions } from './Subscriptions';

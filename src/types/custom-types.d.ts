@@ -1,22 +1,3 @@
-declare module 'service-provider-types' {
-  export type ServiceProviderBillingAccountType = {
-    [x: string]: any;
-    accountId: string;
-    accountName: string;
-    createdDate: string;
-    currency: string;
-    id: string;
-    connected: boolean;
-    provider: string;
-    providerId: string;
-    status: string;
-  };
-
-  interface IConnectedBillingAccountProps {
-    billingAccount: ServiceProviderBillingAccountType;
-  }
-}
-
 declare module 'provider-types' {
   export type ServiceConnectionProviderType = {
     vendor: string;
@@ -88,24 +69,4 @@ declare module 'error-types' {
     isError: boolean;
     errorMessage: string;
   };
-}
-
-declare module 'cost-dashboard-types' {
-  export type CostDashboardBillingAccountType = {
-    map: any;
-    filter: any;
-    id: string;
-    accountName: string;
-    provider: string;
-    billingAccountId: string;
-    currency: string;
-    convertedCurrency: string;
-    isLoading: boolean;
-    isError: boolean;
-    status: string;
-  };
-
-  export interface ICostDashboardBillingAccountProps {
-    billingAccount: CostDashboardBillingAccountType;
-  }
 }

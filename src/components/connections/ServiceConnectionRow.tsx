@@ -3,9 +3,9 @@ import { Table, Dropdown, Popup } from 'semantic-ui-react';
 import { formatDateFull } from '../../utils/helper';
 import ServiceConnectionOptions from './ServiceConnectionOptions';
 import { billingAccountStatusType, IBillingAccountStatus } from '../../types/shared';
-import { IConnectedBillingAccountProps } from 'service-provider-types';
+import { IBillingAccountProps } from '../../types';
 
-export const ServiceConnectionRow = ({ billingAccount }: IConnectedBillingAccountProps, index: any) => {
+export const ServiceConnectionRow = ({ billingAccount }: IBillingAccountProps, index: any) => {
   const statusIcon = billingAccountStatusType[billingAccount.status as keyof IBillingAccountStatus];
 
   return (
@@ -23,7 +23,7 @@ export const ServiceConnectionRow = ({ billingAccount }: IConnectedBillingAccoun
             open={false}
           >
             <Dropdown.Menu data-testid="sc-dropdown-options">
-              <ServiceConnectionOptions billingAccounts={billingAccount} />
+              <ServiceConnectionOptions billingAccount={billingAccount} />
             </Dropdown.Menu>
           </Dropdown>
         </Table.Cell>

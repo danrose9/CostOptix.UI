@@ -10,11 +10,11 @@ import {
   HomePageTitle,
   HomePageSubTitle,
   HomePageActions,
-} from '../__styles__/HomePageStyles';
-import { GetStartedModal } from '../../components/modals/GetStartedModal';
-import { Login, LoginDemo } from '../../components/auth/Login';
+} from './__styles__/HomePageStyles';
+import { GetStartedModal } from '../components/modals/GetStartedModal';
+import { Login, LoginDemo } from '../components/auth/Login';
 import { Image, Menu } from 'semantic-ui-react';
-import * as images from '../../assets/index';
+import * as images from '../assets/index';
 
 export const HomePage = () => {
   return (
@@ -33,13 +33,7 @@ export const HomePage = () => {
               <MenuItem name="About Us" />
               <MenuItem name="Legal" /> */}
               <Menu.Item>
-                <Login
-                  disabled={false}
-                  primary={false}
-                  content="Login"
-                  size="big"
-                  color="black"
-                />
+                <Login disabled={false} primary={false} content="Login" size="big" color="black" />
               </Menu.Item>
             </Menu.Menu>
           </Menu>
@@ -51,8 +45,8 @@ export const HomePage = () => {
             </HomePageTitle>
             <HomePageSubTitle>
               <StyledSubHeader>
-                A powerful and insightful software suite to explore, understand
-                and take action on cloud services spending
+                A powerful and insightful software suite to explore, understand and take action on cloud services
+                spending
               </StyledSubHeader>
             </HomePageSubTitle>
             <HomePageActions>
