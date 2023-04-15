@@ -14,15 +14,14 @@ import { StyledIconButton } from '../../styles/StyledDashboardHeader';
 import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../components/messages/index';
 
 import { IRootState } from '../../services/redux/rootReducer';
-import { ICostDashboardBillingAccountProps, CostDashboardBillingAccountType } from 'cost-dashboard-types';
-import { ServiceProviderBillingAccountType } from 'service-provider-types';
+import { IBillingAccount, IBillingAccountsCostDashboard, IBillingAccountCostDashboard } from '../../types';
 import { AppDispatch } from '../../services/redux/store';
 
-const BillingAccounts = ({ billingAccount }: ICostDashboardBillingAccountProps) => {
+const BillingAccounts: React.FC<IBillingAccountsCostDashboard> = ({ billingAccounts }) => {
   return (
     <>
-      {billingAccount.map((account: CostDashboardBillingAccountType, index: any) => {
-        return <BillingAccount key={index} billingAccount={account} />;
+      {billingAccounts.map((billingAccount: IBillingAccountCostDashboard, index: any) => {
+        return <BillingAccount key={index} billingAccount={billingAccount} />;
       })}
     </>
   );
@@ -31,9 +30,7 @@ const BillingAccounts = ({ billingAccount }: ICostDashboardBillingAccountProps) 
 const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
   const dispatch = useDispatch();
 
-  const billingAccounts: CostDashboardBillingAccountType = useSelector(
-    (state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts
-  );
+  const billingAccounts = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts);
 
   const [accountStatus, setAccountStatus] = useState<string>('');
 
@@ -41,7 +38,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].isAvailable
   );
 
-  const { isComplete, refreshData, billingAccountCount, lastUpdated } = useSelector(
+  const { isComplete, billingAccountCount, lastUpdated } = useSelector(
     (state: IRootState) => state[reduxState.COST_DASHBOARD]
   );
 
@@ -91,13 +88,12 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const RenderTable = () => {
     return (
-      <Segment color="green" data-testid="billingAccounts-1">
+      <Segment color="green" data-testid="cost-dashboard-billingAccounts-table">
         <Table selectable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
-              {/* <Table.HeaderCell></Table.HeaderCell>
-              <Table.HeaderCell></Table.HeaderCell> */}
+
               <Table.HeaderCell textAlign="center">
                 <StyledIconButton
                   name="refresh"
@@ -109,7 +105,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>{isLoading ? null : <BillingAccounts billingAccount={billingAccounts} />}</Table.Body>
+          <Table.Body>{isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}</Table.Body>
           <AccountStatusMessage />
         </Table>
         <CurrencyConflict />
@@ -133,12 +129,13 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       // Fetch a list of billing accounts
       setAccountStatus('Searching for billing accounts ..');
       dispatch<AppDispatch>(fetchServiceProviders());
-      dispatch<AppDispatch>(fetchBillingAccounts()).then((response: ServiceProviderBillingAccountType) => {
+      dispatch<AppDispatch>(fetchBillingAccounts()).then((response: { payload: any }) => {
         // const payloadIsCurrencyConflict: boolean = response.payload?.isCurrencyConflict;
 
-        response.payload.billingAccounts
-          .filter((billingAccount: ServiceProviderBillingAccountType) => billingAccount.status !== 'Disabled')
-          .map((billingAccount: ServiceProviderBillingAccountType, index: any) => {
+        response.payload?.billingAccounts
+          .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
+          .map((billingAccount: IBillingAccount, index: any) => {
+            console.log('xxxxx', billingAccount);
             dispatch(addBillingAccount(billingAccount));
             fetchBillingAccountData(billingAccount);
           });
@@ -146,7 +143,8 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         setAccountStatus(lastUpdated);
       });
     }
-  }, [dispatch, isBillingAccountsAvailable, isCurrencyConflict]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isBillingAccountsAvailable, isCurrencyConflict, lastUpdated]);
 
   useEffect(() => {
     isCurrencyConflictCallback(isCurrencyConflict);

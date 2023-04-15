@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Login } from '../auth/Login';
 
 import { render, cleanup } from '@testing-library/react';
@@ -12,7 +11,7 @@ afterEach(cleanup);
 describe('Login Button', () => {
   test('render without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Login></Login>, div);
+    render(<Login></Login>);
   });
 
   test('renders button correctly', () => {

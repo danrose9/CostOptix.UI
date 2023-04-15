@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchBillingAccountCosts, fetchTransientBillingAccountCosts } from '../thunks/costDashboardThunk';
 import { combineSortSliceArray, upsert } from '../../../utils/arrayHelper';
 
@@ -48,11 +48,12 @@ const costDashboardSlice = createSlice({
   },
   reducers: {
     addBillingAccount(state, action) {
+      const { provider, accountName, accountId, status } = action.payload;
       state.count = state.count + 1;
       var id = '';
 
-      if (action.payload.status === 'Transient') {
-        id = returnId(action.payload.accountId);
+      if (status === 'Transient') {
+        id = returnId(accountId);
       } else {
         id = action.payload.id;
       }
@@ -60,6 +61,8 @@ const costDashboardSlice = createSlice({
       // action for non-transient
       state.billingAccounts.push({
         id: id,
+        provider: provider,
+        accountName: accountName,
         isLoading: true,
         isError: false,
         error: '',
@@ -95,7 +98,7 @@ const costDashboardSlice = createSlice({
       state.monthToDateCost.isLoading = false;
     },
     updateMostExpensiveInstance(state, action) {
-      let orderBy = 'amount30day';
+      var orderBy = 'amount30day';
 
       if (action.payload.isCurrencyConflict) {
         orderBy = 'amount30dayConverted';
