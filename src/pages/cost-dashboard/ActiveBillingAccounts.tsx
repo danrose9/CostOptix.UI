@@ -88,13 +88,12 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const RenderTable = () => {
     return (
-      <Segment color="green" data-testid="billingAccounts-1">
+      <Segment color="green" data-testid="cost-dashboard-billingAccounts-table">
         <Table selectable>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
-              {/* <Table.HeaderCell></Table.HeaderCell>
-              <Table.HeaderCell></Table.HeaderCell> */}
+
               <Table.HeaderCell textAlign="center">
                 <StyledIconButton
                   name="refresh"
@@ -133,9 +132,10 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       dispatch<AppDispatch>(fetchBillingAccounts()).then((response: { payload: any }) => {
         // const payloadIsCurrencyConflict: boolean = response.payload?.isCurrencyConflict;
 
-        response.payload.billingAccounts
+        response.payload?.billingAccounts
           .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
           .map((billingAccount: IBillingAccount, index: any) => {
+            console.log('xxxxx', billingAccount);
             dispatch(addBillingAccount(billingAccount));
             fetchBillingAccountData(billingAccount);
           });
