@@ -13,6 +13,12 @@ export const fetchBillingAccountCosts = createAsyncThunk(
   'billingAccount/Costs',
   async (billingAccountId: string, thunkAPI) => {
     return await fetchInstance(`Costs/${billingAccountId}/${BILLING_ACCOUNT_COSTS}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then((data) => {
         thunkAPI.dispatch(updateMonthToDateCost(data));
@@ -36,7 +42,6 @@ export const fetchTransientBillingAccountCosts = createAsyncThunk(
     })
       .then((response) => {
         if (!response.ok) {
-          console.log('xxxx', response);
           throw Error(response.statusText);
         }
         return response;
