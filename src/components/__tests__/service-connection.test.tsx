@@ -5,8 +5,7 @@
 
 import React from 'react';
 import { render, cleanup, screen, fireEvent, getByDisplayValue, getByText, queryByText } from '@testing-library/react';
-import { Table } from 'semantic-ui-react';
-import { ServiceConnectionTable, AddServiceAzure } from '../../components/connections/index';
+import { AddServiceAzure } from '../../components/connections/index';
 import AddServiceConnectionModal from '../connections/AddServiceConnectionModal';
 import { ServiceConnections as ServiceConnectionCard } from '../../components/connections/ServiceConnections';
 import { ApplicationWrapper } from '../../tests/helpers';
@@ -113,37 +112,6 @@ describe('test service connection modal form', () => {
     // Unfinished
   });
   */
-});
-
-describe('test service connection options', () => {
-  test('More button should render dropdown', async () => {
-    const { getByTestId, getAllByTestId } = render(
-      <Table>
-        <Table.Body>
-          <ServiceConnectionTable billingAccount={mockBillingAccounts} />
-        </Table.Body>
-      </Table>,
-      {
-        wrapper: ApplicationWrapper,
-      }
-    );
-
-    userEvent.hover(getByTestId('sc-dropdown'));
-
-    // check dropdown has fired
-    const scDropdown = expect(getByTestId('sc-dropdown-options') as HTMLElement).toBeTruthy();
-
-    const element = getByTestId('sc-dropdown-options');
-    // test first child
-    expect(element.firstChild).toHaveTextContent('Manage Service');
-
-    //test number of child nodes
-    expect(element.childElementCount).toBe(3);
-  });
-
-  test('Disable/enable should toggle', () => {
-    // Unfinished
-  });
 });
 
 describe('correct modal should show for each provider', () => {

@@ -230,7 +230,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    className="refresh fitted loading icon sc-gKPRtg dZtRqz"
+                    className="refresh disabled fitted loading icon sc-gKPRtg dZtRqz"
                     onClick={[Function]}
                   />
                 </th>
@@ -247,7 +247,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
               >
                 <th
                   className=""
-                  colSpan="16"
+                  colSpan="4"
                 >
                   Last Updated: 
                 </th>

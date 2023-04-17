@@ -7,7 +7,6 @@ import {
   updateFastestGrowingInstance,
   updateMonthlySpend,
 } from '../reducers/costDashboardSlice';
-import { IBillingAccountCostDashboard } from '../../../types';
 
 export const fetchBillingAccountCosts = createAsyncThunk(
   'billingAccount/Costs',

@@ -27,9 +27,14 @@ export const DisableServiceConnection = (props: { providerId: string; id: string
   return (
     <>
       {enabled ? (
-        <Dropdown.Item icon="bell slash outline" text="Disable" onClick={handleOnClick} />
+        <Dropdown.Item
+          icon="bell slash outline"
+          text="Disable"
+          onClick={handleOnClick}
+          data-testid="sc-dropdown-disable"
+        />
       ) : (
-        <Dropdown.Item icon="bell outline" text="Enable" onClick={handleOnClick} />
+        <Dropdown.Item icon="bell outline" text="Enable" onClick={handleOnClick} data-testid="sc-dropdown-enable" />
       )}
     </>
   );
