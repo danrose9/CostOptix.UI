@@ -209,7 +209,6 @@ exports[`Cost Dashboard matches snapshot 1`] = `
       >
         <div
           className="ui green segment"
-          data-testid="cost-dashboard-billingAccounts-table"
         >
           <table
             className="ui selectable table"
@@ -231,7 +230,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    className="refresh fitted icon sc-gKPRtg dZtRqz"
+                    className="refresh fitted loading icon sc-gKPRtg dZtRqz"
                     onClick={[Function]}
                   />
                 </th>

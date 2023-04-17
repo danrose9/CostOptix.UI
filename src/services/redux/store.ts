@@ -21,7 +21,8 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'Profile/incrementLoginCount/fulfilled'],
       },
-    }).concat(loggerMiddleware),
+      // }).concat(loggerMiddleware),
+    }),
   enhancers: [monitorReducersEnhancer],
   devTools: process.env.NODE_ENV === 'development',
 });

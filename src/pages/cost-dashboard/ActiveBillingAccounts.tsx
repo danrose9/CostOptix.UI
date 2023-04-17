@@ -44,9 +44,9 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const refreshPage = (payload: any) => {
+  const refreshPage = () => {
     setIsLoading(true);
-    dispatch(resetCostDashboard(payload));
+    dispatch(resetCostDashboard(true));
     dispatch(resetServiceProviders());
   };
 
@@ -56,7 +56,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const LastUpdated = () => {
     return (
-      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="16">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
+      <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="4">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
     );
   };
 
@@ -66,7 +66,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         <Table.Footer fullWidth>
           <Table.Row>
             {accountStatus && !isComplete ? (
-              <Table.HeaderCell colSpan="16">{accountStatus}</Table.HeaderCell>
+              <Table.HeaderCell colSpan="4">{accountStatus}</Table.HeaderCell>
             ) : (
               <LastUpdated />
             )}
@@ -88,7 +88,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const RenderTable = () => {
     return (
-      <Segment color="green" data-testid="cost-dashboard-billingAccounts-table">
+      <Segment color="green">
         <Table selectable>
           <Table.Header>
             <Table.Row>
@@ -98,8 +98,8 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
                 <StyledIconButton
                   name="refresh"
                   onClick={refreshPage}
-                  // loading={!isComplete}
-                  // disabled={!isComplete}
+                  loading={!isComplete}
+                  disabled={!isComplete}
                   fitted
                 />
               </Table.HeaderCell>
@@ -130,12 +130,10 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       setAccountStatus('Searching for billing accounts ..');
       dispatch<AppDispatch>(fetchServiceProviders());
       dispatch<AppDispatch>(fetchBillingAccounts()).then((response: { payload: any }) => {
-        // const payloadIsCurrencyConflict: boolean = response.payload?.isCurrencyConflict;
-
         response.payload?.billingAccounts
           .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
           .map((billingAccount: IBillingAccount, index: any) => {
-            console.log('xxxxx', billingAccount);
+            // console.log('xxxxx', billingAccount);
             dispatch(addBillingAccount(billingAccount));
             fetchBillingAccountData(billingAccount);
           });
