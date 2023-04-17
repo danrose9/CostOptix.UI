@@ -40,6 +40,15 @@ const findBillingAccountIndex = (billingAccounts, billingAccountId) => {
   return index;
 };
 
+const finalState = (state) => {
+  state.isComplete = true;
+  state.monthlySpend.isLoading = false;
+  state.mostExpensive.isLoading = false;
+  state.monthToDateCost.isLoading = false;
+  state.fastestGrowing.isLoading = false;
+  state.refreshData = false;
+};
+
 const costDashboardSlice = createSlice({
   name: 'costDashboard',
   initialState: initialState,
@@ -134,7 +143,7 @@ const costDashboardSlice = createSlice({
 
       state.monthlySpend.isLoading = false;
     },
-    resetCostDashboard() {
+    resetCostDashboard(state, action) {
       return { ...initialState };
     },
   },
@@ -158,7 +167,7 @@ const costDashboardSlice = createSlice({
         state.billingAccounts[billingAccountIndex].status = 'non-transient';
 
         if (state.updatedCount === state.count) {
-          state.isComplete = true;
+          finalState(state);
         }
 
         state.lastUpdated = new Date().toLocaleString();
@@ -174,12 +183,7 @@ const costDashboardSlice = createSlice({
         state.updatedCount = state.updatedCount + 1;
 
         if (state.updatedCount === state.count) {
-          state.isComplete = true;
-          state.monthlySpend.isLoading = false;
-          state.mostExpensive.isLoading = false;
-          state.monthToDateCost.isLoading = false;
-          state.fastestGrowing.isLoading = false;
-          state.refreshData = false;
+          finalState(state);
         }
       })
       .addCase(fetchTransientBillingAccountCosts.pending, (state) => {
@@ -187,20 +191,38 @@ const costDashboardSlice = createSlice({
       })
       .addCase(fetchTransientBillingAccountCosts.fulfilled, (state, action) => {
         console.log('fetchTransientBillingAccountCosts.fulfilled', action);
-        const Id = returnId(action.payload.billingAccountId);
+        const id = returnId(action.payload.billingAccountId);
 
-        const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, Id);
+        const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, id);
 
         state.updatedCount = state.updatedCount + 1;
 
         state.billingAccounts[billingAccountIndex] = action.payload;
+        // state.billingAccounts[billingAccountIndex].id = id;
+        // state.billingAccounts[billingAccountIndex].billingAccountId = action.payload.billingAccountId;
+        // state.billingAccounts[billingAccountIndex].convertedCurrency = action.payload.convertedCurrency;
+        // state.billingAccounts[billingAccountIndex].currency = action.payload.currency;
+
         state.billingAccounts[billingAccountIndex].isLoading = false;
         state.billingAccounts[billingAccountIndex].isError = false;
         state.billingAccounts[billingAccountIndex].status = 'transient';
+
+        if (state.updatedCount === state.count) {
+          finalState(state);
+        }
       })
       .addCase(fetchTransientBillingAccountCosts.rejected, (state, action) => {
         console.log('fetchTransientBillingAccountCosts.rejected', action);
-        state.updatedCount = state.updatedCount + 1;
+        // const id = returnId(action.payload.billingAccountId);
+        // state.billingAccounts[billingAccountIndex].isLoading = false;
+        // state.billingAccounts[billingAccountIndex].isError = true;
+        // state.billingAccounts[billingAccountIndex].error = action.error.message;
+        // const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, id);
+        // state.updatedCount = state.updatedCount + 1;
+
+        // if (state.updatedCount === state.count) {
+        //   finalState(state);
+        // }
       });
   },
 });

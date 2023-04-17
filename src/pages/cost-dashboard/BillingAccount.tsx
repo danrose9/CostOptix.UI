@@ -19,7 +19,7 @@ const ToolTipData = (instance: { instance: { currency: string } }) => {
 export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ billingAccount }) => {
   const navigate = useNavigate();
 
-  const provider = billingAccount.provider;
+  const { provider, accountName, status, isLoading, isError } = billingAccount;
 
   const LoadingIndicator = () => {
     if (billingAccount.isError) {
@@ -32,7 +32,7 @@ export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ bi
   };
 
   const BillingAccountLabel = () => {
-    if (billingAccount.status === 'transient') {
+    if (status === 'transient') {
       return <Label color="blue">Transient</Label>;
     } else return null;
   };
@@ -43,7 +43,7 @@ export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ bi
         trigger={
           <Table.Row
             style={{ cursor: 'pointer' }}
-            disabled={billingAccount.isLoading}
+            disabled={isLoading}
             data-testid="billingAccounts-2"
             onClick={() => {
               navigate(appRoutes.SERVICE_PROVIDERS);
@@ -53,7 +53,7 @@ export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ bi
               <ProviderImage provider={provider} size="mini" />
             </Table.Cell>
 
-            <Table.Cell width={8}>{billingAccount.accountName}</Table.Cell>
+            <Table.Cell width={8}>{accountName}</Table.Cell>
             <Table.Cell width={6}>
               <BillingAccountLabel />
             </Table.Cell>
@@ -65,7 +65,7 @@ export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ bi
         }
         content={
           <StandardTooltip instance={billingAccount}>
-            {billingAccount.isError ? <FailedToLoadBillingAccount size="mini" /> : null}
+            {isError ? <FailedToLoadBillingAccount size="mini" /> : null}
             <ToolTipData instance={billingAccount} />
           </StandardTooltip>
         }

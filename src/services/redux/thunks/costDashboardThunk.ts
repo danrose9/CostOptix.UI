@@ -12,6 +12,12 @@ export const fetchBillingAccountCosts = createAsyncThunk(
   'billingAccount/Costs',
   async (billingAccountId: string, thunkAPI) => {
     return await fetchInstance(`Costs/${billingAccountId}/${BILLING_ACCOUNT_COSTS}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then((data) => {
         thunkAPI.dispatch(updateMonthToDateCost(data));
@@ -27,11 +33,18 @@ export const fetchBillingAccountCosts = createAsyncThunk(
 export const fetchTransientBillingAccountCosts = createAsyncThunk(
   'transientBillingAccount/Costs',
   async (billingAccountId: string, thunkAPI) => {
+    // try {
     return await fetchInstance(`Costs/${TRANSIENT_BILLING_ACCOUNT_COSTS}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ billingAccountId: billingAccountId }),
     })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
       .then((response) => response.json())
       .then((data) => {
         thunkAPI.dispatch(updateMonthToDateCost(data));
@@ -41,5 +54,10 @@ export const fetchTransientBillingAccountCosts = createAsyncThunk(
 
         return data;
       });
+    // } catch (error: any) {
+    //   console.log('xxxx', error);
+    //   const { rejectWithValue } = thunkAPI;
+    //   return rejectWithValue(error.response.data);
+    // }
   }
 );

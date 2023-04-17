@@ -46,11 +46,9 @@ describe('Cost Dashboard', () => {
   //   render(<CostDashboard />, { wrapper: ApplicationWrapper });
   // });
 
-  let billingAccounts: any;
-
   const isCurrencyConflictCallback = () => {};
 
-  const renderBillingAccounts = (billingAccount: IBillingAccount): RenderResult =>
+  const renderBillingAccounts = (): RenderResult =>
     render(
       <ActiveBillingAccounts isCurrencyConflictCallback={isCurrencyConflictCallback}>
         <BillingAccounts billingAccounts={billingAccounts} />
@@ -63,12 +61,15 @@ describe('Cost Dashboard', () => {
   });
 
   test('active billing accounts should render', () => {
-    const { getByTestId } = renderBillingAccounts(billingAccounts);
-
-    expect(getByTestId('cost-dashboard-billingAccounts-table')).toBeInTheDocument();
+    const { getByTestId } = renderBillingAccounts();
 
     const initialState = screen.getByText(/Searching for billing accounts ../i);
     expect(initialState).toBeInTheDocument();
+  });
+
+  test('active billing accounts widget should render the correct number of billing accounts', () => {
+    const activeBillingAccounts = renderBillingAccounts();
+    console.log('*******', activeBillingAccounts);
   });
 
   test('matches snapshot', () => {

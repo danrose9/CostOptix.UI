@@ -4,7 +4,7 @@ import { Card, Divider, Table } from 'semantic-ui-react';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
-import ServiceConnectionRow from './ServiceConnectionRow';
+import { ServiceConnectionRow } from './index';
 import { ProviderImage } from '../ProviderImage';
 import AddServiceConnectionModal from './AddServiceConnectionModal';
 import { useSelector } from 'react-redux';
@@ -26,8 +26,6 @@ const ServiceConnection = () => {
   const [isPolling, setIsPolling] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
-
-  // const startPolling = () => setIsPolling(true);
 
   useInterval(async () => {
     if (isPolling) {
@@ -71,16 +69,15 @@ const ServiceConnection = () => {
                     </Table.Header>
                     <Table.Body>
                       {CustomerConnectedBillingAccounts.filter(
-                        (account: IBillingAccount) => account.provider === card.provider
-                      ).map((account: IBillingAccount, index: any) => {
-                        return <ServiceConnectionRow billingAccount={account} key={index} />;
+                        (billingAccount: IBillingAccount) => billingAccount.provider === card.provider
+                      ).map((billingAccount: IBillingAccount, index: any) => {
+                        return <ServiceConnectionRow billingAccount={billingAccount} key={index} />;
                       })}
                     </Table.Body>
                   </Table>
                 </Card.Content>
                 <Card.Content extra>
                   <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType} />
-                  {/* <Button onClick={() => setIsPolling(!isPolling)}>Poll</Button> */}
                 </Card.Content>
               </Card>
             );

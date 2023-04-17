@@ -4,19 +4,13 @@ import { ProviderImage } from '../../ProviderImage';
 import { formatDateFull } from '../../../utils/helper';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { billingAccountColorType } from '../../../types/shared';
+import { IBillingAccountProps } from '../../../types';
 
-export const ManageServiceConnection = (props: {
-  accountName: string;
-  provider: string;
-  id: string;
-  status: string;
-  createdDate: Date;
-  currency: string;
-}) => {
+export const ManageServiceConnection = ({ billingAccount }: IBillingAccountProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const { status } = props;
+  const { status, currency, createdDate, provider, accountName, id, statusReason } = billingAccount;
 
-  const currencySymbol = getSymbolFromCurrency(props.currency);
+  const currencySymbol = getSymbolFromCurrency(currency);
   const color = billingAccountColorType[status as keyof typeof billingAccountColorType];
 
   const TableRows = [
@@ -24,18 +18,20 @@ export const ManageServiceConnection = (props: {
     {
       name: 'Status',
       value: (
-        <Label size="medium" horizontal color={color as SemanticCOLORS}>
-          {props.status}
-        </Label>
+        <>
+          <Label size="medium" horizontal color={color as SemanticCOLORS}>
+            {status}
+          </Label>
+        </>
       ),
-      extra: <StatusExtra />,
+      extra: <>{statusReason}</>,
     },
-    { name: 'Created', value: <Fragment>{formatDateFull(props.createdDate)}</Fragment>, extra: <></> },
+    { name: 'Created', value: <Fragment>{formatDateFull(createdDate)}</Fragment>, extra: <></> },
     {
       name: 'Default Currency',
       value: (
         <Fragment>
-          {props.currency} ({currencySymbol})
+          {currency} ({currencySymbol})
         </Fragment>
       ),
       extra: <></>,
@@ -52,20 +48,20 @@ export const ManageServiceConnection = (props: {
       >
         <Modal.Header>Manage Service Connection</Modal.Header>
         <Modal.Content style={{ padding: '1em' }}>
-          <ProviderImage provider={props.provider} size="tiny" floated="left" />
+          <ProviderImage provider={provider} size="tiny" floated="left" />
           <div>
-            <h2 style={{ margin: '0.5rem' }}>{props.accountName}</h2>
+            <h2 style={{ margin: '0.5rem' }}>{accountName}</h2>
 
-            <div>{props.id}</div>
+            <div>{id}</div>
             <Divider />
             <Table fixed>
               <Table.Body>
                 {TableRows.map((row, index) => {
                   return (
                     <Table.Row key={index}>
-                      <Table.Cell width={5}>{row.name}</Table.Cell>
-                      <Table.Cell width={5}>{row.value}</Table.Cell>
-                      <Table.Cell width={4}>{row.extra}</Table.Cell>
+                      <Table.Cell width={6}>{row.name}</Table.Cell>
+                      <Table.Cell width={4}>{row.value}</Table.Cell>
+                      <Table.Cell width={6}>{row.extra}</Table.Cell>
                     </Table.Row>
                   );
                 })}
@@ -85,10 +81,6 @@ export const ManageServiceConnection = (props: {
       </Modal>
     </>
   );
-};
-
-const StatusExtra = () => {
-  return <></>;
 };
 
 export default ManageServiceConnection;
