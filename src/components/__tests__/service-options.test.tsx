@@ -4,12 +4,11 @@
  */
 
 import React from 'react';
-import { render, cleanup, screen, fireEvent, getByDisplayValue, getByText, queryByText } from '@testing-library/react';
+import { render, cleanup, screen } from '@testing-library/react';
 import { Table } from 'semantic-ui-react';
 import { ServiceConnectionRow } from '../../components/connections/index';
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
-import { IBillingAccount } from '../../types';
 
 const RenderServiceConnectionRows = (CustomerConnectedBillingAccounts: any[]) => {
   return render(
@@ -137,7 +136,7 @@ describe('test service connection options', () => {
         id: '755c2753-f2c1-45c0-db70-08db055424dd',
         provider: 'Azure',
         providerId: 'c53e746d-2278-436f-d58e-08db05542036',
-        status: 'Disabled',
+        status: 'Enabled',
         statusReason: null,
       },
       {
