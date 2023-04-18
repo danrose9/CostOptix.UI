@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Modal, Button, Dropdown, Label, Divider, Table, SemanticCOLORS } from 'semantic-ui-react';
+import { Modal, Button, Dropdown, Label, Divider, Table, SemanticCOLORS, Header } from 'semantic-ui-react';
 import { ProviderImage } from '../../ProviderImage';
 import { formatDateFull } from '../../../utils/helper';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { billingAccountColorType } from '../../../types/shared';
 import { IBillingAccountProps } from '../../../types';
+import { HeaderContent, HeaderInformation, HeaderName, AccountName, AccountId } from '../../__styles__/StyledModal';
 
 export const ManageServiceConnection = ({ billingAccount }: IBillingAccountProps) => {
   const [open, setOpen] = useState<boolean>(false);
@@ -47,27 +48,30 @@ export const ManageServiceConnection = ({ billingAccount }: IBillingAccountProps
         size="small"
       >
         <Modal.Header>Manage Service Connection</Modal.Header>
-        <Modal.Content style={{ padding: '1em' }}>
-          <ProviderImage provider={provider} size="tiny" floated="left" />
-          <div>
-            <h2 style={{ margin: '0.5rem' }}>{accountName}</h2>
+        <HeaderContent>
+          <HeaderInformation>
+            <ProviderImage provider={provider} size="tiny" floated="left" />
+            <HeaderName>
+              <AccountName>{accountName}</AccountName>
 
-            <div>{id}</div>
-            <Divider />
-            <Table fixed>
-              <Table.Body>
-                {TableRows.map((row, index) => {
-                  return (
-                    <Table.Row key={index}>
-                      <Table.Cell width={6}>{row.name}</Table.Cell>
-                      <Table.Cell width={4}>{row.value}</Table.Cell>
-                      <Table.Cell width={6}>{row.extra}</Table.Cell>
-                    </Table.Row>
-                  );
-                })}
-              </Table.Body>
-            </Table>
-          </div>
+              <AccountId>{id}</AccountId>
+            </HeaderName>
+          </HeaderInformation>
+        </HeaderContent>
+        <Modal.Content>
+          <Table fixed>
+            <Table.Body>
+              {TableRows.map((row, index) => {
+                return (
+                  <Table.Row key={index}>
+                    <Table.Cell width={6}>{row.name}</Table.Cell>
+                    <Table.Cell width={4}>{row.value}</Table.Cell>
+                    <Table.Cell width={6}>{row.extra}</Table.Cell>
+                  </Table.Row>
+                );
+              })}
+            </Table.Body>
+          </Table>
         </Modal.Content>
         <Modal.Actions>
           <Button
