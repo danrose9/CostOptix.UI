@@ -49,16 +49,16 @@ export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ bi
               navigate(appRoutes.SERVICE_PROVIDERS);
             }}
           >
-            <Table.Cell width={1}>
+            <Table.Cell collapsing>
               <ProviderImage provider={provider} size="mini" />
             </Table.Cell>
 
-            <Table.Cell width={8}>{accountName}</Table.Cell>
-            <Table.Cell width={6}>
+            <Table.Cell>{accountName}</Table.Cell>
+            <Table.Cell>
               <BillingAccountLabel />
             </Table.Cell>
 
-            <Table.Cell width={1} textAlign="center" data-testid="billingAccounts-3">
+            <Table.Cell textAlign="center" data-testid="billingAccounts-3" collapsing>
               <LoadingIndicator />
             </Table.Cell>
           </Table.Row>

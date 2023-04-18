@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Segment } from 'semantic-ui-react';
+import { Table, Segment, TableHeaderCell } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchServiceProviders, fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
 import { reduxState } from '../../services/redux/reduxState';
@@ -90,11 +90,10 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     return (
       <Segment color="green">
         <Table selectable>
-          <Table.Header>
+          <Table.Header fullWidth>
             <Table.Row>
               <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
-
-              <Table.HeaderCell textAlign="center">
+              <Table.HeaderCell textAlign="center" width={2}>
                 <StyledIconButton
                   name="refresh"
                   onClick={refreshPage}
@@ -105,9 +104,12 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>{isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}</Table.Body>
+          <Table.Body style={{ height: '30px' }}>
+            {isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}
+          </Table.Body>
           <AccountStatusMessage />
         </Table>
+
         <CurrencyConflict />
         <NoBillingAccounts />
       </Segment>
