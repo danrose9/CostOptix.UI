@@ -17,7 +17,11 @@ import { IBillingAccount } from '../../types';
 
 export const PollingContext = createContext<any>(false);
 
-const ServiceConnection = () => {
+type ContainerProps = {
+  children: React.ReactNode;
+};
+
+const ServiceConnection = (props: ContainerProps) => {
   const CustomerConnectedBillingAccounts = useSelector(
     (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].billingAccounts
   );

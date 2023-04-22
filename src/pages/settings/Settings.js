@@ -2,12 +2,13 @@ import React from 'react';
 import { PageContent } from '../__styles__/DefaultPageStyles';
 import { Tab } from 'semantic-ui-react';
 
-import { ApplicationSettings, ChangeLog, Profile, Users } from './index';
+import { ApplicationSettings, ChangeLog, Profile, Users, Organizations } from './index';
 
 const panes = [
   { menuItem: 'Profile', render: () => <Profile /> },
   { menuItem: 'Application', render: () => <ApplicationSettings /> },
   { menuItem: 'Users', render: () => <Users /> },
+  { menuItem: 'Organizations', render: () => <Organizations /> },
   { menuItem: 'Change Log', render: () => <ChangeLog /> },
 ];
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import ServiceConnection from '../components/connections/ServiceConnection';
 
-const ConnectionPage = () => {
+const ServiceConnectionPage = () => {
   return <ServiceConnection />;
 };
 
-export default ConnectionPage;
+export default ServiceConnectionPage;
