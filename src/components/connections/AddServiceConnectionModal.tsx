@@ -12,7 +12,6 @@ import ListServiceConnectionModal from './ListServiceConnectionModal';
 import { ErrorType } from 'error-types';
 import { IProviderProps } from 'provider-types';
 import { ModalHeader, ActionButtons } from '../__styles__/StyledModal';
-// import { AddServiceAzure, AddServiceAWS, AddServiceSalesForce } from './index';
 import AddServiceAzure from './providers/AddServiceAzure';
 import AddServiceAWS from './providers/AddServiceAWS';
 

@@ -3,7 +3,7 @@
  * ALL RIGHTS RESERVED
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Card } from 'semantic-ui-react';
 import { render, cleanup, screen, fireEvent, getByDisplayValue, getByText, queryByText } from '@testing-library/react';
 import { AddServiceAzure } from '../../components/connections/index';
@@ -89,106 +89,117 @@ describe('page should render with billing accounts', () => {
   });
 });
 
-// describe('test service connection modal form', () => {
-//   const user = userEvent.setup();
-//   const card = ServiceConnectionCard[1];
+describe('test service connection modal form', () => {
+  const user = userEvent.setup();
+  const card = ServiceConnectionCard[1];
 
-//   beforeEach(() => {
-//     render(
-//       <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}>
-//         <AddServiceAzure />
-//       </AddServiceConnectionModal>,
-//       { wrapper: ApplicationWrapper }
-//     );
-//   });
+  const updateFormData = (formData: any) => {};
 
-// test('should render initial modal and close modal', () => {
-//   const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
-//   // Check button is in dom
-//   expect(addNewButton).toBeInTheDocument();
-//   fireEvent.click(addNewButton);
+  beforeEach(() => {
+    render(
+      <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}>
+        <AddServiceAzure />
+      </AddServiceConnectionModal>,
+      { wrapper: ApplicationWrapper }
+    );
+  });
 
-//   // Check 'Close' button is in dom
-//   const closeButton = screen.getByRole('button', { name: 'Close' });
-//   const continueButton = screen.getByRole('button', { name: 'Continue' });
+  test('should render initial modal and close modal', () => {
+    const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
+    // Check button is in dom
+    expect(addNewButton).toBeInTheDocument();
+    fireEvent.click(addNewButton);
 
-//   // Check buttons render
-//   expect(closeButton).toBeInTheDocument();
-//   expect(continueButton).toBeInTheDocument();
-//   expect(continueButton).toBeDisabled();
+    // Check 'Close' button is in dom
+    const closeButton = screen.getByRole('button', { name: 'Close' });
+    const continueButton = screen.getByRole('button', { name: 'Continue' });
 
-//   fireEvent.click(closeButton);
-//   expect(continueButton).not.toBeInTheDocument();
-// });
+    // Check buttons render
+    expect(closeButton).toBeInTheDocument();
+    expect(continueButton).toBeInTheDocument();
+    expect(continueButton).toBeDisabled();
 
-// test('Azure service connection form accepts input and is valid', () => {
-//   const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
-//   fireEvent.click(addNewButton);
+    fireEvent.click(closeButton);
+    expect(continueButton).not.toBeInTheDocument();
+  });
 
-//   const applicationId = screen.getByRole('textbox', { name: /applicationId/i });
-//   const secretValue = screen.getByRole('textbox', { name: /secretValue/i });
-//   const directoryId = screen.getByRole('textbox', { name: /directoryId/i });
+  test('Azure service connection form accepts input and is valid', () => {
+    const addNewButton = screen.getByRole('button', { name: 'Add new connection' });
+    fireEvent.click(addNewButton);
 
-//   expect(applicationId).toBeInTheDocument();
-//   expect(secretValue).toBeInTheDocument();
-//   expect(directoryId).toBeInTheDocument();
+    const applicationId = screen.getByRole('textbox', { name: /applicationId/i });
+    const secretValue = screen.getByRole('textbox', { name: /secretValue/i });
+    const directoryId = screen.getByRole('textbox', { name: /directoryId/i });
 
-//   fireEvent.change(applicationId, { target: { value: '123' } });
-// });
+    expect(applicationId).toBeInTheDocument();
+    expect(secretValue).toBeInTheDocument();
+    expect(directoryId).toBeInTheDocument();
 
-// 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
-// var providerArray = [1, 2];
+    fireEvent.change(applicationId, { target: { value: '123' } });
+  });
 
-// providerArray.forEach((n) => {
-//   const card = ServiceConnectionCard[n];
+  // 0 - {Office 365}, 1 - {Azure}, 2 - {AWS}, 3 - {SalesForce}, 4 - {Google}
+  var providerArray = [1, 2];
 
-// test('the modal showing for ' + card.provider + ', is for the ' + card.provider + ' card', async () => {
-//   render(
-//     <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>,
-//     { wrapper: ApplicationWrapper }
-//   );
-//   fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+  const RenderServiceConnectionModal = (card: any) => {
+    return render(
+      <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>,
+      { wrapper: ApplicationWrapper }
+    );
+  };
 
-//   expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${card.provider} account`);
-// });
+  providerArray.forEach((n) => {
+    const card = ServiceConnectionCard[n];
 
-// test('href links should work', () => {
-//   render(
-//     <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType}></AddServiceConnectionModal>,
-//     { wrapper: ApplicationWrapper }
-//   );
-//   fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-//   expect(screen.getByRole('link', { name: card.href })).toHaveAttribute('href', card.href);
-// });
-// });
+    test('the modal showing for ' + card.provider + ', is for the ' + card.provider + ' card', async () => {
+      RenderServiceConnectionModal(card);
 
-// test('Continue button should be enabled on valid fill', () => {});
-/*
+      const AddNewButton = screen.getAllByRole('button', { name: 'Add new connection' });
+
+      fireEvent.click(AddNewButton[n - 1]);
+
+      expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${card.provider} account`);
+    });
+
+    test('href links should work', () => {
+      RenderServiceConnectionModal(card);
+
+      const AddNewButton = screen.getAllByRole('button', { name: 'Add new connection' });
+
+      fireEvent.click(AddNewButton[n - 1]);
+
+      expect(screen.getByRole('link', { name: card.href })).toHaveAttribute('href', card.href);
+    });
+  });
+
+  // test('cancel button clears selection array', () => {
+  //   RenderServiceConnectionModal(card);
+  //   fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+  //   fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
+  //   const secondModal = screen.getByTestId('second-modal');
+  // });
+
+  test('Continue button should be enabled on valid fill', () => {});
+  /*
   test('Continue button should be disabled on invalid form', () => {
-    // Unfinished
+    Unfinished
   });
 
   test('Continue button should remove all errors on click', () => {
-    // Unfinished
+    Unfinished
   });
 
   test('Manage modal should render and close', () => {
-    // Unfinished
+    Unfinished
   });
   */
-// });
+});
 
 // describe('billing account selection modal', () => {
 //   test('test all elements are selected when select all is checked', () => {
-//     Unfinished
+//     // Unfinished
 //   });
 //   test('test all elements are selected when select all is unchecked', () => {
-//     Unfinished
-//   });
-//   test('cancel button clears selection array', () => {
-//     render(<AddServiceConnectionModal provider={ServiceConnectionCard[0]}></AddServiceConnectionModal>);
-//     fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
-//     fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
-//     const secondModal = screen.getByTestId('second-modal');
+//     // Unfinished
 //   });
 // });
