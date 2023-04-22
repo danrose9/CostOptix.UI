@@ -2,7 +2,7 @@ export { default as Home } from './HomePage';
 export { default as CostDashboard } from './cost-dashboard/CostDashboard';
 export { default as Subscriptions } from './Subscriptions';
 export { default as Settings } from './settings/Settings';
-export { default as ConnectionPage } from './ConnectionPage';
+export { default as ServiceConnectionPage } from './ServiceConnectionPage';
 export { default as Components } from './Components';
 export { default as Signup } from '../components/auth/Signup';
 export { default as InitializeApp } from '../app/InitializeApp';
