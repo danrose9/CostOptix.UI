@@ -214,7 +214,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
             className="ui selectable table"
           >
             <thead
-              className=""
+              className="full-width"
             >
               <tr
                 className=""
@@ -226,7 +226,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                   Active Billing Accounts
                 </th>
                 <th
-                  className="center aligned"
+                  className="center aligned two wide"
                 >
                   <i
                     aria-hidden="true"
@@ -238,6 +238,11 @@ exports[`Cost Dashboard matches snapshot 1`] = `
             </thead>
             <tbody
               className=""
+              style={
+                Object {
+                  "height": "30px",
+                }
+              }
             />
             <tfoot
               className="full-width"
