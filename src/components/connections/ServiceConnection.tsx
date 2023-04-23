@@ -4,7 +4,7 @@ import { Card, Divider, Table } from 'semantic-ui-react';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { PageTitle } from '../PageTitle';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
-import { ServiceConnectionRow } from './index';
+import ServiceConnectionRow from './ServiceConnectionRow';
 import { ProviderImage } from '../ProviderImage';
 import AddServiceConnectionModal from './AddServiceConnectionModal';
 import { useSelector } from 'react-redux';
