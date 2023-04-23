@@ -174,7 +174,9 @@ describe('test service connection modal form', () => {
 
   // test('cancel button clears selection array', () => {
   //   RenderServiceConnectionModal(card);
-  //   fireEvent.click(screen.getByRole('button', { name: 'Add new connection' }));
+  //   const AddNewButton = screen.getAllByRole('button', { name: 'Add new connection' });
+
+  //   fireEvent.click(AddNewButton[0]);
   //   fireEvent.click(screen.getByRole('button', { name: 'Continue' }));
   //   const secondModal = screen.getByTestId('second-modal');
   // });

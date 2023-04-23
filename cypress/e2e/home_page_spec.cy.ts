@@ -1,8 +1,8 @@
 describe('The Home Page', () => {
   it('successfully loads', () => {
+    cy.viewport(1920, 1080);
     cy.visit('/');
 
-    cy.contains('View Demo').click();
-    cy.url().should('include', 'Demo Organization');
+    cy.url().should('include', '/home');
   });
 });
