@@ -1,21 +1,12 @@
-pr:
-  - develop
-
-pool:
-  vmImage: ubuntu-latest
+trigger: none
 
 stages:
   - stage: BuildAndTestStageDev
     displayName: Build and Test Dev
-    condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
       - job: BuildAndTestJob
         displayName: Build and Test
         steps:
-          - script: |
-              npm install
-              npm run build-dev
-            displayName: npm install, build
           - script: |
               npm run test
             displayName: 'Test'
