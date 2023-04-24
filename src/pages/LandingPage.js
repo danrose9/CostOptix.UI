@@ -102,7 +102,7 @@ const LandingPage = () => {
       <Grid columns={1}>
         <Grid.Column>
           <StyledModal closeOnEscape={false} closeOnDimmerClick={false} open={isOpen} size="large">
-            <Modal.Header class="modal-dialog">Welcome to CostOptix</Modal.Header>
+            <Modal.Header className="modal-dialog">Welcome to CostOptix</Modal.Header>
             <Border>
               <Segment placeholder>
                 <Grid columns={2} stackable textAlign="center">

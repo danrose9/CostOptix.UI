@@ -6,9 +6,7 @@ import * as appRoutes from '../app/appRoutes';
 import { useNavigate } from 'react-router-dom';
 
 export const OrganizationName = () => {
-  const organizationName = useSelector(
-    (state) => state[reduxState.USER_PROFILE].organization.name
-  );
+  const organizationName = useSelector((state) => state[reduxState.USER_PROFILE].organization.name);
 
   const navigate = useNavigate();
 
@@ -17,7 +15,7 @@ export const OrganizationName = () => {
   };
 
   return (
-    <StyledOrganizationName onClick={() => handleClick()}>
+    <StyledOrganizationName onClick={() => handleClick()} data-testid="sidebar-organizationName">
       {organizationName}
     </StyledOrganizationName>
   );
