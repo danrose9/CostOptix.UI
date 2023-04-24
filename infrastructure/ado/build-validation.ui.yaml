@@ -1,5 +1,8 @@
 trigger: none
 
+pool:
+  vmImage: ubuntu-latest
+
 stages:
   - stage: BuildAndTestStageDev
     displayName: Build and Test Dev
@@ -7,6 +10,10 @@ stages:
       - job: BuildAndTestJob
         displayName: Build and Test
         steps:
+          - script: |
+              npm install
+              npm run build-dev
+            displayName: npm install, build
           - script: |
               npm run test
             displayName: 'Test'
