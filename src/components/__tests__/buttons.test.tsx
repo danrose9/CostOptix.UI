@@ -11,7 +11,7 @@ describe('Buttons', () => {
   test('standard button should work correctly', () => {
     render(<StandardButton disabled={true} label="Standard Button" positive={true} />);
 
-    const standardButton = screen.getByRole('button', { name: /standard button/i });
+    const standardButton = screen.getByRole('button', { name: /standard buttonx/i });
 
     expect(standardButton).toBeDisabled();
     expect(standardButton).toBeInTheDocument();
