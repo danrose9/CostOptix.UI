@@ -6,7 +6,7 @@ import { reduxState } from '../../services/redux/reduxState';
 import { PageTitle } from '../../components/PageTitle';
 import { Grid, Divider } from 'semantic-ui-react';
 import * as Widget from './index';
-import { PageContent, PageContainer } from '../__styles__/DefaultPageStyles';
+import { PageContent } from '../__styles__/DefaultPageStyles';
 
 import { ApplicationContext } from '../../app/ApplicationContext';
 import getSymbolFromCurrency from 'currency-symbol-map';
