@@ -109,7 +109,7 @@ export const AddServiceAWS: React.FC<IProviderFormProps> = ({ DisableButtonOnInv
         </Form.Field>
         <Form.Group widths="equal">
           <Form.Input placeholder="Access key" required name="applicationId" onChange={handleChange} />
-          <Form.Input placeholder="Secret value" required name="secretValue" onChange={handleChange} />
+          <Form.Input type="password" placeholder="Secret value" required name="secretValue" onChange={handleChange} />
         </Form.Group>
         <Form.Field>
           19. Once completed click the <b>Continue</b> button below
