@@ -192,16 +192,33 @@ const costDashboardSlice = createSlice({
       .addCase(fetchTransientBillingAccountCosts.fulfilled, (state, action) => {
         console.log('fetchTransientBillingAccountCosts.fulfilled', action);
         const id = returnId(action.payload.billingAccountId);
+        const {
+          billingAccountId,
+          convertedCurrency,
+          currency,
+          monthToDateCost,
+          monthToDateCostConverted,
+          monthlySpend,
+          mostExpensive,
+          provider,
+        } = action.payload;
 
         const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, id);
 
         state.updatedCount = state.updatedCount + 1;
 
-        state.billingAccounts[billingAccountIndex] = action.payload;
-        // state.billingAccounts[billingAccountIndex].id = id;
-        // state.billingAccounts[billingAccountIndex].billingAccountId = action.payload.billingAccountId;
-        // state.billingAccounts[billingAccountIndex].convertedCurrency = action.payload.convertedCurrency;
-        // state.billingAccounts[billingAccountIndex].currency = action.payload.currency;
+        // state.billingAccounts[billingAccountIndex] = action.payload;
+
+        // temporay as accountName not returned for transient connections and so it's overwritten
+        state.billingAccounts[billingAccountIndex].id = id;
+        state.billingAccounts[billingAccountIndex].billingAccountId = billingAccountId;
+        state.billingAccounts[billingAccountIndex].convertedCurrency = convertedCurrency;
+        state.billingAccounts[billingAccountIndex].monthToDateCost = monthToDateCost;
+        state.billingAccounts[billingAccountIndex].monthToDateCostConverted = monthToDateCostConverted;
+        state.billingAccounts[billingAccountIndex].monthlySpend = monthlySpend;
+        state.billingAccounts[billingAccountIndex].mostExpensive = mostExpensive;
+        state.billingAccounts[billingAccountIndex].currency = currency;
+        state.billingAccounts[billingAccountIndex].provider = provider;
 
         state.billingAccounts[billingAccountIndex].isLoading = false;
         state.billingAccounts[billingAccountIndex].isError = false;

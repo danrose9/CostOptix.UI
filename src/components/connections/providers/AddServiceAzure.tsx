@@ -114,6 +114,7 @@ export const AddServiceAzure: React.FC<IProviderFormProps> = ({ DisableButtonOnI
             <Form.Field>
               11. Copy the <i>Value</i> into the box below.
               <Input
+                type="password"
                 placeholder="Secret Value"
                 required
                 name="secretValue"
