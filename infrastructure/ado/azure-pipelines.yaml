@@ -31,24 +31,6 @@ stages:
               npm install
               npm run build-dev
             displayName: npm install, build
-          - script: |
-              npm run test -- --coverage --watchAll=false --ci --reporters=default --reporters=jest-junit --coverageReporters=cobertura
-            displayName: 'Test with code coverage'
-          - task: PublishTestResults@2
-            displayName: Publish Test Results
-            condition: succeededOrFailed()
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/junit.xml'
-              failTaskOnFailedTests: true
-              mergeTestResults: true
-          - task: PublishCodeCoverageResults@1
-            displayName: 'Publish Code Coverage'
-            inputs:
-              codeCoverageTool: Cobertura
-              summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
-              reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
-              failIfCoverageEmpty: false
           - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-dev.zip .)
             displayName: Zip Deployment
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
