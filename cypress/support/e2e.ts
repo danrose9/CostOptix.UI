@@ -22,6 +22,8 @@ import './commands';
 // cypress/support/e2e.ts
 
 function loginViaAAD(username: string, password: string) {
+  const baseUrl = Cypress.config('baseUrl');
+
   cy.visit('/');
 
   cy.contains('Login').click();
@@ -61,7 +63,7 @@ function loginViaAAD(username: string, password: string) {
 
   // Ensure Microsoft has redirected us back to the sample app with our logged in user.
 
-  cy.url().should('equal', 'http://localhost:3000/lp').wait(1000);
+  cy.url().should('equal', `${baseUrl}/lp`).wait(1000);
 
   cy.contains('button', 'Continue').should('be.enabled').click();
 }

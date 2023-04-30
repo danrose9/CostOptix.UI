@@ -5,13 +5,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+  parameters:
+- name: runE2eTests
+  type: boolean
+  default: true
+
 variables:
   tenantId: 90598989-b884-4fc1-999f-d176a8e1a54e
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isDevelop: $[eq(variables['Build.SourceBranch'], 'refs/heads/develop')]
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
-  envDev: dev
-  envProd: prod
+  environment: dev
   subscriptionIdDev: 94e4237e-953e-4c21-9a4e-fc3f3699d9e4
   subscriptionIdProd: f01f288f-34a3-415e-bbb3-f94336f6f6dd
   kvServiceConnectionDev: DEV KV Service Connection
@@ -20,12 +24,12 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: BuildAndTestStageDev
-    displayName: Build and Test Dev
+  - stage: Build_and_Test_Stage
+    displayName: Build and Test
     condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
-      - job: BuildAndTestJob
-        displayName: Build and Test
+      - job: Build
+        displayName: Build
         steps:
           - script: |
               npm install
@@ -38,30 +42,20 @@ stages:
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
-
-  - stage: BuildAndTestStageProd
-    displayName: Build and Test Prod
-    condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
-    dependsOn: []
-    jobs:
-      - job: BuildAndTestJob
-        displayName: Build and Test Prod
+      - job: e2e_Tests
         steps:
-          - script: |
-              npm install
-              npm run build-prod
-            displayName: npm install, build
-          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-prod.zip .)
-            displayName: Zip Deployment
-            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-          - publish: $(Build.ArtifactStagingDirectory)/build-prod.zip
-            displayName: Publish Artifacts
-            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-            artifact: App-prod
+        displayName: Run Cypress end-2-end tests
+          - ${{ if parameters.runE2eTests }}:
+          - template: ../cypress-testing.yaml
+            parameters:
+            environment: ${{variables.environment}}
 
-  - stage: DeployDevStage
-    displayName: Deploy DEV
-    dependsOn: BuildAndTestStageDev
+
+
+
+  - stage: Deploy_Stage
+    displayName: Deploy
+    dependsOn: Build_and_Test_Stage
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployDevJob
@@ -73,24 +67,6 @@ stages:
               steps:
                 - template: _template-deploy.yaml
                   parameters:
-                    Env: $(envDev)
+                    Env: $(environment)
                     SubscriptionId: $(subscriptionIdDev)
                     KVServiceConnection: $(kvServiceConnectionDev)
-
-  - stage: DeployProdStage
-    displayName: Deploy PROD
-    dependsOn: BuildAndTestStageProd
-    condition: and(succeeded(), eq(variables.isMain, 'true'))
-    jobs:
-      - deployment: DeployProdJob
-        displayName: Deploy PROD
-        environment: PROD-App
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - template: _template-deploy.yaml
-                  parameters:
-                    Env: $(envProd)
-                    SubscriptionId: $(subscriptionIdProd)
-                    KVServiceConnection: $(kvServiceConnectionProd)
