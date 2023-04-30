@@ -1,14 +1,8 @@
 trigger:
   - develop
-  - main
 
 pool:
   vmImage: ubuntu-latest
-
-  parameters:
-- name: runE2eTests
-  type: boolean
-  default: true
 
 variables:
   tenantId: 90598989-b884-4fc1-999f-d176a8e1a54e
@@ -44,14 +38,10 @@ stages:
             artifact: App-dev
       - job: e2e_Tests
         steps:
-        displayName: Run Cypress end-2-end tests
-          - ${{ if parameters.runE2eTests }}:
+        - displayName: Run Cypress end-2-end tests
           - template: ../cypress-testing.yaml
             parameters:
             environment: ${{variables.environment}}
-
-
-
 
   - stage: Deploy_Stage
     displayName: Deploy
