@@ -18,7 +18,7 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: Build_and_Test_Stage
+  - stage: Build_Stage
     displayName: Build and Test
     condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
@@ -36,12 +36,9 @@ stages:
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
-      - job: e2e_Tests
-        steps:
-        - displayName: Run Cypress end-2-end tests
-          - template: ./cypress-testing.yaml
-            parameters:
-            environment: ${{variables.environment}}
+  - stage: Test_Stage
+    displayName: Run Cypress tests
+    jobs: !include cypress-testing.yaml
 
   - stage: Deploy_Stage
     displayName: Deploy
