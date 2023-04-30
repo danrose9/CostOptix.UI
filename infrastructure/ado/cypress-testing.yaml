@@ -1,6 +1,3 @@
-variables:
-  environment: ${{variables.environment}}
-
 jobs:
   # Example job that runs end-to-end tests using Cypress test runner
   #   https://www.cypress.io/
