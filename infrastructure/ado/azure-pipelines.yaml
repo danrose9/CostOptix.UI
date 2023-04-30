@@ -39,7 +39,7 @@ stages:
 
   - stage: Deploy_Stage
     displayName: Deploy
-    dependsOn: Build_and_Test_Stage
+    dependsOn: Build_Stage
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployDevJob
