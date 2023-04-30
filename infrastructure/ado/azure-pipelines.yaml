@@ -43,14 +43,11 @@ stages:
             artifact: App-dev
       - job: e2e_Tests
         steps:
-        displayName: Run Cypress end-2-end tests
+        - displayName: Run Cypress end-2-end tests
           - ${{ if parameters.runE2eTests }}:
           - template: ../cypress-testing.yaml
             parameters:
             environment: ${{variables.environment}}
-
-
-
 
   - stage: Deploy_Stage
     displayName: Deploy
