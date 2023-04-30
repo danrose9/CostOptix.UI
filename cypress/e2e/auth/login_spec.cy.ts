@@ -1,5 +1,5 @@
 describe('Azure Active Directory Authentication', () => {
-  beforeEach(() => {
+  before(() => {
     cy.viewport(1920, 1080);
 
     // log into Azure Active Directory through our sample SPA using our custom command
