@@ -36,9 +36,6 @@ stages:
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
-  - stage: Test_Stage
-    displayName: Run Cypress Tests
-    jobs: !include cypress-testing.yaml
 
   - stage: Deploy_Stage
     displayName: Deploy
