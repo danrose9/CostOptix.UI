@@ -39,7 +39,7 @@ stages:
       - job: e2e_Tests
         steps:
         - displayName: Run Cypress end-2-end tests
-          - template: ../cypress-testing.yaml
+          - template: ./cypress-testing.yaml
             parameters:
             environment: ${{variables.environment}}
 
