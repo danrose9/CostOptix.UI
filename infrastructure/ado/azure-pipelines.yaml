@@ -1,11 +1,10 @@
 trigger:
   - develop
-  - main
 
 pool:
   vmImage: ubuntu-latest
 
-  parameters:
+parameters:
 - name: runE2eTests
   type: boolean
   default: true
