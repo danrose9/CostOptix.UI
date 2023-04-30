@@ -19,7 +19,7 @@ variables:
 
 stages:
   - stage: Build_Stage
-    displayName: Build and Test
+    displayName: Build
     condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
       - job: Build
@@ -37,7 +37,7 @@ stages:
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
   - stage: Test_Stage
-    displayName: Run Cypress tests
+    displayName: Run Cypress Tests
     jobs: !include cypress-testing.yaml
 
   - stage: Deploy_Stage
