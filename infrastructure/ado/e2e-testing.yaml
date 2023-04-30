@@ -1,14 +1,13 @@
 # .e2e-testing.yaml
 stages:
-
-# Build the application and install dependencies
-  - stage: build:
+  # Build the application and install dependencies
+  - stage: build
     image: node:14-alpine
     script:
       - npm install
       - npm run build-dev
 
-# Build and push a Docker image of the application
+  # Build and push a Docker image of the application
   - stage: dockerize
     image: docker:stable
     services:
@@ -19,7 +18,7 @@ stages:
       - docker build --build-arg NODE_ENV=development -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
       - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
-# Run Cypress tests against the Docker image
+  # Run Cypress tests against the Docker image
   - stage: test
     image: cypress/base:14.17.0
     services:
