@@ -20,3 +20,4 @@ export const NOT_FOUND_404_PAGE = '/404-page-not-found';
 export const MAINTENANCE_PAGE = '/maintenance';
 export const DEFAULT_ERROR_PAGE = '/debugging';
 export const HELP_PAGE = '/help';
+export const COST_CONTAINERS = '/cost-containers';

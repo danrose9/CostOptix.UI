@@ -88,6 +88,13 @@ export const menuItems = [
     extra: false,
   },
   {
+    title: 'Cost Containers',
+    path: appRoutes.COST_CONTAINERS,
+    icon: 'box',
+    active: true,
+    extra: false,
+  },
+  {
     title: 'Test Page',
     path: appRoutes.GRAPH_DATA,
     icon: 'icon user',
