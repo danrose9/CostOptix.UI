@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Table, Header, Divider, Loader } from 'semantic-ui-react';
-import { PageTitle } from '../../components/PageTitle';
+import { PageHeader } from '../../components/PageHeader';
 import { ProviderImage } from '../../components/ProviderImage';
 import { TableFooter } from '../../components/TableFooter';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import SearchStandard from '../../components/SearchStandard';
-import {
-  PageContainer,
-  PageHeader,
-  TableContainer,
-} from '../__styles__/DefaultPageStyles';
+import { PageContainer, PageHeaderContainer, TableContainer } from '../__styles__/DefaultPageStyles';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/appRoutes';
 import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
@@ -47,6 +43,7 @@ const ResourceList = () => {
                     key={index}
                     onClick={() => {
                       dispatch(RESET_ISAVAILABLE(false));
+
                       navigate(appRoutes.RESOURCE_VIEW, {
                         state: { resource: resource },
                       });
@@ -57,14 +54,9 @@ const ResourceList = () => {
                     <Table.Cell singleLine>{resource.accountName}</Table.Cell>
                     <Table.Cell>
                       <Header>
-                        <ProviderImage
-                          provider={resource.provider}
-                          size="mini"
-                        />
+                        <ProviderImage provider={resource.provider} size="mini" />
                         <Header.Content>
-                          <Header.Subheader>
-                            {resource.provider}
-                          </Header.Subheader>
+                          <Header.Subheader>{resource.provider}</Header.Subheader>
                         </Header.Content>
                       </Header>
                     </Table.Cell>
@@ -80,14 +72,10 @@ const ResourceList = () => {
   return (
     <>
       <PageContainer>
-        <PageHeader>
-          <PageTitle title="Resources" />
-          <SearchStandard
-            initialQuery={initialQuery}
-            pageSize={pageSize}
-            isAvailable={resources.isAvailable}
-          />
-        </PageHeader>
+        <PageHeaderContainer>
+          <PageHeader title="Resources" />
+          <SearchStandard initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
+        </PageHeaderContainer>
         {resources.isLoading ? (
           <Loader size="large" active>
             Fetching Data..

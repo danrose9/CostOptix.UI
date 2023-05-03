@@ -2,11 +2,9 @@ import React, { useState, useContext } from 'react';
 
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
-
-import { PageTitle } from '../../components/PageTitle';
+import PageLayout from '../PageLayout';
 import { Grid, Divider } from 'semantic-ui-react';
 import * as Widget from './index';
-import { PageContent } from '../__styles__/DefaultPageStyles';
 
 import { ApplicationContext } from '../../app/ApplicationContext';
 import getSymbolFromCurrency from 'currency-symbol-map';
@@ -35,8 +33,7 @@ export const CostDashboard = () => {
   };
 
   return (
-    <PageContent>
-      <PageTitle title="Cost Dashboard" />
+    <PageLayout title="Cost Dashboard">
       <Divider />
       <Grid>
         <Grid.Row>
@@ -60,7 +57,7 @@ export const CostDashboard = () => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </PageContent>
+    </PageLayout>
   );
 };
 
