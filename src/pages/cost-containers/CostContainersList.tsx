@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Table, Header, Divider, Loader } from 'semantic-ui-react';
-import { PageTitle } from '../../components/PageTitle';
+import { PageHeader } from '../../components/PageHeader';
 import { ProviderImage } from '../../components/ProviderImage';
 import { TableFooter } from '../../components/TableFooter';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import SearchStandard from '../../components/SearchStandard';
-import { PageContainer, PageHeader, TableContainer } from '../__styles__/DefaultPageStyles';
+import { PageContainer, StyledPageHeader, TableContainer } from '../__styles__/DefaultPageStyles';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/appRoutes';
 import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
 import ActionButton, { ActionButtons } from '../../components/buttons/ActionButton';
+import PageLayout from '../PageLayout';
 
 const costContainers = [
   { name: 'Software Project 1', count: 24, monthlyCosts: '$8,726.00' },
@@ -63,27 +64,24 @@ const CostContainersList = () => {
     );
   };
   return (
-    <>
-      <PageContainer>
-        <PageHeader>
-          <PageTitle title="Cost Containers" />
-          <SearchStandard
-          // initialQuery={initialQuery}
-          // pageSize={pageSize}
-          // isAvailable={resources.isAvailable}
-          />
-        </PageHeader>
-        <RenderTable />
+    <PageLayout title="Cost Containers">
+      <StyledPageHeader>
+        {/* <SearchStandard
+        // initialQuery={initialQuery}
+        // pageSize={pageSize}
+        // isAvailable={resources.isAvailable}
+        /> */}
+      </StyledPageHeader>
+      <RenderTable />
 
-        <Divider />
-        <TableFooter
-          // searchValue={resources.searchValue}
-          totalResults={1}
-          pageSize={1}
-          // isLoading={resources.isLoading}
-        />
-      </PageContainer>
-    </>
+      <Divider />
+      <TableFooter
+        // searchValue={resources.searchValue}
+        totalResults={1}
+        pageSize={1}
+        // isLoading={resources.isLoading}
+      />
+    </PageLayout>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { PageTitle } from '../../components/PageTitle';
+import { PageHeader } from '../../components/PageHeader';
+import PageLayout from '../PageLayout';
 import { useLocation } from 'react-router-dom';
 import { Grid, Card, Loader } from 'semantic-ui-react';
 import { DashboardCard } from '../../components/index';
@@ -95,18 +96,15 @@ export const ResourceView = () => {
   }, [dispatch, args, isAvailable]);
 
   return (
-    <>
-      <PageContent>
-        <PageTitle title="Resource View" />
-        {isLoading ? (
-          <Loader size="large" active>
-            Fetching Data..
-          </Loader>
-        ) : (
-          <RenderView />
-        )}
-      </PageContent>
-    </>
+    <PageLayout title="Resource View">
+      {isLoading ? (
+        <Loader size="large" active>
+          Fetching Data..
+        </Loader>
+      ) : (
+        <RenderView />
+      )}
+    </PageLayout>
   );
 };
 
