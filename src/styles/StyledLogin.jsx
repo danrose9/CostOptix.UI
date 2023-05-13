@@ -15,7 +15,7 @@ export const StyledDivider = styled.div`
 
 export const StyledColumn = {
   position: 'fixed',
-  top: '30vh',
+  top: '10vh',
   maxWidth: '450px',
 };
 

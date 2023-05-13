@@ -28,14 +28,14 @@ const Signup = () => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+    <Grid textAlign="center">
       <Grid.Column style={StyledColumn}>
         <ProductName />
         <StyledForm size="large">
           <StyledHeader>
             <h4 className="ui dividing">Signup</h4>
           </StyledHeader>
-          <div style={{ maxWidth: '70vw' }}>
+          <div>
             <Form.Input
               fluid
               required

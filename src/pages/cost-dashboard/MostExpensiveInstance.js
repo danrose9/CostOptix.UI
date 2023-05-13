@@ -6,7 +6,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/appRoutes';
 import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
-import { StyledHeaderCell } from '../__styles__/DefaultTableStyles';
+import { StyledHeaderCell } from '../../components/tables/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../components/tooltips';
 
 const ToolTipData = (instance) => {

@@ -61,7 +61,7 @@ const ServiceConnection = (props: ContainerProps) => {
                     <Card.Meta>{card.details}</Card.Meta>
                   </Card.Content>
                   <Card.Content extra>
-                    <Table size="small">
+                    <Table size="small" fixed striped selectable>
                       <Table.Header>
                         <Table.Row>
                           <Table.HeaderCell>Billing Name</Table.HeaderCell>

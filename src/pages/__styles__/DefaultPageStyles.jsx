@@ -26,11 +26,6 @@ export const PageHeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const TableContainer = styled.div`
-  overflow: auto;
-  height: 100%;
-`;
-
 export const DashboardHeader = styled.div`
   display: flex;
   text-align: center;
@@ -41,4 +36,30 @@ export const DashboardHeader = styled.div`
 export const StyledPageTitle = styled.div`
   font-weight: 400;
   font-size: 1.7rem;
+`;
+
+///
+/// Table Styles
+///
+
+export const TableContainer = styled.div`
+  padding: 0.5em;
+`;
+
+export const TableHeader = styled.div`
+  display: flex;
+`;
+
+export const TableFooter = styled.div`
+ 
+`;
+
+export const SegmentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const SegmentName = styled.div`
+  font-size: 1.5em;
 `;
