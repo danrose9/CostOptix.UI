@@ -39,7 +39,15 @@ const costContainers = [
     monthlyCosts: '8,726.00',
     currency: 'USD',
     providers: ['AWS', 'Azure'],
-    data: [{ pv: 4000 }, { pv: 3000 }, { pv: 2000 }, { pv: 2780 }, { pv: 1890 }, { pv: 2380 }, { pv: 3980 }],
+    data: [
+      { value: 4000 },
+      { value: 3000 },
+      { value: 2000 },
+      { value: 2780 },
+      { value: 1890 },
+      { value: 2380 },
+      { value: 3980 },
+    ],
   },
   {
     name: 'Software Project with a really really long name that no one is aware of',
@@ -52,7 +60,15 @@ const costContainers = [
     monthlyCosts: '783.00',
     currency: 'USD',
     providers: ['AWS'],
-    data: [{ pv: 1290 }, { pv: 1120 }, { pv: 2910 }, { pv: 2370 }, { pv: 2630 }, { pv: 2530 }, { pv: 2180 }],
+    data: [
+      { value: 1290 },
+      { value: 1120 },
+      { value: 2910 },
+      { value: 2370 },
+      { value: 2630 },
+      { value: 2530 },
+      { value: 2180 },
+    ],
   },
   {
     name: 'Backup for IT',
@@ -65,7 +81,15 @@ const costContainers = [
     monthlyCosts: '95, 263.00',
     currency: 'EUR',
     providers: ['AWS'],
-    data: [{ pv: 14000 }, { pv: 16780 }, { pv: 19820 }, { pv: 23090 }, { pv: 27890 }, { pv: 47890 }, { pv: 65290 }],
+    data: [
+      { value: 14000 },
+      { value: 16780 },
+      { value: 19820 },
+      { value: 23090 },
+      { value: 27890 },
+      { value: 47890 },
+      { value: 65290 },
+    ],
   },
   {
     name: 'SQL DB for Finance',
@@ -78,7 +102,15 @@ const costContainers = [
     monthlyCosts: '23,543.00',
     currency: 'USD',
     providers: ['AWS', 'Azure'],
-    data: [{ pv: 47000 }, { pv: 38500 }, { pv: 32090 }, { pv: 25780 }, { pv: 21890 }, { pv: 23880 }, { pv: 13980 }],
+    data: [
+      { value: 47000 },
+      { value: 38500 },
+      { value: 32090 },
+      { value: 25780 },
+      { value: 21890 },
+      { value: 23880 },
+      { value: 13980 },
+    ],
   },
 ];
 

@@ -7,20 +7,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 export interface ICostContainerDetailProps {}
 
-const costContainers = [
-  {
-    name: 'Software Project 1',
-    created: '23/05/2022',
-    createdBy: 'Doug Davis',
-    resourceCount: 24,
-    monthlyCosts: '8,726.00',
-    currency: 'USD',
-    providers: ['AWS', 'Azure'],
-    data: [{ pv: 4000 }, { pv: 3000 }, { pv: 2000 }, { pv: 2780 }, { pv: 1890 }, { pv: 2380 }, { pv: 3980 }],
-  },
-];
-
-const data = [{ pv: 4000 }, { pv: 3000 }, { pv: 2000 }, { pv: 2780 }, { pv: 1890 }, { pv: 2380 }, { pv: 3980 }];
 const config = {
   width: 150,
   height: 30,
@@ -107,7 +93,7 @@ export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ contai
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
           </LineChart>
         </Segment>
       </Segment>
