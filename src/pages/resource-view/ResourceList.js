@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Table, Header, Divider, Loader } from 'semantic-ui-react';
 import { PageHeader } from '../../components/PageHeader';
 import { ProviderImage } from '../../components/ProviderImage';
-import { TableFooter } from '../../components/TableFooter';
+import { TablePaging } from '../../components/tables/TablePaging';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import SearchStandard from '../../components/SearchStandard';
@@ -85,7 +85,7 @@ const ResourceList = () => {
         )}
 
         <Divider />
-        <TableFooter
+        <TablePaging
           searchValue={resources.searchValue}
           totalResults={resources.count}
           pageSize={pageSize}

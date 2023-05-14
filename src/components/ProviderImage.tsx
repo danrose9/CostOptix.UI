@@ -21,6 +21,12 @@ export const ProviderImage = (props: IProps) => {
   const image = Providers[props.provider];
 
   return (
-    <Image src={image} size={props.size} alt="ServiceProviderLogo" floated={props.floated} style={{ margin: 0 }} />
+    <Image
+      src={image}
+      size={props.size}
+      alt="ServiceProviderLogo"
+      floated={props.floated}
+      style={{ margin: '0.2em' }}
+    />
   );
 };

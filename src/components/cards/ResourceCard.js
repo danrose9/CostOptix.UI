@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Image, Button } from 'semantic-ui-react';
-import { ProviderImage } from '../ProviderImage';
 
 const CardHeader = styled(Card.Header)`
   padding: 0 2px;

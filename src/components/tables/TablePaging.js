@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import {
-  PaginationContainer,
-  RowCounter,
-  PageSelector,
-} from '../styles/StyledPageLoader';
-import { searchQuery } from '../services/api/searchQuery';
+import { PaginationContainer, RowCounter, PageSelector } from '../../styles/StyledPageLoader';
+import { searchQuery } from '../../services/api/searchQuery';
 
-export const TableFooter = (props) => {
+export const TablePaging = (props) => {
   const [activePage, setActivePage] = useState(1);
   const lastItemInPage = props.pageSize * activePage;
 
@@ -35,7 +31,7 @@ export const TableFooter = (props) => {
           <RowCounter>
             Showing {firstItem} to {lastItem()} of {props.totalResults} results
           </RowCounter>
-          Page {activePage}
+
           <PageSelector
             activePage={activePage}
             totalPages={totalPages}

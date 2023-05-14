@@ -4,16 +4,12 @@ import { reduxState } from '../../services/redux/reduxState';
 import { useSelector } from 'react-redux';
 import { ProviderImage } from '../../components/ProviderImage';
 import { roundNumber } from '../../utils/helper';
-import { StyledTableRow } from '../__styles__/DefaultTableStyles';
+import { StyledTableRow } from '../../components/tables/DefaultTableStyles';
 
 export const CostEstimates = (props) => {
-  const isLoading = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].monthToDateCost.isLoading
-  );
+  const isLoading = useSelector((state) => state[reduxState.COST_DASHBOARD].monthToDateCost.isLoading);
 
-  const monthlyCostEstimates = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].monthToDateCost.data
-  );
+  const monthlyCostEstimates = useSelector((state) => state[reduxState.COST_DASHBOARD].monthToDateCost.data);
 
   const Providers = ({ monthlyCostEstimates }) => {
     return (
@@ -38,18 +34,14 @@ export const CostEstimates = (props) => {
     );
   };
 
-  const totalEstimate = roundNumber(
-    monthlyCostEstimates.reduce((acc, provider) => acc + provider.cost, 0)
-  );
+  const totalEstimate = roundNumber(monthlyCostEstimates.reduce((acc, provider) => acc + provider.cost, 0));
 
   return (
     <Segment color="olive" loading={isLoading}>
       <Table selectable>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan="3">
-              Month-to-Date Cost Estimates
-            </Table.HeaderCell>
+            <Table.HeaderCell colSpan="3">Month-to-Date Cost Estimates</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

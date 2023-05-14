@@ -5,7 +5,7 @@ import { Table, Segment, Popup, Card } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/appRoutes';
 import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
-import { StyledHeaderCell } from '../__styles__/DefaultTableStyles';
+import { StyledHeaderCell } from '../../components/tables/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../components/tooltips';
 
 const ToolTipData = (instance) => {
@@ -18,13 +18,9 @@ const ToolTipData = (instance) => {
 };
 
 export const FastestGrowingInstance = () => {
-  const fastestGrowingInstance = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].fastestGrowing.data
-  );
+  const fastestGrowingInstance = useSelector((state) => state[reduxState.COST_DASHBOARD].fastestGrowing.data);
 
-  const isLoading = useSelector(
-    (state) => state[reduxState.COST_DASHBOARD].fastestGrowing.isLoading
-  );
+  const isLoading = useSelector((state) => state[reduxState.COST_DASHBOARD].fastestGrowing.isLoading);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,9 +34,7 @@ export const FastestGrowingInstance = () => {
       <Table fixed selectable>
         <Table.Header onClick={handleOnClick} data-testid="table-header-1">
           <Table.Row>
-            <StyledHeaderCell colSpan="3">
-              Fastest Growing Resources
-            </StyledHeaderCell>
+            <StyledHeaderCell colSpan="3">Fastest Growing Resources</StyledHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Header>
@@ -68,9 +62,7 @@ export const FastestGrowingInstance = () => {
                         });
                       }}
                     >
-                      <Table.Cell singleLine>
-                        {instance.resourceName}
-                      </Table.Cell>
+                      <Table.Cell singleLine>{instance.resourceName}</Table.Cell>
                       <Table.Cell singleLine>{instance.service}</Table.Cell>
                       <Table.Cell textAlign="right" singleLine>
                         {instance.growth30Day}%

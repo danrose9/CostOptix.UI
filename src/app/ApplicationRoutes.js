@@ -98,6 +98,14 @@ export const ApplicationRoutes = () => {
           </PrivateRoute>
         }
       />
+      <Route
+        path={appRoutes.COMPONENTS}
+        element={
+          <PrivateRoute>
+            <page.Components />
+          </PrivateRoute>
+        }
+      />
       <Route path={appRoutes.SESSION_EXPIRED} element={<page.SessionExpired />} />
       <Route path="*" element={<page.PageNotFound404 />} />
     </Routes>

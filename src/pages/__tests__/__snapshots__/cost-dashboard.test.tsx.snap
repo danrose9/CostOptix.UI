@@ -8,7 +8,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
     className="sc-dkrFOg bPgtuD"
   >
     <div
-      className="sc-gKPRtg afiWm"
+      className="sc-jSUZER cUNTky"
     >
       Cost Dashboard
     </div>
@@ -113,7 +113,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 className=""
               >
                 <th
-                  className="sc-pyfCe ZDuvc"
+                  className="sc-csuSiG lgsuTZ"
                   colSpan={3}
                   data-testid="header-cell-1"
                 >
@@ -168,7 +168,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 className=""
               >
                 <th
-                  className="sc-pyfCe ZDuvc"
+                  className="sc-csuSiG lgsuTZ"
                   colSpan="3"
                 >
                   Fastest Growing Resources
@@ -230,7 +230,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    className="refresh disabled fitted loading icon sc-iBYQkv bVpkeA"
+                    className="refresh disabled fitted loading icon sc-kDvujY izENdF"
                     onClick={[Function]}
                   />
                 </th>
