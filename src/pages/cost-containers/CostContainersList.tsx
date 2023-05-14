@@ -27,6 +27,25 @@ const ContainerDetail = styled.div`
   flex-basis: 30%;
 `;
 
+const ProviderContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+interface ICostContainersListProps {
+  [x: string]: any;
+  name: string;
+  description: string;
+  created: string;
+  createdBy: string;
+  owner: string;
+  resourceCount: number;
+  monthlyCosts: string;
+  currency: string;
+  providers: string[];
+  data: any[];
+}
+
 const costContainers = [
   {
     name: 'Software Project 1',
@@ -59,7 +78,7 @@ const costContainers = [
     resourceCount: 3,
     monthlyCosts: '783.00',
     currency: 'USD',
-    providers: ['AWS'],
+    providers: ['Azure'],
     data: [
       { value: 1290 },
       { value: 1120 },
@@ -112,21 +131,11 @@ const costContainers = [
       { value: 13980 },
     ],
   },
-];
+] as ICostContainersListProps[];
 
 const tinychart = {
   width: 150,
   height: 30,
-};
-
-const DisplayProviders = (providers: any) => {
-  return (
-    <Fragment>
-      {providers.map((provider: string, index: any) => {
-        return <ProviderImage provider={provider} size="big" floated="left" />;
-      })}
-    </Fragment>
-  );
 };
 
 const containerOptions = [
@@ -137,6 +146,20 @@ const itemOptions = [
   { key: 1, text: 'Edit', value: 1, icon: 'add' },
   { key: 2, text: 'Set Budgets', value: 2, icon: 'add' },
 ];
+
+const ProviderImages = (props: any) => {
+  console.log(props.providers);
+  // const providers = ['AWS', 'Azure'];
+  // iterate over providers and return ProviderImage component
+
+  return (
+    <ProviderContainer>
+      {props.providers.map((provider: string, index: React.Key | null | undefined) => {
+        return <ProviderImage key={index} provider={provider} size="mini" />;
+      })}
+    </ProviderContainer>
+  );
+};
 
 const CostContainersList = () => {
   const currencySymbol = (currency: string) => getSymbolFromCurrency(currency);
@@ -155,11 +178,13 @@ const CostContainersList = () => {
           <Table fixed striped selectable>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell width={4}>Container</Table.HeaderCell>
+                <Table.HeaderCell width={6}>Container</Table.HeaderCell>
                 <Table.HeaderCell width={1} />
-                <Table.HeaderCell width={3}>Cost Trend</Table.HeaderCell>
+                <Table.HeaderCell width={3} textAlign="center">
+                  Cost Trend
+                </Table.HeaderCell>
                 <Table.HeaderCell width={3}>Providers</Table.HeaderCell>
-                <Table.HeaderCell width={4} textAlign="right">
+                <Table.HeaderCell width={3} textAlign="right">
                   Monthly Costs
                 </Table.HeaderCell>
               </Table.Row>
@@ -175,7 +200,6 @@ const CostContainersList = () => {
                         icon="ellipsis horizontal"
                         simple
                         item
-                        // style={{ zIndex: 300 }}
                         options={itemOptions}
                         direction="left"
                         open={false}
@@ -184,7 +208,9 @@ const CostContainersList = () => {
                     <Table.Cell>
                       <TinyLineChart data={container.data} config={tinychart} />
                     </Table.Cell>
-                    <Table.Cell singleLine>{/* <DisplayProviders /> */}</Table.Cell>
+                    <Table.Cell singleLine>
+                      <ProviderImages providers={container.providers} />
+                    </Table.Cell>
 
                     <Table.Cell singleLine textAlign="right">
                       {container.currency}
