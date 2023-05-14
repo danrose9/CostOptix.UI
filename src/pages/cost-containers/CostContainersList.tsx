@@ -1,18 +1,9 @@
-import React, { Fragment, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Table, Header, Divider, Segment, Dropdown } from 'semantic-ui-react';
-import { PageHeader } from '../../components/PageHeader';
+import React, { useState } from 'react';
+import { Table, Segment, Dropdown } from 'semantic-ui-react';
 import { ProviderImage } from '../../components/ProviderImage';
-import { useSelector } from 'react-redux';
-import { reduxState } from '../../services/redux/reduxState';
-import SearchStandard from '../../components/SearchStandard';
 import { SegmentName, SegmentHeader, TableContainer } from '../__styles__/DefaultPageStyles';
 import { TablePaging } from '../../components/tables/TablePaging';
 import getSymbolFromCurrency from 'currency-symbol-map';
-import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../app/appRoutes';
-import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
-import ActionButton, { ActionButtons } from '../../components/buttons/ActionButton';
 import PageLayout from '../PageLayout';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { CostContainerDetail } from './CostContainerDetail';
@@ -213,7 +204,7 @@ const CostContainersList = () => {
                     </Table.Cell>
 
                     <Table.Cell singleLine textAlign="right">
-                      {container.currency}
+                      {getSymbolFromCurrency(container.currency)}
                       {container.monthlyCosts}
                     </Table.Cell>
                   </Table.Row>
