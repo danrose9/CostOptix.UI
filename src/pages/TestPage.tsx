@@ -12,7 +12,7 @@ const lineChartData = {
 const response = {
   container: {},
   xAxis: {
-    label: { value: 'month' },
+    xAxisLabel: { value: 'month' },
     xAxisKey: 'name',
   },
   data: [
@@ -53,6 +53,7 @@ const response = {
     },
   ],
   line: { lineKey: 'purchased' },
+  yAxis: { yAxisLabel: { value: 'amount' } },
 };
 
 const TestPage = () => {
@@ -65,6 +66,7 @@ const TestPage = () => {
             xAxis={response.xAxis}
             chartData={response.data}
             line={response.line}
+            yAxis={response.yAxis}
           />
         </Segment>
       </div>

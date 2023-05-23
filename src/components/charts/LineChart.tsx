@@ -8,11 +8,11 @@ export interface IStandardLineChartProps {
   chartData: any;
   line: { lineKey: string; color?: string; strokeWidth?: number };
   xAxis: IChartXAxis;
-  //   yAxis: ChartYAxisType;
+  yAxis: ChartYAxisType;
 }
 
 interface IChartXAxis {
-  label: IChartXAxisLabel;
+  xAxisLabel: IChartXAxisLabel;
   xAxisKey?: string;
 }
 
@@ -22,20 +22,20 @@ interface IChartXAxisLabel {
   position?: string;
 }
 
-interface IChartYAxis {
-  orientation: string;
-  label: {
-    value: string;
-    angle: number;
+type ChartYAxisType = {
+  yAxisLabel: {
+    value?: string;
+    angle?: number;
   };
-  yAxisId: string;
-}
+};
 
 const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLineChartProps) => {
   const { height = 400 } = props.chartContainer;
-  const { label, xAxisKey } = props.xAxis;
-  const { value, offset = -5, position = 'bottom' } = label;
+  const { xAxisLabel, xAxisKey } = props.xAxis;
+  const { value, offset = -5, position = 'bottom' } = xAxisLabel;
   const { color = '#82ca9d', lineKey, strokeWidth = 3 } = props.line;
+  const { yAxisLabel } = props.yAxis;
+  const { angle = -90 } = yAxisLabel;
 
   return (
     <ResponsiveContainer height={height}>
@@ -60,7 +60,7 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
         />
 
         <YAxis yAxisId="right" orientation="right" />
-        <YAxis label={{ value: 'amount', angle: -90 }} />
+        <YAxis label={{ value: value, angle: angle }} />
         <Tooltip />
 
         <Line yAxisId="right" type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} />
