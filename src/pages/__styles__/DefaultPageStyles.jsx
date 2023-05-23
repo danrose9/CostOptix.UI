@@ -14,15 +14,16 @@ export const PageContainer = styled(Segment)`
   height: 100%;
 `;
 
-export const PageHeader = styled.div`
+export const StyledPageHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
-export const TableContainer = styled.div`
-  overflow: auto;
-  height: 100%;
+export const PageHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const DashboardHeader = styled.div`
@@ -32,7 +33,33 @@ export const DashboardHeader = styled.div`
   align-items: center;
 `;
 
-export const DashboardTitle = styled.div`
+export const StyledPageTitle = styled.div`
   font-weight: 400;
   font-size: 1.7rem;
+`;
+
+///
+/// Table Styles
+///
+
+export const TableContainer = styled.div`
+  padding: 0.5em;
+`;
+
+export const TableHeader = styled.div`
+  display: flex;
+`;
+
+export const TableFooter = styled.div`
+ 
+`;
+
+export const SegmentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const SegmentName = styled.div`
+  font-size: 1.5em;
 `;

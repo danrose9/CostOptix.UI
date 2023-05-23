@@ -16,10 +16,6 @@ export interface IMessageBox {
   size: undefined;
 }
 
-export interface IPageTitle {
-  title: string;
-}
-
 export interface IProviderImage {
   provider: string;
   image: string;

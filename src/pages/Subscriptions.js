@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Loader, Icon } from 'semantic-ui-react';
 import { getOrganizationId } from '../utils/helper';
-import { StyledTableCell } from '../pages/__styles__/DefaultTableStyles';
+import { StyledTableCell } from '../components/tables/DefaultTableStyles';
 
 export default class Subscriptions extends Component {
   constructor(props) {
@@ -35,17 +35,11 @@ export default class Subscriptions extends Component {
               <Table.Cell>{sku.partNumber}</Table.Cell>
               <StyledTableCell>{sku.prepaidUnitsEnabled}</StyledTableCell>
               <StyledTableCell>{sku.consumedUnits}</StyledTableCell>
-              <StyledTableCell>
-                {sku.prepaidUnitsEnabled - sku.consumedUnits}
-              </StyledTableCell>
+              <StyledTableCell>{sku.prepaidUnitsEnabled - sku.consumedUnits}</StyledTableCell>
               <StyledTableCell>{sku.prepaidUnitsSuspended}</StyledTableCell>
               <StyledTableCell>{sku.prepaidUnitsWarning}</StyledTableCell>
               <StyledTableCell>
-                {sku.isFree ? (
-                  <Icon color="green" name="checkmark" size="large" />
-                ) : (
-                  ''
-                )}
+                {sku.isFree ? <Icon color="green" name="checkmark" size="large" /> : ''}
               </StyledTableCell>
             </Table.Row>
           ))}
@@ -76,13 +70,9 @@ export default class Subscriptions extends Component {
     var organizationId = getOrganizationId();
     const headers = { organizationId: organizationId };
 
-    const response = await fetch(
-      process.env.REACT_APP_API_URI +
-        'microsoft365sku/subscribedSkus?showIsFree=true',
-      {
-        headers,
-      }
-    );
+    const response = await fetch(process.env.REACT_APP_API_URI + 'microsoft365sku/subscribedSkus?showIsFree=true', {
+      headers,
+    });
     const data = await response.json();
 
     this.setState({ subscribedSkus: data, loading: false });

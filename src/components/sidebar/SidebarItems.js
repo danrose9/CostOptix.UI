@@ -137,9 +137,9 @@ export const menuItems = [
     extra: false,
     submenu: [
       {
-        title: 'Signup',
-        path: appRoutes.SIGNUP,
-        active: false,
+        title: 'Components',
+        path: appRoutes.COMPONENTS,
+        active: true,
       },
     ],
   },

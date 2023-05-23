@@ -66,6 +66,9 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
 
     const accounts: CloudProviderType = await fetchCloudBillingAccounts(args);
 
+    // check if accounts already exist and disable for addition
+    console.log('accounts: ', accounts);
+
     setNumberOfBillingAccountsReturned(accounts.count);
 
     if (accounts.error) {
@@ -155,13 +158,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
   // send api request for adding billing accounts
   const handleAddBillingAccounts = async () => {
     setIsAdding(true);
-    // var newBillingAccount = {
-    //   providerAccountId: providerData.providerAccountId,
-    //   providerName: providerData.providerName,
-    //   cloudProvider: providerData.cloudProvider,
-    //   username: providerData.username,
-    //   password: providerData.password,
-    // };
 
     await dispatch(addBillingAccount(providerData));
     setIsAdding(false);
@@ -245,8 +241,8 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
         </Table>
       </Modal.Content>
 
-      <Modal.Actions style={{ display: 'flex', flexDirection: 'row' }}>
-        <Popup
+      <Modal.Actions style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+        {/* <Popup
           content="Refresh"
           basic
           trigger={
@@ -254,7 +250,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
               <Icon name="refresh" loading={isFetching} />
             </Button>
           }
-        />
+        /> */}
         <Button
           floated="right"
           icon
