@@ -1,7 +1,5 @@
 import React from 'react';
-import { Segment, SemanticCOLORS } from 'semantic-ui-react';
-import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart, Legend } from 'recharts';
-import { Container } from 'react-dom';
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart } from 'recharts';
 
 export interface IStandardLineChartProps {
   chartContainer: { height?: number };
