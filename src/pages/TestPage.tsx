@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Segment } from 'semantic-ui-react';
 // import { useNavigate } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
-import StandardLineChart, { IStandardLineChartProps } from '../components/charts/LineChart';
+import StandardLineChart, { IStandardLineChartProps } from '../components/charts/StandardLineChart';
 
 // import { refreshCostDashboard } from '../services/redux/reducers/costDashboardSlice';
 const lineChartData = {
