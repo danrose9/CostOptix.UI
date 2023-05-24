@@ -4,9 +4,9 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineCh
 export interface IStandardLineChartProps {
   chartContainer: { height?: number };
   chartData: any;
-  line: { lineKey: string; color?: string; strokeWidth?: number };
+  line: { lineKey: string; color?: string; strokeWidth?: number; dot?: boolean };
   xAxis: IChartXAxis;
-  yAxis: ChartYAxisType;
+  yAxis: IChartYAxis;
 }
 
 interface IChartXAxis {
@@ -20,12 +20,12 @@ interface IChartXAxisLabel {
   position?: string;
 }
 
-type ChartYAxisType = {
+interface IChartYAxis {
   yAxisLabel: {
     value?: string;
     angle?: number;
   };
-};
+}
 
 const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLineChartProps) => {
   const { height = 400 } = props.chartContainer;
