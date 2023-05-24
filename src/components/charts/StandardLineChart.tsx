@@ -4,9 +4,10 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineCh
 export interface IStandardLineChartProps {
   chartContainer: { height?: number };
   chartData: any;
-  line: { lineKey: string; color?: string; strokeWidth?: number; dot?: boolean };
+  line: IChartLine;
   xAxis: IChartXAxis;
   yAxis: IChartYAxis;
+  tickFormatter?: (input: string) => void;
 }
 
 interface IChartXAxis {
@@ -27,14 +28,23 @@ interface IChartYAxis {
   };
 }
 
-const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLineChartProps) => {
+interface IChartLine {
+  lineKey: string;
+  color?: string;
+  strokeWidth?: number;
+  dot?: boolean;
+}
+
+const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLineChartProps, { tickFormatter }) => {
+  /* Set default values for props */
   const { height = 400 } = props.chartContainer;
   const { xAxisLabel, xAxisKey } = props.xAxis;
   const { value, offset = -5, position = 'bottom' } = xAxisLabel;
-  const { color = '#82ca9d', lineKey, strokeWidth = 3 } = props.line;
+  const { color = '#82ca9d', lineKey, strokeWidth = 3, dot = true } = props.line;
   const { yAxisLabel } = props.yAxis;
   const { angle = -90 } = yAxisLabel;
 
+  console.log(tickFormatter);
   return (
     <ResponsiveContainer height={height}>
       <LineChart
@@ -49,7 +59,7 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey={xAxisKey}
-          // tickFormatter={formatDate}
+          tickFormatter={tickFormatter}
           label={{
             value: value,
             offset: offset,
@@ -59,7 +69,7 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
         <YAxis yAxisId="right" orientation="right" />
         <YAxis label={{ value: value, angle: angle }} />
         <Tooltip />
-        <Line yAxisId="right" type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} />
+        <Line yAxisId="right" type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} dot={dot} />
       </LineChart>
     </ResponsiveContainer>
   );
