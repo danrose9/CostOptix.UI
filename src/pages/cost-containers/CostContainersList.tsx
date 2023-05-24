@@ -43,8 +43,8 @@ const costContainers = [
     description:
       'The software project currently in development is a cloud-based project management tool designed to streamline team collaboration and increase productivity by providing real-time updates and task management capabilities.',
     created: '23/05/2022',
-    createdBy: 'Doug Davis',
-    owner: 'Doug Davis',
+    createdBy: 'Peter Wilson',
+    owner: 'Karen Smith',
     resourceCount: 24,
     monthlyCosts: '8,726.00',
     currency: 'USD',
@@ -64,8 +64,8 @@ const costContainers = [
     description:
       'Our team is developing a cutting-edge mobile application that revolutionizes how users manage their personal finances, with advanced features for budgeting, expense tracking, and investment analysis.',
     created: '03/02/2021',
-    createdBy: 'Dan Rose',
-    owner: 'Doug Davis',
+    createdBy: 'Claire Jones',
+    owner: 'Sally Smith',
     resourceCount: 3,
     monthlyCosts: '783.00',
     currency: 'USD',
@@ -85,8 +85,8 @@ const costContainers = [
     description:
       'Our software development project focuses on creating an AI-powered chatbot for customer support, capable of understanding natural language queries, providing instant responses, and escalating complex issues to human agents when necessary, improving overall service efficiency and customer engagement.',
     created: '29/11/2021',
-    createdBy: 'Doug Davis',
-    owner: 'Joe Public',
+    createdBy: 'Arnold Davis',
+    owner: 'Carrie Jones',
     resourceCount: 17,
     monthlyCosts: '95, 263.00',
     currency: 'EUR',
@@ -106,8 +106,8 @@ const costContainers = [
     description:
       'We are working on a web-based e-commerce platform that provides seamless integration with popular payment gateways, efficient inventory management, and personalized shopping experiences to enhance customer satisfaction and drive sales',
     created: '13/01/2023',
-    createdBy: 'Ian Byrne',
-    owner: 'Ian Byrne',
+    createdBy: 'Donald Martin',
+    owner: 'Harry Wells',
     resourceCount: 5,
     monthlyCosts: '23,543.00',
     currency: 'USD',
