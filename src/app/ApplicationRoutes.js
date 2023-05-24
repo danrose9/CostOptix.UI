@@ -54,7 +54,7 @@ export const ApplicationRoutes = () => {
         path={appRoutes.GRAPH_DATA}
         element={
           <PrivateRoute>
-            <page.PageLayout title="Test Page" />
+            <page.TestPage title="Test Page" />
           </PrivateRoute>
         }
       />
