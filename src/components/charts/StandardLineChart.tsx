@@ -56,11 +56,9 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
             position: position,
           }}
         />
-
         <YAxis yAxisId="right" orientation="right" />
         <YAxis label={{ value: value, angle: angle }} />
         <Tooltip />
-
         <Line yAxisId="right" type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} />
       </LineChart>
     </ResponsiveContainer>
