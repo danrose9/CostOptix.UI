@@ -9,9 +9,9 @@ export interface ITinyLineChartProps {
 }
 
 const TinyLineChart = (props: ITinyLineChartProps) => {
-  const { dataKey, width, height, data } = props;
+  const { dataKey, width = 150, height = 50, data } = props;
   return (
-    <LineChart width={width} height={height} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+    <LineChart width={width} height={height} data={data} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
       <Line type="monotone" dataKey={dataKey} stroke="#8884d8" strokeWidth={3} dot={false} />
     </LineChart>
   );
