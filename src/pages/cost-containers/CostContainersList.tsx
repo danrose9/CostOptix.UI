@@ -197,7 +197,7 @@ const CostContainersList = () => {
                       />
                     </Table.Cell>
                     <Table.Cell>
-                      <TinyLineChart data={container.data} config={tinychart} />
+                      <TinyLineChart data={container.data} width={150} height={50} dataKey="value" />
                     </Table.Cell>
                     <Table.Cell singleLine>
                       <ProviderImages providers={container.providers} />
