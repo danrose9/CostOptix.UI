@@ -2,7 +2,7 @@ import React from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart, Legend } from 'recharts';
 
 export interface IStandardLineChartProps {
-  chartContainer: { height?: number };
+  chartContainer: { height?: number; width?: number };
   chartData: any;
   line: IChartLine;
   xAxis: IChartXAxis;
@@ -37,42 +37,33 @@ interface IChartLine {
 
 const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLineChartProps, { tickFormatter }) => {
   /* Set default values for props */
-  const { height = 400 } = props.chartContainer;
+  const { height = 400, width = 900 } = props.chartContainer;
   const { xAxisLabel, xAxisKey } = props.xAxis;
   const { value, offset = -5, position = 'bottom' } = xAxisLabel;
-  const { color = '#82ca9d', lineKey, strokeWidth = 3, dot = true } = props.line;
+  const { color = '#8884d8', lineKey, strokeWidth = 3, dot = true } = props.line;
   const { yAxisLabel } = props.yAxis;
   const { angle = -90 } = yAxisLabel;
 
   console.log(tickFormatter);
   return (
-    <ResponsiveContainer height={height}>
-      <LineChart
-        data={props.chartData}
-        margin={{
-          top: 5,
-          right: 3,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis
-          dataKey={xAxisKey}
-          tickFormatter={tickFormatter}
-          label={{
-            value: value,
-            offset: offset,
-            position: position,
-          }}
-        />
-        <YAxis yAxisId="right" orientation="right" />
-        <YAxis label={{ value: value, angle: angle }} />
-        <Tooltip />
-        <Legend />
-        <Line yAxisId="right" type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} dot={dot} />
-      </LineChart>
-    </ResponsiveContainer>
+    <LineChart
+      width={width}
+      height={height}
+      data={props.chartData}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey={xAxisKey} />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Line type="monotone" dataKey={lineKey} stroke={color} activeDot={{ r: 8 }} dot={dot} />
+    </LineChart>
   );
 };
 
