@@ -1,5 +1,5 @@
 import React from 'react';
-import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart, Legend } from 'recharts';
 
 export interface IStandardLineChartProps {
   chartContainer: { height?: number };
@@ -69,6 +69,7 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
         <YAxis yAxisId="right" orientation="right" />
         <YAxis label={{ value: value, angle: angle }} />
         <Tooltip />
+        <Legend />
         <Line yAxisId="right" type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} dot={dot} />
       </LineChart>
     </ResponsiveContainer>
