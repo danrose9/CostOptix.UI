@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TableContainer, SegmentHeader, SegmentName } from '../__styles__/DefaultPageStyles';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import StandardLineChart from '../../components/charts/StandardLineChart';
 
 export interface ICostContainerDetailProps {}
 
@@ -15,6 +16,16 @@ const config = {
 interface CostContainerDetailProps {
   container: any;
 }
+
+const chartData = {
+  container: { height: 300 },
+  xAxis: {
+    xAxisLabel: {},
+    xAxisKey: 'name',
+  },
+  yAxis: { yAxisLabel: { value: 'value' } },
+  line: { lineKey: 'value' },
+};
 
 export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ container }) => {
   console.log(container);
@@ -77,6 +88,13 @@ export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ contai
           </Table.Body>
         </Table>
         <Segment>
+          <StandardLineChart
+            chartContainer={chartData.container}
+            xAxis={chartData.xAxis}
+            chartData={container.data}
+            line={chartData.line}
+            yAxis={chartData.yAxis}
+          />
           <LineChart
             width={500}
             height={300}

@@ -14,7 +14,7 @@ const lineChartData = {
 const response = {
   container: {},
   xAxis: {
-    xAxisLabel: { value: 'month' },
+    xAxisLabel: {},
     xAxisKey: 'name',
   },
   data: [
