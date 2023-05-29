@@ -18,7 +18,7 @@ interface CostContainerDetailProps {
 }
 
 const chartData = {
-  container: { height: 300 },
+  container: { width: 500, height: 300 },
   xAxis: {
     xAxisLabel: {},
     xAxisKey: 'name',
@@ -95,24 +95,6 @@ export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ contai
             line={chartData.line}
             yAxis={chartData.yAxis}
           />
-          <LineChart
-            width={500}
-            height={300}
-            data={container.data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} />
-          </LineChart>
         </Segment>
       </Segment>
     </TableContainer>
