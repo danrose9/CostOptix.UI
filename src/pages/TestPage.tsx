@@ -3,6 +3,7 @@ import { Button, Segment } from 'semantic-ui-react';
 // import { useNavigate } from 'react-router-dom';
 // import { useDispatch, useSelector } from 'react-redux';
 import StandardLineChart, { IStandardLineChartProps } from '../components/charts/StandardLineChart';
+import TinyLineChart from '../components/charts/TinyLineChart';
 import { formatDateToShort } from '../utils/helper';
 
 // import { refreshCostDashboard } from '../services/redux/reducers/costDashboardSlice';
@@ -13,7 +14,7 @@ const lineChartData = {
 const response = {
   container: {},
   xAxis: {
-    xAxisLabel: { value: 'month' },
+    xAxisLabel: {},
     xAxisKey: 'name',
   },
   data: [
@@ -57,6 +58,45 @@ const response = {
   yAxis: { yAxisLabel: { value: 'amount' } },
 };
 
+const tinyChart = {
+  container: { width: 15, height: 30 },
+  xAxis: {
+    xAxisLabel: {},
+  },
+  data: [
+    {
+      name: '2021-01-01',
+      purchased: 4000,
+    },
+    {
+      name: '2021-02-01',
+      purchased: 3000,
+    },
+    {
+      name: '2021-03-01',
+      purchased: 2000,
+    },
+    {
+      name: '2021-04-01',
+      purchased: 2780,
+    },
+    {
+      name: '2021-05-01',
+      purchased: 1890,
+    },
+    {
+      name: '2021-06-01',
+      purchased: 2390,
+    },
+    {
+      name: '2021-07-01',
+      purchased: 3490,
+    },
+  ],
+  line: { lineKey: 'purchased' },
+  yAxis: { yAxisLabel: { value: 'amount' } },
+};
+
 // pass in function formatDataToShort to tickformatter
 const tickFormatter = (input: string) => {
   return formatDateToShort(input);
@@ -75,6 +115,9 @@ const TestPage = () => {
             yAxis={response.yAxis}
             tickFormatter={tickFormatter}
           />
+        </Segment>
+        <Segment color="blue">
+          <TinyLineChart width={150} height={30} data={tinyChart.data} dataKey="purchased" />
         </Segment>
       </div>
     </>
