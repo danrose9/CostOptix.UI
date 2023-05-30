@@ -217,13 +217,14 @@ const CostContainersList = () => {
       </TableContainer>
     );
   };
+
   return (
     <PageLayout title="Cost Containers">
       <ComponentContainer>
         <RenderTable />
-        <ContainerDetail>
+        {/* <ContainerDetail>
           <CostContainerDetail container={selectedContainer} />
-        </ContainerDetail>
+        </ContainerDetail> */}
       </ComponentContainer>
 
       {/* <TinyLineChart /> */}
