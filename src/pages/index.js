@@ -17,4 +17,4 @@ export { default as PageNotFound404 } from './PageNotFound404';
 export { default as DefaultErrorPage } from './ErrorDefault';
 export { default as HelpPage } from './HelpPage';
 export { default as PageLayout } from './PageLayout';
-export { default as CostContainersList } from './cost-containers/CostContainersList';
+export { default as CostContainerPage } from './cost-containers/CostContainerPage';
