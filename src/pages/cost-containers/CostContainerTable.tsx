@@ -55,12 +55,23 @@ interface ICostContainerTableProps {
 const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
   const { containers, selectContainerDetail } = props;
 
+  const rowDropdownOptions = [
+    { key: 1, text: 'Edit', value: 1, icon: 'edit' },
+    { key: 2, text: 'Close', value: 2, icon: 'close' },
+  ];
+
+  const dropdownOptions = [
+    { key: 1, text: 'Add', value: 1, icon: 'add' },
+    { key: 2, text: 'Minimize', value: 2, icon: 'minus' },
+  ];
+
   return (
     <>
       <TableContainer>
         <Segment color="blue">
           <SegmentHeader>
             <SegmentName>Containers</SegmentName>
+            <Dropdown icon="ellipsis horizontal" simple item direction="left" open={false} options={dropdownOptions} />
           </SegmentHeader>
           <Table fixed striped>
             <Table.Header>
@@ -82,7 +93,14 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
                   <Table.Row style={{ cursor: 'pointer' }} key={index} onClick={() => selectContainerDetail(container)}>
                     <Table.Cell singleLine>{container.name}</Table.Cell>
                     <Table.Cell>
-                      <Dropdown icon="ellipsis horizontal" simple item direction="left" open={false} />
+                      <Dropdown
+                        icon="ellipsis horizontal"
+                        simple
+                        item
+                        direction="left"
+                        open={false}
+                        options={rowDropdownOptions}
+                      />
                     </Table.Cell>
                     <Table.Cell>
                       <TinyLineChart data={container.data} width={150} height={50} dataKey="value" />

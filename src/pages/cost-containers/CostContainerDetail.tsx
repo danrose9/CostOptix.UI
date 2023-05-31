@@ -28,13 +28,18 @@ const chartData = {
 };
 
 export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ container }) => {
-  console.log(container);
+  const dropdownOptions = [
+    { key: 1, text: 'Edit', value: 1, icon: 'edit' },
+    { key: 2, text: 'Close', value: 2, icon: 'close' },
+    { key: 3, text: 'Expand', value: 3, icon: 'expand' },
+  ];
+
   return (
     <TableContainer>
       <Segment color="orange">
         <SegmentHeader>
           <SegmentName>Details</SegmentName>
-          <Dropdown icon="ellipsis horizontal" simple item open={false} />
+          <Dropdown icon="ellipsis horizontal" simple item open={false} options={dropdownOptions} direction="left" />
         </SegmentHeader>
         <h3>{container.name}</h3>
         <Divider />
