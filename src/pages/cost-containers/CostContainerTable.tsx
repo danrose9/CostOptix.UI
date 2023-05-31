@@ -55,10 +55,7 @@ interface ICostContainerTableProps {
 const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
   const { containers, selectContainerDetail } = props;
 
-  const rowDropdownOptions = [
-    { key: 1, text: 'Edit', value: 1, icon: 'edit' },
-    { key: 2, text: 'Close', value: 2, icon: 'close' },
-  ];
+  const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   const dropdownOptions = [
     { key: 1, text: 'Add', value: 1, icon: 'add' },
