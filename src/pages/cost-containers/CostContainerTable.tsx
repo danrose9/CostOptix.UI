@@ -72,17 +72,19 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
           </SegmentHeader>
           <Table fixed striped>
             <Table.Header>
-              {table.headers.map((header, index) => {
-                return (
-                  <Table.HeaderCell
-                    key={index}
-                    textAlign={header.align as textAlignType}
-                    width={header.width as widthType}
-                  >
-                    {header.name}
-                  </Table.HeaderCell>
-                );
-              })}
+              <Table.Row>
+                {table.headers.map((header, index) => {
+                  return (
+                    <Table.HeaderCell
+                      key={index}
+                      textAlign={header.align as textAlignType}
+                      width={header.width as widthType}
+                    >
+                      {header.name}
+                    </Table.HeaderCell>
+                  );
+                })}
+              </Table.Row>
             </Table.Header>
             <Table.Body>
               {containers.map((container, index) => {
@@ -102,12 +104,9 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
                     <Table.Cell>
                       <TinyLineChart data={container.data} width={150} height={50} dataKey="value" />
                     </Table.Cell>
-                    <Table.Cell singleLine>{/* <ProviderImages providers={container.providers} /> */}</Table.Cell>
+                    <Table.Cell singleLine></Table.Cell>
 
-                    <Table.Cell singleLine textAlign="right">
-                      {/* {getSymbolFromCurrency(container.currency)}
-                      {container.monthlyCosts} */}
-                    </Table.Cell>
+                    <Table.Cell singleLine textAlign="right"></Table.Cell>
                   </Table.Row>
                 );
               })}
