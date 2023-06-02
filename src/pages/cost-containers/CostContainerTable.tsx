@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Segment, Dropdown, Table, SemanticWIDTHS } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
+import { TablePaging } from '../../components/tables/TablePaging';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -58,17 +59,27 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   const dropdownOptions = [
-    { key: 1, text: 'Add', value: 1, icon: 'add' },
-    { key: 2, text: 'Minimize', value: 2, icon: 'minus' },
+    { key: 'add', text: 'Add', value: 'add', icon: 'add' },
+    { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus' },
   ];
 
+  const [dropdownValue, setDropdownValue] = React.useState('');
   return (
     <>
       <TableContainer>
         <Segment color="blue">
           <SegmentHeader>
             <SegmentName>Containers</SegmentName>
-            <Dropdown icon="ellipsis horizontal" simple item direction="left" open={false} options={dropdownOptions} />
+
+            <Dropdown
+              //onChange={this.handleChange}
+              options={dropdownOptions}
+              icon="ellipsis horizontal"
+              value={dropdownValue}
+              simple
+              direction="left"
+              item
+            />
           </SegmentHeader>
           <Table fixed striped>
             <Table.Header>
@@ -112,6 +123,9 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
               })}
             </Table.Body>
           </Table>
+          <TableFooter>
+            <TablePaging totalPages={1} totalResults={1} pageSize={1}></TablePaging>
+          </TableFooter>
         </Segment>
       </TableContainer>
     </>

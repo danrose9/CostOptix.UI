@@ -29,17 +29,27 @@ const chartData = {
 
 export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ container }) => {
   const dropdownOptions = [
-    { key: 1, text: 'Edit', value: 1, icon: 'edit' },
-    { key: 2, text: 'Close', value: 2, icon: 'close' },
-    { key: 3, text: 'Expand', value: 3, icon: 'expand' },
+    { key: 'edit', text: 'Edit', value: 'edit', icon: 'edit' },
+    { key: 'close', text: 'Close', value: 'close', icon: 'close' },
+    { key: 'expand', text: 'Expand', value: 'expand', icon: 'expand' },
   ];
+
+  const [dropdownValue, setDropdownValue] = React.useState('');
 
   return (
     <TableContainer>
       <Segment color="orange">
         <SegmentHeader>
           <SegmentName>Details</SegmentName>
-          <Dropdown icon="ellipsis horizontal" simple item open={false} options={dropdownOptions} direction="left" />
+          <Dropdown
+            //onChange={this.handleChange}
+            options={dropdownOptions}
+            icon="ellipsis horizontal"
+            value={dropdownValue}
+            simple
+            direction="left"
+            item
+          />
         </SegmentHeader>
         <h3>{container.name}</h3>
         <Divider />
