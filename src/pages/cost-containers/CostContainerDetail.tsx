@@ -15,6 +15,7 @@ const config = {
 
 interface CostContainerDetailProps {
   container: any;
+  expandContainer: (container: any) => void;
 }
 
 const chartData = {
@@ -27,11 +28,13 @@ const chartData = {
   line: { lineKey: 'value' },
 };
 
-export const CostContainerDetail: React.FC<CostContainerDetailProps> = ({ container }) => {
+export const CostContainerDetail: React.FC<CostContainerDetailProps> = (props) => {
+  const { container, expandContainer } = props;
+
   const dropdownOptions = [
     { key: 'edit', text: 'Edit', value: 'edit', icon: 'edit' },
+    { key: 'expand', text: 'Expand', value: 'expand', icon: 'expand', onClick: () => expandContainer(true) },
     { key: 'close', text: 'Close', value: 'close', icon: 'close' },
-    { key: 'expand', text: 'Expand', value: 'expand', icon: 'expand' },
   ];
 
   const [dropdownValue, setDropdownValue] = React.useState('');
