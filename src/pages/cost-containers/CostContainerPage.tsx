@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PageLayout from '../PageLayout';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Table, Segment, Dropdown } from 'semantic-ui-react';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
@@ -92,17 +92,22 @@ const costContainers = [
   },
 ];
 
+interface ContainerProps {
+  selected?: boolean;
+  expandContainer: () => void;
+}
+
 const ComponentContainer = styled.div`
   display: flex;
   padding: 0.5em 0 1em;
 `;
 
 const CostContainersList = styled.div`
-  flex-basis: 70%;
+  //   flex-basis: 70%;
 `;
 
 const ContainerDetail = styled.div`
-  flex-basis: 30%;
+  //   flex-basis: 30%;
 `;
 
 interface ICostContainerPage {
@@ -110,10 +115,15 @@ interface ICostContainerPage {
 }
 
 const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
-  const [selectedContainer, setSelectedContainer] = useState<any>(costContainers[0]);
+  const [selectedCostContainer, setSelectedCostContainer] = useState<any>(costContainers[0]);
+  const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
 
   const selectContainerDetail = (container: any) => {
-    setSelectedContainer(container);
+    setSelectedCostContainer(container);
+  };
+
+  const expandContainer = (component: string) => {
+    setSelectedComponent(component);
   };
 
   return (
@@ -123,7 +133,7 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
           <CostContainerTable containers={costContainers} selectContainerDetail={selectContainerDetail} />
         </CostContainersList>
         <ContainerDetail>
-          <CostContainerDetail container={selectedContainer} />
+          <CostContainerDetail container={selectedCostContainer} expandContainer={expandContainer} />
         </ContainerDetail>
       </ComponentContainer>
     </PageLayout>

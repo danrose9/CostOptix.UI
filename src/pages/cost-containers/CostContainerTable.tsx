@@ -39,6 +39,7 @@ type widthType = SemanticWIDTHS | undefined;
 
 interface ICostContainerTableProps {
   selectContainerDetail: (container: any) => void;
+
   containers: {
     name: string;
     description: string;
@@ -60,7 +61,7 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
 
   const dropdownOptions = [
     { key: 'add', text: 'Add', value: 'add', icon: 'add' },
-    { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus' },
+    { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus', onClick: () => console.log('minimize') },
   ];
 
   const [dropdownValue, setDropdownValue] = React.useState('');

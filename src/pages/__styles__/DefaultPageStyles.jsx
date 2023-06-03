@@ -19,6 +19,7 @@ export const StyledPageHeader = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  
 `;
 
 export const PageHeaderContainer = styled.div`
@@ -36,6 +37,7 @@ export const DashboardHeader = styled.div`
 export const StyledPageTitle = styled.div`
   font-weight: 400;
   font-size: 1.7rem;
+  padding: 0.5rem 0;
 `;
 
 ///

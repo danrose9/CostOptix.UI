@@ -44,7 +44,6 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
   const { yAxisLabel } = props.yAxis;
   const { angle = -90 } = yAxisLabel;
 
-  console.log(tickFormatter);
   return (
     <LineChart
       width={width}
