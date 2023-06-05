@@ -130,15 +130,25 @@ export const menuItems = [
     ],
   },
   {
-    title: 'Demo Pages',
+    title: 'Components',
     icon: 'cogs',
     active: false,
     dev: true,
     extra: false,
     submenu: [
       {
-        title: 'Components',
-        path: appRoutes.COMPONENTS,
+        title: 'Sign Up',
+        path: appRoutes.SIGNUP,
+        active: true,
+      },
+      {
+        title: 'Tranition',
+        path: appRoutes.TRANSITION,
+        active: true,
+      },
+      {
+        title: 'Query Filter',
+        path: appRoutes.QUERYFILTER,
         active: true,
       },
     ],
