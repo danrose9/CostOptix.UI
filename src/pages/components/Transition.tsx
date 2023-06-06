@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import PageLayout from '../pages/PageLayout';
+import PageLayout from '../PageLayout';
 
 interface BoxProps {
   selected?: boolean;
@@ -81,7 +81,7 @@ const Box2Component: React.FC<BoxComponentProps> = ({ selected, onClick }) => (
   </Box2>
 );
 
-function TestPage() {
+const Transition = () => {
   const [selectedBox, setSelectedBox] = useState<string | null>(null);
 
   const handleClick = (box: string) => {
@@ -97,6 +97,6 @@ function TestPage() {
       </ComponentContainer>
     </PageLayout>
   );
-}
+};
 
-export default TestPage;
+export default Transition;

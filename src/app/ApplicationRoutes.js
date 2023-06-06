@@ -94,15 +94,31 @@ export const ApplicationRoutes = () => {
         path={appRoutes.COST_CONTAINERS}
         element={
           <PrivateRoute>
-            <page.CostContainersList />
+            <page.CostContainerPage />
           </PrivateRoute>
         }
       />
       <Route
-        path={appRoutes.COMPONENTS}
+        path={appRoutes.SIGNUP}
         element={
           <PrivateRoute>
-            <page.Components />
+            <page.Signup />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={appRoutes.TRANSITION}
+        element={
+          <PrivateRoute>
+            <page.Transition />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={appRoutes.QUERYFILTER}
+        element={
+          <PrivateRoute>
+            <page.QueryFilter />
           </PrivateRoute>
         }
       />
