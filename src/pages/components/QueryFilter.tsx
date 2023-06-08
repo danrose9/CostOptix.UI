@@ -21,6 +21,29 @@ const stringOperators = [
   { key: 6, text: 'ends with', value: 6 },
 ];
 
+const integerOperators = [
+  { key: 1, text: 'is equal to', value: 1 },
+  { key: 2, text: 'is not equal to', value: 2 },
+  { key: 3, text: 'is greater than', value: 3 },
+  { key: 4, text: 'is greater than or equal to', value: 4 },
+  { key: 5, text: 'is less than', value: 5 },
+  { key: 6, text: 'is less than or equal to', value: 6 },
+];
+
+const dateOperators = [
+  { key: 1, text: 'is equal to', value: 1 },
+  { key: 2, text: 'is not equal to', value: 2 },
+  { key: 3, text: 'is after', value: 3 },
+  { key: 4, text: 'is after or equal to', value: 4 },
+  { key: 5, text: 'is before', value: 5 },
+  { key: 6, text: 'is before or equal to', value: 6 },
+];
+
+const conditionalOperators = [
+  { key: 1, text: 'and', value: 'and' },
+  { key: 2, text: 'or', value: 'or' },
+];
+
 const StyledResult = styled.div`
   display: block;
   font-family: monospace;
@@ -33,10 +56,12 @@ const StyledInput = styled(Input)`
 
 const StyledFilterGroup = styled.div`
   padding: 1em;
+  display: flex;
 `;
 
-const StyledActionGroup = styled(Button.Group)`
+const StyledActionGroup = styled.div`
   padding: 5px;
+  display: flex;
 `;
 
 const StyledDropdown = styled(Dropdown)`
@@ -44,6 +69,44 @@ const StyledDropdown = styled(Dropdown)`
 
   &:after {
     z-index: 1000;
+  }
+`;
+
+const StyledFieldContainer = styled.div`
+  padding: 0 1em 0 0;
+`;
+
+const ComponentContainer = styled.div`
+  display: flex;
+  padding: 0.5em 0 1em;
+`;
+
+const StyledReporQueryFilter = styled.div`
+  margin-left: 5px;
+  position: relative;
+  &.show-horizontal-connector:before,
+  &.show-horizontal-connector:after {
+    content: '';
+    position: absolute;
+    left: -18px;
+    width: 18px;
+    border-color: #ccc;
+    border-style: solid;
+    box-sizing: border-box;
+  }
+  &.show-horizontal-connector:before {
+    top: 14px;
+    height: 1px;
+    border-width: 0 0 2px 2px;
+  }
+  &.show-vertical-connector:after {
+    top: 14px;
+    height: calc(50% + 12px);
+    border-width: 0 0 0 2px;
+  }
+  &.two-rows:before,
+  &.two-rows:after {
+    top: 40px;
   }
 `;
 
@@ -59,6 +122,7 @@ const FilterOutput: React.FC<any> = (props) => {
     </Grid>
   );
 };
+
 const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick }) => {
   const [value, setValue] = React.useState();
 
@@ -66,27 +130,35 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick }) 
   return (
     <Grid columns={1}>
       <StyledFilterGroup>
-        <StyledDropdown
-          onChange={handleChange}
-          options={fields}
-          placeholder="Select field"
-          selection
-          value={value}
-          search
-          style={{ margin: '0 5px' }}
-        />
-        <StyledDropdown
-          options={stringOperators}
-          placeholder="Select operator"
-          selection
-          search
-          style={{ margin: '0 5px' }}
-        />
-        <StyledInput placeholder="Enter filter value" style={{ margin: '0 5px' }} />
-        <StyledActionGroup size="mini">
-          <Button icon="add" onClick={onAddBtnClick} />
+        <StyledFieldContainer>
+          <StyledDropdown
+            onChange={handleChange}
+            options={fields}
+            placeholder="Select field"
+            selection
+            value={value}
+            search
+            style={{ margin: '0 5px' }}
+          />
+        </StyledFieldContainer>
+        <StyledFieldContainer>
+          <StyledDropdown
+            options={stringOperators}
+            placeholder="Select operator"
+            selection
+            search
+            style={{ margin: '0 5px' }}
+          />
+        </StyledFieldContainer>
+        <StyledFieldContainer>
+          <StyledInput placeholder="Enter filter value" style={{ margin: '0 5px' }} />
+        </StyledFieldContainer>
+        <StyledActionGroup>
+          <StyledFieldContainer>
+            <Button icon="add" onClick={onAddBtnClick} size="mini" />
 
-          <Button icon="close" onClick={() => onRemoveBtnClick(index)} />
+            <Button icon="close" onClick={() => onRemoveBtnClick(index)} size="mini" />
+          </StyledFieldContainer>
         </StyledActionGroup>
       </StyledFilterGroup>
     </Grid>
@@ -94,11 +166,12 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick }) 
 };
 
 const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
-  const [filterGroup, setFilterGroup] = useState<any>([]);
+  const [filterGroup, setFilterGroup] = useState<any>([<FilterGroup key={0} index={0} />]);
   const [filterOutput, setFilterOutput] = useState<any>([]);
 
   const onAddBtnClick = (event: any) => {
     const newFilterGroup = <FilterGroup key={filterGroup.length} onRemoveBtnClick={onRemoveBtnClick} />;
+    console.log(newFilterGroup);
     setFilterGroup([...filterGroup, newFilterGroup]);
   };
 
@@ -109,13 +182,9 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
 
   return (
     <PageLayout title="Query Filter">
-      <div style={{ padding: '20px 0 ' }}>
-        <Button onClick={onAddBtnClick}>Add input</Button>
-      </div>
       {filterGroup.map((filter: any, index: any) => (
         <FilterGroup key={index} index={index} onRemoveBtnClick={onRemoveBtnClick} onAddBtnClick={onAddBtnClick} />
       ))}
-
       <FilterOutput value={filterOutput} />
     </PageLayout>
   );
