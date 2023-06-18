@@ -57,6 +57,16 @@ const StyledInput = styled(Input)`
 const StyledFilterGroup = styled.div`
   padding: 1em;
   display: flex;
+
+  &.show-horizontal-connector .dropdown:before {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    height: 1px;
+    width: 18px;
+    background-color: #ccc;
+  }
 `;
 
 const StyledActionGroup = styled.div`
@@ -129,7 +139,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick }) 
   const handleChange = (e: any, { value }: any) => setValue(value);
   return (
     <Grid columns={1}>
-      <StyledFilterGroup>
+      <StyledFilterGroup className="show-horizontal-connector">
         <StyledFieldContainer>
           <StyledDropdown
             onChange={handleChange}
@@ -160,6 +170,30 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick }) 
             <Button icon="close" onClick={() => onRemoveBtnClick(index)} size="mini" />
           </StyledFieldContainer>
         </StyledActionGroup>
+        {index}
+      </StyledFilterGroup>
+    </Grid>
+  );
+};
+
+const FilterOperator: React.FC<any> = () => {
+  const [value, setValue] = React.useState();
+
+  const handleChange = (e: any, { value }: any) => setValue(value);
+  return (
+    <Grid columns={1}>
+      <StyledFilterGroup>
+        <StyledFieldContainer>
+          <StyledDropdown
+            onChange={handleChange}
+            options={conditionalOperators}
+            selection
+            compact
+            defaultValue="and"
+            value={value}
+            style={{ margin: '0 5px' }}
+          />
+        </StyledFieldContainer>
       </StyledFilterGroup>
     </Grid>
   );
@@ -169,14 +203,21 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   const [filterGroup, setFilterGroup] = useState<any>([<FilterGroup key={0} index={0} />]);
   const [filterOutput, setFilterOutput] = useState<any>([]);
 
-  const onAddBtnClick = (event: any) => {
+  const onAddBtnClick = () => {
     const newFilterGroup = <FilterGroup key={filterGroup.length} onRemoveBtnClick={onRemoveBtnClick} />;
-    console.log(newFilterGroup);
-    setFilterGroup([...filterGroup, newFilterGroup]);
+    const updatedFilterGroup = [...filterGroup, newFilterGroup];
+
+    // Add the class to the first instance of FilterGroup
+    // updatedFilterGroup[0] = React.cloneElement(updatedFilterGroup[0], {
+    //   className: 'show-horizontal-connector',
+    // });
+
+    setFilterGroup(updatedFilterGroup);
   };
 
   const onRemoveBtnClick = (index: number) => {
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
+    console.log(updatedFilterGroup);
     setFilterGroup(updatedFilterGroup);
   };
 
@@ -185,6 +226,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
       {filterGroup.map((filter: any, index: any) => (
         <FilterGroup key={index} index={index} onRemoveBtnClick={onRemoveBtnClick} onAddBtnClick={onAddBtnClick} />
       ))}
+
       <FilterOutput value={filterOutput} />
     </PageLayout>
   );
