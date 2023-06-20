@@ -3,42 +3,13 @@ import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
 import PageLayout from '../../pages/PageLayout';
 import styled from 'styled-components';
 import { fields, stringOperators } from './operators';
-
-const StyledFilterGroup = styled.div`
-  padding: 1em;
-  display: flex;
-
-  &.show-horizontal-connector .dropdown:before {
-    content: '';
-    position: absolute;
-    left: -18px;
-    top: 50%;
-    height: 1px;
-    width: 18px;
-    background-color: #ccc;
-  }
-`;
-
-const StyledActionGroup = styled.div`
-  padding: 5px;
-  display: flex;
-`;
-
-const StyledDropdown = styled(Dropdown)`
-  z-index: 1;
-
-  &:after {
-    z-index: 1000;
-  }
-`;
-
-const StyledInput = styled(Input)`
-  border: 1px;
-`;
-
-const StyledFieldContainer = styled.div`
-  padding: 0 1em 0 0;
-`;
+import {
+  StyledDropdown,
+  StyledFilterGroup,
+  StyledFieldContainer,
+  StyledInput,
+  StyledActionGroup,
+} from '../__styles__/StyledQueryFilter';
 
 const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
   const [value, setValue] = React.useState();
