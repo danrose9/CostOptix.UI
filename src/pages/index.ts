@@ -19,4 +19,4 @@ export { default as HelpPage } from './HelpPage';
 export { default as PageLayout } from './PageLayout';
 export { default as CostContainerPage } from './cost-containers/CostContainerPage';
 export { default as Transition } from './components/Transition';
-export { default as QueryFilter } from './components/QueryFilter';
+export { default as QueryFilter } from '../components/query_filter/QueryFilter';
