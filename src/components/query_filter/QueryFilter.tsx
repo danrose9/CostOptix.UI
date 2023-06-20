@@ -4,55 +4,9 @@ import PageLayout from '../../pages/PageLayout';
 import styled from 'styled-components';
 import FilterGroup from './FilterGroup';
 import { conditionalOperators } from './operators';
+import { StyledResult, StyledFilterGroup, StyledFieldContainer, StyledDropdown } from '../__styles__/StyledQueryFilter';
 
 interface IQueryFilterProps {}
-
-const StyledResult = styled.div`
-  display: block;
-  font-family: monospace;
-  white-space: pre;
-  margin: 1em 0;
-`;
-const StyledInput = styled(Input)`
-  border: 1px;
-`;
-
-const StyledFilterGroup = styled.div`
-  padding: 1em;
-  display: flex;
-
-  &.show-horizontal-connector .dropdown:before {
-    content: '';
-    position: absolute;
-    left: -18px;
-    top: 50%;
-    height: 1px;
-    width: 18px;
-    background-color: #ccc;
-  }
-`;
-
-const StyledActionGroup = styled.div`
-  padding: 5px;
-  display: flex;
-`;
-
-const StyledDropdown = styled(Dropdown)`
-  z-index: 1;
-
-  &:after {
-    z-index: 1000;
-  }
-`;
-
-const StyledFieldContainer = styled.div`
-  padding: 0 1em 0 0;
-`;
-
-const ComponentContainer = styled.div`
-  display: flex;
-  padding: 0.5em 0 1em;
-`;
 
 const initialState = '{}';
 
