@@ -21,15 +21,15 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
 
   return (
     <Grid columns={1}>
-      <StyledFilterGroup className="show-horizontal-connector">
+      <StyledFilterGroup>
         <StyledFieldContainer>
           <StyledDropdown
+            className="show-horizontal-connector"
             onChange={handleChange}
             options={fields}
             placeholder="Select field"
             selection
             value={value}
-            search
             style={{ margin: '0 5px' }}
           />
         </StyledFieldContainer>
@@ -38,7 +38,6 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
             options={stringOperators}
             placeholder="Select operator"
             selection
-            search
             style={{ margin: '0 5px' }}
           />
         </StyledFieldContainer>
