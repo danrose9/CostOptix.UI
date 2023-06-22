@@ -18,6 +18,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
     setValue(value);
     dispatch({ type: 'UPDATE_FILTER', payload: { value } });
   };
+
   return (
     <Grid columns={1}>
       <StyledFilterGroup className="show-horizontal-connector">
@@ -47,8 +48,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
         <StyledActionGroup>
           <StyledFieldContainer>
             <Button icon="add" onClick={onAddBtnClick} size="mini" />
-
-            <Button icon="close" onClick={() => onRemoveBtnClick(index)} size="mini" />
+            {index !== 0 ? <Button icon="close" onClick={() => onRemoveBtnClick(index)} size="mini" /> : null}
           </StyledFieldContainer>
         </StyledActionGroup>
         {index}
