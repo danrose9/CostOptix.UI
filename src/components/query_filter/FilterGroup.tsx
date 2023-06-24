@@ -9,6 +9,7 @@ import {
   StyledFieldContainer,
   StyledInput,
   StyledActionGroup,
+  StyledGrid,
 } from '../__styles__/StyledQueryFilter';
 
 const FilterOperator: React.FC<any> = () => {
@@ -46,9 +47,9 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
     <React.Fragment>
       {index !== 0 ? <FilterOperator /> : null}
 
-      <Grid columns={1} style={{ paddingLeft: '4em' }}>
+      <StyledGrid columns={1} style={{ paddingLeft: '4em' }}>
         <StyledFilterGroup>
-          <StyledFieldContainer className="show-horizontal-connector">
+          <StyledFieldContainer className="show-connector">
             <StyledDropdown
               onChange={handleChange}
               options={fields}
@@ -77,7 +78,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
           </StyledActionGroup>
           {index}
         </StyledFilterGroup>
-      </Grid>
+      </StyledGrid>
     </React.Fragment>
   );
 };
