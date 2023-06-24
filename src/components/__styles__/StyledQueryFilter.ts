@@ -14,6 +14,8 @@ export const StyledInput = styled(Input)`
 export const StyledFilterGroup = styled.div`
   padding: 1em;
   display: flex;
+  margin-left: 50px;
+  // position: relative;
 `;
 
 export const StyledDropdown = styled(Dropdown)`
@@ -22,8 +24,13 @@ export const StyledDropdown = styled(Dropdown)`
   &:after {
     z-index: 1000;
   }
+`;
 
-  &.show-horizontal-connector :before {
+export const StyledFieldContainer = styled.div`
+  padding: 0 1em 0 0;
+
+  &.show-horizontal-connector :before,
+  &.show-vertical-connector :after {
     content: '';
     position: absolute;
     left: -18px;
@@ -32,10 +39,18 @@ export const StyledDropdown = styled(Dropdown)`
     width: 18px;
     background-color: #ccc;
   }
-`;
 
-export const StyledFieldContainer = styled.div`
-  padding: 0 1em 0 0;
+  &.show-horizontal-connector :before {
+    top: 14px;
+    height: 1px;
+    border-width: 0 0 2px 2px;
+  }
+
+  &.show-vertical-connector :after {
+    top: 10%;
+    height: calc(50% + 25px);
+    width: 1px;
+  }
 `;
 
 export const ComponentContainer = styled.div`

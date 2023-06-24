@@ -3,7 +3,7 @@ import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
 import PageLayout from '../../pages/PageLayout';
 import styled from 'styled-components';
 import FilterGroup from './FilterGroup';
-import { conditionalOperators } from './operators';
+
 import { StyledResult, StyledFilterGroup, StyledFieldContainer, StyledDropdown } from '../__styles__/StyledQueryFilter';
 
 interface IQueryFilterProps {}
@@ -32,29 +32,6 @@ const FilterOutput: React.FC<any> = (props) => {
           <StyledResult>Query: {value}</StyledResult>
         </Segment>
       </Grid.Column>
-    </Grid>
-  );
-};
-
-const FilterOperator: React.FC<any> = () => {
-  const [value, setValue] = React.useState();
-
-  const handleChange = (e: any, { value }: any) => setValue(value);
-  return (
-    <Grid columns={1}>
-      <StyledFilterGroup>
-        <StyledFieldContainer>
-          <StyledDropdown
-            onChange={handleChange}
-            options={conditionalOperators}
-            selection
-            compact
-            defaultValue="and"
-            value={value}
-            style={{ margin: '0 5px' }}
-          />
-        </StyledFieldContainer>
-      </StyledFilterGroup>
     </Grid>
   );
 };
