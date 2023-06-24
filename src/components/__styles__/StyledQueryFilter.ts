@@ -14,16 +14,8 @@ export const StyledInput = styled(Input)`
 export const StyledFilterGroup = styled.div`
   padding: 1em;
   display: flex;
-
-  &.show-horizontal-connector .dropdown:before {
-    content: '';
-    position: absolute;
-    left: -18px;
-    top: 50%;
-    height: 1px;
-    width: 18px;
-    background-color: #ccc;
-  }
+  margin-left: 50px;
+  // position: relative;
 `;
 
 export const StyledDropdown = styled(Dropdown)`
@@ -36,6 +28,29 @@ export const StyledDropdown = styled(Dropdown)`
 
 export const StyledFieldContainer = styled.div`
   padding: 0 1em 0 0;
+
+  &.show-horizontal-connector :before,
+  &.show-vertical-connector :after {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 50%;
+    height: 1px;
+    width: 18px;
+    background-color: #ccc;
+  }
+
+  &.show-horizontal-connector :before {
+    top: 14px;
+    height: 1px;
+    border-width: 0 0 2px 2px;
+  }
+
+  &.show-vertical-connector :after {
+    top: 10%;
+    height: calc(50% + 25px);
+    width: 1px;
+  }
 `;
 
 export const ComponentContainer = styled.div`
