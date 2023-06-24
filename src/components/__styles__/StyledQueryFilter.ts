@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { Input, Dropdown } from 'semantic-ui-react';
+import { Input, Dropdown, Grid } from 'semantic-ui-react';
+
+export const StyledGrid = styled(Grid)`
+  margin-bottom: -2rem;
+`;
 
 export const StyledResult = styled.div`
   display: block;
@@ -28,28 +32,36 @@ export const StyledDropdown = styled(Dropdown)`
 
 export const StyledFieldContainer = styled.div`
   padding: 0 1em 0 0;
+  position: relative; /* Added position relative */
 
-  &.show-horizontal-connector :before,
-  &.show-vertical-connector :after {
+  &.show-connector :before {
     content: '';
     position: absolute;
-    left: -18px;
+    left: -24px;
     top: 50%;
     height: 1px;
-    width: 18px;
+    width: 24px;
     background-color: #ccc;
   }
 
-  &.show-horizontal-connector :before {
-    top: 14px;
-    height: 1px;
-    border-width: 0 0 2px 2px;
+  &.show-connector:before {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 45%;
+    bottom: 0; /* Added bottom: 0 */
+    width: 1px; /* Changed width to 1px */
+    background-color: #ccc;
   }
 
-  &.show-vertical-connector :after {
-    top: 10%;
-    height: calc(50% + 25px);
-    width: 1px;
+  &.show-connector:after {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 70%;
+    bottom: -40%; /* Added bottom: 0 */
+    width: 1px; /* Changed width to 1px */
+    background-color: #ccc;
   }
 `;
 
