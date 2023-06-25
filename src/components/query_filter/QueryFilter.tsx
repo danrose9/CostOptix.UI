@@ -4,7 +4,13 @@ import PageLayout from '../../pages/PageLayout';
 import styled from 'styled-components';
 import FilterGroup from './FilterGroup';
 
-import { StyledResult, StyledFilterGroup, StyledFieldContainer, StyledDropdown } from '../__styles__/StyledQueryFilter';
+import {
+  StyledResult,
+  StyledFilterGroup,
+  StyledFieldContainer,
+  StyledDropdown,
+  StyledFilterOutput,
+} from '../__styles__/StyledQueryFilter';
 
 interface IQueryFilterProps {}
 
@@ -26,13 +32,13 @@ const updateFilterOutput = (state: any, action: any) => {
 const FilterOutput: React.FC<any> = (props) => {
   const { value } = props;
   return (
-    <Grid columns={1}>
+    <StyledFilterOutput columns={1}>
       <Grid.Column>
         <Segment secondary>
           <StyledResult>Query: {value}</StyledResult>
         </Segment>
       </Grid.Column>
-    </Grid>
+    </StyledFilterOutput>
   );
 };
 
