@@ -17,7 +17,7 @@ const FilterOperator: React.FC<any> = () => {
 
   const handleChange = (e: any, { value }: any) => setValue(value);
   return (
-    <Grid columns={1}>
+    <StyledGrid columns={1} className="filter-operator">
       <StyledFilterGroup>
         <StyledFieldContainer className="show-vertical-connector">
           <StyledDropdown
@@ -27,11 +27,10 @@ const FilterOperator: React.FC<any> = () => {
             compact
             defaultValue="and"
             value={value}
-            style={{ margin: '0 5px' }}
           />
         </StyledFieldContainer>
       </StyledFilterGroup>
-    </Grid>
+    </StyledGrid>
   );
 };
 
@@ -47,28 +46,22 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
     <React.Fragment>
       {index !== 0 ? <FilterOperator /> : null}
 
-      <StyledGrid columns={1} style={{ paddingLeft: '4em' }}>
+      <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
-          <StyledFieldContainer className="show-connector">
+          <StyledFieldContainer>
             <StyledDropdown
               onChange={handleChange}
               options={fields}
               placeholder="Select field"
               selection
               value={value}
-              style={{ margin: '0 5px' }}
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
-            <StyledDropdown
-              options={stringOperators}
-              placeholder="Select operator"
-              selection
-              style={{ margin: '0 5px' }}
-            />
+            <StyledDropdown options={stringOperators} placeholder="Select operator" selection />
           </StyledFieldContainer>
           <StyledFieldContainer>
-            <StyledInput placeholder="Enter filter value" style={{ margin: '0 5px' }} />
+            <StyledInput placeholder="Enter filter value" />
           </StyledFieldContainer>
           <StyledActionGroup>
             <StyledFieldContainer>
@@ -76,7 +69,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
               {index !== 0 ? <Button icon="close" onClick={() => onRemoveBtnClick(index)} size="mini" /> : null}
             </StyledFieldContainer>
           </StyledActionGroup>
-          {index}
+          {/* {index} */}
         </StyledFilterGroup>
       </StyledGrid>
     </React.Fragment>
