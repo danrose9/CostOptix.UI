@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
 import PageLayout from '../../pages/PageLayout';
 import styled from 'styled-components';
-import { fields, stringOperators, conditionalOperators } from './operators';
+import { fields, operators, conditionalOperators } from './operators';
 import {
   StyledDropdown,
   StyledFilterGroup,
@@ -21,6 +21,7 @@ const FilterOperator: React.FC<any> = () => {
       <StyledFilterGroup>
         <StyledFieldContainer className="show-vertical-connector">
           <StyledDropdown
+            className="set-minimum-width"
             onChange={handleChange}
             options={conditionalOperators}
             selection
@@ -58,7 +59,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
-            <StyledDropdown options={stringOperators} placeholder="Select operator" selection />
+            <StyledDropdown options={operators} placeholder="Select operator" selection />
           </StyledFieldContainer>
           <StyledFieldContainer>
             <StyledInput placeholder="Enter filter value" />
