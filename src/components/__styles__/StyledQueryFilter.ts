@@ -25,9 +25,12 @@ export const StyledInput = styled(Input)`
 
 export const StyledDropdown = styled(Dropdown)`
   z-index: 1;
-
+  width: 100%;
   &:after {
     z-index: 1000;
+  }
+  &.set-minimum-width {
+    min-width: 80px;
   }
 `;
 
@@ -39,48 +42,29 @@ export const StyledFilterGroup = styled.div`
 
 export const StyledFieldContainer = styled.div`
   padding: 0 1em 0 0;
-  position: relative; /* Added position relative */
+  position: relative;
   margin: 0;
 
   &.show-vertical-connector:before {
     content: '';
     position: absolute;
-    left: 35px;
-    top: 40%;
-    height: calc(100% + 25px); /* Adjust the height as needed */
+    left: 30px;
+    top: -80%;
+    // height: calc(100% + 10px);
+    height: 30px;
     width: 1px;
     background-color: #ccc;
   }
 
-  // &.show-vertical-connector:before {
-  //   content: '';
-  //   position: absolute;
-  //   left: -24px;
-  //   top: 50%;
-  //   height: 1px;
-  //   width: 24px;
-  //   background-color: #ccc;
-  // }
-
-  // &.show-vertical-connector:before {
-  //   content: '';
-  //   position: absolute;
-  //   left: -18px;
-  //   top: 45%;
-  //   bottom: 0; /* Added bottom: 0 */
-  //   width: 1px; /* Changed width to 1px */
-  //   background-color: #ccc;
-  // }
-
-  // &.show-connector:after {
-  //   content: '';
-  //   position: absolute;
-  //   left: -18px;
-  //   top: 70%;
-  //   bottom: -40%; /* Added bottom: 0 */
-  //   width: 1px; /* Changed width to 1px */
-  //   background-color: #ccc;
-  // }
+  &.show-vertical-connector:after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 100%;
+    height: 28px;
+    width: 1px;
+    background-color: #ccc;
+  }
 `;
 
 export const ComponentContainer = styled.div`
