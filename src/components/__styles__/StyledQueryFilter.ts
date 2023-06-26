@@ -56,16 +56,6 @@ export const StyledFieldContainer = styled.div`
     background-color: #ccc;
   }
 
-  &.show-vertical-connector:after {
-    content: '';
-    position: absolute;
-    left: 30px;
-    top: 100%;
-    height: 28px;
-    width: 1px;
-    background-color: #ccc;
-  }
-
   &.show-horizontal-connector:before {
     content: '';
     position: absolute;
@@ -73,6 +63,16 @@ export const StyledFieldContainer = styled.div`
     top: 50%;
     height: 1px;
     width: 25px;
+    background-color: #ccc;
+  }
+
+  &.show-vertical-connector:after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 100%;
+    height: 28px;
+    width: 1px;
     background-color: #ccc;
   }
 `;

@@ -37,10 +37,22 @@ const FilterOperator: React.FC<any> = () => {
 
 const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
   const [value, setValue] = React.useState();
+  const [showHorizontalConnector, setShowHorizontalConnector] = React.useState(false);
+
+  console.log('FilterGroup', index);
 
   const handleChange = (e: any, { value }: any) => {
     setValue(value);
     dispatch({ type: 'UPDATE_FILTER', payload: { value } });
+  };
+
+  const handleAddBtnClick = () => {
+    onAddBtnClick();
+    setShowHorizontalConnector(true);
+  };
+
+  const handleRemoveBtnClick = () => {
+    onRemoveBtnClick(index);
   };
 
   return (
@@ -49,7 +61,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
-          <StyledFieldContainer className="show-horizontal-connector">
+          <StyledFieldContainer className={showHorizontalConnector || index > 0 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
               onChange={handleChange}
               options={fields}
@@ -66,8 +78,8 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
           </StyledFieldContainer>
           <StyledActionGroup>
             <StyledFieldContainer>
-              <Button icon="add" onClick={onAddBtnClick} size="mini" />
-              {index !== 0 ? <Button icon="close" onClick={() => onRemoveBtnClick(index)} size="mini" /> : null}
+              <Button icon="add" onClick={handleAddBtnClick} size="mini" />
+              {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
             </StyledFieldContainer>
           </StyledActionGroup>
           {/* {index} */}
