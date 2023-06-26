@@ -49,7 +49,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
-          <StyledFieldContainer>
+          <StyledFieldContainer className="show-horizontal-connector">
             <StyledDropdown
               onChange={handleChange}
               options={fields}

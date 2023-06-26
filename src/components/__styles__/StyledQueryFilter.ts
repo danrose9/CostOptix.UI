@@ -65,6 +65,16 @@ export const StyledFieldContainer = styled.div`
     width: 1px;
     background-color: #ccc;
   }
+
+  &.show-horizontal-connector:before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    height: 1px;
+    width: 25px;
+    background-color: #ccc;
+  }
 `;
 
 export const ComponentContainer = styled.div`
