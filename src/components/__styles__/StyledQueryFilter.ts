@@ -9,7 +9,7 @@ export const StyledGrid = styled(Grid)`
   }
 
   &.filter-operator {
-    margin: 0 !important;
+    margin: 0 -30px !important;
   }
 
   &.query-result {
