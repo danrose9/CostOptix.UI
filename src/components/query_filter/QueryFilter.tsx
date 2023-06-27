@@ -60,7 +60,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
 
   const onRemoveBtnClick = (index: number) => {
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
-    console.log(updatedFilterGroup);
+
     setFilterGroup(updatedFilterGroup);
   };
 
@@ -68,6 +68,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
     <PageLayout title="Query Filter">
       {filterGroup.map((filter: any, index: any) => (
         <FilterGroup
+          count={filterGroup.length}
           key={index}
           index={index}
           onRemoveBtnClick={onRemoveBtnClick}
