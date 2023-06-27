@@ -35,11 +35,8 @@ const FilterOperator: React.FC<any> = () => {
   );
 };
 
-const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
+const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
   const [value, setValue] = React.useState();
-  const [showHorizontalConnector, setShowHorizontalConnector] = React.useState(false);
-
-  console.log('FilterGroup', index);
 
   const handleChange = (e: any, { value }: any) => {
     setValue(value);
@@ -48,7 +45,6 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
 
   const handleAddBtnClick = () => {
     onAddBtnClick();
-    setShowHorizontalConnector(true);
   };
 
   const handleRemoveBtnClick = () => {
@@ -61,7 +57,7 @@ const FilterGroup: React.FC<any> = ({ index, onRemoveBtnClick, onAddBtnClick, di
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
-          <StyledFieldContainer className={showHorizontalConnector || index > 0 ? 'show-horizontal-connector' : ''}>
+          <StyledFieldContainer className={count > 1 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
               onChange={handleChange}
               options={fields}

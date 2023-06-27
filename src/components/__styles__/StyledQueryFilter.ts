@@ -45,35 +45,35 @@ export const StyledFieldContainer = styled.div`
   position: relative;
   margin: 0;
 
-  &.show-vertical-connector:before {
-    content: '';
-    position: absolute;
-    left: 30px;
-    top: -80%;
-    // height: calc(100% + 10px);
-    height: 30px;
-    width: 1px;
-    background-color: #ccc;
-  }
-
-  &.show-horizontal-connector:before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 50%;
-    height: 1px;
-    width: 25px;
-    background-color: #ccc;
-  }
-
+  &.show-vertical-connector:before,
+  &.show-horizontal-connector:before,
   &.show-vertical-connector:after {
     content: '';
     position: absolute;
-    left: 30px;
-    top: 100%;
-    height: 28px;
-    width: 1px;
     background-color: #ccc;
+  }
+
+  &.show-vertical-connector:before,
+  &.show-vertical-connector:after {
+    width: 1px;
+    left: 30px;
+  }
+
+  &.show-vertical-connector:before {
+    top: -80%;
+    height: calc(100% - 5px);
+  }
+
+  &.show-horizontal-connector:before {
+    top: 48%;
+    left: -12%;
+    height: 1px;
+    width: 25px;
+  }
+
+  &.show-vertical-connector:after {
+    top: 100%;
+    height: calc(100% - 7px);
   }
 `;
 
