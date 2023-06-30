@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Segment, Dropdown, Table, SemanticWIDTHS } from 'semantic-ui-react';
+import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 
@@ -24,6 +24,11 @@ export const SegmentName = styled.div`
   font-size: 1.5em;
 `;
 
+const AddNewContainerRow = styled(Table.Row)`
+  cursor: pointer;
+  color: #283142;
+`;
+
 const table = {
   headers: [
     { name: 'Container', width: 5, align: 'left' },
@@ -38,9 +43,7 @@ type textAlignType = 'center' | 'left' | 'right' | undefined;
 type widthType = SemanticWIDTHS | undefined;
 
 interface ICostContainerTableProps {
-  selectContainerDetail: (container: any) => void;
-
-  containers: {
+  containers?: {
     name: string;
     description: string;
     created: string;
@@ -52,7 +55,23 @@ interface ICostContainerTableProps {
     providers: string[];
     data: any[];
   }[];
+
+  selectContainerDetail: (container: any) => void;
 }
+
+const AddNewContainer = () => {
+  return (
+    <AddNewContainerRow>
+      <Table.Cell width="16">
+        <Icon name="add" size="large" /> Add Container
+      </Table.Cell>
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
+    </AddNewContainerRow>
+  );
+};
 
 const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
   const { containers, selectContainerDetail } = props;
@@ -99,29 +118,35 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {containers.map((container, index) => {
-                return (
-                  <Table.Row style={{ cursor: 'pointer' }} key={index} onClick={() => selectContainerDetail(container)}>
-                    <Table.Cell singleLine>{container.name}</Table.Cell>
-                    <Table.Cell>
-                      <Dropdown
-                        icon="ellipsis horizontal"
-                        simple
-                        item
-                        direction="left"
-                        open={false}
-                        options={rowDropdownOptions}
-                      />
-                    </Table.Cell>
-                    <Table.Cell>
-                      <TinyLineChart data={container.data} width={150} height={50} dataKey="value" />
-                    </Table.Cell>
-                    <Table.Cell singleLine></Table.Cell>
-
-                    <Table.Cell singleLine textAlign="right"></Table.Cell>
-                  </Table.Row>
-                );
-              })}
+              {containers && containers.length > 0
+                ? containers.map((container, index) => (
+                    <>
+                      <Table.Row
+                        style={{ cursor: 'pointer' }}
+                        key={index}
+                        onClick={() => selectContainerDetail(container)}
+                      >
+                        <Table.Cell singleLine>{container.name}</Table.Cell>
+                        <Table.Cell>
+                          <Dropdown
+                            icon="ellipsis horizontal"
+                            simple
+                            item
+                            direction="left"
+                            open={false}
+                            options={rowDropdownOptions}
+                          />
+                        </Table.Cell>
+                        <Table.Cell style={{ padding: 0 }}>
+                          <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
+                        </Table.Cell>
+                        <Table.Cell singleLine></Table.Cell>
+                        <Table.Cell singleLine textAlign="right"></Table.Cell>
+                      </Table.Row>
+                    </>
+                  ))
+                : null}
+              <AddNewContainer />
             </Table.Body>
           </Table>
           <TableFooter>
