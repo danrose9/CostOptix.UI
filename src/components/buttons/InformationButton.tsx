@@ -11,7 +11,13 @@ export function InformationButton(props: IInformationButtonProps) {
 
   return (
     <Popup
-      trigger={<Icon name="info circle" style={{ color: '#3f6fbe', cursor: 'pointer', paddingLeft: '0.5em' }} />}
+      trigger={
+        <Icon
+          name="info circle"
+          style={{ color: '#3f6fbe', cursor: 'pointer', paddingLeft: '0.5em' }}
+          data-testid="info-icon"
+        />
+      }
       content={content}
       basic
       position="top left"

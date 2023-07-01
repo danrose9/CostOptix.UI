@@ -4,6 +4,7 @@ import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
+import CostContainerBuilder from './CostContainerBuilder';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -23,11 +24,6 @@ export const SegmentHeader = styled.div`
 
 export const SegmentName = styled.div`
   font-size: 1.5em;
-`;
-
-const AddNewContainerRow = styled(Table.Row)`
-  cursor: pointer;
-  color: #a9a9a9;
 `;
 
 const table = {
@@ -60,28 +56,21 @@ interface ICostContainerTableProps {
   selectContainerDetail: (container: any) => void;
 }
 
-const AddNewContainer = () => {
-  return (
-    <AddNewContainerRow>
-      <Table.Cell width="16">
-        <Icon name="add" size="large" /> Add Container
-      </Table.Cell>
-      <Table.Cell />
-      <Table.Cell />
-      <Table.Cell />
-      <Table.Cell />
-    </AddNewContainerRow>
-  );
-};
-
 const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
   const { containers, selectContainerDetail } = props;
 
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   const dropdownOptions = [
-    { key: 'add', text: 'Add', value: 'add', icon: 'add' },
-    { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus', onClick: () => console.log('minimize') },
+    { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
+    {
+      key: 'minimize',
+      text: 'Minimize',
+      value: 'minimize',
+      icon: 'minus',
+      onClick: () => console.log('minimize'),
+      disabled: true,
+    },
   ];
 
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
@@ -151,7 +140,7 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
                     </>
                   ))
                 : null}
-              <AddNewContainer />
+              <CostContainerBuilder />
             </Table.Body>
           </Table>
           <TableFooter>
