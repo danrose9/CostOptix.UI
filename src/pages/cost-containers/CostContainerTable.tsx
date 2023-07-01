@@ -1,8 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Segment, Dropdown, Table, SemanticWIDTHS } from 'semantic-ui-react';
+import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
+import InformationButton from '../../components/buttons/InformationButton';
+import CostContainerBuilder from './CostContainerBuilder';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -38,9 +40,7 @@ type textAlignType = 'center' | 'left' | 'right' | undefined;
 type widthType = SemanticWIDTHS | undefined;
 
 interface ICostContainerTableProps {
-  selectContainerDetail: (container: any) => void;
-
-  containers: {
+  containers?: {
     name: string;
     description: string;
     created: string;
@@ -52,6 +52,8 @@ interface ICostContainerTableProps {
     providers: string[];
     data: any[];
   }[];
+
+  selectContainerDetail: (container: any) => void;
 }
 
 const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
@@ -60,9 +62,18 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   const dropdownOptions = [
-    { key: 'add', text: 'Add', value: 'add', icon: 'add' },
-    { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus', onClick: () => console.log('minimize') },
+    { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
+    {
+      key: 'minimize',
+      text: 'Minimize',
+      value: 'minimize',
+      icon: 'minus',
+      onClick: () => console.log('minimize'),
+      disabled: true,
+    },
   ];
+
+  var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
 
   const [dropdownValue, setDropdownValue] = React.useState('');
   return (
@@ -70,7 +81,9 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
       <TableContainer>
         <Segment color="blue">
           <SegmentHeader>
-            <SegmentName>Containers</SegmentName>
+            <SegmentName>
+              Containers <InformationButton content={tooltipContent} />
+            </SegmentName>
 
             <Dropdown
               //onChange={this.handleChange}
@@ -99,29 +112,35 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {containers.map((container, index) => {
-                return (
-                  <Table.Row style={{ cursor: 'pointer' }} key={index} onClick={() => selectContainerDetail(container)}>
-                    <Table.Cell singleLine>{container.name}</Table.Cell>
-                    <Table.Cell>
-                      <Dropdown
-                        icon="ellipsis horizontal"
-                        simple
-                        item
-                        direction="left"
-                        open={false}
-                        options={rowDropdownOptions}
-                      />
-                    </Table.Cell>
-                    <Table.Cell>
-                      <TinyLineChart data={container.data} width={150} height={50} dataKey="value" />
-                    </Table.Cell>
-                    <Table.Cell singleLine></Table.Cell>
-
-                    <Table.Cell singleLine textAlign="right"></Table.Cell>
-                  </Table.Row>
-                );
-              })}
+              {containers && containers.length > 0
+                ? containers.map((container, index) => (
+                    <>
+                      <Table.Row
+                        style={{ cursor: 'pointer' }}
+                        key={index}
+                        onClick={() => selectContainerDetail(container)}
+                      >
+                        <Table.Cell singleLine>{container.name}</Table.Cell>
+                        <Table.Cell>
+                          <Dropdown
+                            icon="ellipsis horizontal"
+                            simple
+                            item
+                            direction="left"
+                            open={false}
+                            options={rowDropdownOptions}
+                          />
+                        </Table.Cell>
+                        <Table.Cell style={{ padding: 0 }}>
+                          <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
+                        </Table.Cell>
+                        <Table.Cell singleLine></Table.Cell>
+                        <Table.Cell singleLine textAlign="right"></Table.Cell>
+                      </Table.Row>
+                    </>
+                  ))
+                : null}
+              <CostContainerBuilder />
             </Table.Body>
           </Table>
           <TableFooter>
