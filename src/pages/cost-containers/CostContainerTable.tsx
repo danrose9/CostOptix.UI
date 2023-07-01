@@ -80,8 +80,15 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   const dropdownOptions = [
-    { key: 'add', text: 'Add', value: 'add', icon: 'add' },
-    { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus', onClick: () => console.log('minimize') },
+    { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
+    {
+      key: 'minimize',
+      text: 'Minimize',
+      value: 'minimize',
+      icon: 'minus',
+      onClick: () => console.log('minimize'),
+      disabled: true,
+    },
   ];
 
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
