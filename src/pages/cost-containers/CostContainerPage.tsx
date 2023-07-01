@@ -5,20 +5,7 @@ import { Table, Segment, Dropdown } from 'semantic-ui-react';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
 
-const containers = [
-  {
-    name: '',
-    description: '',
-    created: '',
-    createdBy: '',
-    owner: '',
-    resourceCount: 24,
-    monthlyCosts: '',
-    currency: '',
-    providers: [],
-    data: [],
-  },
-];
+const containers = [{}];
 
 interface ContainerProps {
   selected?: boolean;
@@ -58,7 +45,7 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
     <PageLayout title="Cost Containers">
       <ComponentContainer>
         <CostContainersList>
-          <CostContainerTable containers={containers} selectContainerDetail={selectContainerDetail} />
+          <CostContainerTable selectContainerDetail={selectContainerDetail} />
         </CostContainersList>
         {/* <ContainerDetail>
           <CostContainerDetail container={selectedCostContainer} expandContainer={expandContainer} />
