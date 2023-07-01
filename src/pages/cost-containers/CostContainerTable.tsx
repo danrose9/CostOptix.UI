@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
+import InformationButton from '../../components/buttons/InformationButton';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -26,7 +27,7 @@ export const SegmentName = styled.div`
 
 const AddNewContainerRow = styled(Table.Row)`
   cursor: pointer;
-  color: #283142;
+  color: #a9a9a9;
 `;
 
 const table = {
@@ -83,13 +84,17 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
     { key: 'minimize', text: 'Minimize', value: 'minimize', icon: 'minus', onClick: () => console.log('minimize') },
   ];
 
+  var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
+
   const [dropdownValue, setDropdownValue] = React.useState('');
   return (
     <>
       <TableContainer>
         <Segment color="blue">
           <SegmentHeader>
-            <SegmentName>Containers</SegmentName>
+            <SegmentName>
+              Containers <InformationButton content={tooltipContent} />
+            </SegmentName>
 
             <Dropdown
               //onChange={this.handleChange}
