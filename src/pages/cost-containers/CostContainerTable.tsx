@@ -52,15 +52,95 @@ interface ICostContainerTableProps {
     providers: string[];
     data: any[];
   }[];
-
-  selectContainerDetail: (container: any) => void;
+  handleAddContainer: () => void;
 }
 
-const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
-  const { containers, selectContainerDetail } = props;
+const AddNewContainerRow = styled(Table.Row)`
+  cursor: pointer;
+  color: #a9a9a9;
+`;
 
+interface IAddNewContainerProps {
+  handleAddContainer: () => void;
+}
+
+function AddNewContainer(props: IAddNewContainerProps) {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <AddNewContainerRow>
+      <Table.Cell width="16" onClick={props.handleAddContainer}>
+        <Icon name="add" size="large" /> Add Container
+      </Table.Cell>
+    </AddNewContainerRow>
+  );
+}
+
+const TableContents: React.FunctionComponent<ICostContainerTableProps> = (props) => {
+  const { containers, handleAddContainer } = props;
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
+  return (
+    <>
+      <Table fixed striped>
+        <Table.Header>
+          <Table.Row>
+            {table.headers.map((header, index) => {
+              return (
+                <Table.HeaderCell
+                  key={index}
+                  textAlign={header.align as textAlignType}
+                  width={header.width as widthType}
+                >
+                  {header.name}
+                </Table.HeaderCell>
+              );
+            })}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {containers && containers.length > 0
+            ? containers.map((container, index) => (
+                <>
+                  <Table.Row style={{ cursor: 'pointer' }} key={index}>
+                    <Table.Cell singleLine>{container.name}</Table.Cell>
+                    <Table.Cell>
+                      <Dropdown
+                        icon="ellipsis horizontal"
+                        simple
+                        item
+                        direction="left"
+                        open={false}
+                        options={rowDropdownOptions}
+                      />
+                    </Table.Cell>
+                    <Table.Cell style={{ padding: 0 }}>
+                      <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
+                    </Table.Cell>
+                    <Table.Cell singleLine></Table.Cell>
+                    <Table.Cell singleLine textAlign="right"></Table.Cell>
+                  </Table.Row>
+                </>
+              ))
+            : null}
+          <AddNewContainer handleAddContainer={handleAddContainer} />
+        </Table.Body>
+      </Table>
+      <TableFooter>
+        <TablePaging totalPages={1} totalResults={1} pageSize={1}></TablePaging>
+      </TableFooter>
+    </>
+  );
+};
+
+const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
+  const [showAddContainer, setShowAddContainer] = React.useState(false);
+  const [dropdownValue, setDropdownValue] = React.useState('');
+
+  const handleAddContainer = () => {
+    setShowAddContainer(true);
+  };
+
+  const { containers } = props;
   const dropdownOptions = [
     { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
     {
@@ -72,10 +152,8 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
       disabled: true,
     },
   ];
-
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
 
-  const [dropdownValue, setDropdownValue] = React.useState('');
   return (
     <>
       <TableContainer>
@@ -95,57 +173,11 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
               item
             />
           </SegmentHeader>
-          <Table fixed striped>
-            <Table.Header>
-              <Table.Row>
-                {table.headers.map((header, index) => {
-                  return (
-                    <Table.HeaderCell
-                      key={index}
-                      textAlign={header.align as textAlignType}
-                      width={header.width as widthType}
-                    >
-                      {header.name}
-                    </Table.HeaderCell>
-                  );
-                })}
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {containers && containers.length > 0
-                ? containers.map((container, index) => (
-                    <>
-                      <Table.Row
-                        style={{ cursor: 'pointer' }}
-                        key={index}
-                        onClick={() => selectContainerDetail(container)}
-                      >
-                        <Table.Cell singleLine>{container.name}</Table.Cell>
-                        <Table.Cell>
-                          <Dropdown
-                            icon="ellipsis horizontal"
-                            simple
-                            item
-                            direction="left"
-                            open={false}
-                            options={rowDropdownOptions}
-                          />
-                        </Table.Cell>
-                        <Table.Cell style={{ padding: 0 }}>
-                          <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
-                        </Table.Cell>
-                        <Table.Cell singleLine></Table.Cell>
-                        <Table.Cell singleLine textAlign="right"></Table.Cell>
-                      </Table.Row>
-                    </>
-                  ))
-                : null}
-              <CostContainerBuilder />
-            </Table.Body>
-          </Table>
-          <TableFooter>
-            <TablePaging totalPages={1} totalResults={1} pageSize={1}></TablePaging>
-          </TableFooter>
+          {!showAddContainer ? (
+            <TableContents containers={containers} handleAddContainer={handleAddContainer} />
+          ) : (
+            <CostContainerBuilder />
+          )}
         </Segment>
       </TableContainer>
     </>

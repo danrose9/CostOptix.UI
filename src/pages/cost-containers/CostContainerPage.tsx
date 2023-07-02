@@ -44,8 +44,12 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   return (
     <PageLayout title="Cost Containers">
       <ComponentContainer>
-        <CostContainersList>
-          <CostContainerTable selectContainerDetail={selectContainerDetail} />
+        <CostContainersList style={{ width: '100%' }}>
+          <CostContainerTable
+            handleAddContainer={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
         </CostContainersList>
         {/* <ContainerDetail>
           <CostContainerDetail container={selectedCostContainer} expandContainer={expandContainer} />
