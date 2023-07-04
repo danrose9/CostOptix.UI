@@ -4,8 +4,7 @@ import styled, { css } from 'styled-components';
 import { Table, Segment, Dropdown } from 'semantic-ui-react';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
-
-const containers = [{}];
+import { containers } from './containerData';
 
 interface ContainerProps {
   selected?: boolean;
@@ -46,6 +45,7 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
       <ComponentContainer>
         <CostContainersList style={{ width: '100%' }}>
           <CostContainerTable
+            containers={containers}
             handleAddContainer={function (): void {
               throw new Error('Function not implemented.');
             }}

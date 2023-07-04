@@ -65,7 +65,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   };
 
   return (
-    <PageLayout title="Query Filter">
+    <>
       {filterGroup.map((filter: any, index: any) => (
         <FilterGroup
           count={filterGroup.length}
@@ -78,7 +78,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
       ))}
 
       <FilterOutput value={filterOutput} />
-    </PageLayout>
+    </>
   );
 };
 export default QueryFilter;

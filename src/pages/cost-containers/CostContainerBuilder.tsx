@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Button, Modal, Table, Icon, Container, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
+import QueryFilter from '../../components/query_filter/QueryFilter';
 
 const AddNewContainerRow = styled(Table.Row)`
   cursor: pointer;
@@ -11,7 +12,11 @@ export interface ICostContainerBuilderProps {}
 
 export function CostContainerBuilder(props: ICostContainerBuilderProps) {
   const [open, setOpen] = React.useState(false);
-  return <Segment>Pellentesque habitant morbi tristique senectus.</Segment>;
+  return (
+    <Segment>
+      <QueryFilter />
+    </Segment>
+  );
 }
 
 export default CostContainerBuilder;
