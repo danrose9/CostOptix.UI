@@ -1,4 +1,4 @@
-const costContainers = [
+export const containers = [
   {
     name: 'Software Project 1',
     description:
@@ -77,6 +77,26 @@ const costContainers = [
       { value: 47000 },
       { value: 38500 },
       { value: 32090 },
+      { value: 25780 },
+      { value: 21890 },
+      { value: 23880 },
+      { value: 13980 },
+    ],
+  },
+  {
+    name: 'Software Project 2',
+    description: 'Description 2',
+    created: '13/01/2023',
+    createdBy: 'Donald Martin',
+    owner: 'Harry Wells',
+    resourceCount: 5,
+    monthlyCosts: '23,543.00',
+    currency: 'USD',
+    providers: ['AWS', 'Azure'],
+    data: [
+      { value: 87000 },
+      { value: 38500 },
+      { value: 132090 },
       { value: 25780 },
       { value: 21890 },
       { value: 23880 },

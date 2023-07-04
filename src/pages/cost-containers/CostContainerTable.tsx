@@ -5,6 +5,8 @@ import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
 import CostContainerBuilder from './CostContainerBuilder';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import '../../components/__styles__/fade.css';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -64,16 +66,20 @@ interface IAddNewContainerProps {
   handleAddContainer: () => void;
 }
 
-function AddNewContainer(props: IAddNewContainerProps) {
+const AddNewContainer = (props: IAddNewContainerProps) => {
   const [open, setOpen] = React.useState(false);
   return (
-    <AddNewContainerRow>
-      <Table.Cell width="16" onClick={props.handleAddContainer}>
+    <AddNewContainerRow onClick={props.handleAddContainer}>
+      <Table.Cell width="16">
         <Icon name="add" size="large" /> Add Container
       </Table.Cell>
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
     </AddNewContainerRow>
   );
-}
+};
 
 const TableContents: React.FunctionComponent<ICostContainerTableProps> = (props) => {
   const { containers, handleAddContainer } = props;
@@ -173,11 +179,21 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
               item
             />
           </SegmentHeader>
-          {!showAddContainer ? (
-            <TableContents containers={containers} handleAddContainer={handleAddContainer} />
-          ) : (
-            <CostContainerBuilder />
-          )}
+          <SwitchTransition>
+            <CSSTransition
+              key={showAddContainer ? 'CostContainerBuilder' : 'TableContents'}
+              addEndListener={(node, done) => {
+                node.addEventListener('transitionend', done, false);
+              }}
+              classNames="fade"
+            >
+              {!showAddContainer ? (
+                <TableContents containers={containers} handleAddContainer={handleAddContainer} />
+              ) : (
+                <CostContainerBuilder />
+              )}
+            </CSSTransition>
+          </SwitchTransition>
         </Segment>
       </TableContainer>
     </>
