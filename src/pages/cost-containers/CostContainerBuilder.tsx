@@ -8,14 +8,29 @@ const AddNewContainerRow = styled(Table.Row)`
   color: #a9a9a9;
 `;
 
+const QueryContainer = styled.div`
+  display: flex;
+`;
+
+const StyledSegment = styled(Segment)`
+  margin: 0 !important;
+
+  &.result-container {
+    border: 1px solid red;
+  }
+`;
+
 export interface ICostContainerBuilderProps {}
 
 export function CostContainerBuilder(props: ICostContainerBuilderProps) {
   const [open, setOpen] = React.useState(false);
   return (
-    <Segment>
-      <QueryFilter />
-    </Segment>
+    <QueryContainer>
+      <StyledSegment>
+        <QueryFilter />
+      </StyledSegment>
+      <StyledSegment className="result-container"></StyledSegment>
+    </QueryContainer>
   );
 }
 
