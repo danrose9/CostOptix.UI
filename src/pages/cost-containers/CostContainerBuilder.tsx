@@ -16,7 +16,7 @@ const StyledSegment = styled(Segment)`
   margin: 0 !important;
 
   &.result-container {
-    border: 1px solid red;
+    width: -webkit-fill-available;
   }
 `;
 
