@@ -73,7 +73,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
             <StyledInput placeholder="Enter filter value" />
           </StyledFieldContainer>
           <StyledActionGroup>
-            <StyledFieldContainer>
+            <StyledFieldContainer className="action-buttons">
               <Button icon="add" onClick={handleAddBtnClick} size="mini" />
               {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
             </StyledFieldContainer>

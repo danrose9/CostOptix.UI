@@ -75,6 +75,11 @@ export const StyledFieldContainer = styled.div`
     top: 100%;
     height: calc(100% - 7px);
   }
+
+  &.action-buttons {
+    display: flex;
+    padding: 0;
+  }
 `;
 
 export const ComponentContainer = styled.div`
