@@ -60,7 +60,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
 
   const onRemoveBtnClick = (index: number) => {
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
-
+    console.log(`Filter group ${index} removed`);
     setFilterGroup(updatedFilterGroup);
   };
 
