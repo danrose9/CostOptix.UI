@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Button, Modal, Table, Icon, Container, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
-import QueryFilter from '../../components/query_filter/QueryFilter';
+import QueryFilter from '../../../components/query_filter/QueryFilter';
+import { CostContainerData } from './CostContainerData';
 
 const AddNewContainerRow = styled(Table.Row)`
   cursor: pointer;
@@ -17,6 +18,8 @@ const StyledSegment = styled(Segment)`
 
   &.result-container {
     width: -webkit-fill-available;
+    max-height: 70vh;
+    overflow-y: auto;
   }
 `;
 
@@ -29,7 +32,9 @@ export function CostContainerBuilder(props: ICostContainerBuilderProps) {
       <StyledSegment>
         <QueryFilter />
       </StyledSegment>
-      <StyledSegment className="result-container"></StyledSegment>
+      <StyledSegment className="result-container">
+        <CostContainerData />
+      </StyledSegment>
     </QueryContainer>
   );
 }

@@ -77,7 +77,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
         />
       ))}
 
-      <FilterOutput value={filterOutput} />
+      {/* <FilterOutput value={filterOutput} /> */}
     </>
   );
 };
