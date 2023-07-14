@@ -1,6 +1,6 @@
 {
   "name": "costoptix.ui",
-  "version": "0.4.41",
+  "version": "0.4.42",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
@@ -20,6 +20,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
     "recharts": "^2.1.16",
     "redux-persist": "^6.0.0",
     "semantic-ui-css": "^2.5.0",
@@ -63,6 +64,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.4.0",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/react-transition-group": "^4.4.6",
     "@types/styled-components": "^5.1.26",
     "cypress": "^12.7.0",
     "dpdm": "^3.10.0",

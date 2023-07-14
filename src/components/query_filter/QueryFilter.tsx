@@ -1,16 +1,7 @@
 import React, { useState, useReducer } from 'react';
-import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
-import PageLayout from '../../pages/PageLayout';
-import styled from 'styled-components';
+import { Grid, Segment } from 'semantic-ui-react';
 import FilterGroup from './FilterGroup';
-
-import {
-  StyledResult,
-  StyledFilterGroup,
-  StyledFieldContainer,
-  StyledDropdown,
-  StyledFilterOutput,
-} from '../__styles__/StyledQueryFilter';
+import { StyledResult, StyledFilterOutput } from '../__styles__/StyledQueryFilter';
 
 interface IQueryFilterProps {}
 
@@ -20,6 +11,12 @@ const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
 
   switch (action.type) {
+    case 'APPEND_FILTER':
+      // Assume value is a JSON string
+      return JSON.stringify({
+        ...JSON.parse(state),
+        ...JSON.parse(value),
+      });
     case 'UPDATE_FILTER':
       return value;
     case 'RESET_FILTER':
@@ -60,12 +57,12 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
 
   const onRemoveBtnClick = (index: number) => {
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
-
+    console.log(`Filter group ${index} removed`);
     setFilterGroup(updatedFilterGroup);
   };
 
   return (
-    <PageLayout title="Query Filter">
+    <>
       {filterGroup.map((filter: any, index: any) => (
         <FilterGroup
           count={filterGroup.length}
@@ -78,7 +75,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
       ))}
 
       <FilterOutput value={filterOutput} />
-    </PageLayout>
+    </>
   );
 };
 export default QueryFilter;
