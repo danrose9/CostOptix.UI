@@ -28,13 +28,18 @@ export function CostContainerData(props: ICostContainerDataProps) {
         Use the query builder to create containers based on providers, organizations and other fields. Cost Containers .
       </p>
 
-      <SectionTitle>Container Information</SectionTitle>
       <Form size="small">
-        <StyledFormField label="Container Name" placeholder="Container Name" icon="users" value="" />
-        <StyledFormField label="Organization Id" readOnly placeholder="Organization Id" icon="address card outline" />
+        <Form.Input label="Container Name" placeholder="Container Name" icon="users" value="" />
+        <Form.TextArea
+          style={{ fontSize: '1.1rem', fontStyle: 'normal' }}
+          label="Container Description"
+          placeholder="Container Description"
+          icon="address card outline"
+        />
+        <StyledFormField label="Owner" readOnly placeholder="Owner" icon="address card outline" />
 
         <Button color="teal" disabled={false}>
-          Update
+          Add
         </Button>
       </Form>
     </div>
