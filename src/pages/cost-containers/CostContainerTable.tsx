@@ -4,7 +4,7 @@ import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
-import CostContainerBuilder from './CostContainerBuilder';
+import CostContainerBuilder from './builder/CostContainerBuilder';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
 

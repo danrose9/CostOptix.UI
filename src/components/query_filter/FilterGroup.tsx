@@ -78,7 +78,6 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
               {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
             </StyledFieldContainer>
           </StyledActionGroup>
-          {/* {index} */}
         </StyledFilterGroup>
       </StyledGrid>
     </React.Fragment>
