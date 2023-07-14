@@ -18,8 +18,8 @@ const StyledSegment = styled(Segment)`
 
   &.result-container {
     width: -webkit-fill-available;
-    max-height: 70vh;
-    overflow-y: auto;
+    // max-height: 100vh;
+    // overflow-y: auto;
   }
 `;
 
