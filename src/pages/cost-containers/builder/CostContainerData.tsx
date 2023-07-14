@@ -24,9 +24,7 @@ export function CostContainerData(props: ICostContainerDataProps) {
         investments.
       </p>
       <br />
-      <p>
-        Use the query builder to create containers based on providers, organizations and other fields. Cost Containers .
-      </p>
+      <p>Use the query builder to create containers based on providers, organizations and other fields.</p>
 
       <Form size="small">
         <Form.Input label="Container Name" placeholder="Container Name" icon="users" value="" />

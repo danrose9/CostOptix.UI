@@ -102,6 +102,6 @@ export const StyledResult = styled.div`
 export const StyledFilterOutput = styled(Grid)`
   position: fixed;
   bottom: 20px;
-  left: 250px;
+  left: 300px;
   right: 20px;
 `;

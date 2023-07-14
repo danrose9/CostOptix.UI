@@ -3,6 +3,7 @@ export const fields = [
   { key: 2, text: 'Billing Account', value: 'BillingAccountId' },
   { key: 3, text: 'Provider', value: 'CloudProvider' },
   { key: 4, text: 'Resource Id', value: '_id' },
+  { key: 5, text: 'Resource Name', value: 'name' },
 ];
 
 export const operators = [
