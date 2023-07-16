@@ -97,6 +97,8 @@ export const StyledResult = styled.div`
   font-family: monospace;
   white-space: pre;
   margin: 1em 0;
+  inline-size: 150px;
+  overflow-wrap: break-word;
 `;
 
 export const StyledFilterOutput = styled(Grid)`
