@@ -106,26 +106,24 @@ const TableContents: React.FunctionComponent<ICostContainerTableProps> = (props)
         <Table.Body>
           {containers && containers.length > 0
             ? containers.map((container, index) => (
-                <>
-                  <Table.Row style={{ cursor: 'pointer' }} key={index}>
-                    <Table.Cell singleLine>{container.name}</Table.Cell>
-                    <Table.Cell>
-                      <Dropdown
-                        icon="ellipsis horizontal"
-                        simple
-                        item
-                        direction="left"
-                        open={false}
-                        options={rowDropdownOptions}
-                      />
-                    </Table.Cell>
-                    <Table.Cell style={{ padding: 0 }}>
-                      <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
-                    </Table.Cell>
-                    <Table.Cell singleLine></Table.Cell>
-                    <Table.Cell singleLine textAlign="right"></Table.Cell>
-                  </Table.Row>
-                </>
+                <Table.Row style={{ cursor: 'pointer' }} key={index}>
+                  <Table.Cell singleLine>{container.name}</Table.Cell>
+                  <Table.Cell>
+                    <Dropdown
+                      icon="ellipsis horizontal"
+                      simple
+                      item
+                      direction="left"
+                      open={false}
+                      options={rowDropdownOptions}
+                    />
+                  </Table.Cell>
+                  <Table.Cell style={{ padding: 0 }}>
+                    <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
+                  </Table.Cell>
+                  <Table.Cell singleLine></Table.Cell>
+                  <Table.Cell singleLine textAlign="right"></Table.Cell>
+                </Table.Row>
               ))
             : null}
           <AddNewContainer handleAddContainer={handleAddContainer} />

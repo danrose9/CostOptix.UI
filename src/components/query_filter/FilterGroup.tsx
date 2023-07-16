@@ -11,6 +11,7 @@ import {
   StyledActionGroup,
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
+import { set } from 'immer/dist/internal';
 
 const FilterOperator: React.FC<any> = () => {
   const [value, setValue] = React.useState();
@@ -39,31 +40,22 @@ const FilterOperator: React.FC<any> = () => {
 const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
   const [field, setField] = React.useState();
   const [operator, setOperator] = React.useState();
-  const [value, setValue] = React.useState();
+  const [filterValue, setFilterValue] = React.useState('');
+  const [currentFilter, setCurrentFilter] = React.useState({ field: '', operator: '', value: '' });
 
-  const handleFieldChange = (e: any, { value }: any) => {
-    setField(value);
+  React.useEffect(() => {
     dispatch({
       type: 'APPEND_FILTER',
-      payload: { value: JSON.stringify({ field: value }) },
+      payload: { value: JSON.stringify(currentFilter) },
     });
-  };
+  }, [currentFilter, dispatch]);
 
-  const handleOperatorChange = (e: any, { value }: any) => {
-    setOperator(value);
-    dispatch({
-      type: 'APPEND_FILTER',
-      payload: { value: JSON.stringify({ operator: value }) },
-    });
-  };
-
-  const handleValueChange = (e: any, { value }: any) => {
-    setOperator(value);
-    dispatch({
-      type: 'APPEND_FILTER',
-      payload: { value: JSON.stringify({ value: value }) },
-    });
-  };
+  const handleFieldChange =
+    (attribute: string, setValue: Function) =>
+    (e: any, { value }: any) => {
+      setValue(value);
+      setCurrentFilter((prevFilter) => ({ ...prevFilter, [attribute]: value }));
+    };
 
   const handleAddBtnClick = () => {
     onAddBtnClick();
@@ -81,7 +73,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
         <StyledFilterGroup>
           <StyledFieldContainer className={count > 1 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
-              onChange={handleFieldChange}
+              onChange={handleFieldChange('field', setField)}
               options={fields}
               placeholder="Select field"
               selection
@@ -93,12 +85,16 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
               options={operators}
               placeholder="Select operator"
               selection
-              onChange={handleOperatorChange}
+              onChange={handleFieldChange('operator', setOperator)}
               value={operator}
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
-            <StyledInput placeholder="Enter filter value" onChange={handleValueChange} value={value} />
+            <StyledInput
+              placeholder="Enter filter value"
+              onChange={handleFieldChange('value', setFilterValue)}
+              value={filterValue}
+            />
           </StyledFieldContainer>
           <StyledActionGroup>
             <StyledFieldContainer className="action-buttons">
