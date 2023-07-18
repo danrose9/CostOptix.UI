@@ -1,26 +1,27 @@
 import React, { useState, useReducer } from 'react';
-import { Grid, Segment } from 'semantic-ui-react';
+import { Button, Grid, Segment } from 'semantic-ui-react';
 import FilterGroup from './FilterGroup';
-import { StyledResult, StyledFilterOutput } from '../__styles__/StyledQueryFilter';
+import { StyledResult, StyledFilterOutput, StyledResetButton } from '../__styles__/StyledQueryFilter';
 
 interface IQueryFilterProps {}
 
-const initialState = '{}';
+const filterInitialState = { field: '', operator: '', value: '' };
+const queryInitialState = '[]';
 
 const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
-
+  console.log('state', JSON.parse(state));
+  console.log('value', JSON.parse(value));
   switch (action.type) {
     case 'APPEND_FILTER':
-      // Assume value is a JSON string
-      return JSON.stringify({
-        ...JSON.parse(state),
-        ...JSON.parse(value),
-      });
+    //return value;
+    //return JSON.stringify([...JSON.parse(state), JSON.parse(value)]);
+    case 'ADD_CONDITIONAL_OPERATOR':
+      return value;
     case 'UPDATE_FILTER':
       return value;
     case 'RESET_FILTER':
-      return initialState;
+      return queryInitialState;
     default:
       throw new Error();
   }
@@ -40,17 +41,14 @@ const FilterOutput: React.FC<any> = (props) => {
 };
 
 const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
-  const [filterGroup, setFilterGroup] = useState<any>([<FilterGroup key={0} index={0} />]);
-  const [filterOutput, dispatch] = useReducer(updateFilterOutput, initialState);
+  const filterGroupInitialState = [<FilterGroup key={0} index={0} />];
+  const [filterGroup, setFilterGroup] = useState<any>(filterGroupInitialState);
+
+  const [filterOutput, dispatch] = useReducer(updateFilterOutput, queryInitialState);
 
   const onAddBtnClick = () => {
     const newFilterGroup = <FilterGroup key={filterGroup.length} onRemoveBtnClick={onRemoveBtnClick} />;
     const updatedFilterGroup = [...filterGroup, newFilterGroup];
-
-    // Add the class to the first instance of FilterGroup
-    // updatedFilterGroup[0] = React.cloneElement(updatedFilterGroup[0], {
-    //   className: 'show-horizontal-connector',
-    // });
 
     setFilterGroup(updatedFilterGroup);
   };
@@ -59,6 +57,11 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
     console.log(`Filter group ${index} removed`);
     setFilterGroup(updatedFilterGroup);
+  };
+
+  const handleReset = () => {
+    dispatch({ type: 'RESET_FILTER', payload: { value: queryInitialState } });
+    setFilterGroup(filterGroupInitialState);
   };
 
   return (
@@ -75,6 +78,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
       ))}
 
       <FilterOutput value={filterOutput} />
+      <StyledResetButton onClick={handleReset}>Reset</StyledResetButton>
     </>
   );
 };

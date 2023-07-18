@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
 import PageLayout from '../../pages/PageLayout';
 import styled from 'styled-components';
@@ -11,12 +11,24 @@ import {
   StyledActionGroup,
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
-import { set } from 'immer/dist/internal';
 
-const FilterOperator: React.FC<any> = () => {
+const FilterOperator: React.FC<any> = ({ dispatch }) => {
   const [value, setValue] = React.useState();
 
-  const handleChange = (e: any, { value }: any) => setValue(value);
+  useEffect(() => {
+    dispatch({
+      type: 'APPEND_FILTER',
+      payload: { value: JSON.stringify({ conditionalOperator: value }) },
+    });
+  }, [value, dispatch]);
+
+  const handleChange = (e: any, { value }: any) => {
+    setValue(value);
+    // dispatch({
+    //   type: 'ADD_CONDITIONAL_OPERATOR',
+    //   payload: { value: JSON.stringify({ conditionalOperator: value }) },
+    // });
+  };
 
   return (
     <StyledGrid columns={1} className="filter-operator">
@@ -38,14 +50,17 @@ const FilterOperator: React.FC<any> = () => {
 };
 
 const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
-  const [field, setField] = React.useState();
-  const [operator, setOperator] = React.useState();
-  const [filterValue, setFilterValue] = React.useState('');
-  const [currentFilter, setCurrentFilter] = React.useState({ field: '', operator: '', value: '' });
+  const filterInitialState = {};
 
-  React.useEffect(() => {
+  const [field, setField] = useState();
+  const [operator, setOperator] = useState();
+  const [filterValue, setFilterValue] = useState('');
+
+  const [currentFilter, setCurrentFilter] = useState(filterInitialState);
+
+  useEffect(() => {
     dispatch({
-      type: 'APPEND_FILTER',
+      type: 'UPDATE_FILTER',
       payload: { value: JSON.stringify(currentFilter) },
     });
   }, [currentFilter, dispatch]);
@@ -67,7 +82,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
   return (
     <React.Fragment>
-      {index !== 0 ? <FilterOperator /> : null}
+      {index !== 0 ? <FilterOperator dispatch={dispatch} /> : null}
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
@@ -109,3 +124,6 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 };
 
 export default FilterGroup;
+function dispatch(arg0: { type: string; payload: { value: string } }) {
+  throw new Error('Function not implemented.');
+}
