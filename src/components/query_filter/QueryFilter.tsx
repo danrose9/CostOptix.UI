@@ -10,14 +10,15 @@ const queryInitialState = '[]';
 
 const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
-  console.log('state', JSON.parse(state));
-  console.log('value', JSON.parse(value));
+  // console.log('state', JSON.parse(state));
+  // console.log('value', JSON.parse(value));
   switch (action.type) {
     case 'APPEND_FILTER':
-    //return value;
-    //return JSON.stringify([...JSON.parse(state), JSON.parse(value)]);
-    case 'ADD_CONDITIONAL_OPERATOR':
       return value;
+    case 'ADD_CONDITIONAL_OPERATOR':
+      console.log('ADD_CONDITIONAL_OPERATOR', JSON.parse(value));
+      console.log('STATE', state);
+      return JSON.stringify([...state, '{foo: "bar"}']);
     case 'UPDATE_FILTER':
       return value;
     case 'RESET_FILTER':
@@ -44,7 +45,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   const filterGroupInitialState = [<FilterGroup key={0} index={0} />];
   const [filterGroup, setFilterGroup] = useState<any>(filterGroupInitialState);
 
-  const [filterOutput, dispatch] = useReducer(updateFilterOutput, queryInitialState);
+  const [filterOutput, dispatch] = useReducer(updateFilterOutput, []);
 
   const onAddBtnClick = () => {
     const newFilterGroup = <FilterGroup key={filterGroup.length} onRemoveBtnClick={onRemoveBtnClick} />;

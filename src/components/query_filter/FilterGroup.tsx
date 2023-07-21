@@ -13,11 +13,11 @@ import {
 } from '../__styles__/StyledQueryFilter';
 
 const FilterOperator: React.FC<any> = ({ dispatch }) => {
-  const [value, setValue] = React.useState();
+  const [value, setValue] = React.useState('and');
 
   useEffect(() => {
     dispatch({
-      type: 'APPEND_FILTER',
+      type: 'ADD_CONDITIONAL_OPERATOR',
       payload: { value: JSON.stringify({ conditionalOperator: value }) },
     });
   }, [value, dispatch]);
@@ -40,7 +40,7 @@ const FilterOperator: React.FC<any> = ({ dispatch }) => {
             options={conditionalOperators}
             selection
             compact
-            defaultValue="and"
+            // defaultValue="and"
             value={value}
           />
         </StyledFieldContainer>
@@ -50,7 +50,7 @@ const FilterOperator: React.FC<any> = ({ dispatch }) => {
 };
 
 const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
-  const filterInitialState = {};
+  const filterInitialState = { field: '', operator: '', value: '' };
 
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
@@ -59,10 +59,11 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
   const [currentFilter, setCurrentFilter] = useState(filterInitialState);
 
   useEffect(() => {
-    dispatch({
-      type: 'UPDATE_FILTER',
-      payload: { value: JSON.stringify(currentFilter) },
-    });
+    console.log('currentFilter', currentFilter);
+    // dispatch({
+    //   type: 'APPEND_FILTER',
+    //   payload: { value: JSON.stringify(currentFilter) },
+    // });
   }, [currentFilter, dispatch]);
 
   const handleFieldChange =
@@ -78,6 +79,10 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
   const handleRemoveBtnClick = () => {
     onRemoveBtnClick(index);
+  };
+
+  const limitFilter = () => {
+    return true;
   };
 
   return (
@@ -113,7 +118,9 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
           </StyledFieldContainer>
           <StyledActionGroup>
             <StyledFieldContainer className="action-buttons">
-              {index === 0 ? <Button icon="add" onClick={handleAddBtnClick} size="mini" /> : null}
+              {index === 0 ? (
+                <Button icon="add" onClick={handleAddBtnClick} size="mini" disabled={count === 5} />
+              ) : null}
               {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
             </StyledFieldContainer>
           </StyledActionGroup>
@@ -124,6 +131,3 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 };
 
 export default FilterGroup;
-function dispatch(arg0: { type: string; payload: { value: string } }) {
-  throw new Error('Function not implemented.');
-}
