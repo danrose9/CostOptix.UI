@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
-import PageLayout from '../../pages/PageLayout';
-import styled from 'styled-components';
+import { Button } from 'semantic-ui-react';
 import { fields, operators, conditionalOperators } from './operators';
 import {
   StyledDropdown,
@@ -18,16 +16,12 @@ const FilterOperator: React.FC<any> = ({ dispatch }) => {
   useEffect(() => {
     dispatch({
       type: 'ADD_CONDITIONAL_OPERATOR',
-      payload: { value: JSON.stringify({ conditionalOperator: value }) },
+      payload: { value: { conditionalOperator: value } },
     });
   }, [value, dispatch]);
 
   const handleChange = (e: any, { value }: any) => {
     setValue(value);
-    // dispatch({
-    //   type: 'ADD_CONDITIONAL_OPERATOR',
-    //   payload: { value: JSON.stringify({ conditionalOperator: value }) },
-    // });
   };
 
   return (
@@ -40,7 +34,6 @@ const FilterOperator: React.FC<any> = ({ dispatch }) => {
             options={conditionalOperators}
             selection
             compact
-            // defaultValue="and"
             value={value}
           />
         </StyledFieldContainer>
@@ -60,10 +53,10 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
   useEffect(() => {
     console.log('currentFilter', currentFilter);
-    // dispatch({
-    //   type: 'APPEND_FILTER',
-    //   payload: { value: JSON.stringify(currentFilter) },
-    // });
+    dispatch({
+      type: 'ADD_FILTER',
+      payload: { value: currentFilter },
+    });
   }, [currentFilter, dispatch]);
 
   const handleFieldChange =
@@ -84,6 +77,8 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
   const limitFilter = () => {
     return true;
   };
+
+  const maxFilterLimit = 5;
 
   return (
     <React.Fragment>
@@ -119,7 +114,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
           <StyledActionGroup>
             <StyledFieldContainer className="action-buttons">
               {index === 0 ? (
-                <Button icon="add" onClick={handleAddBtnClick} size="mini" disabled={count === 5} />
+                <Button icon="add" onClick={handleAddBtnClick} size="mini" disabled={count === maxFilterLimit} />
               ) : null}
               {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
             </StyledFieldContainer>
