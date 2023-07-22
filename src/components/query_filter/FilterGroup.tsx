@@ -63,7 +63,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
     (attribute: string, setValue: Function) =>
     (e: any, { value }: any) => {
       setValue(value);
-      setCurrentFilter((prevFilter) => ({ ...prevFilter, [attribute]: value }));
+      setCurrentFilter((prevFilter) => ({ ...prevFilter, index, [attribute]: value }));
     };
 
   const handleAddBtnClick = () => {

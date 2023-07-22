@@ -11,7 +11,12 @@ const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
   switch (action.type) {
     case 'ADD_FILTER':
-      return [...state, value];
+      const index = state.findIndex((filter: any) => filter.id === value.id);
+      if (index >= 0) {
+        return state.map((filter: any, i: number) => (i === index ? value : filter));
+      } else {
+        return [...state, value];
+      }
     case 'ADD_CONDITIONAL_OPERATOR':
       return [...state, value];
     case 'UPDATE_FILTER':
