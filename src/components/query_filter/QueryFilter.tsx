@@ -5,23 +5,19 @@ import { StyledResult, StyledFilterOutput, StyledResetButton } from '../__styles
 
 interface IQueryFilterProps {}
 
-const filterInitialState = { field: '', operator: '', value: '' };
-const queryInitialState = '[]';
+const INITIAL_STATE = [] as any;
 
 const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
-  console.log('state', JSON.parse(state));
-  console.log('value', JSON.parse(value));
   switch (action.type) {
-    case 'APPEND_FILTER':
-    //return value;
-    //return JSON.stringify([...JSON.parse(state), JSON.parse(value)]);
+    case 'ADD_FILTER':
+      return [...state, value];
     case 'ADD_CONDITIONAL_OPERATOR':
-      return value;
+      return [...state, value];
     case 'UPDATE_FILTER':
       return value;
     case 'RESET_FILTER':
-      return queryInitialState;
+      return INITIAL_STATE;
     default:
       throw new Error();
   }
@@ -29,11 +25,12 @@ const updateFilterOutput = (state: any, action: any) => {
 
 const FilterOutput: React.FC<any> = (props) => {
   const { value } = props;
+  const jsonString = JSON.stringify(value, null);
   return (
     <StyledFilterOutput columns={1}>
       <Grid.Column>
         <Segment secondary>
-          <StyledResult>Query: {value}</StyledResult>
+          <StyledResult>Query: {jsonString}</StyledResult>
         </Segment>
       </Grid.Column>
     </StyledFilterOutput>
@@ -42,9 +39,9 @@ const FilterOutput: React.FC<any> = (props) => {
 
 const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   const filterGroupInitialState = [<FilterGroup key={0} index={0} />];
-  const [filterGroup, setFilterGroup] = useState<any>(filterGroupInitialState);
+  const [filterGroup, setFilterGroup] = useState<any>([filterGroupInitialState]);
 
-  const [filterOutput, dispatch] = useReducer(updateFilterOutput, queryInitialState);
+  const [filterOutput, dispatch] = useReducer(updateFilterOutput, INITIAL_STATE);
 
   const onAddBtnClick = () => {
     const newFilterGroup = <FilterGroup key={filterGroup.length} onRemoveBtnClick={onRemoveBtnClick} />;
@@ -60,7 +57,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   };
 
   const handleReset = () => {
-    dispatch({ type: 'RESET_FILTER', payload: { value: queryInitialState } });
+    dispatch({ type: 'RESET_FILTER', payload: { value: INITIAL_STATE } });
     setFilterGroup(filterGroupInitialState);
   };
 
