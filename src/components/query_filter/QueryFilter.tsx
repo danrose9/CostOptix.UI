@@ -23,7 +23,10 @@ const updateFilterOutput = (state: any, action: any) => {
         return [...state, value];
       }
     case 'ADD_CONDITIONAL_OPERATOR':
-      // Fetch the current maximum index in state
+      /* TODO: This currently just adds a new empty filter and conditional operator to the state */
+      /* TODO: When changing the conditional operator, it should update the existing filter */
+      /* TODO: maxIndex is not working as expected */
+
       const maxIndex = Math.max(...state.map((item: any) => Number(Object.keys(item)[0])));
 
       // Add the new filter with conditionalOperator to state
