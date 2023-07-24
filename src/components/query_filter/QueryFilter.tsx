@@ -11,6 +11,11 @@ const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
   switch (action.type) {
     case 'ADD_FILTER':
+      /* Returns the indexed filter that is being modified */
+      /* {"1":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
+
+      /* TODO: Replace entire object with value */
+      /* TODO: Add conditional operator to filter */
       const index = state.findIndex((filter: any) => filter.id === value.id);
       if (index >= 0) {
         return state.map((filter: any, i: number) => (i === index ? value : filter));
@@ -18,7 +23,22 @@ const updateFilterOutput = (state: any, action: any) => {
         return [...state, value];
       }
     case 'ADD_CONDITIONAL_OPERATOR':
-      return [...state, value];
+      // Fetch the current maximum index in state
+      const maxIndex = Math.max(...state.map((item: any) => Number(Object.keys(item)[0])));
+
+      // Add the new filter with conditionalOperator to state
+      return [
+        ...state,
+        {
+          [maxIndex + 1]: {
+            conditionalOperator: value.conditionalOperator,
+            field: '',
+            operator: '',
+            value: '',
+          },
+        },
+      ];
+
     case 'UPDATE_FILTER':
       return value;
     case 'RESET_FILTER':

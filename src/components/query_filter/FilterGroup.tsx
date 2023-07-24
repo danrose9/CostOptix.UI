@@ -10,7 +10,7 @@ import {
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
 
-const FilterOperator: React.FC<any> = ({ dispatch }) => {
+const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
   const [value, setValue] = React.useState('and');
 
   useEffect(() => {
@@ -42,17 +42,17 @@ const FilterOperator: React.FC<any> = ({ dispatch }) => {
   );
 };
 
-const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
-  const filterInitialState = { field: '', operator: '', value: '' };
+const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch, nextIndex }) => {
+  const filterInitialState = { [nextIndex !== undefined ? nextIndex : index]: { field: '', operator: '', value: '' } };
 
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
 
+  /* currentFilter is the current state of the indexed filter */
   const [currentFilter, setCurrentFilter] = useState(filterInitialState);
 
   useEffect(() => {
-    console.log('currentFilter', currentFilter);
     dispatch({
       type: 'ADD_FILTER',
       payload: { value: currentFilter },
@@ -62,8 +62,15 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
     (e: any, { value }: any) => {
+      console.log('handleFieldChange Index: ', index);
       setValue(value);
-      setCurrentFilter((prevFilter) => ({ ...prevFilter, index, [attribute]: value }));
+      setCurrentFilter((prevFilter) => {
+        /* prevFilter is the current state of the indexed filter */
+        /* index is the current index that is being changed */
+        const updatedFilter = { ...prevFilter };
+        updatedFilter[index][attribute as keyof (typeof updatedFilter)[typeof index]] = value;
+        return updatedFilter;
+      });
     };
 
   const handleAddBtnClick = () => {
@@ -82,7 +89,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
   return (
     <React.Fragment>
-      {index !== 0 ? <FilterOperator dispatch={dispatch} /> : null}
+      {index !== 0 ? <FilterOperator dispatch={dispatch} index={index} /> : null}
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
