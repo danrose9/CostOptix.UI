@@ -11,18 +11,23 @@ const updateFilterOutput = (state: any, action: any) => {
   const { value } = action.payload;
   switch (action.type) {
     case 'ADD_FILTER':
+      /* Responsible for adding a new filter to the state, if index is > 0 then this will also prepend a conditional operator */
       /* Returns the indexed filter that is being modified */
-      /* {"1":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
+      /* {"0":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
 
-      /* TODO: Replace entire object with value */
-      /* TODO: Add conditional operator to filter */
-      const index = state.findIndex((filter: any) => filter.id === value.id);
-      if (index >= 0) {
-        return state.map((filter: any, i: number) => (i === index ? value : filter));
-      } else {
-        return [...state, value];
+      let key = Object.keys(value);
+      let index = parseInt(key[0]);
+
+      if (index > 0) {
+        const filterWithConditionalOperator = {
+          [index]: { conditionalOperator: 'and', ...value[index] },
+        };
+        return [...state, filterWithConditionalOperator];
       }
-    case 'ADD_CONDITIONAL_OPERATOR':
+
+      return [...state, value];
+    case 'UPDATE_CONDITIONAL_OPERATOR':
+      /* Responsible for changing the value of the conditional operator based on the index */
       /* TODO: This currently just adds a new empty filter and conditional operator to the state */
       /* TODO: When changing the conditional operator, it should update the existing filter */
       /* TODO: maxIndex is not working as expected */
@@ -43,8 +48,18 @@ const updateFilterOutput = (state: any, action: any) => {
       ];
 
     case 'UPDATE_FILTER':
+      /* Responsible for updating the value of the filter based on the index */
+      /* TODO: Replace entire object with value */
+      /* TODO: Add conditional operator to filter */
       return value;
-    case 'RESET_FILTER':
+    case 'REMOVE_FILTER':
+      /* Responsible for removing the filter based on the index */
+      /* TODO: Remove conditional operator from filter based on index */
+      return value;
+    case 'RESET_QUERY':
+      /* Responsible for resetting the entire query */
+      /* TODO: Reset query to initial state */
+      /* TODO: Reset components to original state */
       return INITIAL_STATE;
     default:
       throw new Error();
