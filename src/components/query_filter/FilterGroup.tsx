@@ -14,10 +14,10 @@ const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
   const [value, setValue] = React.useState('and');
 
   useEffect(() => {
-    dispatch({
-      type: 'ADD_CONDITIONAL_OPERATOR',
-      payload: { value: { conditionalOperator: value } },
-    });
+    // dispatch({
+    //   type: 'UPDATE_CONDITIONAL_OPERATOR',
+    //   payload: { value: { conditionalOperator: value } },
+    // });
   }, [value, dispatch]);
 
   const handleChange = (e: any, { value }: any) => {
