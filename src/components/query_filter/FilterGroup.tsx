@@ -63,14 +63,14 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
     (attribute: string, setValue: Function) =>
     (e: any, { value }: any) => {
       console.log('handleFieldChange Index: ', index);
-      setValue(value);
-      setCurrentFilter((prevFilter) => {
-        /* prevFilter is the current state of the indexed filter */
-        /* index is the current index that is being changed */
-        const updatedFilter = { ...prevFilter };
-        updatedFilter[index][attribute as keyof (typeof updatedFilter)[typeof index]] = value;
-        return updatedFilter;
-      });
+      // setValue(value);
+      // setCurrentFilter((prevFilter) => {
+      //   /* prevFilter is the current state of the indexed filter */
+      //   /* index is the current index that is being changed */
+      //   const updatedFilter = { ...prevFilter };
+      //   updatedFilter[index][attribute as keyof (typeof updatedFilter)[typeof index]] = value;
+      //   return updatedFilter;
+      // });
     };
 
   const handleAddBtnClick = () => {
