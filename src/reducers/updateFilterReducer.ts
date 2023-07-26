@@ -17,8 +17,7 @@ export const updateFilterReducer = (state: any, action: any) => {
   switch (action.type) {
     case 'ADD_FILTER':
       /* Responsible for adding a new filter to the state, if index is > 0 then this will also prepend a conditional operator */
-      /* Returns the indexed filter that is being modified */
-      /* {"0":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
+      /* Returns the indexed filter that is being modified - {"0":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
 
       let key = Object.keys(value);
       let index = parseInt(key[0]);
@@ -35,6 +34,8 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* Responsible for updating the value of the filter based on the index */
       /* TODO: Replace entire object with value */
       /* TODO: Add conditional operator to filter */
+      /* TODO: I think there is quite a bt of work to do here as ADD_FILTER uses useEffect, so this will trigger ADD_FILTER again */
+
       return value;
     case 'UPDATE_CONDITIONAL_OPERATOR':
       /* Responsible for changing the value of the conditional operator based on the index */
@@ -78,7 +79,7 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* Responsible for resetting the entire query */
       /* TODO: Reset query to initial state */
       /* TODO: Reset components to original state */
-      return INITIAL_STATE;
+      console.log('Resetting filter', INITIAL_STATE);
     default:
       throw new Error();
   }
