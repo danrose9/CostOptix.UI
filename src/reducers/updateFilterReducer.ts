@@ -14,7 +14,7 @@ const FIELDS = {
 };
 
 export const updateFilterReducer = (state: any, action: any) => {
-  const { value } = action.payload;
+  const { value, index } = action.payload;
   switch (action.type) {
     case 'ADD_FILTER':
       /* Responsible for adding a new filter to the state, if index is > 0 then this will also prepend a conditional operator */
@@ -35,9 +35,8 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* Responsible for updating the value of the filter based on the index */
       /* TODO: Replace entire object with value */
       /* TODO: Add conditional operator to filter */
-      /* TODO: I think there is quite a bt of work to do here as ADD_FILTER uses useEffect, so this will trigger ADD_FILTER again */
-      console.log('UPDATE_FILTER', value);
-    // return value;
+      console.log('UPDATE_FILTER', action.payload);
+      return state;
     case 'UPDATE_CONDITIONAL_OPERATOR':
       /* Responsible for changing the value of the conditional operator based on the index */
       /* TODO: This currently just adds a new empty filter and conditional operator to the state */
