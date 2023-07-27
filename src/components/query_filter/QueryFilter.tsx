@@ -2,7 +2,7 @@ import React, { useState, useReducer } from 'react';
 import { Button, Grid, Segment } from 'semantic-ui-react';
 import FilterGroup from './FilterGroup';
 import { StyledResult, StyledFilterOutput, StyledResetButton } from '../__styles__/StyledQueryFilter';
-import { updateFilterReducer, INITIAL_STATE } from '../../reducers/updateFilterReducer';
+import { updateFilterReducer, INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 interface IQueryFilterProps {}
 
@@ -45,7 +45,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   };
 
   const handleReset = () => {
-    dispatch({ type: 'RESET_FILTER', payload: { value: INITIAL_STATE } });
+    dispatch({ type: 'RESET_QUERY', payload: { value: INTIAL_FILTER } });
     setFilterGroup(filterGroupInitialState);
   };
 
