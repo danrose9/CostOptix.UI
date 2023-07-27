@@ -9,6 +9,7 @@ import {
   StyledActionGroup,
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
+import FilterGroupActionButtons from './FilterGroupActionButtons';
 import { INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
@@ -43,9 +44,7 @@ const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
   );
 };
 
-const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch, nextIndex }) => {
-  const newFilter = { [nextIndex !== undefined ? nextIndex : index]: { field: '', operator: '', value: '' } };
-
+const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
@@ -53,20 +52,9 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
   /* currentFilter is the current state of the indexed filter */
   const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
 
-  useEffect(() => {
-    console.log('**useEffect fired**');
-    dispatch({
-      type: 'ADD_FILTER',
-      payload: { value: newFilter },
-    });
-  }, [dispatch]);
-
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
     (e: any, { value }: any) => {
-      console.log('handleFieldChange Index: ', index);
-      console.log('handleFieldChange value: ', value);
-
       setValue(value);
       setCurrentFilter((prevFilter: any) => {
         const updatedFilter = { ...prevFilter };
@@ -77,22 +65,12 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
       /* TODO: This dispatch is still firing ADD_FILTER action */
       /* TODO: The currentFilter should just be the current state of the filter with no index, pass the index in the payload */
-      dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter } });
+      // dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: index } });
     };
 
-  const handleAddBtnClick = () => {
-    onAddBtnClick();
-  };
-
-  const handleRemoveBtnClick = () => {
-    onRemoveBtnClick(index);
-  };
-
-  const limitFilter = () => {
-    return true;
-  };
-
-  const maxFilterLimit = 5;
+  useEffect(() => {
+    dispatch({ type: 'UPDATE_FILTER', payload: { currentFilter: currentFilter, index: index } });
+  }, [, currentFilter, index, dispatch]);
 
   return (
     <React.Fragment>
@@ -125,14 +103,13 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
               value={filterValue}
             />
           </StyledFieldContainer>
-          <StyledActionGroup>
-            <StyledFieldContainer className="action-buttons">
-              {index === 0 ? (
-                <Button icon="add" onClick={handleAddBtnClick} size="mini" disabled={count === maxFilterLimit} />
-              ) : null}
-              {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
-            </StyledFieldContainer>
-          </StyledActionGroup>
+          <FilterGroupActionButtons
+            onAddBtnClick={onAddBtnClick}
+            onRemoveBtnClick={onRemoveBtnClick}
+            index={index}
+            count={count}
+            dispatch={dispatch}
+          />
         </StyledFilterGroup>
       </StyledGrid>
     </React.Fragment>
