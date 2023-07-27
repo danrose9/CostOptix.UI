@@ -9,6 +9,7 @@ import {
   StyledActionGroup,
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
+import { INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
   const [value, setValue] = React.useState('and');
@@ -43,34 +44,40 @@ const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
 };
 
 const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch, nextIndex }) => {
-  const filterInitialState = { [nextIndex !== undefined ? nextIndex : index]: { field: '', operator: '', value: '' } };
+  const newFilter = { [nextIndex !== undefined ? nextIndex : index]: { field: '', operator: '', value: '' } };
 
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
 
   /* currentFilter is the current state of the indexed filter */
-  const [currentFilter, setCurrentFilter] = useState(filterInitialState);
+  const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
 
   useEffect(() => {
+    console.log('**useEffect fired**');
     dispatch({
       type: 'ADD_FILTER',
-      payload: { value: currentFilter },
+      payload: { value: newFilter },
     });
-  }, [currentFilter, dispatch]);
+  }, [dispatch]);
 
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
     (e: any, { value }: any) => {
       console.log('handleFieldChange Index: ', index);
-      // setValue(value);
-      // setCurrentFilter((prevFilter) => {
-      //   /* prevFilter is the current state of the indexed filter */
-      //   /* index is the current index that is being changed */
-      //   const updatedFilter = { ...prevFilter };
-      //   updatedFilter[index][attribute as keyof (typeof updatedFilter)[typeof index]] = value;
-      //   return updatedFilter;
-      // });
+      console.log('handleFieldChange value: ', value);
+
+      setValue(value);
+      setCurrentFilter((prevFilter: any) => {
+        const updatedFilter = { ...prevFilter };
+        updatedFilter[attribute] = value;
+
+        return updatedFilter;
+      });
+
+      /* TODO: This dispatch is still firing ADD_FILTER action */
+      /* TODO: The currentFilter should just be the current state of the filter with no index, pass the index in the payload */
+      dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter } });
     };
 
   const handleAddBtnClick = () => {

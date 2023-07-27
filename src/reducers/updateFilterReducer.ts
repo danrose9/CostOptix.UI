@@ -1,4 +1,5 @@
 export const INITIAL_STATE = [] as any;
+export const INTIAL_FILTER = [{ '0': { field: '', operator: '', value: '' } }];
 
 const CONDITIONAL_OPERATOR = {
   AND: 'and',
@@ -35,8 +36,8 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* TODO: Replace entire object with value */
       /* TODO: Add conditional operator to filter */
       /* TODO: I think there is quite a bt of work to do here as ADD_FILTER uses useEffect, so this will trigger ADD_FILTER again */
-
-      return value;
+      console.log('UPDATE_FILTER', value);
+    // return value;
     case 'UPDATE_CONDITIONAL_OPERATOR':
       /* Responsible for changing the value of the conditional operator based on the index */
       /* TODO: This currently just adds a new empty filter and conditional operator to the state */
@@ -79,7 +80,7 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* Responsible for resetting the entire query */
       /* TODO: Reset query to initial state */
       /* TODO: Reset components to original state */
-      console.log('Resetting filter', INITIAL_STATE);
+      return value;
     default:
       throw new Error();
   }
