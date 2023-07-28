@@ -15,11 +15,10 @@ const QueryContainer = styled.div`
 
 const StyledSegment = styled(Segment)`
   margin: 0 !important;
+  padding: 1em;
 
   &.result-container {
     width: -webkit-fill-available;
-    // max-height: 100vh;
-    // overflow-y: auto;
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Input, Dropdown, Grid } from 'semantic-ui-react';
+import { Input, Dropdown, Grid, Button } from 'semantic-ui-react';
 
 export const StyledGrid = styled(Grid)`
   margin: 0.7em !important;
@@ -95,8 +95,10 @@ export const StyledActionGroup = styled.div`
 export const StyledResult = styled.div`
   display: block;
   font-family: monospace;
-  white-space: pre;
+  // white-space: pre;
   margin: 1em 0;
+  height: 4em;
+  overflow-wrap: break-word;
 `;
 
 export const StyledFilterOutput = styled(Grid)`
@@ -104,4 +106,9 @@ export const StyledFilterOutput = styled(Grid)`
   bottom: 20px;
   left: 300px;
   right: 20px;
+`;
+
+export const StyledResetButton = styled(Button)`
+  position: absolute;
+  bottom: 10px;
 `;

@@ -1,21 +1,27 @@
-import * as React from 'react';
-import { Dropdown, Grid, Segment, Input, Button } from 'semantic-ui-react';
-import PageLayout from '../../pages/PageLayout';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import { fields, operators, conditionalOperators } from './operators';
 import {
   StyledDropdown,
   StyledFilterGroup,
   StyledFieldContainer,
   StyledInput,
-  StyledActionGroup,
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
+import FilterGroupActionButtons from './FilterGroupActionButtons';
 
-const FilterOperator: React.FC<any> = () => {
-  const [value, setValue] = React.useState();
+const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
+  const [conditionalOperator, setConditionalOperator] = React.useState('and');
 
-  const handleChange = (e: any, { value }: any) => setValue(value);
+  useEffect(() => {
+    dispatch({
+      type: 'UPDATE_CONDITIONAL_OPERATOR',
+      payload: { value: conditionalOperator, index: index },
+    });
+  }, [conditionalOperator, dispatch]);
+
+  const handleChange = (e: any, { value }: any) => {
+    setConditionalOperator(value);
+  };
 
   return (
     <StyledGrid columns={1} className="filter-operator">
@@ -27,8 +33,7 @@ const FilterOperator: React.FC<any> = () => {
             options={conditionalOperators}
             selection
             compact
-            defaultValue="and"
-            value={value}
+            value={conditionalOperator}
           />
         </StyledFieldContainer>
       </StyledFilterGroup>
@@ -37,51 +42,38 @@ const FilterOperator: React.FC<any> = () => {
 };
 
 const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
-  const [field, setField] = React.useState();
-  const [operator, setOperator] = React.useState();
-  const [value, setValue] = React.useState();
+  const [field, setField] = useState();
+  const [operator, setOperator] = useState();
+  const [filterValue, setFilterValue] = useState('');
 
-  const handleFieldChange = (e: any, { value }: any) => {
-    setField(value);
-    dispatch({
-      type: 'APPEND_FILTER',
-      payload: { value: JSON.stringify({ field: value }) },
-    });
-  };
+  /* currentFilter is the current state of the indexed filter */
+  const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
 
-  const handleOperatorChange = (e: any, { value }: any) => {
-    setOperator(value);
-    dispatch({
-      type: 'APPEND_FILTER',
-      payload: { value: JSON.stringify({ operator: value }) },
-    });
-  };
+  const handleFieldChange =
+    (attribute: string, setValue: Function) =>
+    (e: any, { value }: any) => {
+      setValue(value);
+      setCurrentFilter((prevFilter: any) => {
+        const updatedFilter = { ...prevFilter };
+        updatedFilter[attribute] = value;
 
-  const handleValueChange = (e: any, { value }: any) => {
-    setOperator(value);
-    dispatch({
-      type: 'APPEND_FILTER',
-      payload: { value: JSON.stringify({ value: value }) },
-    });
-  };
+        return updatedFilter;
+      });
+    };
 
-  const handleAddBtnClick = () => {
-    onAddBtnClick();
-  };
-
-  const handleRemoveBtnClick = () => {
-    onRemoveBtnClick(index);
-  };
+  useEffect(() => {
+    dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: index } });
+  }, [currentFilter, dispatch, index]);
 
   return (
     <React.Fragment>
-      {index !== 0 ? <FilterOperator /> : null}
+      {index !== 0 ? <FilterOperator dispatch={dispatch} index={index} /> : null}
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup>
           <StyledFieldContainer className={count > 1 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
-              onChange={handleFieldChange}
+              onChange={handleFieldChange('field', setField)}
               options={fields}
               placeholder="Select field"
               selection
@@ -93,19 +85,24 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
               options={operators}
               placeholder="Select operator"
               selection
-              onChange={handleOperatorChange}
+              onChange={handleFieldChange('operator', setOperator)}
               value={operator}
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
-            <StyledInput placeholder="Enter filter value" onChange={handleValueChange} value={value} />
+            <StyledInput
+              placeholder="Enter filter value"
+              onChange={handleFieldChange('value', setFilterValue)}
+              value={filterValue}
+            />
           </StyledFieldContainer>
-          <StyledActionGroup>
-            <StyledFieldContainer className="action-buttons">
-              {index === 0 ? <Button icon="add" onClick={handleAddBtnClick} size="mini" /> : null}
-              {index !== 0 ? <Button icon="close" onClick={handleRemoveBtnClick} size="mini" /> : null}
-            </StyledFieldContainer>
-          </StyledActionGroup>
+          <FilterGroupActionButtons
+            onAddBtnClick={onAddBtnClick}
+            onRemoveBtnClick={onRemoveBtnClick}
+            index={index}
+            count={count}
+            dispatch={dispatch}
+          />
         </StyledFilterGroup>
       </StyledGrid>
     </React.Fragment>
