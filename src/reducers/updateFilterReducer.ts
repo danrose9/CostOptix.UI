@@ -18,7 +18,6 @@ export const updateFilterReducer = (state: any, action: any) => {
   switch (action.type) {
     case 'ADD_FILTER':
       /* Responsible for adding a new filter to the state, if index is > 0 then this will also prepend a conditional operator */
-      /* Returns the indexed filter that is being modified - {"0":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
 
       let key = Object.keys(value);
       let filterIndex = parseInt(key[0]);
@@ -33,21 +32,22 @@ export const updateFilterReducer = (state: any, action: any) => {
       return [...state, value];
     case 'UPDATE_FILTER':
       /* Responsible for updating the value of the filter based on the index */
-      /* TODO: Replace entire object with value */
-      /* TODO: Add conditional operator to filter */
-      // console.log('UPDATE_FILTER', action.payload);
-      // return state;
+      console.log('value', action.payload.value);
+      console.log('index', action.payload.index);
       const updatedState = state.map((filterObj: any, i: number) => {
         if (Number(Object.keys(filterObj)[0]) === index) {
           return {
-            [index]: value,
+            [index]: {
+              ...filterObj[index], // spread existing object to maintain the conditionalOperator
+              ...value, // spread new values to update field, operator, and value
+            },
           };
         }
         return filterObj;
       });
 
       console.log('updatedState', updatedState);
-      return state;
+      return updatedState;
     case 'UPDATE_CONDITIONAL_OPERATOR':
       /* Responsible for changing the value of the conditional operator based on the index */
       /* TODO: This currently just adds a new empty filter and conditional operator to the state */

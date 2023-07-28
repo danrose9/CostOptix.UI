@@ -69,7 +69,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
     };
 
   useEffect(() => {
-    dispatch({ type: 'UPDATE_FILTER', payload: { currentFilter: currentFilter, index: index } });
+    dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: index } });
   }, [currentFilter, dispatch, index]);
 
   return (
