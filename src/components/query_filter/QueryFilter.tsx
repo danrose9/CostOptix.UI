@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { Grid, Segment } from 'semantic-ui-react';
 import FilterGroup from './FilterGroup';
 import { StyledResult, StyledFilterOutput, StyledResetButton } from '../__styles__/StyledQueryFilter';
@@ -34,9 +34,8 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   };
 
   const onRemoveBtnClick = (index: number) => {
-    console.log('filterGroup before removal', filterGroup);
+    console.log('index ', index);
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
-    console.log(`Filter group ${index} removed`);
     setFilterGroup(updatedFilterGroup);
 
     /* Update filter output */
@@ -46,6 +45,10 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
     });
   };
 
+  useEffect(() => {
+    console.log('filterGroup ', filterGroup);
+  }, [filterGroup]);
+
   const handleReset = () => {
     dispatch({ type: 'RESET_QUERY', payload: { value: INTIAL_FILTER } });
     setFilterGroup(filterGroupInitialState);
@@ -53,7 +56,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
 
   return (
     <>
-      {filterGroup.map((filter: any, index: any) => (
+      {filterGroup.map((filter: any, index: number) => (
         <FilterGroup
           count={filterGroup.length}
           key={index}
