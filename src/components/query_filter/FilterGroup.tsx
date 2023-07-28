@@ -16,10 +16,10 @@ const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
   const [value, setValue] = React.useState('and');
 
   useEffect(() => {
-    // dispatch({
-    //   type: 'UPDATE_CONDITIONAL_OPERATOR',
-    //   payload: { value: { conditionalOperator: value } },
-    // });
+    dispatch({
+      type: 'UPDATE_CONDITIONAL_OPERATOR',
+      payload: { value: { conditionalOperator: value } },
+    });
   }, [value, dispatch]);
 
   const handleChange = (e: any, { value }: any) => {
@@ -70,7 +70,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
   useEffect(() => {
     dispatch({ type: 'UPDATE_FILTER', payload: { currentFilter: currentFilter, index: index } });
-  }, [, currentFilter, index, dispatch]);
+  }, [currentFilter, dispatch, index]);
 
   return (
     <React.Fragment>

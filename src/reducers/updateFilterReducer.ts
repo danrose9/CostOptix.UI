@@ -21,11 +21,11 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* Returns the indexed filter that is being modified - {"0":{"field":"BillingAccountId","operator":"gt","value":"bar"}} */
 
       let key = Object.keys(value);
-      let index = parseInt(key[0]);
+      let filterIndex = parseInt(key[0]);
 
-      if (index > 0) {
+      if (filterIndex > 0) {
         const filterWithConditionalOperator = {
-          [index]: { conditionalOperator: CONDITIONAL_OPERATOR.AND, ...value[index] },
+          [filterIndex]: { conditionalOperator: CONDITIONAL_OPERATOR.AND, ...value[filterIndex] },
         };
         return [...state, filterWithConditionalOperator];
       }
@@ -35,7 +35,18 @@ export const updateFilterReducer = (state: any, action: any) => {
       /* Responsible for updating the value of the filter based on the index */
       /* TODO: Replace entire object with value */
       /* TODO: Add conditional operator to filter */
-      console.log('UPDATE_FILTER', action.payload);
+      // console.log('UPDATE_FILTER', action.payload);
+      // return state;
+      const updatedState = state.map((filterObj: any, i: number) => {
+        if (Number(Object.keys(filterObj)[0]) === index) {
+          return {
+            [index]: value,
+          };
+        }
+        return filterObj;
+      });
+
+      console.log('updatedState', updatedState);
       return state;
     case 'UPDATE_CONDITIONAL_OPERATOR':
       /* Responsible for changing the value of the conditional operator based on the index */
@@ -46,17 +57,19 @@ export const updateFilterReducer = (state: any, action: any) => {
       const maxIndex = Math.max(...state.map((item: any) => Number(Object.keys(item)[0])));
 
       // Add the new filter with conditionalOperator to state
-      return [
-        ...state,
-        {
-          [maxIndex + 1]: {
-            [FIELDS.CONDITIONAL_OPERATOR]: value.conditionalOperator,
-            [FIELDS.FIELD]: '',
-            [FIELDS.OPERATOR]: '',
-            [FIELDS.VALUE]: '',
-          },
-        },
-      ];
+      // return [
+      //   ...state,
+      //   {
+      //     [maxIndex + 1]: {
+      //       [FIELDS.CONDITIONAL_OPERATOR]: value.conditionalOperator,
+      //       [FIELDS.FIELD]: '',
+      //       [FIELDS.OPERATOR]: '',
+      //       [FIELDS.VALUE]: '',
+      //     },
+      //   },
+      // ];
+      console.log('UPDATE_CONDITIONAL_OPERATOR', action.payload);
+      return state;
     case 'REMOVE_FILTER':
       /* Responsible for removing the filter based on the index */
 
