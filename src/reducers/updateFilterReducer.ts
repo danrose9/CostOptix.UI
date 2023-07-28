@@ -36,8 +36,8 @@ export const updateFilterReducer = (state: any, action: any) => {
         if (Number(Object.keys(filterObj)[0]) === index) {
           return {
             [index]: {
-              ...filterObj[index], // spread existing object to maintain the conditionalOperator
-              ...value, // spread new values to update field, operator, and value
+              ...filterObj[index],
+              ...value,
             },
           };
         }
@@ -51,8 +51,8 @@ export const updateFilterReducer = (state: any, action: any) => {
         if (Number(Object.keys(filterObj)[0]) === index) {
           return {
             [index]: {
-              ...filterObj[index], // spread existing object to maintain field, operator, and value
-              conditionalOperator: value, // update the conditionalOperator
+              ...filterObj[index],
+              conditionalOperator: value,
             },
           };
         }

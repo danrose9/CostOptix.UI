@@ -8,7 +8,6 @@ import {
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
 import FilterGroupActionButtons from './FilterGroupActionButtons';
-import { INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
   const [conditionalOperator, setConditionalOperator] = React.useState('and');
