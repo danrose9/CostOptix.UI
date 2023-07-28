@@ -32,9 +32,7 @@ export const updateFilterReducer = (state: any, action: any) => {
       return [...state, value];
     case 'UPDATE_FILTER':
       /* Responsible for updating the value of the filter based on the index */
-      console.log('value', action.payload.value);
-      console.log('index', action.payload.index);
-      const updatedState = state.map((filterObj: any, i: number) => {
+      const updatedFilterState = state.map((filterObj: any, i: number) => {
         if (Number(Object.keys(filterObj)[0]) === index) {
           return {
             [index]: {
@@ -46,30 +44,22 @@ export const updateFilterReducer = (state: any, action: any) => {
         return filterObj;
       });
 
-      console.log('updatedState', updatedState);
-      return updatedState;
+      return updatedFilterState;
     case 'UPDATE_CONDITIONAL_OPERATOR':
       /* Responsible for changing the value of the conditional operator based on the index */
-      /* TODO: This currently just adds a new empty filter and conditional operator to the state */
-      /* TODO: When changing the conditional operator, it should update the existing filter */
-      /* TODO: maxIndex is not working as expected */
+      const updatedConditionalState = state.map((filterObj: any, i: number) => {
+        if (Number(Object.keys(filterObj)[0]) === index) {
+          return {
+            [index]: {
+              ...filterObj[index], // spread existing object to maintain field, operator, and value
+              conditionalOperator: value, // update the conditionalOperator
+            },
+          };
+        }
+        return filterObj;
+      });
 
-      const maxIndex = Math.max(...state.map((item: any) => Number(Object.keys(item)[0])));
-
-      // Add the new filter with conditionalOperator to state
-      // return [
-      //   ...state,
-      //   {
-      //     [maxIndex + 1]: {
-      //       [FIELDS.CONDITIONAL_OPERATOR]: value.conditionalOperator,
-      //       [FIELDS.FIELD]: '',
-      //       [FIELDS.OPERATOR]: '',
-      //       [FIELDS.VALUE]: '',
-      //     },
-      //   },
-      // ];
-      console.log('UPDATE_CONDITIONAL_OPERATOR', action.payload);
-      return state;
+      return updatedConditionalState;
     case 'REMOVE_FILTER':
       /* Responsible for removing the filter based on the index */
 
@@ -89,9 +79,6 @@ export const updateFilterReducer = (state: any, action: any) => {
 
       return updatedArray;
     case 'RESET_QUERY':
-      /* Responsible for resetting the entire query */
-      /* TODO: Reset query to initial state */
-      /* TODO: Reset components to original state */
       return value;
     default:
       throw new Error();

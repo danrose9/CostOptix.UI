@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'semantic-ui-react';
 import { fields, operators, conditionalOperators } from './operators';
 import {
   StyledDropdown,
   StyledFilterGroup,
   StyledFieldContainer,
   StyledInput,
-  StyledActionGroup,
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
 import FilterGroupActionButtons from './FilterGroupActionButtons';
 import { INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
-  const [value, setValue] = React.useState('and');
+  const [conditionalOperator, setConditionalOperator] = React.useState('and');
 
   useEffect(() => {
     dispatch({
       type: 'UPDATE_CONDITIONAL_OPERATOR',
-      payload: { value: { conditionalOperator: value } },
+      payload: { value: conditionalOperator, index: index },
     });
-  }, [value, dispatch]);
+  }, [conditionalOperator, dispatch]);
 
   const handleChange = (e: any, { value }: any) => {
-    setValue(value);
+    setConditionalOperator(value);
   };
 
   return (
@@ -36,7 +34,7 @@ const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
             options={conditionalOperators}
             selection
             compact
-            value={value}
+            value={conditionalOperator}
           />
         </StyledFieldContainer>
       </StyledFilterGroup>
@@ -62,10 +60,6 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
         return updatedFilter;
       });
-
-      /* TODO: This dispatch is still firing ADD_FILTER action */
-      /* TODO: The currentFilter should just be the current state of the filter with no index, pass the index in the payload */
-      // dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: index } });
     };
 
   useEffect(() => {
