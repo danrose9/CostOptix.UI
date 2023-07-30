@@ -45,7 +45,6 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
-  const [indexCount, setIndexCount] = useState(index);
 
   /* currentFilter is the current state of the indexed filter */
   const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
@@ -64,7 +63,6 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
 
   useEffect(() => {
     dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: index } });
-    console.log('indexCount', indexCount);
   }, [currentFilter, dispatch, index]);
 
   return (
