@@ -34,14 +34,13 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
   };
 
   const onRemoveBtnClick = (index: number) => {
-    console.log('index ', index);
     const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
     setFilterGroup(updatedFilterGroup);
 
     /* Update filter output */
     dispatch({
       type: 'REMOVE_FILTER',
-      payload: { value: index },
+      payload: { value: updatedFilterGroup.length },
     });
   };
 
