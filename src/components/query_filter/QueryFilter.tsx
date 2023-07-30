@@ -44,10 +44,6 @@ const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
     });
   };
 
-  useEffect(() => {
-    console.log('filterGroup ', filterGroup);
-  }, [filterGroup]);
-
   const handleReset = () => {
     dispatch({ type: 'RESET_QUERY', payload: { value: INTIAL_FILTER } });
     setFilterGroup(filterGroupInitialState);
