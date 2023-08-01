@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fields, operators, conditionalOperators } from './operators';
+import { fields, operators } from './operators';
 import {
   StyledDropdown,
   StyledFilterGroup,
@@ -8,40 +8,18 @@ import {
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
 import FilterGroupActionButtons from './FilterGroupActionButtons';
+import FilterOperator from './FilterOperator';
 
-const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
-  const [conditionalOperator, setConditionalOperator] = React.useState('and');
+interface IFilterGroupProps {
+  count: number;
+  index: number;
+  onRemoveBtnClick: (index: number) => void;
+  onAddBtnClick: () => void;
+  dispatch: React.Dispatch<any>;
+  key: number;
+}
 
-  useEffect(() => {
-    dispatch({
-      type: 'UPDATE_CONDITIONAL_OPERATOR',
-      payload: { value: conditionalOperator, index: index },
-    });
-  }, [conditionalOperator, dispatch]);
-
-  const handleChange = (e: any, { value }: any) => {
-    setConditionalOperator(value);
-  };
-
-  return (
-    <StyledGrid columns={1} className="filter-operator">
-      <StyledFilterGroup>
-        <StyledFieldContainer className="show-vertical-connector">
-          <StyledDropdown
-            className="set-minimum-width"
-            onChange={handleChange}
-            options={conditionalOperators}
-            selection
-            compact
-            value={conditionalOperator}
-          />
-        </StyledFieldContainer>
-      </StyledFilterGroup>
-    </StyledGrid>
-  );
-};
-
-const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
+const FilterGroup: React.FC<IFilterGroupProps> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');

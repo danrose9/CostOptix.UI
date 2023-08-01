@@ -4,9 +4,11 @@ import FilterGroup from './FilterGroup';
 import { StyledResult, StyledFilterOutput, StyledResetButton } from '../__styles__/StyledQueryFilter';
 import { updateFilterReducer, INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
-interface IQueryFilterProps {}
+interface IFilterOutputProps {
+  value: string;
+}
 
-const FilterOutput: React.FC<any> = (props) => {
+const FilterOutput: React.FC<IFilterOutputProps> = (props) => {
   const { value } = props;
   const jsonString = JSON.stringify(value, null);
   return (
@@ -20,14 +22,42 @@ const FilterOutput: React.FC<any> = (props) => {
   );
 };
 
-const QueryFilter: React.FC<IQueryFilterProps> = (props) => {
-  const filterGroupInitialState = [<FilterGroup key={0} index={0} />];
+// Define error throwing functions
+const throwError = (): void => {
+  throw new Error('Function not implemented.');
+};
+const dispatchError = (value: any): void => {
+  throw new Error('Function not implemented.');
+};
+
+interface IQueryFilterProps {}
+
+const QueryFilter: React.FC<IQueryFilterProps> = () => {
+  const filterGroupInitialState = [
+    <FilterGroup
+      key={0}
+      index={0}
+      count={0}
+      onRemoveBtnClick={throwError}
+      onAddBtnClick={throwError}
+      dispatch={dispatchError}
+    />,
+  ];
   const [filterGroup, setFilterGroup] = useState<any>([filterGroupInitialState]);
 
   const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
 
   const onAddBtnClick = () => {
-    const newFilterGroup = <FilterGroup key={filterGroup.length} onRemoveBtnClick={onRemoveBtnClick} />;
+    const newFilterGroup = (
+      <FilterGroup
+        key={filterGroup.length}
+        onRemoveBtnClick={onRemoveBtnClick}
+        onAddBtnClick={throwError}
+        dispatch={dispatchError}
+        count={0}
+        index={0}
+      />
+    );
     const updatedFilterGroup = [...filterGroup, newFilterGroup];
 
     setFilterGroup(updatedFilterGroup);
