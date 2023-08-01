@@ -6,13 +6,6 @@ const CONDITIONAL_OPERATOR = {
   OR: 'or',
 };
 
-const FIELDS = {
-  FIELD: 'field',
-  OPERATOR: 'operator',
-  VALUE: 'value',
-  CONDITIONAL_OPERATOR: 'conditionalOperator',
-};
-
 export const updateFilterReducer = (state: any, action: any) => {
   const { value, index } = action.payload;
   switch (action.type) {
