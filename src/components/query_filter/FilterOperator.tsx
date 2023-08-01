@@ -26,6 +26,7 @@ const FilterOperator: React.FC<IFilterOperatorProps> = ({ dispatch, index }) => 
       <StyledFilterGroup>
         <StyledFieldContainer className="show-vertical-connector">
           <StyledDropdown
+            data-testid="conditional-operator"
             className="set-minimum-width"
             onChange={handleChange}
             options={conditionalOperators}
