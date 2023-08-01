@@ -48,7 +48,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({ count, index, onRemoveBtnCli
       {index !== 0 ? <FilterOperator dispatch={dispatch} index={index} /> : null}
 
       <StyledGrid columns={1} className="indent-right">
-        <StyledFilterGroup>
+        <StyledFilterGroup data-testid="filter-group">
           <StyledFieldContainer className={count > 1 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
               onChange={handleFieldChange('field', setField)}
