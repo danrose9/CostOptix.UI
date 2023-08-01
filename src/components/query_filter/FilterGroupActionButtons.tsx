@@ -43,8 +43,14 @@ export const FilterGroupActionButtons: React.FC<IFilterGroupActionButtonsProps> 
       <StyledFieldContainer className="action-buttons">
         {index === 0 ? (
           <React.Fragment>
-            <Button icon="add" onClick={handleAddBtnClick} size="mini" disabled={count === maxFilterLimit} />
-            <Button icon="close" onClick={handleRemoveBtnClick} size="mini" />
+            <Button
+              icon="add"
+              onClick={handleAddBtnClick}
+              size="mini"
+              disabled={count === maxFilterLimit}
+              data-testid="add-button"
+            />
+            <Button icon="close" onClick={handleRemoveBtnClick} size="mini" data-testid="remove-button" />
           </React.Fragment>
         ) : null}
       </StyledFieldContainer>
