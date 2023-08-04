@@ -1,13 +1,8 @@
-import React, { Fragment } from 'react';
-import { Button, Modal, Table, Icon, Container, Segment } from 'semantic-ui-react';
+import React from 'react';
+import { Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import QueryFilter from '../../../components/query_filter/QueryFilter';
 import { CostContainerData } from './CostContainerData';
-
-const AddNewContainerRow = styled(Table.Row)`
-  cursor: pointer;
-  color: #a9a9a9;
-`;
 
 const QueryContainer = styled.div`
   display: flex;
