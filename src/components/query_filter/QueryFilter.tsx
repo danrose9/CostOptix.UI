@@ -30,7 +30,7 @@ const dispatchError = (value: any): void => {
   throw new Error('Function not implemented.');
 };
 
-interface IQueryFilterProps {
+export interface IQueryFilterProps {
   updateSetIsQueryValid: (value: boolean) => void;
 }
 

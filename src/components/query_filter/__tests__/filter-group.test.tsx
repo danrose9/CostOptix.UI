@@ -1,13 +1,12 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { act } from 'react-dom/test-utils';
 import QueryFilter from '../QueryFilter';
 
 describe('FilterGroup', () => {
   let result;
   beforeEach(() => {
-    result = render(<QueryFilter />);
+    result = render(<QueryFilter updateSetIsQueryValid={jest.fn()} />);
   });
 
   test('renders QueryFilter component', () => {
