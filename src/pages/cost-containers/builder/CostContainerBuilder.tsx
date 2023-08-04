@@ -24,18 +24,23 @@ const StyledSegment = styled(Segment)`
 
 export interface ICostContainerBuilderProps {}
 
-export function CostContainerBuilder(props: ICostContainerBuilderProps) {
-  const [open, setOpen] = React.useState(false);
+export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = () => {
+  const [isQueryValid, setIsQueryValid] = React.useState<boolean>(false);
+
+  const updateSetIsQueryValid = (value: boolean) => {
+    setIsQueryValid(value);
+  };
+
   return (
     <QueryContainer>
       <StyledSegment>
-        <QueryFilter />
+        <QueryFilter updateSetIsQueryValid={updateSetIsQueryValid} />
       </StyledSegment>
       <StyledSegment className="result-container">
-        <CostContainerData />
+        <CostContainerData isQueryValid={isQueryValid} />
       </StyledSegment>
     </QueryContainer>
   );
-}
+};
 
 export default CostContainerBuilder;
