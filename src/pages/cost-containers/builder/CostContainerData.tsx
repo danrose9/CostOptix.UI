@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { Segment, Form } from 'semantic-ui-react';
-import { SectionTitle, StyledFormField } from '../../__styles__/settings.styles';
+import React, { useEffect } from 'react';
+import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 
@@ -8,13 +7,14 @@ const StyledForm = styled(Form)`
   font-family: Poppins;
 `;
 
-interface ICostContainerResourceData {}
+interface ICostContainerDataProps {
+  isQueryValid: boolean;
+}
 
-export interface ICostContainerDataProps {}
-
-export function CostContainerData(props: ICostContainerDataProps) {
+export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryValid }) => {
   const [containerName, setContainerName] = React.useState<string>('');
   const [containerOwner, setContainerOwner] = React.useState<string>('');
+  const [addButtonDisabled, setAddButtonDisabled] = React.useState<boolean>(true);
 
   const handleContainerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setContainerName(event.target.value);
@@ -23,6 +23,14 @@ export function CostContainerData(props: ICostContainerDataProps) {
   const handleContainerOwnerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setContainerOwner(event.target.value);
   };
+
+  useEffect(() => {
+    if (isQueryValid && containerName) {
+      setAddButtonDisabled(false);
+    } else {
+      setAddButtonDisabled(true);
+    }
+  }, [isQueryValid, containerName]);
 
   return (
     <div>
@@ -56,10 +64,10 @@ export function CostContainerData(props: ICostContainerDataProps) {
           value={containerOwner}
         />
 
-        <Button color="teal" disabled={false}>
+        <Button color="teal" disabled={addButtonDisabled}>
           Add
         </Button>
       </Form>
     </div>
   );
-}
+};

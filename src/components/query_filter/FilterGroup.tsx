@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fields, operators, conditionalOperators } from './operators';
+import { fields, operators } from './operators';
 import {
   StyledDropdown,
   StyledFilterGroup,
@@ -8,46 +8,45 @@ import {
   StyledGrid,
 } from '../__styles__/StyledQueryFilter';
 import FilterGroupActionButtons from './FilterGroupActionButtons';
+import FilterOperator from './FilterOperator';
 
-const FilterOperator: React.FC<any> = ({ dispatch, index }) => {
-  const [conditionalOperator, setConditionalOperator] = React.useState('and');
+interface IFilterGroupProps {
+  count: number;
+  index: number;
+  onRemoveBtnClick: (index: number) => void;
+  onAddBtnClick: () => void;
+  dispatch: React.Dispatch<any>;
+  key: number;
+  updateSetIsQueryValid: (value: boolean) => void;
+}
 
-  useEffect(() => {
-    dispatch({
-      type: 'UPDATE_CONDITIONAL_OPERATOR',
-      payload: { value: conditionalOperator, index: index },
-    });
-  }, [conditionalOperator, dispatch]);
-
-  const handleChange = (e: any, { value }: any) => {
-    setConditionalOperator(value);
-  };
-
-  return (
-    <StyledGrid columns={1} className="filter-operator">
-      <StyledFilterGroup>
-        <StyledFieldContainer className="show-vertical-connector">
-          <StyledDropdown
-            className="set-minimum-width"
-            onChange={handleChange}
-            options={conditionalOperators}
-            selection
-            compact
-            value={conditionalOperator}
-          />
-        </StyledFieldContainer>
-      </StyledFilterGroup>
-    </StyledGrid>
-  );
-};
-
-const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
+const FilterGroup: React.FC<IFilterGroupProps> = ({
+  count,
+  index,
+  onRemoveBtnClick,
+  onAddBtnClick,
+  dispatch,
+  updateSetIsQueryValid,
+}) => {
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
 
   /* currentFilter is the current state of the indexed filter */
   const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
+
+  const isValidValue = (value: any) => value !== undefined && value !== '';
+
+  const allFieldsValid = (field: any, operator: any, filterValue: any) =>
+    isValidValue(field) && isValidValue(operator) && isValidValue(filterValue);
+
+  useEffect(() => {
+    if (allFieldsValid(field, operator, filterValue)) {
+      updateSetIsQueryValid(true);
+    } else {
+      updateSetIsQueryValid(false);
+    }
+  }, [field, operator, filterValue, currentFilter, dispatch, index]);
 
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
@@ -70,7 +69,7 @@ const FilterGroup: React.FC<any> = ({ count, index, onRemoveBtnClick, onAddBtnCl
       {index !== 0 ? <FilterOperator dispatch={dispatch} index={index} /> : null}
 
       <StyledGrid columns={1} className="indent-right">
-        <StyledFilterGroup>
+        <StyledFilterGroup data-testid="filter-group">
           <StyledFieldContainer className={count > 1 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
               onChange={handleFieldChange('field', setField)}
