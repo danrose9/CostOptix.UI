@@ -17,15 +17,36 @@ interface IFilterGroupProps {
   onAddBtnClick: () => void;
   dispatch: React.Dispatch<any>;
   key: number;
+  updateSetIsQueryValid: (value: boolean) => void;
 }
 
-const FilterGroup: React.FC<IFilterGroupProps> = ({ count, index, onRemoveBtnClick, onAddBtnClick, dispatch }) => {
+const FilterGroup: React.FC<IFilterGroupProps> = ({
+  count,
+  index,
+  onRemoveBtnClick,
+  onAddBtnClick,
+  dispatch,
+  updateSetIsQueryValid,
+}) => {
   const [field, setField] = useState();
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
 
   /* currentFilter is the current state of the indexed filter */
   const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
+
+  const isValidValue = (value: any) => value !== undefined && value !== '';
+
+  const allFieldsValid = (field: any, operator: any, filterValue: any) =>
+    isValidValue(field) && isValidValue(operator) && isValidValue(filterValue);
+
+  useEffect(() => {
+    if (allFieldsValid(field, operator, filterValue)) {
+      updateSetIsQueryValid(true);
+    } else {
+      updateSetIsQueryValid(false);
+    }
+  }, [field, operator, filterValue, currentFilter, dispatch, index]);
 
   const handleFieldChange =
     (attribute: string, setValue: Function) =>

@@ -30,9 +30,11 @@ const dispatchError = (value: any): void => {
   throw new Error('Function not implemented.');
 };
 
-interface IQueryFilterProps {}
+interface IQueryFilterProps {
+  updateSetIsQueryValid: (value: boolean) => void;
+}
 
-const QueryFilter: React.FC<IQueryFilterProps> = () => {
+const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid }) => {
   const filterGroupInitialState = [
     <FilterGroup
       key={0}
@@ -41,6 +43,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = () => {
       onRemoveBtnClick={throwError}
       onAddBtnClick={throwError}
       dispatch={dispatchError}
+      updateSetIsQueryValid={updateSetIsQueryValid}
     />,
   ];
   const [filterGroup, setFilterGroup] = useState<any>([filterGroupInitialState]);
@@ -56,6 +59,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = () => {
         dispatch={dispatchError}
         count={0}
         index={0}
+        updateSetIsQueryValid={updateSetIsQueryValid}
       />
     );
     const updatedFilterGroup = [...filterGroup, newFilterGroup];
@@ -89,6 +93,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = () => {
           onRemoveBtnClick={onRemoveBtnClick}
           onAddBtnClick={onAddBtnClick}
           dispatch={dispatch}
+          updateSetIsQueryValid={updateSetIsQueryValid}
         />
       ))}
 
