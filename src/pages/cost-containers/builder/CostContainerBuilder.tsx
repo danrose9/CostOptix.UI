@@ -6,6 +6,7 @@ import { CostContainerData } from './CostContainerData';
 
 const QueryContainer = styled.div`
   display: flex;
+  margin-top: 1em;
 `;
 
 const StyledSegment = styled(Segment)`
