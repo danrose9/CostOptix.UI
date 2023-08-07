@@ -24,9 +24,7 @@ const ContainerDetail = styled.div`
   //   flex-basis: 30%;
 `;
 
-interface ICostContainerPage {
-  // Define the prop types here
-}
+interface ICostContainerPage {}
 
 const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   const [selectedCostContainer, setSelectedCostContainer] = useState<any>(containers[0]);
