@@ -30,7 +30,7 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryVa
     });
   };
 
-  const [addButtonDisabled, setAddButtonDisabled] = React.useState<boolean>(true);
+  const [addButtonDisabled, setAddButtonDisabled] = useState<boolean>(true);
 
   const handleAddButtonClick = async () => {
     const args = {

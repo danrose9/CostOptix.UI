@@ -66,10 +66,10 @@ interface IAddNewContainerProps {
   handleAddContainer: () => void;
 }
 
-const AddNewContainer = (props: IAddNewContainerProps) => {
+const AddNewContainer: React.FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
   const [open, setOpen] = React.useState(false);
   return (
-    <AddNewContainerRow onClick={props.handleAddContainer}>
+    <AddNewContainerRow onClick={handleAddContainer}>
       <Table.Cell width="16">
         <Icon name="add" size="large" /> Add Container
       </Table.Cell>
@@ -81,7 +81,7 @@ const AddNewContainer = (props: IAddNewContainerProps) => {
   );
 };
 
-const TableContents: React.FunctionComponent<ICostContainerTableProps> = (props) => {
+const TableContents: React.FC<ICostContainerTableProps> = (props) => {
   const { containers, handleAddContainer } = props;
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
@@ -136,7 +136,7 @@ const TableContents: React.FunctionComponent<ICostContainerTableProps> = (props)
   );
 };
 
-const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (props) => {
+const CostContainerTable: React.FC<ICostContainerTableProps> = ({ containers }) => {
   const [showAddContainer, setShowAddContainer] = React.useState(false);
   const [dropdownValue, setDropdownValue] = React.useState('');
 
@@ -144,7 +144,6 @@ const CostContainerTable: React.FunctionComponent<ICostContainerTableProps> = (p
     setShowAddContainer(true);
   };
 
-  const { containers } = props;
   const dropdownOptions = [
     { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
     {
