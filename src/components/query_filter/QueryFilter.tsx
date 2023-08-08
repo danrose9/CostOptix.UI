@@ -1,26 +1,7 @@
-import React, { useState, useReducer, useEffect } from 'react';
-import { Grid, Segment } from 'semantic-ui-react';
+import React, { useState } from 'react';
 import FilterGroup from './FilterGroup';
-import { StyledResult, StyledFilterOutput, StyledResetButton } from '../__styles__/StyledQueryFilter';
-import { updateFilterReducer, INITIAL_STATE, INTIAL_FILTER } from '../../reducers/updateFilterReducer';
-
-interface IFilterOutputProps {
-  value: string;
-}
-
-const FilterOutput: React.FC<IFilterOutputProps> = (props) => {
-  const { value } = props;
-  const jsonString = JSON.stringify(value, null);
-  return (
-    <StyledFilterOutput columns={1}>
-      <Grid.Column>
-        <Segment secondary>
-          <StyledResult>Query: {jsonString}</StyledResult>
-        </Segment>
-      </Grid.Column>
-    </StyledFilterOutput>
-  );
-};
+import { StyledResetButton } from '../__styles__/StyledQueryFilter';
+import { INTIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 // Define error throwing functions
 const throwError = (): void => {
@@ -32,9 +13,10 @@ const dispatchError = (value: any): void => {
 
 export interface IQueryFilterProps {
   updateSetIsQueryValid: (value: boolean) => void;
+  dispatch: React.Dispatch<any>;
 }
 
-const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid }) => {
+const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch }) => {
   const filterGroupInitialState = [
     <FilterGroup
       key={0}
@@ -47,8 +29,6 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid }) => 
     />,
   ];
   const [filterGroup, setFilterGroup] = useState<any>([filterGroupInitialState]);
-
-  const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
 
   const onAddBtnClick = () => {
     const newFilterGroup = (
@@ -97,7 +77,6 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid }) => 
         />
       ))}
 
-      <FilterOutput value={filterOutput} />
       <StyledResetButton onClick={handleReset}>Reset</StyledResetButton>
     </>
   );

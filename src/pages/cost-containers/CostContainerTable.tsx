@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
@@ -63,11 +63,11 @@ const AddNewContainerRow = styled(Table.Row)`
 `;
 
 interface IAddNewContainerProps {
-  handleAddContainer: () => void;
+  handleAddContainer: (arg0: boolean) => void;
 }
 
-const AddNewContainer: React.FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
-  const [open, setOpen] = React.useState(false);
+const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
+  const [open, setOpen] = useState(false);
   return (
     <AddNewContainerRow onClick={handleAddContainer}>
       <Table.Cell width="16">
@@ -81,8 +81,7 @@ const AddNewContainer: React.FC<IAddNewContainerProps> = ({ handleAddContainer }
   );
 };
 
-const TableContents: React.FC<ICostContainerTableProps> = (props) => {
-  const { containers, handleAddContainer } = props;
+const TableContents: FC<ICostContainerTableProps> = ({ containers, handleAddContainer }) => {
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   return (
@@ -136,9 +135,9 @@ const TableContents: React.FC<ICostContainerTableProps> = (props) => {
   );
 };
 
-const CostContainerTable: React.FC<ICostContainerTableProps> = ({ containers }) => {
-  const [showAddContainer, setShowAddContainer] = React.useState(false);
-  const [dropdownValue, setDropdownValue] = React.useState('');
+const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
+  const [showAddContainer, setShowAddContainer] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState('');
 
   const handleAddContainer = () => {
     setShowAddContainer(true);
@@ -147,13 +146,14 @@ const CostContainerTable: React.FC<ICostContainerTableProps> = ({ containers }) 
   const dropdownOptions = [
     { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
     {
-      key: 'minimize',
-      text: 'Minimize',
-      value: 'minimize',
+      key: 'close',
+      text: 'Close',
+      value: 'close',
       icon: 'minus',
-      onClick: () => console.log('minimize'),
-      disabled: true,
+      onClick: () => setShowAddContainer(false),
+      disabled: false,
     },
+    { key: 'showQuery', text: 'Show Query', value: 'showQuery', icon: 'code', disabled: false },
   ];
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
 
@@ -171,9 +171,7 @@ const CostContainerTable: React.FC<ICostContainerTableProps> = ({ containers }) 
               options={dropdownOptions}
               icon="ellipsis horizontal"
               value={dropdownValue}
-              simple
               direction="left"
-              item
             />
           </SegmentHeader>
           <SwitchTransition>
