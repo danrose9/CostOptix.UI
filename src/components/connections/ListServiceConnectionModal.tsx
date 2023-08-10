@@ -67,7 +67,6 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
     const accounts: CloudProviderType = await fetchCloudBillingAccounts(args);
 
     // check if accounts already exist and disable for addition
-    console.log('accounts: ', accounts);
 
     setNumberOfBillingAccountsReturned(accounts.count);
 
