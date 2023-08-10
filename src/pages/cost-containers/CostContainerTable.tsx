@@ -1,12 +1,13 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Dropdown, Table, SemanticWIDTHS, Icon, Tab } from 'semantic-ui-react';
+import { Segment, Table, SemanticWIDTHS, Icon, Menu, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
 import CostContainerBuilder from './builder/CostContainerBuilder';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
+import { InlineDropdown } from '../../components/menus';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -108,13 +109,12 @@ const TableContents: FC<ICostContainerTableProps> = ({ containers, handleAddCont
                 <Table.Row style={{ cursor: 'pointer' }} key={index}>
                   <Table.Cell singleLine>{container.name}</Table.Cell>
                   <Table.Cell>
-                    <Dropdown
+                    <InlineDropdown
                       icon="ellipsis horizontal"
-                      simple
                       item
                       direction="left"
                       open={false}
-                      options={rowDropdownOptions}
+                      items={rowDropdownOptions}
                     />
                   </Table.Cell>
                   <Table.Cell style={{ padding: 0 }}>
@@ -143,19 +143,17 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
     setShowAddContainer(true);
   };
 
-  const dropdownOptions = [
+  const containerListOptions = [
     { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
-    {
-      key: 'close',
-      text: 'Close',
-      value: 'close',
-      icon: 'minus',
-      onClick: () => setShowAddContainer(false),
-      disabled: false,
-    },
-    { key: 'showQuery', text: 'Show Query', value: 'showQuery', icon: 'code', disabled: false },
+    { key: 'close', text: 'Close', value: 'close', icon: 'minus', disabled: true },
+    { key: 'query', text: 'Show Query', value: 'query', icon: 'code', disabled: false },
   ];
+
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
+
+  const handleDropdownChange = (e: any, { value }: any) => {
+    console.log(value);
+  };
 
   return (
     <>
@@ -165,11 +163,9 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
             <SegmentName>
               Containers <InformationButton content={tooltipContent} />
             </SegmentName>
-
-            <Dropdown
-              //onChange={this.handleChange}
-              options={dropdownOptions}
-              icon="ellipsis horizontal"
+            <InlineDropdown
+              onClick={handleDropdownChange}
+              items={containerListOptions}
               value={dropdownValue}
               direction="left"
             />

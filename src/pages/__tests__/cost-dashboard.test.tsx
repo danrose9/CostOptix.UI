@@ -69,7 +69,6 @@ describe('Cost Dashboard', () => {
 
   test('active billing accounts widget should render the correct number of billing accounts', () => {
     const activeBillingAccounts = renderBillingAccounts();
-    console.log('*******', activeBillingAccounts);
   });
 
   test('matches snapshot', () => {
