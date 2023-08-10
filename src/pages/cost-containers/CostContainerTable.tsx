@@ -144,9 +144,9 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   };
 
   const containerListOptions = [
-    { key: 'add', text: 'Add', value: 'add', icon: 'add', disabled: false },
-    { key: 'close', text: 'Close', value: 'close', icon: 'minus', disabled: true },
-    { key: 'query', text: 'Show Query', value: 'query', icon: 'code', disabled: false },
+    { key: 'add', text: 'Add', value: 'add', icon: 'add', hidden: showAddContainer },
+    { key: 'close', text: 'Close', value: 'close', icon: 'minus', hidden: !showAddContainer },
+    { key: 'query', text: 'Show Query', value: 'query', icon: 'code', hidden: !showAddContainer },
   ];
 
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';

@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import QueryFilter from '../../../components/query_filter/QueryFilter';
@@ -23,7 +23,7 @@ const StyledSegment = styled(Segment)`
 export interface ICostContainerBuilderProps {}
 
 export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = () => {
-  const [isQueryValid, setIsQueryValid] = React.useState<boolean>(false);
+  const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
 
   const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
 

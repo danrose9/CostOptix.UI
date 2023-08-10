@@ -15,17 +15,28 @@ export interface IStyledDropdownProps {
   onClick?: (event: React.SyntheticEvent<HTMLElement>, data: any) => void;
   value?: any;
   text?: string;
+  disabled?: boolean;
+  hidden?: boolean;
 }
 
 export const InlineDropdown: React.FC<IStyledDropdownProps> = (props) => {
-  const { icon = 'ellipsis horizontal', items, direction, onClick } = props;
+  const { icon = 'ellipsis horizontal', items, direction, onClick, disabled } = props;
 
   return (
     <StyledDropdown icon={icon} items={items} direction={direction} simple>
       <StyledDropdown.Menu>
-        {items.map((item, index) => (
-          <StyledDropdown.Item text={item.text} key={index} icon={item.icon} value={item.value} onClick={onClick} />
-        ))}
+        {items
+          .filter((item) => !item.hidden)
+          .map((item, index) => (
+            <StyledDropdown.Item
+              text={item.text}
+              key={index}
+              icon={item.icon}
+              value={item.value}
+              onClick={onClick}
+              disabled={item.disabled}
+            />
+          ))}
       </StyledDropdown.Menu>
     </StyledDropdown>
   );
