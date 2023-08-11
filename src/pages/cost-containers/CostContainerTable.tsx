@@ -29,16 +29,6 @@ export const SegmentName = styled.div`
   font-size: 1.5em;
 `;
 
-const table = {
-  headers: [
-    { name: 'Container', width: 5, align: 'left' },
-    { name: '', width: 1, align: 'left' },
-    { name: 'Cost Trend', width: 4, align: 'left' },
-    { name: 'Providers', width: 4, align: 'left' },
-    { name: 'Monthly Costs', width: 2, align: 'right' },
-  ],
-};
-
 type textAlignType = 'center' | 'left' | 'right' | undefined;
 type widthType = SemanticWIDTHS | undefined;
 
@@ -55,7 +45,7 @@ interface ICostContainerTableProps {
     providers: string[];
     data: any[];
   }[];
-  handleAddContainer: () => void;
+  handleAddContainer?: (arg0: boolean) => void;
 }
 
 const AddNewContainerRow = styled(Table.Row)`
@@ -64,13 +54,13 @@ const AddNewContainerRow = styled(Table.Row)`
 `;
 
 interface IAddNewContainerProps {
-  handleAddContainer: (arg0: boolean) => void;
+  handleAddContainer?: (arg0: boolean) => void;
 }
 
 const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
   const [open, setOpen] = useState(false);
   return (
-    <AddNewContainerRow onClick={handleAddContainer}>
+    <AddNewContainerRow onClick={handleAddContainer} data-testid="add-new-container-row">
       <Table.Cell width="16">
         <Icon name="add" size="large" /> Add Container
       </Table.Cell>
@@ -82,22 +72,32 @@ const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
   );
 };
 
+const tableColumns = {
+  headers: [
+    { name: 'Container', width: 5, align: 'left' },
+    { name: '', width: 1, align: 'left' },
+    { name: 'Cost Trend', width: 3, align: 'left' },
+    { name: 'Providers', width: 2, align: 'left' },
+    { name: 'Monthly Costs', width: 2, align: 'right' },
+  ],
+};
+
 const TableContents: FC<ICostContainerTableProps> = ({ containers, handleAddContainer }) => {
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   return (
     <>
-      <Table fixed striped>
+      <Table striped fixed>
         <Table.Header>
           <Table.Row>
-            {table.headers.map((header, index) => {
+            {tableColumns.headers.map((column, index) => {
               return (
                 <Table.HeaderCell
                   key={index}
-                  textAlign={header.align as textAlignType}
-                  width={header.width as widthType}
+                  textAlign={column.align as textAlignType}
+                  width={column.width as widthType}
                 >
-                  {header.name}
+                  {column.name}
                 </Table.HeaderCell>
               );
             })}
@@ -138,6 +138,7 @@ const TableContents: FC<ICostContainerTableProps> = ({ containers, handleAddCont
 const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   const [showAddContainer, setShowAddContainer] = useState(false);
   const [dropdownValue, setDropdownValue] = useState('');
+  const [showFilterOutput, setShowFilterOutput] = useState(false);
 
   const handleAddContainer = () => {
     setShowAddContainer(true);
@@ -146,7 +147,13 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   const containerListOptions = [
     { key: 'add', text: 'Add', value: 'add', icon: 'add', hidden: showAddContainer },
     { key: 'close', text: 'Close', value: 'close', icon: 'minus', hidden: !showAddContainer },
-    { key: 'query', text: 'Show Query', value: 'query', icon: 'code', hidden: !showAddContainer },
+    {
+      key: 'query',
+      text: showFilterOutput ? 'Hide Query' : 'Show Query',
+      value: 'query',
+      icon: 'code',
+      hidden: !showAddContainer,
+    },
   ];
 
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
@@ -160,6 +167,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
         setShowAddContainer(false);
         break;
       case 'query':
+        setShowFilterOutput(!showFilterOutput);
         break;
       default:
         break;
@@ -192,7 +200,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
               {!showAddContainer ? (
                 <TableContents containers={containers} handleAddContainer={handleAddContainer} />
               ) : (
-                <CostContainerBuilder />
+                <CostContainerBuilder showFilterOutput={showFilterOutput} />
               )}
             </CSSTransition>
           </SwitchTransition>

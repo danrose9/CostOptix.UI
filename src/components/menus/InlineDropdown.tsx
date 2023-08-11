@@ -4,6 +4,10 @@ import styled from 'styled-components';
 
 const StyledDropdown = styled(SemanticDropdown)`
   z-index: 1;
+
+  &:after {
+    z-index: 1000;
+  }
 `;
 
 export interface IStyledDropdownProps {
