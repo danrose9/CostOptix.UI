@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import QueryFilter from '../../../components/query_filter/QueryFilter';
@@ -20,10 +20,12 @@ const StyledSegment = styled(Segment)`
   }
 `;
 
-export interface ICostContainerBuilderProps {}
+export interface ICostContainerBuilderProps {
+  showFilterOutput?: boolean;
+}
 
-export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = () => {
-  const [isQueryValid, setIsQueryValid] = React.useState<boolean>(false);
+export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ showFilterOutput }) => {
+  const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
 
   const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
 
@@ -41,7 +43,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = () => 
           <CostContainerData isQueryValid={isQueryValid} />
         </StyledSegment>
       </QueryContainer>
-      <FilterOutput value={filterOutput} />
+      {showFilterOutput ? <FilterOutput value={filterOutput} /> : null}
     </>
   );
 };

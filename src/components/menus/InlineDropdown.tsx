@@ -4,6 +4,10 @@ import styled from 'styled-components';
 
 const StyledDropdown = styled(SemanticDropdown)`
   z-index: 1;
+
+  &:after {
+    z-index: 1000;
+  }
 `;
 
 export interface IStyledDropdownProps {
@@ -15,17 +19,29 @@ export interface IStyledDropdownProps {
   onClick?: (event: React.SyntheticEvent<HTMLElement>, data: any) => void;
   value?: any;
   text?: string;
+  disabled?: boolean;
+  hidden?: boolean;
+  simple?: boolean;
 }
 
 export const InlineDropdown: React.FC<IStyledDropdownProps> = (props) => {
-  const { icon = 'ellipsis horizontal', items, direction, onClick } = props;
+  const { icon = 'ellipsis horizontal', items, direction, onClick, disabled, simple = false } = props;
 
   return (
-    <StyledDropdown icon={icon} items={items} direction={direction} simple>
+    <StyledDropdown icon={icon} items={items} direction={direction} simple={simple}>
       <StyledDropdown.Menu>
-        {items.map((item, index) => (
-          <StyledDropdown.Item text={item.text} key={index} icon={item.icon} value={item.value} onClick={onClick} />
-        ))}
+        {items
+          .filter((item) => !item.hidden)
+          .map((item, index) => (
+            <StyledDropdown.Item
+              text={item.text}
+              key={index}
+              icon={item.icon}
+              value={item.value}
+              onClick={onClick}
+              disabled={item.disabled}
+            />
+          ))}
       </StyledDropdown.Menu>
     </StyledDropdown>
   );

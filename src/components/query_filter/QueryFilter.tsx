@@ -77,7 +77,9 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
         />
       ))}
 
-      <StyledResetButton onClick={handleReset}>Reset</StyledResetButton>
+      <StyledResetButton onClick={handleReset} data-testid="cost-container-reset-button">
+        Reset
+      </StyledResetButton>
     </>
   );
 };
