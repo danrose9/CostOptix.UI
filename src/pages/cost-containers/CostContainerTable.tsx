@@ -152,7 +152,18 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
 
   const handleDropdownChange = (e: any, { value }: any) => {
-    console.log(value);
+    switch (value) {
+      case 'add':
+        setShowAddContainer(true);
+        break;
+      case 'close':
+        setShowAddContainer(false);
+        break;
+      case 'query':
+        break;
+      default:
+        break;
+    }
   };
 
   return (

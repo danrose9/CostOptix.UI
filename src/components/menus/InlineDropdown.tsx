@@ -17,13 +17,14 @@ export interface IStyledDropdownProps {
   text?: string;
   disabled?: boolean;
   hidden?: boolean;
+  simple?: boolean;
 }
 
 export const InlineDropdown: React.FC<IStyledDropdownProps> = (props) => {
-  const { icon = 'ellipsis horizontal', items, direction, onClick, disabled } = props;
+  const { icon = 'ellipsis horizontal', items, direction, onClick, disabled, simple = false } = props;
 
   return (
-    <StyledDropdown icon={icon} items={items} direction={direction} simple>
+    <StyledDropdown icon={icon} items={items} direction={direction} simple={simple}>
       <StyledDropdown.Menu>
         {items
           .filter((item) => !item.hidden)
