@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, SemanticWIDTHS, Icon, Menu, Dropdown } from 'semantic-ui-react';
+import { Segment, Table, SemanticWIDTHS, Icon, Menu, Dropdown, Tab } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -69,46 +69,36 @@ const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
   );
 };
 
-const tableColumns = {
-  headers: [
-    { name: 'Container', width: 5, align: 'left' },
-    { name: '', width: 1, align: 'left' },
-    { name: 'Cost Trend', width: 3, align: 'left' },
-    { name: 'Providers', width: 2, align: 'left' },
-    { name: 'Monthly Costs', width: 2, align: 'right' },
-  ],
-};
-
 interface ITableContentsProps {
   containers?: ContainersType[];
   handleAddContainer?: (arg0: boolean) => void;
 }
 
+const StyledTable = styled(Table)`
+  overflow: unset !important;
+`;
+
 const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer }) => {
-  const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
+  const rowDropdownOptions = [
+    { key: 1, text: 'Edit', value: 'edit', icon: 'edit' },
+    { key: 2, text: 'Delete', value: 'delete', icon: 'trash' },
+  ];
 
   return (
     <>
-      <Table striped fixed>
+      <StyledTable striped w>
         <Table.Header>
           <Table.Row>
-            {tableColumns.headers.map((column, index) => {
-              return (
-                <Table.HeaderCell
-                  key={index}
-                  textAlign={column.align as textAlignType}
-                  width={column.width as widthType}
-                >
-                  {column.name}
-                </Table.HeaderCell>
-              );
-            })}
+            <Table.HeaderCell colSpan="2">Container</Table.HeaderCell>
+            <Table.HeaderCell>Cost Trend</Table.HeaderCell>
+            <Table.HeaderCell>Providers</Table.HeaderCell>
+            <Table.HeaderCell textAlign="right">Monthly Costs</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {containers && containers.length > 0
             ? containers.map((container, index) => (
-                <Table.Row style={{ cursor: 'pointer' }} key={index}>
+                <Table.Row style={{ cursor: 'pointer', zIndex: '-1000' }} key={index}>
                   <Table.Cell singleLine>{container.name}</Table.Cell>
                   <Table.Cell>
                     <InlineDropdown
@@ -122,14 +112,16 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
                   <Table.Cell style={{ padding: 0 }}>
                     <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
                   </Table.Cell>
-                  <Table.Cell singleLine></Table.Cell>
-                  <Table.Cell singleLine textAlign="right"></Table.Cell>
+                  <Table.Cell singleLine>{container.providers}</Table.Cell>
+                  <Table.Cell singleLine textAlign="right">
+                    {container.monthlyCosts}
+                  </Table.Cell>
                 </Table.Row>
               ))
             : null}
           <AddNewContainer handleAddContainer={handleAddContainer} />
         </Table.Body>
-      </Table>
+      </StyledTable>
       <TableFooter>
         <TablePaging totalPages={1} totalResults={1} pageSize={1}></TablePaging>
       </TableFooter>

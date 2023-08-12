@@ -3,11 +3,7 @@ import { Dropdown as SemanticDropdown, Menu, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledDropdown = styled(SemanticDropdown)`
-  z-index: 1;
-
-  &:after {
-    z-index: 1000;
-  }
+  z-index: auto;
 `;
 
 export interface IStyledDropdownProps {

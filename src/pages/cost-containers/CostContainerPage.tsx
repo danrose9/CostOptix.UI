@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PageLayout from '../PageLayout';
-import styled, { css } from 'styled-components';
-import { Table, Segment, Dropdown } from 'semantic-ui-react';
+import styled from 'styled-components';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
 import { containers } from './containerMockData';
@@ -17,7 +16,7 @@ const ComponentContainer = styled.div`
 `;
 
 const CostContainersList = styled.div`
-  //   flex-basis: 70%;
+  width: 100%;
 `;
 
 const ContainerDetail = styled.div`
@@ -41,7 +40,7 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   return (
     <PageLayout title="Cost Containers">
       <ComponentContainer>
-        <CostContainersList style={{ width: '100%' }}>
+        <CostContainersList>
           <CostContainerTable containers={containers} />
         </CostContainersList>
         {/* <ContainerDetail>
