@@ -21,7 +21,7 @@ export const containers = [
     ],
   },
   {
-    name: 'Software Project with a really really long name that no one is aware of',
+    name: 'Software Project 45',
     description:
       'Our team is developing a cutting-edge mobile application that revolutionizes how users manage their personal finances, with advanced features for budgeting, expense tracking, and investment analysis.',
     created: '03/02/2021',
