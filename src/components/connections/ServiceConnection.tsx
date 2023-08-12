@@ -33,7 +33,6 @@ const ServiceConnection = (props: ContainerProps) => {
 
   useInterval(async () => {
     if (isPolling) {
-      console.log('polling..');
       const billingAccounts = await dispatch(fetchBillingAccounts());
 
       const pending: boolean = billingAccounts.payload.billingAccounts.some(

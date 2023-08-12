@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { postCostContainer, ICostContainerArgs } from '../../../services/api/postCostContainer';
+import { useNavigate } from 'react-router-dom';
+import * as appRoutes from '../../../app/appRoutes';
 
 const StyledForm = styled(Form)`
   font-family: Poppins;
@@ -12,25 +15,44 @@ interface ICostContainerDataProps {
 }
 
 export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryValid }) => {
-  const [containerName, setContainerName] = React.useState<string>('');
-  const [containerOwner, setContainerOwner] = React.useState<string>('');
-  const [addButtonDisabled, setAddButtonDisabled] = React.useState<boolean>(true);
+  const [container, setContainer] = useState({
+    name: '',
+    owner: '',
+    description: '',
+  });
 
-  const handleContainerNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setContainerName(event.target.value);
+  const navigate = useNavigate();
+
+  const handleContainerChange = (key: string, value: string) => {
+    setContainer({
+      ...container,
+      [key]: value,
+    });
   };
 
-  const handleContainerOwnerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setContainerOwner(event.target.value);
+  const [addButtonDisabled, setAddButtonDisabled] = useState<boolean>(true);
+
+  const handleAddButtonClick = async () => {
+    const args = {
+      name: container.name,
+      owner: container.owner,
+      description: container.description,
+      query: [],
+    } as ICostContainerArgs;
+
+    const response: any = await postCostContainer(args);
+
+    // navigate to the cost container page
+    navigate(appRoutes.COST_CONTAINERS);
   };
 
   useEffect(() => {
-    if (isQueryValid && containerName) {
+    if (isQueryValid && container.name) {
       setAddButtonDisabled(false);
     } else {
       setAddButtonDisabled(true);
     }
-  }, [isQueryValid, containerName]);
+  }, [isQueryValid, container.name]);
 
   return (
     <div>
@@ -52,22 +74,29 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryVa
           label="Container Name"
           placeholder="Container Name"
           icon="folder outline"
-          value={containerName}
-          onChange={handleContainerNameChange}
+          value={container.name}
+          onChange={(e) => handleContainerChange('name', e.target.value)}
         />
-        <StyledForm.TextArea label="Container Description" placeholder="Container Description" />
+        <StyledForm.TextArea
+          label="Container Description"
+          placeholder="Container Description"
+          value={container.description}
+          onChange={(e) => handleContainerChange('description', e.target.value)}
+        />
         <StyledForm.Input
           label="Owner"
           placeholder="Owner"
           icon="address card outline"
-          onChange={handleContainerOwnerChange}
-          value={containerOwner}
+          onChange={(e) => handleContainerChange('owner', e.target.value)}
+          value={container.owner}
         />
 
-        <Button color="teal" disabled={addButtonDisabled}>
+        <Button color="teal" disabled={addButtonDisabled} onClick={handleAddButtonClick}>
           Add
         </Button>
       </Form>
     </div>
   );
 };
+
+export default CostContainerData;

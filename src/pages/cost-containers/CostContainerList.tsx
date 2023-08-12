@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, Segment, Dropdown } from 'semantic-ui-react';
 import { ProviderImage } from '../../components/ProviderImage';
 import { SegmentName, SegmentHeader, TableContainer } from '../__styles__/DefaultPageStyles';
+import { StyledDropdown } from '../../components/__styles__/StyledQueryFilter';
 import { TablePaging } from '../../components/tables/TablePaging';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import PageLayout from '../PageLayout';
@@ -139,7 +140,6 @@ const itemOptions = [
 ];
 
 const ProviderImages = (props: any) => {
-  console.log(props.providers);
   // const providers = ['AWS', 'Azure'];
   // iterate over providers and return ProviderImage component
 
@@ -152,7 +152,7 @@ const ProviderImages = (props: any) => {
   );
 };
 
-const CostContainersList = () => {
+const CostContainerList = () => {
   const currencySymbol = (currency: string) => getSymbolFromCurrency(currency);
 
   const [selectedContainer, setSelectedContainer] = useState<any>(costContainers[0]);
@@ -187,7 +187,7 @@ const CostContainersList = () => {
                   <Table.Row style={{ cursor: 'pointer' }} key={index} onClick={() => setSelectedContainer(container)}>
                     <Table.Cell singleLine>{container.name}</Table.Cell>
                     <Table.Cell>
-                      <Dropdown
+                      <StyledDropdown
                         icon="ellipsis horizontal"
                         simple
                         item
@@ -238,4 +238,4 @@ const CostContainersList = () => {
   );
 };
 
-export default CostContainersList;
+export default CostContainerList;

@@ -2,11 +2,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CostContainerBuilder from '../builder/CostContainerBuilder';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('CostContainerBuilder', () => {
   let result: any;
   beforeEach(() => {
-    result = render(<CostContainerBuilder />);
+    result = render(
+      <Router>
+        <CostContainerBuilder />
+      </Router>
+    );
   });
 
   test('renders CostContainerBuilder component', () => {
