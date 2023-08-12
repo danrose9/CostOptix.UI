@@ -32,21 +32,18 @@ export const SegmentName = styled.div`
 type textAlignType = 'center' | 'left' | 'right' | undefined;
 type widthType = SemanticWIDTHS | undefined;
 
-interface ICostContainerTableProps {
-  containers?: {
-    name: string;
-    description: string;
-    created: string;
-    createdBy: string;
-    owner: string;
-    resourceCount: number;
-    monthlyCosts: string;
-    currency: string;
-    providers: string[];
-    data: any[];
-  }[];
-  handleAddContainer?: (arg0: boolean) => void;
-}
+type ContainersType = {
+  name: string;
+  description: string;
+  created: string;
+  createdBy: string;
+  owner: string;
+  resourceCount: number;
+  monthlyCosts: string;
+  currency: string;
+  providers: string[];
+  data: any[];
+};
 
 const AddNewContainerRow = styled(Table.Row)`
   cursor: pointer;
@@ -82,7 +79,12 @@ const tableColumns = {
   ],
 };
 
-const TableContents: FC<ICostContainerTableProps> = ({ containers, handleAddContainer }) => {
+interface ITableContentsProps {
+  containers?: ContainersType[];
+  handleAddContainer?: (arg0: boolean) => void;
+}
+
+const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer }) => {
   const rowDropdownOptions = [{ key: 1, text: 'Edit', value: 1, icon: 'edit' }];
 
   return (
@@ -134,6 +136,10 @@ const TableContents: FC<ICostContainerTableProps> = ({ containers, handleAddCont
     </>
   );
 };
+
+interface ICostContainerTableProps {
+  containers?: ContainersType[];
+}
 
 const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   const [showAddContainer, setShowAddContainer] = useState(false);

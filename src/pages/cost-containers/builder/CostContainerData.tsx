@@ -98,3 +98,5 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryVa
     </div>
   );
 };
+
+export default CostContainerData;

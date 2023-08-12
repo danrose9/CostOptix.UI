@@ -152,7 +152,7 @@ const ProviderImages = (props: any) => {
   );
 };
 
-const CostContainersList = () => {
+const CostContainerList = () => {
   const currencySymbol = (currency: string) => getSymbolFromCurrency(currency);
 
   const [selectedContainer, setSelectedContainer] = useState<any>(costContainers[0]);
@@ -238,4 +238,4 @@ const CostContainersList = () => {
   );
 };
 
-export default CostContainersList;
+export default CostContainerList;
