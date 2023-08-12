@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import CostContainerTable from '../CostContainerTable';
-import { containers } from './containerTestData';
+import { containers } from '../containerMockData';
 import { prettyDOM } from '@testing-library/dom';
 
 describe('CostContainerTable', () => {

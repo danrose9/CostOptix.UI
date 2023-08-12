@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { Table, Segment, Dropdown } from 'semantic-ui-react';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
-import { containers } from './__tests__/containerTestData';
+import { containers } from './containerMockData';
 
 interface ContainerProps {
   selected?: boolean;
