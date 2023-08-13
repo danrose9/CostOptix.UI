@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { postCostContainer, ICostContainerArgs } from '../../../services/api/postCostContainer';
+import { postCostContainer, ICostContainerArgs } from '../../../services/api/fetchCostContainer';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/appRoutes';
 
