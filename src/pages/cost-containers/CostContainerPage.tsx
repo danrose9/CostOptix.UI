@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PageLayout from '../PageLayout';
 import styled from 'styled-components';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
 import { containers } from './containerMockData';
+import { getCostContainers } from '../../services/api/fetchCostContainer';
 
 interface ContainerProps {
   selected?: boolean;
@@ -26,16 +27,30 @@ const ContainerDetail = styled.div`
 interface ICostContainerPage {}
 
 const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
-  const [selectedCostContainer, setSelectedCostContainer] = useState<any>(containers[0]);
+  // const [selectedCostContainer, setSelectedCostContainer] = useState<any>(containers[0]);
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
+  const [containers, setContainers] = useState<any[]>([]);
 
-  const selectContainerDetail = (container: any) => {
-    setSelectedCostContainer(container);
-  };
+  // const selectContainerDetail = (container: any) => {
+  //   setSelectedCostContainer(container);
+  // };
 
   const expandContainer = (component: string) => {
     setSelectedComponent(component);
   };
+
+  const fetchCostContainer = useCallback(async () => {
+    try {
+      const fetchedContainers = await getCostContainers();
+      setContainers(fetchedContainers);
+    } catch (error) {
+      console.error('An error occurred while fetching the cost containers:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCostContainer();
+  }, [fetchCostContainer]);
 
   return (
     <PageLayout title="Cost Containers">
