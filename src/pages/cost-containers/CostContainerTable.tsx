@@ -86,7 +86,7 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
 
   return (
     <>
-      <StyledTable striped w>
+      <StyledTable striped>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan="2">Container</Table.HeaderCell>

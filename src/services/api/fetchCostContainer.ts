@@ -28,3 +28,17 @@ export const postCostContainer = async (args: ICostContainerArgs) => {
     return await response.json();
   }
 };
+
+export const getCostContainers = async () => {
+  const response = await fetchInstance(COST_CONTAINERS, {
+    method: 'GET',
+  });
+
+  if (response.ok) {
+    let data = await response.json();
+
+    return data;
+  } else {
+    return await response.json();
+  }
+};
