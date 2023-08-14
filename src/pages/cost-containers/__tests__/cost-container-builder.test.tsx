@@ -2,16 +2,13 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CostContainerBuilder from '../builder/CostContainerBuilder';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { ApplicationWrapper } from '../../../tests/helpers';
 
 describe('CostContainerBuilder', () => {
   let result: any;
   beforeEach(() => {
-    result = render(
-      <Router>
-        <CostContainerBuilder />
-      </Router>
-    );
+    const mockToggleContainerList = (value: boolean) => {};
+    render(<CostContainerBuilder toggleContainerList={mockToggleContainerList} />, { wrapper: ApplicationWrapper });
   });
 
   test('renders CostContainerBuilder component', () => {
