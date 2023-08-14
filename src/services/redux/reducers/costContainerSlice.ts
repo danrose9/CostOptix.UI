@@ -1,12 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCostContainers } from '../thunks/costContainerThunk';
-import { combineSortSliceArray, upsert } from '../../../utils/arrayHelper';
+import { fetchCostContainers, deleteCostContainerById } from '../thunks/costContainerThunk';
 
 const initialState = {
   containers: [],
   isLoading: true,
-  status: null,
-  error: null,
+  status: '',
+  error: '',
+} as {
+  containers: any[];
+  isLoading: boolean;
+  status: string;
+  error: string | undefined;
 };
 
 const costContainerSlice = createSlice({
@@ -21,16 +25,24 @@ const costContainerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCostContainers.pending, (state) => {
-        console.log('fetchBillingAccountCosts.pending');
+        state.status = 'pending';
+        state.isLoading = true;
       })
       .addCase(fetchCostContainers.fulfilled, (state, action) => {
-        console.log('fetchBillingAccountCosts.fulfilled', action);
         state.containers = action.payload;
-        // state.isLoading = false;
+        state.isLoading = false;
+        state.status = 'fulfilled';
       })
       .addCase(fetchCostContainers.rejected, (state, action) => {
-        console.log('fetchBillingAccountCosts.rejected', action);
+        state.isLoading = false;
+        state.status = 'rejected';
+        state.error = action.error.message;
       });
+    builder.addCase(deleteCostContainerById.fulfilled, (state, action) => {
+      const { id } = action.payload;
+      state.containers = state.containers.filter((container) => container.id !== id);
+      console.log('deleteCostContainer.fulfilled', id);
+    });
   },
 });
 
