@@ -6,4 +6,5 @@ export const reduxState = {
   COST_DASHBOARD: 'costDashboard',
   RESOURCES: 'resources',
   APPLICATION: 'application',
+  COST_CONTAINERS: 'costContainers',
 };

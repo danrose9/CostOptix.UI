@@ -7,6 +7,7 @@ import serviceProviderReducer from './reducers/serviceProvidersSlice';
 import costDashboardReducer from './reducers/costDashboardSlice';
 import resourceReducer from './reducers/resourceSlice';
 import applicationReducer from './reducers/applicationSlice';
+import costContainerReducer from './reducers/costContainerSlice';
 
 const appReducer = combineReducers({
   [reduxState.USER_PROFILE]: userProfileReducer,
@@ -15,6 +16,7 @@ const appReducer = combineReducers({
   [reduxState.COST_DASHBOARD]: costDashboardReducer,
   [reduxState.RESOURCES]: resourceReducer,
   [reduxState.APPLICATION]: applicationReducer,
+  [reduxState.COST_CONTAINERS]: costContainerReducer,
 });
 
 export const rootReducer = (state: any, action: any) => {

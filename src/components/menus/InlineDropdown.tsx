@@ -21,7 +21,7 @@ export interface IStyledDropdownProps {
 }
 
 export const InlineDropdown: React.FC<IStyledDropdownProps> = (props) => {
-  const { icon = 'ellipsis horizontal', items, direction, onClick, disabled, simple = false } = props;
+  const { icon = 'ellipsis horizontal', items, direction, onClick, disabled, simple = true } = props;
 
   return (
     <StyledDropdown icon={icon} items={items} direction={direction} simple={simple}>

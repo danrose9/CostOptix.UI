@@ -42,3 +42,17 @@ export const getCostContainers = async () => {
     return await response.json();
   }
 };
+
+export const deleteCostContainerById = async (id: string) => {
+  const response = await fetchInstance(`${COST_CONTAINERS}/${id}`, {
+    method: 'DELETE',
+  });
+
+  if (response.ok) {
+    let data = await response.json();
+
+    return data;
+  } else {
+    return await response.json();
+  }
+};
