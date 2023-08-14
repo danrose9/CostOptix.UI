@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, SemanticWIDTHS, Icon, Menu, Dropdown, Tab } from 'semantic-ui-react';
+import { Segment, Table, SemanticWIDTHS, Icon, Modal, Button, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -8,6 +8,8 @@ import CostContainerBuilder from './builder/CostContainerBuilder';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
 import { InlineDropdown } from '../../components/menus';
+import { deleteCostContainerById } from '../../services/api/fetchCostContainer';
+import CostContainerOptions from './CostContainerOptions';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -32,7 +34,8 @@ export const SegmentName = styled.div`
 type textAlignType = 'center' | 'left' | 'right' | undefined;
 type widthType = SemanticWIDTHS | undefined;
 
-type ContainersType = {
+export type ContainersType = {
+  id: string;
   name: string;
   description: string;
   created: string;
@@ -79,10 +82,22 @@ const StyledTable = styled(Table)`
 `;
 
 const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer }) => {
-  const rowDropdownOptions = [
-    { key: 1, text: 'Edit', value: 'edit', icon: 'edit' },
-    { key: 2, text: 'Delete', value: 'delete', icon: 'trash' },
-  ];
+  const handleDropdownChange = (containerId: string, e: any, { value }: any) => {
+    switch (value) {
+      case 'edit':
+        console.log(containerId);
+        break;
+      case 'delete':
+        handleDeleteItem(containerId);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleDeleteItem = (containerId: string) => {
+    // deleteCostContainerById(containerId);
+  };
 
   return (
     <>
@@ -101,13 +116,19 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
                 <Table.Row style={{ cursor: 'pointer', zIndex: '-1000' }} key={index}>
                   <Table.Cell singleLine>{container.name}</Table.Cell>
                   <Table.Cell>
-                    <InlineDropdown
+                    <Dropdown
                       icon="ellipsis horizontal"
+                      style={{ zIndex: 'auto' }}
+                      simple
                       item
+                      data-testid="cc-dropdown"
                       direction="left"
                       open={false}
-                      items={rowDropdownOptions}
-                    />
+                    >
+                      <Dropdown.Menu>
+                        <CostContainerOptions container={container} />
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </Table.Cell>
                   <Table.Cell style={{ padding: 0 }}>
                     <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
