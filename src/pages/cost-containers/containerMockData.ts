@@ -1,5 +1,6 @@
 export const containers = [
   {
+    id: '1',
     name: 'Software Project 1',
     description:
       'The software project currently in development is a cloud-based project management tool designed to streamline team collaboration and increase productivity by providing real-time updates and task management capabilities.',
@@ -21,6 +22,7 @@ export const containers = [
     ],
   },
   {
+    id: '2',
     name: 'Software Project 45',
     description:
       'Our team is developing a cutting-edge mobile application that revolutionizes how users manage their personal finances, with advanced features for budgeting, expense tracking, and investment analysis.',
@@ -42,6 +44,7 @@ export const containers = [
     ],
   },
   {
+    id: '3',
     name: 'Backup for IT',
     description:
       'Our software development project focuses on creating an AI-powered chatbot for customer support, capable of understanding natural language queries, providing instant responses, and escalating complex issues to human agents when necessary, improving overall service efficiency and customer engagement.',
@@ -63,6 +66,7 @@ export const containers = [
     ],
   },
   {
+    id: '4',
     name: 'SQL DB for Finance',
     description:
       'We are working on a web-based e-commerce platform that provides seamless integration with popular payment gateways, efficient inventory management, and personalized shopping experiences to enhance customer satisfaction and drive sales',
@@ -84,6 +88,7 @@ export const containers = [
     ],
   },
   {
+    id: '5',
     name: 'Software Project 2',
     description: 'Description 2',
     created: '13/01/2023',
