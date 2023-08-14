@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Dropdown, Modal, Button } from 'semantic-ui-react';
 import { ContainersType } from './CostContainerTable';
-import { deleteCostContainerById } from '../../services/api/fetchCostContainer';
+import { deleteCostContainerById } from '../../services/redux/thunks/costContainerThunk';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../services/redux/store';
 
 interface ICostContainerOptionsProps {
   container: ContainersType;
@@ -10,8 +12,10 @@ interface ICostContainerOptionsProps {
 const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container }) => {
   const [open, setOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleRemoveContainer = () => {
-    deleteCostContainerById(container.id);
+    dispatch<AppDispatch>(deleteCostContainerById({ id: container.id }));
     setOpen(false);
   };
 

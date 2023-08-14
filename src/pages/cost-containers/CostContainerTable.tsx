@@ -8,7 +8,6 @@ import CostContainerBuilder from './builder/CostContainerBuilder';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
 import { InlineDropdown } from '../../components/menus';
-import { deleteCostContainerById } from '../../services/api/fetchCostContainer';
 import CostContainerOptions from './CostContainerOptions';
 
 export const TableContainer = styled.div`
@@ -82,23 +81,6 @@ const StyledTable = styled(Table)`
 `;
 
 const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer }) => {
-  const handleDropdownChange = (containerId: string, e: any, { value }: any) => {
-    switch (value) {
-      case 'edit':
-        console.log(containerId);
-        break;
-      case 'delete':
-        handleDeleteItem(containerId);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleDeleteItem = (containerId: string) => {
-    // deleteCostContainerById(containerId);
-  };
-
   return (
     <>
       <StyledTable striped>

@@ -6,7 +6,6 @@ import PageLayout from '../PageLayout';
 import styled from 'styled-components';
 import CostContainerTable from './CostContainerTable';
 import CostContainerDetail from './CostContainerDetail';
-import { containers } from './containerMockData';
 import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
 import { AppDispatch } from '../../services/redux/store';
 
