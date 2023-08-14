@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, SemanticWIDTHS, Icon, Modal, Button, Dropdown } from 'semantic-ui-react';
+import { Segment, Table, SemanticWIDTHS, Icon, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -44,7 +44,9 @@ export type ContainersType = {
   monthlyCosts: string;
   currency: string;
   providers: string[];
-  data: any[];
+  data: {
+    value: number;
+  }[];
 };
 
 const AddNewContainerRow = styled(Table.Row)`
