@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { postCostContainer, ICostContainerArgs } from '../../../services/api/fetchCostContainer';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/appRoutes';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../services/redux/store';
+import { addCostContainer } from '../../../services/redux/thunks/costContainerThunk';
+import { IAddCostContainerArgs } from '../../../services/redux/thunks/costContainerThunk';
 
 const StyledForm = styled(Form)`
   font-family: Poppins;
@@ -12,9 +15,12 @@ const StyledForm = styled(Form)`
 
 interface ICostContainerDataProps {
   isQueryValid: boolean;
+  toggleContainerList: (value: boolean) => void;
 }
 
-export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryValid }) => {
+export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryValid, toggleContainerList }) => {
+  const dispatch = useDispatch();
+
   const [container, setContainer] = useState({
     name: '',
     owner: '',
@@ -38,12 +44,10 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryVa
       owner: container.owner,
       description: container.description,
       query: [],
-    } as ICostContainerArgs;
+    } as IAddCostContainerArgs;
 
-    const response: any = await postCostContainer(args);
-
-    // navigate to the cost container page
-    navigate(appRoutes.COST_CONTAINERS);
+    dispatch<AppDispatch>(addCostContainer(args));
+    toggleContainerList(false);
   };
 
   useEffect(() => {

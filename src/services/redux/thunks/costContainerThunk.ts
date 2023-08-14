@@ -30,3 +30,19 @@ export const deleteCostContainerById = createAsyncThunk(
       .catch((e) => rejectWithValue(e.response.data));
   }
 );
+
+export interface IAddCostContainerArgs {
+  name: string;
+  description: string;
+  owner: string;
+  query: [];
+}
+
+export const addCostContainer = createAsyncThunk(
+  'CostContainer/Add',
+  async (args: IAddCostContainerArgs, { rejectWithValue }) => {
+    return await fetchInstance(COST_CONTAINERS, { method: 'POST', body: JSON.stringify({ ...args }) })
+      .then((response) => response.json())
+      .catch((e) => rejectWithValue(e.response.data));
+  }
+);

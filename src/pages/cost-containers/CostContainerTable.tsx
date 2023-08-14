@@ -9,6 +9,9 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
 import { InlineDropdown } from '../../components/menus';
 import CostContainerOptions from './CostContainerOptions';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../services/redux/store';
+import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -29,9 +32,6 @@ export const SegmentHeader = styled.div`
 export const SegmentName = styled.div`
   font-size: 1.5em;
 `;
-
-type textAlignType = 'center' | 'left' | 'right' | undefined;
-type widthType = SemanticWIDTHS | undefined;
 
 export type ContainersType = {
   id: string;
@@ -142,9 +142,15 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   const [showAddContainer, setShowAddContainer] = useState(false);
   const [dropdownValue, setDropdownValue] = useState('');
   const [showFilterOutput, setShowFilterOutput] = useState(false);
+  const dispatch = useDispatch();
 
   const handleAddContainer = () => {
     setShowAddContainer(true);
+  };
+
+  const toggleContainerList = (value: boolean) => {
+    setShowAddContainer(value);
+    dispatch<AppDispatch>(fetchCostContainers());
   };
 
   const containerListOptions = [
@@ -203,7 +209,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
               {!showAddContainer ? (
                 <TableContents containers={containers} handleAddContainer={handleAddContainer} />
               ) : (
-                <CostContainerBuilder showFilterOutput={showFilterOutput} />
+                <CostContainerBuilder showFilterOutput={showFilterOutput} toggleContainerList={toggleContainerList} />
               )}
             </CSSTransition>
           </SwitchTransition>

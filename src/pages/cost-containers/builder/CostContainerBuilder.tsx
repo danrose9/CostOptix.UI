@@ -22,9 +22,13 @@ const StyledSegment = styled(Segment)`
 
 export interface ICostContainerBuilderProps {
   showFilterOutput?: boolean;
+  toggleContainerList: (value: boolean) => void;
 }
 
-export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ showFilterOutput }) => {
+export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
+  showFilterOutput,
+  toggleContainerList,
+}) => {
   const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
 
   const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
@@ -40,7 +44,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ sho
           <QueryFilter updateSetIsQueryValid={updateSetIsQueryValid} dispatch={dispatch} />
         </StyledSegment>
         <StyledSegment className="result-container">
-          <CostContainerData isQueryValid={isQueryValid} />
+          <CostContainerData isQueryValid={isQueryValid} toggleContainerList={toggleContainerList} />
         </StyledSegment>
       </QueryContainer>
       {showFilterOutput ? <FilterOutput value={filterOutput} /> : null}
