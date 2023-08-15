@@ -2,11 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../../app/appRoutes';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../services/redux/store';
-import { addCostContainer } from '../../../services/redux/thunks/costContainerThunk';
 import { IAddCostContainerArgs } from '../../../services/redux/thunks/costContainerThunk';
 
 const StyledForm = styled(Form)`
@@ -15,19 +10,19 @@ const StyledForm = styled(Form)`
 
 interface ICostContainerDataProps {
   isQueryValid: boolean;
-  toggleContainerList: (value: boolean) => void;
+  handleAddContainer: (container: IAddCostContainerArgs) => void;
 }
 
-export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryValid, toggleContainerList }) => {
-  const dispatch = useDispatch();
+export const CostContainerData: React.FC<ICostContainerDataProps> = ({
+  isQueryValid,
 
+  handleAddContainer,
+}) => {
   const [container, setContainer] = useState({
     name: '',
     owner: '',
     description: '',
   });
-
-  const navigate = useNavigate();
 
   const handleContainerChange = (key: string, value: string) => {
     setContainer({
@@ -37,18 +32,6 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryVa
   };
 
   const [addButtonDisabled, setAddButtonDisabled] = useState<boolean>(true);
-
-  const handleAddButtonClick = async () => {
-    const args = {
-      name: container.name,
-      owner: container.owner,
-      description: container.description,
-      query: [],
-    } as IAddCostContainerArgs;
-
-    dispatch<AppDispatch>(addCostContainer(args));
-    toggleContainerList(false);
-  };
 
   useEffect(() => {
     if (isQueryValid && container.name) {
@@ -95,7 +78,18 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({ isQueryVa
           value={container.owner}
         />
 
-        <Button color="teal" disabled={addButtonDisabled} onClick={handleAddButtonClick}>
+        <Button
+          color="teal"
+          disabled={addButtonDisabled}
+          onClick={(e) => {
+            e.preventDefault();
+            handleAddContainer({
+              name: container.name,
+              owner: container.owner,
+              description: container.description,
+            });
+          }}
+        >
           Add
         </Button>
       </Form>
