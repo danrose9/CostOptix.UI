@@ -35,7 +35,7 @@ export interface IAddCostContainerArgs {
   name: string;
   description: string;
   owner: string;
-  query: [];
+  query?: any;
 }
 
 export const addCostContainer = createAsyncThunk(

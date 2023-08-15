@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCostContainers, deleteCostContainerById } from '../thunks/costContainerThunk';
+import { fetchCostContainers, deleteCostContainerById, addCostContainer } from '../thunks/costContainerThunk';
 
 const initialState = {
   containers: [],
@@ -37,6 +37,16 @@ const costContainerSlice = createSlice({
         state.isLoading = false;
         state.status = 'rejected';
         state.error = action.error.message;
+      });
+    builder
+      .addCase(addCostContainer.pending, (state) => {
+        console.log('addCostContainer.pending');
+      })
+      .addCase(addCostContainer.fulfilled, (state, action) => {
+        console.log('addCostContainer.fulfilled');
+      })
+      .addCase(addCostContainer.rejected, (state, action) => {
+        console.log('addCostContainer.rejected');
       });
     builder.addCase(deleteCostContainerById.fulfilled, (state, action) => {
       const { id } = action.payload;
