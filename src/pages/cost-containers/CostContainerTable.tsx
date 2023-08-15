@@ -80,6 +80,7 @@ interface ITableContentsProps {
 
 const StyledTable = styled(Table)`
   overflow: unset !important;
+  cursor: pointer;
 `;
 
 const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer }) => {
@@ -97,7 +98,7 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
         <Table.Body>
           {containers && containers.length > 0
             ? containers.map((container, index) => (
-                <Table.Row style={{ cursor: 'pointer', zIndex: '-1000' }} key={index}>
+                <Table.Row key={index}>
                   <Table.Cell singleLine>{container.name}</Table.Cell>
                   <Table.Cell>
                     <Dropdown
@@ -128,7 +129,7 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
         </Table.Body>
       </StyledTable>
       <TableFooter>
-        <TablePaging totalPages={1} totalResults={1} pageSize={1}></TablePaging>
+        <TablePaging totalPages={1} totalResults={10} pageSize={10} isLoading={true}></TablePaging>
       </TableFooter>
     </>
   );
