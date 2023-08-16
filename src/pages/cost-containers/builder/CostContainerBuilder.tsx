@@ -48,9 +48,12 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
     const args = { ...container, query };
 
     /* Check that the dispatch was successful before navigating */
-    thunk<AppDispatch>(addCostContainer(args));
-
-    toggleContainerList(false);
+    thunk<AppDispatch>(addCostContainer(args)).then((response: any) => {
+      console.log('response', response);
+      if (!response.error) {
+        toggleContainerList(false);
+      }
+    });
   };
 
   return (

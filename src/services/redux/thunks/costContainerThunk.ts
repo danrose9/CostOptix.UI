@@ -41,6 +41,7 @@ export interface IAddCostContainerArgs {
 export const addCostContainer = createAsyncThunk(
   'CostContainer/Add',
   async (args: IAddCostContainerArgs, { rejectWithValue }) => {
+    console.log('addCostContainer', args);
     return await fetchInstance(COST_CONTAINERS, { method: 'POST', body: JSON.stringify({ ...args }) })
       .then((response) => response.json())
       .catch((e) => rejectWithValue(e.response.data));

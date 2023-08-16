@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, SemanticWIDTHS, Icon, Dropdown } from 'semantic-ui-react';
+import { Segment, Table, Icon, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -10,8 +10,6 @@ import '../../components/__styles__/fade.css';
 import { InlineDropdown } from '../../components/menus';
 import CostContainerOptions from './CostContainerOptions';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../services/redux/store';
-import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -151,7 +149,6 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
 
   const toggleContainerList = (value: boolean) => {
     setShowAddContainer(value);
-    dispatch<AppDispatch>(fetchCostContainers());
   };
 
   const containerListOptions = [

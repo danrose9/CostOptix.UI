@@ -39,14 +39,12 @@ const costContainerSlice = createSlice({
         state.error = action.error.message;
       });
     builder
-      .addCase(addCostContainer.pending, (state) => {
-        console.log('addCostContainer.pending');
-      })
+      .addCase(addCostContainer.pending, (state) => {})
       .addCase(addCostContainer.fulfilled, (state, action) => {
-        console.log('addCostContainer.fulfilled');
+        state.containers = [...state.containers, action.payload];
       })
       .addCase(addCostContainer.rejected, (state, action) => {
-        console.log('addCostContainer.rejected');
+        console.log('addCostContainer.rejected', action.error.message);
       });
     builder.addCase(deleteCostContainerById.fulfilled, (state, action) => {
       const { id } = action.payload;
