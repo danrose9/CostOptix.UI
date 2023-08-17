@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Dropdown, Modal, Button } from 'semantic-ui-react';
-import { ContainersType } from './CostContainerTable';
+import { ICostContainer } from '../../types/container-types';
 import { deleteCostContainerById } from '../../services/redux/thunks/costContainerThunk';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../services/redux/store';
 
 interface ICostContainerOptionsProps {
-  container: ContainersType;
+  container: ICostContainer;
 }
 
 const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container }) => {
