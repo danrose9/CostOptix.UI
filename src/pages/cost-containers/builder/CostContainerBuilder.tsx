@@ -5,10 +5,10 @@ import QueryFilter from '../../../components/query_filter/QueryFilter';
 import { CostContainerData } from './CostContainerData';
 import FilterOutput from '../../../components/query_filter/FilterOuput';
 import { updateFilterReducer, INITIAL_STATE } from '../../../reducers/updateFilterReducer';
-import { IAddCostContainerArgs } from '../../../services/redux/thunks/costContainerThunk';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { addCostContainer } from '../../../services/redux/thunks/costContainerThunk';
+import { INewCostContainer } from '../../../types/container-types';
 
 const QueryContainer = styled.div`
   display: flex;
@@ -27,11 +27,13 @@ const StyledSegment = styled(Segment)`
 export interface ICostContainerBuilderProps {
   showFilterOutput?: boolean;
   toggleContainerList: (value: boolean) => void;
+  container?: INewCostContainer;
 }
 
 export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
   showFilterOutput,
   toggleContainerList,
+  container,
 }) => {
   const thunk = useDispatch();
 
@@ -42,7 +44,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
     setIsQueryValid(value);
   };
 
-  const handleAddContainer = (container: IAddCostContainerArgs) => {
+  const handleAddContainer = (container: INewCostContainer) => {
     // Append filterOutput with container
     const query = filterOutput;
     const args = { ...container, query };

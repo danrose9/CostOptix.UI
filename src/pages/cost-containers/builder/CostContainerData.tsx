@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { IAddCostContainerArgs } from '../../../services/redux/thunks/costContainerThunk';
+import { INewCostContainer } from '../../../types/container-types';
 
 const StyledForm = styled(Form)`
   font-family: Poppins;
@@ -10,7 +10,7 @@ const StyledForm = styled(Form)`
 
 interface ICostContainerDataProps {
   isQueryValid: boolean;
-  handleAddContainer: (container: IAddCostContainerArgs) => void;
+  handleAddContainer: (container: INewCostContainer) => void;
 }
 
 export const CostContainerData: React.FC<ICostContainerDataProps> = ({
