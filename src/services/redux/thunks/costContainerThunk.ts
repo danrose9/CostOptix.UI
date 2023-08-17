@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { COST_CONTAINERS, TRANSIENT_BILLING_ACCOUNT_COSTS } from '../../api/apiEndpoints';
 import fetchInstance from '../../api/fetchInstance';
+import { INewCostContainer } from '../../../types/container-types';
 
 export const fetchCostContainers = createAsyncThunk('CostContainer/List', async (args, { rejectWithValue }) => {
   return await fetchInstance(COST_CONTAINERS)
@@ -31,16 +32,10 @@ export const deleteCostContainerById = createAsyncThunk(
   }
 );
 
-export interface IAddCostContainerArgs {
-  name: string;
-  description: string;
-  owner: string;
-  query?: any;
-}
-
 export const addCostContainer = createAsyncThunk(
   'CostContainer/Add',
-  async (args: IAddCostContainerArgs, { rejectWithValue }) => {
+  async (args: INewCostContainer, { rejectWithValue }) => {
+    console.log('addCostContainer', args);
     return await fetchInstance(COST_CONTAINERS, { method: 'POST', body: JSON.stringify({ ...args }) })
       .then((response) => response.json())
       .catch((e) => rejectWithValue(e.response.data));

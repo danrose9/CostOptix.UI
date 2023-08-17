@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, SemanticWIDTHS, Icon, Dropdown } from 'semantic-ui-react';
+import { Segment, Table, Icon, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -10,8 +10,8 @@ import '../../components/__styles__/fade.css';
 import { InlineDropdown } from '../../components/menus';
 import CostContainerOptions from './CostContainerOptions';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../services/redux/store';
-import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
+import { formatISODateToUTCDate } from '../../utils/dateFormatter';
+import { ICostContainer } from '../../types/container-types';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -33,22 +33,6 @@ export const SegmentName = styled.div`
   font-size: 1.5em;
 `;
 
-export type ContainersType = {
-  id: string;
-  name: string;
-  description: string;
-  created: string;
-  createdBy: string;
-  owner: string;
-  resourceCount: number;
-  monthlyCosts: string;
-  currency: string;
-  providers: string[];
-  data: {
-    value: number;
-  }[];
-};
-
 const AddNewContainerRow = styled(Table.Row)`
   cursor: pointer;
   color: #a9a9a9;
@@ -62,24 +46,20 @@ const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
   const [open, setOpen] = useState(false);
   return (
     <AddNewContainerRow onClick={handleAddContainer} data-testid="add-new-container-row">
-      <Table.Cell width="16">
+      <Table.Cell>
         <Icon name="add" size="large" /> Add Container
       </Table.Cell>
-      <Table.Cell />
-      <Table.Cell />
-      <Table.Cell />
       <Table.Cell />
     </AddNewContainerRow>
   );
 };
 
 interface ITableContentsProps {
-  containers?: ContainersType[];
+  containers?: ICostContainer[];
   handleAddContainer?: (arg0: boolean) => void;
 }
 
 const StyledTable = styled(Table)`
-  overflow: unset !important;
   cursor: pointer;
 `;
 
@@ -89,10 +69,14 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
       <StyledTable striped>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan="2">Container</Table.HeaderCell>
-            <Table.HeaderCell>Cost Trend</Table.HeaderCell>
-            <Table.HeaderCell>Providers</Table.HeaderCell>
-            <Table.HeaderCell textAlign="right">Monthly Costs</Table.HeaderCell>
+            <Table.HeaderCell width={5}>Container</Table.HeaderCell>
+            <Table.HeaderCell width={1}></Table.HeaderCell>
+            <Table.HeaderCell width={3}>Created on</Table.HeaderCell>
+            <Table.HeaderCell width={3}>Cost Trend</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Providers</Table.HeaderCell>
+            <Table.HeaderCell textAlign="right" width={2}>
+              Monthly Costs
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -115,12 +99,13 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
                       </Dropdown.Menu>
                     </Dropdown>
                   </Table.Cell>
+                  <Table.Cell singleLine>{formatISODateToUTCDate(container.createdDate)}</Table.Cell>
                   <Table.Cell style={{ padding: 0 }}>
                     <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
                   </Table.Cell>
-                  <Table.Cell singleLine>{container.providers}</Table.Cell>
+                  <Table.Cell singleLine>{container.cloudProviders}</Table.Cell>
                   <Table.Cell singleLine textAlign="right">
-                    {container.monthlyCosts}
+                    ${container.amount30Day}
                   </Table.Cell>
                 </Table.Row>
               ))
@@ -129,14 +114,14 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
         </Table.Body>
       </StyledTable>
       <TableFooter>
-        <TablePaging totalPages={1} totalResults={10} pageSize={10} isLoading={true}></TablePaging>
+        <TablePaging totalPages={1} totalResults={1} pageSize={10} isLoading={true}></TablePaging>
       </TableFooter>
     </>
   );
 };
 
 interface ICostContainerTableProps {
-  containers?: ContainersType[];
+  containers?: ICostContainer[];
 }
 
 const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
@@ -151,7 +136,6 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
 
   const toggleContainerList = (value: boolean) => {
     setShowAddContainer(value);
-    dispatch<AppDispatch>(fetchCostContainers());
   };
 
   const containerListOptions = [
