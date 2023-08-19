@@ -126,8 +126,7 @@ interface ICostContainerTableProps {
 
 const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   const [showAddContainer, setShowAddContainer] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState('');
-  const [showFilterOutput, setShowFilterOutput] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleAddContainer = () => {
@@ -138,35 +137,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
     setShowAddContainer(value);
   };
 
-  const containerListOptions = [
-    { key: 'add', text: 'Add', value: 'add', icon: 'add', hidden: showAddContainer },
-    { key: 'close', text: 'Close', value: 'close', icon: 'minus', hidden: !showAddContainer },
-    {
-      key: 'query',
-      text: showFilterOutput ? 'Hide Query' : 'Show Query',
-      value: 'query',
-      icon: 'code',
-      hidden: !showAddContainer,
-    },
-  ];
-
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
-
-  const handleDropdownChange = (e: any, { value }: any) => {
-    switch (value) {
-      case 'add':
-        setShowAddContainer(true);
-        break;
-      case 'close':
-        setShowAddContainer(false);
-        break;
-      case 'query':
-        setShowFilterOutput(!showFilterOutput);
-        break;
-      default:
-        break;
-    }
-  };
 
   return (
     <>
@@ -176,12 +147,6 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
             <SegmentName>
               Containers <InformationButton content={tooltipContent} />
             </SegmentName>
-            <InlineDropdown
-              onClick={handleDropdownChange}
-              items={containerListOptions}
-              value={dropdownValue}
-              direction="left"
-            />
           </SegmentHeader>
           <SwitchTransition>
             <CSSTransition
@@ -194,7 +159,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
               {!showAddContainer ? (
                 <TableContents containers={containers} handleAddContainer={handleAddContainer} />
               ) : (
-                <CostContainerBuilder showFilterOutput={showFilterOutput} toggleContainerList={toggleContainerList} />
+                <CostContainerBuilder toggleContainerList={toggleContainerList} />
               )}
             </CSSTransition>
           </SwitchTransition>

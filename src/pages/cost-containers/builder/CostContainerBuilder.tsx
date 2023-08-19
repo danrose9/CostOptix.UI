@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Radio, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import QueryFilter from '../../../components/query_filter/QueryFilter';
 import { CostContainerData } from './CostContainerData';
@@ -25,18 +25,14 @@ const StyledSegment = styled(Segment)`
 `;
 
 export interface ICostContainerBuilderProps {
-  showFilterOutput?: boolean;
   toggleContainerList: (value: boolean) => void;
   container?: INewCostContainer;
 }
 
-export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
-  showFilterOutput,
-  toggleContainerList,
-  container,
-}) => {
+export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ toggleContainerList, container }) => {
   const thunk = useDispatch();
 
+  const [showFilterOutput, setShowFilterOutput] = useState(false);
   const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
   const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
 
@@ -65,9 +61,22 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
           <QueryFilter updateSetIsQueryValid={updateSetIsQueryValid} dispatch={dispatch} />
         </StyledSegment>
         <StyledSegment className="result-container">
-          <CostContainerData isQueryValid={isQueryValid} handleAddContainer={handleAddContainer} />
+          <CostContainerData
+            isQueryValid={isQueryValid}
+            handleAddContainer={handleAddContainer}
+            toggleContainerList={toggleContainerList}
+          />
         </StyledSegment>
       </QueryContainer>
+      <Segment basic style={{ padding: '0 1rem' }}>
+        <Radio
+          toggle
+          label="Show filter"
+          onChange={() => {
+            setShowFilterOutput(!showFilterOutput);
+          }}
+        />
+      </Segment>
       {showFilterOutput ? <FilterOutput value={filterOutput} /> : null}
     </>
   );
