@@ -3,6 +3,7 @@ import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { INewCostContainer } from '../../../types/container-types';
+import { SpaceBetweenButtonGroup } from '../../../components/__styles__/ButtonStyles';
 
 const StyledForm = styled(Form)`
   font-family: Poppins;
@@ -11,11 +12,12 @@ const StyledForm = styled(Form)`
 interface ICostContainerDataProps {
   isQueryValid: boolean;
   handleAddContainer: (container: INewCostContainer) => void;
+  toggleContainerList: (value: boolean) => void;
 }
 
 export const CostContainerData: React.FC<ICostContainerDataProps> = ({
   isQueryValid,
-
+  toggleContainerList,
   handleAddContainer,
 }) => {
   const [container, setContainer] = useState({
@@ -77,21 +79,31 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
           onChange={(e) => handleContainerChange('owner', e.target.value)}
           value={container.owner}
         />
-
-        <Button
-          color="teal"
-          disabled={addButtonDisabled}
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddContainer({
-              name: container.name,
-              owner: container.owner,
-              description: container.description,
-            });
-          }}
-        >
-          Add
-        </Button>
+        <SpaceBetweenButtonGroup>
+          <Button
+            color="teal"
+            disabled={addButtonDisabled}
+            onClick={(e) => {
+              e.preventDefault();
+              handleAddContainer({
+                name: container.name,
+                owner: container.owner,
+                description: container.description,
+              });
+            }}
+          >
+            Save
+          </Button>
+          <Button
+            color="teal"
+            onClick={(e) => {
+              e.preventDefault();
+              toggleContainerList(false);
+            }}
+          >
+            Close
+          </Button>
+        </SpaceBetweenButtonGroup>
       </Form>
     </div>
   );
