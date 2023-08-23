@@ -1,5 +1,5 @@
-import React, { useReducer, useState } from 'react';
-import { Segment } from 'semantic-ui-react';
+import React, { useEffect, useReducer, useState } from 'react';
+import { Segment, Radio } from 'semantic-ui-react';
 import styled from 'styled-components';
 import QueryFilter from '../../../components/query_filter/QueryFilter';
 import { CostContainerData } from './CostContainerData';
@@ -8,7 +8,7 @@ import { updateFilterReducer, INITIAL_STATE } from '../../../reducers/updateFilt
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { addCostContainer } from '../../../services/redux/thunks/costContainerThunk';
-import { INewCostContainer } from '../../../types/container-types';
+import { ICostContainer, INewCostContainer } from '../../../types/container-types';
 
 const QueryContainer = styled.div`
   display: flex;
@@ -25,19 +25,24 @@ const StyledSegment = styled(Segment)`
 `;
 
 export interface ICostContainerBuilderProps {
-  showFilterOutput?: boolean;
   toggleContainerList: (value: boolean) => void;
-  container?: INewCostContainer;
+  containerProps: INewCostContainer | null;
 }
 
-export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
-  showFilterOutput,
-  toggleContainerList,
-  container,
-}) => {
+/*
+ * This component is used to build a new cost container.
+ * containerProps can be passed in to pre-populate the form or be empty to create a new container.
+ */
+
+export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ toggleContainerList, containerProps }) => {
   const thunk = useDispatch();
 
+  const [activeContainer, setActiveContainer] = useState<INewCostContainer | null>(containerProps);
+
+  const [showFilterOutput, setShowFilterOutput] = useState(false);
   const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
+
+  // INITIAL_STATE should be changed to what the incoming query is
   const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
 
   const updateSetIsQueryValid = (value: boolean) => {
@@ -51,12 +56,16 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
 
     /* Check that the dispatch was successful before navigating */
     thunk<AppDispatch>(addCostContainer(args)).then((response: any) => {
-      console.log('response', response);
       if (!response.error) {
         toggleContainerList(false);
       }
     });
   };
+
+  useEffect(() => {
+    console.log('activeContainer', activeContainer);
+    console.log('filterOutput', filterOutput);
+  }, [activeContainer, filterOutput]);
 
   return (
     <>
@@ -65,9 +74,22 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
           <QueryFilter updateSetIsQueryValid={updateSetIsQueryValid} dispatch={dispatch} />
         </StyledSegment>
         <StyledSegment className="result-container">
-          <CostContainerData isQueryValid={isQueryValid} handleAddContainer={handleAddContainer} />
+          <CostContainerData
+            isQueryValid={isQueryValid}
+            handleAddContainer={handleAddContainer}
+            toggleContainerList={toggleContainerList}
+          />
         </StyledSegment>
       </QueryContainer>
+      <Segment basic style={{ padding: '0 1rem' }}>
+        <Radio
+          toggle
+          label={showFilterOutput ? 'Hide Filter' : 'Show Filter'}
+          onChange={() => {
+            setShowFilterOutput(!showFilterOutput);
+          }}
+        />
+      </Segment>
       {showFilterOutput ? <FilterOutput value={filterOutput} /> : null}
     </>
   );
