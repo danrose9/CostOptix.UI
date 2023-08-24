@@ -14,9 +14,12 @@ const dispatchError = (value: any): void => {
 export interface IQueryFilterProps {
   updateSetIsQueryValid: (value: boolean) => void;
   dispatch: React.Dispatch<any>;
+  activeQuery: any;
 }
 
-const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch }) => {
+const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch, activeQuery }) => {
+  /* activeQuery is the current state of the filter */
+
   const filterGroupInitialState = [
     <FilterGroup
       key={0}

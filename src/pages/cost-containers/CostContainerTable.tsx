@@ -157,7 +157,12 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   };
 
   const handleEditContainer = (id: string | null) => {
+    /* if container has an id then we are editing an existing container,
+     if container is null then we are creating a new container */
+
     const containerProps = getContainerProps(id);
+
+    /* pass container props to CostContainerBuilder and toggle showContainerBuilder to true */
     setContainerProps(containerProps);
     setShowContainerBuilder(true);
   };

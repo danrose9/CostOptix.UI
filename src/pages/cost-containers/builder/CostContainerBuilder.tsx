@@ -71,13 +71,18 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ tog
     <>
       <QueryContainer>
         <StyledSegment>
-          <QueryFilter updateSetIsQueryValid={updateSetIsQueryValid} dispatch={dispatch} />
+          <QueryFilter
+            updateSetIsQueryValid={updateSetIsQueryValid}
+            dispatch={dispatch}
+            activeQuery={activeContainer?.query}
+          />
         </StyledSegment>
         <StyledSegment className="result-container">
           <CostContainerData
             isQueryValid={isQueryValid}
             handleAddContainer={handleAddContainer}
             toggleContainerList={toggleContainerList}
+            activeContainer={activeContainer}
           />
         </StyledSegment>
       </QueryContainer>
