@@ -2,7 +2,7 @@ export interface INewCostContainer {
   name: string;
   description: string;
   owner: string;
-  query?: string;
+  query?: any;
 }
 
 export interface ICostContainer extends INewCostContainer {

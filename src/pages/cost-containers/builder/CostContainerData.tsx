@@ -6,24 +6,26 @@ import { INewCostContainer } from '../../../types/container-types';
 import { SpaceBetweenButtonGroup } from '../../../components/__styles__/ButtonStyles';
 
 const StyledForm = styled(Form)`
-  font-family: Poppins;
+  font-family: inherit;
 `;
 
 interface ICostContainerDataProps {
   isQueryValid: boolean;
   handleAddContainer: (container: INewCostContainer) => void;
   toggleContainerList: (value: boolean) => void;
+  activeContainer: INewCostContainer | null;
 }
 
 export const CostContainerData: React.FC<ICostContainerDataProps> = ({
   isQueryValid,
   toggleContainerList,
   handleAddContainer,
+  activeContainer,
 }) => {
   const [container, setContainer] = useState({
-    name: '',
-    owner: '',
-    description: '',
+    name: activeContainer ? activeContainer.name : '',
+    owner: activeContainer ? activeContainer.owner : '',
+    description: activeContainer ? activeContainer.description : '',
   });
 
   const handleContainerChange = (key: string, value: string) => {
@@ -58,21 +60,21 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
       </p>
       <p>Use the query builder to create containers based on providers, organizations and other fields.</p>
 
-      <Form size="small">
-        <StyledForm.Input
+      <Form>
+        <Form.Input
           label="Container Name"
           placeholder="Container Name"
           icon="folder outline"
           value={container.name}
           onChange={(e) => handleContainerChange('name', e.target.value)}
         />
-        <StyledForm.TextArea
+        <Form.TextArea
           label="Container Description"
           placeholder="Container Description"
           value={container.description}
           onChange={(e) => handleContainerChange('description', e.target.value)}
         />
-        <StyledForm.Input
+        <Form.Input
           label="Owner"
           placeholder="Owner"
           icon="address card outline"

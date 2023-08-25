@@ -7,11 +7,11 @@ import InformationButton from '../../components/buttons/InformationButton';
 import CostContainerBuilder from './builder/CostContainerBuilder';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
-import { InlineDropdown } from '../../components/menus';
 import CostContainerOptions from './CostContainerOptions';
 import { useDispatch } from 'react-redux';
 import { formatISODateToUTCDate } from '../../utils/dateFormatter';
-import { ICostContainer } from '../../types/container-types';
+import { ICostContainer, INewCostContainer } from '../../types/container-types';
+import { INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -39,16 +39,22 @@ const AddNewContainerRow = styled(Table.Row)`
 `;
 
 interface IAddNewContainerProps {
-  handleAddContainer?: (arg0: boolean) => void;
+  handleEditContainer?: (id: string | null) => void;
 }
 
-const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
-  const [open, setOpen] = useState(false);
+const AddNewContainer: FC<IAddNewContainerProps> = ({ handleEditContainer }) => {
   return (
-    <AddNewContainerRow onClick={handleAddContainer} data-testid="add-new-container-row">
+    <AddNewContainerRow
+      onClick={() => handleEditContainer && handleEditContainer(null)}
+      data-testid="add-new-container-row"
+    >
       <Table.Cell>
         <Icon name="add" size="large" /> Add Container
       </Table.Cell>
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
       <Table.Cell />
     </AddNewContainerRow>
   );
@@ -56,14 +62,14 @@ const AddNewContainer: FC<IAddNewContainerProps> = ({ handleAddContainer }) => {
 
 interface ITableContentsProps {
   containers?: ICostContainer[];
-  handleAddContainer?: (arg0: boolean) => void;
+  handleEditContainer: (id: string | null) => void;
 }
 
 const StyledTable = styled(Table)`
   cursor: pointer;
 `;
 
-const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer }) => {
+const TableContents: FC<ITableContentsProps> = ({ containers, handleEditContainer }) => {
   return (
     <>
       <StyledTable striped>
@@ -95,12 +101,12 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
                       open={false}
                     >
                       <Dropdown.Menu>
-                        <CostContainerOptions container={container} />
+                        <CostContainerOptions container={container} handleEditContainer={handleEditContainer} />
                       </Dropdown.Menu>
                     </Dropdown>
                   </Table.Cell>
                   <Table.Cell singleLine>{formatISODateToUTCDate(container.createdDate)}</Table.Cell>
-                  <Table.Cell style={{ padding: 0 }}>
+                  <Table.Cell>
                     <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
                   </Table.Cell>
                   <Table.Cell singleLine>{container.cloudProviders}</Table.Cell>
@@ -110,7 +116,7 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleAddContainer
                 </Table.Row>
               ))
             : null}
-          <AddNewContainer handleAddContainer={handleAddContainer} />
+          <AddNewContainer handleEditContainer={handleEditContainer} />
         </Table.Body>
       </StyledTable>
       <TableFooter>
@@ -125,16 +131,45 @@ interface ICostContainerTableProps {
 }
 
 const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
-  const [showAddContainer, setShowAddContainer] = useState(false);
+  /* CostContainerTable should be responsible for passing in either a new empty conainer or an exiting container. 
+  The state should be held in the CostContainerBuilder */
 
+  const [showContainerBuilder, setShowContainerBuilder] = useState(false);
+  const [containerProps, setContainerProps] = useState<INewCostContainer | null>(null);
   const dispatch = useDispatch();
 
-  const handleAddContainer = () => {
-    setShowAddContainer(true);
+  const getContainerProps = (id: string | null): INewCostContainer => {
+    // If id is null, return INITIAL_CONTAINER_STATE
+    if (!id) {
+      return INITIAL_CONTAINER_STATE;
+    }
+
+    // Find the container by its id in containers
+    const container = containers && containers.find((container) => container.id === id);
+
+    // If container not found, return INITIAL_CONTAINER_STATE
+    if (!container) {
+      return INITIAL_CONTAINER_STATE;
+    }
+
+    // Destructure the desired properties and return them
+    const { name, description, owner, query } = container;
+    return { name, description, owner, query };
+  };
+
+  const handleEditContainer = (id: string | null) => {
+    /* if container has an id then we are editing an existing container,
+     if container is null then we are creating a new container */
+
+    const containerProps = getContainerProps(id);
+
+    /* pass container props to CostContainerBuilder and toggle showContainerBuilder to true */
+    setContainerProps(containerProps);
+    setShowContainerBuilder(true);
   };
 
   const toggleContainerList = (value: boolean) => {
-    setShowAddContainer(value);
+    setShowContainerBuilder(value);
   };
 
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
@@ -150,16 +185,16 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
           </SegmentHeader>
           <SwitchTransition>
             <CSSTransition
-              key={showAddContainer ? 'CostContainerBuilder' : 'TableContents'}
+              key={showContainerBuilder ? 'CostContainerBuilder' : 'TableContents'}
               addEndListener={(node, done) => {
                 node.addEventListener('transitionend', done, false);
               }}
               classNames="fade"
             >
-              {!showAddContainer ? (
-                <TableContents containers={containers} handleAddContainer={handleAddContainer} />
+              {!showContainerBuilder ? (
+                <TableContents containers={containers} handleEditContainer={handleEditContainer} />
               ) : (
-                <CostContainerBuilder toggleContainerList={toggleContainerList} />
+                <CostContainerBuilder toggleContainerList={toggleContainerList} containerProps={containerProps} />
               )}
             </CSSTransition>
           </SwitchTransition>
