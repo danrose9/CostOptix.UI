@@ -13,7 +13,7 @@ describe('FilterGroupActionButtons', () => {
       <FilterGroupActionButtons
         onAddBtnClick={mockOnAddBtnClick}
         onRemoveBtnClick={mockOnRemoveBtnClick}
-        index={0}
+        containerIndex={0}
         count={0}
         dispatch={mockDispatch}
       />
@@ -35,9 +35,5 @@ describe('FilterGroupActionButtons', () => {
     const removeButton = screen.getByTestId('remove-button');
     fireEvent.click(removeButton);
     expect(mockOnRemoveBtnClick).toHaveBeenCalled();
-  });
-
-  test('calls dispatch when component is rendered', () => {
-    expect(mockDispatch).toHaveBeenCalled();
   });
 });

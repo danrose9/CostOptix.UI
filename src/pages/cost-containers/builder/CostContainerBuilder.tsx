@@ -1,14 +1,14 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Segment, Radio } from 'semantic-ui-react';
 import styled from 'styled-components';
 import QueryFilter from '../../../components/query_filter/QueryFilter';
 import { CostContainerData } from './CostContainerData';
 import FilterOutput from '../../../components/query_filter/FilterOuput';
-import { updateFilterReducer, INITIAL_STATE } from '../../../reducers/updateFilterReducer';
+import { updateFilterReducer } from '../../../reducers/updateFilterReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { addCostContainer } from '../../../services/redux/thunks/costContainerThunk';
-import { ICostContainer, INewCostContainer } from '../../../types/container-types';
+import { INewCostContainer } from '../../../types/container-types';
 
 const QueryContainer = styled.div`
   display: flex;
@@ -42,8 +42,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ tog
   const [showFilterOutput, setShowFilterOutput] = useState(false);
   const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
 
-  // INITIAL_STATE should be changed to what the incoming query is
-  const [filterOutput, dispatch] = useReducer(updateFilterReducer, INITIAL_STATE);
+  const [filterOutput, dispatch] = useReducer(updateFilterReducer, containerProps?.query);
 
   const updateSetIsQueryValid = (value: boolean) => {
     setIsQueryValid(value);
@@ -57,15 +56,9 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ tog
     /* Check that the dispatch was successful before navigating */
     thunk<AppDispatch>(addCostContainer(args)).then((response: any) => {
       if (!response.error) {
-        toggleContainerList(false);
       }
     });
   };
-
-  useEffect(() => {
-    console.log('activeContainer', activeContainer);
-    console.log('filterOutput', filterOutput);
-  }, [activeContainer, filterOutput]);
 
   return (
     <>
