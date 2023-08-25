@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterGroup from './FilterGroup';
 import { StyledResetButton } from '../__styles__/StyledQueryFilter';
 import { INTIAL_FILTER } from '../../reducers/updateFilterReducer';
@@ -14,41 +14,17 @@ const dispatchError = (value: any): void => {
 export interface IQueryFilterProps {
   updateSetIsQueryValid: (value: boolean) => void;
   dispatch: React.Dispatch<any>;
+  activeQuery: any;
 }
 
-const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch }) => {
-  const filterGroupInitialState = [
-    <FilterGroup
-      key={0}
-      index={0}
-      count={0}
-      onRemoveBtnClick={throwError}
-      onAddBtnClick={throwError}
-      dispatch={dispatchError}
-      updateSetIsQueryValid={updateSetIsQueryValid}
-    />,
-  ];
-  const [filterGroup, setFilterGroup] = useState<any>([filterGroupInitialState]);
+const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch, activeQuery }) => {
+  /* activeQuery is the current state of the filter */
 
-  const onAddBtnClick = () => {
-    const newFilterGroup = (
-      <FilterGroup
-        key={filterGroup.length}
-        onRemoveBtnClick={onRemoveBtnClick}
-        onAddBtnClick={throwError}
-        dispatch={dispatchError}
-        count={0}
-        index={0}
-        updateSetIsQueryValid={updateSetIsQueryValid}
-      />
-    );
-    const updatedFilterGroup = [...filterGroup, newFilterGroup];
+  const [containerIndex, setContainerIndex] = useState<number>(0);
 
-    setFilterGroup(updatedFilterGroup);
-  };
-
-  const onRemoveBtnClick = (index: number) => {
-    const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== index);
+  const onRemoveBtnClick = () => {
+    setContainerIndex(containerIndex - 1);
+    const updatedFilterGroup = filterGroup.filter((_: any, i: number) => i !== containerIndex);
     setFilterGroup(updatedFilterGroup);
 
     /* Update filter output */
@@ -58,18 +34,42 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
     });
   };
 
+  const newFilterGroup = (key: number, containerIndex: number) => {
+    return (
+      <FilterGroup
+        key={containerIndex}
+        containerIndex={containerIndex}
+        count={0}
+        onRemoveBtnClick={onRemoveBtnClick}
+        onAddBtnClick={throwError}
+        dispatch={dispatchError}
+        updateSetIsQueryValid={updateSetIsQueryValid}
+      />
+    );
+  };
+
+  const [filterGroup, setFilterGroup] = useState<any>([newFilterGroup(0, 0)]);
+
+  const onAddBtnClick = () => {
+    setContainerIndex(containerIndex + 1);
+    newFilterGroup(filterGroup.length, containerIndex);
+    const updatedFilterGroup = [...filterGroup, newFilterGroup];
+
+    setFilterGroup(updatedFilterGroup);
+  };
+
   const handleReset = () => {
     dispatch({ type: 'RESET_QUERY', payload: { value: INTIAL_FILTER } });
-    setFilterGroup(filterGroupInitialState);
+    setFilterGroup(newFilterGroup(0, 0));
   };
 
   return (
     <>
-      {filterGroup.map((filter: any, index: number) => (
+      {filterGroup.map((filter: any, containerIndex: number) => (
         <FilterGroup
           count={filterGroup.length}
-          key={index}
-          index={index}
+          key={containerIndex}
+          containerIndex={containerIndex}
           onRemoveBtnClick={onRemoveBtnClick}
           onAddBtnClick={onAddBtnClick}
           dispatch={dispatch}

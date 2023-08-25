@@ -23,7 +23,7 @@ export const updateFilterReducer = (state: any, action: any) => {
   switch (action.type) {
     case 'ADD_FILTER':
       /* Responsible for adding a new filter to the state, if index is > 0 then this will also prepend a conditional operator */
-
+      console.log('ADD_FILTER', action.payload);
       let key = Object.keys(value);
       let filterIndex = parseInt(key[0]);
 

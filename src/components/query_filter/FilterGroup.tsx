@@ -12,8 +12,8 @@ import FilterOperator from './FilterOperator';
 
 interface IFilterGroupProps {
   count: number;
-  index: number;
-  onRemoveBtnClick: (index: number) => void;
+  containerIndex: number;
+  onRemoveBtnClick: () => void;
   onAddBtnClick: () => void;
   dispatch: React.Dispatch<any>;
   key: number;
@@ -22,7 +22,7 @@ interface IFilterGroupProps {
 
 const FilterGroup: React.FC<IFilterGroupProps> = ({
   count,
-  index,
+  containerIndex,
   onRemoveBtnClick,
   onAddBtnClick,
   dispatch,
@@ -32,8 +32,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   const [operator, setOperator] = useState();
   const [filterValue, setFilterValue] = useState('');
 
-  /* currentFilter is the current state of the indexed filter */
-  const [currentFilter, setCurrentFilter] = useState({ field: '', operator: '', value: '' });
+  const [currentFilter, setCurrentFilter] = useState(null);
 
   const isValidValue = (value: any) => value !== undefined && value !== '';
 
@@ -46,7 +45,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
     } else {
       updateSetIsQueryValid(false);
     }
-  }, [field, operator, filterValue, currentFilter, dispatch, index]);
+  }, [field, operator, filterValue, currentFilter, dispatch]);
 
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
@@ -61,12 +60,12 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
     };
 
   useEffect(() => {
-    dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: index } });
-  }, [currentFilter, dispatch, index]);
+    dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: containerIndex } });
+  }, [currentFilter, dispatch, containerIndex]);
 
   return (
     <React.Fragment>
-      {index !== 0 ? <FilterOperator dispatch={dispatch} index={index} /> : null}
+      {containerIndex !== 0 ? <FilterOperator dispatch={dispatch} index={containerIndex} /> : null}
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup data-testid="filter-group">
@@ -98,7 +97,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
           <FilterGroupActionButtons
             onAddBtnClick={onAddBtnClick}
             onRemoveBtnClick={onRemoveBtnClick}
-            index={index}
+            containerIndex={containerIndex}
             count={count}
             dispatch={dispatch}
           />

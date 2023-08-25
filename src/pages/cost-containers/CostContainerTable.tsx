@@ -7,13 +7,11 @@ import InformationButton from '../../components/buttons/InformationButton';
 import CostContainerBuilder from './builder/CostContainerBuilder';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
-import { InlineDropdown } from '../../components/menus';
 import CostContainerOptions from './CostContainerOptions';
 import { useDispatch } from 'react-redux';
 import { formatISODateToUTCDate } from '../../utils/dateFormatter';
 import { ICostContainer, INewCostContainer } from '../../types/container-types';
-import { INITIAL_STATE, INTIAL_FILTER, INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
-import { set } from 'immer/dist/internal';
+import { INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -45,7 +43,6 @@ interface IAddNewContainerProps {
 }
 
 const AddNewContainer: FC<IAddNewContainerProps> = ({ handleEditContainer }) => {
-  const [open, setOpen] = useState(false);
   return (
     <AddNewContainerRow
       onClick={() => handleEditContainer && handleEditContainer(null)}
@@ -54,6 +51,10 @@ const AddNewContainer: FC<IAddNewContainerProps> = ({ handleEditContainer }) => 
       <Table.Cell>
         <Icon name="add" size="large" /> Add Container
       </Table.Cell>
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
+      <Table.Cell />
       <Table.Cell />
     </AddNewContainerRow>
   );
@@ -105,7 +106,7 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleEditContaine
                     </Dropdown>
                   </Table.Cell>
                   <Table.Cell singleLine>{formatISODateToUTCDate(container.createdDate)}</Table.Cell>
-                  <Table.Cell style={{ padding: 0 }}>
+                  <Table.Cell>
                     <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
                   </Table.Cell>
                   <Table.Cell singleLine>{container.cloudProviders}</Table.Cell>
@@ -157,7 +158,12 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
   };
 
   const handleEditContainer = (id: string | null) => {
+    /* if container has an id then we are editing an existing container,
+     if container is null then we are creating a new container */
+
     const containerProps = getContainerProps(id);
+
+    /* pass container props to CostContainerBuilder and toggle showContainerBuilder to true */
     setContainerProps(containerProps);
     setShowContainerBuilder(true);
   };
