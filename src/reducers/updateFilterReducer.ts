@@ -1,5 +1,5 @@
 export const INITIAL_STATE = [] as any;
-export const INTIAL_FILTER = [{ '0': { field: '', operator: '', value: '' } }];
+export const INITIAL_FILTER = [{ '0': { field: '', operator: '', value: '' } }];
 
 const EMPTY_STRING = '';
 const CONTAINER_NAME = EMPTY_STRING;
@@ -11,7 +11,7 @@ export const INITIAL_CONTAINER_STATE = {
   name: CONTAINER_NAME,
   owner: OWNER,
   description: DESCRIPTION,
-  query: INTIAL_FILTER,
+  query: INITIAL_FILTER,
 };
 
 const CONDITIONAL_OPERATOR = {

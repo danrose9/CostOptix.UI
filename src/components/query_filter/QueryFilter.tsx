@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FilterGroup from './FilterGroup';
 import { StyledResetButton } from '../__styles__/StyledQueryFilter';
-import { INTIAL_FILTER } from '../../reducers/updateFilterReducer';
+import { INITIAL_FILTER } from '../../reducers/updateFilterReducer';
 
 // Define error throwing functions
 const throwError = (): void => {
@@ -67,7 +67,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
   };
 
   const handleQueryReset = () => {
-    dispatch({ type: 'RESET_QUERY', payload: { value: INTIAL_FILTER } });
+    dispatch({ type: 'RESET_QUERY', payload: { value: INITIAL_FILTER } });
     // Reset filterGroup to a single group with no values
     setFilterGroup([newFilterGroup(0, 0)]);
     setResetKey((prevKey) => prevKey + 1);

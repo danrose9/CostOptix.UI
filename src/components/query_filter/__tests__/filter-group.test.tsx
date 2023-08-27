@@ -4,13 +4,16 @@ import '@testing-library/jest-dom/extend-expect';
 import QueryFilter from '../QueryFilter';
 import { CostContainerTable, CostContainerBuilder } from '../../../pages/cost-containers/index';
 import { containers } from '../../../pages/cost-containers/containerMockData';
+import { INITIAL_FILTER } from '../../../reducers/updateFilterReducer';
 
 describe('FilterGroup', () => {
   let result;
   const mockFunction = jest.fn();
 
   beforeEach(() => {
-    result = render(<QueryFilter updateSetIsQueryValid={mockFunction} dispatch={mockFunction} />);
+    result = render(
+      <QueryFilter updateSetIsQueryValid={mockFunction} dispatch={mockFunction} activeQuery={INITIAL_FILTER} />
+    );
   });
 
   test('renders QueryFilter component', () => {
