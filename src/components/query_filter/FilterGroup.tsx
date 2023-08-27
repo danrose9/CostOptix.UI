@@ -18,6 +18,8 @@ interface IFilterGroupProps {
   dispatch: React.Dispatch<any>;
   key: number;
   updateSetIsQueryValid: (value: boolean) => void;
+  initialData?: any;
+  filter: any;
 }
 
 const FilterGroup: React.FC<IFilterGroupProps> = ({
@@ -27,10 +29,20 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   onAddBtnClick,
   dispatch,
   updateSetIsQueryValid,
+  initialData,
+  filter,
 }) => {
-  const [field, setField] = useState();
-  const [operator, setOperator] = useState();
-  const [filterValue, setFilterValue] = useState('');
+  useEffect(() => {
+    console.log(`filter ${containerIndex}`, filter);
+  }, [filter]);
+
+  const [field, setField] = useState(initialData ? initialData[containerIndex].field : '');
+  const [operator, setOperator] = useState(initialData ? initialData[containerIndex].operator : '');
+  const [filterValue, setFilterValue] = useState(initialData ? initialData[containerIndex].value : '');
+
+  // const [field, setField] = useState();
+  // const [operator, setOperator] = useState();
+  // const [filterValue, setFilterValue] = useState('');
 
   const [currentFilter, setCurrentFilter] = useState(null);
 

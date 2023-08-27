@@ -18,7 +18,7 @@ export interface IQueryFilterProps {
 }
 
 const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch, activeQuery }) => {
-  /* activeQuery is the current state of the filter */
+  /* activeQuery is the current filter passed from parent */
 
   const [containerIndex, setContainerIndex] = useState<number>(0);
 
@@ -34,33 +34,42 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
     });
   };
 
-  const newFilterGroup = (key: number, containerIndex: number) => {
+  const newFilterGroup = (count: number, containerIndex: number, initialData: any = null) => {
     return (
       <FilterGroup
+        count={count}
         key={containerIndex}
         containerIndex={containerIndex}
-        count={0}
         onRemoveBtnClick={onRemoveBtnClick}
         onAddBtnClick={throwError}
         dispatch={dispatchError}
         updateSetIsQueryValid={updateSetIsQueryValid}
+        initialData={initialData}
+        filter={throwError}
       />
     );
   };
 
-  const [filterGroup, setFilterGroup] = useState<any>([newFilterGroup(0, 0)]);
+  // Init filter groups based on activeQuery
+  const initialFilterGroups = activeQuery.map((query: any, index: number) => newFilterGroup(index, index, query));
+  const [filterGroup, setFilterGroup] = useState<any>(
+    initialFilterGroups.length ? initialFilterGroups : [newFilterGroup(0, 0)]
+  );
+
+  // const [filterGroup, setFilterGroup] = useState<any>([newFilterGroup(0, 0)]);
 
   const onAddBtnClick = () => {
     setContainerIndex(containerIndex + 1);
-    newFilterGroup(filterGroup.length, containerIndex);
+    newFilterGroup(filterGroup.length, containerIndex, null);
     const updatedFilterGroup = [...filterGroup, newFilterGroup];
 
     setFilterGroup(updatedFilterGroup);
   };
 
-  const handleReset = () => {
+  const handleQueryReset = () => {
     dispatch({ type: 'RESET_QUERY', payload: { value: INTIAL_FILTER } });
-    setFilterGroup(newFilterGroup(0, 0));
+    // Reset filterGroup to a single group with no values
+    setFilterGroup(newFilterGroup(0, 0, null));
   };
 
   return (
@@ -74,10 +83,12 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
           onAddBtnClick={onAddBtnClick}
           dispatch={dispatch}
           updateSetIsQueryValid={updateSetIsQueryValid}
+          initialData={activeQuery[containerIndex]}
+          filter={filter}
         />
       ))}
 
-      <StyledResetButton onClick={handleReset} data-testid="cost-container-reset-button">
+      <StyledResetButton onClick={handleQueryReset} data-testid="cost-container-reset-button">
         Reset
       </StyledResetButton>
     </>

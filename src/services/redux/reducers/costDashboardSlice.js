@@ -153,7 +153,6 @@ const costDashboardSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchBillingAccountCosts.fulfilled, (state, action) => {
-        // console.log('fetchBillingAccountCosts.fulfilled', action);
         const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, action.payload.id);
 
         state.currency = action.payload.currency;
@@ -228,18 +227,7 @@ const costDashboardSlice = createSlice({
           finalState(state);
         }
       })
-      .addCase(fetchTransientBillingAccountCosts.rejected, (state, action) => {
-        // console.log('fetchTransientBillingAccountCosts.rejected', action);
-        // const id = returnId(action.payload.billingAccountId);
-        // state.billingAccounts[billingAccountIndex].isLoading = false;
-        // state.billingAccounts[billingAccountIndex].isError = true;
-        // state.billingAccounts[billingAccountIndex].error = action.error.message;
-        // const billingAccountIndex = findBillingAccountIndex(state.billingAccounts, id);
-        // state.updatedCount = state.updatedCount + 1;
-        // if (state.updatedCount === state.count) {
-        //   finalState(state);
-        // }
-      });
+      .addCase(fetchTransientBillingAccountCosts.rejected, (state, action) => {});
   },
 });
 

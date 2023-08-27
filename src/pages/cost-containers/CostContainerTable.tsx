@@ -154,7 +154,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
 
     // Destructure the desired properties and return them
     const { name, description, owner, query } = container;
-    return { name, description, owner, query };
+    return { id, name, description, owner, query };
   };
 
   const handleEditContainer = (id: string | null) => {
