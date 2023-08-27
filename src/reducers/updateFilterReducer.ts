@@ -1,5 +1,5 @@
 export const INITIAL_STATE = [] as any;
-export const INTIAL_FILTER = [{ '0': { field: '', operator: '', value: '' } }];
+export const INITIAL_FILTER = [{ '0': { field: '', operator: '', value: '' } }];
 
 const EMPTY_STRING = '';
 const CONTAINER_NAME = EMPTY_STRING;
@@ -7,10 +7,11 @@ const OWNER = EMPTY_STRING;
 const DESCRIPTION = EMPTY_STRING;
 
 export const INITIAL_CONTAINER_STATE = {
+  id: null,
   name: CONTAINER_NAME,
   owner: OWNER,
   description: DESCRIPTION,
-  query: INTIAL_FILTER,
+  query: INITIAL_FILTER,
 };
 
 const CONDITIONAL_OPERATOR = {
@@ -23,7 +24,6 @@ export const updateFilterReducer = (state: any, action: any) => {
   switch (action.type) {
     case 'ADD_FILTER':
       /* Responsible for adding a new filter to the state, if index is > 0 then this will also prepend a conditional operator */
-      console.log('ADD_FILTER', action.payload);
       let key = Object.keys(value);
       let filterIndex = parseInt(key[0]);
 

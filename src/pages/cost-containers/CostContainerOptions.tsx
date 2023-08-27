@@ -16,6 +16,7 @@ const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container,
   const dispatch = useDispatch();
 
   const handleRemoveContainer = () => {
+    if (!container.id) return console.error('No container id');
     dispatch<AppDispatch>(deleteCostContainerById({ id: container.id }));
     setOpen(false);
   };

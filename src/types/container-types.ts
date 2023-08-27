@@ -1,4 +1,5 @@
 export interface INewCostContainer {
+  id: string | null;
   name: string;
   description: string;
   owner: string;
@@ -6,7 +7,6 @@ export interface INewCostContainer {
 }
 
 export interface ICostContainer extends INewCostContainer {
-  id: string;
   createdDate: string;
   createdBy: string;
   resourceCount: number;
