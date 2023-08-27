@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { addCostContainer, updateCostContainer } from '../../../services/redux/thunks/costContainerThunk';
 import { INewCostContainer } from '../../../types/container-types';
+import { set } from 'immer/dist/internal';
 
 const QueryContainer = styled.div`
   display: flex;
