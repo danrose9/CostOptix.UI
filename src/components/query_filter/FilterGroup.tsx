@@ -18,6 +18,9 @@ interface IFilterGroupProps {
   dispatch: React.Dispatch<any>;
   key: number;
   updateSetIsQueryValid: (value: boolean) => void;
+  initialData?: any;
+  filter: any;
+  reset: number;
 }
 
 const FilterGroup: React.FC<IFilterGroupProps> = ({
@@ -27,17 +30,31 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   onAddBtnClick,
   dispatch,
   updateSetIsQueryValid,
+  initialData,
+  filter,
+  reset,
 }) => {
-  const [field, setField] = useState();
-  const [operator, setOperator] = useState();
-  const [filterValue, setFilterValue] = useState('');
+  useEffect(() => {
+    console.log(`filter ${containerIndex}`, filter);
+  }, [filter]);
 
+  const [field, setField] = useState(initialData ? initialData[containerIndex].field : '');
+  const [operator, setOperator] = useState(initialData ? initialData[containerIndex].operator : '');
+  const [filterValue, setFilterValue] = useState(initialData ? initialData[containerIndex].value : '');
   const [currentFilter, setCurrentFilter] = useState(null);
-
   const isValidValue = (value: any) => value !== undefined && value !== '';
 
   const allFieldsValid = (field: any, operator: any, filterValue: any) =>
     isValidValue(field) && isValidValue(operator) && isValidValue(filterValue);
+
+  useEffect(() => {
+    // Check if the reset value changes
+    if (reset) {
+      setField('');
+      setOperator('');
+      setFilterValue('');
+    }
+  }, [reset]);
 
   useEffect(() => {
     if (allFieldsValid(field, operator, filterValue)) {

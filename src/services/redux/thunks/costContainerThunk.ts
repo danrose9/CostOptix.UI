@@ -35,8 +35,17 @@ export const deleteCostContainerById = createAsyncThunk(
 export const addCostContainer = createAsyncThunk(
   'CostContainer/Add',
   async (args: INewCostContainer, { rejectWithValue }) => {
-    console.log('addCostContainer', args);
     return await fetchInstance(COST_CONTAINERS, { method: 'POST', body: JSON.stringify({ ...args }) })
+      .then((response) => response.json())
+      .catch((e) => rejectWithValue(e.response.data));
+  }
+);
+
+export const updateCostContainer = createAsyncThunk(
+  'CostContainer/Update',
+  async (args: { id: string }, { rejectWithValue }) => {
+    const { id, ...rest } = args;
+    return await fetchInstance(`${COST_CONTAINERS}/${id}`, { method: 'PATCH', body: JSON.stringify({ ...rest }) })
       .then((response) => response.json())
       .catch((e) => rejectWithValue(e.response.data));
   }

@@ -7,8 +7,9 @@ import FilterOutput from '../../../components/query_filter/FilterOuput';
 import { updateFilterReducer } from '../../../reducers/updateFilterReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
-import { addCostContainer } from '../../../services/redux/thunks/costContainerThunk';
+import { addCostContainer, updateCostContainer } from '../../../services/redux/thunks/costContainerThunk';
 import { INewCostContainer } from '../../../types/container-types';
+import { set } from 'immer/dist/internal';
 
 const QueryContainer = styled.div`
   display: flex;
@@ -48,16 +49,21 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ tog
     setIsQueryValid(value);
   };
 
-  const handleAddContainer = (container: INewCostContainer) => {
+  const handleSaveContainer = (container: INewCostContainer) => {
     // Append filterOutput with container
     const query = filterOutput;
     const args = { ...container, query };
 
-    /* Check that the dispatch was successful before navigating */
-    thunk<AppDispatch>(addCostContainer(args)).then((response: any) => {
-      if (!response.error) {
-      }
-    });
+    if (!container.id) {
+      thunk<AppDispatch>(addCostContainer(args)).then((response: any) => {
+        console.log('response', response);
+      });
+    } else {
+      const argsWithId = { ...args, id: container.id };
+      thunk<AppDispatch>(updateCostContainer(argsWithId)).then((response: any) => {
+        console.log('response', response);
+      });
+    }
   };
 
   return (
@@ -73,7 +79,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({ tog
         <StyledSegment className="result-container">
           <CostContainerData
             isQueryValid={isQueryValid}
-            handleAddContainer={handleAddContainer}
+            handleSaveContainer={handleSaveContainer}
             toggleContainerList={toggleContainerList}
             activeContainer={activeContainer}
           />

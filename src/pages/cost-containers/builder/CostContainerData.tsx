@@ -4,6 +4,9 @@ import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { INewCostContainer } from '../../../types/container-types';
 import { SpaceBetweenButtonGroup } from '../../../components/__styles__/ButtonStyles';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../services/redux/store';
+import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
 
 const StyledForm = styled(Form)`
   font-family: inherit;
@@ -11,7 +14,7 @@ const StyledForm = styled(Form)`
 
 interface ICostContainerDataProps {
   isQueryValid: boolean;
-  handleAddContainer: (container: INewCostContainer) => void;
+  handleSaveContainer: (container: INewCostContainer) => void;
   toggleContainerList: (value: boolean) => void;
   activeContainer: INewCostContainer | null;
 }
@@ -19,7 +22,7 @@ interface ICostContainerDataProps {
 export const CostContainerData: React.FC<ICostContainerDataProps> = ({
   isQueryValid,
   toggleContainerList,
-  handleAddContainer,
+  handleSaveContainer,
   activeContainer,
 }) => {
   const [container, setContainer] = useState({
@@ -28,20 +31,40 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
     description: activeContainer ? activeContainer.description : '',
   });
 
+  const dispatch = useDispatch();
+
   const handleContainerChange = (key: string, value: string) => {
     setContainer({
       ...container,
       [key]: value,
     });
+    setSaveButtonDisabled(false);
   };
 
-  const [addButtonDisabled, setAddButtonDisabled] = useState<boolean>(true);
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState<boolean>(true);
+
+  const handleCloseBuilder = (e: any) => {
+    e.preventDefault();
+    toggleContainerList(false);
+    dispatch<AppDispatch>(fetchCostContainers());
+  };
+
+  const handleSaveBuilder = (e: any) => {
+    e.preventDefault();
+    handleSaveContainer({
+      id: activeContainer ? activeContainer.id : '',
+      name: container.name,
+      owner: container.owner,
+      description: container.description,
+    });
+    setSaveButtonDisabled(true);
+  };
 
   useEffect(() => {
     if (isQueryValid && container.name) {
-      setAddButtonDisabled(false);
+      setSaveButtonDisabled(false);
     } else {
-      setAddButtonDisabled(true);
+      setSaveButtonDisabled(true);
     }
   }, [isQueryValid, container.name]);
 
@@ -82,27 +105,10 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
           value={container.owner}
         />
         <SpaceBetweenButtonGroup>
-          <Button
-            color="teal"
-            disabled={addButtonDisabled}
-            onClick={(e) => {
-              e.preventDefault();
-              handleAddContainer({
-                name: container.name,
-                owner: container.owner,
-                description: container.description,
-              });
-            }}
-          >
+          <Button color="teal" disabled={saveButtonDisabled} onClick={handleSaveBuilder}>
             Save
           </Button>
-          <Button
-            color="teal"
-            onClick={(e) => {
-              e.preventDefault();
-              toggleContainerList(false);
-            }}
-          >
+          <Button color="teal" onClick={handleCloseBuilder}>
             Close
           </Button>
         </SpaceBetweenButtonGroup>
