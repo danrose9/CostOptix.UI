@@ -26,11 +26,16 @@ export const StyledInput = styled(Input)`
 export const StyledDropdown = styled(Dropdown)`
   z-index: 1;
   width: 100%;
+  white-space: nowrap !important;
+
   &:after {
     z-index: 1000;
   }
   &.set-minimum-width {
     min-width: 80px;
+  }
+  &.set-maximum-width {
+    max-width: 20px;
   }
 `;
 
