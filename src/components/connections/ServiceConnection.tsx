@@ -63,7 +63,7 @@ const ServiceConnection = (props: ContainerProps) => {
                     <Table size="small" striped selectable>
                       <Table.Header>
                         <Table.Row>
-                          <Table.HeaderCell>Billing Name</Table.HeaderCell>
+                          <Table.HeaderCell>Billing Account</Table.HeaderCell>
                           <Table.HeaderCell />
                           <Table.HeaderCell>Registration Date</Table.HeaderCell>
                           <Table.HeaderCell textAlign="center">Status</Table.HeaderCell>
