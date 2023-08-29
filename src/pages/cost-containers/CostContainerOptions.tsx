@@ -23,11 +23,7 @@ const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container,
 
   return (
     <>
-      <Dropdown.Item
-        icon="bell slash outline"
-        text="Edit"
-        onClick={() => handleEditContainer && handleEditContainer(container.id)}
-      />
+      <Dropdown.Item icon="edit" text="Edit" onClick={() => handleEditContainer && handleEditContainer(container.id)} />
       <Modal
         trigger={<Dropdown.Item icon="trash" text="Delete" />}
         size="small"
