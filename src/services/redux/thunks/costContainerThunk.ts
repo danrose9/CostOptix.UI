@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { COST_CONTAINERS, TRANSIENT_BILLING_ACCOUNT_COSTS } from '../../api/apiEndpoints';
+import { COST_CONTAINERS } from '../../api/apiEndpoints';
 import fetchInstance from '../../api/fetchInstance';
 import { INewCostContainer } from '../../../types/container-types';
 
