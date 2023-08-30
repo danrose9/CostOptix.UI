@@ -9,7 +9,6 @@ export interface ITinyLineChartProps {
 }
 
 const TinyLineChart = (props: ITinyLineChartProps) => {
-  console.log('TinyLineChart props', props);
   const { dataKey, width = 150, height = 50, data } = props;
   return (
     <LineChart width={width} height={height} data={data} margin={{ top: 5, right: 10, left: 20, bottom: 5 }}>
