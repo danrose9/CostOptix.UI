@@ -88,6 +88,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
         <StyledFilterGroup data-testid="filter-group">
           <StyledFieldContainer className={count > 1 ? 'show-horizontal-connector' : ''}>
             <StyledDropdown
+              className="set-maximum-width"
               onChange={handleFieldChange('field', setField)}
               options={fields}
               placeholder="Select field"

@@ -72,14 +72,14 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
     <div>
       <p>
         Cost Containers are a virtual grouping of cloud resources designed to facilitate efficient cost management and
-        analysis within a cloud environment they provide a convenient way to track and monitor costs, trends, and other
+        analysis within a cloud environment. They provide a convenient way to track and monitor costs, trends, and other
         cost-related information.
       </p>
       <p>
-        They allow you to gain insights into your cloud spending patterns, identify cost-saving opportunities, and
-        allocate expenses accurately across different teams or projects. The granular visibility into costs helps
-        optimize resource allocation, control budget, and make informed decisions to maximize the value of cloud
-        investments.
+        With Cost Containers you can gain insights into your cloud spending patterns, identify cost-saving
+        opportunities, and allocate expenses accurately across different teams or projects. The granular visibility into
+        costs helps optimize resource allocation, control budget, and make informed decisions to maximize the value of
+        cloud investments.
       </p>
       <p>Use the query builder to create containers based on providers, organizations and other fields.</p>
 

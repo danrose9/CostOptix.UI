@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, Icon, Dropdown } from 'semantic-ui-react';
+import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { formatISODateToUTCDate } from '../../utils/dateFormatter';
 import { ICostContainer, INewCostContainer } from '../../types/container-types';
 import { INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
+import { ProviderImage } from '../../components/ProviderImage';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -78,10 +79,12 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleEditContaine
             <Table.HeaderCell width={5}>Container</Table.HeaderCell>
             <Table.HeaderCell width={1}></Table.HeaderCell>
             <Table.HeaderCell width={3}>Created on</Table.HeaderCell>
-            <Table.HeaderCell width={3}>Cost Trend</Table.HeaderCell>
+            <Table.HeaderCell width={3} style={{ paddingLeft: '3.5em' }}>
+              Cost Trend
+            </Table.HeaderCell>
             <Table.HeaderCell width={2}>Providers</Table.HeaderCell>
             <Table.HeaderCell textAlign="right" width={2}>
-              Monthly Costs
+              Last 30 days
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -107,9 +110,17 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleEditContaine
                   </Table.Cell>
                   <Table.Cell singleLine>{formatISODateToUTCDate(container.createdDate)}</Table.Cell>
                   <Table.Cell>
-                    <TinyLineChart data={container.data} width={150} height={30} dataKey="value" />
+                    <TinyLineChart data={container.monthlySpend} width={150} height={30} dataKey="amountConverted" />
                   </Table.Cell>
-                  <Table.Cell singleLine>{container.cloudProviders}</Table.Cell>
+                  <Table.Cell singleLine>
+                    {container.cloudProviders
+                      ? container.cloudProviders.map((provider, index) => (
+                          <Header key={index}>
+                            <ProviderImage provider={provider} size="small" />
+                          </Header>
+                        ))
+                      : null}
+                  </Table.Cell>
                   <Table.Cell singleLine textAlign="right">
                     ${container.amount30Day}
                   </Table.Cell>

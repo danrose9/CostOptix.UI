@@ -10,12 +10,9 @@ export interface ICostContainer extends INewCostContainer {
   createdDate: string;
   createdBy: string;
   resourceCount: number;
-  monthlySpend: any;
   currency: string;
   cloudProviders: string[];
   amount30Day: number;
   amount30DayConverted: number;
-  data: {
-    value: number;
-  }[];
+  monthlySpend: [];
 }
