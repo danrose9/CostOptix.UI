@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Table, Header, Divider, Loader } from 'semantic-ui-react';
+import { Table, Header, Divider } from 'semantic-ui-react';
+import { Spinner } from '../../components/Loader';
 import { PageHeader } from '../../components/PageHeader';
 import { ProviderImage } from '../../components/ProviderImage';
 import { TablePaging } from '../../components/tables/TablePaging';
@@ -76,13 +77,7 @@ const ResourceList = () => {
           <PageHeader title="Resources" />
           <SearchStandard initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
         </PageHeaderContainer>
-        {resources.isLoading ? (
-          <Loader size="large" active>
-            Fetching Data..
-          </Loader>
-        ) : (
-          <RenderTable />
-        )}
+        {resources.isLoading ? <Spinner /> : <RenderTable />}
 
         <Divider />
         <TablePaging

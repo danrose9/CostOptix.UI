@@ -1,15 +1,15 @@
 import React from 'react';
 import { Loader, Placeholder } from 'semantic-ui-react';
 
-export const Spinner = (props) => {
+export const Spinner = () => {
   return (
-    <Loader size={props.size} active inline="centered">
-      {props.message}
+    <Loader size="large" active inline="centered">
+      Fetching Data..
     </Loader>
   );
 };
 
-export const Shimmer = (props) => {
+export const Shimmer = () => {
   return (
     <Placeholder>
       <Placeholder.Header image>

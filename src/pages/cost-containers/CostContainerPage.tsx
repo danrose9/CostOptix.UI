@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../services/redux/rootReducer';
+import { Spinner } from '../../components/Loader';
 import { reduxState } from '../../services/redux/reduxState';
 import PageLayout from '../PageLayout';
 import styled from 'styled-components';
@@ -32,7 +33,7 @@ interface ICostContainerPage {}
 const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   const dispatch = useDispatch();
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
-  const containers = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS].containers);
+  const costContainers = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS]);
 
   // const selectContainerDetail = (container: any) => {
   //   setSelectedCostContainer(container);
@@ -49,12 +50,18 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   return (
     <PageLayout title="Cost Containers">
       <ComponentContainer>
-        <CostContainersList>
-          <CostContainerTable containers={containers} />
-        </CostContainersList>
-        {/* <ContainerDetail>
-          <CostContainerDetail container={selectedCostContainer} expandContainer={expandContainer} />
-        </ContainerDetail> */}
+        {
+          costContainers.isLoading ? (
+            <Spinner />
+          ) : (
+            <CostContainersList>
+              <CostContainerTable costContainers={costContainers} />
+            </CostContainersList>
+          )
+          // {/* <ContainerDetail>
+          //   <CostContainerDetail container={selectedCostContainer} expandContainer={expandContainer} />
+          // </ContainerDetail> */}
+        }
       </ComponentContainer>
     </PageLayout>
   );
