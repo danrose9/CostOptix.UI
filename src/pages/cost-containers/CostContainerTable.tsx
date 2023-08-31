@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, Icon, Dropdown, Header, Loader } from 'semantic-ui-react';
+import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -81,7 +81,7 @@ const StyledTable = styled(Table)`
 `;
 
 const TableContents: FC<ITableContentsProps> = ({ costContainers, handleEditContainer }) => {
-  const { containers, isLoading, error } = costContainers;
+  const { containers } = costContainers;
 
   return (
     <>
@@ -124,10 +124,10 @@ const TableContents: FC<ITableContentsProps> = ({ costContainers, handleEditCont
                   <Table.Cell>
                     <TinyLineChart data={container.monthlySpend} width={150} height={30} dataKey="amountConverted" />
                   </Table.Cell>
-                  <Table.Cell singleLine>
+                  <Table.Cell singleLine style={{ display: 'flex', alignItems: 'center' }}>
                     {container.cloudProviders
                       ? container.cloudProviders.map((provider, index) => (
-                          <Header key={index}>
+                          <Header key={index} style={{ margin: 0 }}>
                             <ProviderImage provider={provider} size="small" />
                           </Header>
                         ))
