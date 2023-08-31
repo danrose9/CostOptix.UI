@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
+import { Segment, Table, Icon, Dropdown, Header, Loader } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
@@ -61,8 +61,18 @@ const AddNewContainer: FC<IAddNewContainerProps> = ({ handleEditContainer }) => 
   );
 };
 
+interface ICostContainerThunkResponse {
+  containers: ICostContainer[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+interface ICostContainerTableProps {
+  costContainers: ICostContainerThunkResponse;
+}
+
 interface ITableContentsProps {
-  containers?: ICostContainer[];
+  costContainers: ICostContainerThunkResponse;
   handleEditContainer: (id: string | null) => void;
 }
 
@@ -70,7 +80,9 @@ const StyledTable = styled(Table)`
   cursor: pointer;
 `;
 
-const TableContents: FC<ITableContentsProps> = ({ containers, handleEditContainer }) => {
+const TableContents: FC<ITableContentsProps> = ({ costContainers, handleEditContainer }) => {
+  const { containers, isLoading, error } = costContainers;
+
   return (
     <>
       <StyledTable striped>
@@ -137,11 +149,8 @@ const TableContents: FC<ITableContentsProps> = ({ containers, handleEditContaine
   );
 };
 
-interface ICostContainerTableProps {
-  containers?: ICostContainer[];
-}
-
-const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
+const CostContainerTable: FC<ICostContainerTableProps> = ({ costContainers }) => {
+  const { containers } = costContainers;
   /* CostContainerTable should be responsible for passing in either a new empty conainer or an exiting container. 
   The state should be held in the CostContainerBuilder */
 
@@ -203,7 +212,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ containers }) => {
               classNames="fade"
             >
               {!showContainerBuilder ? (
-                <TableContents containers={containers} handleEditContainer={handleEditContainer} />
+                <TableContents costContainers={costContainers} handleEditContainer={handleEditContainer} />
               ) : (
                 <CostContainerBuilder toggleContainerList={toggleContainerList} containerProps={containerProps} />
               )}
