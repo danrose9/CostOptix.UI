@@ -109,3 +109,9 @@ export const containers = [
     ],
   },
 ];
+
+export const costContainers = {
+  containers: containers,
+  isLoading: false,
+  error: null,
+};
