@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { PageHeader } from '../../components/PageHeader';
 import PageLayout from '../PageLayout';
 import { useLocation } from 'react-router-dom';
-import { Grid, Card, Loader } from 'semantic-ui-react';
+import { Grid, Card } from 'semantic-ui-react';
+import { Spinner } from '../../components/Loader';
 import { DashboardCard } from '../../components/index';
 import ResourceViewChart from './ResourceViewChart';
 import ResourceViewTable from './ResourceViewTable';
@@ -95,17 +96,7 @@ export const ResourceView = () => {
     }
   }, [dispatch, args, isAvailable]);
 
-  return (
-    <PageLayout title="Resource View">
-      {isLoading ? (
-        <Loader size="large" active>
-          Fetching Data..
-        </Loader>
-      ) : (
-        <RenderView />
-      )}
-    </PageLayout>
-  );
+  return <PageLayout title="Resource View">{isLoading ? <Spinner /> : <RenderView />}</PageLayout>;
 };
 
 export default ResourceView;
