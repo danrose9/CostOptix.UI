@@ -12,7 +12,8 @@ const AWSPolicy = `{
           "Action": [
               "ce:GetCostAndUsageWithResources",
               "ce:GetCostAndUsage",
-              "ce:GetCostForecast"
+              "ce:GetCostForecast",
+              "tag:GetResources"
           ],
           "Resource": "*"
       }
