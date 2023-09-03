@@ -16,3 +16,8 @@ export interface ICostContainer extends INewCostContainer {
   amount30DayConverted: number;
   monthlySpend: [];
 }
+
+export enum ContainerAction {
+  SHOW,
+  EDIT,
+}

@@ -43,7 +43,7 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
 
   const [saveButtonDisabled, setSaveButtonDisabled] = useState<boolean>(true);
 
-  const handleCloseBuilder = (e: any) => {
+  const handleClose = (e: any) => {
     e.preventDefault();
     toggleContainerList(false);
     dispatch<AppDispatch>(fetchCostContainers());
@@ -108,7 +108,7 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
           <Button color="teal" disabled={saveButtonDisabled} onClick={handleSaveBuilder}>
             Save
           </Button>
-          <Button color="teal" onClick={handleCloseBuilder}>
+          <Button color="teal" onClick={handleClose}>
             Close
           </Button>
         </SpaceBetweenButtonGroup>

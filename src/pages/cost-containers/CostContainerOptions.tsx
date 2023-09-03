@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Dropdown, Modal, Button } from 'semantic-ui-react';
-import { ICostContainer } from '../../types/container-types';
+import { ICostContainer, ContainerAction } from '../../types/container-types';
 import { deleteCostContainerById } from '../../services/redux/thunks/costContainerThunk';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../services/redux/store';
 
 interface ICostContainerOptionsProps {
   container: ICostContainer;
-  handleEditContainer: (id: string | null) => void;
+  handleContainer: (id: string | null, action: ContainerAction) => void;
 }
 
-const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container, handleEditContainer }) => {
+const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container, handleContainer }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -23,7 +23,11 @@ const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container,
 
   return (
     <>
-      <Dropdown.Item icon="edit" text="Edit" onClick={() => handleEditContainer && handleEditContainer(container.id)} />
+      <Dropdown.Item
+        icon="edit"
+        text="Edit"
+        onClick={() => handleContainer && handleContainer(container.id, ContainerAction.EDIT)}
+      />
       <Modal
         trigger={<Dropdown.Item icon="trash" text="Delete" />}
         size="small"
