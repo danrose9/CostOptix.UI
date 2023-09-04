@@ -1,5 +1,5 @@
 import React from 'react';
-import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart, Legend } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, Line, LineChart, Legend } from 'recharts';
 
 export interface IStandardLineChartProps {
   chartContainer: { height?: number; width?: number };
@@ -16,15 +16,16 @@ interface IChartXAxis {
 }
 
 interface IChartXAxisLabel {
-  value?: string;
+  xAxisName?: string;
   offset?: number;
-  position?: string;
+  xAxisLabelPosition?: string;
 }
 
 interface IChartYAxis {
   yAxisLabel: {
-    value?: string;
+    yAxisName?: string;
     angle?: number;
+    yAxisLabelposition?: string;
   };
 }
 
@@ -35,14 +36,14 @@ interface IChartLine {
   dot?: boolean;
 }
 
-const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLineChartProps, { tickFormatter }) => {
+const StandardLineChart: React.FC<IStandardLineChartProps> = (props, { tickFormatter }) => {
   /* Set default values for props */
   const { height = 400, width = 900 } = props.chartContainer;
   const { xAxisLabel, xAxisKey } = props.xAxis;
-  const { value, offset = -5, position = 'bottom' } = xAxisLabel;
+  const { xAxisName, offset = 0, xAxisLabelPosition = 'insideBottom' } = xAxisLabel;
   const { color = '#8884d8', lineKey, strokeWidth = 3, dot = true } = props.line;
   const { yAxisLabel } = props.yAxis;
-  const { angle = -90 } = yAxisLabel;
+  const { yAxisName, yAxisLabelposition = 'left' } = yAxisLabel;
 
   return (
     <LineChart
@@ -57,11 +58,10 @@ const StandardLineChart: React.FC<IStandardLineChartProps> = (props: IStandardLi
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey={xAxisKey} />
-      <YAxis />
+      <XAxis dataKey={xAxisKey} label={{ value: xAxisName, offset: offset, position: xAxisLabelPosition }} />
+      <YAxis label={{ value: yAxisName, angle: -90, position: yAxisLabelposition }} />
       <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey={lineKey} stroke={color} activeDot={{ r: 8 }} dot={dot} />
+      <Line type="monotone" dataKey={lineKey} stroke={color} strokeWidth={strokeWidth} activeDot={{ r: 8 }} dot={dot} />
     </LineChart>
   );
 };

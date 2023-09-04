@@ -28,7 +28,6 @@ export const TablePaging: React.FC<ITablePagingProps> = (props) => {
   const handlePaginationChange = (e: { activePage: number }) => {
     setActivePage(Math.ceil(activePage));
     searchQuery(activePage, searchValue, pageSize);
-    console.log('activePage', activePage);
   };
 
   return (

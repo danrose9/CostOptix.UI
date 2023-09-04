@@ -3,7 +3,7 @@ import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { INewCostContainer } from '../../../types/container-types';
-import { SpaceBetweenButtonGroup } from '../../../components/__styles__/ButtonStyles';
+import { ButtonGroup } from '../../../components/__styles__/ButtonStyles';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
@@ -12,14 +12,14 @@ const StyledForm = styled(Form)`
   font-family: inherit;
 `;
 
-interface ICostContainerDataProps {
+interface ICostContainerProfileProps {
   isQueryValid: boolean;
   handleSaveContainer: (container: INewCostContainer) => void;
   toggleContainerList: (value: boolean) => void;
   activeContainer: INewCostContainer | null;
 }
 
-export const CostContainerData: React.FC<ICostContainerDataProps> = ({
+export const CostContainerProfile: React.FC<ICostContainerProfileProps> = ({
   isQueryValid,
   toggleContainerList,
   handleSaveContainer,
@@ -43,7 +43,7 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
 
   const [saveButtonDisabled, setSaveButtonDisabled] = useState<boolean>(true);
 
-  const handleCloseBuilder = (e: any) => {
+  const handleClose = (e: any) => {
     e.preventDefault();
     toggleContainerList(false);
     dispatch<AppDispatch>(fetchCostContainers());
@@ -104,17 +104,15 @@ export const CostContainerData: React.FC<ICostContainerDataProps> = ({
           onChange={(e) => handleContainerChange('owner', e.target.value)}
           value={container.owner}
         />
-        <SpaceBetweenButtonGroup>
-          <Button color="teal" disabled={saveButtonDisabled} onClick={handleSaveBuilder}>
+        <ButtonGroup>
+          <Button positive disabled={saveButtonDisabled} onClick={handleSaveBuilder}>
             Save
           </Button>
-          <Button color="teal" onClick={handleCloseBuilder}>
-            Close
-          </Button>
-        </SpaceBetweenButtonGroup>
+          <Button onClick={handleClose}>Close</Button>
+        </ButtonGroup>
       </Form>
     </div>
   );
 };
 
-export default CostContainerData;
+export default CostContainerProfile;

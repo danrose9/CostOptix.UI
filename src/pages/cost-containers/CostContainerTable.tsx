@@ -4,13 +4,12 @@ import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
 import { TablePaging } from '../../components/tables/TablePaging';
 import InformationButton from '../../components/buttons/InformationButton';
-import CostContainerBuilder from './builder/CostContainerBuilder';
+import { CostContainerBuilder, CostContainerViewer, CostContainerOptions } from './index';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../components/__styles__/fade.css';
-import CostContainerOptions from './CostContainerOptions';
 import { useDispatch } from 'react-redux';
 import { formatISODateToUTCDate } from '../../utils/dateFormatter';
-import { ICostContainer, INewCostContainer } from '../../types/container-types';
+import { ICostContainer, ContainerAction } from '../../types/container-types';
 import { INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
 import { ProviderImage } from '../../components/ProviderImage';
 
@@ -40,13 +39,13 @@ const AddNewContainerRow = styled(Table.Row)`
 `;
 
 interface IAddNewContainerProps {
-  handleEditContainer?: (id: string | null) => void;
+  handleContainer?: (id: string | null, action: ContainerAction) => void;
 }
 
-const AddNewContainer: FC<IAddNewContainerProps> = ({ handleEditContainer }) => {
+const AddNewContainer: FC<IAddNewContainerProps> = ({ handleContainer }) => {
   return (
     <AddNewContainerRow
-      onClick={() => handleEditContainer && handleEditContainer(null)}
+      onClick={() => handleContainer && handleContainer(null, ContainerAction.EDIT)}
       data-testid="add-new-container-row"
     >
       <Table.Cell>
@@ -68,20 +67,20 @@ interface ICostContainerThunkResponse {
 }
 
 interface ICostContainerTableProps {
-  costContainers: ICostContainerThunkResponse;
+  allCostContainers: ICostContainerThunkResponse;
 }
 
 interface ITableContentsProps {
-  costContainers: ICostContainerThunkResponse;
-  handleEditContainer: (id: string | null) => void;
+  allCostContainers: ICostContainerThunkResponse;
+  handleContainer: (id: string | null, action: ContainerAction) => void;
 }
 
 const StyledTable = styled(Table)`
   cursor: pointer;
 `;
 
-const TableContents: FC<ITableContentsProps> = ({ costContainers, handleEditContainer }) => {
-  const { containers } = costContainers;
+const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleContainer }) => {
+  const { containers } = allCostContainers;
 
   return (
     <>
@@ -102,44 +101,49 @@ const TableContents: FC<ITableContentsProps> = ({ costContainers, handleEditCont
         </Table.Header>
         <Table.Body>
           {containers && containers.length > 0
-            ? containers.map((container, index) => (
-                <Table.Row key={index}>
-                  <Table.Cell singleLine>{container.name}</Table.Cell>
-                  <Table.Cell>
-                    <Dropdown
-                      icon="ellipsis horizontal"
-                      style={{ zIndex: 'auto' }}
-                      simple
-                      item
-                      data-testid="cc-dropdown"
-                      direction="left"
-                      open={false}
-                    >
-                      <Dropdown.Menu>
-                        <CostContainerOptions container={container} handleEditContainer={handleEditContainer} />
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Table.Cell>
-                  <Table.Cell singleLine>{formatISODateToUTCDate(container.createdDate)}</Table.Cell>
-                  <Table.Cell>
-                    <TinyLineChart data={container.monthlySpend} width={150} height={30} dataKey="amountConverted" />
-                  </Table.Cell>
-                  <Table.Cell singleLine style={{ display: 'flex', alignItems: 'center' }}>
-                    {container.cloudProviders
-                      ? container.cloudProviders.map((provider, index) => (
-                          <Header key={index} style={{ margin: 0 }}>
-                            <ProviderImage provider={provider} size="small" />
-                          </Header>
-                        ))
-                      : null}
-                  </Table.Cell>
-                  <Table.Cell singleLine textAlign="right">
-                    ${container.amount30Day}
-                  </Table.Cell>
-                </Table.Row>
-              ))
+            ? containers.map((container, index) => {
+                var createdOn = null;
+                if (container.createdDate) createdOn = formatISODateToUTCDate(container.createdDate);
+
+                return (
+                  <Table.Row key={index} onClick={() => handleContainer(container.id, ContainerAction.SHOW)}>
+                    <Table.Cell singleLine>{container.name}</Table.Cell>
+                    <Table.Cell>
+                      <Dropdown
+                        icon="ellipsis horizontal"
+                        style={{ zIndex: 'auto' }}
+                        simple
+                        item
+                        data-testid="cc-dropdown"
+                        direction="left"
+                        open={false}
+                      >
+                        <Dropdown.Menu>
+                          <CostContainerOptions container={container} handleContainer={handleContainer} />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Table.Cell>
+                    <Table.Cell singleLine>{createdOn}</Table.Cell>
+                    <Table.Cell>
+                      <TinyLineChart data={container.monthlySpend} width={150} height={30} dataKey="amountConverted" />
+                    </Table.Cell>
+                    <Table.Cell singleLine style={{ display: 'flex', alignItems: 'center' }}>
+                      {container.cloudProviders
+                        ? container.cloudProviders.map((provider, index) => (
+                            <Header key={index} style={{ margin: 0 }}>
+                              <ProviderImage provider={provider} size="small" />
+                            </Header>
+                          ))
+                        : null}
+                    </Table.Cell>
+                    <Table.Cell singleLine textAlign="right">
+                      ${container.amount30Day}
+                    </Table.Cell>
+                  </Table.Row>
+                );
+              })
             : null}
-          <AddNewContainer handleEditContainer={handleEditContainer} />
+          <AddNewContainer handleContainer={handleContainer} />
         </Table.Body>
       </StyledTable>
       <TableFooter>
@@ -149,16 +153,18 @@ const TableContents: FC<ITableContentsProps> = ({ costContainers, handleEditCont
   );
 };
 
-const CostContainerTable: FC<ICostContainerTableProps> = ({ costContainers }) => {
-  const { containers } = costContainers;
+const CostContainerTable: FC<ICostContainerTableProps> = ({ allCostContainers }) => {
+  const { containers } = allCostContainers;
   /* CostContainerTable should be responsible for passing in either a new empty conainer or an exiting container. 
   The state should be held in the CostContainerBuilder */
 
   const [showContainerBuilder, setShowContainerBuilder] = useState(false);
-  const [containerProps, setContainerProps] = useState<INewCostContainer | null>(null);
+  const [showContainerDetail, setShowContainerDetail] = useState(false);
+
+  const [selectedContainer, setSelectedContainer] = useState<ICostContainer | null>(null);
   const dispatch = useDispatch();
 
-  const getContainerProps = (id: string | null): INewCostContainer => {
+  const getSelectedContainer = (id: string | null): ICostContainer => {
     // If id is null, return INITIAL_CONTAINER_STATE
     if (!id) {
       return INITIAL_CONTAINER_STATE;
@@ -172,27 +178,42 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ costContainers }) =>
       return INITIAL_CONTAINER_STATE;
     }
 
-    // Destructure the desired properties and return them
-    const { name, description, owner, query } = container;
-    return { id, name, description, owner, query };
+    return container;
   };
 
-  const handleEditContainer = (id: string | null) => {
-    /* if container has an id then we are editing an existing container,
-     if container is null then we are creating a new container */
+  const handleContainer = (id: string | null, action: ContainerAction) => {
+    const selectedContainer = getSelectedContainer(id);
+    setSelectedContainer(selectedContainer);
 
-    const containerProps = getContainerProps(id);
-
-    /* pass container props to CostContainerBuilder and toggle showContainerBuilder to true */
-    setContainerProps(containerProps);
-    setShowContainerBuilder(true);
+    if (action === ContainerAction.SHOW) {
+      setShowContainerDetail(true);
+    } else if (action === ContainerAction.EDIT) {
+      setShowContainerBuilder(true);
+    }
   };
 
   const toggleContainerList = (value: boolean) => {
     setShowContainerBuilder(value);
   };
 
+  const toggleContainerDetail = (value: boolean) => {
+    setShowContainerDetail(value);
+  };
+
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
+
+  let componentToRender;
+  if (showContainerDetail && selectedContainer) {
+    componentToRender = (
+      <CostContainerViewer selectedContainer={selectedContainer} toggleContainerDetail={toggleContainerDetail} />
+    );
+  } else if (showContainerBuilder) {
+    componentToRender = (
+      <CostContainerBuilder toggleContainerList={toggleContainerList} selectedContainer={selectedContainer} />
+    );
+  } else {
+    componentToRender = <TableContents allCostContainers={allCostContainers} handleContainer={handleContainer} />;
+  }
 
   return (
     <>
@@ -205,17 +226,19 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ costContainers }) =>
           </SegmentHeader>
           <SwitchTransition>
             <CSSTransition
-              key={showContainerBuilder ? 'CostContainerBuilder' : 'TableContents'}
+              key={
+                showContainerDetail
+                  ? 'ContainerDetail'
+                  : showContainerBuilder
+                  ? 'CostContainerBuilder'
+                  : 'TableContents'
+              }
               addEndListener={(node, done) => {
                 node.addEventListener('transitionend', done, false);
               }}
               classNames="fade"
             >
-              {!showContainerBuilder ? (
-                <TableContents costContainers={costContainers} handleEditContainer={handleEditContainer} />
-              ) : (
-                <CostContainerBuilder toggleContainerList={toggleContainerList} containerProps={containerProps} />
-              )}
+              {componentToRender}
             </CSSTransition>
           </SwitchTransition>
         </Segment>
