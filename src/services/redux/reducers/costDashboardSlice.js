@@ -189,7 +189,6 @@ const costDashboardSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchTransientBillingAccountCosts.fulfilled, (state, action) => {
-        // console.log('fetchTransientBillingAccountCosts.fulfilled', action);
         const id = returnId(action.payload.billingAccountId);
         const {
           billingAccountId,

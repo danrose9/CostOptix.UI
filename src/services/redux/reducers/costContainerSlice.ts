@@ -49,7 +49,6 @@ const costContainerSlice = createSlice({
     builder.addCase(deleteCostContainerById.fulfilled, (state, action) => {
       const { id } = action.payload;
       state.containers = state.containers.filter((container) => container.id !== id);
-      console.log('deleteCostContainer.fulfilled', id);
     });
   },
 });

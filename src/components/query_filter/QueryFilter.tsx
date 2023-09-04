@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FilterGroup from './FilterGroup';
 import { StyledResetButton } from '../__styles__/StyledQueryFilter';
 import { INITIAL_FILTER } from '../../reducers/updateFilterReducer';
@@ -96,4 +96,5 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
     </>
   );
 };
+
 export default QueryFilter;

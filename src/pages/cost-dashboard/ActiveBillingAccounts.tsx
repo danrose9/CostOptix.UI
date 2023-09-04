@@ -135,7 +135,6 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         response.payload?.billingAccounts
           .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
           .map((billingAccount: IBillingAccount, index: any) => {
-            // console.log('xxxxx', billingAccount);
             dispatch(addBillingAccount(billingAccount));
             fetchBillingAccountData(billingAccount);
           });

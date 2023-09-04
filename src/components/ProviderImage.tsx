@@ -26,7 +26,7 @@ export const ProviderImage = (props: IProps) => {
       size={props.size}
       alt="ServiceProviderLogo"
       floated={props.floated}
-      style={{ margin: '0.2em' }}
+      style={{ margin: '0.5em' }}
     />
   );
 };

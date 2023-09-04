@@ -22,7 +22,6 @@ export const postCostContainer = async (args: ICostContainerArgs) => {
 
   if (response.ok) {
     let data = await response.json();
-    console.log('postCostContainer', data);
     return data;
   } else {
     return await response.json();

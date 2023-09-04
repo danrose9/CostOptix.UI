@@ -34,10 +34,6 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   filter,
   reset,
 }) => {
-  useEffect(() => {
-    console.log(`filter ${containerIndex}`, filter);
-  }, [filter]);
-
   const [field, setField] = useState(initialData ? initialData[containerIndex].field : '');
   const [operator, setOperator] = useState(initialData ? initialData[containerIndex].operator : '');
   const [filterValue, setFilterValue] = useState(initialData ? initialData[containerIndex].value : '');
