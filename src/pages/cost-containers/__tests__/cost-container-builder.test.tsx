@@ -4,7 +4,8 @@ import '@testing-library/jest-dom/extend-expect';
 import CostContainerBuilder from '../builder/CostContainerBuilder';
 import { ApplicationWrapper } from '../../../tests/helpers';
 
-const mockContainerProps = {
+const mockSelectedContainer = {
+  id: 'test id',
   name: 'test namr',
   description: 'test description',
   owner: 'test owner',
@@ -15,9 +16,12 @@ describe('CostContainerBuilder', () => {
   let result: any;
   beforeEach(() => {
     const mockToggleContainerList = (value: boolean) => {};
-    render(<CostContainerBuilder toggleContainerList={mockToggleContainerList} containerProps={mockContainerProps} />, {
-      wrapper: ApplicationWrapper,
-    });
+    render(
+      <CostContainerBuilder toggleContainerList={mockToggleContainerList} selectedContainer={mockSelectedContainer} />,
+      {
+        wrapper: ApplicationWrapper,
+      }
+    );
   });
 
   test('renders CostContainerBuilder component', () => {

@@ -4,7 +4,6 @@ import { Segment } from 'semantic-ui-react';
 import { formatDate } from '../../utils/helper';
 
 export const ResourceViewChart = (props) => {
-  console.log('props.content', props.content);
   return (
     <Segment color="orange">
       <ResponsiveContainer width="100%" height={350}>

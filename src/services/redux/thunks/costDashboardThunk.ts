@@ -54,10 +54,5 @@ export const fetchTransientBillingAccountCosts = createAsyncThunk(
 
         return data;
       });
-    // } catch (error: any) {
-    //   console.log('xxxx', error);
-    //   const { rejectWithValue } = thunkAPI;
-    //   return rejectWithValue(error.response.data);
-    // }
   }
 );

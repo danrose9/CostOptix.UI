@@ -36,10 +36,6 @@ const userProfileSlice = createSlice({
     updateAvatarUrl(state, action) {
       state.photo = action.payload;
     },
-    // setOrganizationName(state, action) {
-    //   console.log('orgUpdate', action.payload);
-    //   state.organization.name = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder

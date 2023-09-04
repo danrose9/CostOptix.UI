@@ -5,34 +5,17 @@ import { Spinner } from '../../components/Loader';
 import { reduxState } from '../../services/redux/reduxState';
 import PageLayout from '../PageLayout';
 import styled from 'styled-components';
-import CostContainerTable from './CostContainerTable';
+import { CostContainerTable } from './index';
 import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
 import { AppDispatch } from '../../services/redux/store';
-
-interface ContainerProps {
-  selected?: boolean;
-  expandContainer: () => void;
-}
-
-const ComponentContainer = styled.div`
-  display: flex;
-  padding: 0.5em 0 1em;
-`;
-
-const CostContainersList = styled.div`
-  width: 100%;
-`;
-
-const ContainerDetail = styled.div`
-  //   flex-basis: 30%;
-`;
+import { PageContainer, FullWidthContainer } from '../__styles__/CostContainerCommonStyles';
 
 interface ICostContainerPage {}
 
 const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   const dispatch = useDispatch();
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
-  const costContainers = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS]);
+  const allCostContainers = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS]);
 
   const expandContainer = (component: string) => {
     setSelectedComponent(component);
@@ -44,15 +27,15 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
 
   return (
     <PageLayout title="Cost Containers">
-      <ComponentContainer>
-        {costContainers.isLoading ? (
+      <PageContainer>
+        {allCostContainers.isLoading ? (
           <Spinner />
         ) : (
-          <CostContainersList>
-            <CostContainerTable costContainers={costContainers} />
-          </CostContainersList>
+          <FullWidthContainer>
+            <CostContainerTable allCostContainers={allCostContainers} />
+          </FullWidthContainer>
         )}
-      </ComponentContainer>
+      </PageContainer>
     </PageLayout>
   );
 };
