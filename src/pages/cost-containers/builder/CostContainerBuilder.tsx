@@ -6,22 +6,17 @@ import { updateFilterReducer } from '../../../reducers/updateFilterReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { addCostContainer, updateCostContainer } from '../../../services/redux/thunks/costContainerThunk';
-import { INewCostContainer } from '../../../types/container-types';
+import { INewCostContainer, ContainerAction } from '../../../types/container-types';
 import { ComponentContainer, StyledSegment } from '../../__styles__/CostContainerCommonStyles';
 
 export interface ICostContainerBuilderProps {
-  toggleContainerList: (value: boolean) => void;
   selectedContainer: INewCostContainer | null;
+  handleContainerAction?: (id: string | null, action: ContainerAction) => void;
 }
 
-/*
- * This component is used to build a new cost container.
- * containerProps can be passed in to pre-populate the form or be empty to create a new container.
- */
-
 export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
-  toggleContainerList,
   selectedContainer,
+  handleContainerAction,
 }) => {
   const thunk = useDispatch();
 
@@ -63,8 +58,8 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
           <CostContainerProfile
             isQueryValid={isQueryValid}
             handleSaveContainer={handleSaveContainer}
-            toggleContainerList={toggleContainerList}
             activeContainer={activeContainer}
+            handleContainerAction={handleContainerAction}
           />
         </StyledSegment>
       </ComponentContainer>

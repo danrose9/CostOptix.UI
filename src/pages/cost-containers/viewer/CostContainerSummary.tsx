@@ -3,15 +3,16 @@ import { Button, Card, Container, Header, Segment } from 'semantic-ui-react';
 import { ICostContainer } from '../../../types/container-types';
 import { ProviderImage } from '../../../components/ProviderImage';
 import { ButtonGroup } from '../../../components/__styles__/ButtonStyles';
+import { ContainerAction } from '../../../types/container-types';
 
 export interface ICostContainerSummaryProps {
-  handleClose: (e: any) => void;
   data: ICostContainer;
+  handleContainerAction?: (id: string | null, action: ContainerAction) => void;
 }
 
 export const CostContainerSummary: React.FC<ICostContainerSummaryProps> = (props) => {
-  const { handleClose, data } = props;
-  const { name, owner, description, cloudProviders, amount30DayConverted } = data;
+  const { data, handleContainerAction } = props;
+  const { id, name, owner, description, cloudProviders, amount30DayConverted } = data;
   return (
     <div>
       <Card fluid>
@@ -29,8 +30,10 @@ export const CostContainerSummary: React.FC<ICostContainerSummaryProps> = (props
         </Card.Content>
       </Card>
       <ButtonGroup className="absolute-position">
-        <Button positive>Edit</Button>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={() => handleContainerAction && handleContainerAction(id, ContainerAction.EDIT)}>Edit</Button>
+        <Button positive onClick={() => handleContainerAction && handleContainerAction(id, ContainerAction.CLOSE)}>
+          Close
+        </Button>
       </ButtonGroup>
     </div>
   );

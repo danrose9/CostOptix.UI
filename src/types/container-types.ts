@@ -26,4 +26,5 @@ export interface IMonthlySpend {
 export enum ContainerAction {
   SHOW,
   EDIT,
+  CLOSE,
 }
