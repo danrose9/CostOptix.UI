@@ -7,10 +7,10 @@ import { AppDispatch } from '../../services/redux/store';
 
 interface ICostContainerOptionsProps {
   container: ICostContainer;
-  handleContainer: (id: string | null, action: ContainerAction) => void;
+  handleContainerAction: (id: string | null, action: ContainerAction) => void;
 }
 
-const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container, handleContainer }) => {
+const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container, handleContainerAction }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container,
       <Dropdown.Item
         icon="edit"
         text="Edit"
-        onClick={() => handleContainer && handleContainer(container.id, ContainerAction.EDIT)}
+        onClick={() => handleContainerAction && handleContainerAction(container.id, ContainerAction.EDIT)}
       />
       <Modal
         trigger={<Dropdown.Item icon="trash" text="Delete" />}

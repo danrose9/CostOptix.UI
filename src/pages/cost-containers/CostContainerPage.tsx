@@ -4,7 +4,6 @@ import { IRootState } from '../../services/redux/rootReducer';
 import { Spinner } from '../../components/Loader';
 import { reduxState } from '../../services/redux/reduxState';
 import PageLayout from '../PageLayout';
-import styled from 'styled-components';
 import { CostContainerTable } from './index';
 import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
 import { AppDispatch } from '../../services/redux/store';
