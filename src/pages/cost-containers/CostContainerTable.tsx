@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
@@ -12,6 +12,8 @@ import { formatISODateToUTCDate } from '../../utils/dateFormatter';
 import { ICostContainer, ContainerAction } from '../../types/container-types';
 import { INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
 import { ProviderImage } from '../../components/ProviderImage';
+import { AppDispatch } from '../../services/redux/store';
+import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -36,16 +38,17 @@ export const SegmentName = styled.div`
 const AddNewContainerRow = styled(Table.Row)`
   cursor: pointer;
   color: #a9a9a9;
+  line-height: 2.5em;
 `;
 
 interface IAddNewContainerProps {
-  handleContainer?: (id: string | null, action: ContainerAction) => void;
+  handleContainerAction?: (id: string | null, action: ContainerAction) => void;
 }
 
-const AddNewContainer: FC<IAddNewContainerProps> = ({ handleContainer }) => {
+const AddNewContainer: FC<IAddNewContainerProps> = ({ handleContainerAction }) => {
   return (
     <AddNewContainerRow
-      onClick={() => handleContainer && handleContainer(null, ContainerAction.EDIT)}
+      onClick={() => handleContainerAction && handleContainerAction(null, ContainerAction.EDIT)}
       data-testid="add-new-container-row"
     >
       <Table.Cell>
@@ -72,14 +75,14 @@ interface ICostContainerTableProps {
 
 interface ITableContentsProps {
   allCostContainers: ICostContainerThunkResponse;
-  handleContainer: (id: string | null, action: ContainerAction) => void;
+  handleContainerAction: (id: string | null, action: ContainerAction) => void;
 }
 
 const StyledTable = styled(Table)`
   cursor: pointer;
 `;
 
-const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleContainer }) => {
+const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleContainerAction }) => {
   const { containers } = allCostContainers;
 
   return (
@@ -106,7 +109,7 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                 if (container.createdDate) createdOn = formatISODateToUTCDate(container.createdDate);
 
                 return (
-                  <Table.Row key={index} onClick={() => handleContainer(container.id, ContainerAction.SHOW)}>
+                  <Table.Row key={index} onClick={() => handleContainerAction(container.id, ContainerAction.SHOW)}>
                     <Table.Cell singleLine>{container.name}</Table.Cell>
                     <Table.Cell>
                       <Dropdown
@@ -119,7 +122,7 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                         open={false}
                       >
                         <Dropdown.Menu>
-                          <CostContainerOptions container={container} handleContainer={handleContainer} />
+                          <CostContainerOptions container={container} handleContainerAction={handleContainerAction} />
                         </Dropdown.Menu>
                       </Dropdown>
                     </Table.Cell>
@@ -143,7 +146,7 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                 );
               })
             : null}
-          <AddNewContainer handleContainer={handleContainer} />
+          <AddNewContainer handleContainerAction={handleContainerAction} />
         </Table.Body>
       </StyledTable>
       <TableFooter>
@@ -159,7 +162,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ allCostContainers })
   The state should be held in the CostContainerBuilder */
 
   const [showContainerBuilder, setShowContainerBuilder] = useState(false);
-  const [showContainerDetail, setShowContainerDetail] = useState(false);
+  const [showContainerViewer, setShowContainerViewer] = useState(false);
 
   const [selectedContainer, setSelectedContainer] = useState<ICostContainer | null>(null);
   const dispatch = useDispatch();
@@ -181,38 +184,43 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ allCostContainers })
     return container;
   };
 
-  const handleContainer = (id: string | null, action: ContainerAction) => {
+  const handleContainerAction = (id: string | null, action: ContainerAction) => {
     const selectedContainer = getSelectedContainer(id);
     setSelectedContainer(selectedContainer);
 
-    if (action === ContainerAction.SHOW) {
-      setShowContainerDetail(true);
-    } else if (action === ContainerAction.EDIT) {
-      setShowContainerBuilder(true);
+    switch (action) {
+      case ContainerAction.SHOW:
+        setShowContainerViewer(true);
+        break;
+      case ContainerAction.EDIT:
+        setShowContainerViewer(false);
+        setShowContainerBuilder(true);
+        break;
+      case ContainerAction.CLOSE:
+        setShowContainerViewer(false);
+        setShowContainerBuilder(false);
+        dispatch<AppDispatch>(fetchCostContainers());
+        break;
+      default:
+        break;
     }
-  };
-
-  const toggleContainerList = (value: boolean) => {
-    setShowContainerBuilder(value);
-  };
-
-  const toggleContainerDetail = (value: boolean) => {
-    setShowContainerDetail(value);
   };
 
   var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
 
   let componentToRender;
-  if (showContainerDetail && selectedContainer) {
+  if (showContainerViewer && selectedContainer) {
     componentToRender = (
-      <CostContainerViewer selectedContainer={selectedContainer} toggleContainerDetail={toggleContainerDetail} />
+      <CostContainerViewer selectedContainer={selectedContainer} handleContainerAction={handleContainerAction} />
     );
   } else if (showContainerBuilder) {
     componentToRender = (
-      <CostContainerBuilder toggleContainerList={toggleContainerList} selectedContainer={selectedContainer} />
+      <CostContainerBuilder selectedContainer={selectedContainer} handleContainerAction={handleContainerAction} />
     );
   } else {
-    componentToRender = <TableContents allCostContainers={allCostContainers} handleContainer={handleContainer} />;
+    componentToRender = (
+      <TableContents allCostContainers={allCostContainers} handleContainerAction={handleContainerAction} />
+    );
   }
 
   return (
@@ -227,8 +235,8 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ allCostContainers })
           <SwitchTransition>
             <CSSTransition
               key={
-                showContainerDetail
-                  ? 'ContainerDetail'
+                showContainerViewer
+                  ? 'ContainerViewer'
                   : showContainerBuilder
                   ? 'CostContainerBuilder'
                   : 'TableContents'

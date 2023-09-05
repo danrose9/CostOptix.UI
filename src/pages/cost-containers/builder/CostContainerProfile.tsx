@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { INewCostContainer } from '../../../types/container-types';
+import { INewCostContainer, ContainerAction } from '../../../types/container-types';
 import { ButtonGroup } from '../../../components/__styles__/ButtonStyles';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../services/redux/store';
-import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
 
 const StyledForm = styled(Form)`
   font-family: inherit;
@@ -15,23 +12,21 @@ const StyledForm = styled(Form)`
 interface ICostContainerProfileProps {
   isQueryValid: boolean;
   handleSaveContainer: (container: INewCostContainer) => void;
-  toggleContainerList: (value: boolean) => void;
   activeContainer: INewCostContainer | null;
+  handleContainerAction?: (id: string | null, action: ContainerAction) => void;
 }
 
 export const CostContainerProfile: React.FC<ICostContainerProfileProps> = ({
   isQueryValid,
-  toggleContainerList,
   handleSaveContainer,
   activeContainer,
+  handleContainerAction,
 }) => {
   const [container, setContainer] = useState({
     name: activeContainer ? activeContainer.name : '',
     owner: activeContainer ? activeContainer.owner : '',
     description: activeContainer ? activeContainer.description : '',
   });
-
-  const dispatch = useDispatch();
 
   const handleContainerChange = (key: string, value: string) => {
     setContainer({
@@ -42,12 +37,6 @@ export const CostContainerProfile: React.FC<ICostContainerProfileProps> = ({
   };
 
   const [saveButtonDisabled, setSaveButtonDisabled] = useState<boolean>(true);
-
-  const handleClose = (e: any) => {
-    e.preventDefault();
-    toggleContainerList(false);
-    dispatch<AppDispatch>(fetchCostContainers());
-  };
 
   const handleSaveBuilder = (e: any) => {
     e.preventDefault();
@@ -108,7 +97,9 @@ export const CostContainerProfile: React.FC<ICostContainerProfileProps> = ({
           <Button positive disabled={saveButtonDisabled} onClick={handleSaveBuilder}>
             Save
           </Button>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={() => handleContainerAction && handleContainerAction(null, ContainerAction.CLOSE)}>
+            Close
+          </Button>
         </ButtonGroup>
       </Form>
     </div>
