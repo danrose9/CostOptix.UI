@@ -20,7 +20,7 @@ const initialState = {
   error: '',
 } as unknown as {
   containers: ICostContainer[];
-  resources: { count: boolean; data: IResource[] };
+  resources: { count: number; data: IResource[] };
   isLoading: boolean;
   isResourcesLoading: boolean;
   status: string;
@@ -36,7 +36,12 @@ const costContainerSlice = createSlice({
       return { ...initialState };
     },
     RESET_RESOURCES(state) {
-      state.resources.data = [];
+      if (!state.resources) {
+        state.resources = { data: [], count: 0 };
+      } else {
+        state.resources.data = [];
+        state.resources.count = 0;
+      }
     },
   },
   extraReducers: (builder) => {

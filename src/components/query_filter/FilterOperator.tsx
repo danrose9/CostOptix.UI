@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { conditionalOperators } from './operators';
 import { StyledDropdown, StyledFilterGroup, StyledFieldContainer, StyledGrid } from '../__styles__/StyledQueryFilter';
 
 interface IFilterOperatorProps {
   dispatch: React.Dispatch<any>;
   index: number;
+  value?: string;
 }
 
-const FilterOperator: React.FC<IFilterOperatorProps> = ({ dispatch, index }) => {
-  const [conditionalOperator, setConditionalOperator] = React.useState('and');
+const FilterOperator: React.FC<IFilterOperatorProps> = ({ dispatch, index, value }) => {
+  const [conditionalOperator, setConditionalOperator] = React.useState(value);
 
   useEffect(() => {
     dispatch({
