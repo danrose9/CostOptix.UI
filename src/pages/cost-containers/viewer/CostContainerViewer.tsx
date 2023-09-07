@@ -7,10 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
 import { fetchCostContainersResources } from '../../../services/redux/thunks/costContainerThunk';
 import { RESET_RESOURCES } from '../../../services/redux/reducers/costContainerSlice';
-import { IResource } from '../../../types/resource-types';
 import { IRootState } from '../../../services/redux/rootReducer';
 import { reduxState } from '../../../services/redux/reduxState';
-import { COST_CONTAINERS } from '../../../app/appRoutes';
 
 interface ICostContainerViewerProps {
   selectedContainer: ICostContainer;
@@ -24,23 +22,22 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
   const { monthlySpend, ...containerSummaryData } = selectedContainer;
   const { id } = selectedContainer;
   const [showResources, setShowResources] = useState(false);
-  // const [resources, setResources] = useState<IResource[]>([]);
+  const [skip, setSkip] = useState(0);
 
   const dispatch = useDispatch();
 
-  const handleShowResources = (e: React.FormEvent<HTMLInputElement>, data: any) => {
-    if (id === null) return;
-
-    dispatch<AppDispatch>(fetchCostContainersResources({ id }));
-    setShowResources((prevShowResources) => !prevShowResources);
-    // .then((fetchedResources: React.SetStateAction<IResource[]>) => {
-    //   setResources(fetchedResources);
-    //   setShowResources((prevShowResources) => !prevShowResources);
-    // })
-    // .catch((error: any) => {
-    //   console.error('Failed to fetch resources:', error);
-    // });
+  const handlePageChange = (e: any, data: any) => {
+    setSkip((data.activePage - 1) * 10);
   };
+
+  const handleShowResources = (e: React.FormEvent<HTMLInputElement>, data: any) => {
+    setShowResources((prevShowResources) => !prevShowResources);
+  };
+
+  useEffect(() => {
+    if (id === null) return;
+    dispatch<AppDispatch>(fetchCostContainersResources({ id, top: 10, skip: skip }));
+  }, [dispatch, id, skip]);
 
   useEffect(() => {
     dispatch<AppDispatch>(RESET_RESOURCES());
@@ -62,7 +59,13 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
         <Radio toggle label={showResources ? 'Hide Resources' : 'Show Resources'} onChange={handleShowResources} />
       </Segment>
 
-      {showResources ? <CostContainerResourceList resources={resources.data} count={resources.count} /> : null}
+      {showResources ? (
+        <CostContainerResourceList
+          resources={resources.data}
+          count={resources.count}
+          handlePageChange={handlePageChange}
+        />
+      ) : null}
     </>
   );
 };

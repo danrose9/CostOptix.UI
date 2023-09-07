@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { COST_CONTAINERS, COST_CONTAINER_RESOURCES } from '../../api/apiEndpoints';
+import { COST_CONTAINERS } from '../../api/apiEndpoints';
 import fetchInstance from '../../api/fetchInstance';
 import { INewCostContainer } from '../../../types/container-types';
 
@@ -53,9 +53,9 @@ export const updateCostContainer = createAsyncThunk(
 
 export const fetchCostContainersResources = createAsyncThunk(
   'CostContainerResources/List',
-  async (args: { id: string }, { rejectWithValue }) => {
-    const { id } = args;
-    return await fetchInstance(`${COST_CONTAINERS}/${id}/resources`)
+  async (args: { id: string; top: number; skip: number }, { rejectWithValue }) => {
+    const { id, top, skip } = args;
+    return await fetchInstance(`${COST_CONTAINERS}/${id}/resources/?$top=${top}&$skip=${skip}`)
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
