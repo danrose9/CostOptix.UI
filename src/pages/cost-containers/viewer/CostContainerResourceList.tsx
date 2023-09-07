@@ -1,38 +1,55 @@
 import React from 'react';
 import { IResource } from '../../../types/resource-types';
-import { Table } from 'semantic-ui-react';
+import { Table, Header } from 'semantic-ui-react';
+import { ProviderImage } from '../../../components/ProviderImage';
+import { TablePaging } from '../../../components/tables/TablePaging';
 
 interface ICostContainerResourceListProps {
   resources: IResource[];
+  count: number;
 }
 
-export const CostContainerResourceList: React.FC<ICostContainerResourceListProps> = ({ resources }) => {
+export const CostContainerResourceList: React.FC<ICostContainerResourceListProps> = ({ resources, count }) => {
   return (
-    <Table singleLine>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Resource Name</Table.HeaderCell>
-          <Table.HeaderCell>Service</Table.HeaderCell>
-          <Table.HeaderCell>Provider</Table.HeaderCell>
-          <Table.HeaderCell>Growth</Table.HeaderCell>
-          <Table.HeaderCell textAlign="right">Amount (30d)</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+    <>
+      <Table singleLine fixed>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell width={6}>Resource Name</Table.HeaderCell>
+            <Table.HeaderCell width={6}>Service</Table.HeaderCell>
+            <Table.HeaderCell width={2}>Provider</Table.HeaderCell>
+            <Table.HeaderCell width={2} textAlign="right">
+              Growth (30d)
+            </Table.HeaderCell>
+            <Table.HeaderCell width={2} textAlign="right">
+              Amount (30d)
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
 
-      <Table.Body>
-        {resources.map((resource, index) => {
-          return (
-            <Table.Row key={index}>
-              <Table.Cell>{resource.resourceName}</Table.Cell>
-              <Table.Cell>{resource.service}</Table.Cell>
-              <Table.Cell>{resource.provider}</Table.Cell>
-              <Table.Cell>{resource.growth30Day}%</Table.Cell>
-              <Table.Cell textAlign="right">{resource.amount30Day}</Table.Cell>
-            </Table.Row>
-          );
-        })}
-      </Table.Body>
-    </Table>
+        <Table.Body>
+          {resources.map((resource, index) => {
+            return (
+              <Table.Row key={index}>
+                <Table.Cell>{resource.resourceName}</Table.Cell>
+                <Table.Cell>{resource.service}</Table.Cell>
+                <Table.Cell>
+                  <Header>
+                    <ProviderImage provider={resource.provider} size="mini" />
+                    <Header.Content>
+                      <Header.Subheader>{resource.provider}</Header.Subheader>
+                    </Header.Content>
+                  </Header>
+                </Table.Cell>
+                <Table.Cell textAlign="right">{resource.growth30Day}%</Table.Cell>
+                <Table.Cell textAlign="right">{resource.amount30Day}</Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table>
+      <TablePaging searchValue={null} totalResults={count} pageSize={10} isLoading={false} totalPages={0} />
+    </>
   );
 };
 

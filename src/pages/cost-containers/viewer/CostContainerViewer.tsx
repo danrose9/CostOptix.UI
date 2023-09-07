@@ -47,6 +47,7 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
   }, [dispatch]);
 
   const resources = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS].resources);
+
   return (
     <>
       <ComponentContainer>
@@ -61,7 +62,7 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
         <Radio toggle label={showResources ? 'Hide Resources' : 'Show Resources'} onChange={handleShowResources} />
       </Segment>
 
-      {showResources ? <CostContainerResourceList resources={resources} /> : null}
+      {showResources ? <CostContainerResourceList resources={resources.data} count={resources.count} /> : null}
     </>
   );
 };

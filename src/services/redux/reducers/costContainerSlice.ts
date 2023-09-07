@@ -10,14 +10,17 @@ import { IResource } from '../../../types/resource-types';
 
 const initialState = {
   containers: [],
-  resources: [],
+  resources: {
+    count: 0,
+    data: [],
+  },
   isLoading: true,
   isResourcesLoading: true,
   status: '',
   error: '',
-} as {
+} as unknown as {
   containers: ICostContainer[];
-  resources: IResource[];
+  resources: { count: boolean; data: IResource[] };
   isLoading: boolean;
   isResourcesLoading: boolean;
   status: string;
@@ -33,7 +36,7 @@ const costContainerSlice = createSlice({
       return { ...initialState };
     },
     RESET_RESOURCES(state) {
-      state.resources = [];
+      state.resources.data = [];
     },
   },
   extraReducers: (builder) => {
@@ -58,7 +61,8 @@ const costContainerSlice = createSlice({
         state.isResourcesLoading = true;
       })
       .addCase(fetchCostContainersResources.fulfilled, (state, action) => {
-        state.resources = action.payload.value;
+        state.resources.data = action.payload.value;
+        state.resources.count = action.payload['@odata.count'];
         state.isResourcesLoading = false;
         state.status = 'fulfilled';
       })
