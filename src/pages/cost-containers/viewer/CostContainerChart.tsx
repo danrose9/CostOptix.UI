@@ -1,6 +1,6 @@
 import React from 'react';
 import StandardLineChart from '../../../components/charts/StandardLineChart';
-import { IMonthlySpend } from '../../../types/container-types';
+import { IMonthlySpend } from '../../../types/resource-types';
 
 export interface ICostContainerChartProps {
   data: IMonthlySpend[] | undefined;

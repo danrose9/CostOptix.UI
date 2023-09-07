@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { COST_CONTAINERS } from '../../api/apiEndpoints';
+import { COST_CONTAINERS, COST_CONTAINER_RESOURCES } from '../../api/apiEndpoints';
 import fetchInstance from '../../api/fetchInstance';
 import { INewCostContainer } from '../../../types/container-types';
 
@@ -48,5 +48,23 @@ export const updateCostContainer = createAsyncThunk(
     return await fetchInstance(`${COST_CONTAINERS}/${id}`, { method: 'PATCH', body: JSON.stringify({ ...rest }) })
       .then((response) => response.json())
       .catch((e) => rejectWithValue(e.response.data));
+  }
+);
+
+export const fetchCostContainersResources = createAsyncThunk(
+  'CostContainerResources/List',
+  async (args: { id: string }, { rejectWithValue }) => {
+    const { id } = args;
+    return await fetchInstance(`${COST_CONTAINERS}/${id}/resources`)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      });
   }
 );

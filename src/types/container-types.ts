@@ -1,3 +1,5 @@
+import { IMonthlySpend } from './resource-types';
+
 export interface INewCostContainer {
   id: string | null;
   name: string;
@@ -17,12 +19,6 @@ export interface ICostContainer extends INewCostContainer {
   monthlySpend?: IMonthlySpend[];
 }
 
-export interface IMonthlySpend {
-  amount: number;
-  amountConverted: number;
-  periodEnd: Date;
-  periodStart: Date;
-}
 export enum ContainerAction {
   SHOW,
   EDIT,

@@ -1,3 +1,5 @@
+import { IMonthlySpend } from './resource-types';
+
 export interface IBillingAccount {
   id: string;
   providerId: string;
@@ -26,19 +28,12 @@ export interface IBillingAccountCostDashboard extends IBillingAccount {
   convertedCurrency?: string;
   monthToDateCost?: number;
   monthToDateCostConverted?: number;
-  monthlySpend?: [IBillingAccountMonthlySpend];
+  monthlySpend?: IMonthlySpend[];
   mostExpensive?: [IBillingAccountMostExpensive];
   fastestGrowing?: [IBillingAccountFastestGrowing];
   isLoading: boolean;
   isError: boolean;
   status: string;
-}
-
-interface IBillingAccountMonthlySpend {
-  periodStart: Date;
-  periodEnd: Date;
-  amount: number;
-  amountConverted: number;
 }
 
 interface IBillingAccountMostExpensive {

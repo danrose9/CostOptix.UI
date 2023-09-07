@@ -1,14 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCostContainers, deleteCostContainerById, addCostContainer } from '../thunks/costContainerThunk';
+import {
+  fetchCostContainers,
+  deleteCostContainerById,
+  addCostContainer,
+  fetchCostContainersResources,
+} from '../thunks/costContainerThunk';
+import { ICostContainer } from '../../../types/container-types';
+import { IResource } from '../../../types/resource-types';
 
 const initialState = {
   containers: [],
+  resources: {
+    count: 0,
+    data: [],
+  },
   isLoading: true,
+  isResourcesLoading: true,
   status: '',
   error: '',
-} as {
-  containers: any[];
+} as unknown as {
+  containers: ICostContainer[];
+  resources: { count: boolean; data: IResource[] };
   isLoading: boolean;
+  isResourcesLoading: boolean;
   status: string;
   error: string | undefined;
 };
@@ -20,6 +34,9 @@ const costContainerSlice = createSlice({
   reducers: {
     RESET() {
       return { ...initialState };
+    },
+    RESET_RESOURCES(state) {
+      state.resources.data = [];
     },
   },
   extraReducers: (builder) => {
@@ -39,6 +56,22 @@ const costContainerSlice = createSlice({
         state.error = action.error.message;
       });
     builder
+      .addCase(fetchCostContainersResources.pending, (state) => {
+        state.status = 'pending';
+        state.isResourcesLoading = true;
+      })
+      .addCase(fetchCostContainersResources.fulfilled, (state, action) => {
+        state.resources.data = action.payload.value;
+        state.resources.count = action.payload['@odata.count'];
+        state.isResourcesLoading = false;
+        state.status = 'fulfilled';
+      })
+      .addCase(fetchCostContainersResources.rejected, (state, action) => {
+        state.isResourcesLoading = false;
+        state.status = 'rejected';
+        state.error = action.error.message;
+      });
+    builder
       .addCase(addCostContainer.pending, (state) => {})
       .addCase(addCostContainer.fulfilled, (state, action) => {
         state.containers = [...state.containers, action.payload];
@@ -53,6 +86,6 @@ const costContainerSlice = createSlice({
   },
 });
 
-export const {} = costContainerSlice.actions;
+export const { RESET_RESOURCES } = costContainerSlice.actions;
 
 export default costContainerSlice.reducer;
