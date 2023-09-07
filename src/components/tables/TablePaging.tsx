@@ -30,9 +30,6 @@ export const TablePaging: React.FC<ITablePagingProps> = (props) => {
     searchQuery(activePage, searchValue, pageSize);
   };
 
-  useEffect(() => {
-    console.log('TablePaging.tsx: useEffect: activePage: ', activePage);
-  }, [activePage]);
   return (
     <PaginationContainer>
       {totalResults === 0 ? (

@@ -7,13 +7,14 @@ import TablePagination from '../../../components/tables/TablePagination';
 interface ICostContainerResourceListProps {
   resources: IResource[];
   count: number;
+  handlePageChange: (e: any, data: any) => void;
 }
 
-export const CostContainerResourceList: React.FC<ICostContainerResourceListProps> = ({ resources, count }) => {
-  const handlePaginationChange = (e: any, data: any) => {
-    console.log('Active page is: ', data.activePage);
-  };
-
+export const CostContainerResourceList: React.FC<ICostContainerResourceListProps> = ({
+  resources,
+  count,
+  handlePageChange,
+}) => {
   return (
     <>
       <Table singleLine fixed>
@@ -52,7 +53,7 @@ export const CostContainerResourceList: React.FC<ICostContainerResourceListProps
           })}
         </Table.Body>
       </Table>
-      <TablePagination totalItems={count} handlePaginationChange={handlePaginationChange} />
+      <TablePagination totalItems={count} handlePageChange={handlePageChange} />
     </>
   );
 };
