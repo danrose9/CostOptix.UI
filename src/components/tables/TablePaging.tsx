@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PaginationContainer, RowCounter, PageSelector } from '../../styles/StyledPageLoader';
 import { searchQuery } from '../../services/api/searchQuery';
 
@@ -25,11 +25,14 @@ export const TablePaging: React.FC<ITablePagingProps> = (props) => {
   const firstItem = lastItemInPage - (pageSize - 1);
   const totalPages = Math.ceil(totalResults / pageSize);
 
-  const handlePaginationChange = (e: { activePage: number }) => {
-    setActivePage(Math.ceil(activePage));
+  const handlePaginationChange = (e: any, data: any) => {
+    setActivePage(Math.ceil(data.activePage));
     searchQuery(activePage, searchValue, pageSize);
   };
 
+  useEffect(() => {
+    console.log('TablePaging.tsx: useEffect: activePage: ', activePage);
+  }, [activePage]);
   return (
     <PaginationContainer>
       {totalResults === 0 ? (
