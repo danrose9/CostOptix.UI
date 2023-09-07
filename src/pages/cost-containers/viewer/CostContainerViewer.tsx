@@ -45,6 +45,7 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
   useEffect(() => {
     dispatch<AppDispatch>(RESET_RESOURCES());
   }, [dispatch]);
+
   const resources = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS].resources);
   return (
     <>
