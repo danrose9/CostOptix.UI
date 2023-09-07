@@ -1,0 +1,107 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../services/redux/store';
+import { Table, Header, Divider } from 'semantic-ui-react';
+import { Spinner } from '../../components/Loader';
+import { PageHeader } from '../../components/PageHeader';
+import { ProviderImage } from '../../components/ProviderImage';
+import TablePagination from '../../components/tables/TablePagination';
+import { useSelector } from 'react-redux';
+import { reduxState } from '../../services/redux/reduxState';
+import SearchStandard from '../../components/SearchStandard';
+import { PageContainer, PageHeaderContainer, TableContainer } from '../__styles__/DefaultPageStyles';
+import { useNavigate } from 'react-router-dom';
+import * as appRoutes from '../../app/appRoutes';
+import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
+import { IRootState } from '../../services/redux/rootReducer';
+import { IResource } from '../../types/resource-types';
+
+interface ISearchResults {
+  map: any;
+}
+
+interface IResourceTableProps {
+  searchResults: ISearchResults;
+}
+
+const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <Divider />
+      <TableContainer>
+        <Table fixed striped selectable color="purple">
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell width={4}>Resource</Table.HeaderCell>
+              <Table.HeaderCell width={4}>Service</Table.HeaderCell>
+              <Table.HeaderCell width={6}>Billing Account</Table.HeaderCell>
+              <Table.HeaderCell width={2}>Provider</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            {searchResults?.map((resource: IResource, index: React.Key | null | undefined) => {
+              return (
+                <Table.Row
+                  style={{ cursor: 'pointer' }}
+                  key={index}
+                  onClick={() => {
+                    dispatch<AppDispatch>(RESET_ISAVAILABLE(false));
+
+                    navigate(appRoutes.RESOURCE_VIEW, {
+                      state: { resource: resource },
+                    });
+                  }}
+                >
+                  <Table.Cell singleLine>{resource.resourceName}</Table.Cell>
+                  <Table.Cell singleLine>{resource.service}</Table.Cell>
+                  <Table.Cell singleLine>{resource.accountName}</Table.Cell>
+                  <Table.Cell>
+                    <Header>
+                      <ProviderImage provider={resource.provider} size="mini" />
+                      <Header.Content>
+                        <Header.Subheader>{resource.provider}</Header.Subheader>
+                      </Header.Content>
+                    </Header>
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
+        </Table>
+      </TableContainer>
+    </>
+  );
+};
+
+const ResourceList = () => {
+  const navigate = useNavigate();
+
+  const pageSize = 10;
+  const initialQuery = `?$top=${pageSize}&$skip=0`;
+  const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
+
+  const dispatch = useDispatch();
+
+  const handlePageChange = (e: any, data: any) => {};
+
+  return (
+    <>
+      <PageContainer>
+        <PageHeaderContainer>
+          <PageHeader title="Resources" />
+          <SearchStandard initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
+        </PageHeaderContainer>
+        {resources.isLoading ? <Spinner /> : <ResourcesTable searchResults={resources.searchResults} />}
+
+        <Divider />
+        <TablePagination totalItems={resources.count} pageSize={pageSize} handlePageChange={handlePageChange} />
+      </PageContainer>
+    </>
+  );
+};
+
+export default ResourceList;

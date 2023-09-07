@@ -4,26 +4,31 @@ import { PaginationContainer, RowCounter, PageSelector } from '../../styles/Styl
 interface ITablePaginationProps {
   totalItems: number;
   pageSize?: number;
-  handlePaginationChange: (e: any, data: any) => void;
+  handlePageChange: (e: any, data: any) => void;
+  isLoading?: boolean;
 }
 
 const TablePagination: React.FC<ITablePaginationProps> = (props) => {
+  const { isLoading = false } = props;
   const defaultPageSize = 10;
   const { totalItems, pageSize = defaultPageSize } = props;
 
   const totalPages = Math.ceil(totalItems / pageSize);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const lastItemInPage = Math.min(pageSize * currentPage, totalItems);
+  const firstItemInPage = (currentPage - 1) * pageSize + 1;
+
   const onPageChange = (e: any, data: any) => {
     setCurrentPage(data.activePage);
 
-    props.handlePaginationChange(e, data);
+    props.handlePageChange(e, data);
   };
 
   return (
     <PaginationContainer>
       <RowCounter>
-        Showing {1} to {10} of {totalItems} results
+        Showing {firstItemInPage} to {lastItemInPage} of {totalItems} results
       </RowCounter>
       <PageSelector
         activePage={currentPage}
@@ -31,7 +36,7 @@ const TablePagination: React.FC<ITablePaginationProps> = (props) => {
         onPageChange={onPageChange}
         siblingRange={1}
         totalPages={totalPages}
-        // Heads up! All items are powered by shorthands, if you want to hide one of them, just pass `null` as value
+        disabled={isLoading}
         ellipsisItem={true ? undefined : null}
         firstItem={null}
         lastItem={null}
