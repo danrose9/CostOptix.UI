@@ -46,7 +46,6 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
         dispatch={dispatchError}
         updateSetIsQueryValid={updateSetIsQueryValid}
         initialData={initialData}
-        filter={throwError}
         reset={resetKey}
       />
     );
@@ -54,6 +53,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
 
   // Init filter groups based on activeQuery
   const initialFilterGroups = activeQuery.map((query: any, index: number) => newFilterGroup(index, index, query));
+
   const [filterGroup, setFilterGroup] = useState<any>(
     initialFilterGroups.length ? initialFilterGroups : [newFilterGroup(0, 0)]
   );
@@ -85,7 +85,6 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
           dispatch={dispatch}
           updateSetIsQueryValid={updateSetIsQueryValid}
           initialData={activeQuery[containerIndex]}
-          filter={filter}
           reset={resetKey}
         />
       ))}

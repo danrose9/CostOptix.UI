@@ -2,7 +2,7 @@ import React from 'react';
 import { IResource } from '../../../types/resource-types';
 import { Table, Header } from 'semantic-ui-react';
 import { ProviderImage } from '../../../components/ProviderImage';
-import { TablePaging } from '../../../components/tables/TablePaging';
+import TablePagination from '../../../components/tables/TablePagination';
 
 interface ICostContainerResourceListProps {
   resources: IResource[];
@@ -10,6 +10,10 @@ interface ICostContainerResourceListProps {
 }
 
 export const CostContainerResourceList: React.FC<ICostContainerResourceListProps> = ({ resources, count }) => {
+  const handlePaginationChange = (e: any, data: any) => {
+    console.log('Active page is: ', data.activePage);
+  };
+
   return (
     <>
       <Table singleLine fixed>
@@ -48,7 +52,7 @@ export const CostContainerResourceList: React.FC<ICostContainerResourceListProps
           })}
         </Table.Body>
       </Table>
-      <TablePaging searchValue={null} totalResults={count} pageSize={10} isLoading={false} totalPages={0} />
+      <TablePagination totalItems={count} handlePaginationChange={handlePaginationChange} />
     </>
   );
 };

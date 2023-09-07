@@ -19,7 +19,6 @@ interface IFilterGroupProps {
   key: number;
   updateSetIsQueryValid: (value: boolean) => void;
   initialData?: any;
-  filter: any;
   reset: number;
 }
 
@@ -31,12 +30,13 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   dispatch,
   updateSetIsQueryValid,
   initialData,
-  filter,
   reset,
 }) => {
   const [field, setField] = useState(initialData ? initialData[containerIndex].field : '');
   const [operator, setOperator] = useState(initialData ? initialData[containerIndex].operator : '');
   const [filterValue, setFilterValue] = useState(initialData ? initialData[containerIndex].value : '');
+  const conditionalOperator = initialData ? initialData[containerIndex].conditionalOperator : 'and';
+
   const [currentFilter, setCurrentFilter] = useState(null);
   const isValidValue = (value: any) => value !== undefined && value !== '';
 
@@ -78,7 +78,9 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
 
   return (
     <React.Fragment>
-      {containerIndex !== 0 ? <FilterOperator dispatch={dispatch} index={containerIndex} /> : null}
+      {containerIndex !== 0 ? (
+        <FilterOperator dispatch={dispatch} index={containerIndex} value={conditionalOperator} />
+      ) : null}
 
       <StyledGrid columns={1} className="indent-right">
         <StyledFilterGroup data-testid="filter-group">
