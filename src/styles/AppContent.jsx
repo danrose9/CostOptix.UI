@@ -59,5 +59,6 @@ export const MainPage = styled.div`
   background: linear-gradient(0deg, rgba(255,255,255,1) 36%, rgba(174,238,228,0.5503151944371498) 100%);
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
-  height: 100%
+  height: 100%;
+  margin-bottom: 2em;
 `;
