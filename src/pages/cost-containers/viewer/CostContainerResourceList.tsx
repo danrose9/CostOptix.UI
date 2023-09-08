@@ -3,6 +3,11 @@ import { IResource } from '../../../types/resource-types';
 import { Table, Header } from 'semantic-ui-react';
 import { ProviderImage } from '../../../components/ProviderImage';
 import TablePagination from '../../../components/tables/TablePagination';
+import { useNavigate } from 'react-router-dom';
+import * as appRoutes from '../../../app/appRoutes';
+import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../services/redux/store';
 
 interface ICostContainerResourceListProps {
   resources: IResource[];
@@ -15,6 +20,9 @@ export const CostContainerResourceList: React.FC<ICostContainerResourceListProps
   count,
   handlePageChange,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
       <Table singleLine fixed>
@@ -35,7 +43,17 @@ export const CostContainerResourceList: React.FC<ICostContainerResourceListProps
         <Table.Body>
           {resources.map((resource, index) => {
             return (
-              <Table.Row key={index}>
+              <Table.Row
+                style={{ cursor: 'pointer' }}
+                key={index}
+                onClick={() => {
+                  dispatch<AppDispatch>(RESET_ISAVAILABLE(false));
+
+                  navigate(appRoutes.RESOURCE_VIEW, {
+                    state: { resource: resource },
+                  });
+                }}
+              >
                 <Table.Cell>{resource.resourceName}</Table.Cell>
                 <Table.Cell>{resource.service}</Table.Cell>
                 <Table.Cell>
