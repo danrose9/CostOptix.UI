@@ -35,10 +35,15 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
         <Table fixed striped selectable color="purple">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell width={4}>Resource</Table.HeaderCell>
-              <Table.HeaderCell width={4}>Service</Table.HeaderCell>
-              <Table.HeaderCell width={6}>Billing Account</Table.HeaderCell>
+              <Table.HeaderCell width={6}>Resource Name</Table.HeaderCell>
+              <Table.HeaderCell width={6}>Service</Table.HeaderCell>
               <Table.HeaderCell width={2}>Provider</Table.HeaderCell>
+              <Table.HeaderCell width={2} textAlign="right">
+                Growth (30d)
+              </Table.HeaderCell>
+              <Table.HeaderCell width={2} textAlign="right">
+                Amount (30d)
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -56,9 +61,8 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
                     });
                   }}
                 >
-                  <Table.Cell singleLine>{resource.resourceName}</Table.Cell>
-                  <Table.Cell singleLine>{resource.service}</Table.Cell>
-                  <Table.Cell singleLine>{resource.accountName}</Table.Cell>
+                  <Table.Cell>{resource.resourceName}</Table.Cell>
+                  <Table.Cell>{resource.service}</Table.Cell>
                   <Table.Cell>
                     <Header>
                       <ProviderImage provider={resource.provider} size="mini" />
@@ -67,6 +71,8 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
                       </Header.Content>
                     </Header>
                   </Table.Cell>
+                  <Table.Cell textAlign="right">{resource.growth30Day}%</Table.Cell>
+                  <Table.Cell textAlign="right">{resource.amount30Day}</Table.Cell>
                 </Table.Row>
               );
             })}
