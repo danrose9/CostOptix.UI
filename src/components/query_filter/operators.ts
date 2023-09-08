@@ -1,14 +1,31 @@
-export const fields = [
-  // { key: 1, text: 'Organization', value: 'OrganizationId' },
-  { key: 2, text: 'Billing Account', value: 'BillingAccountName' },
-  { key: 3, text: 'Provider', value: 'CloudProvider' },
-  { key: 4, text: 'Resource Id', value: '_id' },
-  { key: 5, text: 'Resource Name', value: 'ResourceName' },
-  { key: 6, text: 'Azure Resource Group', value: 'AzureResourceGroup' },
-  { key: 7, text: 'Service Name', value: 'Service' },
-  { key: 8, text: 'Region', value: 'Region' },
-  { key: 9, text: 'Azure Subscription Id', value: 'AzureSubscriptionId' },
-  { key: 10, text: 'Tags', value: 'ResourceTags' },
+type DataType = 'string' | 'number' | 'boolean' | 'date' | 'datetime';
+
+interface Field {
+  key: number;
+  text: string;
+  value: string;
+  dataType: DataType;
+}
+
+export const dataTypes: Record<DataType, string[]> = {
+  string: ['eq', 'ne', 'contains', 'ncontains', 'beginWith', 'endWith'],
+  number: ['eq', 'ne', 'gt', 'gte', 'lt', 'lte'],
+  boolean: ['eq', 'ne'],
+  date: ['eq', 'ne', 'gt', 'gte', 'lt', 'lte'],
+  datetime: ['eq', 'ne', 'gt', 'gte', 'lt', 'lte'],
+};
+
+export const fields: Field[] = [
+  // { key: 1, text: 'Organization', value: 'OrganizationId', dataType: 'string' },
+  { key: 2, text: 'Billing Account', value: 'BillingAccountName', dataType: 'string' },
+  { key: 3, text: 'Provider', value: 'CloudProvider', dataType: 'string' },
+  { key: 4, text: 'Resource Id', value: '_id', dataType: 'string' },
+  { key: 5, text: 'Resource Name', value: 'ResourceName', dataType: 'string' },
+  { key: 6, text: 'Azure Resource Group', value: 'AzureResourceGroup', dataType: 'string' },
+  { key: 7, text: 'Service Name', value: 'Service', dataType: 'string' },
+  { key: 8, text: 'Region', value: 'Region', dataType: 'string' },
+  { key: 9, text: 'Azure Subscription Id', value: 'AzureSubscriptionId', dataType: 'string' },
+  { key: 10, text: 'Tags', value: 'ResourceTags', dataType: 'string' },
 ];
 
 export const operators = [
