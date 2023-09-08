@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fields, operators } from './operators';
+import { fields, operators, dataTypes } from './operators';
 import {
   StyledDropdown,
   StyledFilterGroup,
@@ -38,10 +38,36 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   const conditionalOperator = initialData ? initialData[containerIndex].conditionalOperator : 'and';
 
   const [currentFilter, setCurrentFilter] = useState(null);
+
+  const [availableOperators, setAvailableOperators] = useState(operators);
+
   const isValidValue = (value: any) => value !== undefined && value !== '';
 
   const allFieldsValid = (field: any, operator: any, filterValue: any) =>
     isValidValue(field) && isValidValue(operator) && isValidValue(filterValue);
+
+  const getApplicableOperators = (fieldValue: string) => {
+    const selectedField = fields.find((field) => field.value === fieldValue);
+    if (!selectedField || !selectedField.dataType) return [];
+
+    // Now TypeScript knows that selectedField.dataType is of type DataType
+    const applicableOperators = dataTypes[selectedField.dataType];
+    return operators.filter((op) => applicableOperators.includes(op.value));
+  };
+
+  const handleFieldChange =
+    (attribute: string, setValue: Function) =>
+    (e: any, { value }: any) => {
+      setValue(value);
+      if (attribute === 'field') {
+        setOperator(''); // reset operator when field changes
+      }
+      setCurrentFilter((prevFilter: any) => {
+        const updatedFilter = { ...prevFilter };
+        updatedFilter[attribute] = value;
+        return updatedFilter;
+      });
+    };
 
   useEffect(() => {
     // Check if the reset value changes
@@ -60,21 +86,13 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
     }
   }, [field, operator, filterValue, currentFilter, dispatch]);
 
-  const handleFieldChange =
-    (attribute: string, setValue: Function) =>
-    (e: any, { value }: any) => {
-      setValue(value);
-      setCurrentFilter((prevFilter: any) => {
-        const updatedFilter = { ...prevFilter };
-        updatedFilter[attribute] = value;
-
-        return updatedFilter;
-      });
-    };
-
   useEffect(() => {
     dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: containerIndex } });
   }, [currentFilter, dispatch, containerIndex]);
+
+  useEffect(() => {
+    setAvailableOperators(getApplicableOperators(field));
+  }, [field]);
 
   return (
     <React.Fragment>
@@ -96,7 +114,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
           </StyledFieldContainer>
           <StyledFieldContainer>
             <StyledDropdown
-              options={operators}
+              options={availableOperators}
               placeholder="Select operator"
               selection
               onChange={handleFieldChange('operator', setOperator)}
