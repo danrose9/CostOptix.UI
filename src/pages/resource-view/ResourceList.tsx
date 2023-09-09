@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../services/redux/store';
 import { Table, Header, Divider } from 'semantic-ui-react';
@@ -92,7 +92,9 @@ const ResourceList = () => {
 
   const dispatch = useDispatch();
 
-  const handlePageChange = (e: any, data: any) => {};
+  const handlePageChange = (e: any, data: any) => {
+    console.log('handlePageChange', data.activePage);
+  };
 
   return (
     <>

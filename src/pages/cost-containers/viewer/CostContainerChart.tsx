@@ -1,6 +1,7 @@
 import React from 'react';
 import StandardLineChart from '../../../components/charts/StandardLineChart';
 import { IMonthlySpend } from '../../../types/resource-types';
+import { orderAndFormatArray } from '../../../utils/arrayFormatter';
 
 export interface ICostContainerChartProps {
   data: IMonthlySpend[] | undefined;
@@ -19,10 +20,12 @@ const chartConfig = {
 export const CostContainerChart: React.FC<ICostContainerChartProps> = ({ data }) => {
   const { container, xAxis, yAxis, line } = chartConfig;
 
+  const orderData = orderAndFormatArray(data || [], 'periodEnd');
+
   return (
     <>
       <StandardLineChart
-        chartData={data}
+        chartData={orderData}
         chartContainer={{
           height: container.height,
           width: container.width,
