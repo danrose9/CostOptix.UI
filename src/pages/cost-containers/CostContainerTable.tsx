@@ -14,6 +14,7 @@ import { INITIAL_CONTAINER_STATE } from '../../reducers/updateFilterReducer';
 import { ProviderImage } from '../../components/ProviderImage';
 import { AppDispatch } from '../../services/redux/store';
 import { fetchCostContainers } from '../../services/redux/thunks/costContainerThunk';
+import { orderAndFormatArray } from '../../utils/arrayFormatter';
 
 export const TableContainer = styled.div`
   padding: 0.5em;
@@ -106,8 +107,10 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
           {containers && containers.length > 0
             ? containers.map((container, index) => {
                 var createdOn = null;
-                if (container.createdDate) createdOn = formatISODateToUTCDate(container.createdDate);
+                var orderData = null;
 
+                if (container.monthlySpend) orderData = orderAndFormatArray(container.monthlySpend || [], 'periodEnd');
+                if (container.createdDate) createdOn = formatISODateToUTCDate(container.createdDate);
                 return (
                   <Table.Row key={index} onClick={() => handleContainerAction(container.id, ContainerAction.SHOW)}>
                     <Table.Cell singleLine>{container.name}</Table.Cell>
@@ -128,7 +131,7 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                     </Table.Cell>
                     <Table.Cell singleLine>{createdOn}</Table.Cell>
                     <Table.Cell>
-                      <TinyLineChart data={container.monthlySpend} width={150} height={30} dataKey="amountConverted" />
+                      <TinyLineChart data={orderData} width={150} height={30} dataKey="amountConverted" />
                     </Table.Cell>
                     <Table.Cell singleLine style={{ display: 'flex', alignItems: 'center' }}>
                       {container.cloudProviders

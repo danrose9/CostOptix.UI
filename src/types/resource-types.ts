@@ -19,6 +19,6 @@ export interface IResource {
 export interface IMonthlySpend {
   amount: number;
   amountConverted: number;
-  periodEnd: Date;
-  periodStart: Date;
+  periodEnd: string;
+  periodStart: string;
 }

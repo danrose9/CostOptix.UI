@@ -48,10 +48,10 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
 
   const getApplicableOperators = (fieldValue: string) => {
     const selectedField = fields.find((field) => field.value === fieldValue);
-    if (!selectedField || !selectedField.dataType) return [];
+    if (!selectedField || !selectedField.datatype) return [];
 
     // Now TypeScript knows that selectedField.dataType is of type DataType
-    const applicableOperators = dataTypes[selectedField.dataType];
+    const applicableOperators = dataTypes[selectedField.datatype];
     return operators.filter((op) => applicableOperators.includes(op.value));
   };
 
