@@ -4,7 +4,7 @@ interface Field {
   key: number;
   text: string;
   value: string;
-  dataType: DataType;
+  datatype: DataType;
 }
 
 export const dataTypes: Record<DataType, string[]> = {
@@ -16,16 +16,16 @@ export const dataTypes: Record<DataType, string[]> = {
 };
 
 export const fields: Field[] = [
-  // { key: 1, text: 'Organization', value: 'OrganizationId', dataType: 'string' },
-  { key: 2, text: 'Billing Account', value: 'BillingAccountName', dataType: 'string' },
-  { key: 3, text: 'Provider', value: 'CloudProvider', dataType: 'string' },
-  { key: 4, text: 'Resource Id', value: '_id', dataType: 'string' },
-  { key: 5, text: 'Resource Name', value: 'ResourceName', dataType: 'string' },
-  { key: 6, text: 'Azure Resource Group', value: 'AzureResourceGroup', dataType: 'string' },
-  { key: 7, text: 'Service Name', value: 'Service', dataType: 'string' },
-  { key: 8, text: 'Region', value: 'Region', dataType: 'string' },
-  { key: 9, text: 'Azure Subscription Id', value: 'AzureSubscriptionId', dataType: 'string' },
-  { key: 10, text: 'Tags', value: 'ResourceTags', dataType: 'string' },
+  // { key: 1, text: 'Organization', value: 'OrganizationId', datatype: 'string' },
+  { key: 2, text: 'Billing Account', value: 'BillingAccountName', datatype: 'string' },
+  { key: 3, text: 'Provider', value: 'CloudProvider', datatype: 'string' },
+  { key: 4, text: 'Resource Id', value: '_id', datatype: 'string' },
+  { key: 5, text: 'Resource Name', value: 'ResourceName', datatype: 'string' },
+  { key: 6, text: 'Azure Resource Group', value: 'AzureResourceGroup', datatype: 'string' },
+  { key: 7, text: 'Service Name', value: 'Service', datatype: 'string' },
+  { key: 8, text: 'Region', value: 'Region', datatype: 'string' },
+  { key: 9, text: 'Azure Subscription Id', value: 'AzureSubscriptionId', datatype: 'string' },
+  { key: 10, text: 'Tags', value: 'ResourceTags', datatype: 'string' },
 ];
 
 export const operators = [
