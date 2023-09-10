@@ -2,7 +2,7 @@ import React, { useState, FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../components/charts/TinyLineChart';
-import { TablePaging } from '../../components/tables/TablePaging';
+import TablePagination from '../../components/tables/TablePagination';
 import InformationButton from '../../components/buttons/InformationButton';
 import { CostContainerBuilder, CostContainerViewer, CostContainerOptions } from './index';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -86,6 +86,7 @@ const StyledTable = styled(Table)`
 const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleContainerAction }) => {
   const { containers } = allCostContainers;
 
+  const handlePageChange = (e: any, data: any) => {};
   return (
     <>
       <StyledTable striped>
@@ -153,7 +154,12 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
         </Table.Body>
       </StyledTable>
       <TableFooter>
-        <TablePaging totalPages={1} totalResults={1} pageSize={10} isLoading={true}></TablePaging>
+        <TablePagination
+          totalItems={1}
+          handlePageChange={handlePageChange}
+          pageSize={10}
+          isLoading={true}
+        ></TablePagination>
       </TableFooter>
     </>
   );

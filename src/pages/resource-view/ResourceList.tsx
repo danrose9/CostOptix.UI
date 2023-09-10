@@ -8,7 +8,7 @@ import { ProviderImage } from '../../components/ProviderImage';
 import TablePagination from '../../components/tables/TablePagination';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
-import SearchStandard from '../../components/SearchStandard';
+import SearchResources from './SearchResources';
 import { PageContainer, PageHeaderContainer, TableContainer } from '../__styles__/DefaultPageStyles';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/appRoutes';
@@ -84,16 +84,13 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
 };
 
 const ResourceList = () => {
-  const navigate = useNavigate();
-
   const pageSize = 10;
-  const initialQuery = `?$top=${pageSize}&$skip=0`;
+  const [skip, setSkip] = useState(0);
+  const initialQuery = `?$top=${pageSize}&$skip=${skip}`;
   const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
 
-  const dispatch = useDispatch();
-
   const handlePageChange = (e: any, data: any) => {
-    console.log('handlePageChange', data.activePage);
+    setSkip((data.activePage - 1) * 10);
   };
 
   return (
@@ -101,7 +98,7 @@ const ResourceList = () => {
       <PageContainer>
         <PageHeaderContainer>
           <PageHeader title="Resources" />
-          <SearchStandard initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
+          <SearchResources initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
         </PageHeaderContainer>
         {resources.isLoading ? <Spinner /> : <ResourcesTable searchResults={resources.searchResults} />}
 

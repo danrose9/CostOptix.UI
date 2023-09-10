@@ -1,16 +1,13 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Search, Grid } from 'semantic-ui-react';
-import {
-  CLEAN_QUERY,
-  SEARCH_CLICK,
-} from '../services/redux/reducers/resourceSlice';
-import { reduxState } from '../services/redux/reduxState';
-import { FINISH_SEARCH } from '../services/redux/thunks/resourceThunk';
+import { CLEAN_QUERY, SEARCH_CLICK } from '../../services/redux/reducers/resourceSlice';
+import { reduxState } from '../../services/redux/reduxState';
+import { SEARCH_RESOURCES } from '../../services/redux/thunks/resourceThunk';
 
 const keyDelay = process.env.REACT_APP_KEY_DELAY;
 
-const SearchStandard = (props) => {
+const SearchResources = (props) => {
   const dispatch = useDispatch();
   const timeoutRef = useRef();
 
@@ -25,20 +22,21 @@ const SearchStandard = (props) => {
       timeoutRef.current = setTimeout(() => {
         if (data.value.length === 0) {
           dispatch(CLEAN_QUERY());
-          dispatch(FINISH_SEARCH(props.initialQuery));
+          dispatch(SEARCH_RESOURCES(props.initialQuery));
           return;
         }
 
         const query = `?$top=${props.pageSize}&$search="${searchValue}"`;
 
-        dispatch(FINISH_SEARCH(query));
+        dispatch(SEARCH_RESOURCES(query));
       }, keyDelay);
     },
     [dispatch, props.initialQuery, props.pageSize]
   );
 
   useEffect(() => {
-    dispatch(FINISH_SEARCH(props.initialQuery));
+    dispatch(SEARCH_RESOURCES(props.initialQuery));
+    console.log('SearchResources: ', props.initialQuery);
     return () => {
       clearTimeout(timeoutRef.current);
     };
@@ -47,15 +45,10 @@ const SearchStandard = (props) => {
   return (
     <Grid>
       <Grid.Column width={6}>
-        <Search
-          placeholder="Search..."
-          onSearchChange={handleSearchChange}
-          value={searchValue}
-          showNoResults={false}
-        />
+        <Search placeholder="Search..." onSearchChange={handleSearchChange} value={searchValue} showNoResults={false} />
       </Grid.Column>
     </Grid>
   );
 };
 
-export default SearchStandard;
+export default SearchResources;
