@@ -84,18 +84,13 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
 };
 
 const ResourceList = () => {
-  const navigate = useNavigate();
-
   const pageSize = 10;
   const [skip, setSkip] = useState(0);
   const initialQuery = `?$top=${pageSize}&$skip=${skip}`;
   const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
 
-  const dispatch = useDispatch();
-
   const handlePageChange = (e: any, data: any) => {
     setSkip((data.activePage - 1) * 10);
-    console.log('handlePageChange', data.activePage);
   };
 
   return (
