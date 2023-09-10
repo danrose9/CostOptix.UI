@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RESOURCES } from '../../api/apiEndpoints';
 import fetchInstance from '../../api/fetchInstance';
 
-export const FINISH_SEARCH = createAsyncThunk('Resources/Search', async (query, { rejectWithValue }) => {
+export const SEARCH_RESOURCES = createAsyncThunk('Resources/Search', async (query, { rejectWithValue }) => {
   return await fetchInstance(RESOURCES + query)
     .then((response) => {
       if (!response.ok) {
