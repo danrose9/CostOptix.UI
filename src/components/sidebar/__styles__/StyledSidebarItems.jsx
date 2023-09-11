@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import {Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
+import { FONT } from '../../../app/constants';
 
 export const StyledBrand = styled.div`
     height: 70px;   
@@ -11,7 +12,7 @@ export const StyledSectionHeader = styled.div`
     text-align: center;
     justify-content: center;
     align-content: center;
-    color: #b8e5f1;
+    color: ${FONT.PRIMARY_COLOR};
     font-size: 1.1em;
     margin: auto;
     font-weight: 200;

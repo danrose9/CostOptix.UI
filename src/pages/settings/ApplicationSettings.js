@@ -1,8 +1,7 @@
 import React from 'react';
 import { Tab, Label, Divider } from 'semantic-ui-react';
 import { SectionTitle, SectionHeader } from '../__styles__/settings.styles';
-
-const { version } = require('../../../package.json');
+import { APP } from '../../app/constants';
 
 export const ApplicationSettings = () => {
   return (
@@ -12,7 +11,7 @@ export const ApplicationSettings = () => {
           <SectionTitle>Application</SectionTitle>
 
           <Label size="large" color="teal">
-            Application Version: {version}
+            Application Version: {APP.VERSION}
           </Label>
         </SectionHeader>
         <Divider />

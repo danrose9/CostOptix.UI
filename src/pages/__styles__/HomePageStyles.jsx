@@ -27,10 +27,6 @@ export const HomePageMainContent = styled.div`
   justify-content: space-between;
 `;
 
-export const HomePageFooter = styled.div`
-  height: 3%;
-`;
-
 export const StyledHeader = styled.h1`
   color: #5f6675;
   font-size: calc(2vw + 2vh + 1vmin);

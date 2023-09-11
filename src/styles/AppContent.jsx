@@ -1,5 +1,6 @@
 import styled, {css} from 'styled-components';
 import { Menu } from 'semantic-ui-react';
+import { COLORS, FONT } from '../app/constants';
 
 export const Container = styled.div`
   width: 100vw;
@@ -23,7 +24,7 @@ const closedSidebar = `
 export const StyledSidebar = styled.div`  
       font-family: 'Poppins', sans-serif;
       font-weight: 200;
-      background-color: #293042;
+      background-color: ${COLORS.PRIMARY};
       width: 18vw;
       margin: 0;
       border-radius: 0;
@@ -46,7 +47,7 @@ export const Main = styled.div`
 
 export const StyledNavbar = styled(Menu)`
     &&& {
-      background-color: #FFFFFF;
+      background-color: ${COLORS.BACKGROUND};
       height: 70px;
       margin: 0;
       align-items: center;
@@ -60,5 +61,14 @@ export const MainPage = styled.div`
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   height: 100%;
-  margin-bottom: 2em;
+`;
+
+export const ApplicationFooter = styled.div`
+  height: 1.5em;
+  background-color: ${COLORS.PRIMARY};
+  & p {
+    font-size: 0.8em;
+    color: ${FONT.PRIMARY_COLOR};
+    text-align: right;
+}
 `;

@@ -14,6 +14,7 @@ import { ServiceConnectionProviderType } from 'provider-types';
 import { useAppDispatch } from '../../services/redux/store';
 import { fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
 import { IBillingAccount } from '../../types';
+import useResetCostDashboard from '../../hooks/useResetCostDashboard';
 
 export const PollingContext = createContext<any>(false);
 
@@ -30,6 +31,7 @@ const ServiceConnection = (props: SelectedContainerProps) => {
   const [isPolling, setIsPolling] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+  const resetCostDashboard = useResetCostDashboard();
 
   useInterval(async () => {
     if (isPolling) {

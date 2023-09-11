@@ -17,6 +17,7 @@ export const DisableServiceConnection = (props: { providerId: string; id: string
     };
 
     setEnabled(!enabled);
+
     if (enabled) {
       dispatch(disableBillingAccount(args));
     } else {
