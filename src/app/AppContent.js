@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as appRoutes from './appRoutes';
-import { Container, MainPage, Main } from '../styles/AppContent';
+import { Container, MainPage, Main, ApplicationFooter } from '../styles/AppContent';
 import Navbar from '../components/navbar/Navbar';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import ApplicationRoutes from '../app/ApplicationRoutes';
@@ -15,6 +15,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { ApplicationContextProvider } from './ApplicationContext';
 import { DemoContextProvider } from './DemoContext';
+
+import { APP_FOOTER } from './constants';
 
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
 const NavbarWithAuth = withAuth(Navbar);
@@ -68,6 +70,9 @@ export const AppContent = () => {
                 <MainPage>
                   <ApplicationRoutes />
                 </MainPage>
+                <ApplicationFooter>
+                  <p>{APP_FOOTER.CONTENT}</p>
+                </ApplicationFooter>
               </Main>
             </Container>
           </ErrorBoundary>

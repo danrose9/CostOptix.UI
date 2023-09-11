@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FONT } from '../../../app/constants';
 
 export const StyledOrganizationName = styled.div`
   height: 60px;
@@ -8,7 +9,7 @@ export const StyledOrganizationName = styled.div`
   text-align: center;
   justify-content: center;
   align-content: center;
-  color: #b8e5f1;
+  color: ${FONT.PRIMARY_COLOR};
   font-size: 1.2em;
   margin: auto;
   font-weight: 300;

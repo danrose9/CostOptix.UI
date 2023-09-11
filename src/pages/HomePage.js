@@ -5,7 +5,6 @@ import {
   PageContainer,
   HomePageNav,
   HomePageMainContent,
-  HomePageFooter,
   HomePageMainLeft,
   HomePageTitle,
   HomePageSubTitle,
@@ -61,7 +60,6 @@ export const HomePage = () => {
             </HomePageActions>
           </HomePageMainLeft>
         </HomePageMainContent>
-        <HomePageFooter></HomePageFooter>
       </PageContainer>
     </>
   );
