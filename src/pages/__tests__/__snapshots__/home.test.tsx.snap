@@ -54,28 +54,28 @@ exports[`Home Page matches snapshot 1`] = `
     className="sc-dkrFOg OtyIt"
   >
     <div
-      className="sc-gKPRtg KMOBR"
+      className="sc-jSUZER deWPDN"
     >
       <div
-        className="sc-iBYQkv gteEYk"
+        className="sc-gKPRtg dUTKLT"
       >
         <h1
-          className="sc-eDvSVe bjdFaS"
+          className="sc-hLBbgP dUUmrK"
         >
           Stop Over-Spending on Cloud Services
         </h1>
       </div>
       <div
-        className="sc-ftTHYK cNqCNO"
+        className="sc-iBYQkv fptuHc"
       >
         <p
-          className="sc-jSUZER gXDBhM"
+          className="sc-eDvSVe ioVcnW"
         >
           A powerful and insightful software suite to explore, understand and take action on cloud services spending
         </p>
       </div>
       <div
-        className="sc-pyfCe dfjFtl"
+        className="sc-ftTHYK laLzlw"
       >
         <div
           className="ui one column grid"
@@ -121,8 +121,5 @@ exports[`Home Page matches snapshot 1`] = `
       </div>
     </div>
   </div>
-  <div
-    className="sc-hLBbgP hKculh"
-  />
 </div>
 `;
