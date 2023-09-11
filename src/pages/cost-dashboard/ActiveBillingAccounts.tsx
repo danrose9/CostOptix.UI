@@ -8,8 +8,8 @@ import {
   fetchBillingAccountCosts,
   fetchTransientBillingAccountCosts,
 } from '../../services/redux/thunks/costDashboardThunk';
-import { resetCostDashboard, addBillingAccount } from '../../services/redux/reducers/costDashboardSlice';
-import { resetServiceProviders } from '../../services/redux/reducers/serviceProvidersSlice';
+import { addBillingAccount } from '../../services/redux/reducers/costDashboardSlice';
+import useResetCostDashboard from '../../hooks/useResetCostDashboard';
 import { StyledIconButton } from '../../styles/StyledDashboardHeader';
 import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../components/messages/index';
 
@@ -29,7 +29,7 @@ const BillingAccounts: React.FC<IBillingAccountsCostDashboard> = ({ billingAccou
 
 const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
   const dispatch = useDispatch();
-
+  const reset = useResetCostDashboard();
   const billingAccounts = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts);
 
   const [accountStatus, setAccountStatus] = useState<string>('');
@@ -46,8 +46,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
 
   const refreshPage = () => {
     setIsLoading(true);
-    dispatch(resetCostDashboard(true));
-    dispatch(resetServiceProviders());
+    reset();
   };
 
   const isNoBillingAccount = () => {
