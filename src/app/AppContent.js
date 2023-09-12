@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { reduxState } from '../services/redux/reduxState';
 
 import { withAuth } from '../components/hoc/withAuth';
-import ErrorDefault from '../pages/ErrorDefault';
+import ErrorDefault from '../components/pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ApplicationContextProvider } from './ApplicationContext';

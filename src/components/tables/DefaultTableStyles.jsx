@@ -23,9 +23,7 @@ export const TableHeader = styled.div`
   display: flex;
 `;
 
-export const TableFooter = styled.div`
- 
-`;
+export const TableFooter = styled.div``;
 
 export const SegmentHeader = styled.div`
   display: flex;
@@ -35,4 +33,16 @@ export const SegmentHeader = styled.div`
 
 export const SegmentName = styled.div`
   font-size: 1.5em;
+`;
+
+export const ScrollableTable = styled.div`
+  max-height: calc(100vh - 400px);
+  overflow-y: auto;
+  display: block;
+`;
+
+export const StickyTableHeader = styled(Table.Header)`
+  position: sticky;
+  top: 0;
+  z-index: 2;
 `;

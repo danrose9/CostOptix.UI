@@ -1,7 +1,7 @@
 import React, { useState, createContext } from 'react';
 import { useInterval } from '../../hooks/useInterval';
 import { Card, Divider, Table } from 'semantic-ui-react';
-import { PageLayout } from '../../pages';
+import { PageLayout } from '../pages';
 import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
 import ServiceConnectionRow from './ServiceConnectionRow';

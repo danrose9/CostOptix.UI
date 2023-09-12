@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import * as appRoutes from './appRoutes';
-import * as page from '../pages/index';
+import * as page from '../components/pages/index';
 import PrivateRoute from './PrivateRoute';
 
 export const ApplicationRoutes = () => {
