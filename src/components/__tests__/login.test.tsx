@@ -1,5 +1,5 @@
 import React from 'react';
-import { Login } from '../auth/Login';
+import { Login } from '../auth/AuthButtons';
 
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';

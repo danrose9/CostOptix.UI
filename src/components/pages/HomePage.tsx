@@ -9,13 +9,18 @@ import {
   HomePageTitle,
   HomePageSubTitle,
   HomePageActions,
+  HomePageButton,
 } from '../__styles__/HomePageStyles';
-import { GetStartedModal } from '../modals/GetStartedModal';
-import { Login, LoginDemo } from '../auth/Login';
-import { Image, Menu } from 'semantic-ui-react';
+import { LoginButton, LoginDemoButton, SignupButton } from '../auth/AuthButtons';
+import { Button, Image, Menu } from 'semantic-ui-react';
 import * as images from '../../assets/index';
+import AuthPage from '../auth/AuthPage';
 
 export const HomePage = () => {
+  const handleOnClick = () => {
+    console.log('clicked');
+  };
+
   return (
     <>
       <PageContainer fluid data-testid="homePage-2">
@@ -31,9 +36,17 @@ export const HomePage = () => {
               <MenuItem name="Pricing" />
               <MenuItem name="About Us" />
               <MenuItem name="Legal" /> */}
-              <Menu.Item>
-                <Login disabled={false} primary={false} content="Login" size="big" color="black" />
-              </Menu.Item>
+              <HomePageButton className="login" onClick={handleOnClick} role="button">
+                Login
+              </HomePageButton>
+              <HomePageButton className="get-started" role="button">
+                Get Started
+              </HomePageButton>
+
+              {/* <Menu.Item>
+                <SignupButton disabled={false} primary={false} content="Signup" size="big" color="green" />
+                <LoginButton disabled={false} primary={false} content="Login" size="big" color="black" />
+              </Menu.Item> */}
             </Menu.Menu>
           </Menu>
         </HomePageNav>
@@ -49,14 +62,10 @@ export const HomePage = () => {
               </StyledSubHeader>
             </HomePageSubTitle>
             <HomePageActions>
-              <GetStartedModal action="Get Started" />
-              <LoginDemo
-                style={{ fontSize: '1.7em' }}
-                disabled={false}
-                primary={true}
-                size="huge"
-                content="View Demo"
-              />
+              {/* <LoginDemoButton disabled={false} secondary size="big" content="View Demo" /> */}
+              <HomePageButton className="view-demo" role="button">
+                View Demo
+              </HomePageButton>
             </HomePageActions>
           </HomePageMainLeft>
         </HomePageMainContent>

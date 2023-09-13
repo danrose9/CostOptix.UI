@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Container, Menu, Button } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
+import { COLORS } from '../../app/constants';
 
 export const PageContainer = styled(Container)`
   overflow: hidden;
@@ -58,8 +59,8 @@ export const HomePageSubTitle = styled.div`
 
 export const HomePageActions = styled.div`
   flex-grow: 3;
-  display: flex;
-  justify-content: space-evenly;
+  position: relative;
+  left: 3em;
 `;
 
 export const MenuItem = styled(Menu.Item)`
@@ -70,4 +71,44 @@ export const MenuItem = styled(Menu.Item)`
 
 export const MenuMenu = styled(Menu.Menu)`
   
+`;
+
+export const HomePageButton = styled.div`
+  font-size: 1.3em;
+  font-weight: 900;
+  padding: 0.9em;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  height: 3em;
+  margin: 1em;
+  width: 8em;
+  align-items: center;
+
+  &.get-started {
+    background-color: ${COLORS.BUTTONS.POSITIVE};
+    color: ${COLORS.WHITE};
+    &:hover {
+      background-color: ${COLORS.BUTTONS.POSITIVE_HIGHLIGHT};
+    }
+  }
+
+  &.view-demo {
+    background-color: ${COLORS.BUTTONS.POSITIVE};
+    color: ${COLORS.WHITE};
+    font-weight: 400;
+
+    &:hover {
+      background-color: ${COLORS.BUTTONS.POSITIVE_HIGHLIGHT};
+    }
+  }
+
+  &.login {
+    border: 1px solid #C4C4C4;
+    color: ${COLORS.BUTTONS.PRIMARY};
+    &:hover {
+      border-color: #8B8B8B;
+    }
+  }
 `;
