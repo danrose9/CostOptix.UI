@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/appRoutes';
 import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNavbarItems';
 import { NavbarMode } from './NavbarMode';
+import { isAuthenticated } from '../../utils/processToken';
 
 export const NavbarItems = () => {
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state[reduxState.USER_PROFILE].name);
   const userAvatar = useSelector((state) => state[reduxState.USER_PROFILE].photo.image);
   const organizationStatus = useSelector((state) => state[reduxState.USER_PROFILE].organization.status);
-  const { isAuthenticated } = useSelector((state) => state[reduxState.USER_PROFILE]);
 
   const options = [
     {
@@ -38,7 +38,7 @@ export const NavbarItems = () => {
       text: 'Log Out',
       image: <Icon name="log out" />,
       onClick: () => navigate(appRoutes.LOGOUT),
-      disabled: !isAuthenticated,
+      disabled: !isAuthenticated(),
     },
   ];
 

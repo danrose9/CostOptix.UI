@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Page matches snapshot 1`] = `
+<div
+  className="ui fluid container sc-bcXHqe iiplrq"
+  data-testid="homePage-2"
+>
+  <div
+    className="sc-gswNZR kHIAfk"
+  >
+    <div
+      className="ui green fluid secondary menu"
+    >
+      <div
+        className="item"
+        onClick={[Function]}
+      >
+        <div>
+          <img
+            className="ui medium image"
+            src="logo-blue.png"
+          />
+        </div>
+      </div>
+      <div
+        className="right menu"
+      >
+        <div
+          className="sc-kDvujY eryGJo login"
+          data-testid="login-ext-button"
+          onClick={[Function]}
+          role="button"
+        >
+          Login
+        </div>
+        <div
+          className="sc-kDvujY eryGJo get-started"
+          data-testid="get-started-button"
+          onClick={[Function]}
+          role="button"
+        >
+          Get Started
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-dkrFOg OtyIt"
+  >
+    <div
+      className="sc-jSUZER deWPDN"
+    >
+      <div
+        className="sc-gKPRtg dUTKLT"
+      >
+        <h1
+          className="sc-hLBbgP dUUmrK"
+        >
+          Stop Over-Spending on Cloud Services
+        </h1>
+      </div>
+      <div
+        className="sc-iBYQkv fptuHc"
+      >
+        <p
+          className="sc-eDvSVe ioVcnW"
+        >
+          A powerful and insightful software suite to explore, understand and take action on cloud services spending
+        </p>
+      </div>
+      <div
+        className="sc-ftTHYK gvvHeS"
+      >
+        <div
+          className="sc-kDvujY eryGJo view-demo"
+          data-testid="login-demo-button"
+          role="button"
+        >
+          View Demo
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

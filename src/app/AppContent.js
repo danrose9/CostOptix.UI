@@ -6,17 +6,16 @@ import { Sidebar } from '../components/sidebar/Sidebar';
 import ApplicationRoutes from '../app/ApplicationRoutes';
 import { useIdleTimer } from 'react-idle-timer';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { reduxState } from '../services/redux/reduxState';
 
 import { withAuth } from '../components/hoc/withAuth';
-import ErrorDefault from '../pages/ErrorDefault';
+import ErrorDefault from '../components/pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ApplicationContextProvider } from './ApplicationContext';
 import { DemoContextProvider } from './DemoContext';
 
 import { APP_FOOTER } from './constants';
+import { isAuthenticated } from '../utils/processToken';
 
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
 const NavbarWithAuth = withAuth(Navbar);
@@ -28,8 +27,6 @@ export const AppContent = () => {
   const showSidebar = () => {
     setSidebarState(!sidebarState);
   };
-
-  const { isAuthenticated } = useSelector((state) => state[reduxState.USER_PROFILE]);
 
   const [sidebarState, setSidebarState] = useState(true);
   const handleOnIdle = () => {
@@ -45,12 +42,12 @@ export const AppContent = () => {
   });
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated()) {
       start();
     } else {
       pause();
     }
-  }, [isAuthenticated, pause, start]);
+  }, [isAuthenticated(), pause, start]);
 
   return (
     <>

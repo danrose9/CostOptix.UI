@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledPageHeader, StyledPageTitle } from '../pages/__styles__/DefaultPageStyles';
+import { StyledPageHeader, StyledPageTitle } from './__styles__/DefaultPageStyles';
 
 interface IPageHeader {
   title: string;

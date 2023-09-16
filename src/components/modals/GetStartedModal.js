@@ -3,7 +3,7 @@ import { Button, Modal, Grid, Header, Icon, Container } from 'semantic-ui-react'
 import { StyledText, Actions } from '../../styles/StyledBetaProgramSignup';
 import * as appRoutes from '../../app/appRoutes';
 import { useNavigate } from 'react-router-dom';
-import { LoginDemo } from '../auth/Login';
+import { LoginDemo } from '../auth/AuthButtons';
 
 export const GetStartedModal = (props) => {
   const [open, setOpen] = useState(false);

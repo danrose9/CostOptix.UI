@@ -1,15 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { reduxState } from '../../services/redux/reduxState';
+import { isAuthenticated } from '../../utils/processToken';
 
 export const withNoAuth = (ComponentToBeRendered) => {
   const Authenticate = (props) => {
-    const { isAuthenticated } = useSelector(
-      (state) => state[reduxState.USER_PROFILE]
-    );
-
-    if (!isAuthenticated)
-      return isAuthenticated && <ComponentToBeRendered {...props} />;
+    if (!isAuthenticated()) return false && <ComponentToBeRendered {...props} />;
     return null;
   };
   return Authenticate;
