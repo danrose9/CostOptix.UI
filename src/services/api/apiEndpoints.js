@@ -1,5 +1,5 @@
 export const BASE = process.env.REACT_APP_API_URI;
-export const EXTERNAL_LOGIN = 'Account/ExternalLogin?provider=Azure&returnUrl=/';
+export const EXTERNAL_LOGIN = 'Account/ExternalLogin?provider=Azure&returnUrl=/init';
 export const DEMO_LOGIN = 'Account/DemoLogin?returnUrl=/';
 export const USER_ME = 'user/me';
 export const AZURE_SUBSCRIPTIONS = 'AzureManagement/subscriptions';

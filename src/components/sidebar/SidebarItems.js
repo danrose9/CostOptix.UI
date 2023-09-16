@@ -137,12 +137,7 @@ export const menuItems = [
     extra: false,
     submenu: [
       {
-        title: 'Sign Up',
-        path: appRoutes.SIGNUP,
-        active: true,
-      },
-      {
-        title: 'Tranition',
+        title: 'Transition',
         path: appRoutes.TRANSITION,
         active: true,
       },
