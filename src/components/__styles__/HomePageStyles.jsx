@@ -20,6 +20,8 @@ export const HomePageNav = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
+  // border-bottom: 2px solid #C2E2FA;
+  
 `;
 
 export const HomePageMainContent = styled.div`

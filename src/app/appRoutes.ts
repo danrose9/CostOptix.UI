@@ -1,5 +1,8 @@
 export const ROOT = '/';
-export const HOME = '/home';
+export const HOME = '/';
+export const SIGNUP = '/signup';
+export const LOGIN = '/login';
+export const INITIALIZE_APP = '/init';
 export const DEFAULT_DASHBOARD = '/dashboard';
 export const AZURE_BILLING_DASHBOARD = '/dashboard-azure-billing';
 export const RESOURCE_SEARCH = '/resources';
@@ -9,7 +12,6 @@ export const COST_DASHBOARD = '/dashboard-cost';
 export const SUBSCRIPTIONS = '/subscriptions';
 export const SERVICE_PROVIDERS = '/providers';
 export const GRAPH_DATA = '/graphdata';
-export const SIGNUP = '/signup';
 export const SETTINGS = '/settings';
 export const LANDING_PAGE = '/lp';
 export const BETA_PROGRAM_SIGNUP = '/ap';

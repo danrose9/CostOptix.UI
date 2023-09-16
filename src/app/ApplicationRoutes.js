@@ -7,9 +7,12 @@ import PrivateRoute from './PrivateRoute';
 export const ApplicationRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<page.InitializeApp />} />
+      <Route path="/" element={<page.Home />} />
+      <Route path={appRoutes.SIGNUP} element={<page.Signup />} />
+      <Route path={appRoutes.LOGIN} element={<page.Login />} />
       <Route path={appRoutes.HOME} element={<page.Home />} />
-      <Route path={appRoutes.LANDING_PAGE} element={<page.landingPage />} />
+      <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
+      <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
       <Route
         path={appRoutes.LOGOUT}
         element={
@@ -95,14 +98,6 @@ export const ApplicationRoutes = () => {
         element={
           <PrivateRoute>
             <page.CostContainerPage />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={appRoutes.SIGNUP}
-        element={
-          <PrivateRoute>
-            <page.Signup />
           </PrivateRoute>
         }
       />

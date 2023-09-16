@@ -6,7 +6,7 @@ exports[`Home Page matches snapshot 1`] = `
   data-testid="homePage-2"
 >
   <div
-    className="sc-gswNZR jhQnwC"
+    className="sc-gswNZR kHIAfk"
   >
     <div
       className="ui green fluid secondary menu"
@@ -26,26 +26,20 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <div
-          className="item"
+          className="sc-kDvujY eryGJo login"
+          data-testid="login-ext-button"
           onClick={[Function]}
+          role="button"
         >
-          <form
-            action="undefinedAccount/ExternalLogin?provider=Azure&returnUrl=/"
-            method="POST"
-          >
-            <button
-              className="ui black big button"
-              data-testid="login-ext-button"
-              onClick={[Function]}
-              style={
-                Object {
-                  "fontSize": "1.7em",
-                }
-              }
-            >
-              Login
-            </button>
-          </form>
+          Login
+        </div>
+        <div
+          className="sc-kDvujY eryGJo get-started"
+          data-testid="get-started-button"
+          onClick={[Function]}
+          role="button"
+        >
+          Get Started
         </div>
       </div>
     </div>
@@ -75,49 +69,15 @@ exports[`Home Page matches snapshot 1`] = `
         </p>
       </div>
       <div
-        className="sc-ftTHYK laLzlw"
+        className="sc-ftTHYK gvvHeS"
       >
         <div
-          className="ui one column grid"
+          className="sc-kDvujY eryGJo view-demo"
+          data-testid="login-demo-button"
+          role="button"
         >
-          <div
-            className="column"
-          >
-            <button
-              className="ui huge positive button"
-              data-testid="get-started-button"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              style={
-                Object {
-                  "fontSize": "1.7em",
-                }
-              }
-            >
-              Get Started
-            </button>
-          </div>
+          View Demo
         </div>
-        <form
-          action="undefinedAccount/DemoLogin?returnUrl=/"
-          method="POST"
-        >
-          <button
-            className="ui huge primary button"
-            data-testid="login-demo-button"
-            onClick={[Function]}
-            style={
-              Object {
-                "fontSize": "1.7em",
-              }
-            }
-          >
-            View Demo
-          </button>
-        </form>
       </div>
     </div>
   </div>

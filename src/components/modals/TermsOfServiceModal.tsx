@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
-import { TermsOfService } from '../../app/TermsOfService';
+import { TermsOfService } from '../../app/constants/TermsOfService';
+import styled from 'styled-components';
+
+const StyledText = styled.p`
+  cursor: pointer;
+  color: #1f70bf;
+`;
 
 const TermsOfServiceModal = () => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <Modal
-      data-testid="terms-02"
       open={openModal}
       onClose={() => setOpenModal(false)}
       onOpen={() => setOpenModal(true)}
-      trigger={
-        <Button data-testid="terms-01" primary>
-          Terms of Service
-        </Button>
-      }
+      trigger={<StyledText data-testid="terms-01">Terms of Service</StyledText>}
     >
       <Modal.Header>Terms of Service</Modal.Header>
       <Modal.Content image scrolling>
@@ -27,7 +28,7 @@ const TermsOfServiceModal = () => {
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={() => setOpenModal(false)} positive>
-          Ok
+          OK
         </Button>
       </Modal.Actions>
     </Modal>
