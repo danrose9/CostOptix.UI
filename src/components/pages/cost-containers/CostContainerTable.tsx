@@ -1,8 +1,8 @@
-import React, { useState, FC, useEffect } from 'react';
+import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../charts/TinyLineChart';
-import TablePagination from '../../tables/TablePagination';
+// import TablePagination from '../../tables/TablePagination';
 import InformationButton from '../../buttons/InformationButton';
 import { CostContainerBuilder, CostContainerViewer, CostContainerOptions } from './index';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -86,7 +86,7 @@ const StyledTable = styled(Table)`
 const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleContainerAction }) => {
   const { containers } = allCostContainers;
 
-  const handlePageChange = (e: any, data: any) => {};
+  // const handlePageChange = (e: any, data: any) => {};
   return (
     <>
       <StyledTable striped>

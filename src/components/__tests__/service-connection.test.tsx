@@ -8,13 +8,11 @@ import { Card } from 'semantic-ui-react';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { AddServiceAzure } from '../../components/connections/index';
 import AddServiceConnectionModal from '../connections/AddServiceConnectionModal';
-import ListServiceConnectionModal from '../connections/ListServiceConnectionModal';
 import { ServiceConnections as ServiceConnectionCard } from '../../components/connections/ServiceConnections';
 import { ServiceConnection } from '../../components/connections/index';
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 import { ServiceConnectionProviderType, IProviderProps } from 'provider-types';
-import { CloudProviderType } from 'cloud-billingaccounts-types';
 import { ServiceConnections as ServiceConnectionCards } from '../connections/ServiceConnections';
 
 afterEach(() => {
