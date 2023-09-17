@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Container } from 'semantic-ui-react';
 
 export const PageContainer = styled.div`
   overflow: hidden;
@@ -27,6 +26,7 @@ export const InputContainer = styled.div`
   display: block;
   background-color: #f5f5f5;
   width: auto;
+  position: relative;
 
   &.login-form {
     width: 28%;
@@ -99,6 +99,9 @@ export const IdpContainer = styled.div`
 export const LoginContainer = styled.a`
   cursor: pointer;
   padding: 2em 0;
+  align-self: center;
+  position: absolute;
+  bottom: 0.3em;
 
   @media (max-height: 768px) {
     /* screen 1366 x 768 (HD) */

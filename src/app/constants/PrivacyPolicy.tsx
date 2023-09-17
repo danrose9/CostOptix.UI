@@ -7,10 +7,6 @@ const StyledDiv = styled.div`
   font-size: 0.8em;
 `;
 
-const Header = styled.h1`
-  text-align: center;
-`;
-
 const OrderedList = styled.ol`
   list-style-type: none;
   margin-left: 2em;
