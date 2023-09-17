@@ -3,8 +3,8 @@ import { Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
-  line-height: 1.3rem;
-  font-size: 0.8em;
+  line-height: 1.5rem;
+  font-size: 1rem;
 `;
 
 const Header = styled.h1`
@@ -14,13 +14,13 @@ const Header = styled.h1`
 const OrderedList = styled.ol`
   list-style-type: none;
   margin-left: 2em;
+  font-family: 'system-ui';
 `;
 
 export const TermsOfService = () => {
   return (
     <StyledDiv data-testid="terms-03">
       <Container>
-        <Header>Terms and conditions of use</Header>
         <OrderedList>
           <li>
             <strong>1. Introduction</strong>
@@ -399,3 +399,5 @@ export const TermsOfService = () => {
     </StyledDiv>
   );
 };
+
+export default TermsOfService;

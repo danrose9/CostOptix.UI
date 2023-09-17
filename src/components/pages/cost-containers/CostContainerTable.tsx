@@ -154,12 +154,11 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
         </Table.Body>
       </StyledTable>
       <TableFooter>
-        <TablePagination
-          totalItems={1}
+        {/* <TablePagination
+          totalItems={containers.length}
           handlePageChange={handlePageChange}
           pageSize={10}
-          isLoading={true}
-        ></TablePagination>
+        ></TablePagination> */}
       </TableFooter>
     </>
   );

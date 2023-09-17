@@ -2,11 +2,11 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-bcXHqe iiplrq"
+  className="ui fluid container sc-gKPRtg xINku"
   data-testid="homePage-2"
 >
   <div
-    className="sc-gswNZR kHIAfk"
+    className="sc-iBYQkv TjSav"
   >
     <div
       className="ui green fluid secondary menu"
@@ -26,7 +26,7 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <div
-          className="sc-kDvujY eryGJo login"
+          className="sc-hBxehG fIRiPz login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -34,7 +34,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </div>
         <div
-          className="sc-kDvujY eryGJo get-started"
+          className="sc-hBxehG fIRiPz get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -45,34 +45,34 @@ exports[`Home Page matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-dkrFOg OtyIt"
+    className="sc-ftTHYK jHZmEC"
   >
     <div
-      className="sc-jSUZER deWPDN"
+      className="sc-kDvujY bzlfjH"
     >
       <div
-        className="sc-gKPRtg dUTKLT"
+        className="sc-ipEyDJ cPjPFR"
       >
         <h1
-          className="sc-hLBbgP dUUmrK"
+          className="sc-pyfCe jkiYLE"
         >
           Stop Over-Spending on Cloud Services
         </h1>
       </div>
       <div
-        className="sc-iBYQkv fptuHc"
+        className="sc-csuSiG hNfGCG"
       >
         <p
-          className="sc-eDvSVe ioVcnW"
+          className="sc-jrcTuL eVxvFz"
         >
           A powerful and insightful software suite to explore, understand and take action on cloud services spending
         </p>
       </div>
       <div
-        className="sc-ftTHYK gvvHeS"
+        className="sc-eDWCr dAGWDt"
       >
         <div
-          className="sc-kDvujY eryGJo view-demo"
+          className="sc-hBxehG fIRiPz view-demo"
           data-testid="login-demo-button"
           role="button"
         >

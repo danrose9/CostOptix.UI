@@ -4,7 +4,6 @@ import * as appRoutes from '../../app/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import { Border, StyledText, StyledForm, StyledFormField } from '../../styles/StyledBetaProgramSignup';
 import { validateEmail } from '../../utils/formValidation';
-import TermsOfServiceModal from './TermsOfServiceModal';
 
 const BetaProgramSignup = () => {
   const [open, setOpen] = useState(true);
@@ -95,7 +94,6 @@ const BetaProgramSignup = () => {
               </Segment>
             </Border>
             <Modal.Actions>
-              <TermsOfServiceModal />
               <Button onClick={() => handleCancel()}>Cancel</Button>
               <Button
                 content="Proceed"
