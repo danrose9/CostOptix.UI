@@ -34,7 +34,6 @@ export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
 
 export const upsert = (array, payload, isCurrencyConflict) => {
   const provider = payload.provider;
-  console.log('provider*', provider);
 
   // take a copy of original array
   const newArray = [...array];
