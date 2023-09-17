@@ -88,11 +88,11 @@ export const WelcomeDescription = styled.p`
 `;
 
 export const IdpContainer = styled.div`
-  padding: 2em 0;
+  padding: 4em 0;
 
   @media (max-height: 864px) {
-    width: 90%;
-    padding: 1em 0;
+    width: 100%;
+    padding: 2em 0;
   }
 `;
 

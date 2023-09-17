@@ -1,20 +1,16 @@
 import React from 'react';
-import { Image, Form, Button, Header } from 'semantic-ui-react';
-import * as images from '../../../assets/index';
+import { Form, Button, Header } from 'semantic-ui-react';
 import * as appRoutes from '../../../app/appRoutes';
-import TermsOfServiceModal from '../../modals/TermsOfServiceModal';
 import { useNavigate } from 'react-router-dom';
 import {
-  PageContainer,
-  ImageContainer,
   InputContainer,
-  TermsContainer,
   StyledGrid,
   StyledColumn,
   WelcomeDescription,
   IdpContainer,
   LoginContainer,
 } from './AuthStyles';
+import AuthPageWrapper from './AuthPageWrapper';
 
 interface ISignupProps {}
 
@@ -22,12 +18,8 @@ const Signup: React.FC<ISignupProps> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <PageContainer>
-      <ImageContainer>
-        <Image src={images.LOGOBLUE} size="medium" />
-      </ImageContainer>
+    <AuthPageWrapper>
       <InputContainer>
-        {/* <Icon name="close" size="large" color="teal" /> */}
         <StyledGrid>
           <StyledColumn>
             <Form>
@@ -70,12 +62,7 @@ const Signup: React.FC<ISignupProps> = (props) => {
           </StyledColumn> */}
         </StyledGrid>
       </InputContainer>
-      <TermsContainer>
-        <a href="#">Privacy Policy</a>
-
-        <TermsOfServiceModal />
-      </TermsContainer>
-    </PageContainer>
+    </AuthPageWrapper>
   );
 };
 
