@@ -1,5 +1,9 @@
 import { formatDateToShort } from './helper';
 
+function validateValue(num) {
+  return typeof num === 'number' && !isNaN(num) ? num : 0;
+}
+
 export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
   const data = state.data;
   const newArray = payload[slice];
@@ -46,15 +50,18 @@ export const upsert = (array, payload, isCurrencyConflict) => {
 
     if (objectToUpdateIndex > -1) {
       // add old provider value to new provider value
-      const newValue = newArray[objectToUpdateIndex][provider] + newObject[provider];
+      const newValue = validateValue(newArray[objectToUpdateIndex][provider]) + validateValue(newObject[provider]);
+      const formattedNumber = parseFloat(newValue.toFixed(2));
+      const validatedResult = isNaN(formattedNumber) ? 0 : formattedNumber;
 
       // check to see if provider is in the object
       if (provider in newArray[objectToUpdateIndex]) {
-        // update existing provider with newValue
+        // update existing provider with validatedResult
         const updatedObject = {
           ...newArray[objectToUpdateIndex],
-          [provider]: newValue,
+          [provider]: validatedResult,
         };
+
         newArray[objectToUpdateIndex] = updatedObject;
       } else {
         // add provider to object
@@ -62,6 +69,7 @@ export const upsert = (array, payload, isCurrencyConflict) => {
           ...newArray[objectToUpdateIndex],
           [provider]: amount,
         };
+
         newArray[objectToUpdateIndex] = newObject;
       }
     } else {
