@@ -35,6 +35,10 @@ const Signup: React.FC<ISignupProps> = (props) => {
     }
   };
 
+  const handleOnClick = () => {
+    navigate(appRoutes.LOGIN, { state: { emailAddress, organization } });
+  };
+
   return (
     <AuthPageWrapper>
       <InputContainer>
@@ -73,7 +77,7 @@ const Signup: React.FC<ISignupProps> = (props) => {
             </Form>
 
             <IdpContainer>
-              <Button content="Next" size="big" positive disabled={!isFormValid} />
+              <Button content="Next" size="big" positive disabled={!isFormValid} onClick={handleOnClick} />
             </IdpContainer>
             <LoginContainer onClick={() => navigate(appRoutes.LOGIN)}>
               Already signed up? Log in with single sign on
