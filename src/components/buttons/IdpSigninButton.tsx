@@ -43,7 +43,7 @@ export const IdpSigninButton: React.FC<IIdpSigninButtonProps> = (props) => {
       <StyledButton>
         <ButtonContent>
           <ProviderImage provider={idpName} size="mini" floated="left" />
-          <ButtonText>Sign in with {idpName}</ButtonText>
+          <ButtonText>Continue with {idpName}</ButtonText>
         </ButtonContent>
       </StyledButton>
     </form>
