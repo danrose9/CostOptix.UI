@@ -7,23 +7,26 @@ import { TermsOfService, PrivacyPolicy } from '../../../app/constants/index';
 
 interface IAuthPageWrapperProps {
   children: React.ReactNode;
+  hideTerms?: boolean;
 }
 
-const AuthPageWrapper: React.FC<IAuthPageWrapperProps> = ({ children }) => {
+const AuthPageWrapper: React.FC<IAuthPageWrapperProps> = ({ children, hideTerms }) => {
   return (
     <PageContainer>
       <ImageContainer>
         <Image src={images.LOGOBLUE} size="medium" />
       </ImageContainer>
       {children}
-      <TermsContainer>
-        <LegalDeclarationsModal header="Privacy Policy" lastUpdated="September 15, 2023" icon="lock">
-          <PrivacyPolicy />
-        </LegalDeclarationsModal>
-        <LegalDeclarationsModal header="Terms of Service" icon="handshake outline">
-          <TermsOfService />
-        </LegalDeclarationsModal>
-      </TermsContainer>
+      {!hideTerms ? (
+        <TermsContainer>
+          <LegalDeclarationsModal header="Privacy Policy" lastUpdated="September 15, 2023" icon="lock">
+            <PrivacyPolicy />
+          </LegalDeclarationsModal>
+          <LegalDeclarationsModal header="Terms of Service" icon="handshake outline">
+            <TermsOfService />
+          </LegalDeclarationsModal>
+        </TermsContainer>
+      ) : null}
     </PageContainer>
   );
 };
