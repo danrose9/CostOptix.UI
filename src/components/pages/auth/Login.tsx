@@ -4,7 +4,7 @@ import { InputContainer, StyledGrid, StyledColumn, IdpContainer, LoginContainer 
 import IdpSigninButton from '../../buttons/IdpSigninButton';
 import AuthPageWrapper from './AuthPageWrapper';
 import CloseButton from '../../buttons/CloseButton';
-import * as appRoutes from '../../../app/appRoutes';
+import * as appRoutes from '../../../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
 
 interface ILoginProps {

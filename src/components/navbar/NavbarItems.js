@@ -3,7 +3,7 @@ import { Dropdown, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../app/appRoutes';
+import * as appRoutes from '../../app/router/appRoutes';
 import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNavbarItems';
 import { NavbarMode } from './NavbarMode';
 import { isAuthenticated } from '../../utils/processToken';

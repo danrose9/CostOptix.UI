@@ -4,7 +4,7 @@ import { reduxState } from '../../../services/redux/reduxState';
 import { Table, Segment, Popup, Card } from 'semantic-ui-react';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../../app/appRoutes';
+import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
 import { StyledHeaderCell } from '../../tables/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../tooltips';

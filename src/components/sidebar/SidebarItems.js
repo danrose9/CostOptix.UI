@@ -1,4 +1,4 @@
-import * as appRoutes from '../../app/appRoutes';
+import * as appRoutes from '../../app/router/appRoutes';
 
 export const menuItems = [
   {

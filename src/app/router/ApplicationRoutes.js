@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import * as appRoutes from './appRoutes';
-import * as page from '../components/pages/index';
+import * as page from '../../components/pages/index';
 import PrivateRoute from './PrivateRoute';
 
 export const ApplicationRoutes = () => {
@@ -10,6 +10,7 @@ export const ApplicationRoutes = () => {
       <Route path="/" element={<page.Home />} />
       <Route path={appRoutes.SIGNUP} element={<page.Signup />} />
       <Route path={appRoutes.LOGIN} element={<page.Login />} />
+      <Route path={appRoutes.AUTH_RESPONSE} element={<page.AuthResponse />} />
       <Route path={appRoutes.HOME} element={<page.Home />} />
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />

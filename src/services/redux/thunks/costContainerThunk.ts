@@ -55,7 +55,7 @@ export const fetchCostContainersResources = createAsyncThunk(
   'CostContainerResources/List',
   async (args: { id: string; top: number; skip: number }, { rejectWithValue }) => {
     const { id, top, skip } = args;
-    return await fetchInstance(`${COST_CONTAINERS}/${id}/resources/?$top=${top}&$skip=${skip}`)
+    return await fetchInstance(`${COST_CONTAINERS}/${id}/resources?$top=${top}&$skip=${skip}`)
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
