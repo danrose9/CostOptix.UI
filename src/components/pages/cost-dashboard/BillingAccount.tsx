@@ -3,7 +3,7 @@ import { ProviderImage } from '../../ProviderImage';
 import { Table, Icon, Loader, Card, Popup, Label } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { StandardTooltip } from '../../tooltips';
-import * as appRoutes from '../../../app/appRoutes';
+import * as appRoutes from '../../../app/router/appRoutes';
 import { FailedToLoadBillingAccount } from '../../messages';
 import { IBillingAccountCostDashboardProps } from '../../../types';
 

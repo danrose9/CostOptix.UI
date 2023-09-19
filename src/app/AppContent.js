@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import * as appRoutes from './appRoutes';
+import * as appRoutes from './router/appRoutes';
 import { Container, MainPage, Main, ApplicationFooter } from '../styles/AppContent';
 import Navbar from '../components/navbar/Navbar';
 import { Sidebar } from '../components/sidebar/Sidebar';
-import ApplicationRoutes from '../app/ApplicationRoutes';
+import ApplicationRoutes from './router/ApplicationRoutes';
 import { useIdleTimer } from 'react-idle-timer';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Header, Input, Segment, Grid, Icon, Divider, Container, Checkbox } from 'semantic-ui-react';
-import * as appRoutes from '../../app/appRoutes';
+import * as appRoutes from '../../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import { Border, StyledText, StyledForm, StyledFormField } from '../../styles/StyledBetaProgramSignup';
 import { validateEmail } from '../../utils/formValidation';

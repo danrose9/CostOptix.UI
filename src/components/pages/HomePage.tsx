@@ -14,7 +14,7 @@ import {
 import { Image, Menu } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../app/appRoutes';
+import * as appRoutes from '../../app/router/appRoutes';
 
 export const HomePage = () => {
   const navigate = useNavigate();
