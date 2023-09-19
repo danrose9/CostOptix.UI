@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Image } from 'semantic-ui-react';
 
 import * as images from '../../assets/index';
-import * as appRoutes from '../../app/appRoutes';
+import * as appRoutes from '../../app/router/appRoutes';
 
 import { useNavigate } from 'react-router-dom';
 import { PageContainer, PageTitle, PageContent, PageDescription } from '../__styles__/StaticPageStyles';

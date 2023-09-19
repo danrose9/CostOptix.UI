@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Header } from 'semantic-ui-react';
-import * as appRoutes from '../../../app/appRoutes';
+import * as appRoutes from '../../../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import {
   InputContainer,

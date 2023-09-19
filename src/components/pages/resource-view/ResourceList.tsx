@@ -11,10 +11,11 @@ import { reduxState } from '../../../services/redux/reduxState';
 import SearchResources from './SearchResources';
 import { PageContainer, PageHeaderContainer, TableContainer } from '../../__styles__/DefaultPageStyles';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../../app/appRoutes';
+import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
 import { IRootState } from '../../../services/redux/rootReducer';
 import { IResource } from '../../../types/resource-types';
+import PageLayout from '../PageLayout';
 
 interface ISearchResults {
   map: any;
@@ -95,16 +96,14 @@ const ResourceList = () => {
 
   return (
     <>
-      <PageContainer>
-        <PageHeaderContainer>
-          <PageHeader title="Resources" />
-          <SearchResources initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
-        </PageHeaderContainer>
+      <PageLayout title="Resources">
+        <SearchResources initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
+
         {resources.isLoading ? <Spinner /> : <ResourcesTable searchResults={resources.searchResults} />}
 
         <Divider />
         <TablePagination totalItems={resources.count} pageSize={pageSize} handlePageChange={handlePageChange} />
-      </PageContainer>
+      </PageLayout>
     </>
   );
 };

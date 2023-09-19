@@ -4,7 +4,7 @@ import { Table, Header } from 'semantic-ui-react';
 import { ProviderImage } from '../../../ProviderImage';
 import TablePagination from '../../../tables/TablePagination';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../../../app/appRoutes';
+import * as appRoutes from '../../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../../services/redux/reducers/resourceSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../services/redux/store';

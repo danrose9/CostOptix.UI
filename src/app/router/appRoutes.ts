@@ -2,6 +2,7 @@ export const ROOT = '/';
 export const HOME = '/';
 export const SIGNUP = '/signup';
 export const LOGIN = '/login';
+export const AUTH_RESPONSE = '/auth-response';
 export const INITIALIZE_APP = '/init';
 export const DEFAULT_DASHBOARD = '/dashboard';
 export const AZURE_BILLING_DASHBOARD = '/dashboard-azure-billing';
