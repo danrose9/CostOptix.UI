@@ -47,7 +47,7 @@ const AuthResponse: React.FC<IAuthResponseProps> = (props) => {
           <Message.Header>{errorMessage}</Message.Header>
         </MessageContainer>
         <ActionButtons>
-          <Button primary onClick={() => navigate(appRoutes.HOME)}>
+          <Button positive onClick={() => navigate(appRoutes.HOME)}>
             Return Home
           </Button>
         </ActionButtons>
