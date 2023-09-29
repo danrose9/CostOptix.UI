@@ -2,7 +2,7 @@ import React from 'react';
 import { PageContent } from '../../__styles__/DefaultPageStyles';
 import { Tab } from 'semantic-ui-react';
 
-import { ApplicationSettings, ChangeLog, Profile, Users, Organizations } from './index';
+import { ApplicationSettings, ChangeLog, Profile } from './index';
 
 const panes = [
   { menuItem: 'Profile', render: () => <Profile /> },

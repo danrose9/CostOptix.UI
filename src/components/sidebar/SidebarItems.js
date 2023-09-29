@@ -95,14 +95,6 @@ export const menuItems = [
     extra: false,
   },
   {
-    title: 'Test Page',
-    path: appRoutes.GRAPH_DATA,
-    icon: 'icon user',
-    active: false,
-    dev: true,
-    extra: false,
-  },
-  {
     title: 'Static Pages',
     icon: 'recycle',
     active: false,
@@ -129,25 +121,25 @@ export const menuItems = [
       },
     ],
   },
-  {
-    title: 'Components',
-    icon: 'cogs',
-    active: false,
-    dev: true,
-    extra: false,
-    submenu: [
-      {
-        title: 'Transition',
-        path: appRoutes.TRANSITION,
-        active: true,
-      },
-      {
-        title: 'Query Filter',
-        path: appRoutes.QUERYFILTER,
-        active: true,
-      },
-    ],
-  },
+  // {
+  //   title: 'Components',
+  //   icon: 'cogs',
+  //   active: false,
+  //   dev: true,
+  //   extra: false,
+  //   submenu: [
+  //     {
+  //       title: 'Transition',
+  //       path: appRoutes.TRANSITION,
+  //       active: false,
+  //     },
+  //     {
+  //       title: 'Query Filter',
+  //       path: appRoutes.QUERYFILTER,
+  //       active: false,
+  //     },
+  //   ],
+  // },
   {
     title: 'Help',
     path: appRoutes.HELP_PAGE,

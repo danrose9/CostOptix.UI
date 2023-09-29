@@ -42,7 +42,7 @@ const Signup: React.FC<ISignupProps> = (props) => {
   return (
     <AuthPageWrapper>
       <InputContainer>
-        <CloseButton onClick={() => navigate(appRoutes.HOME)} />
+        <CloseButton onClick={() => navigate(appRoutes.HOME)} data-testid="close-button" />
         <StyledGrid>
           <StyledColumn>
             <Form>
@@ -83,12 +83,6 @@ const Signup: React.FC<ISignupProps> = (props) => {
               Already signed up? Log in with single sign on
             </LoginContainer>
           </StyledColumn>
-
-          {/* <StyledColumn className="continue-button">
-            <IdpContainer>
-              <Button content="Next" size="big" positive />
-            </IdpContainer>
-          </StyledColumn> */}
         </StyledGrid>
       </InputContainer>
     </AuthPageWrapper>

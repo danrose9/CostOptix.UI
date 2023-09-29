@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from 'semantic-ui-react';
 import { InputContainer, StyledGrid, StyledColumn, IdpContainer, LoginContainer } from './AuthStyles';
-import IdpSigninButton from '../../buttons/IdpSigninButton';
+import IdpSigninButton from '../../buttons/IdpLoginButton';
 import AuthPageWrapper from './AuthPageWrapper';
 import CloseButton from '../../buttons/CloseButton';
 import * as appRoutes from '../../../app/router/appRoutes';
@@ -21,9 +21,9 @@ interface ILoginProps {
 const Login: React.FC<ILoginProps> = ({ children }) => {
   const navigate = useNavigate();
   const locationState = useLocation().state;
-  const [isSignup, setIsSignup] = React.useState(!!locationState);
+  const [isSignup] = React.useState(!!locationState);
+  const { emailAddress, organization } = locationState || {};
 
-  console.log('isSignup', isSignup);
   return (
     <AuthPageWrapper>
       <InputContainer className="login-form">
@@ -35,7 +35,7 @@ const Login: React.FC<ILoginProps> = ({ children }) => {
             </Header>
 
             <IdpContainer>
-              <IdpSigninButton idpName="Azure" />
+              <IdpSigninButton idpName="Azure" organization={organization} emailAddress={emailAddress} />
             </IdpContainer>
             {!isSignup ? (
               <LoginContainer onClick={() => navigate(appRoutes.SIGNUP)} data-testid="navigate-button">

@@ -1,20 +1,21 @@
-import * as React from 'react';
-import { Tab, Table, Divider, Button } from 'semantic-ui-react';
+import React from 'react';
+import { Tab, Table, Divider } from 'semantic-ui-react';
 import { SectionTitle, SectionHeader, SimpleButton } from '../../__styles__/settings.styles';
 
 interface IUsersProps {}
 
-enum role {
-  User = 1,
-  Admin = 2,
-}
+// enum role {
+//   User = 1,
+//   Admin = 2,
+// }
 
-type UserListType = {
-  name: string;
-  email: string;
-  role: role;
-  joined: Date;
-};
+// type UserListType = {
+//   name: string;
+//   email: string;
+//   role: role;
+//   joined: Date;
+// };
+
 const userList = [
   {
     name: 'David Johnston',
