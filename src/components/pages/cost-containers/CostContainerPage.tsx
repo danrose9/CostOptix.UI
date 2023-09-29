@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../../services/redux/rootReducer';
 import { Spinner } from '../../Loader';
@@ -13,12 +13,7 @@ interface ICostContainerPage {}
 
 const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   const dispatch = useDispatch();
-  const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
   const allCostContainers = useSelector((state: IRootState) => state[reduxState.COST_CONTAINERS]);
-
-  const expandContainer = (component: string) => {
-    setSelectedComponent(component);
-  };
 
   useEffect(() => {
     dispatch<AppDispatch>(fetchCostContainers());

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { ProviderImage } from '../ProviderImage';
-import { BASE, EXTERNAL_LOGIN } from '../../services/api/apiEndpoints';
+import { BASE, EXTERNAL_LOGIN, EXTERNAL_SIGNUP, RETURN_URL } from '../../services/api/apiEndpoints';
 
 const StyledButton = styled(Button)`
   width: 100%;
@@ -32,14 +32,24 @@ const ButtonContent = styled.div`
   align-items: center;
 `;
 
-interface IIdpSigninButtonProps {
+interface IIdpLoginButtonProps {
   idpName: string;
+  organization?: string;
+  emailAddress?: string;
 }
 
-export const IdpSigninButton: React.FC<IIdpSigninButtonProps> = (props) => {
-  const { idpName } = props;
+export const IdpLoginButton: React.FC<IIdpLoginButtonProps> = ({ idpName, organization, emailAddress }) => {
+  const isSignup = organization && emailAddress;
+
+  const actionUrl = isSignup
+    ? `${
+        BASE + EXTERNAL_SIGNUP
+      }?provider=${idpName}&returnUrl=${RETURN_URL}&newSignUpOrgName=${organization}&newSignUpUserContactEmail=${emailAddress}`
+    : `${BASE + EXTERNAL_LOGIN}?provider=${idpName}&returnUrl=${RETURN_URL}`;
+
+  console.log('actionUrl', actionUrl);
   return (
-    <form method="POST" action={`${BASE + EXTERNAL_LOGIN}`}>
+    <form method="POST" action={actionUrl}>
       <StyledButton>
         <ButtonContent>
           <ProviderImage provider={idpName} size="mini" floated="left" />
@@ -50,4 +60,4 @@ export const IdpSigninButton: React.FC<IIdpSigninButtonProps> = (props) => {
   );
 };
 
-export default IdpSigninButton;
+export default IdpLoginButton;

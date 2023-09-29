@@ -1,11 +1,9 @@
 import React, { useState, FormEvent, useContext } from 'react';
 import { useAppDispatch } from '../../services/redux/store';
-
-import { Modal, Table, Checkbox, Button, Icon, CheckboxProps, Popup } from 'semantic-ui-react';
+import { Modal, Table, Checkbox, Button, Icon, CheckboxProps } from 'semantic-ui-react';
 import StandardButton from '../buttons/StandardButton';
 import { ModalHeader } from '../__styles__/StyledModal';
 import { ProviderImage } from '../ProviderImage';
-
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
 import { addBillingAccount } from '../../services/redux/thunks/serviceProvidersThunk';
 import { getIndex } from '../../utils/arrayHelper';

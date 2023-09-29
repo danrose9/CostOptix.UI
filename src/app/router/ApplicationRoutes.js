@@ -55,14 +55,6 @@ export const ApplicationRoutes = () => {
         }
       />
       <Route
-        path={appRoutes.GRAPH_DATA}
-        element={
-          <PrivateRoute>
-            <page.TestPage title="Test Page" />
-          </PrivateRoute>
-        }
-      />
-      <Route
         path={appRoutes.SERVICE_PROVIDERS}
         element={
           <PrivateRoute>
@@ -99,14 +91,6 @@ export const ApplicationRoutes = () => {
         element={
           <PrivateRoute>
             <page.CostContainerPage />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path={appRoutes.TRANSITION}
-        element={
-          <PrivateRoute>
-            <page.Transition />
           </PrivateRoute>
         }
       />

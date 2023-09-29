@@ -8,8 +8,8 @@ const useResetCostDashboard = () => {
 
   return () => {
     // Return a function
-    dispatch(resetCostDashboard(true));
-    dispatch(resetServiceProviders());
+    dispatch<AppDispatch>(resetCostDashboard(true));
+    dispatch<AppDispatch>(resetServiceProviders());
   };
 };
 

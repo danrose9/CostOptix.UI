@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Input, Dropdown, Grid, Button, Container } from 'semantic-ui-react';
+import { Input, Dropdown, Grid, Button } from 'semantic-ui-react';
 
 export const StyledGrid = styled(Grid)`
   margin: 0.7em !important;
