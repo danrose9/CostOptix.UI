@@ -42,7 +42,7 @@ const Signup: React.FC<ISignupProps> = (props) => {
   return (
     <AuthPageWrapper>
       <InputContainer>
-        <CloseButton onClick={() => navigate(appRoutes.HOME)} data-testid="close-button" />
+        <CloseButton onClick={() => navigate(appRoutes.HOME)} />
         <StyledGrid>
           <StyledColumn>
             <Form>

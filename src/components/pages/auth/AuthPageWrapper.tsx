@@ -22,7 +22,7 @@ const AuthPageWrapper: React.FC<IAuthPageWrapperProps> = ({ children, hideTerms 
           <LegalDeclarationsModal header="Privacy Policy" lastUpdated="September 15, 2023" icon="lock">
             <PrivacyPolicy />
           </LegalDeclarationsModal>
-          <LegalDeclarationsModal header="Terms of Service" icon="handshake outline">
+          <LegalDeclarationsModal header="Terms of Service" icon="handshake outline" data-testid="tos-modal-trigger">
             <TermsOfService />
           </LegalDeclarationsModal>
         </TermsContainer>
