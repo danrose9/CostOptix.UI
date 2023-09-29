@@ -35,7 +35,7 @@ const LegalDeclarationsModal: React.FC<ILegalDeclarationsModalProps> = ({ childr
       open={openModal}
       onClose={() => setOpenModal(false)}
       onOpen={() => setOpenModal(true)}
-      trigger={<StyledText data-testid="terms-01">{header}</StyledText>}
+      trigger={<StyledText>{header}</StyledText>}
     >
       <HeaderComponents>
         {header}
@@ -48,7 +48,7 @@ const LegalDeclarationsModal: React.FC<ILegalDeclarationsModalProps> = ({ childr
         <Modal.Description>{children}</Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={() => setOpenModal(false)} positive>
+        <Button onClick={() => setOpenModal(false)} positive data-testid="close-legal-modal-button">
           OK
         </Button>
       </Modal.Actions>
