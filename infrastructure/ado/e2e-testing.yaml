@@ -4,7 +4,7 @@ stages:
   - test
 
 # Build the application and install dependencies
-build_job:
+build:
   stage: build
   image: node:14-alpine
   script:
@@ -12,7 +12,7 @@ build_job:
     - npm run build-dev
 
 # Build and push a Docker image of the application
-dockerize_job:
+dockerize:
   stage: dockerize
   image: docker:stable
   services:
@@ -24,7 +24,7 @@ dockerize_job:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
 # Run Cypress tests against the Docker image
-test_job:
+test:
   stage: test
   image: cypress/base:14.17.0
   services:

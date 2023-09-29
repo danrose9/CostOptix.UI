@@ -15,6 +15,7 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+import * as appRoutes from '../../src/app/router/appRoutes';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -23,10 +24,6 @@ import './commands';
 
 function loginViaAAD(username: string, password: string) {
   const baseUrl = Cypress.config('baseUrl');
-
-  cy.visit('/');
-
-  cy.contains('Login').click();
 
   // Login to your AAD tenant.
   cy.origin(
@@ -60,13 +57,25 @@ function loginViaAAD(username: string, password: string) {
       cy.get('#idBtn_Back').click();
     }
   );
-
-  // Ensure Microsoft has redirected us back to the sample app with our logged in user.
-
-  cy.url().should('equal', `${baseUrl}/lp`).wait(1000);
-
-  cy.contains('button', 'Continue').should('be.enabled').click();
 }
+
+Cypress.Commands.add('logout', () => {
+  const log = Cypress.log({
+    displayName: 'Azure Active Directory Logout',
+    message: [`🔐 Logging out`],
+    autoEnd: false,
+  });
+  log.snapshot('before');
+
+  cy.get('[data-testid="navbarItem-3"]').click();
+  cy.contains('Log Out').click();
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.LOGOUT}`);
+  cy.get('[data-testid="logout-button"]').click();
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.HOME}`);
+
+  log.snapshot('after');
+  log.end();
+});
 
 Cypress.Commands.add('loginToAAD', (username: string, password: string) => {
   const log = Cypress.log({
