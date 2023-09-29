@@ -27,7 +27,7 @@ const LogoutPage = () => {
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={() => handleClick()}>No thanks, take me back</Button>
-          <Button positive onClick={() => handleLogout()}>
+          <Button positive onClick={() => handleLogout()} data-testid="logout-button">
             Yes, log me out
           </Button>
         </Modal.Actions>
