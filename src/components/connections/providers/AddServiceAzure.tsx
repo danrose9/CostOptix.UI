@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Segment, Input } from 'semantic-ui-react';
-import {
-  AzureCustomerAgreement,
-  AzureOnlineServices,
-  AzureEnterpriseAgreement,
-  AzurePartnerAgreement,
-} from '../../forms';
+import { AzureCustomerAgreement } from '../../forms';
 import { AzureFormDataType } from 'provider-types';
-
-const options = [
-  { key: 'Microsoft Online Services Program', text: 'Microsoft Online Services Program', value: 'online' },
-  { key: "Microsoft Customer Agreement'", text: 'Microsoft Customer Agreement', value: 'customer' },
-  { key: 'Enterprise Agreement', text: 'Enterprise Agreement', value: 'enterprise' },
-  { key: 'Microsoft Partner Agreement', text: 'Microsoft Partner Agreement', value: 'partner' },
-];
 
 const isFormValid = (formData: AzureFormDataType) => {
   const fd = { ...formData };
@@ -41,21 +29,6 @@ export const AddServiceAzure: React.FC<IProviderFormProps> = ({ DisableButtonOnI
     DisableButtonOnInvalidForm(isFormValid(formData as AzureFormDataType));
     updateFormData(formData);
   });
-
-  const RenderForm = (billingType: string | undefined) => {
-    switch (billingType) {
-      case 'online':
-        return <AzureOnlineServices />;
-      case 'customer':
-        return <AzureCustomerAgreement />;
-      case 'enterprise':
-        return <AzureEnterpriseAgreement />;
-      case 'partner':
-        return <AzurePartnerAgreement />;
-      default:
-        return null;
-    }
-  };
 
   return (
     <>

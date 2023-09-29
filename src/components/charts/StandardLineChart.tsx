@@ -1,5 +1,5 @@
 import React from 'react';
-import { XAxis, YAxis, CartesianGrid, Tooltip, Line, LineChart, Legend } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, Line, LineChart } from 'recharts';
 
 export interface IStandardLineChartProps {
   chartContainer: { height?: number; width?: number };

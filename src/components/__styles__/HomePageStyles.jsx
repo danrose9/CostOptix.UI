@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container, Menu, Button } from 'semantic-ui-react';
+import { Container, Menu } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
 import { COLORS } from '../../app/constants';
 

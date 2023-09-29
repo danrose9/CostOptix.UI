@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Modal, Button, Dropdown, Label, Divider, Table, SemanticCOLORS, Header } from 'semantic-ui-react';
+import { Modal, Button, Dropdown, Label, Table, SemanticCOLORS } from 'semantic-ui-react';
 import { ProviderImage } from '../../ProviderImage';
 import { formatDateFull } from '../../../utils/helper';
 import getSymbolFromCurrency from 'currency-symbol-map';

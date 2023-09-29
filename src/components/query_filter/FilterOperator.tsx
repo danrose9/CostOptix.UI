@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { conditionalOperators } from './operators';
 import { StyledDropdown, StyledFilterGroup, StyledFieldContainer, StyledGrid } from '../__styles__/StyledQueryFilter';
 
