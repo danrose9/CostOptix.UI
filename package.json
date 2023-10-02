@@ -39,7 +39,8 @@
     "tsc": "tsc",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cy:verify": "cypress verify"
+    "cy:verify": "cypress verify",
+    "test:ci:record": "run-p --race start e2e:record"
   },
   "eslintConfig": {
     "extends": [
