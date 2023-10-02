@@ -5,6 +5,7 @@ declare global {
     interface Chainable {
       loginToAAD(email: string, password: string): Chainable<void>;
       logout(): Chainable<void>;
+      fillSignUpForm(username: string): Chainable<void>;
     }
   }
 }

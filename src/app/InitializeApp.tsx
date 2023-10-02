@@ -8,11 +8,6 @@ interface IInitializeAppProps {}
 const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log('****** Initialize App ******');
-    // console.log('isAuthenticated: ', isAuthenticated());
-  }, []);
-
   useMemo(() => {
     if (isAuthCookieAvailable()) {
       setIsAuthenticated(true);
