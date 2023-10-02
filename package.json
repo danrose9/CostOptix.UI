@@ -39,8 +39,20 @@
     "tsc": "tsc",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "test:ci": "run-p --race start e2e",
+    "test:ci:chrome": "run-p --race start e2e:chrome",
+    "test:ci:record": "run-p --race start e2e:record",
+    "test:ci:record:chrome": "run-p --race start e2e:record:chrome",
+    "test:ci:record:edge": "run-p --race start e2e:record:edge",
+    "test:ci:record:firefox": "run-p --race start e2e:record:firefox",
+    "test:ci:record:parallel": "run-p --race start e2e:record:parallel",
     "cy:verify": "cypress verify",
-    "test:ci:record": "run-p --race start e2e:record"
+    "cy:info": "cypress info",
+    "cy:version": "cypress version",
+    "cy:cache:list": "cypress cache list",
+    "cy:run": "cypress run",
+    "cy:run:record": "cypress run --record",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
