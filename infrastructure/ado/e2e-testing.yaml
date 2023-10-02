@@ -41,5 +41,5 @@ jobs:
       # The next command starts the server and runs Cypress end-to-end tests against it.
       # The test artifacts (video, screenshots, test output) will be uploaded to Cypress Cloud
       # To record on Cypress Cloud we need to set CYPRESS_RECORD_KEY environment variable
-      - script: npm run test:ci:record
+      - script: npx cypress run --record --key e5bb23f2-823b-4f56-b213-87955ed04cf1
         displayName: 'Run Cypress tests'
