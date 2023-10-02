@@ -38,7 +38,8 @@
     "dpdm": "dpdm --no-warning --no-tree ./src/index.js",
     "tsc": "tsc",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "cy:verify": "cypress verify"
   },
   "eslintConfig": {
     "extends": [
