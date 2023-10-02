@@ -90,3 +90,19 @@ Cypress.Commands.add('loginToAAD', (username: string, password: string) => {
   log.snapshot('after');
   log.end();
 });
+
+Cypress.Commands.add('fillSignUpForm', (username: string) => {
+  const log = Cypress.log({
+    displayName: 'Fill out signup form',
+    message: [`🔐 Authenticating | ${username}`],
+    autoEnd: false,
+  });
+  log.snapshot('before');
+
+  cy.get('input#organization').type('Cypress Test Org');
+  cy.get('input#email').type(username);
+  cy.contains('label', 'I agree to the Terms of Service').click();
+
+  log.snapshot('after');
+  log.end();
+});
