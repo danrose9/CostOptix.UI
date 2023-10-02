@@ -18,8 +18,6 @@ stages:
       - job: dockerizeJob
         pool:
           vmImage: 'ubuntu-latest' # or another suitable agent pool
-        services:
-          docker: docker
         steps:
           - script: |
               docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
@@ -34,8 +32,6 @@ stages:
       - job: testJob
         pool:
           vmImage: 'ubuntu-latest' # or another suitable agent pool
-        services:
-          docker: docker
         steps:
           - script: |
               docker run --rm -v $PWD:/app -w /app $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA npm install
