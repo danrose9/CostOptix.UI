@@ -13,6 +13,7 @@ function useQuery() {
 
 enum AuthResponseEnum {
   UserNotInOrg = 'It looks like you are not a member of this organization. Please contact your administrator.',
+  UserNotSignedUp = 'It looks like you are not signed up for CostOptix. Please contact your administrator.',
   Default = 'It looks like we had some trouble logging you in. Please try again.',
 }
 
