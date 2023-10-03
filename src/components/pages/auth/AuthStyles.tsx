@@ -38,12 +38,16 @@ export const InputContainer = styled.div`
     height: auto;
     margin: 2% 5%;
   }
+
+  @media (max-height: 864px) {
+    height: 70%;
+  }
 `;
 
 export const TermsContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 2em;
+  // padding: 2em;
   & a {
     padding: 0 3em;
   }
@@ -88,7 +92,7 @@ export const WelcomeDescription = styled.p`
 `;
 
 export const IdpContainer = styled.div`
-  padding: 4em 0;
+  padding: 2em 0;
 
   @media (max-height: 864px) {
     width: 100%;
@@ -105,6 +109,6 @@ export const LoginContainer = styled.a`
 
   @media (max-height: 768px) {
     /* screen 1366 x 768 (HD) */
-    padding: 0;
+    padding: 1em;
   }
 `;

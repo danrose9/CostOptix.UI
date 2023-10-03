@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Button, Header } from 'semantic-ui-react';
+import { Form, Button, Header, Message, Icon } from 'semantic-ui-react';
 import * as appRoutes from '../../../app/router/appRoutes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   InputContainer,
   StyledGrid,
@@ -14,9 +14,16 @@ import AuthPageWrapper from './AuthPageWrapper';
 import { validateEmail } from '../../../utils/formValidation';
 import CloseButton from '../../buttons/CloseButton';
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 interface ISignupProps {}
 
 const Signup: React.FC<ISignupProps> = (props) => {
+  let query = useQuery();
+  let error = query.get('error');
+
   const navigate = useNavigate();
   const [isTermsApproved, setIsTermsApproved] = useState(false);
   const [emailAddress, setEmailAddress] = useState('');
@@ -75,6 +82,15 @@ const Signup: React.FC<ISignupProps> = (props) => {
               />
               <Form.Checkbox label="I agree to the Terms of Service" required id="terms" onChange={validateForm} />
             </Form>
+            {error ? (
+              <Message icon warning>
+                <Icon name="warning" />
+                <Message.Content>
+                  <Message.Header>We can't seem to locate your organization</Message.Header>
+                  Please complete the form above to sign up.
+                </Message.Content>
+              </Message>
+            ) : null}
 
             <IdpContainer>
               <Button
@@ -86,9 +102,11 @@ const Signup: React.FC<ISignupProps> = (props) => {
                 data-testid="next-button"
               />
             </IdpContainer>
-            <LoginContainer onClick={() => navigate(appRoutes.LOGIN)}>
-              Already signed up? Log in with single sign on
-            </LoginContainer>
+            {error ? null : (
+              <LoginContainer onClick={() => navigate(appRoutes.LOGIN)}>
+                Already signed up? Log in with single sign on
+              </LoginContainer>
+            )}
           </StyledColumn>
         </StyledGrid>
       </InputContainer>
