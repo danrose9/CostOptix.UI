@@ -1,43 +1,45 @@
-stages:
-  # Build the application and install dependencies
-  - stage: build
-    jobs:
-      - job: buildJob
-        pool:
-          vmImage: 'ubuntu-latest' # or another suitable agent pool
-        steps:
-          - script: |
-              npm install
-              npm run build-dev
-            displayName: 'Build and install dependencies'
+jobs:
+  # Example job that runs end-to-end tests using Cypress test runner
+  #   https://www.cypress.io/
 
-  # Build and push a Docker image of the application
-  - stage: dockerize
-    dependsOn: build
-    jobs:
-      - job: dockerizeJob
-        pool:
-          vmImage: 'ubuntu-latest' # or another suitable agent pool
-        services:
-          docker: docker
-        steps:
-          - script: |
-              docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-              docker build --build-arg NODE_ENV=development -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
-              docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-            displayName: 'Build and push Docker image'
+  # Job names can contain alphanumeric characters and '_', cannot start with a number
+  - job: Cypress_e2e_tests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '18.x'
+          displayName: 'Install Node.js'
 
-  # Run Cypress tests against the Docker image
-  - stage: test
-    dependsOn: dockerize
-    jobs:
-      - job: testJob
-        pool:
-          vmImage: 'ubuntu-latest' # or another suitable agent pool
-        services:
-          docker: docker
-        steps:
-          - script: |
-              docker run --rm -v $PWD:/app -w /app $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA npm install
-              docker run --rm -v $PWD:/app -w /app -e CYPRESS_baseUrl=http://$CI_PROJECT_URL $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA npx cypress run
-            displayName: 'Run Cypress tests'
+      # NPM modules and Cypress binary should be cached
+      # otherwise the install will be too slow
+      # https://docs.microsoft.com/en-us/azure/devops/pipelines/caching/?view=azure-devops
+      # since the username / user home directory are not available via system variables
+      # (there is even an open question about it)
+      # https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
+      # just use "/home/vsts" for now
+      - task: CacheBeta@1
+        inputs:
+          key: npm | $(Agent.OS) | package-lock.json
+          path: /home/vsts/.npm
+          restoreKeys: npm | $(Agent.OS) | package-lock.json
+        displayName: Cache NPM packages
+      - task: CacheBeta@1
+        inputs:
+          key: cypress | $(Agent.OS) | package-lock.json
+          path: /home/vsts/.cache/Cypress
+          restoreKeys: cypress | $(Agent.OS) | package-lock.json
+        displayName: Cache Cypress binary
+
+      - script: npm ci
+        displayName: 'Install NPM dependencies'
+
+      - script: npm run cy:verify
+        displayName: 'Cypress verify'
+
+      # The next command starts the server and runs Cypress end-to-end tests against it.
+      # The test artifacts (video, screenshots, test output) will be uploaded to Cypress Cloud
+      # To record on Cypress Cloud we need to set CYPRESS_RECORD_KEY environment variable
+      - script: npx cypress run --env baseUrl=https://dev.costoptix.com/
+        displayName: 'Run Cypress tests'
