@@ -47,7 +47,6 @@ export const IdpLoginButton: React.FC<IIdpLoginButtonProps> = ({ idpName, organi
       }?provider=${idpName}&returnUrl=${RETURN_URL}&newSignUpOrgName=${organization}&newSignUpUserContactEmail=${emailAddress}`
     : `${BASE + EXTERNAL_LOGIN}?provider=${idpName}&returnUrl=${RETURN_URL}`;
 
-  console.log('actionUrl', actionUrl);
   return (
     <form method="POST" action={actionUrl}>
       <StyledButton>
