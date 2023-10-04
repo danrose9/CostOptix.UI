@@ -10,13 +10,14 @@ export default defineConfig({
     experimentalModifyObstructiveThirdPartyCode: true,
   },
   env: {
-    aad_username: 'zzz_testuser1@reddogdev.onmicrosoft.com',
-    aad_password: 'Bodo4132&6',
-    aad_organizationname: 'Red Dog Development',
-    aad_userfullname: 'zzz_testuser1',
-    aad_username_93456387: 'admin@M365x93456387.onmicrosoft.com',
-    aad_password_93456387: 'Gqnw%OT=854fV~0%',
-    aad_organizationname_93456387: 'Contoso',
-    aad_userfullname_93456387: 'MOD Administrator',
+    aad_reddogdev_username_1: 'zzz_testuser1@reddogdev.onmicrosoft.com',
+    aad_reddogdev_fullname_1: 'zzz_testuser1',
+    aad_reddogdev_password_1: 'Bodo4132&6',
+    aad_reddogdev_orgname: 'Red Dog Development',
+
+    aad_93456387_username_1: 'admin@M365x93456387.onmicrosoft.com',
+    aad_93456387_password_1: 'Gqnw%OT=854fV~0%',
+    aad_93456387_fullname_1: 'MOD Administrator',
+    aad_93456387_orgname: 'Contoso',
   },
 });
