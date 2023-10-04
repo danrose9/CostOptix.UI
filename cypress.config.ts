@@ -3,7 +3,7 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   // projectId: 'f6noip',
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://dev.costoptix.com',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
