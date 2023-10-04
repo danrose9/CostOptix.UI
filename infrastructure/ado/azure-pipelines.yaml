@@ -8,10 +8,14 @@ variables:
   tenantId: 90598989-b884-4fc1-999f-d176a8e1a54e
   isDevelop: $[eq(variables['Build.SourceBranch'], 'refs/heads/develop')]
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
-  environment: dev
+  envDev: dev
+  envProd: prod
   subscriptionIdDev: 94e4237e-953e-4c21-9a4e-fc3f3699d9e4
+  subscriptionIdProd: f01f288f-34a3-415e-bbb3-f94336f6f6dd
   kvServiceConnectionDev: DEV KV Service Connection
+  kvServiceConnectionProd: PROD KV Service Connection
   apiUrlDev: 'https://api.dev.costoptix.com'
+  apiUrlProd: 'https://api.costoptix.com'
 
 stages:
   - stage: Build_Stage
@@ -33,8 +37,8 @@ stages:
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
 
-  - stage: Deploy_Stage
-    displayName: Deploy
+  - stage: Deploy_Dev_Stage
+    displayName: Deploy Dev
     dependsOn: Build_Stage
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
@@ -47,6 +51,23 @@ stages:
               steps:
                 - template: _template-deploy.yaml
                   parameters:
-                    Env: $(environment)
+                    Env: $(envDev)
                     SubscriptionId: $(subscriptionIdDev)
                     KVServiceConnection: $(kvServiceConnectionDev)
+  - stage: Deploy_Prod_Stage
+    displayName: Deploy Production
+    dependsOn: Deploy_Dev_Stage
+    condition: and(succeeded(), eq(variables.isMain, 'true'))
+    jobs:
+      - deployment: DeployProdJob
+        displayName: Deploy PROD
+        environment: PROD-App
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: _template-deploy.yaml
+                  parameters:
+                    Env: $(envProd)
+                    SubscriptionId: $(subscriptionIdProd)
+                    KVServiceConnection: $(kvServiceConnectionProd)
