@@ -57,7 +57,7 @@ stages:
   - stage: Deploy_Prod_Stage
     displayName: Deploy Production
     dependsOn: Deploy_Dev_Stage
-    condition: and(succeeded(), eq(variables.isMain, 'true'))
+    condition: and(succeeded(), eq(variables.isDevelop, 'true'))
     jobs:
       - deployment: DeployProdJob
         displayName: Deploy PROD
