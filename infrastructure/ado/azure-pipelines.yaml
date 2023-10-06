@@ -37,7 +37,7 @@ stages:
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
-  - stage: Build_Stage
+  - stage: Build_Prod_Stage
     displayName: Build
     condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
     jobs:
