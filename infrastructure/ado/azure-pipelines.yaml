@@ -7,6 +7,7 @@ pool:
 
 variables:
   tenantId: 90598989-b884-4fc1-999f-d176a8e1a54e
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isDevelop: $[eq(variables['Build.SourceBranch'], 'refs/heads/develop')]
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
   envDev: dev
@@ -38,7 +39,7 @@ stages:
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
   - stage: Build_Prod_Stage
-    displayName: Build
+    displayName: Build Prod
     condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
     jobs:
       - job: BuildProd
@@ -74,7 +75,7 @@ stages:
                     SubscriptionId: $(subscriptionIdDev)
                     KVServiceConnection: $(kvServiceConnectionDev)
   - stage: Deploy_Prod_Stage
-    displayName: Deploy Production
+    displayName: Deploy Prod
     dependsOn: Build_Prod_Stage
     condition: and(succeeded(), eq(variables.isMain, 'true'))
     jobs:
