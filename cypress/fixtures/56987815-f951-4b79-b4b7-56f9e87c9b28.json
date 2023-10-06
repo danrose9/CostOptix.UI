@@ -1,0 +1,9 @@
+{
+  "tenant": {
+    "directoryId": "56987815-f951-4b79-b4b7-56f9e87c9b28",
+    "aad_username": "zzz_testuser1@reddogdev.onmicrosoft.com",
+    "aad_password": "Bodo4132&6",
+    "aad_organizationname": "Red Dog Development",
+    "aad_userfullname": "zzz_testuser1"
+  }
+}

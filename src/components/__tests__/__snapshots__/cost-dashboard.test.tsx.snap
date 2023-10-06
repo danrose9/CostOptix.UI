@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cost Dashboard matches snapshot 1`] = `
+<div
+  className="sc-bcXHqe jMdjRw"
+>
+  <div
+    className="sc-dkrFOg feMyyx"
+  >
+    <div
+      className="sc-jSUZER dYOwPx"
+    >
+      Cost Dashboard
+    </div>
+  </div>
+  <div
+    className="ui divider"
+  />
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="twelve wide column"
+      >
+        <div
+          className="ui orange loading segment"
+        >
+          <div
+            className="recharts-responsive-container"
+            style={
+              Object {
+                "height": 350,
+                "maxHeight": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </div>
+      <div
+        className="four wide column"
+      >
+        <div
+          className="ui olive loading segment"
+        >
+          <table
+            className="ui selectable table"
+          >
+            <thead
+              className=""
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className=""
+                  colSpan="3"
+                >
+                  Month-to-Date Cost Estimates
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              className=""
+            />
+            <tfoot
+              className="full-width"
+            >
+              <tr
+                className=""
+              >
+                <td
+                  className=""
+                >
+                  Total
+                </td>
+                <td
+                  className=""
+                />
+                <td
+                  className="right aligned"
+                >
+                  0
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div
+      className="equal width row"
+    >
+      <div
+        className="column"
+      >
+        <div
+          className="ui orange loading segment"
+        >
+          <table
+            className="ui fixed selectable table"
+          >
+            <thead
+              className=""
+              onClick={[Function]}
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className="sc-csuSiG lgsuTZ"
+                  colSpan={3}
+                  data-testid="header-cell-1"
+                >
+                  Most Expensive Resources Last 30 days
+                </th>
+              </tr>
+            </thead>
+            <thead
+              className=""
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className=""
+                >
+                  Resource
+                </th>
+                <th
+                  className=""
+                >
+                  Service
+                </th>
+                <th
+                  className="right aligned"
+                >
+                  Cost
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              className=""
+            />
+          </table>
+        </div>
+      </div>
+      <div
+        className="column"
+      >
+        <div
+          className="ui purple loading segment"
+        >
+          <table
+            className="ui fixed selectable table"
+          >
+            <thead
+              className=""
+              data-testid="table-header-1"
+              onClick={[Function]}
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className="sc-csuSiG lgsuTZ"
+                  colSpan="3"
+                >
+                  Fastest Growing Resources
+                </th>
+              </tr>
+            </thead>
+            <thead
+              className=""
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className=""
+                >
+                  Resource
+                </th>
+                <th
+                  className=""
+                >
+                  Service
+                </th>
+                <th
+                  className="right aligned"
+                >
+                  30d growth
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              className=""
+            />
+          </table>
+        </div>
+      </div>
+      <div
+        className="five wide column"
+      >
+        <div
+          className="ui green segment"
+        >
+          <table
+            className="ui selectable table"
+          >
+            <thead
+              className="full-width"
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className=""
+                  colSpan="3"
+                >
+                  Active Billing Accounts
+                </th>
+                <th
+                  className="center aligned two wide"
+                >
+                  <i
+                    aria-hidden="true"
+                    className="refresh disabled fitted loading icon sc-kDvujY izENdF"
+                    onClick={[Function]}
+                  />
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              className=""
+              style={
+                Object {
+                  "height": "30px",
+                }
+              }
+            />
+            <tfoot
+              className="full-width"
+            >
+              <tr
+                className=""
+              >
+                <th
+                  className=""
+                  colSpan="4"
+                >
+                  Last Updated: 
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

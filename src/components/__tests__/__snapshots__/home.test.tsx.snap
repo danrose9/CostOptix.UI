@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Page matches snapshot 1`] = `
+<div
+  className="ui fluid container sc-eDvSVe kMTpRA"
+  data-testid="homePage-2"
+>
+  <div
+    className="sc-jSUZER ierfPg"
+  >
+    <div
+      className="ui green fluid secondary menu"
+    >
+      <div
+        className="item"
+        onClick={[Function]}
+      >
+        <div>
+          <img
+            className="ui medium image"
+            src="logo-blue.png"
+          />
+        </div>
+      </div>
+      <div
+        className="right menu"
+      >
+        <div
+          className="sc-bqWxrE lnwLBY login"
+          data-testid="login-ext-button"
+          onClick={[Function]}
+          role="button"
+        >
+          Login
+        </div>
+        <div
+          className="sc-bqWxrE lnwLBY get-started"
+          data-testid="get-started-button"
+          onClick={[Function]}
+          role="button"
+        >
+          Get Started
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-gKPRtg mlZdj"
+  >
+    <div
+      className="sc-pyfCe LGQrF"
+    >
+      <div
+        className="sc-jrcTuL fTYTOQ"
+      >
+        <h1
+          className="sc-iBYQkv bxfgkn"
+        >
+          Stop Over-Spending on Cloud Services
+        </h1>
+      </div>
+      <div
+        className="sc-kDvujY kLRbAF"
+      >
+        <p
+          className="sc-ftTHYK fyfblt"
+        >
+          A powerful and insightful software suite to explore, understand and take action on cloud services spending
+        </p>
+      </div>
+      <div
+        className="sc-ipEyDJ gBsYSR"
+      >
+        <div
+          className="sc-bqWxrE lnwLBY view-demo"
+          data-testid="login-demo-button"
+          role="button"
+        >
+          View Demo
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { findBillingAccount } from '../../../utils/arrayHelper';
 
 import {
   fetchServiceProviders,
   fetchBillingAccounts,
+  disableBillingAccount,
+  enableBillingAccount,
+  deleteBillingAccount,
+  addBillingAccount,
 } from '../thunks/serviceProvidersThunk';
 
 const initialState = {
@@ -23,9 +28,7 @@ const serviceProviderSlice = createSlice({
     updateBillingAccountLoading(state, action) {
       const { id } = action.payload;
 
-      const billingAccount = state.billingAccounts.find(
-        (item) => item.id === id
-      );
+      const billingAccount = state.billingAccounts.find((item) => item.id === id);
 
       if (billingAccount) {
         billingAccount.isLoading = false;
@@ -81,13 +84,47 @@ const serviceProviderSlice = createSlice({
         state.error = action.error.message;
         state.isAvailable = false;
       });
+    // Disable Billing Accounts
+    builder
+      .addCase(disableBillingAccount.fulfilled, (state, action) => {
+        const billingAccount = findBillingAccount(state, action.payload);
+
+        if (billingAccount) {
+          billingAccount.status = 'Disabled';
+        }
+      })
+      .addCase(disableBillingAccount.rejected, (state, action) => {});
+    // Enable Billing Accounts
+    builder.addCase(enableBillingAccount.fulfilled, (state, action) => {
+      const billingAccount = findBillingAccount(state, action.payload);
+      if (billingAccount) {
+        billingAccount.status = 'Pending';
+      }
+    });
+
+    // Delete Billing Accounts
+    builder.addCase(deleteBillingAccount.fulfilled, (state, action) => {
+      const { id } = action.payload;
+
+      const billingAccount = state.billingAccounts.findIndex((item) => item.id === id);
+      if (billingAccount > -1) {
+        state.billingAccounts.splice(billingAccount, 1);
+      }
+    });
+    builder
+      .addCase(addBillingAccount.pending, (state) => {
+        console.log('AddBillingAccounts.pending');
+      })
+      .addCase(addBillingAccount.fulfilled, (state, action) => {
+        console.log('AddBillingAccounts.fulfilled');
+      })
+      .addCase(addBillingAccount.rejected, (state, action) => {
+        console.log('AddBillingAccounts.rejected');
+      });
   },
 });
 
-export const {
-  updateBillingAccountLoading,
-  resetIsBillingAccountsAvailable,
-  resetServiceProviders,
-} = serviceProviderSlice.actions;
+export const { updateBillingAccountLoading, resetIsBillingAccountsAvailable, resetServiceProviders } =
+  serviceProviderSlice.actions;
 
 export default serviceProviderSlice.reducer;

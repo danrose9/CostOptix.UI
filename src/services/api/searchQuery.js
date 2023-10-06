@@ -1,5 +1,5 @@
 import { store } from '../redux/store';
-import { FINISH_SEARCH } from '../redux/thunks/resourceThunk';
+import { SEARCH_RESOURCES } from '../redux/thunks/resourceThunk';
 
 export const searchQuery = (pageNumber = 1, searchValue = null, pageSize) => {
   let skip = pageSize * (pageNumber - 1);
@@ -10,7 +10,5 @@ export const searchQuery = (pageNumber = 1, searchValue = null, pageSize) => {
     query = `?$top=${pageSize}&$skip=${skip}&$search="${searchValue}"`;
   }
 
-  console.log('query', query);
-
-  store.dispatch(FINISH_SEARCH(query));
+  store.dispatch(SEARCH_RESOURCES(query));
 };

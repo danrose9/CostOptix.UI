@@ -1,4 +1,4 @@
-import * as appRoutes from '../../app/appRoutes';
+import * as appRoutes from '../../app/router/appRoutes';
 
 export const menuItems = [
   {
@@ -88,11 +88,10 @@ export const menuItems = [
     extra: false,
   },
   {
-    title: 'Test Page',
-    path: appRoutes.GRAPH_DATA,
-    icon: 'icon user',
-    active: false,
-    dev: true,
+    title: 'Cost Containers',
+    path: appRoutes.COST_CONTAINERS,
+    icon: 'box',
+    active: true,
     extra: false,
   },
   {
@@ -122,31 +121,38 @@ export const menuItems = [
       },
     ],
   },
-  {
-    title: 'Demo Pages',
-    icon: 'cogs',
-    active: false,
-    dev: true,
-    extra: false,
-    submenu: [
-      {
-        title: 'Signup',
-        path: appRoutes.SIGNUP,
-        active: false,
-      },
-      {
-        title: 'Service Connections',
-        path: appRoutes.SERVICE_PROVIDERS,
-        active: true,
-      },
-    ],
-  },
+  // {
+  //   title: 'Components',
+  //   icon: 'cogs',
+  //   active: false,
+  //   dev: true,
+  //   extra: false,
+  //   submenu: [
+  //     {
+  //       title: 'Transition',
+  //       path: appRoutes.TRANSITION,
+  //       active: false,
+  //     },
+  //     {
+  //       title: 'Query Filter',
+  //       path: appRoutes.QUERYFILTER,
+  //       active: false,
+  //     },
+  //   ],
+  // },
   {
     title: 'Help',
     path: appRoutes.HELP_PAGE,
     icon: 'help',
     active: false,
     dev: true,
+    extra: true,
+  },
+  {
+    title: 'Service Connections',
+    path: appRoutes.SERVICE_PROVIDERS,
+    icon: 'handshake outline',
+    active: true,
     extra: true,
   },
   {

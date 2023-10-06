@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchUserProfile,
-  incrementLoginCount,
-  fetchUserPhoto,
-  setOrganizationName,
-} from '../thunks/userProfileThunk';
+import { fetchUserProfile, incrementLoginCount, fetchUserPhoto, setOrganizationName } from '../thunks/userProfileThunk';
 
 const initialState = {
   id: null,
@@ -41,10 +36,6 @@ const userProfileSlice = createSlice({
     updateAvatarUrl(state, action) {
       state.photo = action.payload;
     },
-    // setOrganizationName(state, action) {
-    //   console.log('orgUpdate', action.payload);
-    //   state.organization.name = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -54,7 +45,6 @@ const userProfileSlice = createSlice({
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.isAuthenticated = true;
-        console.log('auth: setting state');
 
         state.status = 'success';
         state.id = action.payload.id;
@@ -77,8 +67,7 @@ const userProfileSlice = createSlice({
       })
       .addCase(incrementLoginCount.fulfilled, (state) => {
         state.status = 'success';
-        state.organization.remainingLogins =
-          state.organization.remainingLogins - 1;
+        state.organization.remainingLogins = state.organization.remainingLogins - 1;
       })
       .addCase(incrementLoginCount.rejected, (state) => {
         state.status = 'failed';
@@ -103,7 +92,6 @@ const userProfileSlice = createSlice({
       })
       .addCase(setOrganizationName.fulfilled, (state, action) => {
         state.photo.status = 'success';
-        console.log('action', action.meta);
         state.organization.name = action.meta.arg;
       })
       .addCase(setOrganizationName.rejected, (state, action) => {
@@ -113,11 +101,7 @@ const userProfileSlice = createSlice({
   },
 });
 
-export const {
-  updateUserName,
-  updateAvatarUrl,
-  updateOrganizationName,
-  updateIsAuthenticated,
-} = userProfileSlice.actions;
+export const { updateUserName, updateAvatarUrl, updateOrganizationName, updateIsAuthenticated } =
+  userProfileSlice.actions;
 
 export default userProfileSlice.reducer;

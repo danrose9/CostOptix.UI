@@ -24,15 +24,20 @@ const refreshToken = async (authTokens) => {
   return data;
 };
 
+const isTokenValid = (accessToken) => {
+  try {
+    const authToken = jwt_decode(accessToken);
+    return dayjs.unix(authToken.exp).diff(dayjs()) > 1;
+  } catch (err) {
+    console.error('Error decoding token', err);
+    return false;
+  }
+};
+
 const customFetcher = async (url, config = {}) => {
-  let authTokens = sessionStorage.getItem('authTokens')
-    ? JSON.parse(sessionStorage.getItem('authTokens'))
-    : null;
+  let authTokens = sessionStorage.getItem('authTokens') ? JSON.parse(sessionStorage.getItem('authTokens')) : null;
 
-  const authToken = jwt_decode(authTokens.accessToken);
-  const isExpired = dayjs.unix(authToken.exp).diff(dayjs()) < 1;
-
-  if (isExpired) {
+  if (!isTokenValid(authTokens?.accessToken)) {
     authTokens = await refreshToken(authTokens);
   }
 

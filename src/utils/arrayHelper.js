@@ -1,5 +1,16 @@
 import { formatDateToShort } from './helper';
 
+function validateValue(num) {
+  return typeof num === 'number' && !isNaN(num) ? num : 0;
+}
+
+export function computeNewValue(arrayItem, newObj, provider) {
+  const computedValue = validateValue(arrayItem[provider]) + validateValue(newObj[provider]);
+
+  const formattedNumber = parseFloat(computedValue.toFixed(2));
+  return isNaN(formattedNumber) ? 0 : formattedNumber;
+}
+
 export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
   const data = state.data;
   const newArray = payload[slice];
@@ -46,16 +57,16 @@ export const upsert = (array, payload, isCurrencyConflict) => {
 
     if (objectToUpdateIndex > -1) {
       // add old provider value to new provider value
-      const newValue =
-        newArray[objectToUpdateIndex][provider] + newObject[provider];
+      const validatedResult = computeNewValue(newArray[objectToUpdateIndex], newObject, provider);
 
       // check to see if provider is in the object
       if (provider in newArray[objectToUpdateIndex]) {
-        // update existing provider with newValue
+        // update existing provider with validatedResult
         const updatedObject = {
           ...newArray[objectToUpdateIndex],
-          [provider]: newValue,
+          [provider]: validatedResult,
         };
+
         newArray[objectToUpdateIndex] = updatedObject;
       } else {
         // add provider to object
@@ -63,6 +74,7 @@ export const upsert = (array, payload, isCurrencyConflict) => {
           ...newArray[objectToUpdateIndex],
           [provider]: amount,
         };
+
         newArray[objectToUpdateIndex] = newObject;
       }
     } else {
@@ -72,4 +84,16 @@ export const upsert = (array, payload, isCurrencyConflict) => {
   });
 
   return newArray;
+};
+
+export const findBillingAccount = (state, payload) => {
+  const { id } = payload;
+
+  return state.billingAccounts.find((item) => item.id === id);
+};
+
+export const getIndex = (inputArray, propertyToCheck, valueToFind) => {
+  let obj = inputArray.find((x) => x[propertyToCheck] === valueToFind);
+
+  return inputArray.indexOf(obj);
 };

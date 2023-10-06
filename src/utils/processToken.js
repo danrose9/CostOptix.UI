@@ -1,8 +1,7 @@
 import { store } from '../services/redux/store';
-import {
-  fetchUserProfile,
-  fetchUserPhoto,
-} from '../services/redux/thunks/userProfileThunk';
+import dayjs from 'dayjs';
+import jwt_decode from 'jwt-decode';
+import { fetchUserProfile, fetchUserPhoto } from '../services/redux/thunks/userProfileThunk';
 
 const _ = require('lodash');
 
@@ -39,12 +38,23 @@ export const isAuthCookieAvailable = () => {
   }
 };
 
-export const setUser = () => {
-  store.dispatch(fetchUserProfile());
-  return true;
-};
-
 export const removeAuthCookie = () => {
   let cookie_name = 'AuthCookie=';
   document.cookie = cookie_name + '=; Max-Age=0';
+};
+
+export const isAuthenticated = () => {
+  const authTokens = sessionStorage.getItem('authTokens') ? JSON.parse(sessionStorage.getItem('authTokens')) : null;
+
+  if (!authTokens || !authTokens.accessToken) {
+    return false;
+  }
+
+  try {
+    const authToken = jwt_decode(authTokens.accessToken);
+    return dayjs.unix(authToken.exp).diff(dayjs()) > 1;
+  } catch (err) {
+    console.error('Error decoding token', err);
+    return false;
+  }
 };

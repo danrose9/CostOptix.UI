@@ -3,28 +3,16 @@ import { Dropdown, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../app/appRoutes';
-import {
-  StyledSpan,
-  StyledDropdown,
-  StyledAvatar,
-} from './__styles__/StyledNavbarItems';
+import * as appRoutes from '../../app/router/appRoutes';
+import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNavbarItems';
 import { NavbarMode } from './NavbarMode';
+import { isAuthenticated } from '../../utils/processToken';
 
 export const NavbarItems = () => {
   const navigate = useNavigate();
-  const loggedInUser = useSelector(
-    (state) => state[reduxState.USER_PROFILE].name
-  );
-  const userAvatar = useSelector(
-    (state) => state[reduxState.USER_PROFILE].photo.image
-  );
-  const organizationStatus = useSelector(
-    (state) => state[reduxState.USER_PROFILE].organization.status
-  );
-  const { isAuthenticated } = useSelector(
-    (state) => state[reduxState.USER_PROFILE]
-  );
+  const loggedInUser = useSelector((state) => state[reduxState.USER_PROFILE].name);
+  const userAvatar = useSelector((state) => state[reduxState.USER_PROFILE].photo.image);
+  const organizationStatus = useSelector((state) => state[reduxState.USER_PROFILE].organization.status);
 
   const options = [
     {
@@ -50,12 +38,12 @@ export const NavbarItems = () => {
       text: 'Log Out',
       image: <Icon name="log out" />,
       onClick: () => navigate(appRoutes.LOGOUT),
-      disabled: !isAuthenticated,
+      disabled: !isAuthenticated(),
     },
   ];
 
   const trigger = (
-    <StyledSpan>
+    <StyledSpan data-testid="navbarItem-3">
       <StyledAvatar avatar src={userAvatar} />
       {loggedInUser}
     </StyledSpan>

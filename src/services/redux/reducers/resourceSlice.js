@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FINISH_SEARCH, fetchResourceView } from '../thunks/resourceThunk';
+import { SEARCH_RESOURCES, fetchResourceView } from '../thunks/resourceThunk';
 
 const initialState = {
   searchResults: [],
@@ -36,13 +36,13 @@ const resourceSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(FINISH_SEARCH.pending, (state) => {
+      .addCase(SEARCH_RESOURCES.pending, (state) => {
         state.status = 'loading';
         state.isLoading = true;
         state.isAvailable = false;
         state.error = null;
       })
-      .addCase(FINISH_SEARCH.fulfilled, (state, action) => {
+      .addCase(SEARCH_RESOURCES.fulfilled, (state, action) => {
         state.status = 'success';
         state.isLoading = false;
         state.isAvailable = true;
@@ -50,7 +50,7 @@ const resourceSlice = createSlice({
         state.error = null;
         state.count = action.payload['@odata.count'];
       })
-      .addCase(FINISH_SEARCH.rejected, (state, action) => {
+      .addCase(SEARCH_RESOURCES.rejected, (state, action) => {
         state.status = 'failed';
         state.isLoading = false;
         state.error = action.error.message;
@@ -76,6 +76,5 @@ const resourceSlice = createSlice({
   },
 });
 
-export const { RESET, CLEAN_QUERY, SEARCH_CLICK, RESET_ISAVAILABLE } =
-  resourceSlice.actions;
+export const { RESET, CLEAN_QUERY, SEARCH_CLICK, RESET_ISAVAILABLE } = resourceSlice.actions;
 export default resourceSlice.reducer;
