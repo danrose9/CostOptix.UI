@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the app
-RUN env $(cat .env.development.local | xargs) npm run build
+RUN env $(cat .env.production | xargs) npm run build
 
 # Serve the app using a simple server, e.g., serve
 RUN npm install -g serve
