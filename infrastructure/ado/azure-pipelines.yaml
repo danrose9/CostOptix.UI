@@ -19,8 +19,8 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: Build_Stage
-    displayName: Build
+  - stage: Build_Dev_Stage
+    displayName: Build Dev
     condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
       - job: BuildDev
@@ -37,6 +37,10 @@ stages:
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
+  - stage: Build_Stage
+    displayName: Build
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
+    jobs:
       - job: BuildProd
         displayName: Build Prod
         steps:
@@ -54,7 +58,7 @@ stages:
 
   - stage: Deploy_Dev_Stage
     displayName: Deploy Dev
-    dependsOn: Build_Stage
+    dependsOn: Build_Dev_Stage
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployDevJob
@@ -71,7 +75,7 @@ stages:
                     KVServiceConnection: $(kvServiceConnectionDev)
   - stage: Deploy_Prod_Stage
     displayName: Deploy Production
-    dependsOn: Deploy_Prod_Stage
+    dependsOn: Build_Prod_Stage
     condition: and(succeeded(), eq(variables.isMain, 'true'))
     jobs:
       - deployment: DeployProdJob
