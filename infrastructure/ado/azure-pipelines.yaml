@@ -1,5 +1,6 @@
 trigger:
   - develop
+  - main
 
 pool:
   vmImage: ubuntu-latest
@@ -22,8 +23,8 @@ stages:
     displayName: Build
     condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
     jobs:
-      - job: Build
-        displayName: Build
+      - job: BuildDev
+        displayName: Build Dev
         steps:
           - script: |
               npm install
@@ -36,6 +37,20 @@ stages:
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-dev
+      - job: BuildProd
+        displayName: Build Prod
+        steps:
+          - script: |
+              npm install
+              npm run build-prod
+            displayName: npm install, build
+          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-prod.zip .)
+            displayName: Zip Deployment
+            condition: and(succeeded(), eq(variables.isMain, 'false'))
+          - publish: $(Build.ArtifactStagingDirectory)/build-prod.zip
+            displayName: Publish Artifacts
+            condition: and(succeeded(), eq(variables.isMain, 'false'))
+            artifact: App-prod
 
   - stage: Deploy_Dev_Stage
     displayName: Deploy Dev
@@ -56,8 +71,8 @@ stages:
                     KVServiceConnection: $(kvServiceConnectionDev)
   - stage: Deploy_Prod_Stage
     displayName: Deploy Production
-    dependsOn: Deploy_Dev_Stage
-    condition: and(succeeded(), eq(variables.isDevelop, 'true'))
+    dependsOn: Deploy_Prod_Stage
+    condition: and(succeeded(), eq(variables.isMain, 'true'))
     jobs:
       - deployment: DeployProdJob
         displayName: Deploy PROD
