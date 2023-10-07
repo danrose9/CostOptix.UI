@@ -34,15 +34,15 @@ stages:
         steps:
           - script: |
               npm install
-              npm run build-$(environment)
+              npm run build-${{parameters.environment}}
             displayName: npm install, build
-          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-$(environment).zip .)
+          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
             displayName: Zip Deployment
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-          - publish: $(Build.ArtifactStagingDirectory)/build-$(environment).zip
+          - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
             displayName: Publish Artifacts
             condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-            artifact: App-$(environment)
+            artifact: App-${{parameters.environment}}
 
   - stage: Deploy_Stage
     displayName: Deploy
@@ -51,13 +51,13 @@ stages:
     jobs:
       - deployment: DeployJob
         displayName: Deploy
-        environment: $(adoEnvironment)
+        environment: ${{parameters.adoEnvironment}}
         strategy:
           runOnce:
             deploy:
               steps:
                 - template: _template-deploy.yaml
                   parameters:
-                    Env: $(environment)
-                    SubscriptionId: $(subscriptionId)
-                    KVServiceConnection: $(kvServiceConnection)
+                    Env: ${{parameters.environment}}
+                    SubscriptionId: ${{parameters.subscriptionId}}
+                    KVServiceConnection: ${{parameters.kvServiceConnection}}
