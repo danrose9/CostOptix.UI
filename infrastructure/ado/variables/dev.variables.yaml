@@ -13,3 +13,5 @@ variables:
     value: 'DEV KV Service Connection'
   - name: apiUrl
     value: 'https://api.dev.costoptix.com'
+  - name: adoEnvironment
+    value: 'DEV'
