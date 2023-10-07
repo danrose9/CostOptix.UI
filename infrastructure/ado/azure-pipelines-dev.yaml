@@ -1,7 +1,7 @@
 name: Azure_Pipelines_Dev
 
 variables:
-  - template: ../variables/dev.variables.yaml
+  - template: ./variables/dev.variables.yaml
 
 trigger:
   - none
