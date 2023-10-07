@@ -1,0 +1,21 @@
+name: Azure_Pipelines_Dev
+
+variables:
+  - template: ../variables/dev.variables.yaml
+
+trigger:
+  - develop
+
+pool:
+  vmImage: ubuntu-latest
+
+extends:
+  template: ui-deployment.yaml
+
+  parameters:
+    tenantId: ${{variables.tenantId}}
+    branch: ${{variables.branch}}
+    environment: ${{variables.environment}}
+    subscriptionId: ${{variables.subscriptionId}}
+    kvServiceConnection: ${{variables.kvServiceConnection}}
+    apiUrl: ${{variables.apiUrl}}

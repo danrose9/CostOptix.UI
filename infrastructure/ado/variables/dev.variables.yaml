@@ -1,0 +1,15 @@
+#Dev variables
+
+variables:
+  - name: tenantId
+    value: '90598989-b884-4fc1-999f-d176a8e1a54e'
+  - name: branch
+    value: 'develop'
+  - name: environment
+    value: 'dev'
+  - name: subscriptionId
+    value: '94e4237e-953e-4c21-9a4e-fc3f3699d9e4'
+  - name: kvServiceConnection
+    value: 'DEV KV Service Connection'
+  - name: apiUrl
+    value: 'https://api.dev.costoptix.com'
