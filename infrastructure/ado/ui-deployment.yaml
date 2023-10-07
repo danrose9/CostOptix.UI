@@ -1,0 +1,65 @@
+parameters: 
+- name: tenantId 
+  type: string 
+  default: ""
+- name: branch
+  type: string
+  default: ""
+- name: environment 
+  type: string 
+  default: "" 
+- name: subscriptionId
+  type: string
+  default: ""
+- name: kvServiceConnection
+  type: string
+  default: ""
+- name: deploymentKeyVaultName
+  type: string
+  default: ""
+- name: apiUrl
+  type: string
+  default: ""
+- name: adoEnvironment
+  type: string
+  default: ""
+
+stages:
+
+stages:
+  - stage: Build_Stage
+    displayName: Build
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/${{parameters.branch}}')
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - script: |
+              npm install
+              npm run build-$(environment)
+            displayName: npm install, build
+          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-$(environment).zip .)
+            displayName: Zip Deployment
+            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+          - publish: $(Build.ArtifactStagingDirectory)/build-$(environment).zip
+            displayName: Publish Artifacts
+            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+            artifact: App-$(environment)
+
+  - stage: Deploy_Stage
+    displayName: Deploy
+    dependsOn: Build_Stage
+    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    jobs:
+      - deployment: DeployJob
+        displayName: Deploy
+        environment: $(adoEnvironment)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: _template-deploy.yaml
+                  parameters:
+                    Env: $(environment)
+                    SubscriptionId: $(subscriptionId)
+                    KVServiceConnection: $(kvServiceConnection)
