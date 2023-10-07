@@ -15,3 +15,5 @@ variables:
     value: 'https://api.dev.costoptix.com'
   - name: adoEnvironment
     value: 'DEV-App'
+  - name: isPullRequest
+    value: $[eq(variables['Build.Reason'], 'PullRequest')]

@@ -24,9 +24,6 @@ parameters:
     type: string
     default: ''
 
-variables:
-  isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
-
 stages:
   - stage: Build_Stage
     displayName: Build
