@@ -1,10 +1,10 @@
-name: Dev_Deployment
+name: Dev Deployment
 
 variables:
   - template: ./variables/dev.variables.yaml
 
 trigger:
-  - none
+  - develop
 
 pool:
   vmImage: ubuntu-latest
