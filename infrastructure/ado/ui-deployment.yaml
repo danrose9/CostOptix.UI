@@ -1,30 +1,28 @@
-parameters: 
-- name: tenantId 
-  type: string 
-  default: ""
-- name: branch
-  type: string
-  default: ""
-- name: environment 
-  type: string 
-  default: "" 
-- name: subscriptionId
-  type: string
-  default: ""
-- name: kvServiceConnection
-  type: string
-  default: ""
-- name: deploymentKeyVaultName
-  type: string
-  default: ""
-- name: apiUrl
-  type: string
-  default: ""
-- name: adoEnvironment
-  type: string
-  default: ""
-
-stages:
+parameters:
+  - name: tenantId
+    type: string
+    default: ''
+  - name: branch
+    type: string
+    default: ''
+  - name: environment
+    type: string
+    default: ''
+  - name: subscriptionId
+    type: string
+    default: ''
+  - name: kvServiceConnection
+    type: string
+    default: ''
+  - name: deploymentKeyVaultName
+    type: string
+    default: ''
+  - name: apiUrl
+    type: string
+    default: ''
+  - name: adoEnvironment
+    type: string
+    default: ''
 
 stages:
   - stage: Build_Stage
