@@ -1,4 +1,4 @@
-name: Azure_Pipelines_Dev
+name: Dev Deployment
 
 variables:
   - template: ./variables/dev.variables.yaml
