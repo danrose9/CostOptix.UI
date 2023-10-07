@@ -19,3 +19,4 @@ extends:
     subscriptionId: ${{variables.subscriptionId}}
     kvServiceConnection: ${{variables.kvServiceConnection}}
     apiUrl: ${{variables.apiUrl}}
+    adoEnvironment: ${{variables.adoEnvironment}}
