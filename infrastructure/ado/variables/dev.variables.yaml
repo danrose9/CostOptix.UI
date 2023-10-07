@@ -14,4 +14,4 @@ variables:
   - name: apiUrl
     value: 'https://api.dev.costoptix.com'
   - name: adoEnvironment
-    value: 'DEV'
+    value: 'DEV-App'

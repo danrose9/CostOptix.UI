@@ -1,10 +1,10 @@
 name: Azure_Pipelines_Dev
 
 variables:
-  - template: ../variables/dev.variables.yaml
+  - template: ./variables/dev.variables.yaml
 
 trigger:
-  - develop
+  - none
 
 pool:
   vmImage: ubuntu-latest
@@ -19,3 +19,4 @@ extends:
     subscriptionId: ${{variables.subscriptionId}}
     kvServiceConnection: ${{variables.kvServiceConnection}}
     apiUrl: ${{variables.apiUrl}}
+    adoEnvironment: ${{variables.adoEnvironment}}
