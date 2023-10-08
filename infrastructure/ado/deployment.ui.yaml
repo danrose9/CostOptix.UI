@@ -32,16 +32,6 @@ stages:
       - job: Build
         displayName: Build
         steps:
-          - script: |
-              echo "tenantId: ${{parameters.tenantId}}"
-              echo "branch: ${{parameters.branch}}"
-              echo "environment: ${{parameters.environment}}"
-              echo "subscriptionId: ${{parameters.subscriptionId}}"
-              echo "kvServiceConnection: ${{parameters.kvServiceConnection}}"
-              echo "deploymentKeyVaultName: ${{parameters.deploymentKeyVaultName}}"
-              echo "apiUrl: ${{parameters.apiUrl}}"
-              echo "adoEnvironment: ${{parameters.adoEnvironment}}"
-            displayName: 'Print Parameter Values'
           - task: PowerShell@2
             displayName: Dump Environment Variables
             inputs:
@@ -54,16 +44,16 @@ stages:
             displayName: npm install, build
           - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
             displayName: Zip Deployment
-            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+            condition: and(succeeded(), eq(variables.isPullRequest, 'true'))
           - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
             displayName: Publish Artifacts
-            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+            condition: and(succeeded(), eq(variables.isPullRequest, 'true'))
             artifact: App-${{parameters.environment}}
 
   - stage: Deploy_Stage
     displayName: Deploy
     dependsOn: Build_Stage
-    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    condition: and(succeeded(), eq(variables.isPullRequest, 'true'))
     jobs:
       - deployment: DeployJob
         displayName: Deploy
