@@ -1,0 +1,48 @@
+name: Dev Deployment
+
+trigger:
+  - develop
+
+parameters:
+  - name: branch
+    displayName: Branch Name
+    type: string
+    default: develop
+  - name: environment
+    displayName: Environent Name
+    type: string
+    default: dev
+  - name: subscriptionId
+    displayName: Azure Subscription Id
+    type: string
+    default: 94e4237e-953e-4c21-9a4e-fc3f3699d9e4
+  - name: kvServiceConnection
+    displayName: Key Vault Service Connection
+    type: string
+    default: DEV KV Service Connection
+  - name: apiUrl
+    displayName: API URL
+    type: string
+    default: https://api.dev.costoptix.com
+  - name: adoEnvironment
+    displayName: ADO Environment
+    type: string
+    default: DEV-App
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - template: ./variables/common.variables.yaml
+
+extends:
+  template: deployment.ui.yaml
+
+  parameters:
+    tenantId: ${{variables.tenantId}}
+    branch: ${{parameters.branch}}
+    environment: ${{parameters.environment}}
+    subscriptionId: ${{parameters.subscriptionId}}
+    kvServiceConnection: ${{parameters.kvServiceConnection}}
+    apiUrl: ${{parameters.apiUrl}}
+    adoEnvironment: ${{parameters.adoEnvironment}}

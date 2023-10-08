@@ -1,0 +1,48 @@
+name: Prod Deployment
+
+trigger:
+  - main
+
+parameters:
+  - name: branch
+    displayName: Branch Name
+    type: string
+    default: main
+  - name: environment
+    displayName: Environent Name
+    type: string
+    default: prod
+  - name: subscriptionId
+    displayName: Azure Subscription Id
+    type: string
+    default: f01f288f-34a3-415e-bbb3-f94336f6f6dd
+  - name: kvServiceConnection
+    displayName: Key Vault Service Connection
+    type: string
+    default: PROD KV Service Connection
+  - name: apiUrl
+    displayName: API URL
+    type: string
+    default: https://api.costoptix.com
+  - name: adoEnvironment
+    displayName: ADO Environment
+    type: string
+    default: PROD-App
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - template: ./variables/common.variables.yaml
+
+extends:
+  template: deployment.ui.yaml
+
+  parameters:
+    tenantId: ${{variables.tenantId}}
+    branch: ${{parameters.branch}}
+    environment: ${{parameters.environment}}
+    subscriptionId: ${{parameters.subscriptionId}}
+    kvServiceConnection: ${{parameters.kvServiceConnection}}
+    apiUrl: ${{parameters.apiUrl}}
+    adoEnvironment: ${{parameters.adoEnvironment}}
