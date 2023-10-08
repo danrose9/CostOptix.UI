@@ -32,6 +32,12 @@ stages:
       - job: Build
         displayName: Build
         steps:
+          - task: PowerShell@2
+            displayName: Dump Environment Variables
+            inputs:
+              targetType: 'inline'
+              script: |
+                dir env: | Format-Table -wrap
           - script: |
               npm install
               npm run build-${{parameters.environment}}
