@@ -32,6 +32,16 @@ stages:
       - job: Build
         displayName: Build
         steps:
+          - script: |
+              echo "tenantId: ${{parameters.tenantId}}"
+              echo "branch: ${{parameters.branch}}"
+              echo "environment: ${{parameters.environment}}"
+              echo "subscriptionId: ${{parameters.subscriptionId}}"
+              echo "kvServiceConnection: ${{parameters.kvServiceConnection}}"
+              echo "deploymentKeyVaultName: ${{parameters.deploymentKeyVaultName}}"
+              echo "apiUrl: ${{parameters.apiUrl}}"
+              echo "adoEnvironment: ${{parameters.adoEnvironment}}"
+            displayName: 'Print Parameter Values'
           - task: PowerShell@2
             displayName: Dump Environment Variables
             inputs:
