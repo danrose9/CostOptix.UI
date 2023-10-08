@@ -44,16 +44,16 @@ stages:
             displayName: npm install, build
           - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
             displayName: Zip Deployment
-            condition: and(succeeded())
+            condition: succeeded()
           - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
             displayName: Publish Artifacts
-            condition: and(succeeded())
+            condition: succeeded()
             artifact: App-${{parameters.environment}}
 
   - stage: Deploy_Stage
     displayName: Deploy
     dependsOn: Build_Stage
-    condition: and(succeeded())
+    condition: succeeded()
     jobs:
       - deployment: DeployJob
         displayName: Deploy
