@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 extends:
-  template: ui-deployment.yaml
+  template: deployment.ui.yaml
 
   parameters:
     tenantId: ${{variables.tenantId}}
