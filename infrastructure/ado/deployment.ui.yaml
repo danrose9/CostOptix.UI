@@ -32,6 +32,8 @@ stages:
       - job: Build
         displayName: Build
         steps:
+          - script: echo $(isPullRequest)
+            displayName: 'Echo isPullRequest value'
           - task: PowerShell@2
             displayName: Dump Environment Variables
             inputs:
@@ -44,16 +46,16 @@ stages:
             displayName: npm install, build
           - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
             displayName: Zip Deployment
-            condition: and(succeeded(), eq(variables.isPullRequest, 'true'))
+            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
           - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
             displayName: Publish Artifacts
-            condition: and(succeeded(), eq(variables.isPullRequest, 'true'))
+            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
             artifact: App-${{parameters.environment}}
 
   - stage: Deploy_Stage
     displayName: Deploy
     dependsOn: Build_Stage
-    condition: and(succeeded(), eq(variables.isPullRequest, 'true'))
+    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployJob
         displayName: Deploy
