@@ -1,7 +1,7 @@
 name: Dev Deployment
 
 variables:
-  - template: ./variables/dev.variables.yaml
+  - template: ./variables/common.variables.yaml
 
 trigger:
   - develop
@@ -14,9 +14,9 @@ extends:
 
   parameters:
     tenantId: ${{variables.tenantId}}
-    branch: ${{variables.branch}}
-    environment: ${{variables.environment}}
-    subscriptionId: ${{variables.subscriptionId}}
-    kvServiceConnection: ${{variables.kvServiceConnection}}
-    apiUrl: ${{variables.apiUrl}}
-    adoEnvironment: ${{variables.adoEnvironment}}
+    branch: 'develop'
+    environment: 'dev'
+    subscriptionId: '94e4237e-953e-4c21-9a4e-fc3f3699d9e4'
+    kvServiceConnection: 'DEV KV Service Connection'
+    apiUrl: 'https://api.dev.costoptix.com'
+    adoEnvironment: 'DEV-App'
