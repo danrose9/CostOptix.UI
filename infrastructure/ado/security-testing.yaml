@@ -14,7 +14,7 @@ stages:
         steps:
           - bash: |
               chmod -R 777  ./
-              docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t https://dev.costoptix.com/ -x xml_report.xml
+              docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-full-scan.py -t https://dev.costoptix.com/ -x xml_report.xml
               true
             displayName: 'Owasp Container Scan'
 
