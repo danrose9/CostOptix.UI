@@ -14,7 +14,7 @@ stages:
         steps:
           - bash: |
               chmod -R 777  ./
-              docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t https://dev.costoptix.com/ -x xml_report.xml
+              docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t https://www.costoptix.com/ -x xml_report.xml
               true
             displayName: 'Owasp Container Scan'
 
@@ -25,7 +25,7 @@ stages:
               $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
               $XslTransform.Load($XslPath)
               $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
-              # Get-ChildItem -Path $(System.DefaultWorkingDirectory)/tests -recurse
+              # Get-ChildItem -Path $(System.DefaultWorkingDirectory) -recurse
             displayName: 'Generate Results'
 
           - task: PublishTestResults@2
