@@ -2,6 +2,11 @@ import React from 'react';
 import { Image } from 'semantic-ui-react';
 import * as images from '../assets/index';
 import { SemanticFLOATS, SemanticSIZES } from 'semantic-ui-react';
+import styled from 'styled-components';
+
+const StyledImage = styled(Image)`
+  margin: 0.5em !important;
+`;
 
 interface IProps {
   provider: string;
@@ -20,13 +25,5 @@ export const ProviderImage = (props: IProps) => {
 
   const image = Providers[props.provider];
 
-  return (
-    <Image
-      src={image}
-      size={props.size}
-      alt="ServiceProviderLogo"
-      floated={props.floated}
-      style={{ margin: '0.5em' }}
-    />
-  );
+  return <StyledImage src={image} size={props.size} alt="ServiceProviderLogo" floated={props.floated} />;
 };
