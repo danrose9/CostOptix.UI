@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { IChildren } from '../types';
 import { Icon, Popup, Button } from 'semantic-ui-react';
 
 const PreText = styled.pre`
@@ -24,11 +23,11 @@ const Code = styled.code`
   font-style: italic;
 `;
 
-const tooltipStyle = {
-  height: 'fit-content',
-};
+interface ICodeText {
+  children: React.ReactNode;
+}
 
-const CodeText = ({ children }: IChildren) => {
+const CodeText = ({ children }: ICodeText) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const timeoutLength = 2000;
@@ -53,7 +52,7 @@ const CodeText = ({ children }: IChildren) => {
         <Popup
           // Using styled components pushes the tooltip to top of page
           trigger={
-            <Button icon style={tooltipStyle} data-testid="code-text-copy-button">
+            <Button icon style={{ height: 'fit-content' }} data-testid="code-text-copy-button">
               <Icon name="copy outline" />
             </Button>
           }
