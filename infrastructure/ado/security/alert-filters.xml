@@ -1,6 +1,0 @@
-<config>
-    <alert>
-        <pluginid>10109</pluginid>
-        <newrisk>Ignore</newrisk>
-    </alert>
-</config>
