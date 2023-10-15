@@ -25,7 +25,7 @@ stages:
               $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
               $XslTransform.Load($XslPath)
               $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
-              # Get-ChildItem -Path $(System.DefaultWorkingDirectory)/tests -recurse
+              # Get-ChildItem -Path $(System.DefaultWorkingDirectory) -recurse
             displayName: 'Generate Results'
 
           - task: PublishTestResults@2
