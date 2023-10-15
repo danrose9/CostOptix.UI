@@ -25,8 +25,13 @@ stages:
               $XslTransform = New-Object System.Xml.Xsl.XslCompiledTransform
               $XslTransform.Load($XslPath)
               $XslTransform.Transform($XmlInputPath, $XmlOutputPath)
-              # Get-ChildItem -Path $(System.DefaultWorkingDirectory) -recurse
             displayName: 'Generate Results'
+          - bash: |
+              ls -al
+              displayName: 'List files'
+          - bash: |
+              cat converted_report.xml
+              displayName: 'Show transformed XML'
 
           - task: PublishTestResults@2
             displayName: 'Publish Test Results'
