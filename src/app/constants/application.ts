@@ -10,3 +10,9 @@ export const APP = {
 export const APP_FOOTER = {
   CONTENT: `${APP.NAME} v${APP.VERSION} ${APP.ENVIRONMENT} ${APP.COPYRIGHT}`,
 };
+
+export const ENVIRONMENT = {
+  PRODUCTION: 'production',
+  DEVELOPMENT: 'development',
+  LOCAL: 'local',
+};

@@ -1,5 +1,7 @@
+import { ENVIRONMENT } from 'src/app/constants/application';
+
 const logger = (store) => (next) => (action) => {
-  if (process.env.REACT_APP_ENV === 'production') return next(action);
+  if (process.env.REACT_APP_ENV !== ENVIRONMENT.LOCAL) return next(action);
 
   let result = next(action);
   console.group(action.type);
