@@ -3,7 +3,7 @@ import { Tab, Form, Button, Grid } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
 import { setOrganizationName } from '../../../services/redux/thunks/userProfileThunk';
-import { SectionTitle, StyledFormField, StyledAvatar, AvatarDiv } from '../../__styles__/settings.styles';
+import { SectionTitle, StyledFormInput, StyledAvatar, AvatarDiv } from '../../__styles__/settings.styles';
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -31,8 +31,8 @@ export const Profile = () => {
         <Grid>
           <Grid.Column width={10}>
             <Form size="small">
-              <StyledFormField label="Name" placeholder={profile.name} readOnly icon="user" />
-              <StyledFormField label="Email Address" readOnly placeholder={profile.email} icon="mail" />
+              <StyledFormInput label="Name" placeholder={profile.name} readOnly icon="user" />
+              <StyledFormInput label="Email Address" readOnly placeholder={profile.email} icon="mail" />
             </Form>
           </Grid.Column>
           <Grid.Column width={6}>
@@ -46,14 +46,15 @@ export const Profile = () => {
         <SectionTitle>Company Information</SectionTitle>
         <Form size="small">
           <Form.Group widths="equal">
-            <StyledFormField
+            <StyledFormInput
+              positive
               label="Organization Name"
               placeholder={profile.organization.name}
               icon="users"
               value={organization}
               onChange={handleOnChange}
             />
-            <StyledFormField
+            <StyledFormInput
               label="Organization Id"
               readOnly
               placeholder={profile.organization.id}

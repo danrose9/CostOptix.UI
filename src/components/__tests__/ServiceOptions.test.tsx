@@ -6,7 +6,7 @@
 import React from 'react';
 import { render, cleanup, screen } from '@testing-library/react';
 import { Table } from 'semantic-ui-react';
-import { ServiceConnectionRow } from '../../components/connections/index';
+import { ServiceConnectionRow } from '../connections/index';
 import { ApplicationWrapper } from '../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 

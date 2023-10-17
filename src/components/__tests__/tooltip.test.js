@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { StandardTooltip, TooltipDescription, ChartTooltip } from '../../components/tooltips/index';
+import { StandardTooltip, TooltipDescription, ChartTooltip } from '../tooltips/index';
 
 import renderer from 'react-test-renderer';
 import { AWS96 } from '../../assets';
