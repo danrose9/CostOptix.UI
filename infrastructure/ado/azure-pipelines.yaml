@@ -18,8 +18,8 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: BuildAndTestStage
-    displayName: Build and Test
+  - stage: BuildAndTestStageDev
+    displayName: Build and Test Dev
     jobs:
       - job: BuildDev
         displayName: Build and Test Dev
@@ -33,7 +33,9 @@ stages:
               apiUrl: ${{variables.apiUrlDev}}
               adoEnvironment: ${{variables.adoEnvironment}}
               runTests: true
-
+  - stage: BuildAndTestStage
+    displayName: Build and Test Prod
+    jobs:
       - job: BuildProd
         displayName: Build and Test Prod
         dependsOn: BuildDev
