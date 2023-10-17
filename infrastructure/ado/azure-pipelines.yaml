@@ -18,7 +18,7 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: BuildAndTestStageDev
+  - stage: BuildDevStage
     displayName: Build and Test Dev
     jobs:
       - job: BuildDev
@@ -33,6 +33,25 @@ stages:
               apiUrl: ${{variables.apiUrlDev}}
               adoEnvironment: ${{variables.adoEnvironment}}
               runTests: true
+
+  - stage: DeployDevStage
+    displayName: Deploy Dev
+    dependsOn: BuildAndTestStageDev
+    condition: succeeded('BuildDev')
+    jobs:
+      - deployment: DeployDevJob
+        displayName: Deploy DEV
+        environment: DEV-App
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ./templates/deploy.ui.yaml
+                  parameters:
+                    environment: ${{variables.envDev}}
+                    subscriptionId: ${{variables.subscriptionId}}
+                    kvServiceConnection: ${{variables.kvServiceConnectionDev}}
+
   - stage: BuildAndTestStage
     displayName: Build and Test Prod
     jobs:
@@ -51,10 +70,6 @@ stages:
               adoEnvironment: ${{variables.adoEnvironment}}
               runTests: false
 
-  # - stage: Deploy_Dev_Stage
-  #   displayName: Deploy Dev
-  #   dependsOn: BuildAndTestStage
-  #   condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
   # - stage: Deploy_Prod_Stage
   #   displayName: Deploy Prod
   #   dependsOn: BuildAndTestStage
