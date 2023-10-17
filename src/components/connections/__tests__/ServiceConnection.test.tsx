@@ -6,14 +6,14 @@
 import React, { useCallback } from 'react';
 import { Card } from 'semantic-ui-react';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
-import { AddServiceAzure } from '../../components/connections/index';
-import AddServiceConnectionModal from '../connections/AddServiceConnectionModal';
-import { ServiceConnections as ServiceConnectionCard } from '../../components/connections/ServiceConnections';
-import { ServiceConnection } from '../../components/connections/index';
-import { ApplicationWrapper } from '../../tests/helpers';
+import { AddServiceAzure } from '../index';
+import AddServiceConnectionModal from '../AddServiceConnectionModal';
+import { ServiceConnections as ServiceConnectionCard } from '../ServiceConnections';
+import { ServiceConnection } from '../index';
+import { ApplicationWrapper } from '../../../tests/helpers';
 import userEvent from '@testing-library/user-event';
 import { ServiceConnectionProviderType, IProviderProps } from 'provider-types';
-import { ServiceConnections as ServiceConnectionCards } from '../connections/ServiceConnections';
+import { ServiceConnections as ServiceConnectionCards } from '../ServiceConnections';
 
 afterEach(() => {
   cleanup();
