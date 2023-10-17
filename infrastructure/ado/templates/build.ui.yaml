@@ -25,7 +25,7 @@ parameters:
     default: ''
   - name: runTests
     type: boolean
-    default: false
+    default: true
 
 steps:
   - task: PowerShell@2
@@ -40,15 +40,7 @@ steps:
     displayName: npm install, build
   - ${{ if parameters.runTests}}:
       - template: test.ui.yaml
-        parameters:
-          tenantId: ${{parameters.tenantId}}
-          branch: ${{parameters.branch}}
-          environment: ${{parameters.environment}}
-          subscriptionId: ${{parameters.subscriptionId}}
-          kvServiceConnection: ${{parameters.kvServiceConnection}}
-          deploymentKeyVaultName: ${{parameters.deploymentKeyVaultName}}
-          apiUrl: ${{parameters.apiUrl}}
-          adoEnvironment: ${{parameters.adoEnvironment}}
+        displayName: Unit Tests
   - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
     displayName: Zip Deployment
     condition: succeeded()
