@@ -38,8 +38,8 @@ stages:
     jobs:
       - job: BuildProd
         displayName: Build and Test Prod
-        dependsOn: BuildDev
-        condition: succeeded('BuildDev')
+        # dependsOn: BuildDev
+        # condition: succeeded('BuildDev')
         steps:
           - template: ./templates/build.ui.yaml
             parameters:
