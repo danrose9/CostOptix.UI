@@ -1,52 +1,69 @@
 trigger:
-  - develop
+  - none
 
 pool:
   vmImage: ubuntu-latest
 
 variables:
   tenantId: 90598989-b884-4fc1-999f-d176a8e1a54e
-  isDevelop: $[eq(variables['Build.SourceBranch'], 'refs/heads/develop')]
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isPullRequest: $[eq(variables['Build.Reason'], 'PullRequest')]
-  env: dev
+  envDev: dev
+  envProd: prod
+  kvServiceConnectionDev: DEV KV Service Connection
+  kvServiceConnectionProd: PROD KV Service Connection
   subscriptionId: 94e4237e-953e-4c21-9a4e-fc3f3699d9e4
   kvServiceConnection: DEV KV Service Connection
-  apiUrl: 'https://api.dev.costoptix.com'
+  apiUrlDev: 'https://api.dev.costoptix.com'
 
 stages:
-  - stage: Build_Dev_Stage
-    displayName: Build Dev
-    condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
+  - stage: BuildAndTestStage
+    displayName: Build and Test
     jobs:
-      - job: BuildDev
-        displayName: Build Dev
+      - job: BuildAndTestJob
+        displayName: Build and Test
         steps:
-          - script: |
-              npm install
-              npm run build-dev
-            displayName: npm install, build
-          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-dev.zip .)
-            displayName: Zip Deployment
-            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-          - publish: $(Build.ArtifactStagingDirectory)/build-dev.zip
-            displayName: Publish Artifacts
-            condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-            artifact: App-dev
+          - template: ./templates/build.ui.yaml
+            parameters:
+              tenantId: ${{variables.tenantId}}
+              environment: ${{parameters.envDev}}
+              subscriptionId: ${{parameters.subscriptionId}}
+              kvServiceConnection: ${{parameters.kvServiceConnectionDev}}
+              apiUrl: ${{parameters.apiUrlDev}}
+              adoEnvironment: ${{parameters.adoEnvironment}}
 
-  - stage: Deploy_Dev_Stage
-    displayName: Deploy Dev
-    dependsOn: Build_Dev_Stage
-    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-    jobs:
-      - deployment: DeployDevJob
-        displayName: Deploy DEV
-        environment: DEV-App
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - template: _template-deploy.yaml
-                  parameters:
-                    Env: $(env)
-                    SubscriptionId: $(subscriptionId)
-                    KVServiceConnection: $(kvServiceConnection)
+        # condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
+
+    # jobs:
+    #   - job: BuildDev
+    #     displayName: Build Dev
+    #     steps:
+    #       - script: |
+    #           npm install
+    #           npm run build-dev
+    #         displayName: npm install, build
+    #       - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-dev.zip .)
+    #         displayName: Zip Deployment
+    #         condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    #       - publish: $(Build.ArtifactStagingDirectory)/build-dev.zip
+    #         displayName: Publish Artifacts
+    #         condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    #         artifact: App-dev
+
+  # - stage: Deploy_Dev_Stage
+  #   displayName: Deploy Dev
+  #   dependsOn: Build_Dev_Stage
+  #   condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+  #   jobs:
+  #     - deployment: DeployDevJob
+  #       displayName: Deploy DEV
+  #       environment: DEV-App
+  #       strategy:
+  #         runOnce:
+  #           deploy:
+  #             steps:
+  #               - template: _template-deploy.yaml
+  #                 parameters:
+  #                   Env: $(env)
+  #                   SubscriptionId: $(subscriptionId)
+  #                   KVServiceConnection: $(kvServiceConnection)

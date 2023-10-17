@@ -1,0 +1,69 @@
+parameters:
+  - name: tenantId
+    type: string
+    default: ''
+  - name: branch
+    type: string
+    default: 'main'
+  - name: environment
+    type: string
+    default: ''
+  - name: subscriptionId
+    type: string
+    default: ''
+  - name: kvServiceConnection
+    type: string
+    default: ''
+  - name: deploymentKeyVaultName
+    type: string
+    default: ''
+  - name: apiUrl
+    type: string
+    default: ''
+  - name: adoEnvironment
+    type: string
+    default: ''
+
+stages:
+  - stage: Build_Stage
+    displayName: Build
+    condition: eq(variables['build.sourceBranch'], 'refs/heads/${{parameters.branch}}')
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - task: PowerShell@2
+            displayName: Dump Environment Variables
+            inputs:
+              targetType: 'inline'
+              script: |
+                dir env: | Format-Table -wrap
+          - script: |
+              npm install
+              npm run build-${{parameters.environment}}
+            displayName: npm install, build
+          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
+            displayName: Zip Deployment
+            condition: succeeded()
+          - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
+            displayName: Publish Artifacts
+            condition: succeeded()
+            artifact: App-${{parameters.environment}}
+
+  # - stage: Deploy_Stage
+  #   displayName: Deploy
+  #   dependsOn: Build_Stage
+  #   condition: succeeded()
+  #   jobs:
+  #     - deployment: DeployJob
+  #       displayName: Deploy
+  #       environment: ${{parameters.adoEnvironment}}
+  #       strategy:
+  #         runOnce:
+  #           deploy:
+  #             steps:
+  #               - template: _template-deploy.yaml
+  #                 parameters:
+  #                   Env: ${{parameters.environment}}
+  #                   SubscriptionId: ${{parameters.subscriptionId}}
+  #                   KVServiceConnection: ${{parameters.kvServiceConnection}}
