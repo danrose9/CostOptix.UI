@@ -23,6 +23,9 @@ parameters:
   - name: adoEnvironment
     type: string
     default: ''
+  - name: runTests
+    type: boolean
+    default: false
 
 steps:
   - task: PowerShell@2
@@ -35,6 +38,17 @@ steps:
       npm install
       npm run build-${{parameters.environment}}
     displayName: npm install, build
+  - ${{ if parameters.runTests}}:
+      - template: test.ui.yaml
+        parameters:
+          tenantId: ${{parameters.tenantId}}
+          branch: ${{parameters.branch}}
+          environment: ${{parameters.environment}}
+          subscriptionId: ${{parameters.subscriptionId}}
+          kvServiceConnection: ${{parameters.kvServiceConnection}}
+          deploymentKeyVaultName: ${{parameters.deploymentKeyVaultName}}
+          apiUrl: ${{parameters.apiUrl}}
+          adoEnvironment: ${{parameters.adoEnvironment}}
   - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
     displayName: Zip Deployment
     condition: succeeded()
@@ -43,20 +57,21 @@ steps:
     condition: succeeded()
     artifact: App-${{parameters.environment}}
 
-  # - stage: Deploy_Stage
-  #   displayName: Deploy
-  #   dependsOn: Build_Stage
-  #   condition: succeeded()
-  #   jobs:
-  #     - deployment: DeployJob
-  #       displayName: Deploy
-  #       environment: ${{parameters.adoEnvironment}}
-  #       strategy:
-  #         runOnce:
-  #           deploy:
-  #             steps:
-  #               - template: _template-deploy.yaml
-  #                 parameters:
-  #                   Env: ${{parameters.environment}}
-  #                   SubscriptionId: ${{parameters.subscriptionId}}
-  #                   KVServiceConnection: ${{parameters.kvServiceConnection}}
+  # - script: |
+  #     npm run test -- --coverage --watchAll=false --ci --reporters=default --reporters=jest-junit --coverageReporters=cobertura
+  #   displayName: 'Test with code coverage'
+  # - task: PublishTestResults@2
+  #   displayName: Publish Test Results
+  #   condition: succeededOrFailed()
+  #   inputs:
+  #     testResultsFormat: 'JUnit'
+  #     testResultsFiles: '**/junit.xml'
+  #     failTaskOnFailedTests: true
+  #     mergeTestResults: true
+  # - task: PublishCodeCoverageResults@1
+  #   displayName: 'Publish Code Coverage'
+  #   inputs:
+  #     codeCoverageTool: Cobertura
+  #     summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
+  #     reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+  #     failIfCoverageEmpty: false
