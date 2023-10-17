@@ -22,15 +22,16 @@ stages:
     jobs:
       - job: BuildAndTestJob
         displayName: Build and Test
+        condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
         steps:
           - template: ./templates/build.ui.yaml
             parameters:
               tenantId: ${{variables.tenantId}}
-              environment: ${{parameters.envDev}}
-              subscriptionId: ${{parameters.subscriptionId}}
-              kvServiceConnection: ${{parameters.kvServiceConnectionDev}}
-              apiUrl: ${{parameters.apiUrlDev}}
-              adoEnvironment: ${{parameters.adoEnvironment}}
+              environment: ${{variables.envDev}}
+              subscriptionId: ${{variables.subscriptionId}}
+              kvServiceConnection: ${{variables.kvServiceConnectionDev}}
+              apiUrl: ${{variables.apiUrlDev}}
+              adoEnvironment: ${{variables.adoEnvironment}}
 
         # condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
 
