@@ -40,7 +40,6 @@ steps:
     displayName: npm install, build
   - ${{ if parameters.runTests}}:
       - template: test.ui.yaml
-      displayName: Unit Tests
   - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
     displayName: Zip Deployment
     condition: succeeded()
