@@ -24,31 +24,27 @@ parameters:
     type: string
     default: ''
 
-stages:
-  - stage: Build_Stage
+jobs:
+  - job: Build
     displayName: Build
-    condition: eq(variables['build.sourceBranch'], 'refs/heads/${{parameters.branch}}')
-    jobs:
-      - job: Build
-        displayName: Build
-        steps:
-          - task: PowerShell@2
-            displayName: Dump Environment Variables
-            inputs:
-              targetType: 'inline'
-              script: |
-                dir env: | Format-Table -wrap
-          - script: |
-              npm install
-              npm run build-${{parameters.environment}}
-            displayName: npm install, build
-          - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
-            displayName: Zip Deployment
-            condition: succeeded()
-          - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
-            displayName: Publish Artifacts
-            condition: succeeded()
-            artifact: App-${{parameters.environment}}
+    steps:
+      - task: PowerShell@2
+        displayName: Dump Environment Variables
+        inputs:
+          targetType: 'inline'
+          script: |
+            dir env: | Format-Table -wrap
+      - script: |
+          npm install
+          npm run build-${{parameters.environment}}
+        displayName: npm install, build
+      - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip .)
+        displayName: Zip Deployment
+        condition: succeeded()
+      - publish: $(Build.ArtifactStagingDirectory)/build-${{parameters.environment}}.zip
+        displayName: Publish Artifacts
+        condition: succeeded()
+        artifact: App-${{parameters.environment}}
 
   # - stage: Deploy_Stage
   #   displayName: Deploy
