@@ -1,5 +1,5 @@
 parameters:
-  - name: Env
+  - name: Environment
     type: string
   - name: SubscriptionId
     type: string
@@ -11,7 +11,7 @@ steps:
     displayName: Load In Secrets
     inputs:
       connectedServiceName: ${{ Parameters.KVServiceConnection }}
-      KeyVaultName: costoptix-${{ Parameters.Env }}-devops-kv
+      KeyVaultName: costoptix-${{ Parameters.Environment }}-devops-kv
 
   # App Deploy
   - script: az login --service-principal -u $SERVICE_CONNECTION_CLIENT_ID -p $SERVICE_CONNECTION_CLIENT_SECRET -t $TENANT_ID
@@ -20,5 +20,5 @@ steps:
       SERVICE_CONNECTION_CLIENT_ID: $(devops-app-clientid)
       SERVICE_CONNECTION_CLIENT_SECRET: $(devops-app-clientsecret)
       TENANT_ID: $(tenantId)
-  - script: az webapp deployment source config-zip --src $(Pipeline.Workspace)/App-${{ Parameters.Env }}/build-${{ Parameters.Env }}.zip -n costoptix-${{ Parameters.Env }}-ui -g costoptix-${{ Parameters.Env }}-rg
+  - script: az webapp deployment source config-zip --src $(Pipeline.Workspace)/App-${{ Parameters.Environment }}/build-${{ Parameters.Environment }}.zip -n costoptix-${{ Parameters.Environment }}-ui -g costoptix-${{ Parameters.Environment }}-rg
     displayName: AZ Deploy
