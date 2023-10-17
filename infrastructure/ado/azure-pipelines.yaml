@@ -15,6 +15,7 @@ variables:
   subscriptionId: 94e4237e-953e-4c21-9a4e-fc3f3699d9e4
   kvServiceConnection: DEV KV Service Connection
   apiUrlDev: 'https://api.dev.costoptix.com'
+  apiUrlProd: 'https://api.costoptix.com'
 
 stages:
   - stage: BuildAndTestStage
@@ -31,6 +32,19 @@ stages:
               kvServiceConnection: ${{variables.kvServiceConnectionDev}}
               apiUrl: ${{variables.apiUrlDev}}
               adoEnvironment: ${{variables.adoEnvironment}}
+              runTests: true
+      - job: BuildProd
+        displayName: Build and Test Prod
+        steps:
+          - template: ./templates/build.ui.yaml
+            parameters:
+              tenantId: ${{variables.tenantId}}
+              environment: ${{variables.envProd}}
+              subscriptionId: ${{variables.subscriptionId}}
+              kvServiceConnection: ${{variables.kvServiceConnectionProd}}
+              apiUrl: ${{variables.apiUrlProd}}
+              adoEnvironment: ${{variables.adoEnvironment}}
+              runTests: false
 
   # - stage: Deploy_Dev_Stage
   #   displayName: Deploy Dev
