@@ -36,7 +36,7 @@ stages:
 
   - stage: DeployDevStage
     displayName: Deploy Dev
-    dependsOn: BuildAndTestStageDev
+    dependsOn: BuildDevStage
     condition: succeeded('BuildDev')
     jobs:
       - deployment: DeployDevJob
