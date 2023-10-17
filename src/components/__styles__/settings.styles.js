@@ -23,7 +23,7 @@ export const SimpleButton = styled.button`
   cursor: pointer;
 `;
 
-export const StyledFormField = styled(Form.Input)`
+export const StyledFormInput = styled(Form.Input)`
   font-size: 1.1rem;
   font-style: normal;
 `;
