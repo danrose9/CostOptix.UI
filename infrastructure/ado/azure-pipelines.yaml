@@ -33,8 +33,11 @@ stages:
               apiUrl: ${{variables.apiUrlDev}}
               adoEnvironment: ${{variables.adoEnvironment}}
               runTests: true
+
       - job: BuildProd
         displayName: Build and Test Prod
+        dependsOn: BuildDev
+        condition: succeeded('BuildDev')
         steps:
           - template: ./templates/build.ui.yaml
             parameters:
