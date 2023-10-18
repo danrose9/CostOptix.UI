@@ -79,14 +79,6 @@ export const ApplicationRoutes = () => {
         }
       />
       <Route
-        path={appRoutes.BETA_PROGRAM_SIGNUP}
-        element={
-          <PrivateRoute>
-            <page.betaProgramSignup />
-          </PrivateRoute>
-        }
-      />
-      <Route
         path={appRoutes.COST_CONTAINERS}
         element={
           <PrivateRoute>

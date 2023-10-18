@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { isAuthCookieAvailable } from '../utils/processToken';

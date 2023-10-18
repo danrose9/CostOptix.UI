@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
-import styled from 'styled-components';
 import { INewCostContainer, ContainerAction } from '../../../../types/container-types';
 import { ButtonGroup } from '../../../__styles__/ButtonStyles';
-
-const StyledForm = styled(Form)`
-  font-family: inherit;
-`;
 
 interface ICostContainerProfileProps {
   isQueryValid: boolean;

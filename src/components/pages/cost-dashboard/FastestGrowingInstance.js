@@ -7,6 +7,7 @@ import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
 import { StyledHeaderCell } from '../../tables/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../tooltips';
+import { StyledTableRow } from '../../tables/DefaultTableStyles';
 
 const ToolTipData = (instance) => {
   const { growth30Day } = instance.instance;
@@ -54,7 +55,7 @@ export const FastestGrowingInstance = () => {
                   key={index}
                   trigger={
                     <Table.Row
-                      style={{ cursor: 'pointer' }}
+                      as={StyledTableRow}
                       onClick={() => {
                         dispatch(RESET_ISAVAILABLE(false));
                         navigate(appRoutes.RESOURCE_VIEW, {

@@ -4,6 +4,11 @@ import { ICostContainer } from '../../../../types/container-types';
 import { ProviderImage } from '../../../ProviderImage';
 import { ButtonGroup } from '../../../__styles__/ButtonStyles';
 import { ContainerAction } from '../../../../types/container-types';
+import styled from 'styled-components';
+
+const StyledLabel = styled(Label)`
+  cursor: pointer;
+`;
 
 export interface ICostContainerSummaryProps {
   data: ICostContainer;
@@ -12,7 +17,7 @@ export interface ICostContainerSummaryProps {
 
 export const CostContainerSummary: React.FC<ICostContainerSummaryProps> = (props) => {
   const { data, handleContainerAction } = props;
-  const { id, name, owner, description, cloudProviders, amount30DayConverted, resourceCount } = data;
+  const { id, name, owner, description, cloudProviders, resourceCount } = data;
   return (
     <div>
       <Card fluid>
@@ -31,7 +36,7 @@ export const CostContainerSummary: React.FC<ICostContainerSummaryProps> = (props
         <Card.Content extra>
           <Popup
             trigger={
-              <Label size="large" style={{ cursor: 'pointer' }}>
+              <Label size="large" as={StyledLabel}>
                 <Icon name="folder open outline" /> {resourceCount}
               </Label>
             }

@@ -2,7 +2,6 @@ import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
 import TinyLineChart from '../../charts/TinyLineChart';
-// import TablePagination from '../../tables/TablePagination';
 import InformationButton from '../../buttons/InformationButton';
 import { CostContainerBuilder, CostContainerViewer, CostContainerOptions } from './index';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
@@ -15,16 +14,7 @@ import { ProviderImage } from '../../ProviderImage';
 import { AppDispatch } from '../../../services/redux/store';
 import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
 import { orderAndFormatArray } from '../../../utils/arrayFormatter';
-
-export const TableContainer = styled.div`
-  padding: 0.5em;
-`;
-
-export const TableHeader = styled.div`
-  display: flex;
-`;
-
-export const TableFooter = styled.div``;
+import { StyledTableHeaderCell, StyledDropDown, TableContainer } from '../../tables/DefaultTableStyles';
 
 export const SegmentHeader = styled.div`
   display: flex;
@@ -95,9 +85,9 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
             <Table.HeaderCell width={5}>Container</Table.HeaderCell>
             <Table.HeaderCell width={1}></Table.HeaderCell>
             <Table.HeaderCell width={3}>Created on</Table.HeaderCell>
-            <Table.HeaderCell width={3} style={{ paddingLeft: '3.5em' }}>
+            <StyledTableHeaderCell width={3} className="padleft">
               Cost Trend
-            </Table.HeaderCell>
+            </StyledTableHeaderCell>
             <Table.HeaderCell width={2}>Providers</Table.HeaderCell>
             <Table.HeaderCell textAlign="right" width={2}>
               Last 30 days
@@ -116,9 +106,8 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                   <Table.Row key={index} onClick={() => handleContainerAction(container.id, ContainerAction.SHOW)}>
                     <Table.Cell singleLine>{container.name}</Table.Cell>
                     <Table.Cell>
-                      <Dropdown
+                      <StyledDropDown
                         icon="ellipsis horizontal"
-                        style={{ zIndex: 'auto' }}
                         simple
                         item
                         data-testid="cc-dropdown"
@@ -128,16 +117,16 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                         <Dropdown.Menu>
                           <CostContainerOptions container={container} handleContainerAction={handleContainerAction} />
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </StyledDropDown>
                     </Table.Cell>
                     <Table.Cell singleLine>{createdOn}</Table.Cell>
                     <Table.Cell>
                       <TinyLineChart data={orderData} width={150} height={30} dataKey="amountConverted" />
                     </Table.Cell>
-                    <Table.Cell singleLine style={{ display: 'flex', alignItems: 'center' }}>
+                    <Table.Cell singleLine>
                       {container.cloudProviders
                         ? container.cloudProviders.map((provider, index) => (
-                            <Header key={index} style={{ margin: 0 }}>
+                            <Header key={index}>
                               <ProviderImage provider={provider} size="small" />
                             </Header>
                           ))
@@ -153,13 +142,6 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
           <AddNewContainer handleContainerAction={handleContainerAction} />
         </Table.Body>
       </StyledTable>
-      <TableFooter>
-        {/* <TablePagination
-          totalItems={containers.length}
-          handlePageChange={handlePageChange}
-          pageSize={10}
-        ></TablePagination> */}
-      </TableFooter>
     </>
   );
 };

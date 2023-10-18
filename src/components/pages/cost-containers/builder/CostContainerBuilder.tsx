@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { Segment, Radio } from 'semantic-ui-react';
+import { Radio } from 'semantic-ui-react';
 import { QueryFilter, FilterOutput } from '../../../query_filter/index';
 import { CostContainerProfile } from './CostContainerProfile';
 import { updateFilterReducer } from '../../../../reducers/updateFilterReducer';
@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../services/redux/store';
 import { addCostContainer, updateCostContainer } from '../../../../services/redux/thunks/costContainerThunk';
 import { INewCostContainer, ContainerAction } from '../../../../types/container-types';
-import { ComponentContainer, StyledSegment } from '../../../__styles__/CostContainerCommonStyles';
+import { ComponentContainer, StyledSegment, PaddedSegment } from '../../../__styles__/CostContainerCommonStyles';
 
 export interface ICostContainerBuilderProps {
   selectedContainer: INewCostContainer | null;
@@ -20,7 +20,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
 }) => {
   const thunk = useDispatch();
 
-  const [activeContainer, setActiveContainer] = useState<INewCostContainer | null>(selectedContainer);
+  const [activeContainer] = useState<INewCostContainer | null>(selectedContainer);
 
   const [showFilterOutput, setShowFilterOutput] = useState(false);
   const [isQueryValid, setIsQueryValid] = useState<boolean>(false);
@@ -63,7 +63,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
           />
         </StyledSegment>
       </ComponentContainer>
-      <Segment basic style={{ padding: '0 1rem' }}>
+      <PaddedSegment basic>
         <Radio
           toggle
           label={showFilterOutput ? 'Hide Filter' : 'Show Filter'}
@@ -71,7 +71,7 @@ export const CostContainerBuilder: React.FC<ICostContainerBuilderProps> = ({
             setShowFilterOutput(!showFilterOutput);
           }}
         />
-      </Segment>
+      </PaddedSegment>
       {showFilterOutput ? <FilterOutput value={filterOutput} /> : null}
     </>
   );

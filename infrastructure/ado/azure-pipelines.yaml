@@ -1,5 +1,5 @@
 trigger:
-  - none
+  - main
 
 pool:
   vmImage: ubuntu-latest
@@ -18,7 +18,7 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: BuildAndTestStageDev
+  - stage: BuildStage
     displayName: Build and Test Dev
     jobs:
       - job: BuildDev
@@ -33,13 +33,10 @@ stages:
               apiUrl: ${{variables.apiUrlDev}}
               adoEnvironment: ${{variables.adoEnvironment}}
               runTests: true
-  - stage: BuildAndTestStage
-    displayName: Build and Test Prod
-    jobs:
       - job: BuildProd
         displayName: Build and Test Prod
-        # dependsOn: BuildDev
-        # condition: succeeded('BuildDev')
+        dependsOn: BuildDev
+        condition: succeeded('BuildDev')
         steps:
           - template: ./templates/build.ui.yaml
             parameters:
@@ -51,61 +48,38 @@ stages:
               adoEnvironment: ${{variables.adoEnvironment}}
               runTests: false
 
-  # - stage: Deploy_Dev_Stage
-  #   displayName: Deploy Dev
-  #   dependsOn: BuildAndTestStage
-  #   condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-  # - stage: Deploy_Prod_Stage
-  #   displayName: Deploy Prod
-  #   dependsOn: BuildAndTestStage
-  #   condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+  - stage: DeployDevStage
+    displayName: Deploy Dev
+    dependsOn: BuildStage
+    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    jobs:
+      - deployment: DeployDevJob
+        displayName: Deploy DEV
+        environment: DEV-App
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ./templates/deploy.ui.yaml
+                  parameters:
+                    environment: ${{variables.envDev}}
+                    subscriptionId: ${{variables.subscriptionId}}
+                    kvServiceConnection: ${{variables.kvServiceConnectionDev}}
 
-  # jobs:
-  #   - job: BuildAndTestJob
-  #     displayName: Build and Test
-  #     condition: eq(variables['build.sourceBranch'], 'refs/heads/main')
-  #     steps:
-  #       - template: ./templates/build.ui.yaml
-  #         parameters:
-  #           tenantId: ${{variables.tenantId}}
-  #           environment: ${{variables.envDev}}
-  #           subscriptionId: ${{variables.subscriptionId}}
-  #           kvServiceConnection: ${{variables.kvServiceConnectionDev}}
-  #           apiUrl: ${{variables.apiUrlDev}}
-  #           adoEnvironment: ${{variables.adoEnvironment}}
-
-  # condition: eq(variables['build.sourceBranch'], 'refs/heads/develop')
-
-  # jobs:
-  #   - job: BuildDev
-  #     displayName: Build Dev
-  #     steps:
-  #       - script: |
-  #           npm install
-  #           npm run build-dev
-  #         displayName: npm install, build
-  #       - script: (cd build && zip -r $(Build.ArtifactStagingDirectory)/build-dev.zip .)
-  #         displayName: Zip Deployment
-  #         condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-  #       - publish: $(Build.ArtifactStagingDirectory)/build-dev.zip
-  #         displayName: Publish Artifacts
-  #         condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-  #         artifact: App-dev
-
-  # - stage: Deploy_Dev_Stage
-  #   displayName: Deploy Dev
-  #   dependsOn: Build_Dev_Stage
-  #   condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
-  #   jobs:
-  #     - deployment: DeployDevJob
-  #       displayName: Deploy DEV
-  #       environment: DEV-App
-  #       strategy:
-  #         runOnce:
-  #           deploy:
-  #             steps:
-  #               - template: _template-deploy.yaml
-  #                 parameters:
-  #                   Env: $(env)
-  #                   SubscriptionId: $(subscriptionId)
-  #                   KVServiceConnection: $(kvServiceConnection)
+  - stage: DeployProdStage
+    displayName: Deploy Prod
+    dependsOn: BuildStage
+    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    jobs:
+      - deployment: DeployProdJob
+        displayName: Deploy Prod
+        environment: Prod-App
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - template: ./templates/deploy.ui.yaml
+                  parameters:
+                    environment: ${{variables.envProd}}
+                    subscriptionId: ${{variables.subscriptionId}}
+                    kvServiceConnection: ${{variables.kvServiceConnectionProd}}

@@ -6,7 +6,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
-import { StyledHeaderCell } from '../../tables/DefaultTableStyles';
+import { StyledHeaderCell, StyledTableRow } from '../../tables/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../tooltips';
 
 const ToolTipData = (instance) => {
@@ -76,7 +76,7 @@ export const MostExpensiveInstance = (props) => {
                   key={index}
                   trigger={
                     <Table.Row
-                      style={{ cursor: 'pointer' }}
+                      as={StyledTableRow}
                       onClick={() => {
                         dispatch(RESET_ISAVAILABLE(false));
                         navigate(appRoutes.RESOURCE_VIEW, {

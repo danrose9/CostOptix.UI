@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Table } from 'semantic-ui-react';
+export { StyledDropDown } from '../__styles__/DropdownStyles';
 
 export const StyledTableCell = styled(Table.Cell)`
   &&& {
@@ -45,4 +46,11 @@ export const StickyTableHeader = styled(Table.Header)`
   position: sticky;
   top: 0;
   z-index: 2;
+`;
+
+export const StyledTableHeaderCell = styled(Table.HeaderCell)`
+
+  &.padleft {
+      padding-left: 3.5em !important;
+    }
 `;

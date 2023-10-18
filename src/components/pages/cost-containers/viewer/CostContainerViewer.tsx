@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Radio, Segment } from 'semantic-ui-react';
+import { Radio } from 'semantic-ui-react';
 import { ICostContainer, ContainerAction } from '../../../../types/container-types';
-import { ComponentContainer, StyledSegment } from '../../../__styles__/CostContainerCommonStyles';
+import { ComponentContainer, StyledSegment, PaddedSegment } from '../../../__styles__/CostContainerCommonStyles';
 import { CostContainerChart, CostContainerSummary, CostContainerResourceList } from '../index';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../../../services/redux/store';
@@ -55,9 +55,9 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
           <CostContainerSummary data={containerSummaryData} handleContainerAction={handleContainerAction} />
         </StyledSegment>
       </ComponentContainer>
-      <Segment basic style={{ padding: '0 1rem' }}>
+      <PaddedSegment basic>
         <Radio toggle label={showResources ? 'Hide Resources' : 'Show Resources'} onChange={handleShowResources} />
-      </Segment>
+      </PaddedSegment>
 
       {showResources ? (
         <CostContainerResourceList
