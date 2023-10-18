@@ -23,3 +23,7 @@ export const StyledSegment = styled(Segment)`
     width: -webkit-fill-available;
   }
 `;
+
+export const PaddedSegment = styled(Segment)`
+  padding: 0 1rem !important;
+`;

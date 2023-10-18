@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import { useInterval } from '../../hooks/useInterval';
 import { Card, Table } from 'semantic-ui-react';
 import { PageLayout } from '../pages';
-import { ServiceConnectionPage } from '../../styles/StyledServiceConnections';
+import { ServiceConnectionPage, ServiceConnectionCard } from './__styles__/StyledServiceConnections';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
 import ServiceConnectionRow from './ServiceConnectionRow';
 import { ProviderImage } from '../ProviderImage';
@@ -52,7 +52,7 @@ const ServiceConnection = (props: SelectedContainerProps) => {
           <Card.Group itemsPerRow={2}>
             {ServiceConnectionCards.filter((card) => card.active).map((card, index) => {
               return (
-                <Card key={index} color={card.color as any} style={{ height: '100%' }}>
+                <ServiceConnectionCard key={index} color={card.color as any}>
                   <Card.Content>
                     <ProviderImage floated="right" provider={card.provider} size="tiny" />
                     <Card.Header>{card.name}</Card.Header>
@@ -81,7 +81,7 @@ const ServiceConnection = (props: SelectedContainerProps) => {
                   <Card.Content extra>
                     <AddServiceConnectionModal cloudProvider={card as ServiceConnectionProviderType} />
                   </Card.Content>
-                </Card>
+                </ServiceConnectionCard>
               );
             })}
           </Card.Group>

@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
 import SearchResources from './SearchResources';
 import { TableContainer } from '../../__styles__/DefaultPageStyles';
+import { StyledTableRow } from 'src/components/tables/DefaultTableStyles';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
@@ -51,7 +52,7 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
             {searchResults?.map((resource: IResource, index: React.Key | null | undefined) => {
               return (
                 <Table.Row
-                  style={{ cursor: 'pointer' }}
+                  as={StyledTableRow}
                   key={index}
                   onClick={() => {
                     dispatch<AppDispatch>(RESET_ISAVAILABLE(false));

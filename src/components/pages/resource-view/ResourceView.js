@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PageLayout from '../PageLayout';
 import { useLocation } from 'react-router-dom';
-import { Grid, Card } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { Spinner } from '../../Loader';
 import { DashboardCard } from '../../index';
 import ResourceViewChart from './ResourceViewChart';
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchResourceView } from '../../../services/redux/thunks/resourceThunk';
 import { reduxState } from '../../../services/redux/reduxState';
 import { currencySymbol } from '../../../utils/helper';
+import { DashboardCardGroup } from '../../__styles__/CardStyles';
 
 const dashboardCards = [
   {
@@ -49,7 +50,7 @@ export const ResourceView = () => {
           <>
             <Grid data-testid="resource-view">
               <Grid.Row centered columns={3}>
-                <Card.Group style={{ margin: '5px' }} itemsPerRow={3}>
+                <DashboardCardGroup itemsPerRow={3}>
                   {dashboardCards?.map((card, index) => {
                     const content = () => {
                       if (card.icon === 'dollar sign') {
@@ -70,7 +71,7 @@ export const ResourceView = () => {
                       />
                     );
                   })}
-                </Card.Group>
+                </DashboardCardGroup>
               </Grid.Row>
             </Grid>
             <Grid columns="equal">

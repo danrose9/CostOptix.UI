@@ -8,7 +8,6 @@ export { default as Settings } from './settings/Settings';
 export { default as ServiceConnectionPage } from '../connections/ServiceConnection';
 export { default as InitializeApp } from '../../app/InitializeApp';
 export { default as LandingPage } from './auth/LandingPage';
-export { default as betaProgramSignup } from '../modals/BetaProgramSignup';
 export { default as LogoutPage } from './LogoutPage';
 export { default as SessionExpired } from './SessionExpired';
 export { default as ResourceList } from './resource-view/ResourceList';

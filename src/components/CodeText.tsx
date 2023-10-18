@@ -23,6 +23,10 @@ const Code = styled.code`
   font-style: italic;
 `;
 
+const CopyButton = styled(Button)`
+  height: fit-content;
+`;
+
 interface ICodeText {
   children: React.ReactNode;
 }
@@ -52,7 +56,7 @@ const CodeText = ({ children }: ICodeText) => {
         <Popup
           // Using styled components pushes the tooltip to top of page
           trigger={
-            <Button icon style={{ height: 'fit-content' }} data-testid="code-text-copy-button">
+            <Button icon as={CopyButton} data-testid="code-text-copy-button">
               <Icon name="copy outline" />
             </Button>
           }

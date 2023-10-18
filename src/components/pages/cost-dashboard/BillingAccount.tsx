@@ -6,6 +6,7 @@ import { StandardTooltip } from '../../tooltips';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { FailedToLoadBillingAccount } from '../../messages';
 import { IBillingAccountCostDashboardProps } from '../../../types';
+import { StyledTableRow } from '../../tables/DefaultTableStyles';
 
 const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;
@@ -42,7 +43,7 @@ export const BillingAccount: React.FC<IBillingAccountCostDashboardProps> = ({ bi
       <Popup
         trigger={
           <Table.Row
-            style={{ cursor: 'pointer' }}
+            as={StyledTableRow}
             disabled={isLoading}
             data-testid="billingAccounts-2"
             onClick={() => {
