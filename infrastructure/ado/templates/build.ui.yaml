@@ -36,6 +36,9 @@ steps:
         dir env: | Format-Table -wrap
   - script: |
       npm install
+      if [ "${{parameters.environment}}" == "dev" ]; then
+        npm version patch --force
+      fi
       npm run build-${{parameters.environment}}
     displayName: npm install, build
   - ${{ if parameters.runTests}}:
