@@ -1,8 +1,10 @@
 import React, { useState, useContext, Fragment, FC, useCallback } from 'react';
-
 import { Modal } from 'semantic-ui-react';
-import { StyledContent } from '../../styles/StyledServiceConnections';
-
+import {
+  StyledContent,
+  ServiceConnectionHeader,
+  ServiceConnectionModalWrapper,
+} from './__styles__/StyledServiceConnections';
 import { ProviderImage } from '../ProviderImage';
 import StandardButton from '../buttons/StandardButton';
 import { DemoContext } from '../../app/DemoContext';
@@ -94,9 +96,9 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
       >
         <ModalHeader>
           <ProviderImage provider={provider} size="big" floated="left" data-testid="sc-provider-image" />
-          <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }} data-testid="sc-provider-header">
+          <ServiceConnectionHeader data-testid="sc-provider-header">
             Add a new {provider} Service Connection
-          </p>
+          </ServiceConnectionHeader>
         </ModalHeader>
         <Modal.Content scrolling>
           <Modal.Description>
@@ -125,7 +127,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
             label="Close"
           />
           {error.isError ? <ServiceConnectionWarning content={error.errorMessage} /> : null}
-          <div style={{ display: 'inline-flex' }}>
+          <ServiceConnectionModalWrapper>
             <ListServiceConnectionModal
               disabled={isFormButtonDisabled}
               cloudProvider={cloudProvider}
@@ -133,7 +135,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
               updateSetError={updateSetError}
               closeFormModal={closeFormModal}
             />
-          </div>
+          </ServiceConnectionModalWrapper>
         </ActionButtons>
       </Modal>
     </>

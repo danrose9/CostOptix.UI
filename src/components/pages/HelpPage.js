@@ -24,7 +24,7 @@ export const HelpPage = () => {
       <PageContainer color="blue">
         <TitleSection basic>
           <Title>Hi! How can we help?</Title>
-          <Search size="massive" style={{ fontSize: '2em' }} />
+          <Search size="massive" />
         </TitleSection>
         {true ? null : <Divider horizontal>Featured Articles</Divider>}
         <Segment>

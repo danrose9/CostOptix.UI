@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Card, Button } from 'semantic-ui-react';
-import { ButtonGroup } from '../../styles/StyledServiceConnections';
+import { ButtonGroup } from './__styles__/StyledServiceConnections';
 import ServiceConnectionTable from './ServiceConnectionRow';
 import AddServiceAzure from './AddServiceAzure';
 import AddServiceAWS from './providers/AddServiceAWS';

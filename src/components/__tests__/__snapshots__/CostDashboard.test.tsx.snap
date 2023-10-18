@@ -113,7 +113,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 className=""
               >
                 <th
-                  className="sc-eDWCr bA-dCi"
+                  className="sc-bqWxrE fRFSZi"
                   colSpan={3}
                   data-testid="header-cell-1"
                 >
@@ -168,7 +168,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 className=""
               >
                 <th
-                  className="sc-eDWCr bA-dCi"
+                  className="sc-bqWxrE fRFSZi"
                   colSpan="3"
                 >
                   Fastest Growing Resources
@@ -230,7 +230,7 @@ exports[`Cost Dashboard matches snapshot 1`] = `
                 >
                   <i
                     aria-hidden="true"
-                    className="refresh disabled fitted loading icon sc-ipEyDJ eWpELB"
+                    className="refresh disabled fitted loading icon sc-kgTSHT hZZeCZ"
                     onClick={[Function]}
                   />
                 </th>
@@ -238,11 +238,6 @@ exports[`Cost Dashboard matches snapshot 1`] = `
             </thead>
             <tbody
               className=""
-              style={
-                Object {
-                  "height": "30px",
-                }
-              }
             />
             <tfoot
               className="full-width"

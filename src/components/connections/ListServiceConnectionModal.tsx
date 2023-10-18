@@ -13,7 +13,7 @@ import {
   AddBillingAccountType,
   ICloudBillingAccountsArgs,
 } from 'cloud-billingaccounts-types';
-
+import { ServiceConnectionHeader, ServiceConnectionModalActions } from './__styles__/StyledServiceConnections';
 import { ServiceConnectionProviderType } from 'provider-types';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
 import { resetIsBillingAccountsAvailable } from '../../services/redux/reducers/serviceProvidersSlice';
@@ -189,7 +189,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
     >
       <ModalHeader>
         <ProviderImage provider={provider} size="small" floated="left" data-testid="sc-provider-image" />
-        <p style={{ fontSize: '1.2em', paddingLeft: '1.5em' }}>Billing Accounts</p>
+        <ServiceConnectionHeader>Billing Accounts</ServiceConnectionHeader>
       </ModalHeader>
       <Modal.Content>
         <p>
@@ -238,16 +238,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
         </Table>
       </Modal.Content>
 
-      <Modal.Actions style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        {/* <Popup
-          content="Refresh"
-          basic
-          trigger={
-            <Button size="small" icon style={{ marginRight: 'auto' }} onClick={handleOnSubmit}>
-              <Icon name="refresh" loading={isFetching} />
-            </Button>
-          }
-        /> */}
+      <ServiceConnectionModalActions>
         <Button
           floated="right"
           icon
@@ -263,7 +254,7 @@ const ListServiceConnectionModal: React.FC<IModalProps> = ({
         <Button size="small" onClick={handleCancelButton}>
           Cancel
         </Button>
-      </Modal.Actions>
+      </ServiceConnectionModalActions>
     </Modal>
   );
 };
