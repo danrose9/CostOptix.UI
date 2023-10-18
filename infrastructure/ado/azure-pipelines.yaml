@@ -18,7 +18,7 @@ variables:
   apiUrlProd: 'https://api.costoptix.com'
 
 stages:
-  - stage: BuildDevStage
+  - stage: BuildStage
     displayName: Build and Test Dev
     jobs:
       - job: BuildDev
@@ -35,6 +35,8 @@ stages:
               runTests: true
       - job: BuildProd
         displayName: Build and Test Prod
+        dependsOn: BuildDev
+        condition: succeeded('BuildDev')
         steps:
           - template: ./templates/build.ui.yaml
             parameters:
@@ -48,7 +50,7 @@ stages:
 
   - stage: DeployDevStage
     displayName: Deploy Dev
-    dependsOn: BuildDevStage
+    dependsOn: BuildDev
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployDevJob
@@ -66,7 +68,7 @@ stages:
 
   - stage: DeployProdStage
     displayName: Deploy Prod
-    dependsOn: BuildProdStage
+    dependsOn: BuildProd
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployProdJob
