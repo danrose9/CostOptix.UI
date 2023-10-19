@@ -36,16 +36,20 @@ export interface IBillingAccountCostDashboard extends IBillingAccount {
   status: string;
 }
 
-interface IBillingAccountMostExpensive {
+export interface IBillingAccountMostExpensive {
   id: string;
   resourceName: string;
   service: string;
-  amountConverted: number;
   amount30Day: number;
   amount30DayConverted: number;
+  accountName: string;
+  billingAccountId: string;
+  provider: string;
+  currency: string;
+  convertedCurrency: string;
 }
 
-interface IBillingAccountFastestGrowing {
+export interface IBillingAccountFastestGrowing {
   id: string;
   resourceName: string;
   service: string;

@@ -91,7 +91,9 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
         <Table selectable>
           <Table.Header fullWidth>
             <Table.Row>
-              <Table.HeaderCell colSpan="3">Active Billing Accounts</Table.HeaderCell>
+              <Table.HeaderCell colSpan="3" data-testid="billing-accounts">
+                Active Billing Accounts
+              </Table.HeaderCell>
               <Table.HeaderCell textAlign="center" width={2}>
                 <StyledIconButton
                   name="refresh"
@@ -131,7 +133,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       dispatch<AppDispatch>(fetchBillingAccounts()).then((response: { payload: any }) => {
         response.payload?.billingAccounts
           .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
-          .map((billingAccount: IBillingAccount, index: any) => {
+          .forEach((billingAccount: IBillingAccount, index: any) => {
             dispatch(addBillingAccount(billingAccount));
             fetchBillingAccountData(billingAccount);
           });

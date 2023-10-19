@@ -66,9 +66,21 @@ stages:
                     subscriptionId: ${{variables.subscriptionId}}
                     kvServiceConnection: ${{variables.kvServiceConnectionDev}}
 
+  - stage: RunE2ETests
+    displayName: Run Dev E2E Tests
+    dependsOn: DeployDevStage
+    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    jobs:
+      - job: RunE2ETests
+        displayName: Run E2E Tests
+        steps:
+          - template: ./templates/e2e-testing.yaml
+            parameters:
+              url: dev.costoptix.com
+
   - stage: DeployProdStage
     displayName: Deploy Prod
-    dependsOn: BuildStage
+    dependsOn: RunE2ETests
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployProdJob

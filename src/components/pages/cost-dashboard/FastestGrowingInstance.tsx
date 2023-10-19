@@ -8,8 +8,17 @@ import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlic
 import { StyledHeaderCell } from '../../tables/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../tooltips';
 import { StyledTableRow } from '../../tables/DefaultTableStyles';
+import { IBillingAccountFastestGrowing } from '../../../types/billing-account-types';
+import { getEmbeddedResourceName } from 'src/utils/stringFormatter';
+import { IRootState } from 'src/services/redux/rootReducer';
 
-const ToolTipData = (instance) => {
+interface IToolTipData {
+  instance: {
+    growth30Day: number;
+  };
+}
+
+const ToolTipData: React.FC<IToolTipData> = (instance) => {
   const { growth30Day } = instance.instance;
   return (
     <Card.Content textAlign="right">
@@ -19,9 +28,11 @@ const ToolTipData = (instance) => {
 };
 
 export const FastestGrowingInstance = () => {
-  const fastestGrowingInstance = useSelector((state) => state[reduxState.COST_DASHBOARD].fastestGrowing.data);
+  const fastestGrowingInstance = useSelector(
+    (state: IRootState) => state[reduxState.COST_DASHBOARD].fastestGrowing.data
+  );
 
-  const isLoading = useSelector((state) => state[reduxState.COST_DASHBOARD].fastestGrowing.isLoading);
+  const isLoading = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].fastestGrowing.isLoading);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,21 +46,22 @@ export const FastestGrowingInstance = () => {
       <Table fixed selectable>
         <Table.Header onClick={handleOnClick} data-testid="table-header-1">
           <Table.Row>
-            <StyledHeaderCell colSpan="3">Fastest Growing Resources</StyledHeaderCell>
+            <StyledHeaderCell colSpan="2" data-testid="fastest-growing-resources">
+              Fastest Growing Resources
+            </StyledHeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Resource</Table.HeaderCell>
-            <Table.HeaderCell>Service</Table.HeaderCell>
             <Table.HeaderCell textAlign="right">30d growth</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {fastestGrowingInstance
-            .filter((instance) => instance.growth30Day)
-            .map((instance, index) => {
+            .filter((instance: IBillingAccountFastestGrowing) => instance.growth30Day)
+            .map((instance: IBillingAccountFastestGrowing, index: any) => {
               return (
                 <Popup
                   key={index}
@@ -63,8 +75,7 @@ export const FastestGrowingInstance = () => {
                         });
                       }}
                     >
-                      <Table.Cell singleLine>{instance.resourceName}</Table.Cell>
-                      <Table.Cell singleLine>{instance.service}</Table.Cell>
+                      <Table.Cell singleLine>{getEmbeddedResourceName(instance.resourceName)}</Table.Cell>
                       <Table.Cell textAlign="right" singleLine>
                         {instance.growth30Day}%
                       </Table.Cell>
