@@ -38,7 +38,7 @@ export const CostEstimates = (props) => {
 
   return (
     <Segment color="olive" loading={isLoading}>
-      <Table selectable>
+      <Table selectable data-testid="cost-dashboard-estimates">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan="3">Month-to-Date Cost Estimates</Table.HeaderCell>
