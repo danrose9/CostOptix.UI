@@ -17,7 +17,7 @@ export const MonthlySpend = (props) => {
   };
 
   return (
-    <Segment color="orange" loading={isLoading}>
+    <Segment color="orange" loading={isLoading} data-testid="cost-dashboard-chart">
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           width={500}
