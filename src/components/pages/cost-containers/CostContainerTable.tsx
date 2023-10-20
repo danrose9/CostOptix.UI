@@ -76,7 +76,6 @@ const StyledTable = styled(Table)`
 const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleContainerAction }) => {
   const { containers } = allCostContainers;
 
-  // const handlePageChange = (e: any, data: any) => {};
   return (
     <>
       <StyledTable striped>

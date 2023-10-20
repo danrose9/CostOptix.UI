@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Tab, Form, Button, Grid } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
 import { setOrganizationName } from '../../../services/redux/thunks/userProfileThunk';
 import { SectionTitle, StyledFormInput, StyledAvatar, AvatarDiv } from '../../__styles__/settings.styles';
+import { IRootState } from 'src/services/redux/rootReducer';
+import { useAppDispatch } from 'src/services/redux/store';
 
 export const Profile = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const profile = useSelector((state) => state[reduxState.USER_PROFILE]);
+  const profile = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
   const [disableButton, setDisableButton] = useState(true);
   const [organization, setOrganization] = useState('');
 
-  const userAvatar = useSelector((state) => state[reduxState.USER_PROFILE].photo.image);
+  const userAvatar = useSelector((state: IRootState) => state[reduxState.USER_PROFILE].photo.image);
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value ? setDisableButton(false) : setDisableButton(true);
     setOrganization(e.target.value);
   };

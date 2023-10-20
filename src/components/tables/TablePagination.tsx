@@ -4,7 +4,7 @@ import { PaginationContainer, RowCounter, PageSelector } from '../../styles/Styl
 interface ITablePaginationProps {
   totalItems: number;
   pageSize?: number;
-  handlePageChange: (e: any, data: any) => void;
+  handlePageChange: (e: React.ChangeEvent<HTMLInputElement>, data: any) => void;
   isLoading?: boolean;
 }
 
@@ -19,7 +19,7 @@ const TablePagination: React.FC<ITablePaginationProps> = (props) => {
   const lastItemInPage = Math.min(pageSize * currentPage, totalItems);
   const firstItemInPage = (currentPage - 1) * pageSize + 1;
 
-  const onPageChange = (e: any, data: any) => {
+  const onPageChange = (e: React.ChangeEvent<HTMLInputElement>, data: any) => {
     setCurrentPage(data.activePage);
 
     props.handlePageChange(e, data);

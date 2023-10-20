@@ -90,7 +90,7 @@ const ResourceList = () => {
   const initialQuery = `?$top=${pageSize}&$skip=${skip}`;
   const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
 
-  const handlePageChange = (e: any, data: any) => {
+  const handlePageChange = (e: React.ChangeEvent<HTMLInputElement>, data: any) => {
     setSkip((data.activePage - 1) * 10);
   };
 

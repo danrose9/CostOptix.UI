@@ -80,7 +80,7 @@ stages:
 
   - stage: DeployProdStage
     displayName: Deploy Prod
-    dependsOn: RunE2ETests
+    dependsOn: DeployDevStage
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
     jobs:
       - deployment: DeployProdJob

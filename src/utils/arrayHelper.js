@@ -11,10 +11,14 @@ export function computeNewValue(arrayItem, newObj, provider) {
   return isNaN(formattedNumber) ? 0 : formattedNumber;
 }
 
+/// <summary>
+/// Combines payload with state.data and sorts by sortBy property
+/// Returns a limited array based on limit
+/// </summary>
 export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
   const data = state.data;
   const newArray = payload[slice];
-
+  console.log('payload', payload);
   const updatedArray = newArray.map((obj) => ({
     ...obj,
     accountName: payload.accountName,
@@ -32,6 +36,10 @@ export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
   return limitedArray;
 };
 
+/// <summary>
+/// Combines payload with state.data and to return a single array by date
+/// If isCurrencyConflict is true then use amountConverted
+/// </summary>
 export const upsert = (array, payload, isCurrencyConflict) => {
   const provider = payload.provider;
 
@@ -83,6 +91,7 @@ export const upsert = (array, payload, isCurrencyConflict) => {
     }
   });
 
+  console.log('newArray', newArray);
   return newArray;
 };
 

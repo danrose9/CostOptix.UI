@@ -26,7 +26,7 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
 
   const dispatch = useDispatch();
 
-  const handlePageChange = (e: any, data: any) => {
+  const handlePageChange = (e: React.ChangeEvent<HTMLInputElement>, data: any) => {
     setSkip((data.activePage - 1) * 10);
   };
 
