@@ -118,7 +118,7 @@ const costDashboardSlice = createSlice({
         action.payload,
         'mostExpensive',
         'amount30Day',
-        10
+        5
       );
 
       state.mostExpensive.isLoading = false;
@@ -129,7 +129,7 @@ const costDashboardSlice = createSlice({
         action.payload,
         'fastestGrowing',
         'growth30Day',
-        10
+        5
       );
 
       state.fastestGrowing.isLoading = false;

@@ -13,7 +13,7 @@ import { StyledTableRow } from '../../../tables/DefaultTableStyles';
 interface ICostContainerResourceListProps {
   resources: IResource[];
   count: number;
-  handlePageChange: (e: any, data: any) => void;
+  handlePageChange: (e: React.ChangeEvent<HTMLInputElement>, data: any) => void;
 }
 
 export const CostContainerResourceList: React.FC<ICostContainerResourceListProps> = ({

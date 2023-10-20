@@ -47,7 +47,7 @@ export const FastestGrowingInstance = () => {
         <Table.Header onClick={handleOnClick} data-testid="table-header-1">
           <Table.Row>
             <StyledHeaderCell colSpan="2" data-testid="fastest-growing-resources">
-              Fastest Growing Resources
+              Top 5 Fastest Growing Resources
             </StyledHeaderCell>
           </Table.Row>
         </Table.Header>
