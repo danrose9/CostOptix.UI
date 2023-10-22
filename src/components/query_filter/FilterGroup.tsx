@@ -57,7 +57,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
 
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
-    (e: any, { value }: any) => {
+    (e: React.ChangeEvent<HTMLInputElement>, { value }: any) => {
       setValue(value);
       if (attribute === 'field') {
         setOperator(''); // reset operator when field changes

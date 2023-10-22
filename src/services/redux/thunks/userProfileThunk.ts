@@ -39,7 +39,7 @@ export const incrementLoginCount = createAsyncThunk(
 
 export const setOrganizationName = createAsyncThunk(
   'Profile/updateOriganizationName',
-  async (args, { rejectWithValue, dispatch }) => {
+  async (args: string, { rejectWithValue, dispatch }) => {
     await fetchInstance(UPDATE_ORGANIZATION_NAME, {
       method: 'PATCH',
       body: JSON.stringify({ name: args }),

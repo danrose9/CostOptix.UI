@@ -71,7 +71,7 @@ export const MostExpensiveInstance: React.FC<IMostExpensiveInstance> = (props) =
         <Table.Header>
           <Table.Row>
             <StyledHeaderCell data-testid="most-expensive-resources" colSpan={isCurrencyConflict ? 3 : 2}>
-              Most Expensive Resources Last 30 days
+              Top 5 Most Expensive Resources Last 30 days
             </StyledHeaderCell>
           </Table.Row>
           <Table.Row>
