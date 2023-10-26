@@ -7,6 +7,7 @@ import { SectionTitle, StyledFormInput, StyledAvatar, AvatarDiv } from '../../__
 import { IRootState } from 'src/services/redux/rootReducer';
 import { useAppDispatch } from 'src/services/redux/store';
 import DeleteAccountModal from '../../modals/DeleteAccountModal';
+import { withOutDemo, useIsDemo } from '../../hoc/withDemo';
 
 export const Account = () => {
   const dispatch = useAppDispatch();
@@ -14,10 +15,12 @@ export const Account = () => {
   const profile = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
   const [disableButton, setDisableButton] = useState(true);
   const [organization, setOrganization] = useState('');
+  const isDemo = useIsDemo();
 
   const userAvatar = useSelector((state: IRootState) => state[reduxState.USER_PROFILE].photo.image);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isDemo) return;
     e.target.value ? setDisableButton(false) : setDisableButton(true);
     setOrganization(e.target.value);
   };
@@ -26,6 +29,8 @@ export const Account = () => {
     dispatch(setOrganizationName(organization));
     setDisableButton(true);
   };
+
+  const DeleteAccountPane = withOutDemo(Tab.Pane);
 
   return (
     <>
@@ -50,6 +55,7 @@ export const Account = () => {
         <Form size="small">
           <Form.Group widths="equal">
             <StyledFormInput
+              data-testid="organization-name"
               label="Organization Name"
               placeholder={profile.organization.name}
               icon="users"
@@ -69,12 +75,12 @@ export const Account = () => {
           </Button>
         </Form>
       </Tab.Pane>
-      <Tab.Pane color="red">
+      <DeleteAccountPane color="red">
         <SectionTitle>Account</SectionTitle>
         <Form size="small">
           <DeleteAccountModal />
         </Form>
-      </Tab.Pane>
+      </DeleteAccountPane>
     </>
   );
 };

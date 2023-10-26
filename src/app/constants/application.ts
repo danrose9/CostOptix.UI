@@ -16,3 +16,8 @@ export const ENVIRONMENT = {
   DEVELOPMENT: 'development',
   LOCAL: 'local',
 };
+
+export const TITLE = {
+  TERMS: 'Terms of Service',
+  PRIVACY: 'Privacy Policy',
+};

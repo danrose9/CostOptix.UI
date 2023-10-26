@@ -8,26 +8,19 @@ export const PageContainer = styled(Container)`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url(${backgroundImage});
-  background-repeat: no-repeat;
-  background-size: 100%;
-  // background-position:center;
-`;
-
-export const HomePageNav = styled.div`
-  height: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 30px;
-  // border-bottom: 2px solid #C2E2FA;
   
+  &.home-page {
+    background-image: url(${backgroundImage});
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
 `;
 
 export const HomePageMainContent = styled.div`
   height: 87%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  overflow: auto;
 `;
 
 export const StyledHeader = styled.h1`
