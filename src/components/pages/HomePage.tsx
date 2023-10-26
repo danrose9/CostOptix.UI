@@ -11,10 +11,11 @@ import {
   HomePageActions,
   HomePageButton,
 } from '../__styles__/HomePageStyles';
-import { Image, Menu } from 'semantic-ui-react';
+import { Image, Menu, Button } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
+import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -69,9 +70,11 @@ export const HomePage = () => {
               </StyledSubHeader>
             </HomePageSubTitle>
             <HomePageActions>
-              <HomePageButton className="view-demo" role="button" data-testid="login-demo-button">
-                View Demo
-              </HomePageButton>
+              <form method="POST" action={BASE + DEMO_LOGIN}>
+                <HomePageButton className="view-demo" data-testid="login-demo-button">
+                  View Demo
+                </HomePageButton>
+              </form>
             </HomePageActions>
           </HomePageMainLeft>
         </HomePageMainContent>
@@ -81,3 +84,11 @@ export const HomePage = () => {
 };
 
 export default HomePage;
+
+const LoginDemo = () => {
+  return (
+    <form method="POST" action={BASE + DEMO_LOGIN}>
+      <Button data-testid="login-demo-button">View Demo </Button>
+    </form>
+  );
+};

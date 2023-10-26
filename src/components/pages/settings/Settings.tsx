@@ -2,9 +2,9 @@ import React from 'react';
 import { PageContent } from '../../__styles__/DefaultPageStyles';
 import { Tab } from 'semantic-ui-react';
 
-import { Profile } from './index';
+import { Account } from './index';
 
-const panes = [{ menuItem: 'Profile', render: () => <Profile /> }];
+const panes = [{ menuItem: 'Account', render: () => <Account /> }];
 
 interface ISettingsProps {
   activeTab?: number;

@@ -1,4 +1,4 @@
-export { default as Profile } from './Profile';
+export { default as Account } from './Account';
 export { default as ApplicationSettings } from './ApplicationSettings';
 export { default as ChangeLog } from './ChangeLog';
 export { default as Users } from './Users';

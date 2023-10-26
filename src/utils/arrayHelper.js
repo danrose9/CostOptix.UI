@@ -18,7 +18,7 @@ export function computeNewValue(arrayItem, newObj, provider) {
 export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
   const data = state.data;
   const newArray = payload[slice];
-  console.log('payload', payload);
+
   const updatedArray = newArray.map((obj) => ({
     ...obj,
     accountName: payload.accountName,
@@ -91,7 +91,6 @@ export const upsert = (array, payload, isCurrencyConflict) => {
     }
   });
 
-  console.log('newArray', newArray);
   return newArray;
 };
 
