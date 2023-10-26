@@ -3,7 +3,6 @@ import {
   StyledHeader,
   StyledSubHeader,
   PageContainer,
-  HomePageNav,
   HomePageMainContent,
   HomePageMainLeft,
   HomePageTitle,
@@ -11,11 +10,10 @@ import {
   HomePageActions,
   HomePageButton,
 } from '../__styles__/HomePageStyles';
-import { Image, Menu, Button } from 'semantic-ui-react';
-import * as images from '../../assets/index';
+import { Button } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../app/router/appRoutes';
 import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
+import HomePageNav from '../navbar/HomePageNav';
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -26,38 +24,9 @@ export const HomePage = () => {
 
   return (
     <>
-      <PageContainer fluid data-testid="homePage-2">
-        <HomePageNav>
-          <Menu fluid secondary color="green">
-            <Menu.Item>
-              <div>
-                <Image src={images.LOGOBLUE} size="medium" />
-              </div>
-            </Menu.Item>
-            <Menu.Menu position="right">
-              {/* <MenuItem name="Contact" />
-              <MenuItem name="Pricing" />
-              <MenuItem name="About Us" />
-              <MenuItem name="Legal" /> */}
-              <HomePageButton
-                className="login"
-                onClick={() => handleOnClick(appRoutes.LOGIN)}
-                role="button"
-                data-testid="login-ext-button"
-              >
-                Login
-              </HomePageButton>
-              <HomePageButton
-                className="get-started"
-                onClick={() => handleOnClick(appRoutes.SIGNUP)}
-                role="button"
-                data-testid="get-started-button"
-              >
-                Get Started
-              </HomePageButton>
-            </Menu.Menu>
-          </Menu>
-        </HomePageNav>
+      <PageContainer fluid data-testid="homePage-2" className="home-page">
+        <HomePageNav />
+
         <HomePageMainContent>
           <HomePageMainLeft>
             <HomePageTitle>

@@ -2,11 +2,11 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-eDvSVe kMTpRA"
+  className="ui fluid container sc-gKPRtg bTAeLF home-page"
   data-testid="homePage-2"
 >
   <div
-    className="sc-jSUZER ierfPg"
+    className="sc-hBxehG hrFFpj"
   >
     <div
       className="ui green fluid secondary menu"
@@ -26,7 +26,7 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-bqWxrE iFBIFS login"
+          className="sc-ksBlkl gBFVOY login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -34,7 +34,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-bqWxrE iFBIFS get-started"
+          className="sc-ksBlkl gBFVOY get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -45,38 +45,38 @@ exports[`Home Page matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-gKPRtg mlZdj"
+    className="sc-iBYQkv lpljHd"
   >
     <div
-      className="sc-pyfCe LGQrF"
+      className="sc-jrcTuL dNswJq"
     >
       <div
-        className="sc-jrcTuL fTYTOQ"
+        className="sc-kDvujY gQAjHp"
       >
         <h1
-          className="sc-iBYQkv bxfgkn"
+          className="sc-ftTHYK gWWCN"
         >
           Stop Over-Spending on Cloud Services
         </h1>
       </div>
       <div
-        className="sc-kDvujY kLRbAF"
+        className="sc-ipEyDJ chZxhh"
       >
         <p
-          className="sc-ftTHYK fyfblt"
+          className="sc-pyfCe cVTGik"
         >
           A powerful and insightful software suite to explore, understand and take action on cloud services spending
         </p>
       </div>
       <div
-        className="sc-ipEyDJ gBsYSR"
+        className="sc-csuSiG dfAsey"
       >
         <form
           action="undefinedAccount/DemoLogin?returnUrl=/init"
           method="POST"
         >
           <button
-            className="sc-bqWxrE iFBIFS view-demo"
+            className="sc-ksBlkl gBFVOY view-demo"
             data-testid="login-demo-button"
           >
             View Demo
