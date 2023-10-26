@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { PageNotFound404 } from '../pages/index';
+import { PageNotFound404 } from '../index';
 
 import renderer from 'react-test-renderer';
 
