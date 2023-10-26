@@ -12,6 +12,8 @@ export const ApplicationRoutes = () => {
       <Route path={appRoutes.LOGIN} element={<page.Login />} />
       <Route path={appRoutes.AUTH_RESPONSE} element={<page.AuthResponse />} />
       <Route path={appRoutes.HOME} element={<page.Home />} />
+      <Route path={appRoutes.TERMS} element={<page.Terms />} />
+      <Route path={appRoutes.PRIVACY} element={<page.PrivacyPolicy />} />
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
       <Route
