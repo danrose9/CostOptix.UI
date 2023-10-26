@@ -75,9 +75,10 @@ export const MenuMenu = styled(Menu.Menu)`
   
 `;
 
-export const HomePageButton = styled.div`
+export const HomePageButton = styled.button`
   font-size: 1.3em;
-  font-weight: 900;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
   padding: 0.9em;
   cursor: pointer;
   border-radius: 5px;
@@ -87,7 +88,8 @@ export const HomePageButton = styled.div`
   margin: 1em;
   width: 8em;
   align-items: center;
-
+  border: none;
+  
   &.get-started {
     background-color: ${COLORS.BUTTONS.POSITIVE};
     color: ${COLORS.WHITE};
@@ -99,7 +101,6 @@ export const HomePageButton = styled.div`
   &.view-demo {
     background-color: ${COLORS.BUTTONS.POSITIVE};
     color: ${COLORS.WHITE};
-    font-weight: 400;
 
     &:hover {
       background-color: ${COLORS.BUTTONS.POSITIVE_HIGHLIGHT};
@@ -109,6 +110,7 @@ export const HomePageButton = styled.div`
   &.login {
     border: 1px solid #C4C4C4;
     color: ${COLORS.BUTTONS.PRIMARY};
+    
     &:hover {
       border-color: #8B8B8B;
     }

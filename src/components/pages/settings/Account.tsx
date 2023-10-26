@@ -6,8 +6,9 @@ import { setOrganizationName } from '../../../services/redux/thunks/userProfileT
 import { SectionTitle, StyledFormInput, StyledAvatar, AvatarDiv } from '../../__styles__/settings.styles';
 import { IRootState } from 'src/services/redux/rootReducer';
 import { useAppDispatch } from 'src/services/redux/store';
+import DeleteAccountModal from '../../modals/DeleteAccountModal';
 
-export const Profile = () => {
+export const Account = () => {
   const dispatch = useAppDispatch();
 
   const profile = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
@@ -49,7 +50,6 @@ export const Profile = () => {
         <Form size="small">
           <Form.Group widths="equal">
             <StyledFormInput
-              positive
               label="Organization Name"
               placeholder={profile.organization.name}
               icon="users"
@@ -64,13 +64,19 @@ export const Profile = () => {
             />
           </Form.Group>
 
-          <Button color="teal" disabled={disableButton} onClick={handleClick}>
+          <Button color="teal" disabled={disableButton} onClick={handleClick} positive>
             Update
           </Button>
+        </Form>
+      </Tab.Pane>
+      <Tab.Pane color="red">
+        <SectionTitle>Account</SectionTitle>
+        <Form size="small">
+          <DeleteAccountModal />
         </Form>
       </Tab.Pane>
     </>
   );
 };
 
-export default Profile;
+export default Account;
