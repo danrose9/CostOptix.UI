@@ -55,7 +55,7 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, pageSi
 
   useEffect(() => {
     dispatch<AppDispatch>(SEARCH_RESOURCES(initialQuery));
-    console.log('SearchResources: ', initialQuery);
+
     return () => {
       clearTimeout(timeoutRef.current as NodeJS.Timeout);
     };

@@ -25,22 +25,22 @@ exports[`Home Page matches snapshot 1`] = `
       <div
         className="right menu"
       >
-        <div
-          className="sc-bqWxrE lnwLBY login"
+        <button
+          className="sc-bqWxrE iFBIFS login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
         >
           Login
-        </div>
-        <div
-          className="sc-bqWxrE lnwLBY get-started"
+        </button>
+        <button
+          className="sc-bqWxrE iFBIFS get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
         >
           Get Started
-        </div>
+        </button>
       </div>
     </div>
   </div>
@@ -71,13 +71,17 @@ exports[`Home Page matches snapshot 1`] = `
       <div
         className="sc-ipEyDJ gBsYSR"
       >
-        <div
-          className="sc-bqWxrE lnwLBY view-demo"
-          data-testid="login-demo-button"
-          role="button"
+        <form
+          action="undefinedAccount/DemoLogin?returnUrl=/init"
+          method="POST"
         >
-          View Demo
-        </div>
+          <button
+            className="sc-bqWxrE iFBIFS view-demo"
+            data-testid="login-demo-button"
+          >
+            View Demo
+          </button>
+        </form>
       </div>
     </div>
   </div>
