@@ -19,8 +19,12 @@ export const PageContainer = styled(Container)`
 export const HomePageMainContent = styled.div`
   height: 87%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   overflow: auto;
+
+  &.center {
+    justify-content: center;
+  }
 `;
 
 export const StyledHeader = styled.h1`

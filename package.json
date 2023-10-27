@@ -1,6 +1,6 @@
 {
   "name": "costoptix.ui",
-  "version": "0.4.96",
+  "version": "0.4.97",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.0",
