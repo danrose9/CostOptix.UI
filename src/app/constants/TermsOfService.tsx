@@ -54,7 +54,7 @@ export const TermsOfService = () => {
           <li>
             <strong>3. Copyright notice</strong>
             <OrderedList>
-              <li>3.1 Copyright (c) 2022 ddiware</li>
+              <li>3.1 Copyright (c) 2023 DDIware LTD</li>
               <li>
                 3.2 Subject to the express provisions of these terms and conditions:
                 <OrderedList>
@@ -379,12 +379,10 @@ export const TermsOfService = () => {
           <li>
             <strong>17. Law and jurisdiction</strong>
             <OrderedList>
-              <li>
-                17.1 These terms and conditions shall be governed by and construed in accordance with Canadian law.
-              </li>
+              <li>17.1 These terms and conditions shall be governed by and construed in accordance with UK law.</li>
               <li>
                 17.2 Any disputes relating to these terms and conditions shall be subject to the jurisdiction of the
-                courts of Canada.
+                courts of the United Kingdom.
               </li>
             </OrderedList>
           </li>
