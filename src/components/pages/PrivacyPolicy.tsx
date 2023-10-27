@@ -15,7 +15,7 @@ export const PrivacyPolicy = () => {
         <Header as="h1" textAlign="center">
           {TITLE.PRIVACY}
         </Header>
-        <HomePageMainContent>
+        <HomePageMainContent className="centre">
           <PrivacyPolicyContent />
         </HomePageMainContent>
       </PageContainer>
