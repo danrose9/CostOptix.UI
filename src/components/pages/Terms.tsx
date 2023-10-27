@@ -15,7 +15,7 @@ export const Terms = () => {
         <Header as="h1" textAlign="center">
           {TITLE.TERMS}
         </Header>
-        <HomePageMainContent className="centre">
+        <HomePageMainContent className="center">
           <TermsOfService />
         </HomePageMainContent>
       </PageContainer>

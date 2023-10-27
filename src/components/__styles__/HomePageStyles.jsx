@@ -22,7 +22,7 @@ export const HomePageMainContent = styled.div`
   justify-content: space-between;
   overflow: auto;
 
-  &.centre {
+  &.center {
     justify-content: center;
   }
 `;
