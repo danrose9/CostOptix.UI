@@ -18,5 +18,4 @@ export { default as HelpPage } from './HelpPage';
 export { default as PageLayout } from './PageLayout';
 export { default as CostContainerPage } from './cost-containers/CostContainerPage';
 export { default as QueryFilter } from '../query_filter/QueryFilter';
-export { default as Terms } from './Terms';
-export { default as PrivacyPolicy } from './PrivacyPolicy';
+export { default as LegalNotice } from './LegalNotice';

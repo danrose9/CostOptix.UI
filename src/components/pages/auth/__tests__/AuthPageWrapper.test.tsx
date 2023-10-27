@@ -23,7 +23,7 @@ describe('AuthPageWrapper', () => {
     fireEvent.click(privacyPolicyButton);
 
     // Assuming you have some identifiable text or element in your PrivacyPolicy component
-    const privacyPolicyContent = screen.getByTestId('privacy-03');
+    const privacyPolicyContent = screen.getByText(/This Privacy Policy outlines/i);
     expect(privacyPolicyContent).toBeInTheDocument();
   });
 
@@ -31,8 +31,7 @@ describe('AuthPageWrapper', () => {
     const termsOfServiceButton = screen.getByText(/Terms of Service/i);
     fireEvent.click(termsOfServiceButton);
 
-    // Assuming you have some identifiable text or element in your TermsOfService component
-    const termsOfServiceContent = screen.getByTestId('terms-03');
+    const termsOfServiceContent = screen.getByText(/1.1 These terms and conditions shall/i);
     expect(termsOfServiceContent).toBeInTheDocument();
   });
 });
