@@ -32,6 +32,11 @@ const AddNewContainerRow = styled(Table.Row)`
   line-height: 2.5em;
 `;
 
+const ProviderImageWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
+
 interface IAddNewContainerProps {
   handleContainerAction?: (id: string | null, action: ContainerAction) => void;
 }
@@ -123,13 +128,13 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                       <TinyLineChart data={orderData} width={150} height={30} dataKey="amountConverted" />
                     </Table.Cell>
                     <Table.Cell singleLine>
-                      {container.cloudProviders
-                        ? container.cloudProviders.map((provider, index) => (
-                            <Header key={index}>
-                              <ProviderImage provider={provider} size="small" />
-                            </Header>
-                          ))
-                        : null}
+                      <ProviderImageWrapper>
+                        {container.cloudProviders
+                          ? container.cloudProviders.map((provider, index) => (
+                              <ProviderImage provider={provider} size="mini" key={index} />
+                            ))
+                          : null}
+                      </ProviderImageWrapper>
                     </Table.Cell>
                     <Table.Cell singleLine textAlign="right">
                       ${container.amount30Day}
