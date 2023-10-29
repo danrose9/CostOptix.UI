@@ -6,6 +6,8 @@ import { reduxState } from 'src/services/redux/reduxState';
 import { Logout } from '../../components/auth/Logout';
 import * as appRoutes from '../../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
+import { deleteOrganization } from 'src/services/api/deleteOrganization';
+import WarningMessage from '../messages/WarningMessage';
 
 interface IDeleteAccountProps {}
 
@@ -14,15 +16,25 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
   const [pendingDelete, setPendingDelete] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
+  const [showWarning, setShowWarning] = useState(false);
   const navigate = useNavigate();
 
   const { organization } = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setPendingDelete(true);
-    // TODO: Delete account
-    Logout();
-    navigate(appRoutes.HOME);
+
+    const response = await deleteOrganization();
+    console.log('response', response);
+    // Check if the response is 204 (No Content) which indicates successful deletion
+    if (response && response.status === 204) {
+      Logout();
+      navigate(appRoutes.HOME);
+    } else {
+      setPendingDelete(false);
+      setShowWarning(true);
+      console.error('Failed to delete the organization after 3 retries', response.data);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +43,6 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
 
   return (
     <Modal
-      // basic
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
@@ -54,6 +65,9 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
             <input placeholder="Organization Name" value={inputValue} onChange={handleInputChange} />
           </Form.Field>
         </Form>
+      </Modal.Content>
+      <Modal.Content>
+        {showWarning && <WarningMessage content="Oops! that didn't seems to work, try again" />}
       </Modal.Content>
       <Modal.Actions>
         <Button basic color="green" onClick={() => setOpen(false)}>

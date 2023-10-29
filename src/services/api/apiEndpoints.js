@@ -9,6 +9,7 @@ export const AZURE_AGREEMENT_TYPE = 'AzureManagement/AgreementType';
 export const AZURE_BILLING_INVOICES = 'AzureManagement/invoices';
 export const LANDING_PAGE = 'lp';
 export const ACCOUNT_ME = 'Account/Me';
+export const ACCOUNT = 'Account';
 export const ACCOUNT_PHOTO = 'Account/Photo';
 export const INCREMENT_LOGIN_COUNT = 'Account/IncrementLoginCount';
 export const PROVIDERS = 'Providers';

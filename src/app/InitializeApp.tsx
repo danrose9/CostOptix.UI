@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Navigate } from 'react-router-dom';
+import * as appRoutes from './router/appRoutes';
 
 import { isAuthCookieAvailable } from '../utils/processToken';
 
@@ -14,7 +15,7 @@ const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
     }
   }, []);
 
-  return <>{isAuthenticated ? <Navigate to="/lp" /> : <Navigate to="/" />}</>;
+  return <>{isAuthenticated ? <Navigate to={appRoutes.LANDING_PAGE} /> : <Navigate to={appRoutes.ROOT} />}</>;
 };
 
 export default InitializeApp;
