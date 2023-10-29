@@ -3,6 +3,7 @@ import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { INewCostContainer, ContainerAction } from '../../../../types/container-types';
 import { ButtonGroup } from '../../../__styles__/ButtonStyles';
+import { useIsDemo } from 'src/components/hoc/withDemo';
 
 interface ICostContainerProfileProps {
   isQueryValid: boolean;
@@ -31,9 +32,11 @@ export const CostContainerProfile: React.FC<ICostContainerProfileProps> = ({
     setSaveButtonDisabled(false);
   };
 
+  const isDemo = useIsDemo();
   const [saveButtonDisabled, setSaveButtonDisabled] = useState<boolean>(true);
 
   const handleSaveBuilder = (e: any) => {
+    if (isDemo) return;
     e.preventDefault();
     handleSaveContainer({
       id: activeContainer ? activeContainer.id : '',
