@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ACCOUNT_ME, INCREMENT_LOGIN_COUNT, UPDATE_ORGANIZATION_NAME, ACCOUNT_PHOTO } from '../../api/apiEndpoints';
-// import { updateOrganizationName } from '../reducers/userProfileSlice';
 import fetchInstance from '../../api/fetchInstance';
 import { getDefaultAvatarUrl } from '../../../utils/getDefaultAvatarUrl';
 

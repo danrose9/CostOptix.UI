@@ -5,7 +5,7 @@ import { SemanticFLOATS, SemanticSIZES } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledImage = styled(Image)`
-  margin: 0.5em !important;
+  margin: 0 0.5em !important;
 `;
 
 interface IProps {

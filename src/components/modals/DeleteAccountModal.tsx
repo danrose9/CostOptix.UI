@@ -1,28 +1,42 @@
 import React, { useState } from 'react';
-import { Modal, Button, Header, Icon, Form } from 'semantic-ui-react';
+import { Modal, Button, Header, Icon, Form, Message } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'src/services/redux/rootReducer';
 import { reduxState } from 'src/services/redux/reduxState';
 import { Logout } from '../../components/auth/Logout';
 import * as appRoutes from '../../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
+import { deleteOrganization } from 'src/services/api/deleteOrganization';
+import WarningMessage from '../messages/WarningMessage';
 
 interface IDeleteAccountProps {}
 
 const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
-  const [open, setOpen] = useState(false);
-  const [pendingDelete, setPendingDelete] = useState(false);
+  const [firstOpen, setFirstOpen] = useState(false);
+  const [secondOpen, setSecondOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
+  const [showWarning, setShowWarning] = useState(false);
   const navigate = useNavigate();
 
   const { organization } = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
 
-  const handleClick = () => {
-    setPendingDelete(true);
-    // TODO: Delete account
-    Logout();
-    navigate(appRoutes.HOME);
+  const handleClick = async () => {
+    setSecondOpen(true);
+
+    const response = await deleteOrganization();
+
+    // Add delayed response
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    // Check if the response is 204 (No Content) which indicates successful deletion
+    if (response && response.status === 204) {
+      Logout();
+      navigate(appRoutes.HOME);
+    } else {
+      setShowWarning(true);
+      console.error('Failed to delete the organization after 3 retries', response.data);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,15 +45,18 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
 
   return (
     <Modal
-      // basic
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
+      onClose={() => setFirstOpen(false)}
+      onOpen={() => setFirstOpen(true)}
+      open={firstOpen}
       size="small"
-      trigger={<Button color="red">Delete Account</Button>}
+      trigger={
+        <Button color="red" data-testid="delete-account-button">
+          Delete Account
+        </Button>
+      }
     >
-      <Header icon>
-        <Icon name="trash" />
+      <Header>
+        <Icon name="trash alternate" />
         Delete CostOptix Account
       </Header>
       <Modal.Content>
@@ -55,14 +72,33 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
           </Form.Field>
         </Form>
       </Modal.Content>
+      <Modal.Content>
+        {showWarning && <WarningMessage content="Oops! that didn't seems to work, try again" />}
+      </Modal.Content>
       <Modal.Actions>
-        <Button basic color="green" onClick={() => setOpen(false)}>
+        <Button basic color="green" onClick={() => setFirstOpen(false)}>
           <Icon name="remove" /> Return
         </Button>
-        <Button color="red" onClick={handleClick} loading={pendingDelete} disabled={inputValue !== organization.name}>
-          <Icon name="checkmark" /> Continue
+        <Button color="red" onClick={handleClick} disabled={inputValue !== organization.name}>
+          <Icon name="checkmark" /> Delete
         </Button>
       </Modal.Actions>
+      <Modal
+        onClose={() => setSecondOpen(false)}
+        open={secondOpen}
+        size="small"
+        closeOnDocumentClick={false}
+        closeOnDimmerClick={false}
+        closeOnEscape={false}
+      >
+        <Message icon>
+          <Icon name="circle notched" loading color="green" />
+          <Message.Content>
+            <Message.Header>Sorry to see you go!</Message.Header>
+            Just one second we are now removing all data for {organization.name} from our systems.
+          </Message.Content>
+        </Message>
+      </Modal>
     </Modal>
   );
 };

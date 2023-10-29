@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from 'src/services/redux/store';
-import { Store, configureStore } from '@reduxjs/toolkit';
+import { Store } from '@reduxjs/toolkit';
 import Account from '../Account'; // Adjust the import path accordingly
 import { IRootState } from 'src/services/redux/rootReducer'; // Adjust the import path accordingly
 import { BrowserRouter as Router } from 'react-router-dom';

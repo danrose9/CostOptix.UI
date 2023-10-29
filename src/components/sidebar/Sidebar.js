@@ -1,10 +1,6 @@
 import React from 'react';
 import { menuItems } from './SidebarItems';
-import {
-  StyledMenu,
-  StyledMenuExtra,
-  StyledBrand,
-} from './__styles__/StyledSidebarItems';
+import { StyledMenu, StyledMenuExtra, StyledBrand } from './__styles__/StyledSidebarItems';
 import { StyledSidebar } from '../../styles/AppContent';
 import { ProductName } from '../ProductName';
 import { OrganizationName } from '../OrganizationName';
@@ -15,11 +11,7 @@ export const Sidebar = (props) => {
   const env = process.env.REACT_APP_ENV;
 
   return (
-    <StyledSidebar
-      data-testid="sidebar-1"
-      className="vertical"
-      toggleSidebar={props.sidebarState}
-    >
+    <StyledSidebar data-testid="sidebar-1" className="vertical" toggleSidebar={props.sidebarState}>
       <StyledBrand>
         <ProductName />
       </StyledBrand>
@@ -34,7 +26,6 @@ export const Sidebar = (props) => {
       {env === 'production' ? null : (
         <StyledMenuExtra>
           <Divider clearing />
-          {/* <StyledSectionHeader>Development Pages</StyledSectionHeader> */}
           {menuItems
             .filter((item) => item.dev === true)
             .map((item, index) => {
