@@ -18,9 +18,11 @@ describe('Login flow', () => {
   //   cy.loginToAAD(Cypress.env('aad_93456387_username_1'), Cypress.env('aad_93456387_password_1'));
   //   cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.COST_DASHBOARD}`);
   //   cy.contains(Cypress.env('aad_93456387_fullname_1')).should('be.visible');
+  //   cy.contains('Settings').click();
+
   //   cy.logout();
 
-  //   cy.deleteOrganization(Cypress.env('aad_organizationname_93456387'));
+  //   // cy.deleteOrganization(Cypress.env('aad_organizationname_93456387'));
   // });
 
   // test('#2. organization has not signed up and user selects login', () => {
