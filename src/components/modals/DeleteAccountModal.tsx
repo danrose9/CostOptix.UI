@@ -49,7 +49,11 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
       onOpen={() => setFirstOpen(true)}
       open={firstOpen}
       size="small"
-      trigger={<Button color="red">Delete Account</Button>}
+      trigger={
+        <Button color="red" data-testid="delete-account-button">
+          Delete Account
+        </Button>
+      }
     >
       <Header>
         <Icon name="trash alternate" />
