@@ -20,6 +20,9 @@ describe('Login flow', () => {
     cy.contains(Cypress.env('aad_93456387_fullname_1')).should('be.visible');
     cy.contains('Settings').click();
     cy.get('[data-testid="delete-account-button"]').click();
+    // cy.wait(3000);
+    // cy.get('[data-testid="organization-name-input"]').should('be.visible');
+
     // cy.deleteOrganization(Cypress.env('aad_organizationname_93456387'));
   });
 

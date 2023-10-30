@@ -19,6 +19,10 @@ const Navbar = styled.div`
   }
 `;
 
+const ImageWrapper = styled.div`
+  cursor: pointer;
+`;
+
 interface INavbarProps {
   className?: string;
 }
@@ -35,15 +39,15 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
       <Navbar className={className}>
         <Menu fluid secondary color="green">
           <Menu.Item>
-            <div>
-              <Image src={images.LOGOBLUE} size="medium" />
-            </div>
+            <ImageWrapper>
+              <Image src={images.LOGOBLUE} size="medium" onClick={() => handleOnClick(appRoutes.ROOT)} />
+            </ImageWrapper>
           </Menu.Item>
           <Menu.Menu position="right">
-            {/* <MenuItem name="Contact" />
-              <MenuItem name="Pricing" />
-              <MenuItem name="About Us" />
-              <MenuItem name="Legal" /> */}
+            {/* <Menu.Item name="Contact" />
+            <Menu.Item name="Pricing" />
+            <Menu.Item name="About Us" />
+            <Menu.Item name="Legal" /> */}
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}

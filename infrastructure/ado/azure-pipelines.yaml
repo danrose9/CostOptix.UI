@@ -16,6 +16,7 @@ variables:
   kvServiceConnection: DEV KV Service Connection
   apiUrlDev: 'https://api.dev.costoptix.com'
   apiUrlProd: 'https://api.costoptix.com'
+  runE2ETests: false
 
 stages:
   - stage: BuildStage
@@ -69,7 +70,7 @@ stages:
   - stage: RunE2ETests
     displayName: Run Dev E2E Tests
     dependsOn: DeployDevStage
-    condition: and(succeeded(), eq(variables.isPullRequest, 'false'))
+    condition: and(succeeded(), eq(variables.isPullRequest, 'false'), eq(variables.runE2ETests, 'true'))
     jobs:
       - job: RunE2ETests
         displayName: Run E2E Tests
