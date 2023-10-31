@@ -4,7 +4,6 @@ import { Image, Menu, Button } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
-import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
 import styled from 'styled-components';
 
 const Navbar = styled.div`
