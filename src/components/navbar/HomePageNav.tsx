@@ -4,7 +4,6 @@ import { Image, Menu, Button } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
-import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
 import styled from 'styled-components';
 
 const Navbar = styled.div`
@@ -17,6 +16,10 @@ const Navbar = styled.div`
   &.nav-border {
     border-bottom: 2px solid #c2e2fa;
   }
+`;
+
+const ImageWrapper = styled.div`
+  cursor: pointer;
 `;
 
 interface INavbarProps {
@@ -35,15 +38,15 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
       <Navbar className={className}>
         <Menu fluid secondary color="green">
           <Menu.Item>
-            <div>
-              <Image src={images.LOGOBLUE} size="medium" />
-            </div>
+            <ImageWrapper>
+              <Image src={images.LOGOBLUE} size="medium" onClick={() => handleOnClick(appRoutes.ROOT)} />
+            </ImageWrapper>
           </Menu.Item>
           <Menu.Menu position="right">
-            {/* <MenuItem name="Contact" />
-              <MenuItem name="Pricing" />
-              <MenuItem name="About Us" />
-              <MenuItem name="Legal" /> */}
+            {/* <Menu.Item name="Contact" />
+            <Menu.Item name="Pricing" />
+            <Menu.Item name="About Us" />
+            <Menu.Item name="Legal" /> */}
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}

@@ -67,7 +67,7 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
           Type in the name of your organization, <strong>{organization.name}</strong>, to continue.
         </p>
         <Form>
-          <Form.Field>
+          <Form.Field data-testid="organization-name-input">
             <input placeholder="Organization Name" value={inputValue} onChange={handleInputChange} />
           </Form.Field>
         </Form>
