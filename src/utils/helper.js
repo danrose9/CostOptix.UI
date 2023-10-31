@@ -83,8 +83,18 @@ export function formatDateFull(inputDate) {
   }
 }
 
+export function formatDateToShort(dateString) {
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const date = new Date(dateString);
+  const month = monthNames[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${month} ${year}`;
+}
+
 // convert date YYYY-MM-DD to MMM YYYY
-export function formatDateToShort(inputDate) {
+export function formatDateToShort_old(inputDate) {
   try {
     const year = inputDate.substring(0, 4);
     const month = inputDate.substring(5, 7);
