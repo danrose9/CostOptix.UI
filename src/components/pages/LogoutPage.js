@@ -23,7 +23,7 @@ const LogoutPage = () => {
       <Modal size="tiny" closeOnEscape={false} closeOnDimmerClick={false} open={isOpen}>
         <Modal.Header>Logout</Modal.Header>
         <Modal.Content>
-          <p>Are you about to be logged out from CostOptix, do you wish to continue?</p>
+          <p>You are about to be logged out from CostOptix, do you wish to continue?</p>
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={() => handleClick()}>No thanks, take me back</Button>
