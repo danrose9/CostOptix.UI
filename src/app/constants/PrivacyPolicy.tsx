@@ -8,7 +8,7 @@ export const PrivacyPolicy = () => {
         <strong>1. Introduction</strong>
         <OrderedList>
           <li>
-            Welcome to DDIWare ("we," "our," or "us"). At DDIWare, we are committed to protecting your privacy and
+            Welcome to DDIware ("we," "our," or "us"). At DDIware, we are committed to protecting your privacy and
             handling your personal data with care. This Privacy Policy outlines how we collect, use, disclose, and
             protect your personal information when you use our SaaS platform and related services.
           </li>
@@ -104,6 +104,8 @@ export const PrivacyPolicy = () => {
           </li>
         </OrderedList>
       </li>
+      <br />
+      <br />
     </OrderedList>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
-import { Table, Segment, Popup, Card } from 'semantic-ui-react';
+import { Table, Segment, Card } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
@@ -11,6 +11,7 @@ import { StyledTableRow } from '../../tables/DefaultTableStyles';
 import { IBillingAccountFastestGrowing } from '../../../types/billing-account-types';
 import { getEmbeddedResourceName } from 'src/utils/stringFormatter';
 import { IRootState } from 'src/services/redux/rootReducer';
+import { StyledTooltip } from '../../tooltips/__styles__/StyledTooltip';
 
 interface IToolTipData {
   instance: {
@@ -63,7 +64,7 @@ export const FastestGrowingInstance = () => {
             .filter((instance: IBillingAccountFastestGrowing) => instance.growth30Day)
             .map((instance: IBillingAccountFastestGrowing, index: any) => {
               return (
-                <Popup
+                <StyledTooltip
                   key={index}
                   trigger={
                     <Table.Row
@@ -87,7 +88,7 @@ export const FastestGrowingInstance = () => {
                       <ToolTipData instance={instance} />
                     </StandardTooltip>
                   }
-                ></Popup>
+                ></StyledTooltip>
               );
             })}
         </Table.Body>

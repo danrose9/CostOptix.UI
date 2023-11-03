@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
-import { Table, Segment, Popup, Card } from 'semantic-ui-react';
+import { Table, Segment, Card } from 'semantic-ui-react';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
@@ -11,6 +11,7 @@ import { StandardTooltip, TooltipDescription } from '../../tooltips';
 import { IRootState } from 'src/services/redux/rootReducer';
 import { IBillingAccountMostExpensive } from '../../../types/billing-account-types';
 import { getEmbeddedResourceName } from 'src/utils/stringFormatter';
+import { StyledTooltip } from '../../tooltips/__styles__/StyledTooltip';
 
 interface IToolTipData {
   instance: {
@@ -95,7 +96,7 @@ export const MostExpensiveInstance: React.FC<IMostExpensiveInstance> = (props) =
               const convertedCurrencySymbol = getSymbolFromCurrency(instance.convertedCurrency);
 
               return (
-                <Popup
+                <StyledTooltip
                   key={index}
                   trigger={
                     <Table.Row
@@ -131,7 +132,7 @@ export const MostExpensiveInstance: React.FC<IMostExpensiveInstance> = (props) =
                       />
                     </StandardTooltip>
                   }
-                ></Popup>
+                ></StyledTooltip>
               );
             })}
         </Table.Body>

@@ -13,10 +13,20 @@ import {
 import AuthPageWrapper from './AuthPageWrapper';
 import { validateEmail } from '../../../utils/formValidation';
 import CloseButton from '../../buttons/CloseButton';
+import styled from 'styled-components';
+import LegalDeclarationsModal from 'src/components/modals/LegalDeclarationsModal';
+import { TermsOfService } from 'src/app/constants';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
+const TermsOfServiceWrapper = styled.div`
+  display: flex;
+  & > a {
+    margin-left: 5px;
+  }
+`;
 
 interface ISignupProps {}
 
@@ -80,7 +90,17 @@ const Signup: React.FC<ISignupProps> = (props) => {
                 value={emailAddress}
                 onChange={validateForm}
               />
-              <Form.Checkbox label="I agree to the Terms of Service" required id="terms" onChange={validateForm} />
+              <TermsOfServiceWrapper>
+                <Form.Checkbox label="I agree to the" id="terms" onChange={validateForm} />
+                {/* <a>Terms of Service *</a> */}
+                <LegalDeclarationsModal
+                  header="Terms of Service"
+                  icon="handshake outline"
+                  data-testid="tos-modal-trigger"
+                >
+                  <TermsOfService />
+                </LegalDeclarationsModal>
+              </TermsOfServiceWrapper>
             </Form>
             {error ? (
               <Message icon warning>

@@ -47,9 +47,9 @@ export const InputContainer = styled.div`
 export const TermsContainer = styled.div`
   display: flex;
   justify-content: center;
-  // padding: 2em;
-  & a {
-    padding: 0 3em;
+  padding: 2em;
+  & p {
+    padding: 0 4em;
   }
 `;
 
