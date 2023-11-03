@@ -7,7 +7,6 @@ export const userLogout = () => {
 
 export const Logout = () => {
   store.dispatch(userLogout());
-
   sessionStorage.removeItem('persist:root');
   sessionStorage.removeItem('authTokens');
   removeAuthCookie();
