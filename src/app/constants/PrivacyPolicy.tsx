@@ -104,6 +104,8 @@ export const PrivacyPolicy = () => {
           </li>
         </OrderedList>
       </li>
+      <br />
+      <br />
     </OrderedList>
   );
 };

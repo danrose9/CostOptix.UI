@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledText = styled.p`
   cursor: pointer;
   color: #1f70bf;
-  padding: 2em;
+  padding-left: 5px;
 `;
 
 const HeaderComponents = styled(Modal.Header)`
@@ -16,7 +16,6 @@ const HeaderComponents = styled(Modal.Header)`
 
 const LastUpdated = styled.p`
   font-size: 0.6em;
-
   font-weight: 100;
 `;
 
