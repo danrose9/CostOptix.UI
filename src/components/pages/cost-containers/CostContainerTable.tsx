@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import styled from 'styled-components';
-import { Segment, Table, Icon, Dropdown, Header } from 'semantic-ui-react';
+import { Segment, Table, Icon, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../charts/TinyLineChart';
 import InformationButton from '../../buttons/InformationButton';
 import { CostContainerBuilder, CostContainerViewer, CostContainerOptions } from './index';

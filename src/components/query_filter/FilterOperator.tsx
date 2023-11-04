@@ -16,7 +16,7 @@ const FilterOperator: React.FC<IFilterOperatorProps> = ({ dispatch, index, value
       type: 'UPDATE_CONDITIONAL_OPERATOR',
       payload: { value: conditionalOperator, index: index },
     });
-  }, [conditionalOperator, dispatch]);
+  }, [conditionalOperator, dispatch, index]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, { value }: any) => {
     setConditionalOperator(value);

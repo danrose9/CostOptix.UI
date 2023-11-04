@@ -106,3 +106,20 @@ Cypress.Commands.add('fillSignUpForm', (username: string) => {
   log.snapshot('after');
   log.end();
 });
+
+Cypress.Commands.add('login', (username: string, password: string) => {
+  const log = Cypress.log({
+    displayName: 'CostOptix Login',
+    message: [`🔐 Authenticating | ${username}`],
+    autoEnd: false,
+  });
+  log.snapshot('before');
+
+  cy.get('[data-testid="login-ext-button"]').click();
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.LOGIN}`);
+  cy.contains('Continue with Azure').should('be.visible').click();
+  cy.loginToAAD(username, password);
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.COST_DASHBOARD}`);
+  log.snapshot('after');
+  log.end();
+});

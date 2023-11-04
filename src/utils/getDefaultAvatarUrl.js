@@ -1,6 +1,6 @@
 export const getDefaultAvatarUrl = () => {
   const sessionToken = JSON.parse(sessionStorage.getItem('authTokens'));
-  const loggedInUser = sessionToken.name;
+  let loggedInUser = sessionToken.name;
   if (!loggedInUser) {
     loggedInUser = 'User';
   }

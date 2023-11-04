@@ -9,6 +9,7 @@ import {
 } from '../__styles__/StyledQueryFilter';
 import FilterGroupActionButtons from './FilterGroupActionButtons';
 import FilterOperator from './FilterOperator';
+import { DropdownItemProps, Dropdown } from 'semantic-ui-react';
 
 interface IFilterGroupProps {
   count: number;
@@ -38,9 +39,9 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   const conditionalOperator = initialData ? initialData[containerIndex].conditionalOperator : 'and';
 
   const [currentFilter, setCurrentFilter] = useState(null);
-
+  const [isSelectionField, setIsSelectionField] = useState(false);
   const [availableOperators, setAvailableOperators] = useState(operators);
-
+  const [options, setOptions] = useState([] as DropdownItemProps[]);
   const isValidValue = (value: any) => value !== undefined && value !== '';
 
   const allFieldsValid = (field: any, operator: any, filterValue: any) =>
@@ -57,9 +58,13 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
 
   const handleFieldChange =
     (attribute: string, setValue: Function) =>
-    (e: React.ChangeEvent<HTMLInputElement>, { value }: any) => {
+    (e: React.ChangeEvent<HTMLInputElement> | React.SyntheticEvent<HTMLElement, Event>, { value }: any) => {
       setValue(value);
       if (attribute === 'field') {
+        // Check if the field is a selection field and update the state
+        const selectedField = fields.find((f) => f.value === value);
+        setIsSelectionField(selectedField ? selectedField.options != null : false);
+        setOptions(selectedField?.options ?? []);
         setOperator(''); // reset operator when field changes
       }
       setCurrentFilter((prevFilter: any) => {
@@ -79,12 +84,14 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   }, [reset]);
 
   useEffect(() => {
-    if (allFieldsValid(field, operator, filterValue)) {
+    const isAllfieldsValid = allFieldsValid(field, operator, filterValue);
+    if (isAllfieldsValid) {
       updateSetIsQueryValid(true);
     } else {
       updateSetIsQueryValid(false);
     }
-  }, [field, operator, filterValue, currentFilter, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field, operator, filterValue, currentFilter, updateSetIsQueryValid]);
 
   useEffect(() => {
     dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: containerIndex } });
@@ -122,11 +129,20 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
-            <StyledInput
-              placeholder="Enter filter value"
-              onChange={handleFieldChange('value', setFilterValue)}
-              value={filterValue}
-            />
+            {isSelectionField ? (
+              <Dropdown
+                placeholder="Select value"
+                selection
+                options={options}
+                onChange={handleFieldChange('value', setFilterValue)}
+              />
+            ) : (
+              <StyledInput
+                placeholder="Enter filter value"
+                onChange={handleFieldChange('value', setFilterValue)}
+                value={filterValue}
+              />
+            )}
           </StyledFieldContainer>
           <FilterGroupActionButtons
             onAddBtnClick={onAddBtnClick}

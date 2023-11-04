@@ -1,3 +1,5 @@
+import { DropdownItemProps } from 'semantic-ui-react';
+
 type DataType = 'string' | 'number' | 'boolean' | 'date' | 'datetime';
 
 interface Field {
@@ -5,7 +7,13 @@ interface Field {
   text: string;
   value: string;
   datatype: DataType;
+  options?: DropdownItemProps[];
 }
+
+const providerOptions = [
+  { text: 'Azure', value: 'Azure' },
+  { text: 'AWS', value: 'AWS' },
+];
 
 export const dataTypes: Record<DataType, string[]> = {
   string: ['eq', 'ne', 'contains', 'ncontains', 'beginWith', 'endWith'],
@@ -16,9 +24,9 @@ export const dataTypes: Record<DataType, string[]> = {
 };
 
 export const fields: Field[] = [
-  // { key: 1, text: 'Organization', value: 'OrganizationId', datatype: 'string' },
+  // { key: 1, text: 'Organization', value: 'OrganizationId', datatype: 'string'},
   { key: 2, text: 'Billing Account', value: 'BillingAccountName', datatype: 'string' },
-  { key: 3, text: 'Provider', value: 'CloudProvider', datatype: 'string' },
+  { key: 3, text: 'Provider', value: 'CloudProvider', datatype: 'string', options: providerOptions },
   { key: 4, text: 'Resource Id', value: '_id', datatype: 'string' },
   { key: 5, text: 'Resource Name', value: 'ResourceName', datatype: 'string' },
   { key: 6, text: 'Azure Resource Group', value: 'AzureResourceGroup', datatype: 'string' },

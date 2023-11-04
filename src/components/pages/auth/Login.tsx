@@ -46,8 +46,8 @@ const Login: React.FC<ILoginProps> = ({ children }) => {
         </StyledGrid>
         {isSignup ? (
           <TermsContainer>
-            By clicking "continue" with any of the social login options, you are creating an account, and agree to
-            CostOptix Terms of Service and Privacy Policy
+            By clicking "continue" you are creating an account, and agree to CostOptix Terms of Service and Privacy
+            Policy
           </TermsContainer>
         ) : null}
       </InputContainer>

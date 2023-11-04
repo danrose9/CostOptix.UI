@@ -369,6 +369,8 @@ export const TermsOfService = () => {
           <li>18.1 For contact information send an email to info@ddiware.com</li>
         </OrderedList>
       </li>
+      <br />
+      <br />
     </OrderedList>
   );
 };

@@ -32,7 +32,6 @@ export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
   const orderedArray = combinedArray.sort((a, b) => b[sortBy] - a[sortBy]);
 
   const limitedArray = orderedArray.slice(0, limit);
-
   return limitedArray;
 };
 

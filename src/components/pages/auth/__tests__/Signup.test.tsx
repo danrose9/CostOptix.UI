@@ -53,7 +53,7 @@ describe('IdP button Component', () => {
 
     emailInput = screen.getByPlaceholderText('Contact email address');
     organizationInput = screen.getByPlaceholderText('Organization');
-    termsCheckbox = screen.getByLabelText('I agree to the Terms of Service');
+    termsCheckbox = screen.getByLabelText('I agree to the');
     nextButton = screen.getByText('Next');
   });
 
