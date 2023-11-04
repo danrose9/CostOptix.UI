@@ -1,8 +1,6 @@
 import React from 'react';
 import { PageContainer, HomePageMainContent } from '../__styles__/HomePageStyles';
 import { Header, Container } from 'semantic-ui-react';
-import { TermsOfService } from 'src/app/constants';
-import { TITLE } from 'src/app/constants/application';
 import styled from 'styled-components';
 import HomePageNav from '../navbar/HomePageNav';
 

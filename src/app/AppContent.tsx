@@ -34,7 +34,7 @@ export const AppContent = () => {
   };
 
   const { start, pause } = useIdleTimer({
-    timeout: 1000 * 60 * SESSION_TIMEOUT,
+    timeout: 1000 * 60 * parseInt(SESSION_TIMEOUT ?? '0'),
     onIdle: handleOnIdle,
     startManually: true,
     stopOnIdle: true,
@@ -42,12 +42,13 @@ export const AppContent = () => {
   });
 
   useEffect(() => {
-    if (isAuthenticated()) {
+    const authenticated = isAuthenticated();
+    if (authenticated) {
       start();
     } else {
       pause();
     }
-  }, [isAuthenticated(), pause, start]);
+  }, [pause, start]);
 
   return (
     <>

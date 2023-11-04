@@ -10,18 +10,10 @@ import {
   HomePageActions,
   HomePageButton,
 } from '../__styles__/HomePageStyles';
-import { Button } from 'semantic-ui-react';
-import { useNavigate } from 'react-router-dom';
 import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
 import HomePageNav from '../navbar/HomePageNav';
 
 export const HomePage = () => {
-  const navigate = useNavigate();
-
-  const handleOnClick = (route: string) => {
-    navigate(route);
-  };
-
   return (
     <>
       <PageContainer fluid data-testid="homePage-2" className="home-page">
@@ -53,11 +45,3 @@ export const HomePage = () => {
 };
 
 export default HomePage;
-
-const LoginDemo = () => {
-  return (
-    <form method="POST" action={BASE + DEMO_LOGIN}>
-      <Button data-testid="login-demo-button">View Demo </Button>
-    </form>
-  );
-};
