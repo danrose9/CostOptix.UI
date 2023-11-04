@@ -1,6 +1,6 @@
 import React from 'react';
 import { HomePageButton } from '../__styles__/HomePageStyles';
-import { Image, Menu, Button } from 'semantic-ui-react';
+import { Image, Menu } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';

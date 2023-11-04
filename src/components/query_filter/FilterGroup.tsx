@@ -84,12 +84,14 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
   }, [reset]);
 
   useEffect(() => {
-    if (allFieldsValid(field, operator, filterValue)) {
+    const isAllfieldsValid = allFieldsValid(field, operator, filterValue);
+    if (isAllfieldsValid) {
       updateSetIsQueryValid(true);
     } else {
       updateSetIsQueryValid(false);
     }
-  }, [field, operator, filterValue, currentFilter, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field, operator, filterValue, currentFilter, updateSetIsQueryValid]);
 
   useEffect(() => {
     dispatch({ type: 'UPDATE_FILTER', payload: { value: currentFilter, index: containerIndex } });

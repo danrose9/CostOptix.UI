@@ -115,34 +115,43 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
     );
   };
 
-  const fetchBillingAccountData = async (billingAccount: any) => {
-    if (billingAccount.status === 'Transient') {
-      await dispatch<AppDispatch>(fetchTransientBillingAccountCosts(billingAccount.accountId));
-    } else {
-      await dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id));
-    }
-  };
-
   useEffect(() => {
-    if (isBillingAccountsAvailable) {
-      setIsLoading(false);
-    } else {
-      // Fetch a list of billing accounts
-      setAccountStatus('Searching for billing accounts ..');
-      dispatch<AppDispatch>(fetchServiceProviders());
-      dispatch<AppDispatch>(fetchBillingAccounts()).then((response: { payload: any }) => {
-        response.payload?.billingAccounts
-          .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
-          .forEach((billingAccount: IBillingAccount, index: any) => {
-            dispatch(addBillingAccount(billingAccount));
-            fetchBillingAccountData(billingAccount);
-          });
+    if (!isBillingAccountsAvailable) {
+      setIsLoading(true);
+      setAccountStatus('Searching for billing accounts...');
 
-        setAccountStatus(lastUpdated);
-      });
+      const fetchBillingAccountData = async (billingAccount: IBillingAccount) => {
+        if (billingAccount.status === 'Transient') {
+          await dispatch<AppDispatch>(fetchTransientBillingAccountCosts(billingAccount.accountId));
+        } else {
+          await dispatch<AppDispatch>(fetchBillingAccountCosts(billingAccount.id));
+        }
+      };
+
+      const fetchAccountsAndServiceProviders = async () => {
+        try {
+          await dispatch<AppDispatch>(fetchServiceProviders());
+
+          const response = await dispatch<AppDispatch>(fetchBillingAccounts());
+
+          response.payload?.billingAccounts
+            .filter((billingAccount: IBillingAccount) => billingAccount.status !== 'Disabled')
+            .forEach((billingAccount: IBillingAccount, index: any) => {
+              dispatch(addBillingAccount(billingAccount));
+              fetchBillingAccountData(billingAccount);
+            });
+
+          setAccountStatus(lastUpdated);
+        } catch (error) {
+          console.error('Failed to fetch billing accounts or service providers:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      fetchAccountsAndServiceProviders();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, isBillingAccountsAvailable, isCurrencyConflict, lastUpdated]);
+  }, [isBillingAccountsAvailable, lastUpdated, dispatch]);
 
   useEffect(() => {
     isCurrencyConflictCallback(isCurrencyConflict);
