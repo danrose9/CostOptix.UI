@@ -33,7 +33,8 @@ export const fields: Field[] = [
   { key: 7, text: 'Service Name', value: 'Service', datatype: 'string' },
   { key: 8, text: 'Region', value: 'Region', datatype: 'string' },
   { key: 9, text: 'Azure Subscription Id', value: 'AzureSubscriptionId', datatype: 'string' },
-  { key: 10, text: 'Tags', value: 'ResourceTags', datatype: 'string' },
+  { key: 10, text: 'Tag Name', value: 'ResourceTagName', datatype: 'string' },
+  { key: 11, text: 'Tag Value', value: 'ResourceTagValue', datatype: 'string' },
 ];
 
 export const operators = [
