@@ -27,13 +27,13 @@ export const fields: Field[] = [
   // { key: 1, text: 'Organization', value: 'OrganizationId', datatype: 'string'},
   { key: 2, text: 'Billing Account', value: 'BillingAccountName', datatype: 'string' },
   { key: 3, text: 'Provider', value: 'CloudProvider', datatype: 'string', options: providerOptions },
-  { key: 4, text: 'Resource Id', value: '_id', datatype: 'string' },
+  { key: 4, text: 'Resource Id', value: 'ResourceId', datatype: 'string' },
   { key: 5, text: 'Resource Name', value: 'ResourceName', datatype: 'string' },
   { key: 6, text: 'Azure Resource Group', value: 'AzureResourceGroup', datatype: 'string' },
   { key: 7, text: 'Service Name', value: 'Service', datatype: 'string' },
   { key: 8, text: 'Region', value: 'Region', datatype: 'string' },
   { key: 9, text: 'Azure Subscription Id', value: 'AzureSubscriptionId', datatype: 'string' },
-  // { key: 10, text: 'Tags', value: 'ResourceTags', datatype: 'string' },
+  { key: 10, text: 'Tags', value: 'ResourceTags', datatype: 'string' },
 ];
 
 export const operators = [
