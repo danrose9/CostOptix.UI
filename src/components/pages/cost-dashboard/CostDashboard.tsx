@@ -1,11 +1,9 @@
 import React, { useState, useContext } from 'react';
-
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
 import PageLayout from '../PageLayout';
 import { Grid, Divider } from 'semantic-ui-react';
 import * as Widget from './index';
-
 import { ApplicationContext } from '../../../app/ApplicationContext';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { IRootState } from '../../../services/redux/rootReducer';
