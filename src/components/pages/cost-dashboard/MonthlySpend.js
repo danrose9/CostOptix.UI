@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Bar, BarChart } from 'recharts';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Table } from 'semantic-ui-react';
 import { reduxState } from '../../../services/redux/reduxState';
 import { ChartTooltip } from '../../tooltips/index';
+import DefaultTableHeader from 'src/components/tables/DefaultTableHeader';
 
 export const MonthlySpend = (props) => {
   const monthlyCosts = useSelector((state) => state[reduxState.COST_DASHBOARD].monthlySpend.data);
@@ -18,6 +19,9 @@ export const MonthlySpend = (props) => {
 
   return (
     <Segment color="orange" loading={isLoading} data-testid="cost-dashboard-chart">
+      <Table selectable>
+        <DefaultTableHeader title="Monthly Spend" />
+      </Table>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           width={500}

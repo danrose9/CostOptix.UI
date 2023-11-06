@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { ProviderImage } from '../../ProviderImage';
 import { roundNumber } from '../../../utils/helper';
 import { StyledTableRow } from '../../tables/DefaultTableStyles';
+import DefaultTableHeader from 'src/components/tables/DefaultTableHeader';
 
 export const CostEstimates = (props) => {
   const isLoading = useSelector((state) => state[reduxState.COST_DASHBOARD].monthToDateCost.isLoading);
@@ -39,11 +40,7 @@ export const CostEstimates = (props) => {
   return (
     <Segment color="olive" loading={isLoading}>
       <Table selectable data-testid="cost-dashboard-estimates">
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell colSpan="3">Month-to-Date Cost Estimates</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
+        <DefaultTableHeader title="Month-to-Date Cost Estimates" colSpan={3} />
         <Table.Body>
           <Providers monthlyCostEstimates={monthlyCostEstimates} />
         </Table.Body>
