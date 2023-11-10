@@ -91,7 +91,7 @@ Cypress.Commands.add('loginToAAD', (username: string, password: string) => {
   log.end();
 });
 
-Cypress.Commands.add('fillSignUpForm', (username: string) => {
+Cypress.Commands.add('fillSignUpForm', (username: string, organization: string) => {
   const log = Cypress.log({
     displayName: 'Fill out signup form',
     message: [`🔐 Authenticating | ${username}`],
@@ -99,9 +99,9 @@ Cypress.Commands.add('fillSignUpForm', (username: string) => {
   });
   log.snapshot('before');
 
-  cy.get('input#organization').type('Cypress Test Org');
+  cy.get('input#organization').type(organization);
   cy.get('input#email').type(username);
-  cy.contains('label', 'I agree to the Terms of Service').click();
+  cy.contains('label', 'I agree to the').click();
 
   log.snapshot('after');
   log.end();
@@ -120,6 +120,60 @@ Cypress.Commands.add('login', (username: string, password: string) => {
   cy.contains('Continue with Azure').should('be.visible').click();
   cy.loginToAAD(username, password);
   cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.COST_DASHBOARD}`);
+  log.snapshot('after');
+  log.end();
+});
+
+Cypress.Commands.add('deleteOrganization', (organization: string) => {
+  const log = Cypress.log({
+    displayName: 'Delete organization',
+    message: [`🔐 Deleting organization | ${organization}`],
+    autoEnd: false,
+  });
+  log.snapshot('before');
+
+  cy.contains('Settings').click();
+  cy.get('[data-testid="delete-account-button"]').should('be.visible').click();
+
+  cy.get('button').contains('Return').should('be.visible').click();
+  cy.get('[data-testid="delete-account-button"]').should('be.visible').click();
+
+  cy.get('[data-testid="return-button"]').should('be.visible');
+  cy.get('[data-testid="organization-name-input"]').should('be.visible').type(organization);
+  cy.contains('button', 'Remove Account').should('be.visible').click().wait(2000);
+
+  cy.get('[data-testid="get-started-button"]').should('be.visible');
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.ROOT}`);
+
+  log.snapshot('after');
+  log.end();
+});
+
+Cypress.Commands.add('purgeSession', () => {
+  const log = Cypress.log({
+    displayName: 'Purge all sessions',
+    message: [`🔐 Clear all session cookies`],
+    autoEnd: false,
+  });
+  log.snapshot('before');
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.ROOT}`);
+
+  // check 'authToken' is purged from session storage
+  cy.window().then((win) => {
+    expect(win.sessionStorage.getItem('authToken')).to.be.null;
+  });
+
+  // check 'authToken' cookie is purged
+  cy.getCookie('authToken').should('not.exist');
+
+  // check 'persist:root' is purged from session storage
+  cy.fixture('emptyState.json').then((emptyState) => {
+    cy.window().then((win) => {
+      const persistRoot = JSON.parse(win.sessionStorage.getItem('persist:root'));
+      expect(persistRoot.userProfile).to.deep.equal(emptyState.userProfile);
+    });
+  });
+
   log.snapshot('after');
   log.end();
 });

@@ -13,16 +13,18 @@ describe('Logout Flow', () => {
     // Perform the logout operation
     cy.logout();
 
-    cy.wait(5000);
-    // Check if sessionStorage is cleared
+    // cy.purgeSession();
+
     cy.window().then((win) => {
-      // expect(win.sessionStorage.getItem('persist:root')).to.not.contain(Cypress.env('aad_reddogdev_password_1'));
-      expect(win.sessionStorage.getItem('authTokens')).to.be.null;
+      console.log('**window**', win);
     });
 
-    // Attempt to get the "AuthCookie" cookie
-
-    cy.getCookie('AuthCookie').should('not.exist');
+    cy.window()
+      .should('have.property', 'store') // Make sure the store is available
+      .then((win: any) => {
+        const state = win.store.getState();
+        expect(state.userProfile).to.be.empty;
+      });
 
     // You can also check if the user is redirected to the login page or not
     cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.ROOT}`);

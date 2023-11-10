@@ -45,6 +45,7 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
 
   return (
     <Modal
+      data-testid="delete-account-modal"
       onClose={() => setFirstOpen(false)}
       onOpen={() => setFirstOpen(true)}
       open={firstOpen}
@@ -76,11 +77,17 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
         {showWarning && <WarningMessage content="Oops! that didn't seems to work, try again" />}
       </Modal.Content>
       <Modal.Actions>
-        <Button basic color="green" onClick={() => setFirstOpen(false)}>
+        <Button data-testid="return-button" basic color="green" onClick={() => setFirstOpen(false)}>
           <Icon name="remove" /> Return
         </Button>
-        <Button color="red" onClick={handleClick} disabled={inputValue !== organization.name}>
-          <Icon name="checkmark" /> Delete
+        <Button
+          data-testid="delete-button"
+          color="red"
+          onClick={handleClick}
+          disabled={inputValue !== organization.name}
+        >
+          <Icon name="checkmark" />
+          Remove Account
         </Button>
       </Modal.Actions>
       <Modal
