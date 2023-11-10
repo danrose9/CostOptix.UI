@@ -1,0 +1,9 @@
+{
+  "userProfile": "{\"id\":null,\"name\":null,\"email\":null,\"organization\":{\"id\":null,\"name\":null,\"createdDate\":null,\"status\":null,\"error\":null,\"remainingLogins\":0},\"photo\":{\"image\":null,\"status\":null,\"error\":null},\"status\":null,\"isDemo\":false,\"isAuthenticated\":false}",
+  "azureManagement": "{\"agreementType\":null,\"subscriptions\":[],\"invoices\":[],\"status\":null}",
+  "serviceProviders": "{\"isCurrencyConflict\":false,\"providers\":[],\"billingAccounts\":[],\"status\":null,\"isLoading\":true,\"isAvailable\":false,\"error\":null}",
+  "costDashboard": "{\"billingAccounts\":[],\"mostExpensive\":{\"isLoading\":true,\"data\":[]},\"monthToDateCost\":{\"isLoading\":true,\"data\":[]},\"monthlySpend\":{\"isLoading\":true,\"data\":[]},\"fastestGrowing\":{\"isLoading\":true,\"data\":[]},\"updatedCount\":0,\"count\":0,\"isComplete\":false,\"lastUpdated\":null,\"currency\":null,\"isLoading\":true,\"status\":null,\"error\":null}",
+  "resources": "{\"searchResults\":[],\"view\":{\"isLoading\":true,\"isAvailable\":false,\"error\":null,\"data\":[]},\"count\":0,\"searchValue\":\"\",\"status\":null,\"error\":null,\"isLoading\":true,\"isAvailable\":false}",
+  "costContainers": "{\"containers\":[],\"resources\":{\"count\":0,\"data\":[]},\"isLoading\":true,\"isResourcesLoading\":true,\"status\":\"\",\"error\":\"\"}",
+  "_persist": "{\"version\":1,\"rehydrated\":true}"
+}

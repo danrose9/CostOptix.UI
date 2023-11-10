@@ -15,7 +15,7 @@ describe('Login flow', () => {
     cy.get('[data-testid="get-started-button"]').click();
     cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.SIGNUP}`);
 
-    cy.fillSignUpForm(Cypress.env('aad_reddogdev_username_1'));
+    cy.fillSignUpForm(Cypress.env('aad_reddogdev_username_1'), Cypress.env('aad_reddogdev_orgname'));
     cy.get('[data-testid="next-button"]').click();
     cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.LOGIN}`);
     cy.contains('Continue with Azure').should('be.visible').click();
