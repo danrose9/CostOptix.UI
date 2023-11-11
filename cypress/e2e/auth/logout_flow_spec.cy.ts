@@ -1,4 +1,5 @@
 import * as appRoutes from '../../../src/app/router/appRoutes';
+import { IRootState } from '../../../src/services/redux/rootReducer';
 
 describe('Logout Flow', () => {
   beforeEach(() => {
@@ -15,14 +16,10 @@ describe('Logout Flow', () => {
 
     // cy.purgeSession();
 
-    cy.window().then((win) => {
-      console.log('**window**', win);
-    });
-
     cy.window()
       .should('have.property', 'store') // Make sure the store is available
       .then((win: any) => {
-        const state = win.store.getState();
+        const state = win.Cypress.store.getState();
         expect(state.userProfile).to.be.empty;
       });
 

@@ -2,7 +2,7 @@ import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import { Segment, Table, Icon, Dropdown } from 'semantic-ui-react';
 import TinyLineChart from '../../charts/TinyLineChart';
-import InformationButton from '../../buttons/InformationButton';
+// import InformationButton from '../../buttons/InformationButton';
 import { CostContainerBuilder, CostContainerViewer, CostContainerOptions } from './index';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import '../../__styles__/fade.css';
@@ -35,6 +35,11 @@ const AddNewContainerRow = styled(Table.Row)`
 const ProviderImageWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+`;
+
+const ContainerDescription = styled.div`
+  margin: 1em 0;
+  font-size: 1.2em;
 `;
 
 interface IAddNewContainerProps {
@@ -83,6 +88,10 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
 
   return (
     <>
+      <ContainerDescription>
+        A Cost Container is a virtual grouping of resources across different service providers or billing accounts. You
+        can create a container to group resources by department, project, or by ownership.
+      </ContainerDescription>
       <StyledTable striped>
         <Table.Header>
           <Table.Row>
@@ -98,6 +107,7 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
+
         <Table.Body>
           {containers && containers.length > 0
             ? containers.map((container, index) => {
@@ -200,7 +210,7 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ allCostContainers })
     }
   };
 
-  var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
+  // var tooltipContent = 'Cost Containers are used to group resources for cost management purposes.';
 
   let componentToRender;
   if (showContainerViewer && selectedContainer) {
@@ -223,7 +233,8 @@ const CostContainerTable: FC<ICostContainerTableProps> = ({ allCostContainers })
         <Segment color="blue">
           <SegmentHeader>
             <SegmentName>
-              Containers <InformationButton content={tooltipContent} />
+              {/* Containers <InformationButton content={tooltipContent} /> */}
+              Containers
             </SegmentName>
           </SegmentHeader>
           <SwitchTransition>
