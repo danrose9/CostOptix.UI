@@ -43,7 +43,7 @@ describe('DeleteAccountModal Component', () => {
   test('Delete button should be disabled until the organization name is entered correctly', () => {
     fireEvent.click(screen.getByText('Delete Account'));
 
-    const deleteButton = screen.getByText('Delete');
+    const deleteButton = screen.getByText('Remove Account');
     expect(deleteButton).toBeDisabled();
 
     fireEvent.change(screen.getByPlaceholderText('Organization Name'), {
