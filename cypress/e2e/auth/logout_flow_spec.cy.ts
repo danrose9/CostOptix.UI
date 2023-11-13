@@ -14,16 +14,7 @@ describe('Logout Flow', () => {
     // Perform the logout operation
     cy.logout();
 
-    // cy.purgeSession();
-
-    cy.window()
-      .should('have.property', 'store') // Make sure the store is available
-      .then((win: any) => {
-        const state = win.Cypress.store.getState();
-        expect(state.userProfile).to.be.empty;
-      });
-
-    // You can also check if the user is redirected to the login page or not
+    cy.purgeSession();
     cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.ROOT}`);
   });
 });

@@ -38,7 +38,7 @@ describe('Legal Declarations', () => {
 
   test('verify a user can click Privacy Policy', () => {
     cy.contains('Privacy Policy').click();
-    cy.contains('Welcome to DDIWare').should('be.visible');
+    cy.contains('Welcome to DDIware').should('be.visible');
     cy.get('[data-testid="close-legal-modal-button"]').click();
     cy.contains('Looking for the signup page?').should('be.visible');
   });

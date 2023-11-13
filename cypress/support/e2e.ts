@@ -174,6 +174,20 @@ Cypress.Commands.add('purgeSession', () => {
     });
   });
 
+  // check redux state is reset
+  cy.visit('/');
+  cy.fixture('emptyState.json').then((data) => {
+    const expectedUserProfile = JSON.parse(data.userProfile);
+
+    cy.window()
+      .its('store')
+      .invoke('getState')
+      .its('userProfile')
+      .should((actualUserProfile) => {
+        expect(actualUserProfile).to.deep.equal(expectedUserProfile);
+      });
+  });
+
   log.snapshot('after');
   log.end();
 });

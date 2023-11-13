@@ -39,7 +39,7 @@ const ProviderImageWrapper = styled.div`
 
 const ContainerDescription = styled.div`
   margin: 1em 0;
-  font-size: 1.2em;
+  font-size: 1.1em;
 `;
 
 interface IAddNewContainerProps {
