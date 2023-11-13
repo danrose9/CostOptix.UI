@@ -91,8 +91,7 @@ const Signup: React.FC<ISignupProps> = (props) => {
                 onChange={validateForm}
               />
               <TermsOfServiceWrapper>
-                <Form.Checkbox label="I agree to the" id="terms" onChange={validateForm} />
-                {/* <a>Terms of Service *</a> */}
+                <Form.Checkbox label="I agree to the" id="terms" onChange={validateForm} data-testid="terms-checkbox" />
                 <LegalDeclarationsModal
                   header="Terms of Service"
                   icon="handshake outline"

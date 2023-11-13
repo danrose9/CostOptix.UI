@@ -16,6 +16,12 @@ import './App.css';
 import { store, persistor } from './services/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
+declare global {
+  interface Window {
+    Cypress: any;
+  }
+}
+
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
@@ -25,3 +31,11 @@ root.render(
     </PersistGate>
   </Provider>
 );
+
+// expose store when run in Cypress
+type CypressWindow = Window & typeof globalThis & { Cypress: any; store: any };
+const testWindow = window as CypressWindow;
+
+if (testWindow.Cypress) {
+  testWindow.store = store;
+}
