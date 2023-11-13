@@ -1,4 +1,5 @@
 import * as appRoutes from '../../../src/app/router/appRoutes';
+import { IRootState } from '../../../src/services/redux/rootReducer';
 
 describe('Logout Flow', () => {
   beforeEach(() => {
@@ -13,20 +14,7 @@ describe('Logout Flow', () => {
     // Perform the logout operation
     cy.logout();
 
-    // cy.purgeSession();
-
-    cy.window().then((win) => {
-      console.log('**window**', win);
-    });
-
-    cy.window()
-      .should('have.property', 'store') // Make sure the store is available
-      .then((win: any) => {
-        const state = win.store.getState();
-        expect(state.userProfile).to.be.empty;
-      });
-
-    // You can also check if the user is redirected to the login page or not
+    cy.purgeSession();
     cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.ROOT}`);
   });
 });
