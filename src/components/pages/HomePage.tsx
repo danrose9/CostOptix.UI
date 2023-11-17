@@ -12,8 +12,17 @@ import {
 } from '../__styles__/HomePageStyles';
 import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
 import HomePageNav from '../navbar/HomePageNav';
+import { AppDispatch } from 'src/services/redux/store';
+import { useDispatch } from 'react-redux';
+import { setIsDemo } from '../../services/redux/reducers/userProfileSlice';
 
 export const HomePage = () => {
+  const dispatch = useDispatch();
+
+  const handleDemoClick = () => {
+    dispatch<AppDispatch>(setIsDemo(true));
+  };
+
   return (
     <>
       <PageContainer fluid data-testid="homePage-2" className="home-page">
@@ -32,7 +41,7 @@ export const HomePage = () => {
             </HomePageSubTitle>
             <HomePageActions>
               <form method="POST" action={BASE + DEMO_LOGIN}>
-                <HomePageButton className="view-demo" data-testid="login-demo-button">
+                <HomePageButton className="view-demo" data-testid="login-demo-button" onClick={handleDemoClick}>
                   View Demo
                 </HomePageButton>
               </form>

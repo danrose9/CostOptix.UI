@@ -6,6 +6,7 @@ import { STORAGE } from '../../app/constants/StorageKeys';
 
 interface WelcomeModalProps {
   setDismissWelcomePageCallback: (val: boolean) => void;
+  isDemo?: boolean;
 }
 
 const StyledModal = styled(Modal)``;
@@ -34,7 +35,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallback }) => {
+const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallback, isDemo }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   // eslint-disable-next-line

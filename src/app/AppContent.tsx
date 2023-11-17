@@ -11,9 +11,6 @@ import { withAuth } from '../components/hoc/withAuth';
 import ErrorDefault from '../components/pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { ApplicationContextProvider } from './ApplicationContext';
-import { DemoContextProvider } from './DemoContext';
-
 import { APP_FOOTER } from './constants';
 import { isAuthenticated } from '../utils/processToken';
 
@@ -52,30 +49,26 @@ export const AppContent = () => {
 
   return (
     <>
-      <DemoContextProvider>
-        <ApplicationContextProvider>
-          <ErrorBoundary
-            FallbackComponent={ErrorDefault}
-            onReset={() => {
-              console.warn('Application Reset');
-              navigate(appRoutes.ROOT);
-            }}
-          >
-            <Container>
-              <SidebarWithAuth sidebarState={sidebarState} />
-              <Main>
-                <NavbarWithAuth onClick={showSidebar} />
-                <MainPage>
-                  <ApplicationRoutes />
-                </MainPage>
-                <ApplicationFooter>
-                  <p>{APP_FOOTER.CONTENT}</p>
-                </ApplicationFooter>
-              </Main>
-            </Container>
-          </ErrorBoundary>
-        </ApplicationContextProvider>
-      </DemoContextProvider>
+      <ErrorBoundary
+        FallbackComponent={ErrorDefault}
+        onReset={() => {
+          console.warn('Application Reset');
+          navigate(appRoutes.ROOT);
+        }}
+      >
+        <Container>
+          <SidebarWithAuth sidebarState={sidebarState} />
+          <Main>
+            <NavbarWithAuth onClick={showSidebar} />
+            <MainPage>
+              <ApplicationRoutes />
+            </MainPage>
+            <ApplicationFooter>
+              <p>{APP_FOOTER.CONTENT}</p>
+            </ApplicationFooter>
+          </Main>
+        </Container>
+      </ErrorBoundary>
     </>
   );
 };

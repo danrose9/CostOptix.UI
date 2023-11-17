@@ -3,7 +3,7 @@ import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { INewCostContainer, ContainerAction } from '../../../../types/container-types';
 import { ButtonGroup } from '../../../__styles__/ButtonStyles';
-import { useIsDemo } from 'src/components/hoc/withDemo';
+import { useIsDemo } from '../../../hoc/withDemo';
 
 interface ICostContainerProfileProps {
   isQueryValid: boolean;

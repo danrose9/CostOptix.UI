@@ -11,11 +11,10 @@ import { withOutDemo, useIsDemo } from '../../hoc/withDemo';
 
 export const Account = () => {
   const dispatch = useAppDispatch();
-
+  const isDemo = useIsDemo();
   const profile = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
   const [disableButton, setDisableButton] = useState(true);
   const [organization, setOrganization] = useState('');
-  const isDemo = useIsDemo();
 
   const userAvatar = useSelector((state: IRootState) => state[reduxState.USER_PROFILE].photo.image);
 
