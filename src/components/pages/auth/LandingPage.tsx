@@ -14,7 +14,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
   const isDemo = useIsDemo();
 
   // Initialize the state directly with the value from local storage to prevent flickering
-  const hideWelcomePage = localStorage.getItem(STORAGE.HIDE_WELCOME_PAGE) === 'true';
+  const hideWelcomePage = localStorage.getItem(STORAGE.HIDE_WELCOME_PAGE) === 'true' && !isDemo;
 
   /* The following code is commented out because it is not used anywhere in the app currently */
   const [dismissWelcomePage, setDismissWelcomePage] = useState<boolean>(hideWelcomePage);

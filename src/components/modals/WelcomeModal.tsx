@@ -3,6 +3,7 @@ import { Modal, Button, CheckboxProps, Checkbox, Image } from 'semantic-ui-react
 import styled from 'styled-components';
 import * as images from '../../assets';
 import { STORAGE } from '../../app/constants/StorageKeys';
+import { withOutDemo } from '../hoc/withDemo';
 
 interface WelcomeModalProps {
   setDismissWelcomePageCallback: (val: boolean) => void;
@@ -53,6 +54,12 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
     }
   };
 
+  const DoNotShowCheckbox = () => {
+    return <Checkbox label="Don't show again" onChange={handleCheckbox} />;
+  };
+
+  const DoNotShowCheckBoxWithOutDemo = withOutDemo(DoNotShowCheckbox);
+
   return (
     <StyledModal open={isOpen} size="large">
       <Modal.Header>Welcome to CostOptix</Modal.Header>
@@ -76,7 +83,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
       </Modal.Content>
       <ActionButtons>
         <ButtonWrapper>
-          <Checkbox label="Don't show again" onChange={handleCheckbox} />
+          <DoNotShowCheckBoxWithOutDemo />
         </ButtonWrapper>
         <ButtonWrapper>
           <Button onClick={handleDismiss}>Dismiss</Button>
