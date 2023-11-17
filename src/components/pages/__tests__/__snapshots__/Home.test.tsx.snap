@@ -81,6 +81,7 @@ exports[`Home Page matches snapshot 1`] = `
           <button
             className="sc-bqWxrE iFBIFS view-demo"
             data-testid="login-demo-button"
+            onClick={[Function]}
           >
             View Demo
           </button>

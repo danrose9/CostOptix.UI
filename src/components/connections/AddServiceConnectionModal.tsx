@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment, FC, useCallback } from 'react';
+import React, { useState, Fragment, FC, useCallback } from 'react';
 import { Modal } from 'semantic-ui-react';
 import {
   StyledContent,
@@ -7,10 +7,9 @@ import {
 } from './__styles__/StyledServiceConnections';
 import { ProviderImage } from '../ProviderImage';
 import StandardButton from '../buttons/StandardButton';
-import { DemoContext } from '../../app/DemoContext';
 import { ServiceConnectionWarning } from '../messages';
 import ListServiceConnectionModal from './ListServiceConnectionModal';
-
+import { useIsDemo } from '../hoc/withDemo';
 import { ErrorType } from 'error-types';
 import { IProviderProps } from 'provider-types';
 import { ModalHeader, ActionButtons } from '../__styles__/StyledModal';
@@ -18,8 +17,7 @@ import AddServiceAzure from './providers/AddServiceAzure';
 import AddServiceAWS from './providers/AddServiceAWS';
 
 const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
-  const isDemo = useContext(DemoContext);
-
+  const isDemo = useIsDemo();
   const { provider, vendor, name } = cloudProvider;
 
   const [open, setOpen] = useState<boolean>(false);
