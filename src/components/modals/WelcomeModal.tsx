@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import * as images from '../../assets';
 import { STORAGE } from '../../app/constants/StorageKeys';
 import { withOutDemo } from '../hoc/withDemo';
+import { ExternalWelcomeDescription, DemoWelcomeDescription } from './WelcomeDescription';
 
 interface WelcomeModalProps {
   setDismissWelcomePageCallback: (val: boolean) => void;
@@ -21,12 +22,6 @@ const ActionButtons = styled(Modal.Actions)`
 
 const ButtonWrapper = styled.div`
   align-self: center;
-`;
-
-const ModalDescription = styled(Modal.Description)`
-  /* Styles for Modal.Description */
-  font-size: 1.3em;
-  margin-bottom: 1em;
 `;
 
 const ContentWrapper = styled.div`
@@ -65,21 +60,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
       <Modal.Header>Welcome to CostOptix</Modal.Header>
       <Modal.Content image>
         <Image size="medium" src={images.CHECKLIST} />
-        <ContentWrapper>
-          <ModalDescription>Getting Started</ModalDescription>
-          <p>
-            Welcome to CostOptix, your gateway to insightful cloud spending analysis, empowering you to make
-            cost-effective decisions with your cloud providers.
-          </p>
-          <p>
-            Since this is your organization's first login, we'll attemp to compile some initial cloud costs based on
-            your Azure account.
-          </p>
-          <p>
-            This may be somewhat limited initially due to access, so we highly recommend you create a new connection via
-            our Service Connection page and follow our tour to maximize your experience with CostOptix.
-          </p>
-        </ContentWrapper>
+        <ContentWrapper>{isDemo ? <DemoWelcomeDescription /> : <ExternalWelcomeDescription />}</ContentWrapper>
       </Modal.Content>
       <ActionButtons>
         <ButtonWrapper>
