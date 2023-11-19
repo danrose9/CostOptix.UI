@@ -18,9 +18,14 @@ const LandingPage: React.FC<LandingPageProps> = () => {
 
   /* The following code is commented out because it is not used anywhere in the app currently */
   const [dismissWelcomePage, setDismissWelcomePage] = useState<boolean>(hideWelcomePage);
+  const [beginTour, setBeginTour] = useState<boolean>(false);
 
   const setDismissWelcomePageCallback = (val: boolean) => {
     setDismissWelcomePage(val);
+  };
+
+  const startTour = (val: boolean) => {
+    setBeginTour(val);
   };
 
   useEffect(() => {
@@ -30,9 +35,13 @@ const LandingPage: React.FC<LandingPageProps> = () => {
   return (
     <>
       {dismissWelcomePage ? (
-        <Navigate to="/dashboard-cost" />
+        <Navigate to="/dashboard-cost" state={{ startTour: beginTour }} />
       ) : (
-        <WelcomeModal setDismissWelcomePageCallback={setDismissWelcomePageCallback} isDemo={isDemo} />
+        <WelcomeModal
+          setDismissWelcomePageCallback={setDismissWelcomePageCallback}
+          startTour={startTour}
+          isDemo={isDemo}
+        />
       )}
     </>
   );

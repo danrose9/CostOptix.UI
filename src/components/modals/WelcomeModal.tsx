@@ -8,6 +8,7 @@ import { ExternalWelcomeDescription, DemoWelcomeDescription } from './WelcomeDes
 
 interface WelcomeModalProps {
   setDismissWelcomePageCallback: (val: boolean) => void;
+  startTour: (val: boolean) => void;
   isDemo?: boolean;
 }
 
@@ -31,14 +32,16 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallback, isDemo }) => {
+const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallback, startTour, isDemo }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   // eslint-disable-next-line
   const [hideWelcomePage, setHideWelcomePage] = useState<boolean>(false);
 
-  const handleDismiss = () => {
+  const handleCloseModal = (shouldStartTour: boolean, e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setDismissWelcomePageCallback(true);
+    startTour(shouldStartTour);
     setIsOpen(false);
   };
 
@@ -67,8 +70,10 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
           <DoNotShowCheckBoxWithOutDemo />
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button onClick={handleDismiss}>Dismiss</Button>
-          <Button color="green">Begin Tour</Button>
+          <Button onClick={(e) => handleCloseModal(false, e)}>Dismiss</Button>
+          <Button color="green" onClick={(e) => handleCloseModal(true, e)}>
+            Begin Tour
+          </Button>
         </ButtonWrapper>
       </ActionButtons>
     </StyledModal>

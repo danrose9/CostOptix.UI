@@ -5,6 +5,7 @@ import { PageHeader } from '../PageHeader';
 interface IPageLayoutProps {
   title: string;
   children?: ReactNode;
+  className?: string;
 }
 
 const PageLayout = (props: IPageLayoutProps) => {
