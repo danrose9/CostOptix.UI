@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SubMenuItems from './SubMenuItems';
-import {
-  StyledMenuItem,
-  StyledSpan,
-  SubMenuDropdown,
-} from './__styles__/StyledSidebarItems';
+import { StyledMenuItem, StyledSpan, SubMenuDropdown } from './__styles__/StyledSidebarItems';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 
@@ -43,7 +39,7 @@ const MenuItems = ({ items }) => {
         <>
           <Link to={items.path}>
             <Icon className={items.icon}></Icon>
-            <StyledSpan>{items.title}</StyledSpan>
+            <StyledSpan id={items.id}>{items.title}</StyledSpan>
           </Link>
         </>
       )}

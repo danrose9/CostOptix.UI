@@ -1,23 +1,32 @@
 import React from 'react';
 
-// Define the type for each step
-interface TourStep {
+export interface TourStep {
   content: React.ReactNode;
   locale?: { skip: React.ReactNode };
-  placement: 'top' | 'bottom' | 'left' | 'right' | 'center';
+  placement?: 'top' | 'bottom' | 'left' | 'right' | 'center';
   target: string;
   title?: string;
-  // Add other properties as needed
+  disableBeacon?: boolean;
 }
 
-// Define the tour steps
-const tourSteps: TourStep[] = [
+export const TOUR_STEPS: TourStep[] = [
   {
-    content: <h2>Let's begin our journey</h2>,
-    locale: { skip: <strong aria-label="skip">S-K-I-P</strong> },
-    placement: 'center',
-    target: 'body',
+    target: '[product-tour="tour-start"]',
+    content:
+      'This is your default dashboard. Each widget gives you a different view of your spend across different providers.',
+    disableBeacon: true,
+  },
+  {
+    target: '[product-tour="active-providers"]',
+    content:
+      'These are the connected billing accounts. You can add or remove providers and billing accounts through the Service Connections page.',
+  },
+  {
+    target: '[product-tour="most-expensive"]',
+    content: 'You can drill into each resource to get a detailed view of your spend',
+  },
+  {
+    target: '#cost-containers',
+    content: 'foo',
   },
 ];
-
-export default tourSteps;

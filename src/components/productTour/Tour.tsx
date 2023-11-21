@@ -1,59 +1,21 @@
 import React, { useReducer, useEffect } from 'react';
 import JoyRide, { ACTIONS, EVENTS, STATUS } from 'react-joyride';
-
-const TOUR_STEPS = [
-  {
-    target: '.tour-start',
-    content: 'This is where you can search the dashboard.',
-    disableBeacon: true,
-  },
-];
-
-const INITIAL_STATE = {
-  key: new Date(), // This field makes the tour to re-render when we restart the tour
-  run: false,
-  continuous: true,
-  loading: false,
-  stepIndex: 0,
-  steps: TOUR_STEPS,
-};
-
-// Reducer will manage updating the local state
-const reducer = (state = INITIAL_STATE, action: any) => {
-  switch (action.type) {
-    case 'START':
-      console.log('start');
-      return { ...state, run: true };
-    case 'RESET':
-      return { ...state, stepIndex: 0 };
-    case 'STOP':
-      return { ...state, run: false };
-    case 'NEXT_OR_PREV':
-      return { ...state, ...action.payload };
-    case 'RESTART':
-      return {
-        ...state,
-        stepIndex: 0,
-        run: true,
-        loading: false,
-        key: new Date(),
-      };
-    default:
-      return state;
-  }
-};
+import { useNavigate } from 'react-router-dom';
+import { tourReducer, INITIAL_STATE } from './tourReducer';
 
 interface TourProps {
   shouldStart: boolean;
 }
 
-// Tour component
 const Tour: React.FC<TourProps> = ({ shouldStart }) => {
   // Tour state is the state which control the JoyRide component
-  const [tourState, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [tourState, dispatch] = useReducer(tourReducer, INITIAL_STATE);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (shouldStart) {
+      navigate('/dashboard-cost');
       dispatch({ type: 'START' });
     }
   }, [shouldStart]);
@@ -95,6 +57,7 @@ const Tour: React.FC<TourProps> = ({ shouldStart }) => {
         {...tourState}
         callback={callback}
         showSkipButton={true}
+        showProgress={true}
         styles={{
           tooltipContainer: {
             textAlign: 'left',

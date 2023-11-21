@@ -89,6 +89,7 @@ export const menuItems = [
   },
   {
     title: 'Cost Containers',
+    id: 'cost-containers',
     path: appRoutes.COST_CONTAINERS,
     icon: 'box',
     active: true,
