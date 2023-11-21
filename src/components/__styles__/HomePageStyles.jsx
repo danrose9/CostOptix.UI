@@ -40,7 +40,7 @@ export const StyledSubHeader = styled.p`
 `;
 
 export const HomePageMainLeft = styled.div`
-  width: 40%;
+  width: 43%;
   display: flex;
   flex-direction: column;
 `;

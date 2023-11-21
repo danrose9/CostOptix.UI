@@ -31,7 +31,7 @@ export const HomePage = () => {
         <HomePageMainContent>
           <HomePageMainLeft>
             <HomePageTitle>
-              <StyledHeader>Stop Over-Spending on Cloud Services</StyledHeader>
+              <StyledHeader>Reduce Your Cloud Spending Costs Effectively with CostOptix</StyledHeader>
             </HomePageTitle>
             <HomePageSubTitle>
               <StyledSubHeader>

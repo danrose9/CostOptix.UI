@@ -40,7 +40,7 @@ export const isAuthCookieAvailable = () => {
 
 export const removeAuthCookie = () => {
   let cookie_name = 'AuthCookie=';
-  document.cookie = cookie_name + '=; Max-Age=0';
+  document.cookie = cookie_name + '=; Path=/; domain=.costoptix.com; Max-Age=0';
 };
 
 export const isAuthenticated = () => {

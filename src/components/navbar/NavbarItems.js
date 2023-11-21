@@ -2,11 +2,12 @@ import React from 'react';
 import { Dropdown, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
 import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNavbarItems';
 import { NavbarMode } from './NavbarMode';
 import { isAuthenticated } from '../../utils/processToken';
+import { initializeTour } from '../productTour/initializeTour';
 
 export const NavbarItems = () => {
   const navigate = useNavigate();
@@ -27,6 +28,12 @@ export const NavbarItems = () => {
       onClick: () => navigate(appRoutes.SETTINGS),
     },
     { key: 'help', text: 'Help', image: <Icon name="help" /> },
+    {
+      key: 'tour',
+      text: 'Take a Tour',
+      image: <Icon name="user" />,
+      onClick: () => navigate('/dashboard-cost', { state: { startTour: true } }),
+    },
     {
       key: 'settings',
       text: 'Settings',

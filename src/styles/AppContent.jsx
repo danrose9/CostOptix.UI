@@ -55,7 +55,7 @@ export const StyledNavbar = styled(Menu)`
 `;
 
 export const MainPage = styled.div`
-  overflow-y: auto;
+  overflow-y: auto !important;
   background: rgb(255,255,255);
   background: linear-gradient(0deg, rgba(255,255,255,1) 36%, rgba(174,238,228,0.5503151944371498) 100%);
   -webkit-overflow-scrolling: touch;
