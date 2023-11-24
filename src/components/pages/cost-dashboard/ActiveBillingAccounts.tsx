@@ -95,11 +95,13 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       </Segment>
     );
   };
+
   useEffect(() => {
     if (!isBillingAccountsAvailable) {
       fetchAccountsAndServiceProviders({ dispatch, updateIsLoading, setAccountStatus, lastUpdated });
     }
   }, [isBillingAccountsAvailable, lastUpdated, dispatch]);
+
   useEffect(() => {
     isCurrencyConflictCallback(isCurrencyConflict);
   }, [isCurrencyConflict, isCurrencyConflictCallback]);
