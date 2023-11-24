@@ -21,6 +21,7 @@ const initialState = {
   status: null,
   isDemo: false,
   isAuthenticated: false,
+  error: null,
 };
 
 const userProfileSlice = createSlice({
@@ -35,6 +36,9 @@ const userProfileSlice = createSlice({
     },
     updateAvatarUrl(state, action) {
       state.photo = action.payload;
+    },
+    setIsDemo(state, action) {
+      state.isDemo = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -56,9 +60,10 @@ const userProfileSlice = createSlice({
           state.isDemo = true;
         } else state.isDemo = false;
       })
-      .addCase(fetchUserProfile.rejected, (state) => {
+      .addCase(fetchUserProfile.rejected, (state, action) => {
         state.status = 'failed';
         state.isAuthenticated = false;
+        state.error = action.error;
       });
     // incrementLoginCount
     builder
@@ -101,7 +106,7 @@ const userProfileSlice = createSlice({
   },
 });
 
-export const { updateUserName, updateAvatarUrl, updateOrganizationName, updateIsAuthenticated } =
+export const { updateUserName, updateAvatarUrl, updateOrganizationName, updateIsAuthenticated, setIsDemo } =
   userProfileSlice.actions;
 
 export default userProfileSlice.reducer;

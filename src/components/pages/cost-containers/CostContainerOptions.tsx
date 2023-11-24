@@ -4,6 +4,7 @@ import { ICostContainer, ContainerAction } from '../../../types/container-types'
 import { deleteCostContainerById } from '../../../services/redux/thunks/costContainerThunk';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../services/redux/store';
+import { useIsDemo } from '../../hoc/withDemo';
 
 interface ICostContainerOptionsProps {
   container: ICostContainer;
@@ -12,7 +13,7 @@ interface ICostContainerOptionsProps {
 
 const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container, handleContainerAction }) => {
   const [open, setOpen] = useState(false);
-
+  const isDemo = useIsDemo();
   const dispatch = useDispatch();
 
   const handleRemoveContainer = () => {
@@ -40,7 +41,7 @@ const CostContainerOptions: React.FC<ICostContainerOptionsProps> = ({ container,
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={() => setOpen(false)}>No thanks, let's keep it</Button>
-          <Button positive onClick={handleRemoveContainer}>
+          <Button positive onClick={handleRemoveContainer} disabled={isDemo}>
             Yes, bin it!
           </Button>
         </Modal.Actions>

@@ -1,15 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { reduxState } from '../../services/redux/reduxState';
 import { Button, Modal } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
 import { Logout } from '../auth/Logout';
+import { useIsDemo } from '../hoc/withDemo';
 
 const SessionExpired = () => {
   const navigate = useNavigate();
 
-  const { isDemo } = useSelector((state) => state[reduxState.USER_PROFILE]);
+  const isDemo = useIsDemo();
 
   const handleLogout = useCallback(() => {
     navigate(appRoutes.HOME);

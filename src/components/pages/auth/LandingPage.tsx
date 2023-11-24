@@ -4,25 +4,28 @@ import { AppDispatch } from '../../../services/redux/store';
 import { incrementLoginCount } from '../../../services/redux/thunks/userProfileThunk';
 import { Navigate } from 'react-router-dom';
 import WelcomeModal from '../../modals/WelcomeModal';
-// import { STORAGE } from '../../../app/constants/StorageKeys';
-// import { useLocation } from 'react-router-dom';
+import { STORAGE } from '../../../app/constants/StorageKeys';
+import { useIsDemo } from '../../hoc/withDemo';
 
 interface LandingPageProps {}
 
 const LandingPage: React.FC<LandingPageProps> = () => {
   const dispatch = useDispatch();
-  // const location = useLocation();
-  // const { isDemo } = location.state || {};
+  const isDemo = useIsDemo();
 
   // Initialize the state directly with the value from local storage to prevent flickering
-  // const hideWelcomePage = localStorage.getItem(STORAGE.HIDE_WELCOME_PAGE) === 'true';
+  const hideWelcomePage = localStorage.getItem(STORAGE.HIDE_WELCOME_PAGE) === 'true' && !isDemo;
 
   /* The following code is commented out because it is not used anywhere in the app currently */
-  // const [dismissWelcomePage, setDismissWelcomePage] = useState<boolean>(hideWelcomePage);
-  const [dismissWelcomePage, setDismissWelcomePage] = useState<boolean>(true);
+  const [dismissWelcomePage, setDismissWelcomePage] = useState<boolean>(hideWelcomePage);
+  const [beginTour, setBeginTour] = useState<boolean>(false);
 
   const setDismissWelcomePageCallback = (val: boolean) => {
     setDismissWelcomePage(val);
+  };
+
+  const startTour = (val: boolean) => {
+    setBeginTour(val);
   };
 
   useEffect(() => {
@@ -32,9 +35,13 @@ const LandingPage: React.FC<LandingPageProps> = () => {
   return (
     <>
       {dismissWelcomePage ? (
-        <Navigate to="/dashboard-cost" />
+        <Navigate to="/dashboard-cost" state={{ startTour: beginTour }} />
       ) : (
-        <WelcomeModal setDismissWelcomePageCallback={setDismissWelcomePageCallback} />
+        <WelcomeModal
+          setDismissWelcomePageCallback={setDismissWelcomePageCallback}
+          startTour={startTour}
+          isDemo={isDemo}
+        />
       )}
     </>
   );

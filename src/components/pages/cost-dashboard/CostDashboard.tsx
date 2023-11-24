@@ -31,31 +31,32 @@ export const CostDashboard = () => {
   };
 
   return (
-    <PageLayout title="Cost Dashboard">
-      <Divider />
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={12}>
-            <Widget.CostDashboardChart currency={currencySymbol} />
-          </Grid.Column>
-          <Grid.Column width={4}>
-            <Widget.CostDasboardEstimates isCurrencyConflict={isCurrencyConflict} currency={currencySymbol} />
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row columns="equal">
-          <Grid.Column>
-            <Widget.MostExpensiveInstance isCurrencyConflict={isCurrencyConflict} />
-          </Grid.Column>
-          <Grid.Column>
-            <Widget.FastestGrowingInstance />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <Widget.BillingAccounts isCurrencyConflictCallback={isCurrencyConflictCallback} />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </PageLayout>
+    <>
+      <PageLayout title="Cost Dashboard">
+        <Divider />
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={12} product-tour="tour-start">
+              <Widget.CostDashboardChart currency={currencySymbol} />
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <Widget.CostDasboardEstimates isCurrencyConflict={isCurrencyConflict} currency={currencySymbol} />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns="equal">
+            <Grid.Column product-tour="most-expensive">
+              <Widget.MostExpensiveInstance isCurrencyConflict={isCurrencyConflict} />
+            </Grid.Column>
+            <Grid.Column>
+              <Widget.FastestGrowingInstance />
+            </Grid.Column>
+            <Grid.Column width={5} product-tour="active-providers">
+              <Widget.BillingAccounts isCurrencyConflictCallback={isCurrencyConflictCallback} />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </PageLayout>
+    </>
   );
 };
 

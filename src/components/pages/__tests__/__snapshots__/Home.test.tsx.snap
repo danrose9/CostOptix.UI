@@ -51,7 +51,7 @@ exports[`Home Page matches snapshot 1`] = `
     className="sc-gKPRtg ipIhgG"
   >
     <div
-      className="sc-pyfCe LGQrF"
+      className="sc-pyfCe icIUxe"
     >
       <div
         className="sc-jrcTuL fTYTOQ"
@@ -59,7 +59,7 @@ exports[`Home Page matches snapshot 1`] = `
         <h1
           className="sc-iBYQkv bxfgkn"
         >
-          Stop Over-Spending on Cloud Services
+          Reduce Your Cloud Spending Costs Effectively with CostOptix
         </h1>
       </div>
       <div
@@ -81,6 +81,7 @@ exports[`Home Page matches snapshot 1`] = `
           <button
             className="sc-bqWxrE iFBIFS view-demo"
             data-testid="login-demo-button"
+            onClick={[Function]}
           >
             View Demo
           </button>
