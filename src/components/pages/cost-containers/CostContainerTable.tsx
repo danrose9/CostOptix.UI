@@ -117,7 +117,11 @@ const TableContents: FC<ITableContentsProps> = ({ allCostContainers, handleConta
                 if (container.monthlySpend) orderData = orderAndFormatArray(container.monthlySpend || [], 'periodEnd');
                 if (container.createdDate) createdOn = formatISODateToUTCDate(container.createdDate);
                 return (
-                  <Table.Row key={index} onClick={() => handleContainerAction(container.id, ContainerAction.SHOW)}>
+                  <Table.Row
+                    key={index}
+                    onClick={() => handleContainerAction(container.id, ContainerAction.SHOW)}
+                    product-tour="cost-container"
+                  >
                     <Table.Cell singleLine>{container.name}</Table.Cell>
                     <Table.Cell>
                       <StyledDropDown

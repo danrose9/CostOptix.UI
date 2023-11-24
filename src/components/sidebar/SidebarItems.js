@@ -1,4 +1,5 @@
 import * as appRoutes from '../../app/router/appRoutes';
+import { targets } from '../productTour/steps';
 
 export const menuItems = [
   {
@@ -89,7 +90,7 @@ export const menuItems = [
   },
   {
     title: 'Cost Containers',
-    id: 'cost-containers',
+    id: targets.DEMO_STEP_4,
     path: appRoutes.COST_CONTAINERS,
     icon: 'box',
     active: true,

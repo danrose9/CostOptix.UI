@@ -7,13 +7,9 @@ import * as Widget from './index';
 import { ApplicationContext } from '../../../app/ApplicationContext';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { IRootState } from '../../../services/redux/rootReducer';
-import Tour from 'src/components/productTour/Tour';
-import { useLocation } from 'react-router-dom';
 
 export const CostDashboard = () => {
   const application = useContext(ApplicationContext);
-  const location = useLocation();
-  const { startTour } = location.state || {};
 
   const billingAccountCurrency = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].currency);
 
@@ -36,7 +32,6 @@ export const CostDashboard = () => {
 
   return (
     <>
-      <Tour shouldStart={startTour} />
       <PageLayout title="Cost Dashboard">
         <Divider />
         <Grid>
