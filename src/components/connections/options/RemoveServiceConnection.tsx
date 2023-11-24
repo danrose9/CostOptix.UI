@@ -3,14 +3,20 @@ import { useAppDispatch } from '../../../services/redux/store';
 import { Modal, Button, Dropdown } from 'semantic-ui-react';
 import { deleteBillingAccount } from '../../../services/redux/thunks/serviceProvidersThunk';
 
-export const RemoveServiceConnection = (props: { providerId: string; id: string }) => {
+interface IRemoveServiceConnectionProps {
+  providerId: string;
+  id: string;
+  isDemo?: boolean;
+}
+
+export const RemoveServiceConnection: React.FC<IRemoveServiceConnectionProps> = ({ providerId, id, isDemo }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleRemoveConnection = () => {
     const args = {
-      id: props.id,
-      providerId: props.providerId,
+      id: id,
+      providerId: providerId,
     };
 
     dispatch(deleteBillingAccount(args));
@@ -19,7 +25,11 @@ export const RemoveServiceConnection = (props: { providerId: string; id: string 
 
   return (
     <>
-      <Modal trigger={<Dropdown.Item icon="trash" text="Remove" />} onOpen={() => setOpen(true)} open={open}>
+      <Modal
+        trigger={<Dropdown.Item icon="trash" text="Remove" disabled={isDemo} />}
+        onOpen={() => setOpen(true)}
+        open={open}
+      >
         <Modal.Header>Remove Service Connection</Modal.Header>
         <Modal.Content>
           <p>Are you sure you want to permanently remove this service connection?</p>

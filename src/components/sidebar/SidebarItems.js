@@ -1,5 +1,5 @@
 import * as appRoutes from '../../app/router/appRoutes';
-import { targets } from '../productTour/steps';
+import { targets } from '../productTour/productTourSteps';
 
 export const menuItems = [
   {

@@ -5,6 +5,8 @@ import * as images from '../../assets';
 import { STORAGE } from '../../app/constants/StorageKeys';
 import { withOutDemo } from '../hoc/withDemo';
 import { ExternalWelcomeDescription, DemoWelcomeDescription } from './WelcomeDescription';
+import { useNavigate } from 'react-router-dom';
+import * as appRoutes from '../../app/router/appRoutes';
 
 interface WelcomeModalProps {
   setDismissWelcomePageCallback: (val: boolean) => void;
@@ -35,13 +37,21 @@ const ContentWrapper = styled.div`
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallback, startTour, isDemo }) => {
   const [isOpen, setIsOpen] = useState(true);
 
+  const navigate = useNavigate();
+
   // eslint-disable-next-line
   const [hideWelcomePage, setHideWelcomePage] = useState<boolean>(false);
 
   const handleCloseModal = (shouldStartTour: boolean, e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setDismissWelcomePageCallback(true);
-    startTour(shouldStartTour);
+
+    if (!isDemo && !shouldStartTour) {
+      navigate(appRoutes.SERVICE_PROVIDERS);
+    } else {
+      startTour(shouldStartTour);
+    }
+
     setIsOpen(false);
   };
 

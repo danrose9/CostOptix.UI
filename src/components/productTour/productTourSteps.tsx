@@ -38,7 +38,8 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     target: `#${targets.DEMO_STEP_4}`,
-    content: 'CostOptix offers multiple views of how you can easily visualize your spend.',
+    content:
+      'CostOptix allows to you collect and create multiple views of your services so you can easily visualize your spend.',
     redirectTo: appRoutes.COST_CONTAINERS,
   },
   {
@@ -50,6 +51,6 @@ export const TOUR_STEPS: TourStep[] = [
   {
     target: targets.DEMO_STEP_6,
     content:
-      'To get started create a new service connection. You can add or remove providers and billing accounts through each connection.',
+      'To get started, create a new service connection. You can add or remove providers and billing accounts through each connection.',
   },
 ];
