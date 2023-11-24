@@ -5,7 +5,7 @@ import Navbar from '../components/navbar/Navbar';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import ApplicationRoutes from './router/ApplicationRoutes';
 import { useIdleTimer } from 'react-idle-timer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { withAuth } from '../components/hoc/withAuth';
 import ErrorDefault from '../components/pages/ErrorDefault';
@@ -14,12 +14,17 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { APP_FOOTER } from './constants';
 import { isAuthenticated } from '../utils/processToken';
 
+import Tour from '../components/productTour/Tour';
+
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
 const NavbarWithAuth = withAuth(Navbar);
 const SidebarWithAuth = withAuth(Sidebar);
 
 export const AppContent = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { startTour } = location.state || {};
 
   const showSidebar = () => {
     setSidebarState(!sidebarState);
@@ -49,6 +54,7 @@ export const AppContent = () => {
 
   return (
     <>
+      <Tour shouldStart={startTour} />
       <ErrorBoundary
         FallbackComponent={ErrorDefault}
         onReset={() => {

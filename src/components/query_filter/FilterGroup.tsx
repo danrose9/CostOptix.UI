@@ -63,9 +63,21 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
       if (attribute === 'field') {
         // Check if the field is a selection field and update the state
         const selectedField = fields.find((f) => f.value === value);
-        setIsSelectionField(selectedField ? selectedField.options != null : false);
-        setOptions(selectedField?.options ?? []);
-        setOperator(''); // reset operator when field changes
+
+        // Check if the operator is 'eq' or 'ne'
+        const isOperatorEqOrNe = operator === 'eq' || operator === 'ne';
+
+        // Set selectionfield to true if the field has options and the operator is 'eq' or 'ne'
+        setIsSelectionField(selectedField?.options != null && isOperatorEqOrNe);
+        setOptions(isOperatorEqOrNe ? selectedField?.options ?? [] : []);
+        setOperator('');
+      } else if (attribute === 'operator') {
+        // Check if the field has options and the operator is now 'eq' or 'ne'
+        const selectedField = fields.find((f) => f.value === field);
+        const isOperatorEqOrNe = value === 'eq' || value === 'ne';
+
+        setIsSelectionField(selectedField?.options != null && isOperatorEqOrNe);
+        setOptions(isOperatorEqOrNe ? selectedField?.options ?? [] : []);
       }
       setCurrentFilter((prevFilter: any) => {
         const updatedFilter = { ...prevFilter };
@@ -117,6 +129,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
               placeholder="Select field"
               selection
               value={field}
+              data-testid="field-dropdown"
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
@@ -126,6 +139,7 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
               selection
               onChange={handleFieldChange('operator', setOperator)}
               value={operator}
+              data-testid="operator-dropdown"
             />
           </StyledFieldContainer>
           <StyledFieldContainer>
@@ -135,12 +149,14 @@ const FilterGroup: React.FC<IFilterGroupProps> = ({
                 selection
                 options={options}
                 onChange={handleFieldChange('value', setFilterValue)}
+                data-testid="select-value-dropdown"
               />
             ) : (
               <StyledInput
                 placeholder="Enter filter value"
                 onChange={handleFieldChange('value', setFilterValue)}
                 value={filterValue}
+                data-testid="type-value-dropdown"
               />
             )}
           </StyledFieldContainer>

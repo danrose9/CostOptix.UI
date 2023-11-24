@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import JoyRide, { ACTIONS, EVENTS, STATUS } from 'react-joyride';
 import { useNavigate } from 'react-router-dom';
 import { tourReducer, INITIAL_STATE } from './tourReducer';
+import * as appRoutes from '../../app/router/appRoutes';
 
 interface TourProps {
   shouldStart: boolean;
@@ -15,10 +16,10 @@ const Tour: React.FC<TourProps> = ({ shouldStart }) => {
 
   useEffect(() => {
     if (shouldStart) {
-      navigate('/dashboard-cost');
+      navigate(appRoutes.COST_DASHBOARD);
       dispatch({ type: 'START' });
     }
-  }, [shouldStart]);
+  }, [shouldStart, navigate]);
 
   // Set once tour is viewed, skipped or closed
   const setTourViewed = () => {
@@ -26,29 +27,33 @@ const Tour: React.FC<TourProps> = ({ shouldStart }) => {
   };
 
   const callback = (data: any) => {
-    const { action, index, type, status } = data;
+    const { action, index, type, status, step } = data;
 
-    if (
-      // If close button clicked, then close the tour
-      action === ACTIONS.CLOSE ||
-      // If skipped or end tour, then close the tour
-      (status === STATUS.SKIPPED && tourState.run) ||
-      status === STATUS.FINISHED
-    ) {
+    if (action === ACTIONS.CLOSE || (status === STATUS.SKIPPED && tourState.run) || status === STATUS.FINISHED) {
       setTourViewed();
       dispatch({ type: 'STOP' });
     } else if (type === EVENTS.STEP_AFTER || type === EVENTS.TARGET_NOT_FOUND) {
-      // Check whether next or back button click and update the step.
-      dispatch({
-        type: 'NEXT_OR_PREV',
-        payload: { stepIndex: index + (action === ACTIONS.PREV ? -1 : 1) },
-      });
-    }
-  };
+      // Check if a redirect is needed before dispatching NEXT_OR_PREV
 
-  const startTour = () => {
-    // Start the tour manually
-    dispatch({ type: 'RESTART' });
+      const payload = { stepIndex: index + (action === ACTIONS.PREV ? -1 : 1) };
+      if (step.redirectTo) {
+        // delay in ms if redirect is request to allow component to mount
+        const delay = 400;
+
+        navigate(step.redirectTo);
+        setTimeout(() => {
+          dispatch({
+            type: 'NEXT_OR_PREV',
+            payload: payload,
+          });
+        }, delay);
+      } else {
+        dispatch({
+          type: 'NEXT_OR_PREV',
+          payload: payload,
+        });
+      }
+    }
   };
 
   return (

@@ -11,7 +11,7 @@ export const ServiceConnectionRow = ({ billingAccount }: IBillingAccountProps, i
 
   return (
     <>
-      <Table.Row key={index}>
+      <Table.Row key={index} product-tour="service-connection">
         <Table.Cell>{billingAccount.accountName}</Table.Cell>
         <Table.Cell>
           <StyledDropDown
