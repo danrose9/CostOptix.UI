@@ -22,6 +22,9 @@ export const DisableServiceConnection: React.FC<IDisableServiceConnectionProps> 
   const setIsPolling = useContext(PollingContext);
 
   const handleOnClick = () => {
+    if (isDemo) {
+      return;
+    }
     setIsPolling(true);
     const args = {
       id: id,
@@ -45,16 +48,9 @@ export const DisableServiceConnection: React.FC<IDisableServiceConnectionProps> 
           text="Disable"
           onClick={handleOnClick}
           data-testid="sc-dropdown-disable"
-          disabled={isDemo}
         />
       ) : (
-        <Dropdown.Item
-          icon="bell outline"
-          text="Enable"
-          onClick={handleOnClick}
-          data-testid="sc-dropdown-enable"
-          disabled={isDemo}
-        />
+        <Dropdown.Item icon="bell outline" text="Enable" onClick={handleOnClick} data-testid="sc-dropdown-enable" />
       )}
     </>
   );
