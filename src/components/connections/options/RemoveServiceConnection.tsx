@@ -14,6 +14,10 @@ export const RemoveServiceConnection: React.FC<IRemoveServiceConnectionProps> = 
   const dispatch = useAppDispatch();
 
   const handleRemoveConnection = () => {
+    if (isDemo) {
+      setOpen(false);
+      return;
+    }
     const args = {
       id: id,
       providerId: providerId,
@@ -25,11 +29,7 @@ export const RemoveServiceConnection: React.FC<IRemoveServiceConnectionProps> = 
 
   return (
     <>
-      <Modal
-        trigger={<Dropdown.Item icon="trash" text="Remove" disabled={isDemo} />}
-        onOpen={() => setOpen(true)}
-        open={open}
-      >
+      <Modal trigger={<Dropdown.Item icon="trash" text="Remove" />} onOpen={() => setOpen(true)} open={open}>
         <Modal.Header>Remove Service Connection</Modal.Header>
         <Modal.Content>
           <p>Are you sure you want to permanently remove this service connection?</p>
