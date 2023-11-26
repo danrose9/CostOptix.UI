@@ -6,7 +6,7 @@ export const NoBillingAccountMessage = (props) => {
     <>
       <Message
         header="No Billing Accounts were found"
-        content="We were unable to find any Billing Accounts. Please check account access through your provider"
+        content="We were unable to find any Billing Accounts. Check that you have set up a service connection to your cloud provider."
         onDismiss={props.handleDismiss}
       />
     </>

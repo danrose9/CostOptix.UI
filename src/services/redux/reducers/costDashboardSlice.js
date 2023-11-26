@@ -56,6 +56,10 @@ const costDashboardSlice = createSlice({
     state = initialState;
   },
   reducers: {
+    setStatus(state) {
+      finalState(state);
+    },
+
     addBillingAccount(state, action) {
       const { provider, accountName, accountId, status } = action.payload;
       state.count = state.count + 1;
@@ -161,6 +165,12 @@ const costDashboardSlice = createSlice({
         state.billingAccounts[billingAccountIndex].isError = false;
         state.billingAccounts[billingAccountIndex].status = 'non-transient';
 
+        state.isLoading = false;
+        state.fastestGrowing.isLoading = false;
+        state.monthToDateCost.isLoading = false;
+        state.monthlySpend.isLoading = false;
+        state.mostExpensive.isLoading = false;
+
         if (state.updatedCount === state.count) {
           finalState(state);
         }
@@ -173,6 +183,12 @@ const costDashboardSlice = createSlice({
         state.billingAccounts[billingAccountIndex].isLoading = false;
         state.billingAccounts[billingAccountIndex].isError = true;
         state.billingAccounts[billingAccountIndex].error = action.error.message;
+
+        state.isLoading = false;
+        state.fastestGrowing.isLoading = false;
+        state.monthToDateCost.isLoading = false;
+        state.monthlySpend.isLoading = false;
+        state.mostExpensive.isLoading = false;
 
         state.status = 'partial';
         state.updatedCount = state.updatedCount + 1;
@@ -233,6 +249,7 @@ export const {
   updateMonthlySpend,
   resetCostDashboard,
   addBillingAccount,
+  setStatus,
 } = costDashboardSlice.actions;
 
 export default costDashboardSlice.reducer;

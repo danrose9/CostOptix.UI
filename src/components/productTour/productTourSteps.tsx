@@ -52,5 +52,6 @@ export const TOUR_STEPS: TourStep[] = [
     target: targets.DEMO_STEP_6,
     content:
       'To get started, create a new service connection. You can add or remove providers and billing accounts through each connection.',
+    redirectTo: appRoutes.COST_DASHBOARD,
   },
 ];
