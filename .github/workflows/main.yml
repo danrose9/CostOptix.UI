@@ -1,0 +1,36 @@
+name: Auto PR from develop to main
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  auto-pr-and-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh
+
+      - name: Authenticate GitHub CLI
+        run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Create and Merge PR
+        run: |
+          # Ensure repo is checked out to the default branch
+          git checkout main
+          # Create PR from develop to main
+          PR_URL=$(gh pr create --base main --head develop --title "Merge develop into main" --body "Automatic PR generated to sync changes from develop to main." --repo ${{ github.repository }} --draft)
+          # Extract PR number from PR URL
+          PR_NUMBER=$(echo $PR_URL | rev | cut -d/ -f1 | rev)
+          # Merge PR
+          gh pr merge $PR_NUMBER --merge --repo ${{ github.repository }}
+

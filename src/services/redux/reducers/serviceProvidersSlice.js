@@ -77,7 +77,6 @@ const serviceProviderSlice = createSlice({
         state.error = null;
         state.isAvailable = true;
         state.isCurrencyConflict = action.payload.isCurrencyConflict;
-        // state.billingAccounts.fastestGrowing.isLoading = false;
       })
       .addCase(fetchBillingAccounts.rejected, (state, action) => {
         state.status = 'failed';

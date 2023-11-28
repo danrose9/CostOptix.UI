@@ -33,16 +33,12 @@ const ContentWrapper = styled.div`
 `;
 
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallback, startTour, isDemo }) => {
-  const [isOpen, setIsOpen] = useState(true);
-
   // eslint-disable-next-line
   const [hideWelcomePage, setHideWelcomePage] = useState<boolean>(false);
 
-  const handleCloseModal = (shouldStartTour: boolean, e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleClose = (shouldStartTour: boolean, e: React.MouseEvent<HTMLButtonElement>) => {
     setDismissWelcomePageCallback(true);
     startTour(shouldStartTour);
-    setIsOpen(false);
   };
 
   const handleCheckbox = (event: FormEvent<HTMLInputElement>, data: CheckboxProps) => {
@@ -59,7 +55,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
   const DoNotShowCheckBoxWithOutDemo = withOutDemo(DoNotShowCheckbox);
 
   return (
-    <StyledModal open={isOpen} size="large">
+    <StyledModal open={true} size="large">
       <Modal.Header>Welcome to CostOptix</Modal.Header>
       <Modal.Content image>
         <Image size="medium" src={images.CHECKLIST} />
@@ -70,8 +66,8 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
           <DoNotShowCheckBoxWithOutDemo />
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button onClick={(e) => handleCloseModal(false, e)}>Dismiss</Button>
-          <Button color="green" onClick={(e) => handleCloseModal(true, e)}>
+          <Button onClick={(e) => handleClose(false, e)}>Dismiss</Button>
+          <Button color="green" onClick={(e) => handleClose(true, e)}>
             Begin Tour
           </Button>
         </ButtonWrapper>

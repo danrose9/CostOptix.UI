@@ -7,6 +7,12 @@ import { isAuthCookieAvailable } from '../utils/processToken';
 
 interface IInitializeAppProps {}
 
+/*
+  This component will check for the presence of an Auth cookie and if isDemo is true.
+  If the cookie is present, the user will be redirected to the landing page.
+  isAuthCookieAvailable will also fecth the user's profile
+*/
+
 const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
   const isDemo = useIsDemo();
 

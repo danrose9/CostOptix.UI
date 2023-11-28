@@ -3,14 +3,24 @@ import { useAppDispatch } from '../../../services/redux/store';
 import { Modal, Button, Dropdown } from 'semantic-ui-react';
 import { deleteBillingAccount } from '../../../services/redux/thunks/serviceProvidersThunk';
 
-export const RemoveServiceConnection = (props: { providerId: string; id: string }) => {
+interface IRemoveServiceConnectionProps {
+  providerId: string;
+  id: string;
+  isDemo?: boolean;
+}
+
+export const RemoveServiceConnection: React.FC<IRemoveServiceConnectionProps> = ({ providerId, id, isDemo }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleRemoveConnection = () => {
+    if (isDemo) {
+      setOpen(false);
+      return;
+    }
     const args = {
-      id: props.id,
-      providerId: props.providerId,
+      id: id,
+      providerId: providerId,
     };
 
     dispatch(deleteBillingAccount(args));
