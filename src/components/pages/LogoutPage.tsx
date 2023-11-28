@@ -15,7 +15,7 @@ const LogoutPage = () => {
 
   const handleClick = () => {
     setIsOpen(false);
-    navigate.goBack();
+    navigate(-1);
   };
 
   return (
