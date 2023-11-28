@@ -13,7 +13,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { APP_FOOTER } from './constants';
 import { isAuthenticated } from '../utils/processToken';
-
 import Tour from '../components/productTour/Tour';
 
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
@@ -54,7 +53,7 @@ export const AppContent = () => {
 
   return (
     <>
-      <Tour shouldStart={startTour} />
+      <Tour shouldStart={startTour} tourType={'default'} />
       <ErrorBoundary
         FallbackComponent={ErrorDefault}
         onReset={() => {

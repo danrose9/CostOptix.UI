@@ -46,7 +46,8 @@ const LandingPage: React.FC<LandingPageProps> = () => {
     if (dismissWelcomePage) {
       if (count > 0) {
         // Redirect to cost-dashboard if count > 0
-        navigate(appRoutes.COST_DASHBOARD, { state: { startTour: beginTour } });
+        navigate(appRoutes.COST_DASHBOARD, { state: { startTour: beginTour, tourType: 'default' } });
+        // navigate(appRoutes.COST_DASHBOARD);
       } else {
         // Redirect to service-connections if count = 0
         navigate(appRoutes.SERVICE_PROVIDERS);
@@ -56,7 +57,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
 
   return (
     <>
-      {dismissWelcomePage ? null : ( // Redirect logic is handled in useEffect
+      {dismissWelcomePage ? null : (
         <WelcomeModal
           setDismissWelcomePageCallback={setDismissWelcomePageCallback}
           startTour={startTour}

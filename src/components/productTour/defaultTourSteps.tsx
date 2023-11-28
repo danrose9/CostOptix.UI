@@ -1,15 +1,6 @@
 import React from 'react';
 import * as appRoutes from '../../app/router/appRoutes';
-
-export interface TourStep {
-  content: React.ReactNode;
-  locale?: { skip: React.ReactNode };
-  placement?: 'top' | 'bottom' | 'left' | 'right' | 'center';
-  target: string;
-  title?: string;
-  disableBeacon?: boolean;
-  redirectTo?: string;
-}
+import { TourStep } from './types';
 
 export const targets = {
   DEMO_STEP_1: '[product-tour="tour-start"]',
@@ -20,7 +11,7 @@ export const targets = {
   DEMO_STEP_6: '[product-tour="service-connection"]',
 };
 
-export const TOUR_STEPS: TourStep[] = [
+export const DEFAULT_TOUR_STEPS: TourStep[] = [
   {
     target: targets.DEMO_STEP_1,
     content:
