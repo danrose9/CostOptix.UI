@@ -1,15 +1,6 @@
 import React from 'react';
 import * as appRoutes from '../../app/router/appRoutes';
-
-export interface TourStep {
-  content: React.ReactNode;
-  locale?: { skip: React.ReactNode };
-  placement?: 'top' | 'bottom' | 'left' | 'right' | 'center';
-  target: string;
-  title?: string;
-  disableBeacon?: boolean;
-  redirectTo?: string;
-}
+import { TourStep } from './types';
 
 export const targets = {
   DEMO_STEP_1: '[product-tour="tour-start"]',
@@ -20,7 +11,7 @@ export const targets = {
   DEMO_STEP_6: '[product-tour="service-connection"]',
 };
 
-export const TOUR_STEPS: TourStep[] = [
+export const DEFAULT_TOUR_STEPS: TourStep[] = [
   {
     target: targets.DEMO_STEP_1,
     content:
@@ -38,7 +29,8 @@ export const TOUR_STEPS: TourStep[] = [
   },
   {
     target: `#${targets.DEMO_STEP_4}`,
-    content: 'CostOptix offers multiple views of how you can easily visualize your spend.',
+    content:
+      'CostOptix allows to you collect and create multiple views of your services so you can easily visualize your spend.',
     redirectTo: appRoutes.COST_CONTAINERS,
   },
   {
@@ -50,6 +42,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     target: targets.DEMO_STEP_6,
     content:
-      'To get started create a new service connection. You can add or remove providers and billing accounts through each connection.',
+      'To get started, create a new service connection. You can add or remove providers and billing accounts through each connection.',
+    redirectTo: appRoutes.COST_DASHBOARD,
   },
 ];

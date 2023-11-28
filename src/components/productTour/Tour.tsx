@@ -1,14 +1,29 @@
 import React, { useReducer, useEffect } from 'react';
 import JoyRide, { ACTIONS, EVENTS, STATUS } from 'react-joyride';
 import { useNavigate } from 'react-router-dom';
-import { tourReducer, INITIAL_STATE } from './tourReducer';
+import { tourReducer } from './tourReducer';
 import * as appRoutes from '../../app/router/appRoutes';
+import { DEFAULT_TOUR_STEPS } from './defaultTourSteps';
+import { CONTAINER_TOUR_STEPS } from './containersTourSteps';
 
 interface TourProps {
   shouldStart: boolean;
+  tourType: string;
 }
 
-const Tour: React.FC<TourProps> = ({ shouldStart }) => {
+const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
+  const steps = tourType === 'default' ? DEFAULT_TOUR_STEPS : CONTAINER_TOUR_STEPS;
+
+  const INITIAL_STATE = {
+    key: new Date(),
+    run: false,
+    continuous: true,
+    loading: false,
+    stepIndex: 0,
+    steps: steps,
+  };
+
+  console.log('Tour', tourType);
   // Tour state is the state which control the JoyRide component
   const [tourState, dispatch] = useReducer(tourReducer, INITIAL_STATE);
 

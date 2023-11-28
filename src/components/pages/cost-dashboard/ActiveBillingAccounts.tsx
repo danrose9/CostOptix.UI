@@ -9,6 +9,7 @@ import { CurrencyConflictWarning, NoBillingAccountMessage } from '../../messages
 import { fetchAccountsAndServiceProviders } from '../../../services/api/fetchAccountsAndServiceProviders';
 import { IRootState } from '../../../services/redux/rootReducer';
 import { IBillingAccountsCostDashboard, IBillingAccountCostDashboard } from '../../../types';
+
 const BillingAccounts: React.FC<IBillingAccountsCostDashboard> = ({ billingAccounts }) => {
   return (
     <>
@@ -18,30 +19,41 @@ const BillingAccounts: React.FC<IBillingAccountsCostDashboard> = ({ billingAccou
     </>
   );
 };
-const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
+
+interface IActiveBillingAccountsProps {
+  isCurrencyConflictCallback: (val: boolean) => void;
+}
+
+const ActiveBillingAccounts: React.FC<IActiveBillingAccountsProps> = ({ isCurrencyConflictCallback }) => {
   const dispatch = useDispatch();
   const reset = useResetCostDashboard();
+
   const billingAccounts = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts);
   const [accountStatus, setAccountStatus] = useState<string>('');
-  const isBillingAccountsAvailable = useSelector(
-    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].isAvailable
-  );
-  const { isComplete, billingAccountCount, lastUpdated } = useSelector(
-    (state: IRootState) => state[reduxState.COST_DASHBOARD]
-  );
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { isComplete, count, lastUpdated } = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD]);
+
+  const updateSetAccountStatus = (val: string) => {
+    setAccountStatus(val);
+  };
+
   const refreshPage = () => {
     setIsLoading(true);
     reset();
+    fetchAccountsAndServiceProviders({ dispatch, lastUpdated, updateIsLoading, updateSetAccountStatus });
   };
+
   const isNoBillingAccount = () => {
-    return billingAccountCount === 0 && isComplete ? true : false;
+    return count === 0 && isComplete;
   };
+
   const LastUpdated = () => {
     return (
       <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="4">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
     );
   };
+
   const AccountStatusMessage = () => {
     return (
       <>
@@ -57,16 +69,21 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       </>
     );
   };
+
   const NoBillingAccounts = () => {
     return <>{isNoBillingAccount() ? <NoBillingAccountMessage /> : null}</>;
   };
+
   const { isCurrencyConflict } = useSelector((state: IRootState) => state[reduxState.SERVICE_PROVIDERS]);
+
   const CurrencyConflict = () => {
     return <>{isCurrencyConflict ? <CurrencyConflictWarning /> : null}</>;
   };
+
   const updateIsLoading = (val: boolean) => {
     setIsLoading(val);
   };
+
   const RenderTable = () => {
     return (
       <Segment color="green">
@@ -95,11 +112,7 @@ const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
       </Segment>
     );
   };
-  useEffect(() => {
-    if (!isBillingAccountsAvailable) {
-      fetchAccountsAndServiceProviders({ dispatch, updateIsLoading, setAccountStatus, lastUpdated });
-    }
-  }, [isBillingAccountsAvailable, lastUpdated, dispatch]);
+
   useEffect(() => {
     isCurrencyConflictCallback(isCurrencyConflict);
   }, [isCurrencyConflict, isCurrencyConflictCallback]);

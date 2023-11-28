@@ -1,21 +1,6 @@
-import { TOUR_STEPS } from './steps';
+import { InitialStateType, TourAction } from './types';
 
-type TourAction = {
-  type: 'START' | 'RESET' | 'STOP' | 'NEXT_OR_PREV' | 'RESTART';
-  payload?: any;
-};
-
-export const INITIAL_STATE = {
-  key: new Date(),
-  run: false,
-  continuous: true,
-  loading: false,
-  stepIndex: 0,
-  steps: TOUR_STEPS,
-};
-
-export const tourReducer = (state = INITIAL_STATE, action: TourAction) => {
-  console.log('tourReducer', action);
+export const tourReducer = (state: InitialStateType, action: TourAction) => {
   switch (action.type) {
     case 'START':
       return { ...state, run: true };
