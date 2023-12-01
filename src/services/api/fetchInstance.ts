@@ -1,15 +1,17 @@
 import dayjs from 'dayjs';
 import jwt_decode from 'jwt-decode';
 import { BASE, REFRESH_TOKEN } from './apiEndpoints';
+import { AuthTokens, DecodedToken } from './types';
 
-const originalRequest = async (url, config) => {
+const AUTHTOKENS = 'authTokens';
+
+const originalRequest = async (url: string, config: any): Promise<Response> => {
   url = `${BASE}${url}`;
-
-  let response = await fetch(url, config);
+  const response = await fetch(url, config);
   return response;
 };
 
-const refreshToken = async (authTokens) => {
+const refreshToken = async (authTokens: AuthTokens): Promise<any> => {
   let response = await fetch(BASE + REFRESH_TOKEN, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -20,13 +22,14 @@ const refreshToken = async (authTokens) => {
   });
   let data = await response.json();
 
-  sessionStorage.setItem('authTokens', JSON.stringify(data));
+  sessionStorage.setItem(AUTHTOKENS, JSON.stringify(data));
   return data;
 };
 
-const isTokenValid = (accessToken) => {
+const isTokenValid = (accessToken: string) => {
   try {
-    const authToken = jwt_decode(accessToken);
+    const authToken: DecodedToken = jwt_decode(accessToken);
+
     return dayjs.unix(authToken.exp).diff(dayjs()) > 1;
   } catch (err) {
     console.error('Error decoding token', err);
@@ -34,15 +37,17 @@ const isTokenValid = (accessToken) => {
   }
 };
 
-const customFetcher = async (url, config = {}) => {
-  let authTokens = sessionStorage.getItem('authTokens') ? JSON.parse(sessionStorage.getItem('authTokens')) : null;
+const customFetcher = async (url: string, config: RequestInit = {}): Promise<Response> => {
+  let authTokens: AuthTokens = sessionStorage.getItem(AUTHTOKENS)
+    ? (JSON.parse(sessionStorage.getItem(AUTHTOKENS) as string) as AuthTokens)
+    : null!;
 
-  if (!isTokenValid(authTokens?.accessToken)) {
+  if (!isTokenValid(authTokens.accessToken)) {
     authTokens = await refreshToken(authTokens);
   }
 
   config['headers'] = {
-    Authorization: `Bearer ${authTokens?.accessToken}`,
+    Authorization: `Bearer ${authTokens.accessToken}`,
     'Content-Type': 'application/json',
   };
 

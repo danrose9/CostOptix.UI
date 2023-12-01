@@ -96,9 +96,13 @@ const ResourceList = () => {
 
   return (
     <>
-      <PageLayout title="Resources">
-        <SearchResources initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
-
+      <PageLayout
+        title="Resources"
+        searchComponent={
+          <SearchResources initialQuery={initialQuery} pageSize={pageSize} isAvailable={resources.isAvailable} />
+        }
+        downloadComponent={true}
+      >
         {resources.isLoading ? <Spinner /> : <ResourcesTable searchResults={resources.searchResults} />}
 
         <Divider />
