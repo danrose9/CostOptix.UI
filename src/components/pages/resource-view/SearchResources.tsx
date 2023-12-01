@@ -1,18 +1,13 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Search, Grid } from 'semantic-ui-react';
+import { Search } from 'semantic-ui-react';
 import { CLEAN_QUERY, SEARCH_CLICK } from '../../../services/redux/reducers/resourceSlice';
 import { reduxState } from '../../../services/redux/reduxState';
 import { SEARCH_RESOURCES } from '../../../services/redux/thunks/resourceThunk';
-import styled from 'styled-components';
 import { IRootState } from '../../../services/redux/rootReducer';
 import { AppDispatch } from '../../../services/redux/store';
 
 const keyDelay = process.env.REACT_APP_KEY_DELAY;
-const StyledSearchGrid = styled(Grid)`
-  position: absolute;
-  right: 2em;
-`;
 
 interface ISearchResourcesProps {
   initialQuery: string;
@@ -62,11 +57,12 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, pageSi
   }, [dispatch, initialQuery]);
 
   return (
-    <StyledSearchGrid>
-      <Grid.Column width={6}>
-        <Search placeholder="Search..." onSearchChange={handleSearchChange} value={searchValue} showNoResults={false} />
-      </Grid.Column>
-    </StyledSearchGrid>
+    <Search
+      placeholder="Search page..."
+      onSearchChange={handleSearchChange}
+      value={searchValue}
+      showNoResults={false}
+    />
   );
 };
 

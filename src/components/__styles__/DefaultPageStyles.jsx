@@ -14,14 +14,6 @@ export const PageContainer = styled(Segment)`
   height: 100%;
 `;
 
-export const StyledPageHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  
-`;
-
 export const PageHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -32,12 +24,6 @@ export const DashboardHeader = styled.div`
   text-align: center;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const StyledPageTitle = styled.div`
-  font-weight: 400;
-  font-size: 1.7rem;
-  padding: 0.5rem 0;
 `;
 
 ///

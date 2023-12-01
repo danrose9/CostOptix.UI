@@ -26,13 +26,13 @@ export const NavbarItems = () => {
       image: <Icon name="user" />,
       onClick: () => navigate(appRoutes.SETTINGS),
     },
-    { key: 'help', text: 'Help', image: <Icon name="help" /> },
-    {
-      key: 'settings',
-      text: 'Settings',
-      image: <Icon name="setting" />,
-      onClick: () => navigate(appRoutes.SETTINGS),
-    },
+    // { key: 'help', text: 'Help', image: <Icon name="help" /> },
+    // {
+    //   key: 'settings',
+    //   text: 'Settings',
+    //   image: <Icon name="setting" />,
+    //   onClick: () => navigate(appRoutes.SETTINGS),
+    // },
     {
       key: 'log-out',
       text: 'Log Out',

@@ -20,19 +20,21 @@ const BillingAccounts: React.FC<IBillingAccountsCostDashboard> = ({ billingAccou
   );
 };
 
-interface IActiveBillingAccountsProps {
-  isCurrencyConflictCallback: (val: boolean) => void;
-}
-
-const ActiveBillingAccounts: React.FC<IActiveBillingAccountsProps> = ({ isCurrencyConflictCallback }) => {
+const ActiveBillingAccounts = ({ isCurrencyConflictCallback }: any) => {
   const dispatch = useDispatch();
   const reset = useResetCostDashboard();
-
   const billingAccounts = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].billingAccounts);
+  const { isCurrencyConflict } = useSelector((state: IRootState) => state[reduxState.SERVICE_PROVIDERS]);
+  const isBillingAccountsAvailable = useSelector(
+    (state: IRootState) => state[reduxState.SERVICE_PROVIDERS].isAvailable
+  );
+
   const [accountStatus, setAccountStatus] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isComplete, count, lastUpdated } = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD]);
+  const { isComplete, billingAccountCount, lastUpdated } = useSelector(
+    (state: IRootState) => state[reduxState.COST_DASHBOARD]
+  );
 
   const updateSetAccountStatus = (val: string) => {
     setAccountStatus(val);
@@ -41,19 +43,15 @@ const ActiveBillingAccounts: React.FC<IActiveBillingAccountsProps> = ({ isCurren
   const refreshPage = () => {
     setIsLoading(true);
     reset();
-    fetchAccountsAndServiceProviders({ dispatch, lastUpdated, updateIsLoading, updateSetAccountStatus });
   };
-
   const isNoBillingAccount = () => {
-    return count === 0 && isComplete;
+    return billingAccountCount === 0 && isComplete ? true : false;
   };
-
   const LastUpdated = () => {
     return (
       <>{isNoBillingAccount() ? null : <Table.HeaderCell colSpan="4">Last Updated: {lastUpdated}</Table.HeaderCell>}</>
     );
   };
-
   const AccountStatusMessage = () => {
     return (
       <>
@@ -69,12 +67,9 @@ const ActiveBillingAccounts: React.FC<IActiveBillingAccountsProps> = ({ isCurren
       </>
     );
   };
-
   const NoBillingAccounts = () => {
     return <>{isNoBillingAccount() ? <NoBillingAccountMessage /> : null}</>;
   };
-
-  const { isCurrencyConflict } = useSelector((state: IRootState) => state[reduxState.SERVICE_PROVIDERS]);
 
   const CurrencyConflict = () => {
     return <>{isCurrencyConflict ? <CurrencyConflictWarning /> : null}</>;
@@ -84,38 +79,41 @@ const ActiveBillingAccounts: React.FC<IActiveBillingAccountsProps> = ({ isCurren
     setIsLoading(val);
   };
 
-  const RenderTable = () => {
-    return (
-      <Segment color="green">
-        <Table selectable>
-          <Table.Header fullWidth>
-            <Table.Row>
-              <Table.HeaderCell colSpan="3" data-testid="billing-accounts">
-                Active Billing Accounts
-              </Table.HeaderCell>
-              <Table.HeaderCell textAlign="center" width={2}>
-                <StyledIconButton
-                  name="refresh"
-                  onClick={refreshPage}
-                  loading={!isComplete}
-                  disabled={!isComplete}
-                  fitted
-                />
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>{isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}</Table.Body>
-          <AccountStatusMessage />
-        </Table>
-        <CurrencyConflict />
-        <NoBillingAccounts />
-      </Segment>
-    );
-  };
+  useEffect(() => {
+    if (!isBillingAccountsAvailable) {
+      fetchAccountsAndServiceProviders({ dispatch, updateIsLoading, updateSetAccountStatus, lastUpdated });
+    }
+  }, [isBillingAccountsAvailable, lastUpdated, dispatch]);
 
   useEffect(() => {
     isCurrencyConflictCallback(isCurrencyConflict);
   }, [isCurrencyConflict, isCurrencyConflictCallback]);
-  return <RenderTable />;
+
+  return (
+    <Segment color="green">
+      <Table selectable>
+        <Table.Header fullWidth>
+          <Table.Row>
+            <Table.HeaderCell colSpan="3" data-testid="billing-accounts">
+              Active Billing Accounts
+            </Table.HeaderCell>
+            <Table.HeaderCell textAlign="center" width={2}>
+              <StyledIconButton
+                name="refresh"
+                onClick={refreshPage}
+                loading={!isComplete}
+                disabled={!isComplete}
+                fitted
+              />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>{isLoading ? null : <BillingAccounts billingAccounts={billingAccounts} />}</Table.Body>
+        <AccountStatusMessage />
+      </Table>
+      <CurrencyConflict />
+      <NoBillingAccounts />
+    </Segment>
+  );
 };
 export default ActiveBillingAccounts;

@@ -1,5 +1,3 @@
-import React from 'react';
-import * as appRoutes from '../../app/router/appRoutes';
 import { TourStep } from './types';
 
 export const targets = {

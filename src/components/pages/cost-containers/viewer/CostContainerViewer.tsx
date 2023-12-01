@@ -21,7 +21,7 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
 }) => {
   const { monthlySpend, ...containerSummaryData } = selectedContainer;
   const { id } = selectedContainer;
-  const [showResources, setShowResources] = useState(false);
+  const [showResources, setShowResources] = useState(true);
   const [skip, setSkip] = useState(0);
 
   const dispatch = useDispatch();
@@ -56,7 +56,12 @@ export const CostContainerViewer: React.FC<ICostContainerViewerProps> = ({
         </StyledSegment>
       </ComponentContainer>
       <PaddedSegment basic>
-        <Radio toggle label={showResources ? 'Hide Resources' : 'Show Resources'} onChange={handleShowResources} />
+        <Radio
+          toggle
+          label={showResources ? 'Hide Resources' : 'Show Resources'}
+          onChange={handleShowResources}
+          checked={showResources}
+        />
       </PaddedSegment>
 
       {showResources ? (

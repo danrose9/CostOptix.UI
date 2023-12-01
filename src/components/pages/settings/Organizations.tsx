@@ -51,8 +51,8 @@ const Organizations = (props: IOrganizationProps) => {
                 <Table.Cell>{dateJoined}</Table.Cell>
                 <Table.Cell collapsing>
                   <ActionButtons>
-                    <ActionButton name="edit outline" color="grey" content="edit" onClick={() => {}} />
-                    <ActionButton name="trash alternate outline" color="grey" content="delete" onClick={() => {}} />
+                    <ActionButton name="edit outline" color="grey" tooltip="edit" onClick={() => {}} />
+                    <ActionButton name="trash alternate outline" color="grey" tooltip="delete" onClick={() => {}} />
                   </ActionButtons>
                 </Table.Cell>
               </Table.Row>

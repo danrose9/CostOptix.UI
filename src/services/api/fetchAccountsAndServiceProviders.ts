@@ -6,9 +6,9 @@ import { IBillingAccount } from 'src/types';
 
 interface IFetchAccountsAndServiceProviders {
   dispatch: AppDispatch;
-  lastUpdated: string;
   updateIsLoading?: (isLoading: boolean) => void;
   updateSetAccountStatus?: (status: string) => void;
+  lastUpdated: string;
 }
 
 export const fetchAccountsAndServiceProviders = async ({

@@ -1,7 +1,7 @@
 import { COST_CONTAINERS } from './apiEndpoints';
 import fetchInstance from './fetchInstance';
 
-export interface ICostContainerArgs {
+interface ICostContainerArgs {
   name: string;
   description: string;
   owner: string;
