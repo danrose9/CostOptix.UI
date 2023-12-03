@@ -33,6 +33,17 @@ export const NavbarItems = () => {
     //   image: <Icon name="setting" />,
     //   onClick: () => navigate(appRoutes.SETTINGS),
     // },
+    //   key: 'tour',
+    //   text: 'Take a Tour',
+    //   image: <Icon name="user" />,
+    //   onClick: () => navigate('/dashboard-cost', { state: { startTour: true } }),
+    // },
+    {
+      key: 'settings',
+      text: 'Settings',
+      image: <Icon name="setting" />,
+      onClick: () => navigate(appRoutes.SETTINGS),
+    },
     {
       key: 'log-out',
       text: 'Log Out',
