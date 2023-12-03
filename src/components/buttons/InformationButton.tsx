@@ -1,29 +1,20 @@
 import React from 'react';
 import { Icon, Popup } from 'semantic-ui-react';
-import styled from 'styled-components';
+import { StyledIcon } from './Button.styles';
 
 export interface IInformationButtonProps {
   content?: string;
 }
 
-const StyledIcon = styled(Icon)`
-  color: #3f6fbe;
-  cursor: pointer;
-  padding-left: 0.5em;
-`;
-
-export function InformationButton(props: IInformationButtonProps) {
-  const { content } = props;
-  /* Using styled components pushes the tooltip to top of page */
-
+export const InformationButton: React.FC<IInformationButtonProps> = ({ content }) => {
   return (
     <Popup
-      trigger={<Icon name="info circle" as={StyledIcon} data-testid="info-icon" />}
+      trigger={<Icon className="information-icon" name="info circle" as={StyledIcon} data-testid="info-icon" />}
       content={content}
       basic
       position="top left"
     />
   );
-}
+};
 
 export default InformationButton;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
 import { INewCostContainer, ContainerAction } from '../../../../types/container-types';
-import { ButtonGroup } from '../../../__styles__/ButtonStyles';
+import { ButtonGroup } from '../../../buttons/Button.styles';
 import { useIsDemo } from '../../../hoc/withDemo';
 
 interface ICostContainerProfileProps {
