@@ -111,7 +111,7 @@ const costDashboardSlice = createSlice({
       state.monthToDateCost.isLoading = false;
     },
     updateMostExpensiveInstance(state, action) {
-      var orderBy = action.payload.isCurrencyConflict ? 'amount30dayConverted' : 'amount30day';
+      var orderBy = action.payload.isCurrencyConflict ? 'amount30DayConverted' : 'amount30Day';
 
       state.mostExpensive.data = combineSortSliceArray(
         state.mostExpensive,

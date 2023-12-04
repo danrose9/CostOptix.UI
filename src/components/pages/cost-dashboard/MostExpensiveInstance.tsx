@@ -54,10 +54,7 @@ interface IMostExpensiveInstance {
 export const MostExpensiveInstance: React.FC<IMostExpensiveInstance> = (props) => {
   const { isCurrencyConflict } = props;
 
-  const mostExpensiveService = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].mostExpensive.data);
-
-  const isLoading = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].mostExpensive.isLoading);
-
+  const { data, isLoading } = useSelector((state: IRootState) => state[reduxState.COST_DASHBOARD].mostExpensive);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -89,7 +86,7 @@ export const MostExpensiveInstance: React.FC<IMostExpensiveInstance> = (props) =
         </Table.Header>
 
         <Table.Body>
-          {mostExpensiveService
+          {data
             .filter((instance: IBillingAccountMostExpensive) => instance.amount30Day > 0)
             .map((instance: IBillingAccountMostExpensive, index: any) => {
               const currencySymbol = getSymbolFromCurrency(instance.currency);
