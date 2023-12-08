@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon, SemanticCOLORS, SemanticICONS, Popup } from 'semantic-ui-react';
-import styled from 'styled-components';
+import { StyledIcon } from './Button.styles';
 
 export interface IActionButton {
   name: SemanticICONS | undefined;
@@ -10,21 +10,12 @@ export interface IActionButton {
   tooltipPosition?: 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'right center' | 'left center';
 }
 
-export const ActionButtons = styled.div`
-  display: table;
-  cursor: pointer;
-`;
-
-const StyledIcon = styled(Icon)`
-  padding: 0 1rem;
-`;
-
-const ActionButton: React.FC<IActionButton> = ({ name, color, tooltip, tooltipPosition }) => {
+const ActionButton: React.FC<IActionButton> = ({ name, color, tooltip, tooltipPosition, onClick }) => {
   return (
     <Popup
-      trigger={<Icon name={name} color={color} size="large" as={StyledIcon} />}
+      trigger={<Icon name={name} color={color} size="large" as={StyledIcon} onClick={onClick} />}
       content={tooltip}
-      tooltipPosition={tooltipPosition}
+      position={tooltipPosition}
     />
   );
 };

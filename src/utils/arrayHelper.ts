@@ -1,10 +1,11 @@
+import { IRootState } from 'src/services/redux/rootReducer';
 import { formatDateToShort } from './helper';
 
-function validateValue(num) {
+function validateValue(num: number) {
   return typeof num === 'number' && !isNaN(num) ? num : 0;
 }
 
-export function computeNewValue(arrayItem, newObj, provider) {
+export function computeNewValue(arrayItem: any, newObj: any, provider: string) {
   const computedValue = validateValue(arrayItem[provider]) + validateValue(newObj[provider]);
 
   const formattedNumber = parseFloat(computedValue.toFixed(2));
@@ -15,11 +16,21 @@ export function computeNewValue(arrayItem, newObj, provider) {
 /// Combines payload with state.data and sorts by sortBy property
 /// Returns a limited array based on limit
 /// </summary>
-export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
+export const combineSortSliceArray = (
+  state: IRootState,
+  payload: any,
+  slice: string,
+  sortBy: string,
+  limit: number
+) => {
+  // payload is a single billing account
   const data = state.data;
+
+  // newArray is the array of fastestGrowing or mostExpensive only
   const newArray = payload[slice];
 
-  const updatedArray = newArray.map((obj) => ({
+  // add billing account properties to each object in newArray
+  const updatedArray = newArray.map((obj: any) => ({
     ...obj,
     accountName: payload.accountName,
     billingAccountId: payload.id,
@@ -28,10 +39,14 @@ export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
     convertedCurrency: payload.convertedCurrency,
   }));
 
+  // combine updatedArray with state.data
   const combinedArray = data.concat(updatedArray);
-  const orderedArray = combinedArray.sort((a, b) => b[sortBy] - a[sortBy]);
 
+  const orderedArray = combinedArray.sort((b: any, a: any) => a[sortBy] - b[sortBy]);
+
+  // limitedArray is the first x objects in orderedArray
   const limitedArray = orderedArray.slice(0, limit);
+
   return limitedArray;
 };
 
@@ -39,14 +54,14 @@ export const combineSortSliceArray = (state, payload, slice, sortBy, limit) => {
 /// Combines payload with state.data and to return a single array by date
 /// If isCurrencyConflict is true then use amountConverted
 /// </summary>
-export const upsert = (array, payload, isCurrencyConflict) => {
+export const upsert = (array: any, payload: any, isCurrencyConflict: boolean) => {
   const provider = payload.provider;
 
   // take a copy of original array
   const newArray = [...array];
 
   // eslint-disable-next-line array-callback-return
-  payload.monthlySpend.map((obj) => {
+  payload.monthlySpend.map((obj: any) => {
     let amount = obj.amount;
     if (isCurrencyConflict) {
       amount = obj.amountConverted;
@@ -93,14 +108,14 @@ export const upsert = (array, payload, isCurrencyConflict) => {
   return newArray;
 };
 
-export const findBillingAccount = (state, payload) => {
+export const findBillingAccount = (state: IRootState, payload: any) => {
   const { id } = payload;
 
-  return state.billingAccounts.find((item) => item.id === id);
+  return state.billingAccounts.find((item: any) => item.id === id);
 };
 
-export const getIndex = (inputArray, propertyToCheck, valueToFind) => {
-  let obj = inputArray.find((x) => x[propertyToCheck] === valueToFind);
+export const getIndex = (inputArray: any, propertyToCheck: any, valueToFind: any) => {
+  let obj = inputArray.find((x: any) => x[propertyToCheck] === valueToFind);
 
   return inputArray.indexOf(obj);
 };

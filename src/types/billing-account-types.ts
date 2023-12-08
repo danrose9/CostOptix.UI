@@ -12,6 +12,17 @@ export interface IBillingAccount {
   provider: string;
 }
 
+export interface IBillingAccountCostDashboard extends IBillingAccount {
+  convertedCurrency?: string;
+  monthToDateCost?: number;
+  monthToDateCostConverted?: number;
+  monthlySpend?: IMonthlySpend[];
+  mostExpensive?: [IBillingAccountMostExpensive];
+  fastestGrowing?: [IBillingAccountFastestGrowing];
+  isLoading: boolean;
+  isError: boolean;
+}
+
 export interface IBillingAccountProps {
   billingAccount: IBillingAccount;
 }
@@ -22,18 +33,6 @@ export interface IBillingAccountsCostDashboard {
 
 export interface IBillingAccountCostDashboardProps {
   billingAccount: IBillingAccountCostDashboard;
-}
-
-export interface IBillingAccountCostDashboard extends IBillingAccount {
-  convertedCurrency?: string;
-  monthToDateCost?: number;
-  monthToDateCostConverted?: number;
-  monthlySpend?: IMonthlySpend[];
-  mostExpensive?: [IBillingAccountMostExpensive];
-  fastestGrowing?: [IBillingAccountFastestGrowing];
-  isLoading: boolean;
-  isError: boolean;
-  status: string;
 }
 
 export interface IBillingAccountMostExpensive {
@@ -53,7 +52,11 @@ export interface IBillingAccountFastestGrowing {
   id: string;
   resourceName: string;
   service: string;
-  amountConverted: number;
   growth30Day: number;
   growth6Month: number;
+  accountName: string;
+  billingAccountId: string;
+  provider: string;
+  currency: string;
+  convertedCurrency: string;
 }

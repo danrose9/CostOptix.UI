@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Label, Header, Icon, Popup } from 'semantic-ui-react';
 import { ICostContainer } from '../../../../types/container-types';
 import { ProviderImage } from '../../../ProviderImage';
-import { ButtonGroup } from '../../../__styles__/ButtonStyles';
+import { ButtonGroup } from '../../../buttons/Button.styles';
 import { ContainerAction } from '../../../../types/container-types';
 import styled from 'styled-components';
 

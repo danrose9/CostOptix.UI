@@ -7,6 +7,7 @@ import {
   updateFastestGrowingInstance,
   updateMonthlySpend,
 } from '../reducers/costDashboardSlice';
+import { IRootState } from '../rootReducer';
 
 export const fetchBillingAccountCosts = createAsyncThunk(
   'billingAccount/Costs',
@@ -20,10 +21,14 @@ export const fetchBillingAccountCosts = createAsyncThunk(
       })
       .then((response) => response.json())
       .then((data) => {
-        thunkAPI.dispatch(updateMonthToDateCost(data));
-        thunkAPI.dispatch(updateMostExpensiveInstance(data));
-        thunkAPI.dispatch(updateFastestGrowingInstance(data));
-        thunkAPI.dispatch(updateMonthlySpend(data));
+        const isCurrencyConflict = (thunkAPI.getState() as IRootState).serviceProviders.isCurrencyConflict;
+
+        const costDashboardData = { ...data, isCurrencyConflict: isCurrencyConflict };
+
+        thunkAPI.dispatch(updateMonthToDateCost(costDashboardData));
+        thunkAPI.dispatch(updateMostExpensiveInstance(costDashboardData));
+        thunkAPI.dispatch(updateFastestGrowingInstance(costDashboardData));
+        thunkAPI.dispatch(updateMonthlySpend(costDashboardData));
 
         return data;
       });
@@ -33,7 +38,6 @@ export const fetchBillingAccountCosts = createAsyncThunk(
 export const fetchTransientBillingAccountCosts = createAsyncThunk(
   'transientBillingAccount/Costs',
   async (billingAccountId: string, thunkAPI) => {
-    // try {
     return await fetchInstance(`Costs/${TRANSIENT_BILLING_ACCOUNT_COSTS}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
