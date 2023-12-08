@@ -23,7 +23,6 @@ const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
     steps: steps,
   };
 
-  console.log('Tour', tourType);
   // Tour state is the state which control the JoyRide component
   const [tourState, dispatch] = useReducer(tourReducer, INITIAL_STATE);
 

@@ -4,6 +4,7 @@ import { PageHeader } from '../PageHeader';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
 import { ActionButton } from '../buttons';
+import { useIsDemo } from '../hoc/withDemo';
 
 interface IPageLayoutProps {
   title: string;
@@ -11,6 +12,7 @@ interface IPageLayoutProps {
   className?: string;
   searchComponent?: React.ReactNode;
   downloadComponent?: boolean;
+  onClick?: () => void;
 }
 
 const PageHeaderContainer = styled.div`
@@ -31,19 +33,27 @@ const ActionButtons = styled(Icon.Group)`
   align-items: center;
 `;
 
-const PageLayout = (props: IPageLayoutProps) => {
-  const { title, children, searchComponent, downloadComponent } = props;
+const PageLayout: React.FC<IPageLayoutProps> = ({ title, children, searchComponent, downloadComponent, onClick }) => {
+  const isDemo = useIsDemo();
   return (
     <>
       <PageContent>
         <PageHeaderContainer>
           <PageHeader title={title} />
           <PageActionBar>
-            <ActionButtons>
-              {downloadComponent ? (
-                <ActionButton name="download" color="blue" tooltip="download" tooltipPosition="bottom left" />
-              ) : null}
-            </ActionButtons>
+            {isDemo ? null : (
+              <ActionButtons>
+                {downloadComponent ? (
+                  <ActionButton
+                    name="download"
+                    color="blue"
+                    tooltip="download"
+                    tooltipPosition="bottom left"
+                    onClick={onClick}
+                  />
+                ) : null}
+              </ActionButtons>
+            )}
             {searchComponent ? searchComponent : null}
           </PageActionBar>
         </PageHeaderContainer>

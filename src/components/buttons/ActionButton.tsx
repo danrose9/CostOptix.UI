@@ -10,12 +10,12 @@ export interface IActionButton {
   tooltipPosition?: 'top left' | 'top right' | 'bottom left' | 'bottom right' | 'right center' | 'left center';
 }
 
-const ActionButton: React.FC<IActionButton> = ({ name, color, tooltip, tooltipPosition }) => {
+const ActionButton: React.FC<IActionButton> = ({ name, color, tooltip, tooltipPosition, onClick }) => {
   return (
     <Popup
-      trigger={<Icon name={name} color={color} size="large" as={StyledIcon} />}
+      trigger={<Icon name={name} color={color} size="large" as={StyledIcon} onClick={onClick} />}
       content={tooltip}
-      tooltipPosition={tooltipPosition}
+      position={tooltipPosition}
     />
   );
 };

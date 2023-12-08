@@ -46,9 +46,11 @@ const resourceSlice = createSlice({
         state.status = 'success';
         state.isLoading = false;
         state.isAvailable = true;
-        state.searchResults = action.payload.value;
         state.error = null;
-        state.count = action.payload['@odata.count'];
+        if (action.payload !== undefined) {
+          state.searchResults = action.payload.value;
+          state.count = action.payload['@odata.count'];
+        }
       })
       .addCase(SEARCH_RESOURCES.rejected, (state, action) => {
         state.status = 'failed';
