@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import * as appRoutes from './router/appRoutes';
 import { useIsDemo } from '../components/hoc/withDemo';
 
-import { isAuthCookieAvailable } from '../utils/processToken';
+import { isAuthCookieAvailable } from '../services/api/processToken';
 
 interface IInitializeAppProps {}
 
@@ -14,6 +14,7 @@ interface IInitializeAppProps {}
 */
 
 const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
+  console.log('initializeApp');
   const isDemo = useIsDemo();
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);

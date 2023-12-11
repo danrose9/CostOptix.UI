@@ -1,6 +1,6 @@
 import { store } from '../../../services/redux/store';
 import { Logout, userLogout } from '../Logout';
-import { removeAuthCookie } from '../../../utils/processToken';
+import { removeAuthCookie } from '../../../services/api/processToken';
 
 // Mock the store dispatch and sessionStorage
 jest.mock('../../../services/redux/store', () => ({

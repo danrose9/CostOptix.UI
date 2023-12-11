@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
 import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNavbarItems';
 import { NavbarMode } from './NavbarMode';
-import { isAuthenticated } from '../../utils/processToken';
+import { isAuthenticated } from '../../services/api/processToken';
 
 export const NavbarItems = () => {
   const navigate = useNavigate();

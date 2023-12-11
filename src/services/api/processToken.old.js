@@ -1,7 +1,7 @@
-import { store } from '../services/redux/store';
+import { store } from '../redux/store';
 import dayjs from 'dayjs';
 import jwt_decode from 'jwt-decode';
-import { fetchUserProfile, fetchUserPhoto } from '../services/redux/thunks/userProfileThunk';
+import { fetchUserProfile, fetchUserPhoto } from '../redux/thunks/userProfileThunk';
 
 const _ = require('lodash');
 

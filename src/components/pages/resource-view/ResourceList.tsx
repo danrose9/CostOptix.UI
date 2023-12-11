@@ -9,8 +9,7 @@ import ResourcesTable from './ResourceTable';
 import TablePagination from '../../tables/TablePagination';
 import PageLayout from '../PageLayout';
 import SearchResources from '../../search/SearchResources';
-
-const pageSize = 10;
+import { defaultPageSize as pageSize } from 'src/app/constants/application';
 
 const ResourceList = () => {
   const [skip, setSkip] = useState(0);

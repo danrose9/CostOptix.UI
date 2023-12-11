@@ -1,5 +1,5 @@
 import React from 'react';
-import { isAuthenticated } from '../../utils/processToken';
+import { isAuthenticated } from '../../services/api/processToken';
 
 export const withAuth = (ComponentToBeRendered) => (props) => {
   if (isAuthenticated()) return <ComponentToBeRendered {...props} />;

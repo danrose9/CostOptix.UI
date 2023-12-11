@@ -1,5 +1,5 @@
 import { store } from '../../services/redux/store';
-import { removeAuthCookie } from '../../utils/processToken';
+import { removeAuthCookie } from '../../services/api/processToken';
 
 export const userLogout = () => {
   return { type: 'USER_LOGOUT' };
