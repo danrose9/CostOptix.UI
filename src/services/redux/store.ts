@@ -22,7 +22,6 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'Profile/incrementLoginCount/fulfilled'],
       },
     }).concat(loggerMiddleware),
-  // }),
   enhancers: [monitorReducersEnhancer],
   devTools: process.env.NODE_ENV === 'development',
 });

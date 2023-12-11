@@ -62,7 +62,6 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ skip, initialQuery, 
   const searchValueRef = useRef<string>(initialQuery);
 
   useEffect(() => {
-    console.log('foo', 'initial, pageChange');
     executeSearch(searchValue, pageSize, skip, exportToCSV);
   }, [executeSearch, pageSize, searchValue, skip, exportToCSV]);
 

@@ -21,3 +21,5 @@ export const TITLE = {
   TERMS: 'Terms of Service',
   PRIVACY: 'Privacy Policy',
 };
+
+export const defaultPageSize = 10;
