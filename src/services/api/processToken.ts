@@ -61,7 +61,7 @@ export const removeAuthCookie = () => {
 /// <input> authTokens: AuthTokens </input>
 /// <return> Promise<any> </return>
 /// <summary>
-export const refreshToken = async (authToken: AuthToken): Promise<any> => {
+const refreshToken = async (authToken: AuthToken): Promise<any> => {
   let response = await fetch(BASE + REFRESH_TOKEN, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -81,7 +81,7 @@ export const refreshToken = async (authToken: AuthToken): Promise<any> => {
 /// <input> accessToken: string </input>
 /// <return> boolean </return>
 /// <summary>
-export const isTokenValid = (accessToken: string) => {
+const isTokenValid = (accessToken: string) => {
   try {
     const authToken: DecodedToken = jwt_decode(accessToken);
 
@@ -93,11 +93,13 @@ export const isTokenValid = (accessToken: string) => {
 };
 
 /// <summary>
-/// Fetches the authTokens from sessionStorage
+/// Fetches the authToken and refreshToken from sessionStorage
 /// <return> AuthToken </return>
 /// <summary>
-export const fetchToken = (): AuthToken | null => {
-  return sessionStorage.getItem(AUTHTOKEN) ? JSON.parse(sessionStorage.getItem(AUTHTOKEN) as string) : null;
+const fetchTokens = (): AuthToken | null => {
+  return sessionStorage.getItem(AUTHTOKEN)
+    ? (JSON.parse(sessionStorage.getItem(AUTHTOKEN) as string) as AuthToken)
+    : null;
 };
 
 /// <summary>
@@ -105,11 +107,34 @@ export const fetchToken = (): AuthToken | null => {
 /// <return> boolean </return>
 /// <summary>
 export const isAuthenticated = () => {
-  const authToken = fetchToken();
+  const authToken = fetchTokens();
 
   if (!authToken || !authToken.accessToken) {
     return false;
   }
 
-  return isTokenValid(authToken.accessToken);
+  const isTokenGood = isTokenValid(authToken.accessToken);
+
+  if (!isTokenGood) {
+    const newToken = refreshToken(authToken);
+    if (!newToken) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+/// <summary>
+/// Checks if the accessToken is valid and refreshes it if necessary
+/// <return> AuthToken </return>
+/// <summary>
+export const checkTokens = async (): Promise<AuthToken> => {
+  let authTokens: AuthToken = fetchTokens()!;
+
+  if (!isTokenValid(authTokens.accessToken)) {
+    authTokens = await refreshToken(authTokens);
+  }
+
+  return authTokens;
 };
