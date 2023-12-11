@@ -9,7 +9,7 @@ jest.mock('../../../services/redux/store', () => ({
   },
 }));
 
-jest.mock('../../../utils/processToken', () => ({
+jest.mock('../../../services/api/processToken', () => ({
   removeAuthCookie: jest.fn(),
 }));
 
