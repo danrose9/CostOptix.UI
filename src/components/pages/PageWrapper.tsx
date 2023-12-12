@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { PageContent } from '../__styles__/DefaultPageStyles';
+import { PageContainer } from '../__styles__/DefaultPageStyles';
 import { PageHeader } from '../PageHeader';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
@@ -33,11 +33,11 @@ const ActionButtons = styled(Icon.Group)`
   align-items: center;
 `;
 
-const PageLayout: React.FC<IPageLayoutProps> = ({ title, children, searchComponent, downloadComponent, onClick }) => {
+const PageWrapper: React.FC<IPageLayoutProps> = ({ title, children, searchComponent, downloadComponent, onClick }) => {
   const isDemo = useIsDemo();
   return (
     <>
-      <PageContent>
+      <PageContainer>
         <PageHeaderContainer>
           <PageHeader title={title} />
           <PageActionBar>
@@ -58,9 +58,9 @@ const PageLayout: React.FC<IPageLayoutProps> = ({ title, children, searchCompone
           </PageActionBar>
         </PageHeaderContainer>
         {children}
-      </PageContent>
+      </PageContainer>
     </>
   );
 };
 
-export default PageLayout;
+export default PageWrapper;

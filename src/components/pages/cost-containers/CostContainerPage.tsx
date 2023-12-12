@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../../services/redux/rootReducer';
 import { Spinner } from '../../Loader';
 import { reduxState } from '../../../services/redux/reduxState';
-import PageLayout from '../PageLayout';
+import PageWrapper from '../PageWrapper';
 import { CostContainerTable } from './index';
 import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
 import { AppDispatch } from '../../../services/redux/store';
@@ -20,11 +20,11 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
   }, [dispatch]);
 
   return (
-    <PageLayout title="Cost Containers">
+    <PageWrapper title="Cost Containers">
       <PageContainer className="full-width">
         {allCostContainers.isLoading ? <Spinner /> : <CostContainerTable allCostContainers={allCostContainers} />}
       </PageContainer>
-    </PageLayout>
+    </PageWrapper>
   );
 };
 

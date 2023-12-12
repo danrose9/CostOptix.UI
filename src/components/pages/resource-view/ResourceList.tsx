@@ -7,7 +7,7 @@ import { IRootState } from '../../../services/redux/rootReducer';
 import { SEARCH } from '../../search/searchKeywords';
 import ResourcesTable from './ResourceTable';
 import TablePagination from '../../tables/TablePagination';
-import PageLayout from '../PageLayout';
+import PageWrapper from '../PageWrapper';
 import SearchResources from '../../search/SearchResources';
 import { defaultPageSize as pageSize } from 'src/app/constants/application';
 
@@ -40,7 +40,7 @@ const ResourceList = () => {
 
   return (
     <>
-      <PageLayout
+      <PageWrapper
         title="Resources"
         searchComponent={
           <SearchResources
@@ -59,7 +59,7 @@ const ResourceList = () => {
 
         <Divider />
         <TablePagination totalItems={resources.count} pageSize={pageSize} handlePageChange={handlePageChange} />
-      </PageLayout>
+      </PageWrapper>
     </>
   );
 };

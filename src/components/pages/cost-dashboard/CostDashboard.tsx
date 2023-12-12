@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../../services/redux/reduxState';
-import PageLayout from '../PageLayout';
+import PageWrapper from '../PageWrapper';
 import { Grid, Divider } from 'semantic-ui-react';
 import * as Widget from './index';
 import { ApplicationContext } from '../../../app/ApplicationContext';
@@ -32,7 +32,7 @@ export const CostDashboard = () => {
 
   return (
     <>
-      <PageLayout title="Cost Dashboard">
+      <PageWrapper title="Cost Dashboard">
         <Divider />
         <Grid>
           <Grid.Row>
@@ -55,7 +55,7 @@ export const CostDashboard = () => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </PageLayout>
+      </PageWrapper>
     </>
   );
 };

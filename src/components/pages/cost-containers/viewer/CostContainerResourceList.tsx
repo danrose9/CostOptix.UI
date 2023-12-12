@@ -8,7 +8,7 @@ import * as appRoutes from '../../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../../services/redux/reducers/resourceSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../services/redux/store';
-import { StyledTableRow } from '../../../tables/DefaultTableStyles';
+import { StyledTableRow } from '../../../__styles__/DefaultTableStyles';
 
 interface ICostContainerResourceListProps {
   resources: IResource[];

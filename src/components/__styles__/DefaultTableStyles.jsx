@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Table } from 'semantic-ui-react';
-export { StyledDropDown } from '../__styles__/DropdownStyles';
+export { StyledDropDown } from './DropdownStyles';
 
 export const StyledTableCell = styled(Table.Cell)`
   &&& {

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Divider, Header, Table } from 'semantic-ui-react';
 import { ProviderImage } from '../../ProviderImage';
-import { StyledTableRow } from '../../tables/DefaultTableStyles';
+import { StyledTableRow } from '../../__styles__/DefaultTableStyles';
 import { TableContainer } from '../../__styles__/DefaultPageStyles';
 import { IResource } from '../../../types/resource-types';
 import { AppDispatch } from '../../../services/redux/store';

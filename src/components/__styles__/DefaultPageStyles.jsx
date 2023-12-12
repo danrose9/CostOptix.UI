@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
 
-export const PageContent = styled.div`
+export const PageContainer = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
-export const PageContainer = styled(Segment)`
+export const PageSegment = styled(Segment)`
   display: flex;
   flex-direction: column;
   height: 100%;

@@ -6,7 +6,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
-import { StyledHeaderCell, StyledTableRow } from '../../tables/DefaultTableStyles';
+import { StyledHeaderCell, StyledTableRow } from '../../__styles__/DefaultTableStyles';
 import { StandardTooltip, TooltipDescription } from '../../tooltips';
 import { IRootState } from 'src/services/redux/rootReducer';
 import { IBillingAccountMostExpensive } from '../../../types/billing-account-types';

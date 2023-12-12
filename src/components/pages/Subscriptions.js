@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Loader, Icon } from 'semantic-ui-react';
 import { getOrganizationId } from '../../utils/helper';
-import { StyledTableCell } from '../tables/DefaultTableStyles';
+import { StyledTableCell } from '../__styles__/DefaultTableStyles';
 
 export default class Subscriptions extends Component {
   constructor(props) {

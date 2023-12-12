@@ -14,7 +14,7 @@ import { ProviderImage } from '../../ProviderImage';
 import { AppDispatch } from '../../../services/redux/store';
 import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
 import { orderAndFormatArray } from '../../../utils/arrayFormatter';
-import { StyledTableHeaderCell, StyledDropDown, TableContainer } from '../../tables/DefaultTableStyles';
+import { StyledTableHeaderCell, StyledDropDown, TableContainer } from '../../__styles__/DefaultTableStyles';
 
 export const SegmentHeader = styled.div`
   display: flex;

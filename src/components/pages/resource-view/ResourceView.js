@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import PageLayout from '../PageLayout';
+import PageWrapper from '../PageWrapper';
 import { useLocation } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import { Spinner } from '../../Loader';
@@ -95,7 +95,7 @@ export const ResourceView = () => {
     }
   }, [dispatch, args, isAvailable]);
 
-  return <PageLayout title="Resource View">{isLoading ? <Spinner /> : <RenderView />}</PageLayout>;
+  return <PageWrapper title="Resource View">{isLoading ? <Spinner /> : <RenderView />}</PageWrapper>;
 };
 
 export default ResourceView;
