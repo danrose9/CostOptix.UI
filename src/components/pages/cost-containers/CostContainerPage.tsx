@@ -7,7 +7,7 @@ import PageLayout from '../PageLayout';
 import { CostContainerTable } from './index';
 import { fetchCostContainers } from '../../../services/redux/thunks/costContainerThunk';
 import { AppDispatch } from '../../../services/redux/store';
-import { PageContainer, FullWidthContainer } from '../../__styles__/CostContainerCommonStyles';
+import { PageContainer } from '../../__styles__/CostContainerCommonStyles';
 
 interface ICostContainerPage {}
 
@@ -21,14 +21,8 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
 
   return (
     <PageLayout title="Cost Containers">
-      <PageContainer>
-        {allCostContainers.isLoading ? (
-          <Spinner />
-        ) : (
-          <FullWidthContainer>
-            <CostContainerTable allCostContainers={allCostContainers} />
-          </FullWidthContainer>
-        )}
+      <PageContainer className="full-width">
+        {allCostContainers.isLoading ? <Spinner /> : <CostContainerTable allCostContainers={allCostContainers} />}
       </PageContainer>
     </PageLayout>
   );
