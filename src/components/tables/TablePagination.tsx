@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { PaginationProps } from 'semantic-ui-react';
 import { PaginationContainer, RowCounter, PageSelector } from '../../styles/StyledPageLoader';
-
-const defaultPageSize = 10;
+import { defaultPageSize } from '../../app/constants/application';
 
 interface ITablePaginationProps {
   totalItems: number;
@@ -11,9 +10,12 @@ interface ITablePaginationProps {
   isLoading?: boolean;
 }
 
-const TablePagination: React.FC<ITablePaginationProps> = (props) => {
-  const { totalItems, pageSize = defaultPageSize, isLoading = false } = props;
-
+export const TablePagination: React.FC<ITablePaginationProps> = ({
+  totalItems,
+  pageSize = defaultPageSize,
+  isLoading = false,
+  ...props
+}) => {
   const [pageState, setPageState] = useState({
     currentPage: 1,
     skip: 0,

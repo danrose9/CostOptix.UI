@@ -6,7 +6,7 @@ import { StandardTooltip } from '../../tooltips';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { FailedToLoadBillingAccount } from '../../messages';
 import { IBillingAccountCostDashboardProps } from '../../../types';
-import { StyledTableRow } from '../../__styles__/DefaultTableStyles';
+import { StyledTableRow } from '../../tables/DefaultTableStyles';
 
 const ToolTipData = (instance: { instance: { currency: string } }) => {
   const { currency } = instance.instance;

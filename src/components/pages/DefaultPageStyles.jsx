@@ -26,22 +26,6 @@ export const DashboardHeader = styled.div`
   align-items: center;
 `;
 
-///
-/// Table Styles
-///
-
-export const TableContainer = styled.div`
-  padding: 0.5em;
-`;
-
-export const TableHeader = styled.div`
-  display: flex;
-`;
-
-export const TableFooter = styled.div`
- 
-`;
-
 export const SegmentHeader = styled.div`
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageSegment, PageContainer } from '../__styles__/DefaultPageStyles';
+import { PageSegment, PageContainer } from './DefaultPageStyles';
 import styled from 'styled-components';
 import { Search, Segment, Divider, Grid, Image } from 'semantic-ui-react';
 

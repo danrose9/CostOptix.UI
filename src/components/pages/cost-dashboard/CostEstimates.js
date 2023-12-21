@@ -4,7 +4,7 @@ import { reduxState } from '../../../services/redux/reduxState';
 import { useSelector } from 'react-redux';
 import { ProviderImage } from '../../ProviderImage';
 import { roundNumber } from '../../../utils/helper';
-import { StyledTableRow } from '../../__styles__/DefaultTableStyles';
+import { StyledTableRow } from '../../tables/DefaultTableStyles';
 import DefaultTableHeader from 'src/components/tables/DefaultTableHeader';
 
 export const CostEstimates = (props) => {

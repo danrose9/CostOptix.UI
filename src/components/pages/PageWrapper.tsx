@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { PageContainer } from '../__styles__/DefaultPageStyles';
+import { PageContainer } from './DefaultPageStyles';
 import { PageHeader } from '../PageHeader';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
@@ -36,30 +36,28 @@ const ActionButtons = styled(Icon.Group)`
 const PageWrapper: React.FC<IPageLayoutProps> = ({ title, children, searchComponent, downloadComponent, onClick }) => {
   const isDemo = useIsDemo();
   return (
-    <>
-      <PageContainer>
-        <PageHeaderContainer>
-          <PageHeader title={title} />
-          <PageActionBar>
-            {isDemo ? null : (
-              <ActionButtons>
-                {downloadComponent ? (
-                  <ActionButton
-                    name="download"
-                    color="blue"
-                    tooltip="download"
-                    tooltipPosition="bottom left"
-                    onClick={onClick}
-                  />
-                ) : null}
-              </ActionButtons>
-            )}
-            {searchComponent ? searchComponent : null}
-          </PageActionBar>
-        </PageHeaderContainer>
-        {children}
-      </PageContainer>
-    </>
+    <PageContainer>
+      <PageHeaderContainer>
+        <PageHeader title={title} />
+        <PageActionBar>
+          {isDemo ? null : (
+            <ActionButtons>
+              {downloadComponent ? (
+                <ActionButton
+                  name="download"
+                  color="blue"
+                  tooltip="download"
+                  tooltipPosition="bottom left"
+                  onClick={onClick}
+                />
+              ) : null}
+            </ActionButtons>
+          )}
+          {searchComponent ? searchComponent : null}
+        </PageActionBar>
+      </PageHeaderContainer>
+      {children}
+    </PageContainer>
   );
 };
 

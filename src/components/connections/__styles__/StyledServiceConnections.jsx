@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Card, Modal } from 'semantic-ui-react';
 
-export { StyledDropDown } from '../../__styles__/DefaultTableStyles';
+export { StyledDropDown } from '../../tables/DefaultTableStyles';
 
 export const StyledContent = styled.p`
     font-size: 1em;

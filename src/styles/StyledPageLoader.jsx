@@ -9,9 +9,14 @@ export const PaginationContainer = styled.div`
 `;
 
 export const RowCounter = styled.div`
-  font-size: 1.1rem;
+  font-size: 1rem;
 `;
 
 export const PageSelector = styled(Pagination)`
   border: 10px;
+  
+  &.ui.pagination.menu {
+    font-family: inherit;
+    font-size: 1rem;
+  }
 `;

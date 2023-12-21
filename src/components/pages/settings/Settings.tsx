@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContainer } from '../../__styles__/DefaultPageStyles';
+import { PageContainer } from '../DefaultPageStyles';
 import { Tab } from 'semantic-ui-react';
 
 import { Account } from './index';

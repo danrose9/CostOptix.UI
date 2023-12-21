@@ -1,6 +1,29 @@
 import styled from 'styled-components';
 import { Table } from 'semantic-ui-react';
-export { StyledDropDown } from './DropdownStyles';
+import { FONT } from 'src/app/constants';
+
+export { StyledDropDown } from '../__styles__/DropdownStyles';
+
+export const TableHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+export const TableHeaderOptions = styled.div``;
+
+export const TableTitle = styled.h5`
+  font-size: 1.1em;
+  font-weight: 500;
+  margin: 0;
+`;
+
+export const TableDescription = styled.p`
+  margin: 0;
+  font-size: 1.1em;
+  color: ${FONT.TERNARY_COLOR};
+`;
 
 export const StyledTableCell = styled(Table.Cell)`
   &&& {
@@ -18,13 +41,25 @@ export const StyledTableRow = styled(Table.Row)`
 
 export const TableContainer = styled.div`
   padding: 0.5em;
+  * {
+    font-family: inherit;
+  }
 `;
 
-export const TableHeader = styled.div`
-  display: flex;
+export const TableWrapper = styled.div`
+  overflow-x: auto;
+  * {
+    color: ${FONT.SECONDARY_COLOR} !Important;
+  }
 `;
 
-export const TableFooter = styled.div``;
+
+export const TableFooter = styled.div`
+  padding: 1em 0;
+* {
+    color: ${FONT.SECONDARY_COLOR} !Important;
+  }
+`;
 
 export const SegmentHeader = styled.div`
   display: flex;

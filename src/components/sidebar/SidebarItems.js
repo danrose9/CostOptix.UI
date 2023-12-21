@@ -123,6 +123,7 @@ export const menuItems = [
       },
     ],
   },
+
   // {
   //   title: 'Components',
   //   icon: 'cogs',
@@ -148,6 +149,14 @@ export const menuItems = [
     icon: 'help',
     active: false,
     dev: true,
+    extra: true,
+  },
+  {
+    title: 'Test Page',
+    path: appRoutes.TEST_PAGE,
+    icon: 'box',
+    dev: true,
+    active: false,
     extra: true,
   },
   {
