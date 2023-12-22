@@ -4,11 +4,11 @@ import styled from 'styled-components';
 export const PageContainer = styled.div`
   display: flex;
   padding: 0.5em 0 1em;
+  &.full-width {
+    width: 100%;
+  }
 `;
 
-export const FullWidthContainer = styled.div`
-  width: 100%;
-`;
 
 export const ComponentContainer = styled.div`
   display: flex;

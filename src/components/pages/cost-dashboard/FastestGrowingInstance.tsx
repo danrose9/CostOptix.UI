@@ -39,7 +39,7 @@ export const FastestGrowingInstance = () => {
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
-    navigate(appRoutes.RESOURCE_SEARCH);
+    navigate(appRoutes.RESOURCES);
   };
 
   return (

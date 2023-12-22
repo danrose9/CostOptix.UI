@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContainer, PageContent } from '../__styles__/DefaultPageStyles';
+import { PageSegment, PageContainer } from './DefaultPageStyles';
 import styled from 'styled-components';
 import { Search, Segment, Divider, Grid, Image } from 'semantic-ui-react';
 
@@ -20,8 +20,8 @@ const CategorySection = styled(Grid)`
 
 export const HelpPage = () => {
   return (
-    <PageContent>
-      <PageContainer color="blue">
+    <PageContainer>
+      <PageSegment color="blue">
         <TitleSection basic>
           <Title>Hi! How can we help?</Title>
           <Search size="massive" />
@@ -54,8 +54,8 @@ export const HelpPage = () => {
             </Grid.Row>
           </CategorySection>
         </Segment>
-      </PageContainer>
-    </PageContent>
+      </PageSegment>
+    </PageContainer>
   );
 };
 

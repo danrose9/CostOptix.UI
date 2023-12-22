@@ -1,7 +1,7 @@
 import React, { useState, createContext } from 'react';
 import { useInterval } from '../../hooks/useInterval';
 import { Card, Table } from 'semantic-ui-react';
-import { PageLayout } from '../pages';
+import { PageWrapper } from '../pages';
 import { ServiceConnectionPage, ServiceConnectionCard } from './__styles__/StyledServiceConnections';
 import { ServiceConnections as ServiceConnectionCards } from './ServiceConnections';
 import ServiceConnectionRow from './ServiceConnectionRow';
@@ -47,7 +47,7 @@ const ServiceConnection = (props: SelectedContainerProps) => {
 
   return (
     <PollingContext.Provider value={setIsPolling}>
-      <PageLayout title="Service Connections">
+      <PageWrapper title="Service Connections">
         <ServiceConnectionPage>
           <Card.Group itemsPerRow={2}>
             {ServiceConnectionCards.filter((card) => card.active).map((card, index) => {
@@ -86,7 +86,7 @@ const ServiceConnection = (props: SelectedContainerProps) => {
             })}
           </Card.Group>
         </ServiceConnectionPage>
-      </PageLayout>
+      </PageWrapper>
     </PollingContext.Provider>
   );
 };

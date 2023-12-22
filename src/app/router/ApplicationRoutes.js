@@ -46,7 +46,7 @@ export const ApplicationRoutes = () => {
         }
       />
       <Route
-        path={appRoutes.RESOURCE_SEARCH}
+        path={appRoutes.RESOURCES}
         element={
           <PrivateRoute>
             <page.ResourceList />
@@ -98,6 +98,14 @@ export const ApplicationRoutes = () => {
         element={
           <PrivateRoute>
             <page.QueryFilter />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={appRoutes.TEST_PAGE}
+        element={
+          <PrivateRoute>
+            <page.TestPage />
           </PrivateRoute>
         }
       />

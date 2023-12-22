@@ -14,5 +14,8 @@ export const COLORS = {
 };
 
 export const FONT = {
-  PRIMARY_COLOR: '#B8E5F1',
+  PRIMARY_COLOR: '#495058',
+  SECONDARY_COLOR: '#696969',
+  TERNARY_COLOR: '#92989E',
+  WHITE: '#FFFFFF',
 };

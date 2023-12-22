@@ -68,7 +68,7 @@ export const ApplicationFooter = styled.div`
   background-color: ${COLORS.PRIMARY};
   & p {
     font-size: 0.8em;
-    color: ${FONT.PRIMARY_COLOR};
+    color: ${FONT.WHITE};
     text-align: right;
 }
 `;
