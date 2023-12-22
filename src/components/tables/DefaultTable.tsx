@@ -11,6 +11,7 @@ import {
 import TablePagination from './TablePagination';
 import TableActionBar from './TableActionBar';
 import TableHeaderOptions from './TableHeaderOptions';
+import { Spinner } from '../Loader';
 
 interface IDefaultTableProps {
   title?: string;
@@ -21,6 +22,8 @@ interface IDefaultTableProps {
   showSearch?: boolean;
   searchFunction?: React.ReactNode;
   totalItems: number;
+  isLoading?: boolean;
+  handleExportToCSV?: () => void;
 }
 
 const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
@@ -32,6 +35,8 @@ const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
   searchFunction,
   showPagination,
   totalItems,
+  isLoading,
+  handleExportToCSV,
 }) => {
   return (
     <TableContainer>
@@ -41,15 +46,13 @@ const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
             <TableTitle>{title}</TableTitle>
             <TableDescription>{description}</TableDescription>
           </div>
-          <TableHeaderOptions />
+          <TableHeaderOptions handleExportToCSV={handleExportToCSV} />
         </TableHeader>
+
         <TableActionBar showSearch={showSearch} searchFunction={searchFunction} />
-        <TableWrapper>{children}</TableWrapper>
-        <TableFooter>
-          {showPagination ? (
-            <TablePagination totalItems={totalItems} handlePageChange={() => {}}></TablePagination>
-          ) : null}
-        </TableFooter>
+
+        {isLoading ? <Spinner /> : <TableWrapper>{children}</TableWrapper>}
+        <TableFooter>{showPagination ? <TablePagination totalItems={totalItems}></TablePagination> : null}</TableFooter>
       </Segment>
     </TableContainer>
   );

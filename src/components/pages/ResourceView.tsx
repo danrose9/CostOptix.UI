@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DefaultTable from '../tables/DefaultTable';
 import PageWrapper from './PageWrapper';
 import ResourcesTable from './resource-view/ResourceTable';
@@ -10,6 +10,11 @@ import { PaginationProvider } from '../tables/PaginationContext';
 
 const ResourceView = () => {
   const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
+  const [exportToCSV, setExportToCSV] = useState<boolean>(false);
+
+  const handleExportToCSV = () => {
+    setExportToCSV(true);
+  };
 
   return (
     <PaginationProvider>
@@ -21,14 +26,11 @@ const ResourceView = () => {
           showSearch={true}
           children={<ResourcesTable searchResults={resources.searchResults} />}
           totalItems={resources.count}
+          handleExportToCSV={handleExportToCSV}
           searchFunction={
-            <SearchResources
-              initialQuery={''}
-              isAvailable={resources.isAvailable}
-              exportToCSV={false}
-              // resetPage={resetPage}
-            />
+            <SearchResources initialQuery={''} isAvailable={resources.isAvailable} exportToCSV={exportToCSV} />
           }
+          isLoading={resources.isLoading}
         />
       </PageWrapper>
     </PaginationProvider>

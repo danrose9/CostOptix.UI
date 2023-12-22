@@ -5,7 +5,7 @@ import { usePagination } from './PaginationContext';
 
 interface ITablePaginationProps {
   totalItems: number;
-  handlePageChange: (e: React.ChangeEvent<HTMLInputElement>, data: PaginationProps) => void;
+  handlePageChange?: (e: React.ChangeEvent<HTMLInputElement>, data: PaginationProps) => void;
   isLoading?: boolean;
 }
 
@@ -23,7 +23,7 @@ export const TablePagination: React.FC<ITablePaginationProps> = ({ totalItems, i
     setActivePage(newActivePage);
     setSkip(newSkip);
 
-    props.handlePageChange(e, data);
+    props.handlePageChange && props.handlePageChange(e, data);
   };
 
   return (

@@ -1,22 +1,31 @@
 import React from 'react';
-import { Icon } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { FONT } from 'src/app/constants';
 
 interface ITableHeaderOptionsProps {
-  showDownload?: boolean;
+  showDownloadCSV?: boolean;
+  handleExportToCSV?: () => void;
 }
 
-const StyledIcon = styled(Icon)`
+const StyledDropdown = styled(Dropdown)`
   color: ${FONT.TERNARY_COLOR};
-  cursor: pointer;
   font-size: 1.2em !important;
 `;
 
-export const TableHeaderOptions: React.FunctionComponent<ITableHeaderOptionsProps> = (props) => {
+export const TableHeaderOptions: React.FunctionComponent<ITableHeaderOptionsProps> = ({
+  showDownloadCSV = true,
+  handleExportToCSV,
+}) => {
   return (
     <>
-      <StyledIcon name="ellipsis vertical" />
+      <StyledDropdown icon="ellipsis vertical" simple item direction="left" open={false}>
+        <Dropdown.Menu>
+          {showDownloadCSV ? (
+            <Dropdown.Item text="Download CSV" icon="file excel outline" onClick={handleExportToCSV} />
+          ) : null}
+        </Dropdown.Menu>
+      </StyledDropdown>
     </>
   );
 };

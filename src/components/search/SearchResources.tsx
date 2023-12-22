@@ -16,13 +16,12 @@ interface ISearchResourcesProps {
   initialQuery: string;
   isAvailable?: boolean;
   exportToCSV?: boolean;
-  resetPage?: () => void;
 }
 
-const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, exportToCSV, resetPage }) => {
+const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, exportToCSV }) => {
   const dispatch = useDispatch();
 
-  const { pageSize, skip } = usePagination();
+  const { pageSize, skip, setSkip, setActivePage } = usePagination();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   let { searchValue } = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
@@ -30,8 +29,7 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, export
   const executeSearch = useCallback(
     (searchValue: string, pageSize: number, skip?: number, exportToCSV?: boolean) => {
       const query = queryBuilder(searchValue, pageSize, skip, exportToCSV);
-      if (exportToCSV) {
-      }
+
       timeoutRef.current = setTimeout(() => {
         dispatch<AppDispatch>(SEARCH_RESOURCES(query));
       }, keyDelay);
@@ -45,10 +43,9 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, export
         clearTimeout(timeoutRef.current);
       }
 
-      // this prevents hidden search results if the page selected is more than the subsequent search
-      if (skip && skip > 0) {
-        resetPage && resetPage();
-      }
+      // Reset skip and active page on new search
+      setSkip(0);
+      setActivePage(1);
 
       const newSearchValue = data.value;
       if (searchValueRef.current !== newSearchValue) {
@@ -56,7 +53,7 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, export
         searchValueRef.current = newSearchValue;
       }
     },
-    [dispatch, skip, resetPage]
+    [dispatch, setSkip, setActivePage]
   );
 
   const searchValueRef = useRef<string>(initialQuery);
