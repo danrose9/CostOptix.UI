@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { Segment, SemanticCOLORS } from 'semantic-ui-react';
 import {
   TableContainer,
@@ -11,7 +11,6 @@ import {
 import TablePagination from './TablePagination';
 import TableActionBar from './TableActionBar';
 import TableHeaderOptions from './TableHeaderOptions';
-import { usePageSize } from './PageSizeContext';
 
 interface IDefaultTableProps {
   title?: string;
@@ -34,12 +33,6 @@ const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
   showPagination,
   totalItems,
 }) => {
-  const { pageSize, setPageSize } = usePageSize();
-
-  const handlePageSizeChange = (e: SyntheticEvent<HTMLElement>, data: any) => {
-    setPageSize(data.value);
-  };
-
   return (
     <TableContainer>
       <Segment color={color}>
@@ -50,15 +43,11 @@ const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
           </div>
           <TableHeaderOptions />
         </TableHeader>
-        <TableActionBar
-          showSearch={showSearch}
-          searchFunction={searchFunction}
-          handlePageSizeChange={handlePageSizeChange}
-        />
+        <TableActionBar showSearch={showSearch} searchFunction={searchFunction} />
         <TableWrapper>{children}</TableWrapper>
         <TableFooter>
           {showPagination ? (
-            <TablePagination totalItems={totalItems} pageSize={pageSize} handlePageChange={() => {}}></TablePagination>
+            <TablePagination totalItems={totalItems} handlePageChange={() => {}}></TablePagination>
           ) : null}
         </TableFooter>
       </Segment>

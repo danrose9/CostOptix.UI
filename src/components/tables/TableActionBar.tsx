@@ -1,9 +1,8 @@
 import React, { SyntheticEvent } from 'react';
-import { Search, Dropdown, DropdownItemProps, DropdownProps } from 'semantic-ui-react';
+import { Dropdown, DropdownItemProps } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { FONT } from 'src/app/constants';
-import { SEARCH } from '../search/searchKeywords';
-import { usePageSize } from './PageSizeContext';
+import { usePagination } from './PaginationContext';
 
 const PageSizeSelector = styled.div`
   color: ${FONT.SECONDARY_COLOR} !important;
@@ -24,11 +23,16 @@ const pageSelectorOptions: DropdownItemProps[] = [
 
 interface ITableActionBarProps {
   showSearch?: boolean;
-  handlePageSizeChange?: (e: SyntheticEvent<HTMLElement, Event>, data: DropdownProps) => void;
   searchFunction?: React.ReactNode;
 }
 
-const TableActionBar: React.FC<ITableActionBarProps> = ({ showSearch, handlePageSizeChange, searchFunction }) => {
+const TableActionBar: React.FC<ITableActionBarProps> = ({ showSearch, searchFunction }) => {
+  const { setPageSize } = usePagination();
+
+  const handlePageSizeChange = (e: SyntheticEvent<HTMLElement>, data: any) => {
+    setPageSize(data.value);
+  };
+
   return (
     <ActionBarContainer>
       <PageSizeSelector>

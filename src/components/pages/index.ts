@@ -9,7 +9,7 @@ export { default as InitializeApp } from '../../app/InitializeApp';
 export { default as LandingPage } from './auth/LandingPage';
 export { default as LogoutPage } from './LogoutPage';
 export { default as SessionExpired } from './SessionExpired';
-export { default as ResourceList } from './resource-view/ResourceList';
+export { default as ResourceList } from './ResourceView';
 export { default as ResourceView } from './resource-view/ResourceView';
 export { default as PageNotFound404 } from './PageNotFound404';
 export { default as DefaultErrorPage } from './ErrorDefault';

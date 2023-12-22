@@ -1,38 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PaginationProps } from 'semantic-ui-react';
 import { PaginationContainer, RowCounter, PageSelector } from '../../styles/StyledPageLoader';
-import { defaultPageSize } from '../../app/constants/application';
+import { usePagination } from './PaginationContext';
 
 interface ITablePaginationProps {
   totalItems: number;
-  pageSize?: number;
   handlePageChange: (e: React.ChangeEvent<HTMLInputElement>, data: PaginationProps) => void;
   isLoading?: boolean;
 }
 
-export const TablePagination: React.FC<ITablePaginationProps> = ({
-  totalItems,
-  pageSize = defaultPageSize,
-  isLoading = false,
-  ...props
-}) => {
-  const [pageState, setPageState] = useState({
-    currentPage: 1,
-    skip: 0,
-  });
+export const TablePagination: React.FC<ITablePaginationProps> = ({ totalItems, isLoading = false, ...props }) => {
+  const { pageSize, setSkip, activePage, setActivePage } = usePagination();
 
   const totalPages = Math.ceil(totalItems / pageSize);
-  const lastItemInPage = Math.min(pageSize * pageState.currentPage, totalItems);
-  const firstItemInPage = (pageState.currentPage - 1) * pageSize + 1;
+  const lastItemInPage = Math.min(pageSize * activePage, totalItems);
+  const firstItemInPage = (activePage - 1) * pageSize + 1;
 
   const onPageChange = (e: React.ChangeEvent<HTMLInputElement>, data: PaginationProps) => {
-    const skip = ((data.activePage as number) - 1) * 10;
+    const newActivePage = data.activePage as number;
+    const newSkip = (newActivePage - 1) * pageSize;
 
-    setPageState((prevState) => ({
-      ...prevState,
-      currentPage: data.activePage as number,
-      skip: skip,
-    }));
+    setActivePage(newActivePage);
+    setSkip(newSkip);
 
     props.handlePageChange(e, data);
   };
@@ -43,7 +32,7 @@ export const TablePagination: React.FC<ITablePaginationProps> = ({
         Showing {firstItemInPage} to {lastItemInPage} of {totalItems} results
       </RowCounter>
       <PageSelector
-        activePage={pageState.currentPage}
+        activePage={activePage}
         boundaryRange={1}
         onPageChange={onPageChange}
         siblingRange={1}

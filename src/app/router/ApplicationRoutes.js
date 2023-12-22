@@ -46,7 +46,7 @@ export const ApplicationRoutes = () => {
         }
       />
       <Route
-        path={appRoutes.RESOURCE_SEARCH}
+        path={appRoutes.RESOURCES}
         element={
           <PrivateRoute>
             <page.ResourceList />

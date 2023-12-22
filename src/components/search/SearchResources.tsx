@@ -8,23 +8,21 @@ import { AppDispatch } from '../../services/redux/store';
 import { SEARCH } from './searchKeywords';
 import { queryBuilder } from './queryBuilder';
 import SearchInput from './SearchInput';
-import { usePageSize } from '../tables/PageSizeContext';
+import { usePagination } from '../tables/PaginationContext';
 
 const keyDelay = parseInt(process.env.REACT_APP_KEY_DELAY || '300');
 
 interface ISearchResourcesProps {
-  skip?: number;
   initialQuery: string;
-  pageSize?: number;
   isAvailable?: boolean;
   exportToCSV?: boolean;
   resetPage?: () => void;
 }
 
-const SearchResources: React.FC<ISearchResourcesProps> = ({ skip, initialQuery, exportToCSV, resetPage }) => {
+const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, exportToCSV, resetPage }) => {
   const dispatch = useDispatch();
 
-  const { pageSize } = usePageSize();
+  const { pageSize, skip } = usePagination();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   let { searchValue } = useSelector((state: IRootState) => state[reduxState.RESOURCES]);

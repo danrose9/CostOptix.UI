@@ -59,7 +59,7 @@ export const MostExpensiveInstance: React.FC<IMostExpensiveInstance> = (props) =
   const dispatch = useDispatch();
 
   const handleOnClick = () => {
-    navigate(appRoutes.RESOURCE_SEARCH);
+    navigate(appRoutes.RESOURCES);
   };
 
   return (
