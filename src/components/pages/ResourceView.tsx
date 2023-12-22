@@ -7,12 +7,17 @@ import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
 import SearchResources from '../search/SearchResources';
 import { PaginationProvider } from '../tables/PaginationContext';
+import { useIsDemo } from '../hoc/withDemo';
 
 const ResourceView = () => {
   const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
   const [exportToCSV, setExportToCSV] = useState<boolean>(false);
+  const isDemo = useIsDemo();
 
   const handleExportToCSV = () => {
+    if (isDemo) {
+      return;
+    }
     setExportToCSV(true);
   };
 
