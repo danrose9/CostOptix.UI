@@ -9,6 +9,12 @@ import resourceReducer from './reducers/resourceSlice';
 import applicationReducer from './reducers/applicationSlice';
 import costContainerReducer from './reducers/costContainerSlice';
 
+export const AsyncThunkStatus = {
+  PENDING: 'pending',
+  FULFILLED: 'fulfilled',
+  REJECTED: 'rejected',
+};
+
 const appReducer = combineReducers({
   [reduxState.USER_PROFILE]: userProfileReducer,
   [reduxState.AZURE_MANAGEMENT]: azureManagementReducer,

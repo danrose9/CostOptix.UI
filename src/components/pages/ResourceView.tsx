@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import DefaultTable from '../tables/DefaultTable';
 import PageWrapper from './PageWrapper';
 import ResourcesTable from './resource-view/ResourceTable';
@@ -14,12 +14,16 @@ const ResourceView = () => {
   const [exportToCSV, setExportToCSV] = useState<boolean>(false);
   const isDemo = useIsDemo();
 
-  const handleExportToCSV = () => {
+  const handleExportToCSV = (arg0: boolean) => {
     if (isDemo) {
       return;
     }
-    setExportToCSV(true);
+    setExportToCSV(arg0);
   };
+
+  const resetExportToCSV = useCallback(() => {
+    setExportToCSV(false);
+  }, []);
 
   return (
     <PaginationProvider>
@@ -33,7 +37,12 @@ const ResourceView = () => {
           totalItems={resources.count}
           handleExportToCSV={handleExportToCSV}
           searchFunction={
-            <SearchResources initialQuery={''} isAvailable={resources.isAvailable} exportToCSV={exportToCSV} />
+            <SearchResources
+              initialQuery={''}
+              isAvailable={resources.isAvailable}
+              exportToCSV={exportToCSV}
+              onExportComplete={resetExportToCSV}
+            />
           }
           isLoading={resources.isLoading}
         />

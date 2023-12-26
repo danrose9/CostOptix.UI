@@ -23,7 +23,7 @@ interface IDefaultTableProps {
   searchFunction?: React.ReactNode;
   totalItems: number;
   isLoading?: boolean;
-  handleExportToCSV?: () => void;
+  handleExportToCSV?: (arg0: boolean) => void;
 }
 
 const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
