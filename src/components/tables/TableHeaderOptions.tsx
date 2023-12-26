@@ -5,7 +5,7 @@ import { FONT } from 'src/app/constants';
 
 interface ITableHeaderOptionsProps {
   showDownloadCSV?: boolean;
-  handleExportToCSV?: () => void;
+  handleExportToCSV?: (arg0: boolean) => void;
 }
 
 const StyledDropdown = styled(Dropdown)`
@@ -22,7 +22,11 @@ export const TableHeaderOptions: React.FunctionComponent<ITableHeaderOptionsProp
       <StyledDropdown icon="ellipsis vertical" simple item direction="left" open={false}>
         <Dropdown.Menu>
           {showDownloadCSV ? (
-            <Dropdown.Item text="Download CSV" icon="file excel outline" onClick={handleExportToCSV} />
+            <Dropdown.Item
+              text="Download CSV"
+              icon="file excel outline"
+              onClick={() => handleExportToCSV && handleExportToCSV(true)}
+            />
           ) : null}
         </Dropdown.Menu>
       </StyledDropdown>

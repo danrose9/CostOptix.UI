@@ -16,9 +16,10 @@ interface ISearchResourcesProps {
   initialQuery: string;
   isAvailable?: boolean;
   exportToCSV?: boolean;
+  onExportComplete: () => void;
 }
 
-const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, exportToCSV }) => {
+const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, exportToCSV, onExportComplete }) => {
   const dispatch = useDispatch();
 
   const { pageSize, skip, setSkip, setActivePage } = usePagination();
@@ -30,11 +31,14 @@ const SearchResources: React.FC<ISearchResourcesProps> = ({ initialQuery, export
     (searchValue: string, pageSize: number, skip?: number, exportToCSV?: boolean) => {
       const query = queryBuilder(searchValue, pageSize, skip, exportToCSV);
 
-      timeoutRef.current = setTimeout(() => {
-        dispatch<AppDispatch>(SEARCH_RESOURCES(query));
+      timeoutRef.current = setTimeout(async () => {
+        await dispatch<AppDispatch>(SEARCH_RESOURCES(query));
+
+        // reset exportToCSV to false after export is complete
+        onExportComplete();
       }, keyDelay);
     },
-    [dispatch]
+    [dispatch, onExportComplete]
   );
 
   const handleSearchChange = useCallback(

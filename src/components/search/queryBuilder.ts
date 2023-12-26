@@ -16,7 +16,7 @@ export const queryBuilder = (searchValue?: string, top?: number, skip?: number, 
   }
 
   if (exportToCSV) {
-    queryParts.push('csvResponse=true');
+    queryParts.push(`csvResponse=${exportToCSV}`);
   }
 
   return queryParts.length > 0 ? '?' + queryParts.join('&') : '';
