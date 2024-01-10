@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Card, Icon } from 'semantic-ui-react';
 
+const StyledCard = styled(Card)``;
+
 const StyledCardHeader = styled(Card.Header)`
   flex: 1 70%;
+  font-family: inherit !important;
 `;
 
 const StyledDescription = styled(Card.Description)`
@@ -22,19 +25,13 @@ const StyledCardContent = styled(Card.Content)`
 
 export const DashboardCard = (props) => {
   return (
-    <Card raised onClick={props.onClick}>
+    <StyledCard raised onClick={props.onClick}>
       <StyledCardContent>
         <StyledCardHeader>{props.title}</StyledCardHeader>
-        <Icon
-          fitted
-          size={props.iconsize}
-          circular
-          color={props.iconcolor}
-          name={props.icon}
-        />
+        <Icon fitted size={props.iconsize} circular color={props.iconcolor} name={props.icon} />
       </StyledCardContent>
       <StyledDescription textAlign="center">{props.content}</StyledDescription>
       <StyledCardContent extra>{props.description}</StyledCardContent>
-    </Card>
+    </StyledCard>
   );
 };

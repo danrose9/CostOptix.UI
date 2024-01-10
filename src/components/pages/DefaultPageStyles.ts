@@ -1,22 +1,10 @@
 import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
 
-export const PageContainer = styled.div`
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
 export const PageSegment = styled(Segment)`
   display: flex;
   flex-direction: column;
   height: 100%;
-`;
-
-export const PageHeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;
 
 export const DashboardHeader = styled.div`

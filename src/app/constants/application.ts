@@ -4,7 +4,7 @@ export const APP = {
   NAME: 'CostOptix',
   VERSION: `${version}`,
   RELEASE: 'BETA',
-  COPYRIGHT: '© 2023 DDIWARE LTD. ALL RIGHTS RESERVED.',
+  COPYRIGHT: '© 2024 DDIWARE LTD. ALL RIGHTS RESERVED.',
 };
 
 export const APP_FOOTER = {

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IPageHeader {
-  title: string;
+  title?: string;
 }
 
 export const StyledPageHeader = styled.div`

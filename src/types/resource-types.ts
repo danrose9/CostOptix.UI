@@ -5,6 +5,7 @@ export interface IResource {
   resourceId: string;
   resourceName: string;
   service: string;
+  resourceTags: [];
   provider: string;
   location: string;
   currency: string;

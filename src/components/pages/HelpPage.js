@@ -1,5 +1,6 @@
 import React from 'react';
-import { PageSegment, PageContainer } from './DefaultPageStyles';
+import { PageSegment } from './DefaultPageStyles';
+import PageWrapper from './PageWrapper';
 import styled from 'styled-components';
 import { Search, Segment, Divider, Grid, Image } from 'semantic-ui-react';
 
@@ -20,7 +21,7 @@ const CategorySection = styled(Grid)`
 
 export const HelpPage = () => {
   return (
-    <PageContainer>
+    <PageWrapper>
       <PageSegment color="blue">
         <TitleSection basic>
           <Title>Hi! How can we help?</Title>
@@ -55,7 +56,7 @@ export const HelpPage = () => {
           </CategorySection>
         </Segment>
       </PageSegment>
-    </PageContainer>
+    </PageWrapper>
   );
 };
 

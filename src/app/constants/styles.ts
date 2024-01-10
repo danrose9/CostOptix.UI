@@ -1,8 +1,11 @@
 export const COLORS = {
   PRIMARY: '#293042',
+  SECONDARY: '#6094B0',
+  TERNARY: '#BBC09F',
+  HIGHLIGHT: '#DEB35B',
+  LOWLIGHT: '#E4CCD9',
   BACKGROUND: '#F5F5F5',
   WHITE: '#FFFFFF',
-  //   SECONDARY: '#2c3e50',
   //   ERROR: '#e74c3c',
   //   SUCCESS: '#2ecc71',
   BUTTONS: {
@@ -18,4 +21,5 @@ export const FONT = {
   SECONDARY_COLOR: '#696969',
   TERNARY_COLOR: '#92989E',
   WHITE: '#FFFFFF',
+  STAT: '#1678C2',
 };
