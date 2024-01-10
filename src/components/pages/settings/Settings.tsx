@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContainer } from '../DefaultPageStyles';
+import PageWrapper from '../PageWrapper';
 import { Tab } from 'semantic-ui-react';
 
 import { Account } from './index';
@@ -12,9 +12,9 @@ interface ISettingsProps {
 
 const Settings: React.FC<ISettingsProps> = ({ activeTab }) => {
   return (
-    <PageContainer>
+    <PageWrapper>
       <Tab menu={{ fluid: true, vertical: true }} menuPosition="left" panes={panes} defaultActiveIndex={activeTab} />
-    </PageContainer>
+    </PageWrapper>
   );
 };
 

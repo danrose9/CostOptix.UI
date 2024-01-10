@@ -8,7 +8,7 @@ import ResourceViewChart from './ResourceViewChart';
 import ResourceViewTable from './ResourceViewTable';
 import ResourceViewChartData from './ResourceViewChartData';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchResourceView } from '../../../services/redux/thunks/resourceThunk';
+import { FETCH_RESOURCES } from '../../../services/redux/thunks/resourceThunk';
 import { reduxState } from '../../../services/redux/reduxState';
 import { currencySymbol } from '../../../utils/helper';
 import { DashboardCardGroup } from '../../__styles__/CardStyles';
@@ -91,7 +91,7 @@ export const ResourceView = () => {
 
   useEffect(() => {
     if (!isAvailable) {
-      dispatch(fetchResourceView(args));
+      dispatch(FETCH_RESOURCES(args));
     }
   }, [dispatch, args, isAvailable]);
 

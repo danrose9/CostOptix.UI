@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SEARCH_RESOURCES, fetchResourceView } from '../thunks/resourceThunk';
+import { SEARCH_RESOURCES, FETCH_RESOURCES } from '../thunks/resourceThunk';
+import { IResource } from 'src/types/resource-types';
 
 const initialState = {
   searchResults: [],
@@ -7,7 +8,7 @@ const initialState = {
     isLoading: true,
     isAvailable: false,
     error: null,
-    data: [],
+    data: {} as IResource,
   },
   count: 0,
   searchValue: '',
@@ -15,6 +16,20 @@ const initialState = {
   error: null,
   isLoading: true,
   isAvailable: false,
+} as {
+  searchResults: any[];
+  view: {
+    isLoading: boolean;
+    isAvailable: boolean;
+    error: any;
+    data: IResource;
+  };
+  count: number;
+  searchValue: string;
+  status: string | null;
+  error: string | null | undefined;
+  isLoading: boolean;
+  isAvailable: boolean;
 };
 
 const resourceSlice = createSlice({
@@ -47,8 +62,8 @@ const resourceSlice = createSlice({
         state.isLoading = false;
         state.isAvailable = true;
         state.error = null;
-        if (action.payload !== undefined) {
-          state.searchResults = action.payload.value;
+        if (typeof action.payload === 'object' && action.payload !== undefined) {
+          state.searchResults = (action.payload as any).value;
           state.count = action.payload['@odata.count'];
         }
       })
@@ -59,18 +74,18 @@ const resourceSlice = createSlice({
         state.isAvailable = false;
       });
     builder
-      .addCase(fetchResourceView.pending, (state) => {
+      .addCase(FETCH_RESOURCES.pending, (state) => {
         state.view.isLoading = true;
         state.view.isAvailable = false;
         state.view.error = null;
       })
-      .addCase(fetchResourceView.fulfilled, (state, action) => {
+      .addCase(FETCH_RESOURCES.fulfilled, (state, action) => {
         state.view.data = action.payload;
         state.view.isLoading = false;
         state.view.isAvailable = true;
         state.view.error = null;
       })
-      .addCase(fetchResourceView.rejected, (state, action) => {
+      .addCase(FETCH_RESOURCES.rejected, (state, action) => {
         state.view.isLoading = false;
         state.view.isAvailable = false;
         state.view.error = action.error.message;

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { PageContainer } from './DefaultPageStyles';
 import { PageHeader } from '../PageHeader';
 import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
@@ -7,13 +6,20 @@ import { ActionButton } from '../buttons';
 import { useIsDemo } from '../hoc/withDemo';
 
 interface IPageLayoutProps {
-  title: string;
+  title?: string | undefined;
   children?: ReactNode;
   className?: string;
   searchComponent?: React.ReactNode;
   downloadComponent?: boolean;
   onClick?: () => void;
 }
+
+const PageContainer = styled.div`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const PageHeaderContainer = styled.div`
   display: flex;

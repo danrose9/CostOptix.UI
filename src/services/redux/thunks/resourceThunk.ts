@@ -39,7 +39,7 @@ export const SEARCH_RESOURCES = createAsyncThunk<string | void, string, {}>(
   }
 );
 
-export const fetchResourceView = createAsyncThunk('Resources/ResourceView', async (args, { rejectWithValue }) => {
+export const FETCH_RESOURCES = createAsyncThunk('Resources/ResourceView', async (args, { rejectWithValue }) => {
   return await fetchInstance(RESOURCES + '/' + args)
     .then((response) => {
       if (!response.ok) {
