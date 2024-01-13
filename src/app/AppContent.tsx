@@ -3,24 +3,20 @@ import * as appRoutes from './router/appRoutes';
 import { Container, MainPage, Main, ApplicationFooter } from '../styles/AppContent';
 import Navbar from '../components/navbar/Navbar';
 import { Sidebar } from '../components/sidebar/Sidebar';
-import ApplicationRoutes from './router/ApplicationRoutes';
+import ApplicationRoutes, { HIDE_NAV_SIDEBAR_ROUTES } from './router/ApplicationRoutes';
 import { useIdleTimer } from 'react-idle-timer';
 import { useNavigate, useLocation } from 'react-router-dom';
-
-import { withAuth } from '../components/hoc/withAuth';
 import ErrorDefault from '../components/pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
-
 import { APP_FOOTER } from './constants';
 import { isAuthenticated } from '../services/api/processToken';
 import Tour from '../components/productTour/Tour';
 
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
-const NavbarWithAuth = withAuth(Navbar);
-const SidebarWithAuth = withAuth(Sidebar);
 
 export const AppContent = () => {
   const navigate = useNavigate();
+  const [startTimer, setStartTimer] = useState(false);
 
   const location = useLocation();
   const { startTour } = location.state || {};
@@ -43,13 +39,24 @@ export const AppContent = () => {
   });
 
   useEffect(() => {
-    const authenticated = isAuthenticated();
-    if (authenticated) {
+    const checkAuthentication = async () => {
+      const authenticated = await isAuthenticated();
+      setStartTimer(authenticated);
+    };
+
+    checkAuthentication();
+  }, []);
+
+  // useEffect hook to observe changes to startTimer
+  useEffect(() => {
+    if (startTimer) {
       start();
     } else {
       pause();
     }
-  }, [pause, start]);
+  }, [startTimer, start, pause]);
+
+  const shouldHideNavSidebar = HIDE_NAV_SIDEBAR_ROUTES.includes(location.pathname);
 
   return (
     <>
@@ -62,9 +69,9 @@ export const AppContent = () => {
         }}
       >
         <Container>
-          <SidebarWithAuth sidebarState={sidebarState} />
+          {!shouldHideNavSidebar && <Sidebar sidebarState={sidebarState} />}
           <Main>
-            <NavbarWithAuth onClick={showSidebar} />
+            {!shouldHideNavSidebar && <Navbar onClick={showSidebar} />}
             <MainPage>
               <ApplicationRoutes />
             </MainPage>

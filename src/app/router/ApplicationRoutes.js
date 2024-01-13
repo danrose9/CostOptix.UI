@@ -6,6 +6,14 @@ import PrivateRoute from './PrivateRoute';
 import { TITLE } from '../constants/application';
 import { TermsOfService, PrivacyPolicy } from '../constants';
 
+export const HIDE_NAV_SIDEBAR_ROUTES = [
+  appRoutes.HOME,
+  appRoutes.LOGIN,
+  appRoutes.SIGNUP,
+  appRoutes.NOT_FOUND_404_PAGE,
+  appRoutes.DEFAULT_ERROR_PAGE,
+];
+
 export const ApplicationRoutes = () => {
   return (
     <Routes>
