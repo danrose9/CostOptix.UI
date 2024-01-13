@@ -61,19 +61,32 @@ export const removeAuthCookie = () => {
 /// <input> authTokens: AuthTokens </input>
 /// <return> Promise<any> </return>
 /// <summary>
-const refreshToken = async (authToken: AuthToken): Promise<any> => {
-  let response = await fetch(BASE + REFRESH_TOKEN, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      accessToken: authToken.accessToken,
-      refreshToken: authToken.refreshToken,
-    }),
-  });
-  let data = await response.json();
+let refreshPromise: Promise<AuthToken | null> | null = null;
 
-  sessionStorage.setItem(AUTHTOKEN, JSON.stringify(data));
-  return data;
+const refreshToken = async (authToken: AuthToken): Promise<AuthToken | null> => {
+  if (!refreshPromise) {
+    refreshPromise = new Promise<AuthToken | null>(async (resolve, reject) => {
+      try {
+        let response = await fetch(BASE + REFRESH_TOKEN, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            accessToken: authToken.accessToken,
+            refreshToken: authToken.refreshToken,
+          }),
+        });
+        let data = await response.json();
+        sessionStorage.setItem(AUTHTOKEN, JSON.stringify(data));
+        resolve(data);
+      } catch (error) {
+        console.error('Error refreshing token', error);
+        reject(error);
+      }
+    }).finally(() => {
+      refreshPromise = null; // Reset the promise after it's resolved or rejected
+    });
+  }
+  return refreshPromise;
 };
 
 /// <summary>
@@ -106,17 +119,15 @@ const fetchTokens = (): AuthToken | null => {
 /// Checks if the user is authenticated
 /// <return> boolean </return>
 /// <summary>
-export const isAuthenticated = () => {
+export const isAuthenticated = async () => {
   const authToken = fetchTokens();
 
   if (!authToken || !authToken.accessToken) {
     return false;
   }
 
-  const isTokenGood = isTokenValid(authToken.accessToken);
-
-  if (!isTokenGood) {
-    const newToken = refreshToken(authToken);
+  if (!isTokenValid(authToken.accessToken)) {
+    const newToken = await refreshToken(authToken);
     if (!newToken) {
       return false;
     }
@@ -133,7 +144,10 @@ export const checkTokens = async (): Promise<AuthToken> => {
   let authTokens: AuthToken = fetchTokens()!;
 
   if (!isTokenValid(authTokens.accessToken)) {
-    authTokens = await refreshToken(authTokens);
+    const newTokens = await refreshToken(authTokens);
+    if (newTokens) {
+      authTokens = newTokens;
+    }
   }
 
   return authTokens;
