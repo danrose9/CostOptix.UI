@@ -16,8 +16,9 @@ import './App.css';
 import { store, persistor } from './services/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import ReactGA from 'react-ga';
-ReactGA.initialize('G-0GB9MB9RTE', { standardImplementation: true });
+import ReactGA from 'react-ga4';
+import reportWebVitals from './reportWebVitals';
+ReactGA.initialize('G-0GB9MB9RTE');
 
 declare global {
   interface Window {
@@ -34,6 +35,17 @@ root.render(
     </PersistGate>
   </Provider>
 );
+
+const SendAnalytics = () => {
+  ReactGA.send({
+    hitType: 'pageview',
+    page: window.location.pathname,
+  });
+};
+
+// To log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals(SendAnalytics);
 
 // expose store when run in Cypress
 type CypressWindow = Window & typeof globalThis & { Cypress: any; store: any };
