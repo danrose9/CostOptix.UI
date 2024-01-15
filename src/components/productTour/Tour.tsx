@@ -32,7 +32,7 @@ const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
 
   useEffect(() => {
     if (shouldStart) {
-      // ReactGA.event(GA_EVENTS.TOUR_STARTED, { tourType: tourType });
+      ReactGA.event(GA_EVENTS.TOUR_STARTED, { tourType: tourType });
       navigate(appRoutes.COST_DASHBOARD);
       dispatch({ type: 'START' });
     }
@@ -40,8 +40,7 @@ const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
 
   // Set once tour is viewed, skipped or closed
   const setTourViewed = () => {
-    console.log('tour completed');
-    // ReactGA.event(GA_EVENTS.TOUR_COMPLETED, { tourType: tourType });
+    ReactGA.event(GA_EVENTS.TOUR_COMPLETED, { tourType: tourType });
     // localStorage.setItem("tour", "1");
   };
 
