@@ -20,7 +20,8 @@ export const ApplicationRoutes = () => {
   const location = useLocation();
   useEffect(() => {
     const page = location.pathname + location.search;
-    ReactGA.send({ hitType: 'pageview', page: { page } });
+    console.log('page', page);
+    ReactGA.send({ hitType: 'pageview', page: { page }, title: { page } });
   }, [location]);
 
   return (
