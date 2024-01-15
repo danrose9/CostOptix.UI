@@ -38,16 +38,17 @@ root.render(
   </Provider>
 );
 
-const SendAnalytics = () => {
-  ReactGA.send({
-    hitType: 'pageview',
-    page: window.location.pathname,
-  });
-};
+// const SendAnalytics = () => {
+//   ReactGA.send({
+//     hitType: 'pageview',
+//     page: '/',
+//     title: 'Home Page',
+//   });
+// };
 
 // To log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(SendAnalytics);
+reportWebVitals();
 
 // expose store when run in Cypress
 type CypressWindow = Window & typeof globalThis & { Cypress: any; store: any };

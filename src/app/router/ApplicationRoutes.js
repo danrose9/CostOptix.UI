@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import * as appRoutes from './appRoutes';
 import * as page from '../../components/pages/index';
 import PrivateRoute from './PrivateRoute';
 import { TITLE } from '../constants/application';
 import { TermsOfService, PrivacyPolicy } from '../constants';
+import { useLocation } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 
 export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.HOME,
@@ -15,6 +17,12 @@ export const HIDE_NAV_SIDEBAR_ROUTES = [
 ];
 
 export const ApplicationRoutes = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const page = location.pathname + location.search;
+    ReactGA.send({ hitType: 'pageview', page: { page } });
+  }, [location]);
+
   return (
     <Routes>
       <Route path="/" element={<page.Home />} />
