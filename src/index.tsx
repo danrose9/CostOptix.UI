@@ -21,7 +21,6 @@ import reportWebVitals from './reportWebVitals';
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GTAG;
 
 ReactGA.initialize(GA_MEASUREMENT_ID as string);
-console.log('gtag', GA_MEASUREMENT_ID);
 
 declare global {
   interface Window {
