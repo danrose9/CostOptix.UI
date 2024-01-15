@@ -19,8 +19,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 import ReactGA from 'react-ga4';
 import reportWebVitals from './reportWebVitals';
 const gtag = process.env.REACT_APP_GTAG;
+const GA_MEASUREMENT_ID = process.env.REACT_APP_ENV === 'production' ? 'G-0GB9MB9RTE' : 'G-0XET9M4V3E';
 
-ReactGA.initialize(gtag as string);
+ReactGA.initialize(GA_MEASUREMENT_ID as string);
+console.log('gtag', GA_MEASUREMENT_ID);
 
 declare global {
   interface Window {
