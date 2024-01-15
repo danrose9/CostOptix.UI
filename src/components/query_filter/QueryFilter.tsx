@@ -12,9 +12,9 @@ const dispatchError = (value: any): void => {
 };
 
 export interface IQueryFilterProps {
-  updateSetIsQueryValid: (value: boolean) => void;
-  dispatch: React.Dispatch<any>;
-  activeQuery: any;
+  updateSetIsQueryValid?: (value: boolean) => void;
+  dispatch?: React.Dispatch<any>;
+  activeQuery?: any;
 }
 
 const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispatch, activeQuery }) => {
@@ -29,10 +29,12 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
     setFilterGroup(updatedFilterGroup);
 
     /* Update filter output */
-    dispatch({
-      type: 'REMOVE_FILTER',
-      payload: { value: updatedFilterGroup.length },
-    });
+    if (dispatch) {
+      dispatch({
+        type: 'REMOVE_FILTER',
+        payload: { value: updatedFilterGroup.length },
+      });
+    }
   };
 
   const newFilterGroup = (count: number, containerIndex: number, initialData: any = null) => {
@@ -44,7 +46,7 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
         onRemoveBtnClick={onRemoveBtnClick}
         onAddBtnClick={throwError}
         dispatch={dispatchError}
-        updateSetIsQueryValid={updateSetIsQueryValid}
+        updateSetIsQueryValid={updateSetIsQueryValid!}
         initialData={initialData}
         reset={resetKey}
       />
@@ -60,14 +62,16 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
 
   const onAddBtnClick = () => {
     setContainerIndex(containerIndex + 1);
-    newFilterGroup(filterGroup.length, containerIndex, null);
-    const updatedFilterGroup = [...filterGroup, newFilterGroup];
+    const newGroup = newFilterGroup(filterGroup.length, containerIndex, null);
+    const updatedFilterGroup = [...filterGroup, newGroup];
 
     setFilterGroup(updatedFilterGroup);
   };
 
   const handleQueryReset = () => {
-    dispatch({ type: 'RESET_QUERY', payload: { value: INITIAL_FILTER } });
+    if (dispatch) {
+      dispatch({ type: 'RESET_QUERY', payload: { value: INITIAL_FILTER } });
+    }
     // Reset filterGroup to a single group with no values
     setFilterGroup([newFilterGroup(0, 0)]);
     setResetKey((prevKey) => prevKey + 1);
@@ -82,8 +86,8 @@ const QueryFilter: React.FC<IQueryFilterProps> = ({ updateSetIsQueryValid, dispa
           containerIndex={containerIndex}
           onRemoveBtnClick={onRemoveBtnClick}
           onAddBtnClick={onAddBtnClick}
-          dispatch={dispatch}
-          updateSetIsQueryValid={updateSetIsQueryValid}
+          dispatch={dispatch!}
+          updateSetIsQueryValid={updateSetIsQueryValid!}
           initialData={activeQuery[containerIndex]}
           reset={resetKey}
         />

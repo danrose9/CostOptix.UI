@@ -6,8 +6,8 @@ import * as images from '../../assets/index';
 import { PageContainer, PageTitle, PageContent, PageDescription } from '../__styles__/StaticPageStyles';
 
 interface IErrorDefaultProps {
-  error: any;
-  resetErrorBoundary: any;
+  error?: any;
+  resetErrorBoundary?: any;
 }
 
 export const ErrorDefault: React.FC<IErrorDefaultProps> = ({ error, resetErrorBoundary }) => {

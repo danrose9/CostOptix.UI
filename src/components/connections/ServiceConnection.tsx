@@ -18,7 +18,7 @@ import { IBillingAccount } from '../../types';
 export const PollingContext = createContext<any>(false);
 
 type SelectedContainerProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const ServiceConnection = (props: SelectedContainerProps) => {

@@ -21,7 +21,7 @@ export const OrderedList = styled.ol`
 
 interface ILegalNoticeProps {
   title: string;
-  content: string;
+  content: JSX.Element;
 }
 
 export const LegalNotice: React.FC<ILegalNoticeProps> = ({ title, content }) => {
