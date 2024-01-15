@@ -16,8 +16,8 @@ import './App.css';
 import { store, persistor } from './services/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import ReactGA from 'react-ga';
-ReactGA.initialize('G-6KPES2WMQB', { standardImplementation: true });
+// import ReactGA from 'react-ga';
+// ReactGA.initialize('G-6KPES2WMQB', { standardImplementation: true });
 
 declare global {
   interface Window {
