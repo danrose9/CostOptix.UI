@@ -38,14 +38,6 @@ root.render(
   </Provider>
 );
 
-// const SendAnalytics = () => {
-//   ReactGA.send({
-//     hitType: 'pageview',
-//     page: '/',
-//     title: 'Home Page',
-//   });
-// };
-
 // To log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

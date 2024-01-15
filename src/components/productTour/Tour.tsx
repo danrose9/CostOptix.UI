@@ -5,6 +5,8 @@ import { tourReducer } from './tourReducer';
 import * as appRoutes from '../../app/router/appRoutes';
 import { DEFAULT_TOUR_STEPS } from './defaultTourSteps';
 import { CONTAINER_TOUR_STEPS } from './containersTourSteps';
+import ReactGA from 'react-ga4';
+import { GA_EVENTS } from '../../app/constants/analyticEvents';
 
 interface TourProps {
   shouldStart: boolean;
@@ -30,6 +32,7 @@ const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
 
   useEffect(() => {
     if (shouldStart) {
+      // ReactGA.event(GA_EVENTS.TOUR_STARTED, { tourType: tourType });
       navigate(appRoutes.COST_DASHBOARD);
       dispatch({ type: 'START' });
     }
@@ -37,6 +40,8 @@ const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
 
   // Set once tour is viewed, skipped or closed
   const setTourViewed = () => {
+    console.log('tour completed');
+    // ReactGA.event(GA_EVENTS.TOUR_COMPLETED, { tourType: tourType });
     // localStorage.setItem("tour", "1");
   };
 
