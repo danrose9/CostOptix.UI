@@ -4,11 +4,14 @@ import fetchInstance from '../../api/fetchInstance';
 import { getDefaultAvatarUrl } from '../../../utils/getDefaultAvatarUrl';
 
 export const fetchUserProfile = createAsyncThunk('Profile/fetchUserProfile', async (args, { rejectWithValue }) => {
-  return await fetchInstance(ACCOUNT_ME)
+  const response = fetchInstance(ACCOUNT_ME)
     .then((response) => response.json())
     .catch((error) => {
       return rejectWithValue({ message: error.message, status: error.response?.status });
     });
+
+  console.log('fetchUserProfile', response);
+  return response;
 });
 
 export const fetchUserPhoto = createAsyncThunk('Profile/fetchUserPhoto', async (args, { rejectWithValue }) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dropdown, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
@@ -7,20 +7,21 @@ import * as appRoutes from '../../app/router/appRoutes';
 import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNavbarItems';
 import { NavbarMode } from './NavbarMode';
 import { isAuthenticated } from '../../services/api/processToken';
+import { IRootState } from 'src/services/redux/rootReducer';
 
 export const NavbarItems = () => {
   const navigate = useNavigate();
-  const loggedInUser = useSelector((state) => state[reduxState.USER_PROFILE].name);
-  const userAvatar = useSelector((state) => state[reduxState.USER_PROFILE].photo.image);
-  const organizationStatus = useSelector((state) => state[reduxState.USER_PROFILE].organization.status);
+  const { name, photo, organization } = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
 
   const options = [
     {
+      id: 1,
       key: 'user',
-      text: <NavbarMode status={organizationStatus} />,
+      text: <NavbarMode status={organization.status} />,
       disabled: true,
     },
     {
+      id: 2,
       key: 'profile',
       text: 'Your Profile',
       image: <Icon name="user" />,
@@ -34,6 +35,7 @@ export const NavbarItems = () => {
     //   onClick: () => navigate(appRoutes.SETTINGS),
     // },
     {
+      id: 3,
       key: 'log-out',
       text: 'Log Out',
       image: <Icon name="log out" />,
@@ -44,10 +46,19 @@ export const NavbarItems = () => {
 
   const trigger = (
     <StyledSpan data-testid="navbarItem-3">
-      <StyledAvatar avatar src={userAvatar} />
-      {loggedInUser}
+      <StyledAvatar avatar src={photo.image} />
+      {name}
     </StyledSpan>
   );
+
+  useEffect(() => {
+    // console.log('User-Id', name);
+    // if (isDemo) {
+    //   console.log('User-Id', '00000000-0000-0000-0000-000000000000');
+    // } else {
+    //   console.log('User-Id', id);
+    // }
+  }, [name]);
 
   return (
     <StyledDropdown data-testid="navbarItem-2" trigger={trigger}>
@@ -55,7 +66,7 @@ export const NavbarItems = () => {
         {/* <Input icon="search" iconPosition="left" className="search" /> */}
         <Dropdown.Menu scrolling>
           {options.map((option) => (
-            <Dropdown.Item key={option.value} {...option} />
+            <Dropdown.Item {...option} />
           ))}
         </Dropdown.Menu>
       </Dropdown.Menu>

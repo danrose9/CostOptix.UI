@@ -11,12 +11,14 @@ interface IFetchAccountsAndServiceProviders {
   lastUpdated: string;
 }
 
+type ReturnedPayload = Promise<number | undefined>;
+
 export const fetchAccountsAndServiceProviders = async ({
   dispatch,
   updateIsLoading,
   updateSetAccountStatus,
   lastUpdated,
-}: IFetchAccountsAndServiceProviders): Promise<void> => {
+}: IFetchAccountsAndServiceProviders): Promise<ReturnedPayload> => {
   try {
     if (updateIsLoading && updateSetAccountStatus) {
       updateIsLoading(true);
@@ -26,10 +28,11 @@ export const fetchAccountsAndServiceProviders = async ({
     await dispatch(fetchServiceProviders());
 
     const response = await dispatch(fetchBillingAccounts());
+    const billingAccountCount = response.payload?.billingAccounts.length;
 
-    if (response.payload?.billingAccounts.length === 0) {
+    if (billingAccountCount === 0) {
       dispatch(setStatus(true));
-      return;
+      return 0;
     }
 
     response.payload?.billingAccounts
@@ -40,6 +43,7 @@ export const fetchAccountsAndServiceProviders = async ({
       });
 
     if (updateSetAccountStatus) updateSetAccountStatus(lastUpdated);
+    return billingAccountCount;
   } catch (error) {
     console.error('Failed to fetch billing accounts or service providers:', error);
   } finally {
