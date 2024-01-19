@@ -36,7 +36,7 @@ const Tour: React.FC<TourProps> = ({ shouldStart, tourType }) => {
       navigate(appRoutes.COST_DASHBOARD);
       dispatch({ type: 'START' });
     }
-  }, [shouldStart, navigate]);
+  }, [shouldStart, navigate, tourType]);
 
   // Set once tour is viewed, skipped or closed
   const setTourViewed = () => {

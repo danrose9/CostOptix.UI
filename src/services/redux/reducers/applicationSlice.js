@@ -2,14 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const applicationVersion = process.env.REACT_APP_VERSION;
 
-// interface ApplicationState {
-//   settings: object
-//   version: any
-//   status?: string | null
-//   error?: string | null
-//   isLoading: Boolean
-// }
-
 const initialState = {
   settings: {
     preferredCurrency: 'USD',
