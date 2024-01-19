@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Dropdown, Icon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
@@ -50,15 +50,6 @@ export const NavbarItems = () => {
       {name}
     </StyledSpan>
   );
-
-  useEffect(() => {
-    // console.log('User-Id', name);
-    // if (isDemo) {
-    //   console.log('User-Id', '00000000-0000-0000-0000-000000000000');
-    // } else {
-    //   console.log('User-Id', id);
-    // }
-  }, [name]);
 
   return (
     <StyledDropdown data-testid="navbarItem-2" trigger={trigger}>
