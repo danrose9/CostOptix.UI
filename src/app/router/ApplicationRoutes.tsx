@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import * as appRoutes from './appRoutes';
 import * as page from '../../components/pages/index';

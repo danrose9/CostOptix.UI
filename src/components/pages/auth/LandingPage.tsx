@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import WelcomeModal from '../../modals/WelcomeModal';
@@ -7,6 +7,10 @@ import { STORAGE } from '../../../app/constants/StorageKeys';
 import { useIsDemo } from '../../hoc/withDemo';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { AppDispatch } from 'src/services/redux/store';
+import { IRootState } from 'src/services/redux/rootReducer';
+import { useSelector } from 'react-redux';
+import { reduxState } from 'src/services/redux/reduxState';
+import { useTrackEvent } from 'src/hooks/useTrackEvent';
 
 interface LandingPageProps {}
 
@@ -25,6 +29,11 @@ const LandingPage: React.FC<LandingPageProps> = () => {
     }
     dispatch<AppDispatch>(incrementLoginCount());
   }, [dismissWelcomePage, beginTour, dispatch, navigate]);
+
+  const user_id = useSelector((state: IRootState) => state[reduxState.USER_PROFILE].id);
+  const eventData = useMemo(() => ({ user: user_id }), [user_id]);
+
+  useTrackEvent('user_id', eventData, user_id);
 
   return (
     <>

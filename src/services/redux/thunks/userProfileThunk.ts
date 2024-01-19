@@ -10,7 +10,6 @@ export const fetchUserProfile = createAsyncThunk('Profile/fetchUserProfile', asy
       return rejectWithValue({ message: error.message, status: error.response?.status });
     });
 
-  console.log('fetchUserProfile', response);
   return response;
 });
 
