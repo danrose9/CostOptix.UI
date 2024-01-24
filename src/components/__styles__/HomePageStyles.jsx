@@ -12,8 +12,11 @@ export const PageContainer = styled(Container)`
   &.home-page {
     background-image: url(${backgroundImage});
     background-repeat: no-repeat;
-    background-size: 100%;
-  }
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
 `;
 
 export const HomePageMainContent = styled.div`
