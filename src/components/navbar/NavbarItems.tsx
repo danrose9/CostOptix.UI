@@ -13,6 +13,11 @@ export const NavbarItems = () => {
   const navigate = useNavigate();
   const { name, photo, organization } = useSelector((state: IRootState) => state[reduxState.USER_PROFILE]);
 
+  const sendEmail = () => {
+    const mailtoLink = 'mailto:someone@example.com?subject=Help Needed';
+    window.location.href = mailtoLink;
+  };
+
   const options = [
     {
       id: 1,
@@ -27,7 +32,14 @@ export const NavbarItems = () => {
       image: <Icon name="user" />,
       onClick: () => navigate(appRoutes.SETTINGS),
     },
-    // { key: 'help', text: 'Help', image: <Icon name="help" /> },
+    {
+      key: 'help',
+      text: 'Help',
+      image: <Icon name="help" />,
+      onClick: () => {
+        sendEmail();
+      },
+    },
     // {
     //   key: 'settings',
     //   text: 'Settings',

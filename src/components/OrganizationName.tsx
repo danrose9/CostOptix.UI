@@ -4,9 +4,10 @@ import { StyledOrganizationName } from './sidebar/__styles__/StyledOrganizationN
 import { reduxState } from '../services/redux/reduxState';
 import * as appRoutes from '../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
+import { IRootState } from 'src/services/redux/rootReducer';
 
 export const OrganizationName = () => {
-  const organizationName = useSelector((state) => state[reduxState.USER_PROFILE].organization.name);
+  const organizationName = useSelector((state: IRootState) => state[reduxState.USER_PROFILE].organization.name);
 
   const navigate = useNavigate();
 

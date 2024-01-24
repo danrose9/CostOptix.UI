@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Resource from '../resources/Resource';
 
 const TestPage = () => {
-  return <Resource />;
+  return <a href="mailto:someone@yoursite.com?subject=Mail from Our Site">Email Us</a>;
 };
 
 export default TestPage;

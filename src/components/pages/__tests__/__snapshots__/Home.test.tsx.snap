@@ -29,7 +29,7 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-bqWxrE iFBIFS login"
+          className="sc-eDWCr iWyJuu login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -37,7 +37,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-bqWxrE iFBIFS get-started"
+          className="sc-eDWCr iWyJuu get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -79,7 +79,7 @@ exports[`Home Page matches snapshot 1`] = `
           method="POST"
         >
           <button
-            className="sc-bqWxrE iFBIFS view-demo"
+            className="sc-eDWCr iWyJuu view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >

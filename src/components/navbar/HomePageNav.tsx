@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePageButton } from '../__styles__/HomePageStyles';
+import { HomePageButton, MenuItem } from '../__styles__/HomePageStyles';
 import { Image, Menu } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
@@ -43,10 +43,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
             </ImageWrapper>
           </Menu.Item>
           <Menu.Menu position="right">
-            {/* <Menu.Item name="Contact" />
-            <Menu.Item name="Pricing" />
-            <Menu.Item name="About Us" />
-            <Menu.Item name="Legal" /> */}
+            {/* <MenuItem name="Contact" /> */}
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}
