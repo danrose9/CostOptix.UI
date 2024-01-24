@@ -2,7 +2,7 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-jSUZER citWZd home-page"
+  className="ui fluid container sc-jSUZER cuqPKr home-page"
   data-testid="homePage-2"
 >
   <div
