@@ -43,7 +43,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
             </ImageWrapper>
           </Menu.Item>
           <Menu.Menu position="right">
-            <MenuItem name="Contact" />
+            {/* <MenuItem name="Contact" /> */}
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}
