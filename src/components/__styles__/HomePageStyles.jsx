@@ -63,13 +63,11 @@ export const HomePageActions = styled.div`
 `;
 
 export const MenuItem = styled(Menu.Item)`
-  font-size: 1.7em;  
+  font-size: 1.3em;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
   padding-right: 2em !important;
   cursor: pointer;
-`;
-
-export const MenuMenu = styled(Menu.Menu)`
-  
 `;
 
 export const HomePageButton = styled.button`
