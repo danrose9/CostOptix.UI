@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../../services/redux/store';
 import { Modal, Button, Dropdown } from 'semantic-ui-react';
-import { deleteBillingAccount } from '../../../services/redux/thunks/serviceProvidersThunk';
+import { deleteBillingAccount } from '../../../services/redux/thunks/serviceProviderThunk';
 
 interface IRemoveServiceConnectionProps {
   providerId: string;

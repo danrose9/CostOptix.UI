@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { resetServiceProviders } from '../services/redux/reducers/serviceProvidersSlice';
+import { resetServiceProviders } from '../services/redux/reducers/serviceProviderSlice';
 import { resetCostDashboard } from '../services/redux/reducers/costDashboardSlice';
 import { AppDispatch } from '../services/redux/store';
 

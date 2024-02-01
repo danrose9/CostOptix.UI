@@ -8,7 +8,7 @@ import {
   enableBillingAccount,
   deleteBillingAccount,
   addBillingAccount,
-} from '../thunks/serviceProvidersThunk';
+} from '../thunks/serviceProviderThunk';
 
 const initialState = {
   isCurrencyConflict: false,
@@ -21,7 +21,7 @@ const initialState = {
 };
 
 const serviceProviderSlice = createSlice({
-  name: 'serviceProviders',
+  name: 'serviceProvider',
   initialState: initialState,
 
   reducers: {
