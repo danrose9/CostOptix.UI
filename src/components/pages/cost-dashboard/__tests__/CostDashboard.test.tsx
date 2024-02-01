@@ -3,6 +3,7 @@ import { render, cleanup, screen } from '@testing-library/react';
 import CostDashboard from '../CostDashboard';
 import { ApplicationWrapper } from '../../../../tests/helpers';
 import { ApplicationContext } from 'src/app/ApplicationContext';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 afterEach(() => {
   cleanup();
@@ -34,14 +35,14 @@ const billingAccounts = [
 ];
 
 describe('CostDashboard Components', () => {
-  // beforeEach(() => {
-  //   render(
-  //     <ApplicationContext.Provider value={{ settings: { preferredCurrency: 'USD' } }}>
-  //       <CostDashboard />
-  //     </ApplicationContext.Provider>,
-  //     { wrapper: ApplicationWrapper }
-  //   );
-  // });
+  beforeEach(() => {
+    render(
+      <ApplicationContext.Provider value={{ settings: { preferredCurrency: 'USD' } }}>
+        {/* <CostDashboard /> */}
+      </ApplicationContext.Provider>,
+      { wrapper: ApplicationWrapper }
+    );
+  });
 
   test('true should be true', () => {
     expect(true).toBe(true);

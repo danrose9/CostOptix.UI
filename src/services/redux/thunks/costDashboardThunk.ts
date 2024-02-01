@@ -21,7 +21,7 @@ export const fetchBillingAccountCosts = createAsyncThunk(
       })
       .then((response) => response.json())
       .then((data) => {
-        const isCurrencyConflict = (thunkAPI.getState() as IRootState).serviceProviders.isCurrencyConflict;
+        const isCurrencyConflict = (thunkAPI.getState() as IRootState).serviceProvider.isCurrencyConflict;
 
         const costDashboardData = { ...data, isCurrencyConflict: isCurrencyConflict };
 

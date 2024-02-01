@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 import { reduxState } from './reduxState';
 
-import userProfileReducer from './reducers/userProfileSlice';
-import azureManagementReducer from './reducers/azureManagementSlice';
-import serviceProviderReducer from './reducers/serviceProvidersSlice';
-import costDashboardReducer from './reducers/costDashboardSlice';
-import resourceReducer from './reducers/resourceSlice';
-import applicationReducer from './reducers/applicationSlice';
-import costContainerReducer from './reducers/costContainerSlice';
+import {
+  serviceProviderReducer,
+  userProfileReducer,
+  azureManagementReducer,
+  costContainerReducer,
+  costDashboardReducer,
+  applicationReducer,
+  resourceReducer,
+} from './reducers/index';
 
 export const AsyncThunkStatus = {
   PENDING: 'pending',

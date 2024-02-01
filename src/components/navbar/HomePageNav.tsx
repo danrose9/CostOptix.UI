@@ -1,6 +1,6 @@
 import React from 'react';
 import { HomePageButton, MenuItem } from '../__styles__/HomePageStyles';
-import { Image, Menu } from 'semantic-ui-react';
+import { Image, Menu, Dropdown } from 'semantic-ui-react';
 import * as images from '../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
@@ -43,7 +43,13 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
             </ImageWrapper>
           </Menu.Item>
           <Menu.Menu position="right">
-            {/* <MenuItem name="Contact" /> */}
+            {/* <MenuItem>
+              <Dropdown simple text="Contact">
+                <Dropdown.Menu>
+                  <Dropdown.Item>English</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </MenuItem> */}
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}

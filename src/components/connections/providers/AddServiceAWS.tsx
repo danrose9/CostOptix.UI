@@ -3,23 +3,7 @@ import { Segment, Form } from 'semantic-ui-react';
 import CodeText from '../../CodeText';
 import { AWSFormDataType } from 'provider-types';
 import { AwsBillingCostWarning } from 'src/components/messages';
-
-const AWSPolicy = `{
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-          "Sid": "VisualEditor0",
-          "Effect": "Allow",
-          "Action": [
-              "ce:GetCostAndUsageWithResources",
-              "ce:GetCostAndUsage",
-              "ce:GetCostForecast",
-              "tag:GetResources"
-          ],
-          "Resource": "*"
-      }
-  ]
-}`;
+import { AWSPolicy } from './AWSPolicy';
 
 interface IProviderFormProps {
   DisableButtonOnInvalidForm: any;
@@ -58,7 +42,7 @@ export const AddServiceAWS: React.FC<IProviderFormProps> = ({ DisableButtonOnInv
             1. Log into your <i>AWS</i> account. <a href="https://aws.amazon.com/">https://aws.amazon.com/</a>
           </Form.Field>
           <Form.Field>
-            2. Navigate to <i>AWS Cost Explorer</i>
+            2. Navigate to <i>Cost Explorer</i>
           </Form.Field>
           <Form.Field>
             3. Select <i>Preferences</i>

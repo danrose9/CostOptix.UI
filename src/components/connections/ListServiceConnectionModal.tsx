@@ -5,7 +5,7 @@ import StandardButton from '../buttons/StandardButton';
 import { ModalHeader } from '../__styles__/StyledModal';
 import { ProviderImage } from '../ProviderImage';
 import fetchCloudBillingAccounts from '../../services/api/fetchCloudBillingAccounts';
-import { addBillingAccount } from '../../services/redux/thunks/serviceProvidersThunk';
+import { addBillingAccount } from '../../services/redux/thunks/serviceProviderThunk';
 import { getIndex } from '../../utils/arrayHelper';
 import {
   AddProviderType,
@@ -16,7 +16,7 @@ import {
 import { ServiceConnectionHeader, ServiceConnectionModalActions } from './__styles__/StyledServiceConnections';
 import { ServiceConnectionProviderType } from 'provider-types';
 import { AzureFormDataType, AWSFormDataType } from 'provider-types';
-import { resetIsBillingAccountsAvailable } from '../../services/redux/reducers/serviceProvidersSlice';
+import { resetIsBillingAccountsAvailable } from '../../services/redux/reducers/serviceProviderSlice';
 
 import { PollingContext } from './ServiceConnection';
 

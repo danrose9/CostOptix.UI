@@ -9,3 +9,4 @@ export { default as ERROR404 } from './404-error.png';
 export { default as BROKENPAGE } from './broken-page.png';
 export { default as HOME_BACKGROUND } from './home-background.png';
 export { default as CHECKLIST } from './checklist.png';
+export { default as SUPPORT } from './support.png';

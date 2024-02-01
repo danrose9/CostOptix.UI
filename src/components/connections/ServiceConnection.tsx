@@ -12,7 +12,7 @@ import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
 import { ServiceConnectionProviderType } from 'provider-types';
 import { useAppDispatch } from '../../services/redux/store';
-import { fetchBillingAccounts } from '../../services/redux/thunks/serviceProvidersThunk';
+import { fetchBillingAccounts } from '../../services/redux/thunks/serviceProviderThunk';
 import { IBillingAccount } from '../../types';
 
 export const PollingContext = createContext<any>(false);
