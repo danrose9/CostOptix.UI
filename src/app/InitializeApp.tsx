@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Navigate } from 'react-router-dom';
 import * as appRoutes from './router/appRoutes';
-import { useIsDemo } from '../components/hoc/withDemo';
 
 import { isAuthCookieAvailable } from '../services/api/processToken';
+import { useBillingAccountCount } from 'src/hooks/useBillingAccountCount';
+import { Spinner } from 'src/components/Loader';
 
 interface IInitializeAppProps {}
 
@@ -14,8 +15,8 @@ interface IInitializeAppProps {}
 */
 
 const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
-  console.log('initializeApp');
-  const isDemo = useIsDemo();
+  // flag to be used to set if organization has configured any billing accounts
+  const { billingAccountCount, isLoading } = useBillingAccountCount();
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
@@ -25,8 +26,18 @@ const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
     }
   }, []);
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
-    <>{isAuthenticated ? <Navigate to={appRoutes.LANDING_PAGE} state={isDemo} /> : <Navigate to={appRoutes.ROOT} />}</>
+    <>
+      {isAuthenticated ? (
+        <Navigate to={appRoutes.LANDING_PAGE} state={billingAccountCount} />
+      ) : (
+        <Navigate to={appRoutes.ROOT} />
+      )}
+    </>
   );
 };
 

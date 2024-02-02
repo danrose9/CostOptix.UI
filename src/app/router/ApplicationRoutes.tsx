@@ -79,7 +79,7 @@ export const ApplicationRoutes = () => {
         path={appRoutes.SERVICE_PROVIDERS}
         element={
           <PrivateRoute>
-            <page.ServiceConnectionPage />
+            <page.ServiceConnection />
           </PrivateRoute>
         }
       />

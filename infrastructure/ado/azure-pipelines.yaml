@@ -16,7 +16,7 @@ variables:
   kvServiceConnection: DEV KV Service Connection
   apiUrlDev: 'https://api.dev.costoptix.com'
   apiUrlProd: 'https://api.costoptix.com'
-  runE2ETests: false
+  runE2ETests: true
 
 stages:
   - stage: BuildStage

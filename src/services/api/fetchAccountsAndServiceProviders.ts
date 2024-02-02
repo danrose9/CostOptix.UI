@@ -1,4 +1,4 @@
-import { fetchServiceProviders, fetchBillingAccounts } from '../redux/thunks/serviceProvidersThunk';
+import { fetchServiceProviders, fetchBillingAccounts } from '../redux/thunks/serviceProviderThunk';
 import { fetchBillingAccountCosts } from '../redux/thunks/costDashboardThunk';
 import { addBillingAccount, setStatus } from '../redux/reducers/costDashboardSlice';
 import { AppDispatch } from 'src/services/redux/store';
