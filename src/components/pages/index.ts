@@ -4,7 +4,7 @@ export { default as Login } from './auth/Login';
 export { default as AuthResponse } from './auth/AuthResponse';
 export { default as CostDashboard } from './cost-dashboard/CostDashboard';
 export { default as Settings } from './settings/Settings';
-export { default as ServiceConnectionPage } from '../connections/ServiceConnection';
+export { default as ServiceConnection } from '../connections/ServiceConnection';
 export { default as InitializeApp } from '../../app/InitializeApp';
 export { default as LandingPage } from './auth/LandingPage';
 export { default as LogoutPage } from './LogoutPage';
