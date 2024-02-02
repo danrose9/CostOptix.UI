@@ -89,6 +89,7 @@ const AddServiceConnectionModal: FC<IProviderProps> = ({ cloudProvider }) => {
             positive={true}
             label="Add new connection"
             onClick={handleOpenInitialModal}
+            product-tour="add-connection-button"
           />
         }
       >
