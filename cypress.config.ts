@@ -3,11 +3,14 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   // projectId: 'f6noip',
   e2e: {
-    baseUrl: 'https://www.costoptix.com',
+    baseUrl: 'https://dev.costoptix.com',
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
     experimentalModifyObstructiveThirdPartyCode: true,
+    // chromeWebSecurity: true,
+    defaultCommandTimeout: 10000,
+    pageLoadTimeout: 15000,
   },
   env: {
     aad_reddogdev_username_1: 'zzz_testuser1@reddogdev.onmicrosoft.com',
