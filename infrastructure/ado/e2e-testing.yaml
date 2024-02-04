@@ -38,7 +38,7 @@ jobs:
       - script: npm run cy:verify
         displayName: 'Cypress verify'
 
-      - script: npx cypress run --env baseUrl=https://dev.costoptix.com/
+      - script: npx cypress run --browser firefox --env baseUrl=https://dev.costoptix.com/
         displayName: 'Run Cypress tests'
 
       - task: PublishTestResults@2

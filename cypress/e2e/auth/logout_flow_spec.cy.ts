@@ -1,5 +1,4 @@
 import * as appRoutes from '../../../src/app/router/appRoutes';
-import { IRootState } from '../../../src/services/redux/rootReducer';
 
 describe('Logout Flow', () => {
   beforeEach(() => {
