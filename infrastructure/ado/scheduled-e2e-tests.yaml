@@ -1,0 +1,21 @@
+schedules:
+  - cron: '0 0 * * *'
+    displayName: Daily midnight run
+    branches:
+      include:
+        - main
+    always: true
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: RunE2ETests
+    displayName: Run e2e tests
+    jobs:
+      - job: RunE2ETests
+        displayName: Run E2E Tests
+        steps:
+          - template: ./templates/e2e-testing.yaml
+            parameters:
+              url: www.costoptix.com
