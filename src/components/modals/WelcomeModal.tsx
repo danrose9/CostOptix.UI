@@ -66,7 +66,9 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ setDismissWelcomePageCallba
           <DoNotShowCheckBoxWithOutDemo />
         </ButtonWrapper>
         <ButtonWrapper>
-          <Button onClick={(e) => handleClose(false, e)}>Dismiss</Button>
+          <Button onClick={(e) => handleClose(false, e)} data-testid="dismiss-modal-button">
+            Dismiss
+          </Button>
           <Button color="green" onClick={(e) => handleClose(true, e)}>
             Begin Tour
           </Button>

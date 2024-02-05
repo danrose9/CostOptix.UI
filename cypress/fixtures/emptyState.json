@@ -1,5 +1,5 @@
 {
-  "userProfile": "{\"id\":null,\"name\":null,\"email\":null,\"organization\":{\"id\":null,\"name\":null,\"createdDate\":null,\"status\":null,\"error\":null,\"remainingLogins\":0},\"photo\":{\"image\":null,\"status\":null,\"error\":null},\"status\":null,\"isDemo\":false,\"isAuthenticated\":false}",
+  "userProfile": "{\"id\":null,\"name\":null,\"email\":null,\"organization\":{\"id\":null,\"name\":null,\"createdDate\":null,\"status\":null,\"error\":null,\"remainingLogins\":0},\"photo\":{\"image\":null,\"status\":null,\"error\":null},\"status\":null,\"isDemo\":false,\"isAuthenticated\":false,\"error\":null}",
   "azureManagement": "{\"agreementType\":null,\"subscriptions\":[],\"invoices\":[],\"status\":null}",
   "serviceProvider": "{\"isCurrencyConflict\":false,\"providers\":[],\"billingAccounts\":[],\"status\":null,\"isLoading\":true,\"isAvailable\":false,\"error\":null}",
   "costDashboard": "{\"billingAccounts\":[],\"mostExpensive\":{\"isLoading\":true,\"data\":[]},\"monthToDateCost\":{\"isLoading\":true,\"data\":[]},\"monthlySpend\":{\"isLoading\":true,\"data\":[]},\"fastestGrowing\":{\"isLoading\":true,\"data\":[]},\"updatedCount\":0,\"count\":0,\"isComplete\":false,\"lastUpdated\":null,\"currency\":null,\"isLoading\":true,\"status\":null,\"error\":null}",
