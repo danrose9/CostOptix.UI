@@ -14,8 +14,7 @@ variables:
 
 stages:
   - stage: RunE2ETests
-    displayName: Run Dev E2E Tests
-    dependsOn: DeployDevStage
+    displayName: Run e2e tests
     condition: and(succeeded(), eq(variables.isPullRequest, 'false'), eq(variables.runE2ETests, 'true'))
     jobs:
       - job: RunE2ETests
