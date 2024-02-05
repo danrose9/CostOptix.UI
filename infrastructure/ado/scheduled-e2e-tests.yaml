@@ -9,13 +9,9 @@ schedules:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  runE2ETests: true
-
 stages:
   - stage: RunE2ETests
     displayName: Run e2e tests
-    condition: and(succeeded(), eq(variables.isPullRequest, 'false'), eq(variables.runE2ETests, 'true'))
     jobs:
       - job: RunE2ETests
         displayName: Run E2E Tests

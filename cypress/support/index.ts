@@ -5,6 +5,7 @@ declare global {
     interface Chainable {
       logout(): Chainable<void>;
       purgeSession(): Chainable<void>;
+      dismissWelcomeModal(): Chainable<void>;
       loginToAAD(email: string, password: string): Chainable<void>;
       login(username: string, password: string): Chainable<void>;
       deleteOrganization(organization: string): Chainable<void>;

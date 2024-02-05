@@ -88,7 +88,7 @@ Cypress.Commands.add('login', (username: string, password: string) => {
   cy.loginToAAD(username, password);
 
   // Dismiss welcome message
-  cy.get('.actions > :nth-child(2) > :nth-child(1)').click();
+  cy.dismissWelcomeModal();
 
   // Redirect to Service Providers page as there are no billing accounts
   cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.SERVICE_PROVIDERS}`);
@@ -110,6 +110,8 @@ Cypress.Commands.add('logout', () => {
   cy.get('[data-testid="logout-button"]').click();
   cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.HOME}`);
 
+  cy.purgeSession();
+  cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.ROOT}`);
   log.snapshot('after');
   log.end();
 });
