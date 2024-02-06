@@ -1,16 +1,16 @@
 import React from 'react';
 import PageWrapper from './PageWrapper';
 import styled from 'styled-components';
-import { Search, Segment, Icon, Grid, Image } from 'semantic-ui-react';
+import { Segment, Icon, Image } from 'semantic-ui-react';
 import * as images from '../../assets';
 import { FONT } from '../../app/constants/index';
 
-const StyledSearchInput = styled(Search)`
-  padding: 0 2em;
-  &.ui.search .prompt {
-    border-radius: unset !important;
-  }
-`;
+// const StyledSearchInput = styled(Search)`
+//   padding: 0 2em;
+//   &.ui.search .prompt {
+//     border-radius: unset !important;
+//   }
+// `;
 
 const PageSection = styled(Segment)`
   // text-align: center;
@@ -40,93 +40,43 @@ const Title = styled.h1`
   padding: 0.5em 0;
 `;
 
+const SupportHeaderSection = styled.div`
+  padding: 1em 3em;
+`;
+
+const SupportHeaderContent = styled.div`
+  padding: 4em 0;
+  display: flex;
+  align-items: center;
+  p {
+    padding: 0 2em;
+  }
+`;
+
 export const HelpPage = () => {
   return (
     <PageWrapper>
       <PageSection>
-        <div style={{ padding: '1em 3em' }}>
+        <SupportHeaderSection>
           <div>
             <Title>How can we help?</Title>
             <p>Want to get in touch? We'd love to hear from you. Here's is how you can reach us..</p>
           </div>
-          <div style={{ padding: '2em 0', display: 'flex', alignItems: 'center' }}>
+          <SupportHeaderContent>
             <StyledIcon name="talk" />
-            <p style={{ padding: '0 2em' }}>
+            <p>
               Get in contact at <a href="mailto:support@ddiware.com">support@ddiware.com</a>
             </p>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          </SupportHeaderContent>
+          {/* <div style={{ display: 'flex', alignItems: 'center' }}>
             <StyledIcon name="search" />
             <StyledSearchInput size="large" placeholder="Search support articles.." fluid />
-          </div>
-        </div>
+          </div> */}
+        </SupportHeaderSection>
         <div>
           <StyledImage src={images.SUPPORT} />
         </div>
       </PageSection>
-      <Segment>
-        <Grid columns={3} divided>
-          <Grid.Row>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-            <Grid.Column>
-              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
     </PageWrapper>
   );
 };
