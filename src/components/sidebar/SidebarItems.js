@@ -144,14 +144,6 @@ export const menuItems = [
   //   ],
   // },
   {
-    title: 'Help',
-    path: appRoutes.HELP_PAGE,
-    icon: 'help',
-    active: false,
-    dev: true,
-    extra: true,
-  },
-  {
     title: 'Test Page',
     path: appRoutes.TEST_PAGE,
     icon: 'box',
@@ -163,6 +155,13 @@ export const menuItems = [
     title: 'Service Connections',
     path: appRoutes.SERVICE_PROVIDERS,
     icon: 'handshake outline',
+    active: true,
+    extra: true,
+  },
+  {
+    title: 'Support',
+    path: appRoutes.HELP_PAGE,
+    icon: 'help',
     active: true,
     extra: true,
   },

@@ -6,9 +6,7 @@ export const AWSPolicy = `{
           "Effect": "Allow",
           "Action": [
               "ce:GetCostAndUsageWithResources",
-              "ce:GetCostAndUsage",
               "ce:GetCostForecast",
-              "tag:GetResources",
               "ec2:DescribeInstances"
           ],
           "Resource": "*"
