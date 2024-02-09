@@ -15,6 +15,7 @@ import HomePageNav from '../navbar/HomePageNav';
 import { AppDispatch } from 'src/services/redux/store';
 import { useDispatch } from 'react-redux';
 import { setIsDemo } from '../../services/redux/reducers/userProfileSlice';
+import CookieBanner from '../CookieBanner';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ export const HomePage = () => {
               </form>
             </HomePageActions>
           </HomePageMainLeft>
+          <CookieBanner />
         </HomePageMainContent>
       </PageContainer>
     </>
