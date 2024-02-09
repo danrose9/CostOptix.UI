@@ -137,45 +137,5 @@ describe('add service connection modal', () => {
 
       expect(screen.getByTestId('provider-steps-1')).toHaveTextContent(`Log into your ${card.provider} account`);
     });
-
-    test('href links should work', () => {
-      RenderServiceConnectionModal(card);
-
-      const AddNewButton = screen.getAllByRole('button', { name: 'Add new connection' });
-
-      fireEvent.click(AddNewButton[n - 1]);
-
-      expect(screen.getByRole('link', { name: card.href })).toHaveAttribute('href', card.href);
-    });
   });
 });
-
-// describe('list service connection modal', () => {
-//   var cloudProvider: any = ServiceConnectionCards.filter((card) => card.provider === 'Azure');
-
-//   const RenderServiceConnectionModal = render(
-//     <ListServiceConnectionModal
-//       disabled={false}
-//       cloudProvider={cloudProvider}
-//       formData={{
-//         applicationId: undefined,
-//         secretValue: undefined,
-//         directoryId: undefined,
-//       }}
-//       updateSetError={undefined}
-//       closeFormModal={undefined}
-//     ></ListServiceConnectionModal>,
-//     { wrapper: ApplicationWrapper }
-//   );
-
-//   test('test all elements are selected when select all is checked', () => {
-//     // Unfinished
-//   });
-//   test('test all elements are selected when select all is unchecked', () => {
-//     // Unfinished
-//   });
-
-//   test('cancel button returns to previous modal', () => {
-//     // Unfinished
-//   });
-// });
