@@ -82,7 +82,7 @@ export const menuItems = [
     extra: false,
   },
   {
-    title: 'Resource View',
+    title: 'Resource List',
     path: appRoutes.RESOURCES,
     icon: 'desktop',
     active: true,

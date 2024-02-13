@@ -9,13 +9,13 @@ import {
   HomePageSubTitle,
   HomePageActions,
   HomePageButton,
-} from '../__styles__/HomePageStyles';
-import { BASE, DEMO_LOGIN } from '../../services/api/apiEndpoints';
-import HomePageNav from '../navbar/HomePageNav';
+} from '../../__styles__/HomePageStyles';
+import { BASE, DEMO_LOGIN } from '../../../services/api/apiEndpoints';
+import HomePageNav from './HomePageNav';
 import { AppDispatch } from 'src/services/redux/store';
 import { useDispatch } from 'react-redux';
-import { setIsDemo } from '../../services/redux/reducers/userProfileSlice';
-import CookieBanner from '../CookieBanner';
+import { setIsDemo } from '../../../services/redux/reducers/userProfileSlice';
+import CookieBanner from '../../CookieBanner';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
