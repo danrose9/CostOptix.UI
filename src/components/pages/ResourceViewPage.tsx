@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import DefaultTable from '../tables/DefaultTable';
 import PageWrapper from './PageWrapper';
-import ResourcesTable from './resource-view/ResourceTable';
+import ResourcesTable from '../resources/ResourceTable';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { IRootState } from '../../services/redux/rootReducer';
@@ -9,7 +9,7 @@ import SearchResources from '../search/SearchResources';
 import { PaginationProvider } from '../tables/PaginationContext';
 import { useIsDemo } from '../hoc/withDemo';
 
-const ResourceView = () => {
+const ResourceViewPage = () => {
   const resources = useSelector((state: IRootState) => state[reduxState.RESOURCES]);
   const [exportToCSV, setExportToCSV] = useState<boolean>(false);
   const isDemo = useIsDemo();
@@ -27,7 +27,7 @@ const ResourceView = () => {
 
   return (
     <PaginationProvider>
-      <PageWrapper title={'Resource View'}>
+      <PageWrapper title={'Resource List'}>
         <DefaultTable
           title="Resources"
           description="A complete list of all resources across each of your service providers."
@@ -51,4 +51,4 @@ const ResourceView = () => {
   );
 };
 
-export default ResourceView;
+export default ResourceViewPage;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, LineChart } from 'recharts';
 import { Segment } from 'semantic-ui-react';
-import { formatDate } from '../../../utils/helper';
+import { formatDate } from '../../utils/helper';
 
 export const ResourceViewChart = (props) => {
   return (

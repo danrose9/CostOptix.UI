@@ -34,7 +34,7 @@ const resourceCards = [
 const Resource: React.FunctionComponent<IResourceProps> = (props) => {
   const { data, isLoading, isAvailable } = useSelector((state: IRootState) => state[reduxState.RESOURCES]).view;
   return (
-    <PageWrapper title={'Resource View'}>
+    <PageWrapper title={'Resource List'}>
       {data.length === 0 ? null : (
         <>
           <Grid data-testid="resource-view">

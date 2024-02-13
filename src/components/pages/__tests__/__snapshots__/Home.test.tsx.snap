@@ -2,7 +2,7 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-jSUZER cuqPKr home-page"
+  className="ui fluid container sc-gKPRtg iWFFr home-page"
   data-testid="homePage-2"
 >
   <div
@@ -29,7 +29,18 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-eDWCr iWyJuu login"
+          className="sc-bqWxrE hNCPDN transparent shift-right"
+          data-testid="support-button"
+          onClick={[Function]}
+          role="button"
+        >
+          Support
+        </button>
+        <div
+          className="sc-dkrFOg eMptMp"
+        />
+        <button
+          className="sc-bqWxrE hNCPDN login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -37,7 +48,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-eDWCr iWyJuu get-started"
+          className="sc-bqWxrE hNCPDN get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -48,38 +59,38 @@ exports[`Home Page matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-gKPRtg ipIhgG"
+    className="sc-iBYQkv jooilV"
   >
     <div
-      className="sc-pyfCe icIUxe"
+      className="sc-jrcTuL hLMccN"
     >
       <div
-        className="sc-jrcTuL fTYTOQ"
+        className="sc-kDvujY gQAjHp"
       >
         <h1
-          className="sc-iBYQkv bxfgkn"
+          className="sc-ftTHYK gWWCN"
         >
           Reduce Your Cloud Spending Costs Effectively with CostOptix
         </h1>
       </div>
       <div
-        className="sc-kDvujY kLRbAF"
+        className="sc-ipEyDJ chZxhh"
       >
         <p
-          className="sc-ftTHYK fyfblt"
+          className="sc-pyfCe cVTGik"
         >
           A powerful and insightful software suite to explore, understand and take action on cloud services spending
         </p>
       </div>
       <div
-        className="sc-ipEyDJ gBsYSR"
+        className="sc-csuSiG dfAsey"
       >
         <form
           action="undefinedAccount/DemoLogin?returnUrl=/init"
           method="POST"
         >
           <button
-            className="sc-eDWCr iWyJuu view-demo"
+            className="sc-bqWxrE hNCPDN view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >

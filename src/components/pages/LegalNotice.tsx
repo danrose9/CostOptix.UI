@@ -2,7 +2,7 @@ import React from 'react';
 import { PageContainer, HomePageMainContent } from '../__styles__/HomePageStyles';
 import { Header, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
-import HomePageNav from '../navbar/HomePageNav';
+import HomePageNav from './homepage/HomePageNav';
 
 const StyledDiv = styled.div`
   line-height: 1.5em;
