@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import PageWrapper from '../PageWrapper';
+import PageWrapper from '../pages/PageWrapper';
 import { useLocation } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
-import { Spinner } from '../../Loader';
-import { DashboardCard } from '../../index';
+import { Spinner } from '../Loader';
+import { DashboardCard } from '../index';
 import ResourceViewChart from './ResourceViewChart';
-import ResourceViewTable from './ResourceViewTable';
+import ResourceProfile from './ResourceProfile';
 import ResourceViewChartData from './ResourceViewChartData';
 import { useDispatch, useSelector } from 'react-redux';
-import { FETCH_RESOURCES } from '../../../services/redux/thunks/resourceThunk';
-import { reduxState } from '../../../services/redux/reduxState';
-import { currencySymbol } from '../../../utils/helper';
-import { DashboardCardGroup } from '../../__styles__/CardStyles';
+import { FETCH_RESOURCES } from '../../services/redux/thunks/resourceThunk';
+import { reduxState } from '../../services/redux/reduxState';
+import { currencySymbol } from '../../utils/helper';
+import { DashboardCardGroup } from '../__styles__/CardStyles';
+import { formatGrowthValue } from '../../utils/valueFormatter';
 
 const dashboardCards = [
   {
@@ -56,7 +57,7 @@ export const ResourceView = () => {
                       if (card.icon === 'dollar sign') {
                         return currencySymbol(data.currency) + data[card.value];
                       } else if (card.icon === 'percent') {
-                        return data[card.value] + '%';
+                        return formatGrowthValue(data[card.value]);
                       }
                     };
 
@@ -76,7 +77,7 @@ export const ResourceView = () => {
             </Grid>
             <Grid columns="equal">
               <Grid.Column floated="left" width={6}>
-                <ResourceViewTable data={data} />
+                <ResourceProfile data={data} />
               </Grid.Column>
               <Grid.Column floated="right" width={10}>
                 <ResourceViewChart content={data.monthlySpend} />
@@ -95,7 +96,7 @@ export const ResourceView = () => {
     }
   }, [dispatch, args, isAvailable]);
 
-  return <PageWrapper title="Resource View">{isLoading ? <Spinner /> : <RenderView />}</PageWrapper>;
+  return <PageWrapper title="Resource List">{isLoading ? <Spinner /> : <RenderView />}</PageWrapper>;
 };
 
 export default ResourceView;

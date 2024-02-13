@@ -88,6 +88,19 @@ export const HomePageButton = styled.button`
   align-items: center;
   border: none;
   
+  &.transparent {
+    background-color: transparent;
+    color: ${COLORS.BUTTONS.PRIMARY};
+    border: none;
+    &:hover {
+      color: ${COLORS.BUTTONS.PRIMARY_HIGHLIGHT};
+    }
+  }
+
+  &.shift-right {
+    padding: 0.9em;
+  }
+
   &.get-started {
     background-color: ${COLORS.BUTTONS.POSITIVE};
     color: ${COLORS.WHITE};

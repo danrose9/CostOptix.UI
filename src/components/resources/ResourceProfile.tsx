@@ -1,7 +1,13 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
+import { IResource } from 'src/types/resource-types';
 
-const resourceData = [
+interface ResourceDataItem {
+  title: string;
+  value: keyof IResource;
+}
+
+const resourceData: ResourceDataItem[] = [
   {
     title: 'Resource Name',
     value: 'resourceName',
@@ -32,7 +38,11 @@ const resourceData = [
   },
 ];
 
-export const ResourceViewTable = ({ data }) => {
+interface ResourceProfileProps {
+  data: IResource;
+}
+
+export const ResourceProfile: React.FC<ResourceProfileProps> = ({ data }) => {
   return (
     <Table celled color="olive">
       <Table.Body>
@@ -40,7 +50,7 @@ export const ResourceViewTable = ({ data }) => {
           return (
             <Table.Row key={index}>
               <Table.Cell singleLine>{item.title}</Table.Cell>
-              <Table.Cell>{data[item.value]}</Table.Cell>
+              <Table.Cell>{String(data[item.value])}</Table.Cell>
             </Table.Row>
           );
         })}
@@ -49,4 +59,4 @@ export const ResourceViewTable = ({ data }) => {
   );
 };
 
-export default ResourceViewTable;
+export default ResourceProfile;

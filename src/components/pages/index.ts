@@ -1,4 +1,4 @@
-export { default as Home } from './HomePage';
+export { default as Home } from './homepage/HomePage';
 export { default as Signup } from './auth/Signup';
 export { default as Login } from './auth/Login';
 export { default as AuthResponse } from './auth/AuthResponse';
@@ -9,8 +9,8 @@ export { default as InitializeApp } from '../../app/InitializeApp';
 export { default as LandingPage } from './auth/LandingPage';
 export { default as LogoutPage } from './LogoutPage';
 export { default as SessionExpired } from './SessionExpired';
-export { default as ResourceList } from './ResourceView';
-export { default as ResourceView } from './resource-view/ResourceView';
+export { default as ResourceList } from './ResourceViewPage';
+export { default as ResourceView } from '../resources/ResourceView';
 export { default as PageNotFound404 } from './PageNotFound404';
 export { default as DefaultErrorPage } from './ErrorDefault';
 export { default as HelpPage } from './HelpPage';

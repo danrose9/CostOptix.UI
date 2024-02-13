@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import HomePage from '../HomePage';
+import HomePage from '../homepage/HomePage';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ApplicationWrapper } from '../../../tests/helpers';

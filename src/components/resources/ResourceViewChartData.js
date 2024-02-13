@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import getSymbolFromCurrency from 'currency-symbol-map';
-import { formatDateFull } from '../../../utils/helper';
+import { formatDateFull } from '../../utils/helper';
 
 export const ResourceViewChartData = ({ data }) => {
   const currencySymbol = getSymbolFromCurrency(data.currency);

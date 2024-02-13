@@ -1,9 +1,9 @@
 import React from 'react';
-import { HomePageButton } from '../__styles__/HomePageStyles';
-import { Image, Menu } from 'semantic-ui-react';
-import * as images from '../../assets/index';
+import { HomePageButton } from '../../__styles__/HomePageStyles';
+import { Image, Menu, Divider } from 'semantic-ui-react';
+import * as images from '../../../assets/index';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../app/router/appRoutes';
+import * as appRoutes from '../../../app/router/appRoutes';
 import styled from 'styled-components';
 
 const Navbar = styled.div`
@@ -20,6 +20,10 @@ const Navbar = styled.div`
 
 const ImageWrapper = styled.div`
   cursor: pointer;
+`;
+
+const HomePageNavDivider = styled.div`
+  border-left: 2px solid #ccc;
 `;
 
 interface INavbarProps {
@@ -42,14 +46,18 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
               <Image src={images.LOGOBLUE} size="medium" onClick={() => handleOnClick(appRoutes.ROOT)} />
             </ImageWrapper>
           </Menu.Item>
+
           <Menu.Menu position="right">
-            {/* <MenuItem>
-              <Dropdown simple text="Contact">
-                <Dropdown.Menu>
-                  <Dropdown.Item>English</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </MenuItem> */}
+            <HomePageButton
+              className="transparent shift-right"
+              onClick={() => handleOnClick(appRoutes.LOGIN)}
+              role="button"
+              data-testid="support-button"
+            >
+              Support
+            </HomePageButton>
+            <HomePageNavDivider />
+
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}

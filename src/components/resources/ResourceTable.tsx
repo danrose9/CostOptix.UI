@@ -2,12 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Header, Table } from 'semantic-ui-react';
-import { ProviderImage } from '../../ProviderImage';
-import { StyledTableRow } from '../../tables/DefaultTableStyles';
-import { IResource } from '../../../types/resource-types';
-import { AppDispatch } from '../../../services/redux/store';
-import { RESET_ISAVAILABLE } from '../../../services/redux/reducers/resourceSlice';
-import * as appRoutes from '../../../app/router/appRoutes';
+import { ProviderImage } from '../ProviderImage';
+import { StyledTableRow } from '../tables/DefaultTableStyles';
+import { IResource } from '../../types/resource-types';
+import { AppDispatch } from '../../services/redux/store';
+import { RESET_ISAVAILABLE } from '../../services/redux/reducers/resourceSlice';
+import * as appRoutes from '../../app/router/appRoutes';
+import { formatGrowthValue, formatCurrencyValue } from 'src/utils/valueFormatter';
+import getSymbolFromCurrency from 'currency-symbol-map';
 
 interface ISearchResults {
   map: any;
@@ -41,6 +43,10 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
 
         <Table.Body>
           {searchResults?.map((resource: IResource, index: React.Key | null | undefined) => {
+            const convertedCurrencySymbol = getSymbolFromCurrency(resource.currency);
+            const growth30Day = formatGrowthValue(resource.growth30Day);
+            const amount30Day = formatCurrencyValue(resource.amount30Day, convertedCurrencySymbol);
+
             return (
               <Table.Row
                 as={StyledTableRow}
@@ -63,8 +69,8 @@ const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
                     </Header.Content>
                   </Header>
                 </Table.Cell>
-                <Table.Cell textAlign="right">{resource.growth30Day}%</Table.Cell>
-                <Table.Cell textAlign="right">{resource.amount30Day}</Table.Cell>
+                <Table.Cell textAlign="right">{growth30Day}</Table.Cell>
+                <Table.Cell textAlign="right">{amount30Day}</Table.Cell>
               </Table.Row>
             );
           })}
