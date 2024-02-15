@@ -13,6 +13,7 @@ export const COLORS = {
     PRIMARY_HIGHLIGHT: '#104268',
     POSITIVE: '#21BA45',
     POSITIVE_HIGHLIGHT: '#1A9437',
+    BORDER: '#C4C4C4',
   },
 };
 

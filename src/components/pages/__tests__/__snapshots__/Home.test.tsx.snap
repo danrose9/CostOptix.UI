@@ -2,11 +2,11 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-gKPRtg iWFFr home-page"
+  className="ui fluid container sc-ftTHYK cHWSdq home-page"
   data-testid="homePage-2"
 >
   <div
-    className="sc-bcXHqe cmhGCi"
+    className="sc-hLBbgP dFDHev"
   >
     <div
       className="ui green fluid secondary menu"
@@ -16,7 +16,7 @@ exports[`Home Page matches snapshot 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-gswNZR loKfof"
+          className="sc-eDvSVe gTUNTl"
         >
           <img
             className="ui medium image"
@@ -29,18 +29,60 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-bqWxrE hNCPDN transparent shift-right"
+          className="sc-hBxehG bViUOI transparent shift-right"
           data-testid="support-button"
           onClick={[Function]}
           role="button"
         >
-          Support
+          Help Centre
         </button>
         <div
-          className="sc-dkrFOg eMptMp"
-        />
+          aria-expanded={false}
+          className="ui simple dropdown sc-bcXHqe kzsyIS"
+          data-testid="dropdown"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="listbox"
+          tabIndex={0}
+        >
+          <div
+            aria-atomic={true}
+            aria-live="polite"
+            className="divider text"
+            role="alert"
+          >
+            Legal
+          </div>
+          <i
+            aria-hidden="true"
+            className="dropdown icon"
+            onClick={[Function]}
+          />
+          <div
+            className="menu transition sc-gswNZR eulPVq"
+          >
+            <div
+              className="item sc-dkrFOg iWHbYH"
+              onClick={[Function]}
+              role="option"
+            >
+              Privacy
+            </div>
+            <div
+              className="item sc-dkrFOg iWHbYH"
+              onClick={[Function]}
+              role="option"
+            >
+              Terms of Service
+            </div>
+          </div>
+        </div>
         <button
-          className="sc-bqWxrE hNCPDN login"
+          className="sc-hBxehG bViUOI login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -48,7 +90,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-bqWxrE hNCPDN get-started"
+          className="sc-hBxehG bViUOI get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -59,38 +101,38 @@ exports[`Home Page matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-iBYQkv jooilV"
+    className="sc-pyfCe kKPFa"
   >
     <div
-      className="sc-jrcTuL hLMccN"
+      className="sc-ipEyDJ eaZUbE"
     >
       <div
-        className="sc-kDvujY gQAjHp"
+        className="sc-csuSiG hrYaiu"
       >
         <h1
-          className="sc-ftTHYK gWWCN"
+          className="sc-jrcTuL hjSAun"
         >
           Reduce Your Cloud Spending Costs Effectively with CostOptix
         </h1>
       </div>
       <div
-        className="sc-ipEyDJ chZxhh"
+        className="sc-eDWCr iWmlnB"
       >
         <p
-          className="sc-pyfCe cVTGik"
+          className="sc-kDvujY UufDO"
         >
           A powerful and insightful software suite to explore, understand and take action on cloud services spending
         </p>
       </div>
       <div
-        className="sc-csuSiG dfAsey"
+        className="sc-bqWxrE iqHtSB"
       >
         <form
           action="undefinedAccount/DemoLogin?returnUrl=/init"
           method="POST"
         >
           <button
-            className="sc-bqWxrE hNCPDN view-demo"
+            className="sc-hBxehG bViUOI view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >

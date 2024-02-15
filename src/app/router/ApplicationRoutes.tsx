@@ -14,6 +14,8 @@ export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.SIGNUP,
   appRoutes.NOT_FOUND_404_PAGE,
   appRoutes.DEFAULT_ERROR_PAGE,
+  appRoutes.TERMS,
+  appRoutes.PRIVACY,
 ];
 
 export const ApplicationRoutes = () => {
