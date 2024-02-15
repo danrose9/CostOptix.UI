@@ -119,7 +119,7 @@ export const HomePageButton = styled.button`
   }
 
   &.login {
-    border: 1px solid #C4C4C4;
+    border: 1px solid ${COLORS.BUTTONS.BORDER};
     color: ${COLORS.BUTTONS.PRIMARY};
     
     &:hover {

@@ -1,10 +1,13 @@
 import React from 'react';
 import { HomePageButton } from '../../__styles__/HomePageStyles';
-import { Image, Menu, Divider } from 'semantic-ui-react';
+import { Image, Menu } from 'semantic-ui-react';
 import * as images from '../../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import styled from 'styled-components';
+import { COLORS } from 'src/app/constants';
+import { Dropdown } from 'src/components/menus/Dropdown';
+import { HomePageDropdownItems } from './HomePageDropdownItems';
 
 const Navbar = styled.div`
   height: 10%;
@@ -14,16 +17,12 @@ const Navbar = styled.div`
   padding: 0 30px;
 
   &.nav-border {
-    border-bottom: 2px solid #c2e2fa;
+    border-bottom: 2px solid ${COLORS.SECONDARY};
   }
 `;
 
 const ImageWrapper = styled.div`
   cursor: pointer;
-`;
-
-const HomePageNavDivider = styled.div`
-  border-left: 2px solid #ccc;
 `;
 
 interface INavbarProps {
@@ -39,7 +38,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
 
   return (
     <>
-      <Navbar className={className}>
+      <Navbar>
         <Menu fluid secondary color="green">
           <Menu.Item>
             <ImageWrapper>
@@ -54,10 +53,9 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
               role="button"
               data-testid="support-button"
             >
-              Support
+              Help Centre
             </HomePageButton>
-            <HomePageNavDivider />
-
+            <Dropdown dropdownName="Legal" children={<HomePageDropdownItems />} />
             <HomePageButton
               className="login"
               onClick={() => handleOnClick(appRoutes.LOGIN)}
