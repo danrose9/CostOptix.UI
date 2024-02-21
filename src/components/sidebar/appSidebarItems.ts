@@ -1,13 +1,14 @@
 import * as appRoutes from '../../app/router/appRoutes';
 import { targets } from '../productTour/defaultTourSteps';
+import { ISidebarItem } from 'src/types/menu-types';
 
-export const menuItems = [
+export const appSidebarItems: ISidebarItem[] = [
   {
     title: 'Dashboards',
     icon: 'icon home',
     active: false,
     extra: false,
-    submenu: [
+    items: [
       {
         title: 'Default',
         path: appRoutes.DEFAULT_DASHBOARD,
@@ -28,7 +29,7 @@ export const menuItems = [
     icon: 'cloud',
     active: false,
     extra: false,
-    submenu: [
+    items: [
       {
         title: 'Azure',
         path: appRoutes.HOME,
@@ -102,7 +103,7 @@ export const menuItems = [
     active: false,
     dev: true,
     extra: false,
-    submenu: [
+    items: [
       {
         title: 'Maintenance',
         path: appRoutes.MAINTENANCE_PAGE,
@@ -123,26 +124,6 @@ export const menuItems = [
       },
     ],
   },
-
-  // {
-  //   title: 'Components',
-  //   icon: 'cogs',
-  //   active: false,
-  //   dev: true,
-  //   extra: false,
-  //   submenu: [
-  //     {
-  //       title: 'Transition',
-  //       path: appRoutes.TRANSITION,
-  //       active: false,
-  //     },
-  //     {
-  //       title: 'Query Filter',
-  //       path: appRoutes.QUERYFILTER,
-  //       active: false,
-  //     },
-  //   ],
-  // },
   {
     title: 'Test Page',
     path: appRoutes.TEST_PAGE,

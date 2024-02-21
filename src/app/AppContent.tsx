@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as appRoutes from './router/appRoutes';
 import { Container, MainPage, Main, ApplicationFooter } from '../styles/AppContent';
 import Navbar from '../components/navbar/Navbar';
-import { Sidebar } from '../components/sidebar/Sidebar';
+import AppSidebar from '../components/sidebar/AppSidebar';
 import ApplicationRoutes, { HIDE_NAV_SIDEBAR_ROUTES } from './router/ApplicationRoutes';
 import { useIdleTimer } from 'react-idle-timer';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -71,7 +71,7 @@ export const AppContent = () => {
       >
         <Tour shouldStart={startTour} tourType={'default'} />
         <Container>
-          {!shouldHideNavSidebar && <Sidebar sidebarState={sidebarState} />}
+          {!shouldHideNavSidebar && <AppSidebar sidebarState={sidebarState} />}
           <Main>
             {!shouldHideNavSidebar && <Navbar onClick={showSidebar} />}
             <MainPage>
