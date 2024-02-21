@@ -49,7 +49,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
           <Menu.Menu position="right">
             <HomePageButton
               className="transparent shift-right"
-              onClick={() => handleOnClick(appRoutes.LOGIN)}
+              onClick={() => handleOnClick(appRoutes.HELP_CENTRE)}
               role="button"
               data-testid="support-button"
             >
