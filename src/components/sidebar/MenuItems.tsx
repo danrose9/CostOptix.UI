@@ -4,19 +4,27 @@ import { StyledMenuItem, StyledSpan, SubMenuDropdown } from './__styles__/Styled
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 
-const MenuItems = ({ items }) => {
+interface IMenuItemsProps {
+  items: any;
+  showIcon?: boolean;
+  className?: string;
+}
+
+const MenuItems: React.FC<IMenuItemsProps> = ({ items, showIcon, className }) => {
   const [dropdown, setDropdown] = useState(false);
 
-  let ref = useRef();
+  let ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handler = (event) => {
-      if (dropdown && ref.current && !ref.current.contains(event.target)) {
+    const handler = (event: MouseEvent | TouchEvent) => {
+      if (dropdown && ref.current && ref.current.contains(event.target as Node)) {
         setDropdown(false);
       }
     };
+
     document.addEventListener('mousedown', handler);
     document.addEventListener('touchstart', handler);
+
     return () => {
       // Cleanup the event listener
       document.removeEventListener('mousedown', handler);
@@ -25,20 +33,20 @@ const MenuItems = ({ items }) => {
   }, [dropdown]);
 
   return (
-    <StyledMenuItem className="menu-items" ref={ref}>
-      {items.submenu ? (
+    <StyledMenuItem className={className}>
+      {items.items ? (
         <>
           <button onClick={() => setDropdown((prev) => !prev)}>
-            <Icon className={items.icon}></Icon>
-            <StyledSpan>{items.title}</StyledSpan>
+            {showIcon ? <Icon className={items.icon}></Icon> : null}
+            <StyledSpan className={className}>{items.title}</StyledSpan>
             <SubMenuDropdown name="angle down" />
           </button>
-          <SubMenuItems submenuItems={items.submenu} dropdown={dropdown} />
+          <SubMenuItems submenuItems={items.items} dropdown={dropdown} className={className} />
         </>
       ) : (
         <>
           <Link to={items.path}>
-            <Icon className={items.icon}></Icon>
+            {showIcon ? <Icon className={items.icon}></Icon> : null}
             <StyledSpan id={items.id}>{items.title}</StyledSpan>
           </Link>
         </>

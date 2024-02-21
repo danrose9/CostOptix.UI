@@ -16,6 +16,7 @@ export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.DEFAULT_ERROR_PAGE,
   appRoutes.TERMS,
   appRoutes.PRIVACY,
+  appRoutes.HELP_CENTRE,
 ];
 
 export const ApplicationRoutes = () => {
@@ -37,6 +38,7 @@ export const ApplicationRoutes = () => {
       />
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
+      <Route path={appRoutes.HELP_CENTRE} element={<page.HelpCentre />} />
       <Route
         path={appRoutes.LOGOUT}
         element={

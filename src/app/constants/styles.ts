@@ -4,8 +4,9 @@ export const COLORS = {
   TERNARY: '#BBC09F',
   HIGHLIGHT: '#DEB35B',
   LOWLIGHT: '#E4CCD9',
-  BACKGROUND: '#F5F5F5',
+  BACKGROUND: '#E9F9F7',
   WHITE: '#FFFFFF',
+  OFFWHITE: '#FAEBD7',
   //   ERROR: '#e74c3c',
   //   SUCCESS: '#2ecc71',
   BUTTONS: {
@@ -20,7 +21,8 @@ export const COLORS = {
 export const FONT = {
   PRIMARY_COLOR: '#495058',
   SECONDARY_COLOR: '#696969',
-  TERNARY_COLOR: '#92989E',
+  TERNARY_COLOR: '#A9A9A9',
+  TERNANY_HOVER: '#F2F2F2',
   WHITE: '#FFFFFF',
   STAT: '#1678C2',
 };
