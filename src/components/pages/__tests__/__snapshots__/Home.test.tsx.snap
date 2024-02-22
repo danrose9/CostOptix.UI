@@ -2,11 +2,11 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-ftTHYK cHWSdq home-page"
+  className="ui fluid container sc-bcXHqe jozkMD home-page"
   data-testid="homePage-2"
 >
   <div
-    className="sc-hLBbgP dFDHev"
+    className="sc-csuSiG ecoRFI"
   >
     <div
       className="ui green fluid secondary menu"
@@ -16,7 +16,7 @@ exports[`Home Page matches snapshot 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-eDvSVe gTUNTl"
+          className="sc-eDWCr gvCYGp"
         >
           <img
             className="ui medium image"
@@ -29,7 +29,7 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-hBxehG bViUOI transparent shift-right"
+          className="sc-pyfCe VwDhx transparent shift-right"
           data-testid="support-button"
           onClick={[Function]}
           role="button"
@@ -38,7 +38,7 @@ exports[`Home Page matches snapshot 1`] = `
         </button>
         <div
           aria-expanded={false}
-          className="ui simple dropdown sc-bcXHqe kzsyIS"
+          className="ui simple dropdown sc-jrcTuL jgjMzt"
           data-testid="dropdown"
           onBlur={[Function]}
           onChange={[Function]}
@@ -63,17 +63,17 @@ exports[`Home Page matches snapshot 1`] = `
             onClick={[Function]}
           />
           <div
-            className="menu transition sc-gswNZR eulPVq"
+            className="menu transition sc-kDvujY iQtuLY"
           >
             <div
-              className="item sc-dkrFOg iWHbYH"
+              className="item sc-ipEyDJ hiVSlf"
               onClick={[Function]}
               role="option"
             >
               Privacy
             </div>
             <div
-              className="item sc-dkrFOg iWHbYH"
+              className="item sc-ipEyDJ hiVSlf"
               onClick={[Function]}
               role="option"
             >
@@ -82,7 +82,7 @@ exports[`Home Page matches snapshot 1`] = `
           </div>
         </div>
         <button
-          className="sc-hBxehG bViUOI login"
+          className="sc-pyfCe VwDhx login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -90,7 +90,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-hBxehG bViUOI get-started"
+          className="sc-pyfCe VwDhx get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -101,38 +101,38 @@ exports[`Home Page matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-pyfCe kKPFa"
+    className="sc-gswNZR gisqCa"
   >
     <div
-      className="sc-ipEyDJ eaZUbE"
+      className="sc-eDvSVe koGCqo"
     >
       <div
-        className="sc-csuSiG hrYaiu"
+        className="sc-jSUZER eQeuXz"
       >
         <h1
-          className="sc-jrcTuL hjSAun"
+          className="sc-dkrFOg ecqxDK"
         >
           Reduce Your Cloud Spending Costs Effectively with CostOptix
         </h1>
       </div>
       <div
-        className="sc-eDWCr iWmlnB"
+        className="sc-gKPRtg cIPwTr"
       >
         <p
-          className="sc-kDvujY UufDO"
+          className="sc-hLBbgP ffLNhu"
         >
           A powerful and insightful software suite to explore, understand and take action on cloud services spending
         </p>
       </div>
       <div
-        className="sc-bqWxrE iqHtSB"
+        className="sc-iBYQkv hDEynk"
       >
         <form
           action="undefinedAccount/DemoLogin?returnUrl=/init"
           method="POST"
         >
           <button
-            className="sc-hBxehG bViUOI view-demo"
+            className="sc-pyfCe VwDhx view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >
