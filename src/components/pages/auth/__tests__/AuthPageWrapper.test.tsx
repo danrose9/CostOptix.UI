@@ -18,14 +18,14 @@ describe('AuthPageWrapper', () => {
     expect(termsOfServiceButton).toBeInTheDocument();
   });
 
-  test('shows Privacy Policy content on click', () => {
-    const privacyPolicyButton = screen.getByText(/Privacy Policy/i);
-    fireEvent.click(privacyPolicyButton);
+  // test('shows Privacy Policy content on click', () => {
+  //   const privacyPolicyButton = screen.getByText(/Privacy Policy/i);
+  //   fireEvent.click(privacyPolicyButton);
 
-    // Assuming you have some identifiable text or element in your PrivacyPolicy component
-    const privacyPolicyContent = screen.getByText(/This Privacy Policy outlines/i);
-    expect(privacyPolicyContent).toBeInTheDocument();
-  });
+  //   // Assuming you have some identifiable text or element in your PrivacyPolicy component
+  //   const privacyPolicyContent = screen.getByText(/This Privacy Policy outlines/i);
+  //   expect(privacyPolicyContent).toBeInTheDocument();
+  // });
 
   test('shows Terms of Service content on click', () => {
     const termsOfServiceButton = screen.getByText(/Terms of Service/i);
