@@ -22,3 +22,4 @@ export const REFRESH_TOKEN = 'Account/RefreshToken';
 export const CLOUD_BILLING_ACCOUNTS = 'Providers/CloudBillingAccounts';
 export const COST_CONTAINERS = 'CostContainers';
 export const COST_CONTAINER_RESOURCES = 'CostContainers';
+export const DOCS = 'Docs';
