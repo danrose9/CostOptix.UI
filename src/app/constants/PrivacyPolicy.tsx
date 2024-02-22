@@ -1,7 +1,33 @@
 import React from 'react';
 import { OrderedList } from '../../components/pages/LegalNotice';
+import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
+
+const PrivacyPolicyDocId = '65c8cdbe67367cae14bbabb9';
 
 export const PrivacyPolicy = () => {
+  const { document, isLoading, error } = useFetchDocumentById(PrivacyPolicyDocId);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.warn('Error loading the privacy policy: ', { error });
+  }
+
+  if (!document) {
+    return <div>Document not found</div>;
+  }
+
+  // Safely render HTML content
+  return (
+    <>
+      <div dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
+    </>
+  );
+};
+
+export const PrivacyPolicy1 = () => {
   return (
     <OrderedList>
       <li>
