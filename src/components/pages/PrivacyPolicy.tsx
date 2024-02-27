@@ -1,7 +1,14 @@
 import React from 'react';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
+import styled from 'styled-components';
 
 const documentId = '65c8cdbe67367cae14bbabb9';
+
+const StyledDiv = styled.div`
+  ul {
+    padding: 0.5em 3em;
+  }
+`;
 
 export const PrivacyPolicy = () => {
   const { document, isLoading, error } = useFetchDocumentById(documentId);
@@ -20,7 +27,7 @@ export const PrivacyPolicy = () => {
 
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
+      <StyledDiv dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
     </>
   );
 };
