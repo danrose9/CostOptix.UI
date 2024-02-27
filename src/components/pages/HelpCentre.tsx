@@ -12,10 +12,10 @@ import HelpCentreArticle from './help-centre/helpCentreArticle';
 
 import { Sidebar } from '../sidebar/Sidebar';
 import SearchByCategory, { Documents } from '../search/SearchByCategory';
-import { searchDocs } from 'src/services/api/fetchDocs';
-import useSearchDocuments from 'src/hooks/useSearchDocuments';
+import { FetchDocsResponse } from 'src/services/api/fetchDocs';
+import useSearchDocuments, { UseSearchDocumentsResponse } from 'src/hooks/useSearchDocuments';
 
-const options: Documents = {
+const data: Documents = {
   'Legal & Compliance': {
     name: 'Legal & Compliance',
     results: [
@@ -145,11 +145,14 @@ const breadcrumbSections = [
 export const HelpCentre: React.FC<IHelpCentreProps> = ({ title }) => {
   const showDocs = false;
   const [searchString, setSearchString] = React.useState('');
+  const [selectedId, setSelectedId] = React.useState<string>('');
 
-  // const searchResponse: any = useSearchDocuments({ search: searchString });
-  // useEffect(() => {
-  //   console.log('searchResponse', searchResponse.documents);
-  // }, [searchResponse]);
+  const searchResponse: UseSearchDocumentsResponse = useSearchDocuments({ search: searchString });
+  useEffect(() => {
+    console.log('searchResponse', searchResponse);
+    // console.log('static', data);
+    // console.log('selectedId', selectedId);
+  }, [searchResponse]);
 
   return (
     <>
@@ -163,8 +166,9 @@ export const HelpCentre: React.FC<IHelpCentreProps> = ({ title }) => {
               <SidebarWrapper>
                 <SearchByCategory
                   placeholder="Search Help Centre.."
-                  options={options}
+                  options={data}
                   setSearchString={setSearchString}
+                  setSelectedId={setSelectedId}
                 />
                 <GetStartedSpan>
                   <p>Get Started</p>

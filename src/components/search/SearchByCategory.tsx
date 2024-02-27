@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { useState, useCallback, useEffect } from 'react';
 import SearchInput from './SearchInput';
 
-interface Option {
+interface Document {
   id: string;
   adoFilePath: string;
   title: string;
@@ -16,7 +16,7 @@ interface Option {
 export interface Documents {
   [key: string]: {
     name: string;
-    results: Option[];
+    results: Document[];
   };
 }
 
@@ -30,15 +30,22 @@ interface ISearchByCategoryProps {
   placeholder?: string;
   options: Documents;
   setSearchString?: (searchString: string) => void;
+  setSelectedId?: (selectedId: string) => void;
 }
 
 const initialState: SearchState = { isLoading: false, results: {}, value: '' };
 
-const SearchByCategory: React.FC<ISearchByCategoryProps> = ({ placeholder, options, setSearchString }) => {
+const SearchByCategory: React.FC<ISearchByCategoryProps> = ({
+  placeholder,
+  options,
+  setSearchString,
+  setSelectedId,
+}) => {
   const [state, setState] = useState<SearchState>(initialState);
 
-  const handleResultSelect = useCallback((e: any, { result }: { result: Option }) => {
+  const handleResultSelect = useCallback((e: any, { result }: { result: Document }) => {
     setState((prevState) => ({ ...prevState, value: result.title }));
+    setSelectedId && setSelectedId(result.id);
   }, []);
 
   const handleSearchChange = useCallback((e: any, { value }: { value: string }) => {
@@ -51,12 +58,13 @@ const SearchByCategory: React.FC<ISearchByCategoryProps> = ({ placeholder, optio
       }
 
       const re = new RegExp(_.escapeRegExp(value), 'i');
-      const isMatch = (result: Option) => re.test(result.title);
+      const isMatch = (result: Document) => re.test(result.title);
 
       const filteredResults = _.reduce(
         options,
         (memo, data, name) => {
           const results = _.filter(data.results, isMatch);
+          console.log('isMatch', { memo, data, name });
           if (results.length) memo[name] = { name, results };
 
           return memo;

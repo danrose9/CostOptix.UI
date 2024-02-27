@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
-import { searchDocs, DocumentType, SearchDocsParams } from '../services/api/fetchDocs';
+import { searchDocs, DocumentType, SearchDocsParams, FetchDocsResponse } from '../services/api/fetchDocs';
+
+export type UseSearchDocumentsResponse = {
+  documents: FetchDocsResponse[];
+  isLoading: boolean;
+  error: any;
+};
 
 const useSearchDocuments = ({ search, top, skip }: SearchDocsParams) => {
-  const [documents, setDocuments] = useState<DocumentType[]>([]);
+  const [documents, setDocuments] = useState<FetchDocsResponse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -11,8 +17,8 @@ const useSearchDocuments = ({ search, top, skip }: SearchDocsParams) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const { data } = await searchDocs({ search, top, skip });
-        setDocuments(data);
+        const response = await searchDocs({ search, top, skip });
+        setDocuments(response);
       } catch (error: any) {
         setError(error.message);
       } finally {
@@ -21,7 +27,7 @@ const useSearchDocuments = ({ search, top, skip }: SearchDocsParams) => {
     };
 
     fetchData();
-  }, [search]);
+  }, [search, top, skip]);
 
   return { documents, isLoading, error };
 };

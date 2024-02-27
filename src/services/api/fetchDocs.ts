@@ -1,5 +1,10 @@
 import { DOCS, BASE } from './apiEndpoints';
 
+export type FetchDocsResponse = {
+  totalCount: number;
+  data: DocumentType[];
+};
+
 export type DocumentType = {
   adoFilePath: string;
   category: string;
