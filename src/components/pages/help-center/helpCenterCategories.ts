@@ -1,6 +1,6 @@
 import { ISidebarItem } from '../../../types/menu-types';
 
-export const helpCentreCategories: ISidebarItem[] = [
+export const helpCenterCategories: ISidebarItem[] = [
   {
     title: 'Account & Setup',
     id: '65c8cdbe67367cae14bcabb9',

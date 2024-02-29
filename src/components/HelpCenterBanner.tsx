@@ -42,12 +42,12 @@ const BannerWrapper = styled.div`
   justify-content: space-between;
 `;
 
-interface IHelpCentreBannerProps {
+interface IHelpCenterBannerProps {
   className?: string;
   heading: string;
 }
 
-const HelpCentreBanner: React.FC<IHelpCentreBannerProps> = ({ className, heading }) => {
+const HelpCenterBanner: React.FC<IHelpCenterBannerProps> = ({ className, heading }) => {
   return (
     <BannerWrapper>
       <SupportHeaderSection className={className}>
@@ -69,4 +69,4 @@ const HelpCentreBanner: React.FC<IHelpCentreBannerProps> = ({ className, heading
   );
 };
 
-export default HelpCentreBanner;
+export default HelpCenterBanner;

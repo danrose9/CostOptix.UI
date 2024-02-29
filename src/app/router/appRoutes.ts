@@ -30,4 +30,4 @@ export const COST_CONTAINERS = '/cost-containers';
 export const COMPONENTS = '/components';
 export const TRANSITION = '/components/transition';
 export const QUERYFILTER = '/components/queryfilter';
-export const HELP_CENTRE = '/help-centre';
+export const HELP_CENTER = '/help-center';
