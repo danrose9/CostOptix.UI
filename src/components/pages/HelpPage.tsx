@@ -3,7 +3,7 @@ import PageWrapper from './PageWrapper';
 import styled from 'styled-components';
 import { Segment } from 'semantic-ui-react';
 import { FONT } from '../../app/constants/index';
-import HelpCentreBanner from '../HelpCentreBanner';
+import HelpCenterBanner from '../HelpCenterBanner';
 
 const PageSection = styled(Segment)`
   // text-align: center;
@@ -21,7 +21,7 @@ export const HelpPage = () => {
   return (
     <PageWrapper>
       <PageSection>
-        <HelpCentreBanner heading="How can we help?" />
+        <HelpCenterBanner heading="How can we help?" />
       </PageSection>
     </PageWrapper>
   );

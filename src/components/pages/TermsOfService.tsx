@@ -1,14 +1,8 @@
 import React from 'react';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
-import styled from 'styled-components';
+import { Document } from './help-center/HelpCentreStyles';
 
 const documentId = '65c8cdbe67367cae14bbabba';
-
-const StyledDiv = styled.div`
-  ul {
-    padding: 0.5em 3em;
-  }
-`;
 
 export const TermsOfService = () => {
   const { document, isLoading, error } = useFetchDocumentById(documentId);
@@ -27,7 +21,7 @@ export const TermsOfService = () => {
 
   return (
     <>
-      <StyledDiv dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
+      <Document dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
     </>
   );
 };

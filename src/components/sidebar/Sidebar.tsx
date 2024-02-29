@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledMenu, StyledMenuExtra } from './__styles__/StyledSidebarItems';
-import { Divider, SemanticICONS } from 'semantic-ui-react';
+import { Divider } from 'semantic-ui-react';
 import MenuItems from './MenuItems';
 import { ISidebarItem } from 'src/types/menu-types';
 
@@ -23,16 +23,6 @@ export const Sidebar: React.FC<ISidebarProps> = ({ menuItems, className, showExt
             return <MenuItems items={item} showIcon={showIcon} key={index} className={className}></MenuItems>;
           })}
       </StyledMenu>
-      {/* {env === 'production' ? null : (
-        <StyledMenuExtra>
-          <Divider clearing />
-          {menuItems
-            .filter((item) => item.dev === true)
-            .map((item, index) => {
-              return <MenuItems items={item} key={index}></MenuItems>;
-            })}
-        </StyledMenuExtra>
-      )} */}
       {showExtra ? (
         <StyledMenuExtra>
           <Divider clearing />
