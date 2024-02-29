@@ -3,7 +3,7 @@ export interface ISidebarItem {
   id?: string;
   path?: string;
   icon?: string;
-  active: boolean;
+  active?: boolean;
   extra?: boolean;
   dev?: boolean;
   items?: ISubmenuItem[];

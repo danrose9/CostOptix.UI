@@ -49,11 +49,11 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
           <Menu.Menu position="right">
             <HomePageButton
               className="transparent shift-right"
-              onClick={() => handleOnClick(appRoutes.HELP_CENTRE)}
+              onClick={() => handleOnClick(appRoutes.HELP_CENTER)}
               role="button"
               data-testid="support-button"
             >
-              Help Centre
+              Help Center
             </HomePageButton>
             <Dropdown dropdownName="Legal" children={<HomePageDropdownItems />} />
             <HomePageButton

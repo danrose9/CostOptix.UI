@@ -1,5 +1,6 @@
 import React from 'react';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
+import { Document } from './help-center/HelpCentreStyles';
 
 const documentId = '65c8cdbe67367cae14bbabba';
 
@@ -20,7 +21,7 @@ export const TermsOfService = () => {
 
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
+      <Document dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
     </>
   );
 };

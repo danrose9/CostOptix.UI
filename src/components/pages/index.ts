@@ -19,4 +19,4 @@ export { default as PageWrapper } from './PageWrapper';
 export { default as CostContainerPage } from './cost-containers/CostContainerPage';
 export { default as QueryFilter } from '../query_filter/QueryFilter';
 export { default as LegalNotice } from './LegalNotice';
-export { default as HelpCentre } from './HelpCentre';
+export { default as HelpCenter } from './HelpCenter';

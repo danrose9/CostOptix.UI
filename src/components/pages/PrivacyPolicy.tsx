@@ -1,5 +1,6 @@
 import React from 'react';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
+import { Document } from './help-center/HelpCentreStyles';
 
 const documentId = '65c8cdbe67367cae14bbabb9';
 
@@ -20,7 +21,7 @@ export const PrivacyPolicy = () => {
 
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
+      <Document dangerouslySetInnerHTML={{ __html: document.htmlContent }} />
     </>
   );
 };

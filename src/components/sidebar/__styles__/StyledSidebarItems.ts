@@ -20,7 +20,7 @@ export const StyledSectionHeader = styled.div`
 
 export const StyledMenu = styled.ul`
   padding-top: 20px;
-  &.help-centre {
+  &.light {
     padding-top: 0;
   }
 `;
@@ -36,7 +36,7 @@ export const StyledMenuExtra = styled.ul`
 export const StyledMenuItem = styled.li`
   list-style: none;
 
-  &.help-centre {
+  &.light {
     * {
       color: ${FONT.SECONDARY_COLOR};
       font-weight: 400;
@@ -66,8 +66,12 @@ export const StyledMenuItem = styled.li`
     position: relative;
     text-align: left;
     padding: 0.7rem 1rem;
+    height: 3em;
     &:hover {
       color: ${FONT.TERNANY_HOVER};
+    }
+    & icon {
+      right: 0.5em;
     }
   }
 `;
@@ -76,7 +80,7 @@ export const StyledSpan = styled.span`
   margin: 3px 0 0 20px;
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
-  &.help-centre {
+  &.light {
     margin: 0;
   }
 `;
