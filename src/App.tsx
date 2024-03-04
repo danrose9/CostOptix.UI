@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ApplicationContextProvider } from './app/ApplicationContext';
+import { DocumentProvider } from './components/help-center/DocumentContext';
 import AppContent from './app/AppContent';
 
 export const App = () => {
@@ -10,7 +11,9 @@ export const App = () => {
     <>
       <Router>
         <ApplicationContextProvider>
-          <AppContent />
+          <DocumentProvider>
+            <AppContent />
+          </DocumentProvider>
         </ApplicationContextProvider>
       </Router>
     </>

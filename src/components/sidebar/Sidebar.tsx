@@ -12,8 +12,6 @@ interface ISidebarProps {
 }
 
 export const Sidebar: React.FC<ISidebarProps> = ({ menuItems, className, showExtra, showIcon }) => {
-  const env = process.env.REACT_APP_ENV;
-
   return (
     <>
       <StyledMenu className={className}>
