@@ -11,7 +11,7 @@ import {
 import TablePagination from './TablePagination';
 import TableActionBar from './TableActionBar';
 import TableHeaderOptions from './TableHeaderOptions';
-import { Spinner } from '../Loader';
+import { Loader } from '../Loader';
 
 interface IDefaultTableProps {
   title?: string;
@@ -51,7 +51,7 @@ const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
 
         <TableActionBar showSearch={showSearch} searchFunction={searchFunction} />
 
-        {isLoading ? <Spinner /> : <TableWrapper>{children}</TableWrapper>}
+        {isLoading ? <Loader /> : <TableWrapper>{children}</TableWrapper>}
         <TableFooter>{showPagination ? <TablePagination totalItems={totalItems}></TablePagination> : null}</TableFooter>
       </Segment>
     </TableContainer>

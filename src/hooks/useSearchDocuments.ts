@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { searchDocs, DocumentType, SearchDocsParams, FetchDocsResponse } from '../services/api/fetchDocs';
+import { searchDocs, SearchDocsParams, FetchDocsResponse } from '../services/api/fetchDocs';
 
 export type UseSearchDocumentsResponse = {
   documents: FetchDocsResponse[];

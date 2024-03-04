@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../../../services/redux/rootReducer';
-import { Spinner } from '../../Loader';
+import { Loader } from '../../Loader';
 import { reduxState } from '../../../services/redux/reduxState';
 import PageWrapper from '../PageWrapper';
 // replace this with default table
@@ -21,7 +21,7 @@ const CostContainerPage: React.FC<ICostContainerPage> = (props) => {
 
   return (
     <PageWrapper title="Cost Containers">
-      {allCostContainers.isLoading ? <Spinner /> : <CostContainerTable allCostContainers={allCostContainers} />}
+      {allCostContainers.isLoading ? <Loader /> : <CostContainerTable allCostContainers={allCostContainers} />}
     </PageWrapper>
   );
 };

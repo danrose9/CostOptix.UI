@@ -1,4 +1,3 @@
-import { DocumentType } from 'src/services/api/fetchDocs';
 export const searchActionTypes = {
   CLEAN_QUERY: 'CLEAN_QUERY',
   START_SEARCH: 'START_SEARCH',

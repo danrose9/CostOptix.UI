@@ -5,17 +5,6 @@ export type FetchDocsResponse = {
   data: DocumentType[];
 };
 
-export type DocumentType = {
-  adoFilePath: string;
-  category: string;
-  htmlContent: string;
-  id: string;
-  lastUpdatedDate: string;
-  summary: string;
-  tags: string[] | null;
-  title: string;
-};
-
 export interface SearchDocsParams {
   search?: string;
   top?: number | undefined;
