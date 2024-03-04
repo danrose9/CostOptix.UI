@@ -3,7 +3,7 @@ import { StyledSubMenu, StyledSpan, StyledMenuItem } from './__styles__/StyledSi
 import { Link } from 'react-router-dom';
 import './__styles__/sidebar.css';
 import { ISubmenuItem } from 'src/types/menu-types';
-import { DocumentContext } from '../pages/help-center/DocumentContext';
+import { DocumentContext } from '../help-center/DocumentContext';
 
 interface ISubMenuItemsProps {
   submenuItems: ISubmenuItem[];
@@ -12,10 +12,11 @@ interface ISubMenuItemsProps {
 }
 
 const SubMenuItems: React.FC<ISubMenuItemsProps> = ({ submenuItems, dropdown, className }) => {
-  const { setDocumentId } = useContext(DocumentContext);
+  const { setDocumentId, setCategory } = useContext(DocumentContext);
 
-  const handleSelect = (id: string) => {
+  const handleSelect = (id: string, category: string) => {
     setDocumentId(id);
+    setCategory(category);
   };
 
   return (
@@ -23,18 +24,18 @@ const SubMenuItems: React.FC<ISubMenuItemsProps> = ({ submenuItems, dropdown, cl
       {submenuItems
         .filter((item) => item.active)
         .map((item, index) => (
-          <StyledMenuItem key={index}>
+          <StyledMenuItem
+            key={index}
+            onClick={() => {
+              if (item.id !== undefined) {
+                if (item.id !== undefined && item.category !== undefined) {
+                  handleSelect(item.id, item.category);
+                }
+              }
+            }}
+          >
             <Link to={item.path || ''}>
-              <StyledSpan
-                className={className}
-                onClick={() => {
-                  if (item.id !== undefined) {
-                    handleSelect(item.id);
-                  }
-                }}
-              >
-                {item.title}
-              </StyledSpan>
+              <StyledSpan className={className}>{item.title}</StyledSpan>
             </Link>
           </StyledMenuItem>
         ))}

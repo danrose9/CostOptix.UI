@@ -1,27 +1,14 @@
 import React from 'react';
-import { Loader, Placeholder } from 'semantic-ui-react';
+import { Loader as SemanticLoader } from 'semantic-ui-react';
 
-export const Spinner = () => {
-  return (
-    <Loader size="large" active inline="centered">
-      Fetching Data..
-    </Loader>
-  );
-};
+interface ILoaderProps {
+  text?: string;
+}
 
-export const Shimmer = () => {
+export const Loader: React.FC<ILoaderProps> = ({ text }) => {
   return (
-    <Placeholder>
-      <Placeholder.Header image>
-        <Placeholder.Line />
-        <Placeholder.Line />
-      </Placeholder.Header>
-      <Placeholder.Paragraph>
-        <Placeholder.Line />
-        <Placeholder.Line />
-        <Placeholder.Line />
-        <Placeholder.Line />
-      </Placeholder.Paragraph>
-    </Placeholder>
+    <SemanticLoader size="large" active inline="centered">
+      {text}
+    </SemanticLoader>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PageWrapper from '../pages/PageWrapper';
 import { useLocation } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
-import { Spinner } from '../Loader';
+import { Loader } from '../Loader';
 import { DashboardCard } from '../index';
 import ResourceViewChart from './ResourceViewChart';
 import ResourceProfile from './ResourceProfile';
@@ -96,7 +96,7 @@ export const ResourceView = () => {
     }
   }, [dispatch, args, isAvailable]);
 
-  return <PageWrapper title="Resource List">{isLoading ? <Spinner /> : <RenderView />}</PageWrapper>;
+  return <PageWrapper title="Resource List">{isLoading ? <Loader /> : <RenderView />}</PageWrapper>;
 };
 
 export default ResourceView;

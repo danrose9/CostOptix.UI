@@ -24,6 +24,7 @@ const useFetchDocumentCategories = () => {
           items: response.data[category].documents.map((doc: ISubmenuItem) => ({
             id: doc.id,
             title: doc.title,
+            category: doc.category,
             active: true,
           })),
         }));

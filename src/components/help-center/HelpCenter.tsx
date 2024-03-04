@@ -1,22 +1,22 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { PageContainer } from '../__styles__/HomePageStyles';
-import { Breadcrumb } from 'semantic-ui-react';
 import styled from 'styled-components';
-import HomePageNav from './homepage/HomePageNav';
+import HomePageNav from '../pages/homepage/HomePageNav';
 import HelpCenterBanner from '../HelpCenterBanner';
 import { Segment, Image, Container } from 'semantic-ui-react';
 import { COLORS, FONT } from '../../app/constants';
 
-import { helpCenterCategories } from './help-center/helpCenterCategories';
-import HelpCenterArticle from './help-center/HelpCenterArticle';
+import HelpCenterArticle from './HelpCenterArticle';
 
 import { Sidebar } from '../sidebar/Sidebar';
 import SearchByCategory, { Documents } from '../search/SearchByCategory';
 import { FetchDocsResponse } from 'src/services/api/fetchDocs';
 import useSearchDocuments, { UseSearchDocumentsResponse } from 'src/hooks/useSearchDocuments';
-import { use } from 'chai';
 import useFetchDocumentCategories from 'src/hooks/useFetchDocumentCategories';
-import { DocumentContext, DocumentProvider } from './help-center/DocumentContext';
+import { DocumentContext } from './DocumentContext';
+import GetStartedDocument from './GetStartedDocument';
+import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
+import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
 
 const data: any = {
   'Legal & Compliance': {
@@ -74,6 +74,9 @@ const PageSection = styled(Segment)`
 
 const ContentContainer = styled(Container)`
   // background-color: white;
+  p {
+    color: ${FONT.SECONDARY_COLOR} !important;
+  }
 `;
 
 const SidebarWrapper = styled.div`
@@ -110,59 +113,58 @@ const GetStartedSpan = styled.span`
   }
 `;
 
-const breadcrumbSections = [
-  { key: 'HelpCenter', content: 'Help Center', link: true },
-  { key: 'Account', content: 'Account & Setup', link: true },
-  { key: 'AccountManagement', content: 'Account Management', active: true },
-];
-
 export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
-  const showDocs = false;
+  const [showGetStarted, setShowGetStarted] = useState(true);
   const [searchString, setSearchString] = React.useState('');
   const [selectedId, setSelectedId] = React.useState<string>('');
-  const { documentId } = useContext(DocumentContext);
+
   // const searchResponse: UseSearchDocumentsResponse = useSearchDocuments({ search: searchString });
 
-  useEffect(() => {
-    console.log('searchString', searchString);
-  }, [searchString]);
   const categories = useFetchDocumentCategories();
 
-  return (
-    <>
-      <DocumentProvider>
-        <PageContainer fluid>
-          <HomePageNav className="nav-border" />
+  const { documentId, category, setDocumentId } = useContext(DocumentContext);
+  const documentRecord = useFetchDocumentById(documentId);
 
-          <div style={{ height: '100%', overflowY: 'auto' }}>
-            <Container>
-              <HelpCenterBanner className="min-left-padding" heading="Help Center" />
-              <div style={{ display: 'flex' }}>
-                <SidebarWrapper>
-                  <SearchByCategory
-                    placeholder="Search Help Center.."
-                    options={data}
-                    setSearchString={setSearchString}
-                    setSelectedId={setSelectedId}
-                  />
-                  <GetStartedSpan>
-                    <p>Get Started</p>
-                  </GetStartedSpan>
-                  <Sidebar menuItems={categories.category} className="light" />
-                </SidebarWrapper>
-                <ContentWrapper>
-                  <StyledBreadcrumb icon="right angle" sections={breadcrumbSections} />
-                  <div>
-                    <div className="heading" style={{ padding: '1em 0' }}></div>
-                    <>{showDocs ? <div className="doc-list"></div> : <HelpCenterArticle />}</>
-                  </div>
-                </ContentWrapper>
-              </div>
-            </Container>
-          </div>
-        </PageContainer>
-      </DocumentProvider>
-    </>
+  const renderGetStartedDocument = () => {
+    setShowGetStarted(true);
+    setDocumentId(''); // Clear the documentId
+  };
+
+  useEffect(() => {
+    if (documentId) {
+      setShowGetStarted(false);
+    }
+  }, [documentId]);
+
+  const breadcrumbSections = buildBreadcrumbSections({
+    showGetStarted,
+    category,
+    documentRecord,
+  });
+
+  return (
+    <ContentContainer>
+      <HelpCenterBanner className="min-left-padding" heading="Help Center" />
+      <div style={{ display: 'flex' }}>
+        <SidebarWrapper>
+          <SearchByCategory
+            placeholder="Search Help Center.."
+            options={data}
+            setSearchString={setSearchString}
+            setSelectedId={setSelectedId}
+          />
+          <GetStartedSpan onClick={renderGetStartedDocument}>
+            <p>Get Started</p>
+          </GetStartedSpan>
+          <Sidebar menuItems={categories.category} className="light" />
+        </SidebarWrapper>
+        <ContentWrapper>
+          <StyledBreadcrumb sections={breadcrumbSections} />
+
+          {showGetStarted ? <GetStartedDocument /> : <HelpCenterArticle documentRecord={documentRecord} />}
+        </ContentWrapper>
+      </div>
+    </ContentContainer>
   );
 };
 

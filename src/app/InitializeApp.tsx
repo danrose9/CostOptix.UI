@@ -4,7 +4,7 @@ import * as appRoutes from './router/appRoutes';
 
 import { isAuthCookieAvailable } from '../services/api/processToken';
 import { useBillingAccountCount } from 'src/hooks/useBillingAccountCount';
-import { Spinner } from 'src/components/Loader';
+import { Loader } from 'src/components/Loader';
 
 interface IInitializeAppProps {}
 
@@ -27,7 +27,7 @@ const InitializeApp: React.FC<IInitializeAppProps> = (props) => {
   }, []);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Loader />;
   }
 
   return (
