@@ -22,6 +22,16 @@ export const StyledMenu = styled.ul`
   padding-top: 20px;
   &.light {
     padding-top: 0;
+    button {
+      &.pad-right {
+        padding-left: 2em;
+        height: auto;
+        min-height: 3em;
+      }
+      &:hover {
+        background-color: ${FONT.TERNANY_HOVER};
+      }
+    }
   }
 `;
 
@@ -40,9 +50,6 @@ export const StyledMenuItem = styled.li`
     * {
       color: ${FONT.SECONDARY_COLOR};
       font-weight: 400;
-      &:hover {
-        background-color: ${FONT.TERNANY_HOVER};
-      }
     }
   }
 
@@ -53,9 +60,6 @@ export const StyledMenuItem = styled.li`
     text-decoration: none;
     text-align: left;
     padding: 0.7rem 1rem;
-    &:hover {
-      color: ${FONT.TERNANY_HOVER};
-    }
   }
   & button {
     color: ${FONT.TERNARY_COLOR};
