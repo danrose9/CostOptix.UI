@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { StyledSubMenu, StyledSpan, StyledMenuItem } from './__styles__/StyledSidebarItems';
-import { Link } from 'react-router-dom';
 import './__styles__/sidebar.css';
 import { ISubmenuItem } from 'src/types/menu-types';
 import { DocumentContext } from '../help-center/DocumentContext';
@@ -35,9 +34,9 @@ const SubMenuItems: React.FC<ISubMenuItemsProps> = ({ submenuItems, dropdown, cl
               }
             }}
           >
-            <Link to={item.path || ''}>
+            <button className="pad-right">
               <StyledSpan className={className}>{item.title}</StyledSpan>
-            </Link>
+            </button>
           </StyledMenuItem>
         ))}
     </StyledSubMenu>
