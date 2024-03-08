@@ -9,14 +9,18 @@ import { COLORS, FONT } from '../../app/constants';
 import HelpCenterArticle from './HelpCenterArticle';
 
 import { Sidebar } from '../sidebar/Sidebar';
-import SearchByCategory, { Documents } from '../search/SearchByCategory';
-import { FetchDocsResponse } from 'src/services/api/fetchDocs';
-import useSearchDocuments, { UseSearchDocumentsResponse } from 'src/hooks/useSearchDocuments';
+import SearchByCategory from '../search/SearchByCategory';
+import { Documents } from 'src/services/api/fetchDocs';
+import { UseSearchDocumentsResponse } from 'src/services/api/fetchDocs';
+import useSearchDocuments from 'src/hooks/useSearchDocuments';
 import useFetchDocumentCategories from 'src/hooks/useFetchDocumentCategories';
 import { DocumentContext } from './DocumentContext';
 import GetStartedDocument from './GetStartedDocument';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
 import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
+import SearchDocuments from '../search/SearchDocuments';
+import Search from '../search/Search';
+import SearchByCategoryId from '../search/SearchByCategoryId';
 
 const data: any = {
   'Legal & Compliance': {
@@ -73,8 +77,8 @@ const PageSection = styled(Segment)`
 `;
 
 const ContentContainer = styled(Container)`
-  // background-color: white;
-  p {
+  p,
+  li {
     color: ${FONT.SECONDARY_COLOR} !important;
   }
 `;
@@ -118,7 +122,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   const [searchString, setSearchString] = React.useState('');
   const [selectedId, setSelectedId] = React.useState<string>('');
 
-  // const searchResponse: UseSearchDocumentsResponse = useSearchDocuments({ search: searchString });
+  const searchResponse: UseSearchDocumentsResponse = useSearchDocuments({ search: searchString });
 
   const categories = useFetchDocumentCategories();
 
@@ -136,23 +140,40 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
     }
   }, [documentId]);
 
+  useEffect(() => {
+    renderGetStartedDocument();
+  }, []);
+
   const breadcrumbSections = buildBreadcrumbSections({
     showGetStarted,
     category,
     documentRecord,
   });
 
+  // useEffect(() => {
+  //   console.log('searchResponse', searchResponse);
+  // }, [searchResponse]);
+
   return (
     <ContentContainer>
       <HelpCenterBanner className="min-left-padding" heading="Help Center" />
       <div style={{ display: 'flex' }}>
         <SidebarWrapper>
-          <SearchByCategory
-            placeholder="Search Help Center.."
+          {/* <SearchByCategory
+            placeholder="SearchByCategory"
             options={data}
             setSearchString={setSearchString}
             setSelectedId={setSelectedId}
-          />
+          /> */}
+          {/* <SearchByCategoryId
+            placeholder="SearchByCategoryId"
+            options={data}
+            setSearchString={setSearchString}
+            setSelectedId={setSelectedId}
+          /> */}
+          {/* <Search placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} /> */}
+
+          {/* <AISearch options={searchResponse.documents} setSearchString={setSearchString} /> */}
           <GetStartedSpan onClick={renderGetStartedDocument}>
             <p>Get Started</p>
           </GetStartedSpan>

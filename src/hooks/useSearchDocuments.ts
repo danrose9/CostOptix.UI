@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react';
-import { searchDocs, SearchDocsParams, FetchDocsResponse } from '../services/api/fetchDocs';
-
-export type UseSearchDocumentsResponse = {
-  documents: FetchDocsResponse[];
-  isLoading: boolean;
-  error: any;
-};
+import { searchDocs, SearchDocsParams, DocumentData } from '../services/api/fetchDocs';
+import { UseSearchDocumentsResponse, Documents } from '../services/api/fetchDocs';
 
 const useSearchDocuments = ({ search, top, skip }: SearchDocsParams) => {
-  const [documents, setDocuments] = useState<FetchDocsResponse[]>([]);
+  const [documents, setDocuments] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 

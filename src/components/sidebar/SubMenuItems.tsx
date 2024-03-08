@@ -14,6 +14,7 @@ interface ISubMenuItemsProps {
 const SubMenuItems: React.FC<ISubMenuItemsProps> = ({ submenuItems, dropdown, className }) => {
   const { setDocumentId, setCategory } = useContext(DocumentContext);
 
+  // passing back the category and documentId to the parent component to set breadcrumb and render document
   const handleSelect = (id: string, category: string) => {
     setDocumentId(id);
     setCategory(category);

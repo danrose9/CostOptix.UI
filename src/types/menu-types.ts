@@ -20,14 +20,3 @@ export interface ISubmenuItem {
   tags?: string[];
   summary?: string;
 }
-
-export type DocumentType = {
-  adoFilePath: string;
-  category: string;
-  htmlContent: string;
-  id: string;
-  lastUpdatedDate: string;
-  summary: string;
-  tags: string[] | null;
-  title: string;
-};
