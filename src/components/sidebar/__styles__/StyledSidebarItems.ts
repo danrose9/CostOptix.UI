@@ -87,5 +87,5 @@ export const StyledSpan = styled.span`
 
 export const SubMenuDropdown = styled(Icon)`
   position: absolute;
-  right: 1.7rem;
+  right: 0;
 `;

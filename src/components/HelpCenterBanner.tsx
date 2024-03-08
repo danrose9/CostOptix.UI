@@ -21,6 +21,10 @@ const SupportHeaderSection = styled.div`
   &.min-left-padding {
     padding: 0;
   }
+  p {
+    font-size: 1.2em;
+    width: 80%;
+  }
 `;
 
 const SupportHeaderContent = styled.div`

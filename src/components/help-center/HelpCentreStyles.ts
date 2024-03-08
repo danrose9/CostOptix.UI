@@ -5,6 +5,6 @@ export const Document = styled.div`
     padding: 0.5em 3em;
   }
   img {
-    max-width: -webkit-fill-available;
+    max-width: 100%;
   }
 `;

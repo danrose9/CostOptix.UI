@@ -1,14 +1,8 @@
 import _ from 'lodash';
 import React, { useState, useCallback, useEffect } from 'react';
 import SearchInput from './SearchInput';
-import { DocumentType } from '../../services/api/fetchDocs';
-
-interface Documents {
-  [key: string]: {
-    name: string;
-    results: DocumentType[];
-  };
-}
+import { DocumentType, Documents } from '../../services/api/fetchDocs';
+import { Search } from 'semantic-ui-react';
 
 interface SearchState {
   isLoading: boolean;
@@ -16,7 +10,7 @@ interface SearchState {
   value: string;
 }
 
-interface ISearchByCategoryProps {
+interface ISearchByCategoryIdProps {
   placeholder?: string;
   options: Documents;
   setSearchString?: (searchString: string) => void;
@@ -25,7 +19,7 @@ interface ISearchByCategoryProps {
 
 const initialState: SearchState = { isLoading: false, results: {}, value: '' };
 
-const SearchByCategory: React.FC<ISearchByCategoryProps> = ({
+const SearchByCategoryId: React.FC<ISearchByCategoryIdProps> = ({
   placeholder,
   options,
   setSearchString,
@@ -47,24 +41,9 @@ const SearchByCategory: React.FC<ISearchByCategoryProps> = ({
         return;
       }
 
-      const re = new RegExp(_.escapeRegExp(value), 'i');
-      const isMatch = (result: DocumentType) => re.test(result.title);
-
-      const filteredResults = _.reduce(
-        options,
-        (memo, data, name) => {
-          const results = _.filter(data.results, isMatch);
-
-          if (results.length) memo[name] = { name, results };
-
-          return memo;
-        },
-        {} as Documents
-      );
-
       setState({
         isLoading: false,
-        results: filteredResults,
+        results: options.documents,
         value,
       });
     }, 300);
@@ -85,7 +64,7 @@ const SearchByCategory: React.FC<ISearchByCategoryProps> = ({
   };
 
   useEffect(() => {
-    console.log('state', state);
+    console.log('SearchByCategoryId', options);
   }, [state]);
 
   // Cleanup on component unmount
@@ -96,16 +75,16 @@ const SearchByCategory: React.FC<ISearchByCategoryProps> = ({
   }, [debouncedSearchChange]);
 
   return (
-    <SearchInput
+    <Search
       placeholder={placeholder}
       category
       loading={state.isLoading}
       onResultSelect={handleResultSelect}
       onSearchChange={onSearchChange}
-      results={state.results}
+      results={options}
       value={state.value}
     />
   );
 };
 
-export default SearchByCategory;
+export default SearchByCategoryId;

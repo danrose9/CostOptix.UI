@@ -1,8 +1,32 @@
 import { DOCS, BASE } from './apiEndpoints';
 
-export type FetchDocsResponse = {
+export type DocumentType = {
+  adoFilePath: string;
+  category: string;
+  htmlContent: string;
+  id: string;
+  lastUpdatedDate: string;
+  summary: string;
+  tags: string[] | null;
+  title: string;
+};
+
+export type Documents = {
+  [key: string]: {
+    name: string;
+    documents: DocumentType[];
+  };
+};
+
+export type DocumentData = {
   totalCount: number;
-  data: DocumentType[];
+  data: Documents[];
+};
+
+export type UseSearchDocumentsResponse = {
+  documents: DocumentData;
+  error?: any;
+  isLoading: boolean;
 };
 
 export interface SearchDocsParams {
