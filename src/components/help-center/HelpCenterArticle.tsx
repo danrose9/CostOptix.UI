@@ -1,6 +1,6 @@
 import React from 'react';
 import { Document } from './HelpCentreStyles';
-import { DocumentType } from 'src/types/menu-types';
+import { DocumentType } from 'src/services/api/fetchDocs';
 import { Loader } from 'src/components/Loader';
 
 interface HelpCenterArticleProps {

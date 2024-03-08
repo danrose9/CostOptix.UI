@@ -1,12 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ISubmenuItem } from 'src/types/menu-types';
-import { searchDocs, FetchDocsResponse } from '../services/api/fetchDocs';
-
-export type UseSearchDocumentsResponse = {
-  category: FetchDocsResponse[];
-  isLoading: boolean;
-  error: string | null;
-};
+import { searchDocs } from '../services/api/fetchDocs';
 
 const useFetchDocumentCategories = () => {
   const [category, setCategory] = useState<{ title: string; items: ISubmenuItem[] }[]>([]);
@@ -29,7 +23,10 @@ const useFetchDocumentCategories = () => {
           })),
         }));
 
-        setCategory(transformedData);
+        // Sort the transformed data by category title
+        const sortedData = transformedData.sort((a, b) => a.title.localeCompare(b.title));
+
+        setCategory(sortedData);
       } catch (error: any) {
         setError(error.message);
       } finally {

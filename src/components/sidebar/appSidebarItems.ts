@@ -140,7 +140,7 @@ export const appSidebarItems: ISidebarItem[] = [
     extra: true,
   },
   {
-    title: 'Support',
+    title: 'Help Center',
     path: appRoutes.HELP_PAGE,
     icon: 'help',
     active: true,
