@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { searchDocs, SearchDocsParams, DocumentData } from '../services/api/fetchDocs';
-import { UseSearchDocumentsResponse, Documents } from '../services/api/fetchDocs';
+import { searchDocs, SearchDocsParams } from '../services/api/fetchDocs';
 
 const useSearchDocuments = ({ search, top, skip }: SearchDocsParams) => {
   const [documents, setDocuments] = useState<any>();

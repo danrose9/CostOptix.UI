@@ -28,12 +28,6 @@ export const DocumentProvider: React.FC<IDocumentProviderProps> = ({ children })
   const [documentId, setDocumentId] = useState<string>('');
   const [category, setCategory] = useState<string>('');
 
-  // Implement selectDocument or similar if needed
-  const selectDocument = (newDocumentId: string, newCategory: string) => {
-    setDocumentId(newDocumentId);
-    setCategory(newCategory);
-  };
-
   return (
     <DocumentContext.Provider value={{ documentId, setDocumentId, category, setCategory }}>
       {children}

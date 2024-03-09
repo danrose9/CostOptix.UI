@@ -11,16 +11,18 @@ export type DocumentType = {
   title: string;
 };
 
-export type Documents = {
-  [key: string]: {
-    name: string;
-    documents: DocumentType[];
-  };
+type Category = {
+  name: string;
+  documents: DocumentType[];
+};
+
+export type DocumentStructure = {
+  [key: string]: Category;
 };
 
 export type DocumentData = {
   totalCount: number;
-  data: Documents[];
+  data: DocumentStructure;
 };
 
 export type UseSearchDocumentsResponse = {
