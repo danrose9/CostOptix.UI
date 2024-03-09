@@ -14,7 +14,7 @@ interface ISearchInputProps {
   onSearchChange?: (e: React.MouseEvent<HTMLElement, MouseEvent>, data: any) => void;
   resultRenderer?: (props: any) => JSX.Element;
   placeholder?: string;
-  results?: any[];
+  results?: any;
   showNoResults?: boolean;
   size?: SemanticSIZES;
   value?: string;
