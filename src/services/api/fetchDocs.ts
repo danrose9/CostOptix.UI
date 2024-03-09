@@ -18,9 +18,18 @@ export type Documents = {
   };
 };
 
+type Category = {
+  name: string;
+  documents: DocumentType[];
+};
+
+export type DataStructure = {
+  [key: string]: Category;
+};
+
 export type DocumentData = {
   totalCount: number;
-  data: Documents[];
+  data: DataStructure;
 };
 
 export type UseSearchDocumentsResponse = {

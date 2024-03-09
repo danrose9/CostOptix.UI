@@ -8,6 +8,7 @@ export const searchActionTypes = {
 export const initialState = {
   loading: false,
   documents: [],
+  results: [],
   value: '',
 };
 
@@ -25,7 +26,6 @@ export const searchReducer = (state: typeof initialState, action: actionType) =>
     case searchActionTypes.START_SEARCH:
       return { ...state, loading: true, value: action.query };
     case searchActionTypes.FINISH_SEARCH:
-      console.log('FINISH_SEARCH.action.results', action.results);
       return { ...state, loading: false, results: action.results };
     case searchActionTypes.UPDATE_SELECTION:
       return { ...state, value: action.selection };

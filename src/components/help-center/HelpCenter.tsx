@@ -150,30 +150,12 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
     documentRecord,
   });
 
-  // useEffect(() => {
-  //   console.log('searchResponse', searchResponse);
-  // }, [searchResponse]);
-
   return (
     <ContentContainer>
       <HelpCenterBanner className="min-left-padding" heading="Help Center" />
       <div style={{ display: 'flex' }}>
         <SidebarWrapper>
-          {/* <SearchByCategory
-            placeholder="SearchByCategory"
-            options={data}
-            setSearchString={setSearchString}
-            setSelectedId={setSelectedId}
-          /> */}
-          {/* <SearchByCategoryId
-            placeholder="SearchByCategoryId"
-            options={data}
-            setSearchString={setSearchString}
-            setSelectedId={setSelectedId}
-          /> */}
-          {/* <Search placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} /> */}
-
-          {/* <AISearch options={searchResponse.documents} setSearchString={setSearchString} /> */}
+          <Search placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} />
           <GetStartedSpan onClick={renderGetStartedDocument}>
             <p>Get Started</p>
           </GetStartedSpan>
