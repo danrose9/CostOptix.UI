@@ -43,7 +43,7 @@ const Image = styled.img`
 export const GetStartedSegment: React.FC<IGetStartedSegmentProps> = ({ heading, description, image, documentId }) => {
   const { setDocumentId } = useContext(DocumentContext);
   return (
-    <Segment onClick={() => setDocumentId(documentId || '')}>
+    <Segment onClick={() => setDocumentId(documentId || '')} data-testid="segment">
       <Image src={image} />
       <Content>
         <h3>{heading}</h3>

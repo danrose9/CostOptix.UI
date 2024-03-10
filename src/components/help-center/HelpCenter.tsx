@@ -57,6 +57,10 @@ const GetStartedSpan = styled.span`
   }
 `;
 
+const HelpCenterWrapper = styled.div`
+  display: flex;
+`;
+
 export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   const [showGetStarted, setShowGetStarted] = useState(true);
   const [searchString, setSearchString] = React.useState('');
@@ -93,7 +97,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   return (
     <ContentContainer>
       <HelpCenterBanner className="min-left-padding" heading={HELP_CENTER} />
-      <div style={{ display: 'flex' }}>
+      <HelpCenterWrapper>
         <SidebarWrapper>
           <SearchDocument placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} />
           <GetStartedSpan onClick={renderGetStartedDocument}>
@@ -106,7 +110,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
 
           {showGetStarted ? <GetStartedDocument /> : <HelpCenterArticle documentRecord={documentRecord} />}
         </ContentWrapper>
-      </div>
+      </HelpCenterWrapper>
     </ContentContainer>
   );
 };
