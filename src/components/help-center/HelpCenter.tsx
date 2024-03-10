@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import HelpCenterBanner from '../HelpCenterBanner';
 import { Container } from 'semantic-ui-react';
 import { COLORS, FONT } from '../../app/constants';
-
 import HelpCenterArticle from './HelpCenterArticle';
-
 import { Sidebar } from '../sidebar/Sidebar';
 import { UseSearchDocumentsResponse } from 'src/services/api/fetchDocs';
 import useSearchDocuments from 'src/hooks/useSearchDocuments';
@@ -15,6 +13,8 @@ import GetStartedDocument from './GetStartedDocument';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
 import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
 import SearchDocument from '../search/SearchDocument';
+
+const HELP_CENTER = 'Help Center';
 
 const ContentContainer = styled(Container)`
   p,
@@ -79,9 +79,10 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
     }
   }, [documentId]);
 
-  // useEffect(() => {
-  //   renderGetStartedDocument();
-  // }, [renderGetStartedDocument]);
+  // Fetch the get started document on initial render
+  useEffect(() => {
+    renderGetStartedDocument();
+  }, [renderGetStartedDocument]);
 
   const breadcrumbSections = buildBreadcrumbSections({
     showGetStarted,
@@ -91,7 +92,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
 
   return (
     <ContentContainer>
-      <HelpCenterBanner className="min-left-padding" heading="Help Center" />
+      <HelpCenterBanner className="min-left-padding" heading={HELP_CENTER} />
       <div style={{ display: 'flex' }}>
         <SidebarWrapper>
           <SearchDocument placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} />
