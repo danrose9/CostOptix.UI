@@ -5,12 +5,11 @@ import { Container } from 'semantic-ui-react';
 import { COLORS, FONT } from '../../app/constants';
 import HelpCenterArticle from './HelpCenterArticle';
 import { Sidebar } from '../sidebar/Sidebar';
-import { UseSearchDocumentsResponse } from 'src/services/api/fetchDocs';
-import useSearchDocuments from 'src/hooks/useSearchDocuments';
-import useFetchDocumentCategories from 'src/hooks/useFetchDocumentCategories';
-import { DocumentContext } from './DocumentContext';
+import { SearchDocumentsResponseType } from 'src/services/api/fetchDocs';
+
 import GetStartedDocument from './GetStartedDocument';
-import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
+import { DocumentContext } from './DocumentContext';
+import { useFetchDocumentById, useFetchDocumentCategories, useSearchDocuments } from 'src/hooks/index';
 import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
 import SearchDocument from '../search/SearchDocument';
 
@@ -57,11 +56,15 @@ const GetStartedSpan = styled.span`
   }
 `;
 
+const HelpCenterWrapper = styled.div`
+  display: flex;
+`;
+
 export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   const [showGetStarted, setShowGetStarted] = useState(true);
   const [searchString, setSearchString] = React.useState('');
 
-  const searchResponse: UseSearchDocumentsResponse = useSearchDocuments({ search: searchString });
+  const searchResponse: SearchDocumentsResponseType = useSearchDocuments({ search: searchString });
 
   const categories = useFetchDocumentCategories();
 
@@ -93,7 +96,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   return (
     <ContentContainer>
       <HelpCenterBanner className="min-left-padding" heading={HELP_CENTER} />
-      <div style={{ display: 'flex' }}>
+      <HelpCenterWrapper>
         <SidebarWrapper>
           <SearchDocument placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} />
           <GetStartedSpan onClick={renderGetStartedDocument}>
@@ -106,7 +109,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
 
           {showGetStarted ? <GetStartedDocument /> : <HelpCenterArticle documentRecord={documentRecord} />}
         </ContentWrapper>
-      </div>
+      </HelpCenterWrapper>
     </ContentContainer>
   );
 };
