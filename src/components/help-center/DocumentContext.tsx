@@ -10,7 +10,7 @@ const contextDefaultValue = {
 };
 
 // Type definition for the context
-interface IDocumentContextProps {
+export interface IDocumentContextProps {
   documentId: string;
   setDocumentId: (documentId: string) => void;
   category: string;
@@ -20,7 +20,7 @@ interface IDocumentContextProps {
 // Creating context with the updated structure
 export const DocumentContext = createContext<IDocumentContextProps>(contextDefaultValue);
 
-interface IDocumentProviderProps {
+export interface IDocumentProviderProps {
   children: React.ReactNode;
 }
 

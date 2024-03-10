@@ -1,5 +1,5 @@
 import React from 'react';
-import GetStartedSegment from './GetStartedSegment';
+import { GetStartedSegment } from './GetStartedSegment';
 import * as images from '../../assets/index';
 import styled from 'styled-components';
 

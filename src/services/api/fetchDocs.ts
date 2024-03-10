@@ -25,7 +25,7 @@ export type DocumentData = {
   data: DocumentStructure;
 };
 
-export type UseSearchDocumentsResponse = {
+export type SearchDocumentsResponseType = {
   documents: DocumentData;
   error?: any;
   isLoading: boolean;
