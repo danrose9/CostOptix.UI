@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const HelpCenterWrapper = styled.div`
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 const HelpCenterPage = () => {

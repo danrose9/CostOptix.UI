@@ -52,5 +52,3 @@ export const GetStartedSegment: React.FC<IGetStartedSegmentProps> = ({ heading, 
     </Segment>
   );
 };
-
-export default GetStartedSegment;
