@@ -97,16 +97,21 @@ export const AddServiceAzure: React.FC<IProviderFormProps> = ({ DisableButtonOnI
             </Form.Field>
           </Form.Group>
           <Form.Field>
-            12. Select <i>API Permissions</i> from the left nav
+            12. Navigate to <b>Subscriptions</b>
+          </Form.Field>
+          <Form.Field>13. For each subscription that you would like to report on complete steps 14-18</Form.Field>
+          <Form.Field>14. Select a subscription</Form.Field>
+          <Form.Field>
+            15. Select <i>Access control IAM</i> followed by <i>Role Assignments</i>
           </Form.Field>
           <Form.Field>
-            13. Click <i>Add a permission</i>
+            16. Select <i>Add</i> then <i>Add role assignment</i>
           </Form.Field>
           <Form.Field>
-            14. Under <i>Microsoft APIs </i> select <i>Azure Service Management</i>
+            17. Choose <i>Reader</i> and add the app you created earlier as a member
           </Form.Field>
           <Form.Field>
-            15. Check <i>user_impersonation</i> and the <i>Add permission</i>
+            18. Once completed click <i>Review + Assign</i>
           </Form.Field>
 
           <Form.Field inline></Form.Field>
