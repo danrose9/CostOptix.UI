@@ -13,7 +13,7 @@ import TableActionBar from './TableActionBar';
 import TableHeaderOptions from './TableHeaderOptions';
 import { Loader } from '../Loader';
 
-interface IDefaultTableProps {
+interface DefaultTableProps {
   title?: string;
   description?: string;
   color?: SemanticCOLORS | undefined;
@@ -26,7 +26,7 @@ interface IDefaultTableProps {
   handleExportToCSV?: (arg0: boolean) => void;
 }
 
-const DefaultTable: React.FunctionComponent<IDefaultTableProps> = ({
+const DefaultTable: React.FunctionComponent<DefaultTableProps> = ({
   title,
   color = 'purple',
   description,
