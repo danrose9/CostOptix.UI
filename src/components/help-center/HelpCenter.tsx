@@ -63,7 +63,6 @@ const HelpCenterWrapper = styled.div`
 export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   const [showGetStarted, setShowGetStarted] = useState(true);
   const [searchString, setSearchString] = React.useState('');
-
   const searchResponse: SearchDocumentsResponseType = useSearchDocuments({ search: searchString });
 
   const categories = useFetchDocumentCategories();
