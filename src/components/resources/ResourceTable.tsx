@@ -12,15 +12,15 @@ import { formatGrowthValue, formatCurrencyValue } from 'src/utils/valueFormatter
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 interface ISearchResults {
-  map: any;
-  slice: any;
+  map: (arg0: (resource: IResource, index: React.Key | null | undefined) => JSX.Element) => React.ReactNode;
+  slice: (arg0: number, arg1: number) => ISearchResults;
 }
 
-interface IResourceTableProps {
+interface ResourceTableProps {
   searchResults: ISearchResults;
 }
 
-const ResourcesTable: React.FC<IResourceTableProps> = ({ searchResults }) => {
+const ResourcesTable: React.FC<ResourceTableProps> = ({ searchResults }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
