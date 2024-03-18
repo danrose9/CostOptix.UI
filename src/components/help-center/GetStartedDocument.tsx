@@ -8,6 +8,13 @@ const SegmentWrapper = styled.div`
   height: 100%;
 `;
 
+const DOCUMENT = {
+  SETUP: '65f6ce12d771f28cb3a17878',
+  CONNECT_CLOUD: '65c8cdbe67367cae14bbabbb',
+  COST_CONTAINER: '65c8cdbe67367cae14bbabbc',
+  ANALYZE_SPEND: '65e9bb10ab0e70a192c0703b',
+};
+
 const GetStartedDocument = () => {
   return (
     <>
@@ -22,22 +29,25 @@ const GetStartedDocument = () => {
             heading="Setup a new account"
             description="Signup and create a new CostOptix account to get started."
             image={images.CHECKLIST_ICON}
+            documentId={DOCUMENT.SETUP}
           />
           <GetStartedSegment
             heading="Connect your cloud services"
             description="Connect your cloud services to CostOptix and start analyzing your spend."
             image={images.TRAFFIC_LIGHT_ICON}
+            documentId={DOCUMENT.CONNECT_CLOUD}
           />
           <GetStartedSegment
             heading="Create a Cost Container"
             description="Create a cost container and analyze resource spend across different service providers."
             image={images.MONEY_BAG_ICON}
-            documentId="65c8cdbe67367cae14bbabbc"
+            documentId={DOCUMENT.COST_CONTAINER}
           />
           <GetStartedSegment
             heading="Start analyzing your cloud spend"
             description="Get insights into your cloud spend and start optimizing your costs."
             image={images.CHART_ICON}
+            documentId={DOCUMENT.ANALYZE_SPEND}
           />
         </SegmentWrapper>
       </div>
