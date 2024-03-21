@@ -10,7 +10,7 @@ import { AppDispatch } from 'src/services/redux/store';
 import { IRootState } from 'src/services/redux/rootReducer';
 import { useSelector } from 'react-redux';
 import { reduxState } from 'src/services/redux/reduxState';
-import { useTrackEvent } from 'src/hooks/useTrackEvent';
+import { useTrackEvent, eventTypes } from 'src/hooks/useTrackEvent';
 
 interface LandingPageProps {}
 
@@ -38,7 +38,7 @@ const LandingPage: React.FC<LandingPageProps> = () => {
   const user_id = useSelector((state: IRootState) => state[reduxState.USER_PROFILE].id);
   const eventData = useMemo(() => ({ user: user_id }), [user_id]);
 
-  useTrackEvent('user_id', eventData, user_id);
+  useTrackEvent(eventTypes.USER_ID, eventData, user_id);
 
   return (
     <>

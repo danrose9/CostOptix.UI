@@ -16,11 +16,14 @@ import { AppDispatch } from 'src/services/redux/store';
 import { useDispatch } from 'react-redux';
 import { setIsDemo } from '../../../services/redux/reducers/userProfileSlice';
 import CookieBanner from '../../CookieBanner';
+import ReactGA from 'react-ga4';
+import { eventTypes } from '../../../hooks/useTrackEvent';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
 
   const handleDemoClick = () => {
+    ReactGA.event(eventTypes.DEMO_LOGIN, { user: 'demo' });
     dispatch<AppDispatch>(setIsDemo(true));
   };
 
