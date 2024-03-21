@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import { COLORS } from 'src/app/constants';
 import { Dropdown } from 'src/components/menus/Dropdown';
 import { HomePageDropdownItems } from './HomePageDropdownItems';
+import ReactGA from 'react-ga4';
+import { eventTypes } from 'src/hooks/useTrackEvent';
 
 const Navbar = styled.div`
   height: 10%;
@@ -32,7 +34,8 @@ interface INavbarProps {
 export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
   const navigate = useNavigate();
 
-  const handleOnClick = (route: string) => {
+  const handleButtonClick = (route: string, eventType: string) => {
+    ReactGA.event(eventType);
     navigate(route);
   };
 
@@ -42,14 +45,14 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
         <Menu fluid secondary color="green">
           <Menu.Item>
             <ImageWrapper>
-              <Image src={images.LOGOBLUE} size="medium" onClick={() => handleOnClick(appRoutes.ROOT)} />
+              <Image src={images.LOGOBLUE} size="medium" onClick={() => navigate(appRoutes.ROOT)} />
             </ImageWrapper>
           </Menu.Item>
 
           <Menu.Menu position="right">
             <HomePageButton
               className="transparent shift-right"
-              onClick={() => handleOnClick(appRoutes.HELP_CENTER)}
+              onClick={() => handleButtonClick(appRoutes.HELP_CENTER, eventTypes.HELP_CENTER_BUTTON_CLICK)}
               role="button"
               data-testid="support-button"
             >
@@ -58,7 +61,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
             <Dropdown dropdownName="Legal" children={<HomePageDropdownItems />} />
             <HomePageButton
               className="login"
-              onClick={() => handleOnClick(appRoutes.LOGIN)}
+              onClick={() => handleButtonClick(appRoutes.LOGIN, eventTypes.LOGIN_BUTTON)}
               role="button"
               data-testid="login-ext-button"
             >
@@ -66,7 +69,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
             </HomePageButton>
             <HomePageButton
               className="get-started"
-              onClick={() => handleOnClick(appRoutes.SIGNUP)}
+              onClick={() => handleButtonClick(appRoutes.SIGNUP, eventTypes.SIGNUP_BUTTON)}
               role="button"
               data-testid="get-started-button"
             >

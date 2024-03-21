@@ -20,7 +20,11 @@ import ReactGA from 'react-ga4';
 import reportWebVitals from './reportWebVitals';
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GTAG;
 
-ReactGA.initialize(GA_MEASUREMENT_ID as string);
+ReactGA.initialize(GA_MEASUREMENT_ID as string, {
+  gaOptions: {
+    cookieFlags: 'max-age=7200;SameSite=None;Secure',
+  },
+});
 
 declare global {
   interface Window {
