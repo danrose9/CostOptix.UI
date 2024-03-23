@@ -1,15 +1,18 @@
 import React from 'react';
-import { Message } from 'semantic-ui-react';
-import { IMessageBox } from '../types';
+import { Message as SemanticMessage, SemanticCOLORS } from 'semantic-ui-react';
 
-export const MessageBox = (props: IMessageBox) => {
-  const {title, message, color, size} = props;
+interface MessageBoxProps {
+  title: string;
+  message: string;
+  color: SemanticCOLORS;
+}
 
+export const MessageBox: React.FC<MessageBoxProps> = ({ title, message, color }) => {
   return (
-    <Message color={color} size={size}>
+    <SemanticMessage color={color}>
       <strong>{title}</strong>
       <p>{message}</p>
-    </Message>
+    </SemanticMessage>
   );
 };
 

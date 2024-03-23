@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as appRoutes from './router/appRoutes';
-import { Container, MainPage, Main, ApplicationFooter } from '../styles/AppContent';
+import { Container, MainPage, Main } from '../styles/AppStyles';
+import ApplicationFooter from 'src/components/ApplicationFooter';
 import Navbar from '../components/navbar/Navbar';
 import AppSidebar from '../components/sidebar/AppSidebar';
 import ApplicationRoutes, { HIDE_NAV_SIDEBAR_ROUTES } from './router/ApplicationRoutes';
@@ -8,7 +9,6 @@ import { useIdleTimer } from 'react-idle-timer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ErrorDefault from '../components/pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
-import { APP_FOOTER } from './constants';
 import { isAuthenticated } from '../services/api/processToken';
 import Tour from '../components/productTour/Tour';
 import { Logout } from 'src/components/auth/Logout';
@@ -77,9 +77,7 @@ export const AppContent = () => {
             <MainPage>
               <ApplicationRoutes />
             </MainPage>
-            <ApplicationFooter>
-              <p>{APP_FOOTER.CONTENT}</p>
-            </ApplicationFooter>
+            <ApplicationFooter />
           </Main>
         </Container>
       </ErrorBoundary>

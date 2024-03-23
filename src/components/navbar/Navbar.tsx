@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Label } from 'semantic-ui-react';
 import { ToggleButton } from './__styles__/StyledNavbarItems';
-import { StyledNavbar } from '../../styles/AppContent';
+import { StyledNavbar } from '../../styles/AppStyles';
 import NavbarItems from './NavbarItems';
 import styled from 'styled-components';
 

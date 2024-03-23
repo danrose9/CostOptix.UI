@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Menu as SemanticMenu } from 'semantic-ui-react';
-import { COLORS, FONT } from '../app/constants';
+import { COLORS } from '../app/constants';
 
 interface StyledSidebarProps {
   toggleSidebar: boolean;
@@ -65,14 +65,4 @@ export const MainPage = styled.div`
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   height: 100%;
-`;
-
-export const ApplicationFooter = styled.div`
-  height: 1.5em;
-  background-color: ${COLORS.PRIMARY};
-  & p {
-    font-size: 0.8em;
-    color: ${FONT.WHITE};
-    text-align: right;
-  }
 `;
