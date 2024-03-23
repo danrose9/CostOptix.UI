@@ -9,13 +9,6 @@ export {
   IBillingAccountCostDashboardProps,
 } from './billing-account-types';
 
-export interface IMessageBox {
-  title: string;
-  message: string;
-  color: undefined;
-  size: undefined;
-}
-
 export interface IProviderImage {
   provider: string;
   image: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sidebar } from './Sidebar';
-import { StyledSidebar } from 'src/styles/AppContent';
+import { StyledSidebar } from 'src/styles/AppStyles';
 import { ProductName } from '../ProductName';
 import { OrganizationName } from '../OrganizationName';
 import { StyledBrand } from './__styles__/StyledSidebarItems';
