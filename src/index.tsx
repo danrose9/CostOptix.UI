@@ -12,7 +12,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import App from './App';
 import { Provider } from 'react-redux';
-import './App.css';
+import './styles/app.css';
 import { store, persistor } from './services/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 

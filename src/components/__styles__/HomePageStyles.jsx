@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container, Menu } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
-import { COLORS } from '../../app/constants';
+import { COLORS, FONT } from '../../app/constants';
 
 export const PageContainer = styled(Container)`
   overflow: hidden;
@@ -15,8 +15,14 @@ export const PageContainer = styled(Container)`
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-}
 
+    @media only screen and (max-width: 600px) {
+      background-image: none;
+      background-color: ${COLORS.BACKGROUND};
+      margin: unset !important;
+    }
+  }
+}
 `;
 
 export const HomePageMainContent = styled.div`
@@ -28,35 +34,61 @@ export const HomePageMainContent = styled.div`
   &.center {
     justify-content: center;
   }
+  @media only screen and (max-width: 600px) {
+    overflow: unset;
+    
+  }
 `;
 
 export const StyledHeader = styled.h1`
   color: #5f6675;
   font-size: calc(2vw + 2vh + 1vmin);
   padding: 10px;
+  @media only screen and (max-width: 600px) {
+      font-size: 2.5em;
+      color: ${FONT.PRIMARY_COLOR};
+  }
+
 `;
 
 export const StyledSubHeader = styled.p`
   font-size: 1.8em;
   color: #5f6675;
   font-size: 2em;
+    @media only screen and (max-width: 600px) {
+      font-size: 1.5em;
+      font-weight: 400;
+      font-size: 2.5em;
+  }
 `;
 
 export const HomePageMainLeft = styled.div`
   width: 43%;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (max-width: 600px) {
+      width: 100%;
+  }
 `;
 
 export const HomePageTitle = styled.div`
   padding: 30px;
   flex-grow: 3;
+  @media only screen and (max-width: 600px) {
+      width: 100%;
+      flex-grow: 1;
+  }
 `;
 
 export const HomePageSubTitle = styled.div`
   padding: 0 40px;
   flex-grow: 4;
   font-size: calc(0.5vw + 0.5vh + 0.5vmin);
+  @media only screen and (max-width: 600px) {
+      padding: 5em;
+      line-height: 1.5em;
+  }
 `;
 
 export const HomePageActions = styled.div`

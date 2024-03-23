@@ -2,7 +2,7 @@
 
 exports[`Home Page matches snapshot 1`] = `
 <div
-  className="ui fluid container sc-dkrFOg kHBjVh home-page"
+  className="ui fluid container sc-dkrFOg ibwWHE home-page"
   data-testid="homePage-2"
 >
   <div
@@ -101,27 +101,27 @@ exports[`Home Page matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-hLBbgP CRDY"
+    className="sc-hLBbgP guGsDL"
   >
     <div
-      className="sc-gKPRtg ibOSHq"
+      className="sc-gKPRtg gPvMJG"
     >
       <div
-        className="sc-iBYQkv gteEYk"
+        className="sc-iBYQkv iiBpSn"
       >
         <h1
-          className="sc-eDvSVe bjdFaS"
+          className="sc-eDvSVe hOmfJZ"
         >
           Reduce Your Cloud Spending Costs Effectively with CostOptix
         </h1>
       </div>
       <div
-        className="sc-ftTHYK cNqCNO"
+        className="sc-ftTHYK dnZKT"
       >
         <p
-          className="sc-jSUZER gXDBhM"
+          className="sc-jSUZER juyXml"
         >
-          A powerful and insightful software suite to explore, understand and take action on cloud services spending
+          A powerful and insightful software suite to explore, understand and take action on cloud services spending.
         </p>
       </div>
       <div
