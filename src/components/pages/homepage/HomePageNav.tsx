@@ -10,6 +10,7 @@ import { Dropdown } from 'src/components/menus/Dropdown';
 import { HomePageDropdownItems } from './HomePageDropdownItems';
 import ReactGA from 'react-ga4';
 import { eventTypes } from 'src/hooks/useTrackEvent';
+import { useMobileDevice } from 'src/hooks/useMobileDevice';
 
 const Navbar = styled.div`
   height: 10%;
@@ -39,6 +40,38 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
     navigate(route);
   };
 
+  const HomePageActionButtons = useMobileDevice(
+    <Menu.Menu position="right">
+      <HomePageButton
+        className="transparent shift-right"
+        onClick={() => handleButtonClick(appRoutes.HELP_CENTER, eventTypes.HELP_CENTER_BUTTON_CLICK)}
+        role="button"
+        data-testid="support-button"
+      >
+        Help Center
+      </HomePageButton>
+      <Dropdown dropdownName="Legal" children={<HomePageDropdownItems />} />
+      <HomePageButton
+        className="login"
+        onClick={() => handleButtonClick(appRoutes.LOGIN, eventTypes.LOGIN_BUTTON)}
+        role="button"
+        data-testid="login-ext-button"
+      >
+        Login
+      </HomePageButton>
+      <HomePageButton
+        className="get-started"
+        onClick={() => handleButtonClick(appRoutes.SIGNUP, eventTypes.SIGNUP_BUTTON)}
+        role="button"
+        data-testid="get-started-button"
+      >
+        Get Started
+      </HomePageButton>
+    </Menu.Menu>,
+    640,
+    false
+  );
+
   return (
     <>
       <Navbar>
@@ -48,34 +81,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
               <Image src={images.LOGOBLUE} size="medium" onClick={() => navigate(appRoutes.ROOT)} />
             </ImageWrapper>
           </Menu.Item>
-
-          <Menu.Menu position="right">
-            <HomePageButton
-              className="transparent shift-right"
-              onClick={() => handleButtonClick(appRoutes.HELP_CENTER, eventTypes.HELP_CENTER_BUTTON_CLICK)}
-              role="button"
-              data-testid="support-button"
-            >
-              Help Center
-            </HomePageButton>
-            <Dropdown dropdownName="Legal" children={<HomePageDropdownItems />} />
-            <HomePageButton
-              className="login"
-              onClick={() => handleButtonClick(appRoutes.LOGIN, eventTypes.LOGIN_BUTTON)}
-              role="button"
-              data-testid="login-ext-button"
-            >
-              Login
-            </HomePageButton>
-            <HomePageButton
-              className="get-started"
-              onClick={() => handleButtonClick(appRoutes.SIGNUP, eventTypes.SIGNUP_BUTTON)}
-              role="button"
-              data-testid="get-started-button"
-            >
-              Get Started
-            </HomePageButton>
-          </Menu.Menu>
+          {HomePageActionButtons}
         </Menu>
       </Navbar>
     </>
