@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { Dropdown, Icon, Image } from 'semantic-ui-react';
+import { FONT_FAMILY } from '../../../app/constants/styles';
 
 export const StyledDropdown = styled(Dropdown)`
     &&& {
       padding: 9px;
       font-size: 1.2rem;
+      font-family: ${FONT_FAMILY}
       position: relative;
       z-index: 1000;
   }

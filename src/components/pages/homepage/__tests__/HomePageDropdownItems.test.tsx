@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, waitForElement } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { HomePageDropdownItems } from '../HomePageDropdownItems';
@@ -16,24 +16,37 @@ describe('HomePageDropdownItems', () => {
       </BrowserRouter>
     );
 
+  const hoverLegalButton = async () => {
+    const legalButton = await screen.findByText('Legal');
+    await waitFor(() => {
+      userEvent.hover(legalButton);
+    });
+  };
+
   it('navigates to Privacy page on click', async () => {
     renderComponent();
-    const privacyOption = await screen.findByRole('option', { name: 'Privacy' });
+
+    // wait for the button to appear on hover
+    await hoverLegalButton();
+
+    const privacyOption = await screen.findByTestId('privacy');
     userEvent.click(privacyOption);
 
-    // Use waitFor to wait for a specific condition to be true
+    // Your waitFor usage is correct
     await waitFor(() => {
-      // For example, wait for the URL to change
       expect(window.location.pathname).toEqual(appRoutes.PRIVACY);
     });
   });
 
   it('navigates to Terms of Service page on click', async () => {
     renderComponent();
-    const termsOption = await screen.findByRole('option', { name: 'Terms of Service' });
+
+    // wait for the button to appear on hover
+    await hoverLegalButton();
+
+    const termsOption = await screen.findByTestId('terms');
     userEvent.click(termsOption);
 
-    // Use waitFor to wait for a specific condition to be true
     await waitFor(() => {
       // For example, wait for the URL to change
       expect(window.location.pathname).toEqual(appRoutes.TERMS);

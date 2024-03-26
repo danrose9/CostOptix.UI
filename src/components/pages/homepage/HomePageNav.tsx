@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import styled from 'styled-components';
 import { COLORS } from 'src/app/constants';
-import { Dropdown } from 'src/components/menus/Dropdown';
 import { HomePageDropdownItems } from './HomePageDropdownItems';
 import ReactGA from 'react-ga4';
 import { eventTypes } from 'src/hooks/useTrackEvent';
 import { useMobileDevice } from 'src/hooks/useMobileDevice';
+
+const LOGIN = 'Login';
+const GET_STARTED = 'Get Started';
+const HELP_CENTER = 'Help Center';
 
 const Navbar = styled.div`
   height: 10%;
@@ -48,16 +51,16 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
         role="button"
         data-testid="support-button"
       >
-        Help Center
+        {HELP_CENTER}
       </HomePageButton>
-      <Dropdown dropdownName="Legal" children={<HomePageDropdownItems />} />
+      <HomePageDropdownItems />
       <HomePageButton
         className="login"
         onClick={() => handleButtonClick(appRoutes.LOGIN, eventTypes.LOGIN_BUTTON)}
         role="button"
         data-testid="login-ext-button"
       >
-        Login
+        {LOGIN}
       </HomePageButton>
       <HomePageButton
         className="get-started"
@@ -65,7 +68,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
         role="button"
         data-testid="get-started-button"
       >
-        Get Started
+        {GET_STARTED}
       </HomePageButton>
     </Menu.Menu>,
     640,
