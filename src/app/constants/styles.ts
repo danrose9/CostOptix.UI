@@ -26,3 +26,5 @@ export const FONT = {
   WHITE: '#FFFFFF',
   STAT: '#1678C2',
 };
+
+export const FONT_FAMILY = "'Poppins', sans-serif";

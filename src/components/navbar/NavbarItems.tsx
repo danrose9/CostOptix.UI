@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Icon } from 'semantic-ui-react';
+import { Dropdown, Icon as SemanticIcon } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { reduxState } from '../../services/redux/reduxState';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { StyledSpan, StyledDropdown, StyledAvatar } from './__styles__/StyledNav
 import { NavbarMode } from './NavbarMode';
 import { isAuthenticated } from '../../services/api/processToken';
 import { IRootState } from 'src/services/redux/rootReducer';
+import { Feedback } from '../Feedback';
 
 export const NavbarItems = () => {
   const navigate = useNavigate();
@@ -24,26 +25,30 @@ export const NavbarItems = () => {
       id: 2,
       key: 'profile',
       text: 'Your Profile',
-      image: <Icon name="user" />,
+      image: <SemanticIcon name="user" color="blue" />,
       onClick: () => navigate(appRoutes.SETTINGS),
+    },
+    {
+      key: 'settings',
+      text: 'Account Settings',
+      image: <SemanticIcon name="settings" color="grey" />,
+      onClick: () => navigate(appRoutes.SETTINGS),
+    },
+    {
+      key: 'feedback',
+      content: <Feedback />,
     },
     {
       key: 'help',
       text: 'Help',
-      image: <Icon name="help" />,
+      image: <SemanticIcon name="help" color="green" />,
       onClick: () => navigate(appRoutes.HELP_PAGE),
     },
-    // {
-    //   key: 'settings',
-    //   text: 'Settings',
-    //   image: <Icon name="setting" />,
-    //   onClick: () => navigate(appRoutes.SETTINGS),
-    // },
     {
       id: 3,
       key: 'log-out',
       text: 'Log Out',
-      image: <Icon name="log out" />,
+      image: <SemanticIcon name="log out" color="black" />,
       onClick: () => navigate(appRoutes.LOGOUT),
       disabled: !isAuthenticated(),
     },
