@@ -130,7 +130,7 @@ export const HomePageButton = styled.button`
   }
 
   &.shift-right {
-    padding: 0.9em;
+    margin-right: 0.1em;
   }
 
   &.get-started {

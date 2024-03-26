@@ -6,7 +6,7 @@ exports[`Home Page matches snapshot 1`] = `
   data-testid="homePage-2"
 >
   <div
-    className="sc-bqWxrE bnxYDj"
+    className="sc-csuSiG ecoRFI"
   >
     <div
       className="ui green fluid secondary menu"
@@ -16,7 +16,7 @@ exports[`Home Page matches snapshot 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-ksBlkl iSLJgr"
+          className="sc-eDWCr gvCYGp"
         >
           <img
             className="ui medium image"
@@ -29,60 +29,30 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-kDvujY fXaCbX transparent shift-right"
+          className="sc-kDvujY lAOLl transparent shift-right"
           data-testid="support-button"
           onClick={[Function]}
           role="button"
         >
           Help Center
         </button>
-        <div
-          aria-expanded={false}
-          className="ui simple dropdown sc-ipEyDJ iLipIc"
-          data-testid="dropdown"
+        <button
+          className="sc-kDvujY lAOLl transparent"
           onBlur={[Function]}
-          onChange={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onMouseDown={[Function]}
-          role="listbox"
-          tabIndex={0}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          style={
+            Object {
+              "position": "relative",
+            }
+          }
         >
-          <div
-            aria-atomic={true}
-            aria-live="polite"
-            className="divider text"
-            role="alert"
-          >
-            Legal
-          </div>
-          <i
-            aria-hidden="true"
-            className="dropdown icon"
-            onClick={[Function]}
-          />
-          <div
-            className="menu transition sc-csuSiG bpjurD"
-          >
-            <div
-              className="item sc-eDWCr kHPHiD"
-              onClick={[Function]}
-              role="option"
-            >
-              Privacy
-            </div>
-            <div
-              className="item sc-eDWCr kHPHiD"
-              onClick={[Function]}
-              role="option"
-            >
-              Terms of Service
-            </div>
-          </div>
-        </div>
+          Legal
+        </button>
         <button
-          className="sc-kDvujY fXaCbX login"
+          className="sc-kDvujY lAOLl login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -90,7 +60,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-kDvujY fXaCbX get-started"
+          className="sc-kDvujY lAOLl get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -132,7 +102,7 @@ exports[`Home Page matches snapshot 1`] = `
           method="POST"
         >
           <button
-            className="sc-kDvujY fXaCbX view-demo"
+            className="sc-kDvujY lAOLl view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >
