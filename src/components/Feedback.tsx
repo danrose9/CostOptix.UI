@@ -13,8 +13,8 @@ import {
 import styled from 'styled-components';
 import { submitFeedback } from '../services/api/submitFeedback';
 
-const FEEDBACK_PLACEHOLDER = 'Tell us more about your experience';
-const FEEDBACK_LABEL = 'Feedback';
+export const FEEDBACK_PLACEHOLDER = 'Tell us more about your experience';
+export const FEEDBACK_LABEL = 'Feedback';
 const DEFAULT_RATING = 3;
 const DEFAULT_MAX_RATING = 5;
 const ANIMATION = { animation: 'fade up', duration: 1000 };
@@ -45,6 +45,7 @@ export const Feedback = () => {
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     await submitFeedback({ rating, feedbackText });
+    setFeedbackText('');
     setOpen(false);
   };
 
@@ -81,6 +82,7 @@ export const Feedback = () => {
                 maxRating={DEFAULT_MAX_RATING}
                 size="large"
                 onRate={handleRatingChange}
+                data-testid="rating-selector"
               />
               <Form>
                 <Form.Field
