@@ -36,6 +36,7 @@ export const NavbarItems = () => {
     },
     {
       key: 'feedback',
+      text: 'Feedback',
       content: <Feedback />,
     },
     {
@@ -62,14 +63,11 @@ export const NavbarItems = () => {
   );
 
   return (
-    <StyledDropdown data-testid="navbarItem-2" trigger={trigger}>
+    <StyledDropdown simple data-testid="navbarItem-2" open={false} trigger={trigger}>
       <Dropdown.Menu>
-        {/* <Input icon="search" iconPosition="left" className="search" /> */}
-        <Dropdown.Menu scrolling>
-          {options.map((option) => (
-            <Dropdown.Item {...option} />
-          ))}
-        </Dropdown.Menu>
+        {options.map((option) => (
+          <Dropdown.Item {...option} />
+        ))}
       </Dropdown.Menu>
     </StyledDropdown>
   );
