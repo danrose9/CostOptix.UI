@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent, screen, waitFor, getByRole } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import HomePage from '../homepage/HomePage';
 import { Provider } from 'react-redux';
@@ -51,4 +52,20 @@ describe('Home Page', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  // test('should be able to click login button and then return home successfully', async () => {
+  //   const user = userEvent.setup();
+  //   render(<HomePage />, { wrapper: ApplicationWrapper });
+
+  //   const loginButton = screen.getByTestId('login-ext-button');
+
+  //   await user.click(loginButton);
+  //   // Await the assertions inside waitFor
+  //   await waitFor(() => {
+  //     expect(screen.getByText('Log in to CostOptix')).toBeInTheDocument();
+  //     // user.click(screen.getByTestId('close-button'));
+
+  //     // expect(screen.getByText('wefkwefgwegewhbg')).toBeInTheDocument();
+  //   });
+  // });
 });

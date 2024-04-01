@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Login from '../Login';
-import * as appRoutes from '../../../../app/router/appRoutes';
+import Login from '../auth/Login';
+import * as appRoutes from '../../../app/router/appRoutes';
 
 describe('Login Component', () => {
   test('should render the Login component', () => {

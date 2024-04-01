@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import CostContainerTable from '../CostContainerTable';
+import CostContainerTable from '../cost-containers/CostContainerTable';
 import { containers as costContainers } from '../containerMockData';
-import { ApplicationWrapper } from '../../../../tests/helpers';
+import { ApplicationWrapper } from '../../../tests/helpers';
 
 describe('CostContainerTable', () => {
   test('The table renders with mock data', () => {
