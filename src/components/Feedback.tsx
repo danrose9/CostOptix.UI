@@ -11,16 +11,13 @@ import {
   TransitionablePortal,
 } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { submitFeedback } from '../services/api/submitFeedback';
 
 const FEEDBACK_PLACEHOLDER = 'Tell us more about your experience';
 const FEEDBACK_LABEL = 'Feedback';
 const DEFAULT_RATING = 3;
 const DEFAULT_MAX_RATING = 5;
 const ANIMATION = { animation: 'fade up', duration: 1000 };
-
-interface FeedbackProps {
-  openFeedback?: boolean;
-}
 
 const FeedbackButton = styled.button`
   background-color: transparent;
@@ -40,33 +37,59 @@ const Icon = styled(SemanticIcon)`
   color: gold;
 `;
 
-export const Feedback: React.FC<FeedbackProps> = ({ openFeedback }) => {
-  const [open, setOpen] = useState(openFeedback);
-  const handleSubmit = () => setOpen(false);
+export const Feedback = () => {
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(DEFAULT_RATING);
+  const [feedbackText, setFeedbackText] = useState('');
+
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    await submitFeedback({ rating, feedbackText });
+    setOpen(false);
+  };
+
+  const handleClick = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const FeedbackDropdownItem = () => {
     return (
       <span>
         <Icon name="star" />
-        <FeedbackButton onClick={() => setOpen(true)}>Feedback</FeedbackButton>
+        <FeedbackButton onClick={handleClick}>Feedback</FeedbackButton>
       </span>
     );
   };
 
+  const handleRatingChange = (e: React.MouseEvent, data: any) => {
+    setRating(data.rating);
+  };
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setFeedbackText(e.target.value);
+  };
+
   return (
     <div>
-      <TransitionablePortal
-        onClose={() => setOpen(false)}
-        open={open}
-        transition={ANIMATION}
-        trigger={<FeedbackDropdownItem />}
-      >
+      <FeedbackDropdownItem />
+      <TransitionablePortal onClose={handleClose} open={open} transition={ANIMATION}>
         <Segment>
           <Card>
             <CardContent>
-              <Rating icon="star" defaultRating={DEFAULT_RATING} maxRating={DEFAULT_MAX_RATING} size="large" />
+              <Rating
+                icon="star"
+                defaultRating={DEFAULT_RATING}
+                maxRating={DEFAULT_MAX_RATING}
+                size="large"
+                onRate={handleRatingChange}
+              />
               <Form>
-                <Form.Field control={TextArea} label={FEEDBACK_LABEL} placeholder={FEEDBACK_PLACEHOLDER} />
+                <Form.Field
+                  control={TextArea}
+                  label={FEEDBACK_LABEL}
+                  placeholder={FEEDBACK_PLACEHOLDER}
+                  onChange={handleTextChange}
+                  value={feedbackText}
+                />
 
                 <Button type="submit" onClick={handleSubmit} positive>
                   Submit

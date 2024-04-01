@@ -23,3 +23,4 @@ export const CLOUD_BILLING_ACCOUNTS = 'Providers/CloudBillingAccounts';
 export const COST_CONTAINERS = 'CostContainers';
 export const COST_CONTAINER_RESOURCES = 'CostContainers';
 export const DOCS = 'Docs';
+export const FEEDBACK = 'Feedback/SubmitFeedback';
