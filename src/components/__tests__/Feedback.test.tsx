@@ -4,6 +4,8 @@ import '@testing-library/jest-dom';
 import { Feedback, FEEDBACK_PLACEHOLDER, FEEDBACK_LABEL } from '../Feedback';
 import * as api from 'src/services/api/submitFeedback';
 
+const RATING_SELECTOR = 'rating-selector';
+
 // Mock the submitFeedback API call
 jest.mock('src/services/api/submitFeedback', () => ({
   submitFeedback: jest.fn(),
@@ -28,7 +30,7 @@ describe('Feedback Component', () => {
 
     fireEvent.click(getByText(FEEDBACK_LABEL));
 
-    const ratingSelector = getByTestId('rating-selector');
+    const ratingSelector = getByTestId(RATING_SELECTOR);
     const fifthStar = ratingSelector.querySelector('i[aria-posinset="5"]');
     if (fifthStar) {
       fireEvent.click(fifthStar);
