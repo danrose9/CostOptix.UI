@@ -24,7 +24,7 @@ describe('Feedback Component', () => {
   });
 
   test('submitting feedback', async () => {
-    const { getByText, getByPlaceholderText, container, getByTestId, queryByText } = render(<Feedback />);
+    const { getByText, getByPlaceholderText, getByTestId, queryByText } = render(<Feedback />);
 
     fireEvent.click(getByText(FEEDBACK_LABEL));
 
