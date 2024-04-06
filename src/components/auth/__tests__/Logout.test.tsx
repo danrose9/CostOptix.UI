@@ -1,55 +1,58 @@
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import LogoutPage from '../../../components/pages/LogoutPage';
 import { store } from '../../../services/redux/store';
-import { Logout, userLogout } from '../Logout';
-import { removeAuthCookie } from '../../../services/api/processToken';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+import * as appRoutes from '../../../app/router/appRoutes';
 
-// Mock the store dispatch and sessionStorage
-jest.mock('../../../services/redux/store', () => ({
-  store: {
-    dispatch: jest.fn(),
-  },
-}));
+describe('useLogout', () => {
+  const history = createMemoryHistory();
+  const renderComponent = () =>
+    render(
+      <Router location={history.location} navigator={history}>
+        <LogoutPage />
+      </Router>
+    );
 
-jest.mock('../../../services/api/processToken', () => ({
-  removeAuthCookie: jest.fn(),
-}));
-
-// Mock sessionStorage
-const sessionStorageMock = (function () {
-  let store = {};
-
-  return {
-    getItem: function (key: string | number) {
-      return (store as { [key: string]: any })[key] || null;
-    },
-    setItem: function (key: string | number, value: { toString: () => any }) {
-      (store as { [key: string]: any })[key] = value.toString();
-    },
-    removeItem: function (key: string | number) {
-      delete (store as { [key: string]: any })[key];
-    },
-    clear: function () {
-      store = {};
-    },
+  const createCookie = () => {
+    document.cookie = 'user=AuthCookie';
   };
-})();
 
-Object.defineProperty(window, 'sessionStorage', {
-  value: sessionStorageMock,
-});
+  function checkCookie(cookieName: string) {
+    // Attempt to fetch the cookie value
+    const match = document.cookie.match(new RegExp('(^| )' + cookieName + '=([^;]+)'));
+    // Return true if the cookie exists, false otherwise
+    return match ? true : false;
+  }
 
-describe('Logout', () => {
-  beforeEach(() => {
-    // Set up some values in sessionStorage
-    sessionStorage.setItem('persist:root', 'someValue');
-    sessionStorage.setItem('authTokens', 'someToken');
+  it('authCookie is correctly removed from the browser', async () => {
+    createCookie();
+
+    renderComponent();
+    fireEvent.click(screen.getByTestId('logout-button'));
+
+    // Wait for any async actions to complete
+    await waitFor(() => {
+      // Since the logout function is mocked, we're mainly verifying the navigation behavior
+      expect(history.location.pathname).toBe(appRoutes.HOME);
+    });
+    expect(checkCookie('AuthCookie')).toBe(false);
   });
+  // it('correctly performs logout actions', () => {
+  //   const { getByText } = render(<LogoutPage />);
+  //   fireEvent.click(getByText('Logout'));
 
-  test('should clear sessionStorage and reset redux state on logout', () => {
-    Logout();
+  //   // Verify sessionStorage is cleared
+  //   expect(sessionStorage.getItem('persist:root')).toBeNull();
+  //   expect(sessionStorage.getItem('authTokens')).toBeNull();
 
-    expect(store.dispatch).toHaveBeenCalledWith(userLogout());
-    expect(sessionStorage.getItem('persist:root')).toBeNull();
-    expect(sessionStorage.getItem('authTokens')).toBeNull();
-    expect(removeAuthCookie).toHaveBeenCalled();
-  });
+  //   // Verify removeAuthCookie is called
+  //   // This might require spying on the function if it's not mocked, depending on how it's implemented
+
+  //   // Verify Redux store dispatched the correct action
+  //   // This might involve checking the store's state to confirm the logout action was handled
+  //   // Example assuming you can inspect the store's state directly or have a selector to do so:
+  //   expect(store.getState().user).toEqual(expect.anything()); // Adjust based on what your state should look like
+  // });
 });

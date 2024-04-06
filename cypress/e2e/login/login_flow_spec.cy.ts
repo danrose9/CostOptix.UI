@@ -6,6 +6,15 @@ describe('Login flow', () => {
     cy.visit('/');
   });
 
+  /* 
+    For a login test, you will need to:
+    1. Create an Organization in the by calling the API directly
+    2. Create a user in the organization in the by calling the API directly
+    3. Click the "Login" button or the "Get Started" button and login with the user you created
+    4. Click the "Logout" button to logout
+    5. Purge the user and organization you created
+  */
+
   test('#4. user is signed up and is redirected to login successfully when clicking signup button', () => {
     cy.get('[data-testid="get-started-button"]').click();
     cy.url().should('eq', `${Cypress.config().baseUrl}${appRoutes.SIGNUP}`);
