@@ -51,8 +51,25 @@ export const isAuthCookieAvailable = () => {
 /// <summary>
 /// Removes the authTokens in sessionStorage
 /// <summary>
+export const removeAuthCookieAsync = (): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    try {
+      let cookie_name = 'AuthCookie=';
+      document.cookie = cookie_name + '=; Path=/; domain=localhost; Max-Age=0';
+      document.cookie = cookie_name + '=; Path=/; domain=.costoptix.com; Max-Age=0';
+      resolve('Cookie removed successfully');
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+/// <summary>
+/// Removes the authTokens in sessionStorage
+/// <summary>
 export const removeAuthCookie = () => {
   let cookie_name = 'AuthCookie=';
+  document.cookie = cookie_name + '=; Path=/; domain=localhost; Max-Age=0';
   document.cookie = cookie_name + '=; Path=/; domain=.costoptix.com; Max-Age=0';
 };
 

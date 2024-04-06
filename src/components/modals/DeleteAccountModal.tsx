@@ -3,7 +3,7 @@ import { Modal, Button, Header, Icon, Form, Message } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import { IRootState } from 'src/services/redux/rootReducer';
 import { reduxState } from 'src/services/redux/reduxState';
-import { Logout } from '../../components/auth/Logout';
+import { useLogout } from 'src/hooks/useLogout';
 import * as appRoutes from '../../app/router/appRoutes';
 import { useNavigate } from 'react-router-dom';
 import { deleteOrganization } from 'src/services/api/deleteOrganization';
@@ -15,6 +15,7 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
   const [firstOpen, setFirstOpen] = useState(false);
   const [secondOpen, setSecondOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const { logout } = useLogout();
 
   const [showWarning, setShowWarning] = useState(false);
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const DeleteAccountModal: React.FunctionComponent<IDeleteAccountProps> = () => {
 
     // Check if the response is 204 (No Content) which indicates successful deletion
     if (response && response.status === 204) {
-      Logout();
+      await logout();
       navigate(appRoutes.HOME);
     } else {
       setShowWarning(true);

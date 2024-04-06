@@ -10,9 +10,8 @@ import { HomePageDropdownItems } from './HomePageDropdownItems';
 import ReactGA from 'react-ga4';
 import { eventTypes } from 'src/hooks/useTrackEvent';
 import { useMobileDevice } from 'src/hooks/useMobileDevice';
+import HomePageNavLogin from './HomePageNavLogin';
 
-const LOGIN = 'Login';
-const GET_STARTED = 'Get Started';
 const HELP_CENTER = 'Help Center';
 
 const Navbar = styled.div`
@@ -54,22 +53,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
         {HELP_CENTER}
       </HomePageButton>
       <HomePageDropdownItems />
-      <HomePageButton
-        className="login"
-        onClick={() => handleButtonClick(appRoutes.LOGIN, eventTypes.LOGIN_BUTTON)}
-        role="button"
-        data-testid="login-ext-button"
-      >
-        {LOGIN}
-      </HomePageButton>
-      <HomePageButton
-        className="get-started"
-        onClick={() => handleButtonClick(appRoutes.SIGNUP, eventTypes.SIGNUP_BUTTON)}
-        role="button"
-        data-testid="get-started-button"
-      >
-        {GET_STARTED}
-      </HomePageButton>
+      <HomePageNavLogin />
     </Menu.Menu>,
     640,
     false

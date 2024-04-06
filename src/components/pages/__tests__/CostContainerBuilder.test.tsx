@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import CostContainerBuilder from '../builder/CostContainerBuilder';
-import { ApplicationWrapper } from '../../../../tests/helpers';
+import CostContainerBuilder from '../cost-containers/builder/CostContainerBuilder';
+import { ApplicationWrapper } from '../../../tests/helpers';
 
 const mockSelectedContainer = {
   id: 'test id',

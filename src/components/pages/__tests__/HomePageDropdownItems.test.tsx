@@ -2,8 +2,8 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { HomePageDropdownItems } from '../HomePageDropdownItems';
-import * as appRoutes from '../../../../app/router/appRoutes';
+import { HomePageDropdownItems } from '../homepage/HomePageDropdownItems';
+import * as appRoutes from '../../../app/router/appRoutes';
 import { createMemoryHistory } from 'history';
 
 describe('HomePageDropdownItems', () => {

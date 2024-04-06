@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import Signup from '../Signup';
-import * as appRoutes from '../../../../app/router/appRoutes';
+import Signup from '../auth/Signup';
+import * as appRoutes from '../../../app/router/appRoutes';
 
 describe('Signup Component', () => {
   beforeEach(() => {

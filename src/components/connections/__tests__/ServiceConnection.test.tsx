@@ -3,7 +3,7 @@
  * ALL RIGHTS RESERVED
  */
 
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Card } from 'semantic-ui-react';
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import { AddServiceAzure } from '../index';

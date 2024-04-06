@@ -11,7 +11,7 @@ import ErrorDefault from '../components/pages/ErrorDefault';
 import { ErrorBoundary } from 'react-error-boundary';
 import { isAuthenticated } from '../services/api/processToken';
 import Tour from '../components/productTour/Tour';
-import { Logout } from 'src/components/auth/Logout';
+import { useLogout } from 'src/hooks/useLogout';
 
 const SESSION_TIMEOUT = process.env.REACT_APP_SESSION_TIMEOUT;
 
@@ -20,6 +20,7 @@ export const AppContent = () => {
   const [startTimer, setStartTimer] = useState(false);
 
   const location = useLocation();
+  const { logout } = useLogout();
   const { startTour } = location.state || {};
 
   const showSidebar = () => {
@@ -65,7 +66,7 @@ export const AppContent = () => {
         FallbackComponent={ErrorDefault}
         onReset={() => {
           console.warn('Application Reset');
-          Logout();
+          logout();
           navigate(appRoutes.ROOT);
         }}
       >
