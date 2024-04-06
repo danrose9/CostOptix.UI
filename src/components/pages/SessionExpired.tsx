@@ -2,11 +2,12 @@ import React, { useEffect, useCallback } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
-import { Logout } from '../auth/Logout';
+import { useLogout } from 'src/hooks/useLogout';
 import { useIsDemo } from '../hoc/withDemo';
 
 const SessionExpired = () => {
   const navigate = useNavigate();
+  const { logout } = useLogout();
 
   const isDemo = useIsDemo();
 
@@ -15,7 +16,7 @@ const SessionExpired = () => {
   }, [navigate]);
 
   useEffect(() => {
-    Logout();
+    logout();
   }, []);
 
   useEffect(() => {

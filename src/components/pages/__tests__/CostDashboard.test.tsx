@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, screen } from '@testing-library/react';
-import CostDashboard from '../CostDashboard';
-import { ApplicationWrapper } from '../../../../tests/helpers';
+import CostDashboard from '../cost-dashboard/CostDashboard';
+import { ApplicationWrapper } from '../../../tests/helpers';
 import { ApplicationContext } from 'src/app/ApplicationContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 

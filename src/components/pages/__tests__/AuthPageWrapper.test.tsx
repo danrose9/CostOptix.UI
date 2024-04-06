@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import AuthPageWrapper from '../AuthPageWrapper';
+import AuthPageWrapper from '../auth/AuthPageWrapper';
 
 describe('AuthPageWrapper', () => {
   beforeEach(() => {

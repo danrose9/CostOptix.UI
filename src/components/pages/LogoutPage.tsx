@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../app/router/appRoutes';
-import { Logout } from '../auth/Logout';
+import { useLogout } from '../../hooks/useLogout';
 
 const LogoutPage = () => {
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
+  const { logout } = useLogout();
+
   const handleLogout = () => {
-    Logout();
+    logout();
     navigate(appRoutes.HOME);
   };
 
