@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FONT } from 'src/app/constants';
 
 export const PageContainer = styled.div`
   overflow: hidden;
@@ -84,6 +85,14 @@ export const StyledColumn = styled.div`
     width: 90%;
     padding: 1em 3em;
   }
+`;
+
+export const WelcomeSubHeader = styled.p`
+  padding: 1em 0 0;
+  font-weight: 500;
+  font-size: 1.2em;
+  text-align: center;
+  color: ${FONT.STAT};
 `;
 
 export const WelcomeDescription = styled.p`

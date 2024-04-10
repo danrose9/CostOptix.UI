@@ -29,6 +29,11 @@ const content = {
   DEMO_BUTTON: 'View Demo',
 };
 
+const mobile = {
+  TITLE: 'CostOptix is now available!',
+  MESSAGE: 'For the best experience, please use a desktop or tablet device.',
+};
+
 const HomePage = () => {
   const dispatch = useDispatch();
 
@@ -39,11 +44,7 @@ const HomePage = () => {
 
   const MobileMessageBox = useMobileDevice(
     <Container>
-      <MessageBox
-        title="CostOptix is now available!"
-        message="For the best experience, please use a desktop or tablet device."
-        color="yellow"
-      />
+      <MessageBox title={mobile.TITLE} message={mobile.MESSAGE} color="yellow" />
     </Container>,
     640
   );

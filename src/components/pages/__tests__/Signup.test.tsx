@@ -18,7 +18,7 @@ describe('Signup Component', () => {
   });
 
   test('should render the Signup component', () => {
-    expect(screen.getByText('Welcome to CostOptix')).toBeInTheDocument();
+    expect(screen.getByText('Start your trial')).toBeInTheDocument();
   });
 
   test('should navigate to HOME when CloseButton is clicked', () => {

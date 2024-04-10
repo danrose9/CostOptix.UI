@@ -9,6 +9,7 @@ import {
   WelcomeDescription,
   IdpContainer,
   LoginContainer,
+  WelcomeSubHeader,
 } from './AuthStyles';
 import AuthPageWrapper from './AuthPageWrapper';
 import { validateEmail } from '../../../utils/formValidation';
@@ -17,10 +18,15 @@ import styled from 'styled-components';
 import LegalDeclarationsModal from 'src/components/modals/LegalDeclarationsModal';
 import { TermsOfService } from 'src/app/constants';
 
+const SignUpHeader = 'Start your trial';
+const SignUpSubHeader = 'Free 3-month trial, no obligation!';
+const SignUpDescription =
+  'To get started for free, please provide the name of your organization and a contact email address.';
+const SignupFooterMessage = 'Already signed up? Log in with single sign on';
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-
 const TermsOfServiceWrapper = styled.div`
   display: flex;
   & > a {
@@ -64,12 +70,10 @@ const Signup: React.FC<ISignupProps> = (props) => {
           <StyledColumn>
             <Form>
               <Header as="h2" color="teal" textAlign="center">
-                Welcome to CostOptix
+                {SignUpHeader}
               </Header>
-
-              <WelcomeDescription>
-                To get started please let us know the name of your organization and a contact email address.
-              </WelcomeDescription>
+              <WelcomeSubHeader>{SignUpSubHeader}</WelcomeSubHeader>
+              <WelcomeDescription>{SignUpDescription}</WelcomeDescription>
               <Form.Input
                 icon="building"
                 iconPosition="left"
@@ -122,9 +126,7 @@ const Signup: React.FC<ISignupProps> = (props) => {
               />
             </IdpContainer>
             {error ? null : (
-              <LoginContainer onClick={() => navigate(appRoutes.LOGIN)}>
-                Already signed up? Log in with single sign on
-              </LoginContainer>
+              <LoginContainer onClick={() => navigate(appRoutes.LOGIN)}>{SignupFooterMessage}</LoginContainer>
             )}
           </StyledColumn>
         </StyledGrid>
