@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import { useLogout } from 'src/hooks/useLogout';
 import { useIsDemo } from 'src/components/hoc/withDemo';
-import { log } from 'console';
 
 const LOGIN = 'Login';
-const GET_STARTED = 'Get Started';
+const GET_STARTED = 'Get Started Free';
+
 interface HomePageNavButtonGroupProps {}
 
 const HomePageNavLogin: React.FC<HomePageNavButtonGroupProps> = (props) => {
@@ -21,7 +21,7 @@ const HomePageNavLogin: React.FC<HomePageNavButtonGroupProps> = (props) => {
     ReactGA.event(eventType);
     navigate(route);
     if (isDemo) {
-      await logout();
+      logout();
     }
   };
   return (

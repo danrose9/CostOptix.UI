@@ -116,9 +116,10 @@ export const HomePageButton = styled.button`
   justify-content: center;
   height: 3em;
   margin: 1em;
-  width: 8em;
+  width: 10em;
   align-items: center;
   border: none;
+  position: relative;
   
   &.transparent {
     background-color: transparent;
