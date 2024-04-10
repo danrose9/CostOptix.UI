@@ -6,7 +6,7 @@ exports[`Home Page matches snapshot 1`] = `
   data-testid="homePage-2"
 >
   <div
-    className="sc-csuSiG ecoRFI"
+    className="sc-eDWCr dIhCdL"
   >
     <div
       className="ui green fluid secondary menu"
@@ -16,7 +16,7 @@ exports[`Home Page matches snapshot 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-eDWCr gvCYGp"
+          className="sc-bqWxrE dinsOJ"
         >
           <img
             className="ui medium image"
@@ -29,7 +29,7 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-kDvujY lAOLl transparent shift-right"
+          className="sc-kDvujY kgXGsi transparent shift-right"
           data-testid="support-button"
           onClick={[Function]}
           role="button"
@@ -37,22 +37,17 @@ exports[`Home Page matches snapshot 1`] = `
           Help Center
         </button>
         <button
-          className="sc-kDvujY lAOLl transparent"
+          className="sc-kDvujY kgXGsi transparent"
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          style={
-            Object {
-              "position": "relative",
-            }
-          }
         >
           Legal
         </button>
         <button
-          className="sc-kDvujY lAOLl login"
+          className="sc-kDvujY kgXGsi login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -60,12 +55,12 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-kDvujY lAOLl get-started"
+          className="sc-kDvujY kgXGsi get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
         >
-          Get Started
+          Get Started Free
         </button>
       </div>
     </div>
@@ -102,7 +97,7 @@ exports[`Home Page matches snapshot 1`] = `
           method="POST"
         >
           <button
-            className="sc-kDvujY lAOLl view-demo"
+            className="sc-kDvujY kgXGsi view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >
