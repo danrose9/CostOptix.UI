@@ -1,3 +1,5 @@
+import { SemanticICONS } from 'semantic-ui-react';
+
 export interface ISidebarItem {
   title: string;
   id?: string;
@@ -19,4 +21,13 @@ export interface ISubmenuItem {
   category?: string;
   tags?: string[];
   summary?: string;
+}
+
+export interface HomePageDropdownItem {
+  index: number;
+  className?: string;
+  icon: string;
+  title: string;
+  content: string;
+  navigate: string;
 }

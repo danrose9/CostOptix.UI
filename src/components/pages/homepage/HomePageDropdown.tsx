@@ -7,39 +7,39 @@ import {
 } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import * as appRoutes from '../../../app/router/appRoutes';
 import { HomePageButton } from '../../__styles__/HomePageStyles';
-
-const LegalButtonName = 'Legal';
-const PrivacyItemName = 'Privacy Policy';
-const PrivacyItemDescription = 'How we handle your personal information.';
-const TermsItemName = 'Terms of Service';
-const TermsItemDescription = 'Agreement defining use of a service.';
+import { HomePageDropdownItem } from 'src/types/menu-types';
 
 const DropdownTransitionEffects = { animation: 'fade up', duration: 1000 };
 const TransitionMouseLeaveDelay = 500;
 
 const Message = styled(SemanticMessage)`
   cursor: pointer;
-  &.privacy {
+  &.shift-right {
     > .icon {
-      margin-right: 0.9em;
+      margin-right: 0.8em;
     }
   }
 `;
 
 const Segment = styled(SemanticSegment)`
-  right: 18em;
+  right: 25em;
   position: absolute !important;
   top: 5em;
   z-index: 1000;
+  width: 20em;
 `;
 
 const Icon = styled(SemanticIcon)`
   padding-left: 1em;
 `;
 
-export const HomePageDropdownItems = () => {
+interface HomePageDropdownProps {
+  title: string;
+  items: HomePageDropdownItem[];
+}
+
+export const HomePageDropdown: React.FC<HomePageDropdownProps> = ({ title, items }) => {
   const navigate = useNavigate();
   const handleOnClick = (route: string) => {
     navigate(route);
@@ -54,29 +54,25 @@ export const HomePageDropdownItems = () => {
       transition={DropdownTransitionEffects}
       trigger={
         <HomePageButton className="transparent">
-          {LegalButtonName} <Icon name="angle down" />
+          {title} <Icon name="angle down" />
         </HomePageButton>
       }
     >
       <Segment>
         <>
-          <Message
-            className="privacy"
-            size="mini"
-            icon="privacy"
-            header={PrivacyItemName}
-            content={PrivacyItemDescription}
-            data-testid="privacy"
-            onClick={() => handleOnClick(appRoutes.PRIVACY)}
-          />
-          <Message
-            size="mini"
-            icon="handshake outline"
-            header={TermsItemName}
-            content={TermsItemDescription}
-            data-testid="terms"
-            onClick={() => handleOnClick(appRoutes.TERMS)}
-          />
+          {items.map((item, index) => {
+            return (
+              <Message
+                size="mini"
+                className={item.className}
+                icon={item.icon}
+                header={item.title}
+                content={item.content}
+                // data-testid="privacy"
+                onClick={() => handleOnClick(item.navigate)}
+              />
+            );
+          })}
         </>
       </Segment>
     </TransitionablePortal>

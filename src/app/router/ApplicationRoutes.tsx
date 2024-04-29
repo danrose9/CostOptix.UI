@@ -7,6 +7,9 @@ import { TITLE } from '../constants/application';
 import { TermsOfService, PrivacyPolicy } from '../constants';
 import { useLocation } from 'react-router-dom';
 import { useTrackPageView } from 'src/hooks/useTrackPageView';
+import Pricing from 'src/components/Pricing';
+import HelpCenter from 'src/components/help-center/HelpCenter';
+import ContactUs from 'src/components/ContactUs';
 
 export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.HOME,
@@ -17,6 +20,8 @@ export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.TERMS,
   appRoutes.PRIVACY,
   appRoutes.HELP_CENTER,
+  appRoutes.CONTACT_PAGE,
+  appRoutes.PRICING_PAGE,
 ];
 
 export const ApplicationRoutes = () => {
@@ -38,7 +43,9 @@ export const ApplicationRoutes = () => {
       />
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
-      <Route path={appRoutes.HELP_CENTER} element={<page.HelpCenter />} />
+      <Route path={appRoutes.HELP_CENTER} element={<page.ExternalPage children={<HelpCenter />} />} />
+      <Route path={appRoutes.PRICING_PAGE} element={<page.ExternalPage children={<Pricing />} />} />
+      <Route path={appRoutes.CONTACT_PAGE} element={<page.ExternalPage children={<ContactUs />} />} />
       <Route
         path={appRoutes.LOGOUT}
         element={

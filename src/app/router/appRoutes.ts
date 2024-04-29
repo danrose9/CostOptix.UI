@@ -31,3 +31,5 @@ export const COMPONENTS = '/components';
 export const TRANSITION = '/components/transition';
 export const QUERYFILTER = '/components/queryfilter';
 export const HELP_CENTER = '/help-center';
+export const PRICING_PAGE = '/pricing';
+export const CONTACT_PAGE = '/contact';

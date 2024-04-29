@@ -95,6 +95,7 @@ export const HomePageActions = styled.div`
   flex-grow: 3;
   position: relative;
   left: 3em;
+  display: flex;
 `;
 
 export const MenuItem = styled(Menu.Item)`
@@ -131,7 +132,7 @@ export const HomePageButton = styled.button`
   }
 
   &.shift-right {
-    margin-right: 0.1em;
+    width: 4em;
   }
 
   &.get-started {
@@ -148,6 +149,15 @@ export const HomePageButton = styled.button`
 
     &:hover {
       background-color: ${COLORS.BUTTONS.POSITIVE_HIGHLIGHT};
+    }
+  }
+
+    &.book-demo {
+    background-color: ${COLORS.BUTTONS.PRIMARY};
+    color: ${COLORS.WHITE};
+
+    &:hover {
+      background-color: ${COLORS.BUTTONS.PRIMARY_HIGHLIGHT};
     }
   }
 

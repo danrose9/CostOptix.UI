@@ -10,8 +10,8 @@ export const COLORS = {
   //   ERROR: '#e74c3c',
   //   SUCCESS: '#2ecc71',
   BUTTONS: {
-    PRIMARY: '#2185D0',
-    PRIMARY_HIGHLIGHT: '#104268',
+    PRIMARY: '#4593CE',
+    PRIMARY_HIGHLIGHT: '#1678C2',
     POSITIVE: '#21BA45',
     POSITIVE_HIGHLIGHT: '#1A9437',
     BORDER: '#C4C4C4',

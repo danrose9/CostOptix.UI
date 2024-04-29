@@ -6,7 +6,7 @@ exports[`Home Page matches snapshot 1`] = `
   data-testid="homePage-2"
 >
   <div
-    className="sc-eDWCr dIhCdL"
+    className="sc-bqWxrE bnxYDj"
   >
     <div
       className="ui green fluid secondary menu"
@@ -16,7 +16,7 @@ exports[`Home Page matches snapshot 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-bqWxrE dinsOJ"
+          className="sc-ksBlkl iSLJgr"
         >
           <img
             className="ui medium image"
@@ -29,25 +29,31 @@ exports[`Home Page matches snapshot 1`] = `
         className="right menu"
       >
         <button
-          className="sc-kDvujY kgXGsi transparent shift-right"
+          className="sc-kDvujY eDLHin transparent shift-right"
           data-testid="support-button"
           onClick={[Function]}
           role="button"
         >
-          Help Center
+          Pricing
         </button>
         <button
-          className="sc-kDvujY kgXGsi transparent"
+          className="sc-kDvujY eDLHin transparent"
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          Legal
+          Support
+           
+          <i
+            aria-hidden="true"
+            className="angle down icon sc-eDWCr kvFrTm"
+            onClick={[Function]}
+          />
         </button>
         <button
-          className="sc-kDvujY kgXGsi login"
+          className="sc-kDvujY eDLHin login"
           data-testid="login-ext-button"
           onClick={[Function]}
           role="button"
@@ -55,7 +61,7 @@ exports[`Home Page matches snapshot 1`] = `
           Login
         </button>
         <button
-          className="sc-kDvujY kgXGsi get-started"
+          className="sc-kDvujY eDLHin get-started"
           data-testid="get-started-button"
           onClick={[Function]}
           role="button"
@@ -90,20 +96,27 @@ exports[`Home Page matches snapshot 1`] = `
         </p>
       </div>
       <div
-        className="sc-pyfCe ctoBuz"
+        className="sc-pyfCe fvoqiF"
       >
         <form
           action="undefinedAccount/DemoLogin?returnUrl=/init"
           method="POST"
         >
           <button
-            className="sc-kDvujY kgXGsi view-demo"
+            className="sc-kDvujY eDLHin view-demo"
             data-testid="login-demo-button"
             onClick={[Function]}
           >
             View Demo
           </button>
         </form>
+        <button
+          className="sc-kDvujY eDLHin book-demo"
+          data-testid="book-demo-button"
+          onClick={[Function]}
+        >
+          Schedule a Demo
+        </button>
       </div>
     </div>
     <div
