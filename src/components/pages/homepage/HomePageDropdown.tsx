@@ -7,7 +7,7 @@ import {
 } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { HomePageButton } from '../../__styles__/HomePageStyles';
+import { HomePageButton } from '../../__styles__/ExternalPageStyles';
 import { HomePageDropdownItem } from 'src/types/menu-types';
 
 const DropdownTransitionEffects = { animation: 'fade up', duration: 1000 };
@@ -60,9 +60,10 @@ export const HomePageDropdown: React.FC<HomePageDropdownProps> = ({ title, items
     >
       <Segment>
         <>
-          {items.map((item, index) => {
+          {items.map((item) => {
             return (
               <Message
+                key={item.index}
                 size="mini"
                 className={item.className}
                 icon={item.icon}

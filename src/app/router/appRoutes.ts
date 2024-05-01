@@ -33,3 +33,4 @@ export const QUERYFILTER = '/components/queryfilter';
 export const HELP_CENTER = '/help-center';
 export const PRICING_PAGE = '/pricing';
 export const CONTACT_PAGE = '/contact';
+export const SCHEDULE_DEMO = '/contact/schedule-demo';

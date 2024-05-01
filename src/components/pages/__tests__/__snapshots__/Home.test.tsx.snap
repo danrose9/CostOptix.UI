@@ -6,7 +6,7 @@ exports[`Home Page matches snapshot 1`] = `
   data-testid="homePage-2"
 >
   <div
-    className="sc-bqWxrE bnxYDj"
+    className="sc-bjfHbI iFfliB"
   >
     <div
       className="ui green fluid secondary menu"
@@ -16,7 +16,7 @@ exports[`Home Page matches snapshot 1`] = `
         onClick={[Function]}
       >
         <div
-          className="sc-ksBlkl iSLJgr"
+          className="sc-idXgbr fFhfgI"
         >
           <img
             className="ui medium image"
@@ -48,7 +48,7 @@ exports[`Home Page matches snapshot 1`] = `
            
           <i
             aria-hidden="true"
-            className="angle down icon sc-eDWCr kvFrTm"
+            className="angle down icon sc-fEXmlR hlSKqV"
             onClick={[Function]}
           />
         </button>

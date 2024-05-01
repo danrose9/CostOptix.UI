@@ -15,13 +15,13 @@ export const supportDropdownItems: HomePageDropdownItem[] = [
     title: 'Schedule a Demo',
     icon: 'clock outline',
     content: 'Schedule a demo with our team',
-    navigate: appRoutes.CONTACT_PAGE,
+    navigate: appRoutes.SCHEDULE_DEMO,
   },
   {
     index: 3,
     title: 'Privacy',
     icon: 'key',
-    content: 'How we hanlde your personal information',
+    content: 'How we handle your personal information',
     navigate: appRoutes.PRIVACY,
   },
   {

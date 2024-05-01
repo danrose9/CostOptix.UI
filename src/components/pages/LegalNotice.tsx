@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContainer, HomePageMainContent } from '../__styles__/HomePageStyles';
+import { PageContainer, HomePageMainContent } from '../__styles__/ExternalPageStyles';
 import { Header, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import HomePageNav from './homepage/HomePageNav';

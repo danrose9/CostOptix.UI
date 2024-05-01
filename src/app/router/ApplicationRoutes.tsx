@@ -10,6 +10,7 @@ import { useTrackPageView } from 'src/hooks/useTrackPageView';
 import Pricing from 'src/components/Pricing';
 import HelpCenter from 'src/components/help-center/HelpCenter';
 import ContactUs from 'src/components/ContactUs';
+import ScheduleDemo from 'src/components/ScheduleDemo';
 
 export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.HOME,
@@ -22,6 +23,7 @@ export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.HELP_CENTER,
   appRoutes.CONTACT_PAGE,
   appRoutes.PRICING_PAGE,
+  appRoutes.SCHEDULE_DEMO,
 ];
 
 export const ApplicationRoutes = () => {
@@ -46,6 +48,7 @@ export const ApplicationRoutes = () => {
       <Route path={appRoutes.HELP_CENTER} element={<page.ExternalPage children={<HelpCenter />} />} />
       <Route path={appRoutes.PRICING_PAGE} element={<page.ExternalPage children={<Pricing />} />} />
       <Route path={appRoutes.CONTACT_PAGE} element={<page.ExternalPage children={<ContactUs />} />} />
+      <Route path={appRoutes.SCHEDULE_DEMO} element={<page.ExternalPage children={<ScheduleDemo />} />} />
       <Route
         path={appRoutes.LOGOUT}
         element={
