@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomePageButton } from '../../__styles__/HomePageStyles';
+import { HomePageButton } from '../../__styles__/ExternalPageStyles';
 import ReactGA from 'react-ga4';
 import { eventTypes } from 'src/hooks/useTrackEvent';
 import { useNavigate } from 'react-router-dom';

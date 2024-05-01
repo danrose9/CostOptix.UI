@@ -7,6 +7,13 @@ export const PageSegment = styled(Segment)`
   height: 100%;
 `;
 
+export const PageSection = styled.div`
+  display: flex;
+  height: auto;
+  width: 100%;
+  align-self: center;
+`;
+
 export const DashboardHeader = styled.div`
   display: flex;
   text-align: center;

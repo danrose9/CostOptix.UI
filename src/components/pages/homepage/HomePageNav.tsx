@@ -1,18 +1,20 @@
 import React from 'react';
-import { HomePageButton } from '../../__styles__/HomePageStyles';
+import { HomePageButton } from '../../__styles__/ExternalPageStyles';
 import { Image, Menu } from 'semantic-ui-react';
 import * as images from '../../../assets/index';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import styled from 'styled-components';
 import { COLORS } from 'src/app/constants';
-import { HomePageDropdownItems } from './HomePageDropdownItems';
+// import { HomePageDropdownItems } from './HomePageDropdownItems';
+import { HomePageDropdown } from './HomePageDropdown';
 import ReactGA from 'react-ga4';
 import { eventTypes } from 'src/hooks/useTrackEvent';
 import { useMobileDevice } from 'src/hooks/useMobileDevice';
 import HomePageNavLogin from './HomePageNavLogin';
+import { supportDropdownItems } from './supportDropdownItems';
 
-const HELP_CENTER = 'Help Center';
+const PRICING_PAGE = 'Pricing';
 
 const Navbar = styled.div`
   height: 10%;
@@ -46,13 +48,13 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
     <Menu.Menu position="right">
       <HomePageButton
         className="transparent shift-right"
-        onClick={() => handleButtonClick(appRoutes.HELP_CENTER, eventTypes.HELP_CENTER_BUTTON_CLICK)}
+        onClick={() => handleButtonClick(appRoutes.PRICING_PAGE, eventTypes.PRICING_PAGE_BUTTON_CLICK)}
         role="button"
         data-testid="support-button"
       >
-        {HELP_CENTER}
+        {PRICING_PAGE}
       </HomePageButton>
-      <HomePageDropdownItems />
+      <HomePageDropdown title="Support" items={supportDropdownItems} />
       <HomePageNavLogin />
     </Menu.Menu>,
     640,
