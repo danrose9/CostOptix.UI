@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import HelpCenterBanner from '../HelpCenterBanner';
-import { Container } from 'semantic-ui-react';
 import { COLORS, FONT } from '../../app/constants';
 import HelpCenterArticle from './HelpCenterArticle';
 import { Sidebar } from '../sidebar/Sidebar';
@@ -14,13 +13,6 @@ import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
 import SearchDocument from '../search/SearchDocument';
 
 const HELP_CENTER = 'Help Center';
-
-const ContentContainer = styled(Container)`
-  p,
-  li {
-    color: ${FONT.SECONDARY_COLOR} !important;
-  }
-`;
 
 const SidebarWrapper = styled.div`
   width: 20%;
@@ -93,7 +85,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   });
 
   return (
-    <ContentContainer>
+    <>
       <HelpCenterBanner className="min-left-padding" heading={HELP_CENTER} />
       <HelpCenterWrapper>
         <SidebarWrapper>
@@ -109,7 +101,7 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
           {showGetStarted ? <GetStartedDocument /> : <HelpCenterArticle documentRecord={documentRecord} />}
         </ContentWrapper>
       </HelpCenterWrapper>
-    </ContentContainer>
+    </>
   );
 };
 

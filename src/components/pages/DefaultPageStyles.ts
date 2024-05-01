@@ -10,7 +10,7 @@ export const PageSegment = styled(Segment)`
 export const PageSection = styled.div`
   display: flex;
   height: auto;
-  width: 90%;
+  width: 100%;
   align-self: center;
 `;
 

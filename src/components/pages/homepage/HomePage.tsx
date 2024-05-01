@@ -9,7 +9,7 @@ import {
   HomePageSubTitle,
   HomePageActions,
   HomePageButton,
-} from '../../__styles__/HomePageStyles';
+} from '../../__styles__/ExternalPageStyles';
 import { BASE, DEMO_LOGIN } from '../../../services/api/apiEndpoints';
 import HomePageNav from './HomePageNav';
 import { AppDispatch } from 'src/services/redux/store';
@@ -48,7 +48,7 @@ const HomePage = () => {
 
   const handleBookDemoClick = () => {
     ReactGA.event(eventTypes.BOOK_DEMO_BUTTON_CLICK);
-    navigate(appRoutes.CONTACT_PAGE);
+    navigate(appRoutes.SCHEDULE_DEMO);
   };
 
   const MobileMessageBox = useMobileDevice(

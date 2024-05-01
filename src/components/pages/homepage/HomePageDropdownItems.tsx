@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
-import { HomePageButton } from '../../__styles__/HomePageStyles';
+import { HomePageButton } from '../../__styles__/ExternalPageStyles';
 
 const LegalButtonName = 'Legal';
 const PrivacyItemName = 'Privacy Policy';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Menu, Card as SemanticCard } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
 import { COLORS, FONT } from '../../app/constants';
 
@@ -168,5 +168,71 @@ export const HomePageButton = styled.button`
     &:hover {
       border-color: #8B8B8B;
     }
+  }
+`;
+
+export const Segment = styled.div`
+  flex: 1;
+  text-align: center;
+  padding: 0 0 5em;
+`;
+
+export const FormContainer = styled.div`
+  width: 80%;
+  align-self: center;
+  padding: 4vh 0;
+  * label {
+    font-weight: 400 !important;
+    text-align: left !important;
+    padding-left: 0.2em;
+  }
+  * input {
+    border-radius: 5px !important;
+    margin: 0 0 1em 0 !important;
+  }
+  * button {
+    background-color: ${COLORS.BUTTONS.PRIMARY} !important;
+    color: ${FONT.WHITE} !important;
+    border-radius: 5px !important;
+    padding: 1em 2em !important;
+    margin: 2em 0 !important;
+    width: 100% !important;
+  }
+  .ui.form .field {
+    text-align: left !important;
+  }
+`;
+
+export const Card = styled(SemanticCard)`
+  width: auto !important;
+  border-radius: 25px !important;
+  box-shadow: 0 0 10px 0 ${COLORS.PRIMARY} !important;
+  overflow: hidden;
+`;
+
+export const CardHeader = styled.div`
+  background-color: ${COLORS.PRIMARY};
+  height: 7em;
+
+  & > p {
+    color: ${FONT.TERNARY_COLOR} !important;
+    font-size: 1.8em;
+    padding: 0.5em;
+  }
+`;
+
+export const DescriptionContainer = styled.div`
+  padding: 1em 4em 0 0;
+  text-align: left;
+  color: ${FONT.PRIMARY_COLOR} !important;
+  p {
+    font-size: 1.3em;
+    padding: 0.4em 0;
+  }
+  ul {
+    padding: 0 0 0 2em;
+  }
+  li {
+    padding: 0 1em 0.5em 1em;
   }
 `;
