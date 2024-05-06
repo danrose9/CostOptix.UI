@@ -11,13 +11,14 @@ import {
   TransitionablePortal,
 } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { submitFeedback } from '../services/api/submitFeedback';
+import { submitFeedback } from '../services/api/apiFeedback';
 
 export const FEEDBACK_PLACEHOLDER = 'Tell us more about your experience';
 export const FEEDBACK_LABEL = 'Feedback';
 const DEFAULT_RATING = 3;
 const DEFAULT_MAX_RATING = 5;
 const ANIMATION = { animation: 'fade up', duration: 1000 };
+const SIGNED_IN_USER_EMAIL = 'demo@demo.com';
 
 const FeedbackButton = styled.button`
   background-color: transparent;
@@ -44,7 +45,7 @@ export const Feedback = () => {
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    await submitFeedback({ rating, feedbackText });
+    await submitFeedback({ rating, message: feedbackText, contact: { email: SIGNED_IN_USER_EMAIL } });
     setFeedbackText('');
     setOpen(false);
   };
