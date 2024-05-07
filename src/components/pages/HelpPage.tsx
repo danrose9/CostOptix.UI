@@ -6,7 +6,7 @@ import HelpCenter from '../help-center/HelpCenter';
 export const HelpPage = () => {
   return (
     <PageWrapper>
-      <PageSection>
+      <PageSection className="narrow-column">
         <HelpCenter />
       </PageSection>
     </PageWrapper>
