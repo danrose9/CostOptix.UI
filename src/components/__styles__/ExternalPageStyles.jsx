@@ -8,7 +8,7 @@ export const PageContainer = styled(Container)`
   height: 100%;
   display: flex;
   flex-direction: column;
-  
+
   &.home-page {
     background-image: url(${backgroundImage});
     background-repeat: no-repeat;
@@ -23,6 +23,13 @@ export const PageContainer = styled(Container)`
     }
   }
 }
+`;
+
+export const LegalDocumentWrapper = styled.div`
+  margin: 3em 0 15em;
+  ul {
+    padding: 0 0 0 2em;
+  }
 `;
 
 export const HomePageMainContent = styled.div`

@@ -4,20 +4,20 @@ import { Header, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import HomePageNav from './homepage/HomePageNav';
 
-const StyledDiv = styled.div`
+export const StyledDiv = styled.div`
   line-height: 1.5em;
   font-size: 1.2rem;
 `;
 
-const StyledContainer = styled(Container)`
+export const StyledContainer = styled(Container)`
   padding-bottom: 5em;
 `;
 
-export const OrderedList = styled.ol`
-  list-style-type: none;
-  margin-left: 2em;
-  font-family: 'system-ui';
-`;
+// export const OrderedList = styled.ol`
+//   list-style-type: none;
+//   margin-left: 2em;
+//   font-family: 'system-ui';
+// `;
 
 interface ILegalNoticeProps {
   title: string;
