@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PageWrapper from './pages/PageWrapper';
 import { PageSection } from './pages/DefaultPageStyles';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import { submitDemoRequest, ContactInfo } from 'src/services/api/apiFeedback';
 import { validateEmail } from 'src/utils/formValidation';
 import {
@@ -10,6 +10,7 @@ import {
   Card,
   FormContainer,
   CardHeader,
+  Message,
 } from '../components/__styles__/ExternalPageStyles';
 
 export const ScheduleDemo = () => {
@@ -80,7 +81,7 @@ export const ScheduleDemo = () => {
               Our platform seamlessly integrates with Azure and Amazon Web Services to bring you huge cost saving
               benifits and impressive insights into your cloud spend.
             </p>
-            <p>Why take a Demo?</p>
+            <p>Why take a 30 minute Demo?</p>
             <ul>
               <p>
                 <li>

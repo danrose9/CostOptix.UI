@@ -15,7 +15,7 @@ interface IPageLayoutProps {
 }
 
 const PageContainer = styled.div`
-  padding: 1rem;
+  padding: 3vh;
   display: flex;
   flex-direction: column;
   height: 100%;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Container, Menu, Card as SemanticCard } from 'semantic-ui-react';
+import { Container, Menu, Card as SemanticCard, Message as SemanticMessage } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
 import { COLORS, FONT } from '../../app/constants';
 
@@ -79,6 +79,10 @@ export const HomePageTitle = styled.div`
       width: 100%;
       flex-grow: 1;
   }
+`;
+
+export const Message = styled(SemanticMessage)`
+  margin: 0 !important;
 `;
 
 export const HomePageSubTitle = styled.div`

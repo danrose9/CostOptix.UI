@@ -14,7 +14,7 @@ export const supportDropdownItems: HomePageDropdownItem[] = [
     index: 2,
     title: 'Schedule a Demo',
     icon: 'clock outline',
-    content: 'Schedule a demo with our team',
+    content: 'Schedule a 30 min demo with our team',
     navigate: appRoutes.SCHEDULE_DEMO,
   },
   {
@@ -28,7 +28,7 @@ export const supportDropdownItems: HomePageDropdownItem[] = [
     index: 4,
     title: 'Contact Us',
     icon: 'talk',
-    content: "We'd love to hear from you, get in touch with our team",
+    content: "Get in touch with our team, we'd love to hear from you",
     navigate: appRoutes.CONTACT_PAGE,
   },
 ];

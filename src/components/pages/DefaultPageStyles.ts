@@ -12,6 +12,9 @@ export const PageSection = styled.div`
   height: auto;
   width: 100%;
   align-self: center;
+  &.narrow-column {
+    width: 80%;
+    flex-direction: column;
 `;
 
 export const DashboardHeader = styled.div`
