@@ -38,11 +38,9 @@ export const ApplicationRoutes = () => {
       <Route path={appRoutes.LOGIN} element={<page.Login />} />
       <Route path={appRoutes.AUTH_RESPONSE} element={<page.AuthResponse />} />
       <Route path={appRoutes.HOME} element={<page.Home />} />
-      <Route path={appRoutes.TERMS} element={<page.LegalNotice title={TITLE.TERMS} content={<TermsOfService />} />} />
-      <Route
-        path={appRoutes.PRIVACY}
-        element={<page.LegalNotice title={TITLE.PRIVACY} content={<PrivacyPolicy />} />}
-      />
+      <Route path={appRoutes.TERMS} element={<page.ExternalPage children={<TermsOfService />} />} />
+      <Route path={appRoutes.PRIVACY} element={<page.ExternalPage children={<PrivacyPolicy />} />} />
+
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
       <Route path={appRoutes.HELP_CENTER} element={<page.ExternalPage children={<HelpCenter />} />} />
