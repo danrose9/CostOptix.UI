@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import HelpCenterBanner from '../HelpCenterBanner';
-import { COLORS, FONT } from '../../app/constants';
+import { COLORS } from '../../app/constants';
 import HelpCenterArticle from './HelpCenterArticle';
 import { Sidebar } from '../sidebar/Sidebar';
 import { SearchDocumentsResponseType } from 'src/services/api/fetchDocs';

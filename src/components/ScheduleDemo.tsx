@@ -21,6 +21,7 @@ export const ScheduleDemo = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [showValidationMessage, setShowValidationMessage] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const validateForm = validateEmail(emailAddress) && firstName.length > 0;
 
@@ -60,12 +61,21 @@ export const ScheduleDemo = () => {
     );
   };
 
+  const SuccessMessage = () => (
+    <Message color="green">
+      <Message.Content>
+        Thank you for your interest, one of our representatives will be in touch shortly
+      </Message.Content>
+    </Message>
+  );
+
   const handleOnSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (isFormValid) {
       const contactInfo: ContactInfo = { firstName, lastName, email: emailAddress, phone: phoneNumber, company };
       await submitDemoRequest({ contact: contactInfo });
       clearFields();
+      setShowSuccessMessage(true);
     } else {
       setShowValidationMessage(true);
     }
@@ -147,6 +157,7 @@ export const ScheduleDemo = () => {
                   onChange={updateFields}
                 />
                 {showValidationMessage ? <ValidationMessage /> : null}
+                {showSuccessMessage ? <SuccessMessage /> : null}
                 <Button type="submit" onClick={handleOnSubmit}>
                   Submit
                 </Button>

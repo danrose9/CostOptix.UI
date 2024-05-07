@@ -17,7 +17,7 @@ const SessionExpired = () => {
 
   useEffect(() => {
     logout();
-  }, []);
+  }, [logout]);
 
   useEffect(() => {
     if (isDemo) {

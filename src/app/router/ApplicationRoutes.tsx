@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import * as appRoutes from './appRoutes';
 import * as page from '../../components/pages/index';
 import PrivateRoute from './PrivateRoute';
-import { TITLE } from '../constants/application';
 import { TermsOfService, PrivacyPolicy } from '../constants';
 import { useLocation } from 'react-router-dom';
 import { useTrackPageView } from 'src/hooks/useTrackPageView';

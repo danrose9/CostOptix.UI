@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageWrapper from './pages/PageWrapper';
 import { PageSection } from './pages/DefaultPageStyles';
 import { Button, Form } from 'semantic-ui-react';
@@ -14,55 +14,65 @@ import {
 } from '../components/__styles__/ExternalPageStyles';
 
 export const ContactUs = () => {
-  const [emailAddress, setEmailAddress] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [comments, setComments] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    comments: '',
+  });
   const [isCallbackRequested, setIsCallbackRequested] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [showValidationMessage, setShowValidationMessage] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  const validateForm = validateEmail(emailAddress) && firstName.length > 0;
+  useEffect(() => {
+    const validateForm = () => {
+      if (isCallbackRequested) {
+        return formData.firstName.length > 0 && formData.comments.length > 0 && validateEmail(formData.emailAddress);
+      } else {
+        return formData.firstName.length > 0 && formData.comments.length > 0;
+      }
+    };
+    setIsFormValid(!!validateForm());
+  }, [formData, isCallbackRequested]);
 
   const updateFields = (e: any) => {
-    if (e.target.id === 'email') {
-      setEmailAddress(e.target.value);
-    }
-    if (e.target.id === 'firstName') {
-      setFirstName(e.target.value);
-    }
-    if (e.target.id === 'lastName') {
-      setLastName(e.target.value);
-    }
-    if (e.target.id === 'comments') {
-      setComments(e.target.value);
-    }
-    setIsFormValid(!!validateForm);
+    const { id, value } = e.target;
+    console.log(e.target.id);
+    setFormData((prevData) => ({ ...prevData, [id]: value }));
   };
 
   const clearFields = () => {
-    setEmailAddress('');
-    setFirstName('');
-    setLastName('');
-    setComments('');
+    setFormData({ firstName: '', lastName: '', emailAddress: '', comments: '' });
     setIsCallbackRequested(false);
+    setShowValidationMessage(false);
   };
 
-  const ValidationMessage = () => {
-    return (
-      <Message color="yellow">
-        <Message.Content>Please enter a valid name and email address</Message.Content>
-      </Message>
-    );
-  };
+  const ValidationMessage = () => (
+    <Message color="yellow">
+      <Message.Content>
+        Please ensure all required fields are properly filled and email is valid if callback is requested.
+      </Message.Content>
+    </Message>
+  );
 
-  const handleOnSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const SuccessMessage = () => (
+    <Message color="green">
+      <Message.Content>Thank you for you feedback!</Message.Content>
+    </Message>
+  );
+
+  const handleOnSubmit = async (event: any) => {
     event.preventDefault();
     if (isFormValid) {
-      // const feedbackArgs: SubmitFeedbackArgs = { comments, isCallbackRequested };
-
-      await submitFeedback({ message: comments, isCallbackRequested });
+      const { firstName, lastName, emailAddress, comments } = formData;
+      await submitFeedback({
+        contact: { firstName, lastName, email: emailAddress },
+        message: comments,
+        isCallbackRequested,
+      });
       clearFields();
+      setShowSuccessMessage(true);
     } else {
       setShowValidationMessage(true);
     }
@@ -78,8 +88,8 @@ export const ContactUs = () => {
               We mesh perfectly with top cloud services like Azure and Amazon Web Services, helping you snag major
               savings and unlock key insights into where your money's going.
             </p>
-            <p>
-              <ul>
+            <ul>
+              <p>
                 <li>
                   Custom fits: Your business is unique, right? Let's chat about how we can tweak our tools to fit just
                   what you need.
@@ -89,8 +99,8 @@ export const ContactUs = () => {
                   puzzles.
                 </li>
                 <li>Share your thoughts: Tell us what you love, what you don't. We love feedback!</li>
-              </ul>
-            </p>
+              </p>
+            </ul>
             <p>
               If you're curious to learn more or just have a few questions, get in touch. We're here to help you make
               the most of your cloud budget.
@@ -108,7 +118,7 @@ export const ContactUs = () => {
                   <Form.Input
                     label="First name"
                     placeholder="First name"
-                    value={firstName}
+                    value={formData.firstName}
                     id="firstName"
                     required
                     onChange={updateFields}
@@ -116,7 +126,7 @@ export const ContactUs = () => {
                   <Form.Input
                     label="Last Name"
                     placeholder="Last name"
-                    value={lastName}
+                    value={formData.lastName}
                     id="lastName"
                     onChange={updateFields}
                   />
@@ -124,23 +134,25 @@ export const ContactUs = () => {
                 <Form.Input
                   label="Email address"
                   placeholder="Email address"
-                  value={emailAddress}
-                  id="email"
+                  value={formData.emailAddress}
+                  id="emailAddress"
                   onChange={updateFields}
                 />
                 <Form.TextArea
                   label="Comments"
                   placeholder="Comments"
-                  value={comments}
+                  value={formData.comments}
                   id="comments"
                   required
                   onChange={updateFields}
                 />
                 <Form.Checkbox
                   label="Please get back in touch"
-                  // onChange={() => setIsCallBackRequested(!isCallBackRequested)}
+                  checked={isCallbackRequested}
+                  onChange={() => setIsCallbackRequested((prev) => !prev)}
                 />
-                {showValidationMessage ? <ValidationMessage /> : null}
+                {showValidationMessage && <ValidationMessage />}
+                {showSuccessMessage && <SuccessMessage />}
                 <Button type="submit" onClick={handleOnSubmit}>
                   Submit
                 </Button>

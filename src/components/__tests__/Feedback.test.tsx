@@ -2,12 +2,12 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Feedback, FEEDBACK_PLACEHOLDER, FEEDBACK_LABEL } from '../Feedback';
-import * as api from 'src/services/api/submitFeedback';
+import * as api from 'src/services/api/apiFeedback';
 
 const RATING_SELECTOR = 'rating-selector';
 
 // Mock the submitFeedback API call
-jest.mock('src/services/api/submitFeedback', () => ({
+jest.mock('src/services/api/apiFeedback', () => ({
   submitFeedback: jest.fn(),
 }));
 
@@ -47,7 +47,8 @@ describe('Feedback Component', () => {
 
     expect(api.submitFeedback).toHaveBeenCalledWith({
       rating: 5,
-      feedbackText: 'Great experience!',
+      contact: { email: 'demo@demo.com' },
+      message: 'Great experience!',
     });
 
     expect(api.submitFeedback).toHaveBeenCalledTimes(1);
