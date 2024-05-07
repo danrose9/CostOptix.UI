@@ -1,6 +1,4 @@
-import fetchInstance from './fetchInstance';
 import { BASE, FEEDBACK, DEMO_REQUEST } from './apiEndpoints';
-import { Feed } from 'semantic-ui-react';
 
 interface ApiResponse {
   response?: Response;
