@@ -8,6 +8,7 @@ export { default as LOGOWHITE } from './logo-white.png';
 export { default as ERROR404 } from './404-error.png';
 export { default as BROKENPAGE } from './broken-page.png';
 export { default as HOME_BACKGROUND } from './home-background.png';
+export { default as EXTERNAL_BACKGROUND } from './external-background.png';
 export { default as CHECKLIST } from './checklist.png';
 export { default as SUPPORT } from './support.png';
 export { default as CHECKLIST_ICON } from './icons/checklist.png';

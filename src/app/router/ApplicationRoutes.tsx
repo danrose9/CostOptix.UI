@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import * as appRoutes from './appRoutes';
 import * as page from '../../components/pages/index';
 import PrivateRoute from './PrivateRoute';
-import { TITLE } from '../constants/application';
 import { TermsOfService, PrivacyPolicy } from '../constants';
 import { useLocation } from 'react-router-dom';
 import { useTrackPageView } from 'src/hooks/useTrackPageView';
@@ -38,11 +37,9 @@ export const ApplicationRoutes = () => {
       <Route path={appRoutes.LOGIN} element={<page.Login />} />
       <Route path={appRoutes.AUTH_RESPONSE} element={<page.AuthResponse />} />
       <Route path={appRoutes.HOME} element={<page.Home />} />
-      <Route path={appRoutes.TERMS} element={<page.LegalNotice title={TITLE.TERMS} content={<TermsOfService />} />} />
-      <Route
-        path={appRoutes.PRIVACY}
-        element={<page.LegalNotice title={TITLE.PRIVACY} content={<PrivacyPolicy />} />}
-      />
+      <Route path={appRoutes.TERMS} element={<page.ExternalPage children={<TermsOfService />} />} />
+      <Route path={appRoutes.PRIVACY} element={<page.ExternalPage children={<PrivacyPolicy />} />} />
+
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
       <Route path={appRoutes.HELP_CENTER} element={<page.ExternalPage children={<HelpCenter />} />} />

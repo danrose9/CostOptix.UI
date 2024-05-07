@@ -4,11 +4,16 @@ import HomePageNav from './homepage/HomePageNav';
 import styled from 'styled-components';
 import { Container as SemanticContainer } from 'semantic-ui-react';
 import { COLORS, FONT } from 'src/app/constants';
+import { EXTERNAL_BACKGROUND } from 'src/assets/index';
 
 const ExternalPageWrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
   background-color: ${COLORS.BACKGROUND};
+  &.show-background-image {
+    background-image: url(${EXTERNAL_BACKGROUND});
+    background-size: cover;
+  }
 `;
 
 const Container = styled(SemanticContainer)`
@@ -25,10 +30,10 @@ interface ExternalPageProps {
 const ExternalPage: React.FC<ExternalPageProps> = ({ children }) => {
   return (
     <>
-      <PageContainer fluid>
+      <PageContainer fluid className="external-page">
         <HomePageNav className="nav-border" />
 
-        <ExternalPageWrapper>
+        <ExternalPageWrapper className="show-background-image">
           <Container>{children}</Container>
         </ExternalPageWrapper>
       </PageContainer>
