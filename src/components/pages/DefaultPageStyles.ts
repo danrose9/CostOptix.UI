@@ -15,6 +15,10 @@ export const PageSection = styled.div`
   &.narrow-column {
     width: 80%;
     flex-direction: column;
+  }
+  &.space-around {
+    justify-content: space-around;
+  }
 `;
 
 export const DashboardHeader = styled.div`

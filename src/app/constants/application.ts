@@ -3,7 +3,7 @@ const { version } = require('../../../package.json');
 export const APP = {
   NAME: 'CostOptix',
   VERSION: `${version}`,
-  RELEASE: 'BETA',
+  RELEASE: '', // ALPHA, BETA, RC, RELEASE
   COPYRIGHT: '© 2024 DDIWARE LTD. ALL RIGHTS RESERVED.',
 };
 

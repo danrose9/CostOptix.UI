@@ -32,9 +32,7 @@ const Navbar: React.FC<INavbarProps> = ({ onClick }) => {
           <LoginButtonGroup>
             <HomePageNavLoginWithDemo />
           </LoginButtonGroup>
-          <Menu.Item>
-            <BetaLabel color={BetaLabelColor}>Beta</BetaLabel>
-          </Menu.Item>
+          <Menu.Item>{/* <BetaLabel color={BetaLabelColor}>Beta</BetaLabel> */}</Menu.Item>
           <NavbarItems />
         </Menu.Menu>
       </StyledNavbar>

@@ -17,6 +17,7 @@ const ExternalPageWrapper = styled.div`
 `;
 
 const Container = styled(SemanticContainer)`
+  padding: 2em 0;
   p,
   li {
     color: ${FONT.SECONDARY_COLOR} !important;
