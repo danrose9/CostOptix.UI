@@ -25,10 +25,12 @@ const PricingCardHeader = styled.div`
   height: 10vh;
   align-content: center;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   p {
     font-size: 2em;
-    margin: auto 0 1em 2em;
+    margin: 1em 0 1em 2em;
     text-align: center;
   }
 `;
@@ -37,8 +39,22 @@ const CardContent = styled.div`
   padding: 1.5em;
 `;
 
+const ImageContainer = styled.div`
+  // flex: none; // Ensures that the ImageContainer doesn't grow or shrink
+  // padding-right: 1em; // Optional: Adds some spacing between the image and the text
+`;
+
+const SubscriptionTypeContainer = styled.div`
+  flex: 1; // Takes up the rest of the space in PricingCardHeader
+  display: flex;
+  justify-content: center; // Centers the content horizontally
+  align-items: center; // Centers the content vertically
+`;
+
 const Image = styled.img`
-  width: 8em;
+  width: 10vh;
+  height: auto;
+  max-width: 100%;
 `;
 
 const ChildrenContainer = styled.div`
@@ -51,7 +67,8 @@ const ChildrenContainer = styled.div`
 
 interface IPricingCardProps {
   subscriptionType?: string;
-  subscriptionStrapline?: string;
+  strapline?: string;
+  secondaryStrapline?: string;
   price?: string;
   features?: string[];
   children?: React.ReactNode;
@@ -59,16 +76,21 @@ interface IPricingCardProps {
 }
 
 export function PricingCard(props: IPricingCardProps) {
-  const { subscriptionType, image, features, subscriptionStrapline } = props;
+  const { subscriptionType, image, features, strapline, secondaryStrapline } = props;
   return (
     <Card>
       <PricingCardHeader>
-        <Image src={image} />
-        <p>{subscriptionType}</p>
+        <ImageContainer>
+          <Image src={image} />
+        </ImageContainer>
+        <SubscriptionTypeContainer>
+          <p>{subscriptionType}</p>
+        </SubscriptionTypeContainer>
+        <div style={{ width: '8em' }} />
       </PricingCardHeader>
       <CardContent>
-        <p>{subscriptionStrapline}</p>
-
+        <p>{strapline}</p>
+        <p>{secondaryStrapline}</p>
         <div>
           <List as="ul">
             {features?.map((feature, index) => (
