@@ -50,6 +50,7 @@ export const HomePageDropdown: React.FC<HomePageDropdownProps> = ({ title, items
       openOnTriggerMouseEnter
       closeOnTriggerMouseLeave
       closeOnPortalMouseLeave
+      closeOnTriggerClick
       mouseLeaveDelay={TransitionMouseLeaveDelay}
       transition={DropdownTransitionEffects}
       trigger={
@@ -69,7 +70,6 @@ export const HomePageDropdown: React.FC<HomePageDropdownProps> = ({ title, items
                 icon={item.icon}
                 header={item.title}
                 content={item.content}
-                // data-testid="privacy"
                 onClick={() => handleOnClick(item.navigate)}
               />
             );

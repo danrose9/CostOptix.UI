@@ -7,9 +7,9 @@ import { validateEmail } from 'src/utils/formValidation';
 import {
   DescriptionContainer,
   Segment,
-  Card,
+  ContactCard,
   FormContainer,
-  CardHeader,
+  ContactCardHeader,
   Message,
 } from '../components/__styles__/ExternalPageStyles';
 
@@ -110,10 +110,10 @@ export const ScheduleDemo = () => {
           </DescriptionContainer>
         </Segment>
         <Segment>
-          <Card>
-            <CardHeader>
+          <ContactCard>
+            <ContactCardHeader>
               <p>Schedule a demo today and see CostOptix in action!</p>
-            </CardHeader>
+            </ContactCardHeader>
             <FormContainer>
               <Form unstackable>
                 <Form.Group widths={2}>
@@ -163,7 +163,7 @@ export const ScheduleDemo = () => {
                 </Button>
               </Form>
             </FormContainer>
-          </Card>
+          </ContactCard>
         </Segment>
       </PageSection>
     </PageWrapper>
