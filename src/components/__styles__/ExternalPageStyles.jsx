@@ -191,7 +191,6 @@ export const Segment = styled.div`
 export const FormContainer = styled.div`
   width: 80%;
   align-self: center;
-  padding: 4vh 0;
   * label {
     font-weight: 400 !important;
     text-align: left !important;

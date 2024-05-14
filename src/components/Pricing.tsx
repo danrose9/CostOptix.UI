@@ -80,13 +80,16 @@ export const Pricing = () => {
       <PageSection className="space-around">
         <PricingCard
           image={images.TARGET}
-          subscriptionType="Free"
-          subscriptionStrapline="Completely free with no obligation. Signup and get a 1 month free trial."
+          subscriptionType="Try It"
+          strapline="Get a complete initial overview of your cost model for Azure and AWS cloud spend in as little as 10 minutes"
           features={[
-            'Full access to all features',
-            'Unlimited service connections',
-            'Free customer support',
-            'Zero obligation',
+            'Free no obligation 30 day trial',
+            'Quick, easy, initial setup',
+            'Cost overview dashboard',
+            'In depth resource cost breakdown',
+            'Cost drill-downs',
+            'Multi-service combined spend review',
+            'Free support',
           ]}
           children={
             <Button positive onClick={() => navigate(appRoutes.SIGNUP)}>
@@ -96,8 +99,9 @@ export const Pricing = () => {
         />
         <PricingCard
           image={images.CERTIFICATE}
-          subscriptionType="Flexible"
-          subscriptionStrapline="Let us help you create a flexible plan suitable for your business. "
+          subscriptionType="Buy It"
+          strapline="Start with a yearly subscription to CostOptix for as low as $999."
+          secondaryStrapline="Get full access to all features including an assigned Customer Success Manager."
           children={
             <>
               <p>Please complete the form below</p>
