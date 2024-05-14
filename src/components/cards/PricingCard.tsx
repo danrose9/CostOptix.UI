@@ -39,16 +39,13 @@ const CardContent = styled.div`
   padding: 1.5em;
 `;
 
-const ImageContainer = styled.div`
-  // flex: none; // Ensures that the ImageContainer doesn't grow or shrink
-  // padding-right: 1em; // Optional: Adds some spacing between the image and the text
-`;
+const ImageContainer = styled.div``;
 
 const SubscriptionTypeContainer = styled.div`
-  flex: 1; // Takes up the rest of the space in PricingCardHeader
+  flex: 1;
   display: flex;
-  justify-content: center; // Centers the content horizontally
-  align-items: center; // Centers the content vertically
+  justify-content: center;
+  align-items: center;
 `;
 
 const Image = styled.img`
