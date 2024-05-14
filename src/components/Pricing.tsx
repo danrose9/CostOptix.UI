@@ -105,7 +105,7 @@ export const Pricing = () => {
           children={
             <>
               <p>Please complete the form below</p>
-              <FormContainer className="full-width">
+              <FormContainer className="full-width reduce-padding">
                 <Form>
                   <Form.Group widths={2}>
                     <Form.Input placeholder="First name*" id="firstName" onChange={updateFields} value={firstName} />

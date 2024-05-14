@@ -191,6 +191,7 @@ export const Segment = styled.div`
 export const FormContainer = styled.div`
   width: 80%;
   align-self: center;
+  padding: 4vh 0;
   * label {
     font-weight: 400 !important;
     text-align: left !important;
@@ -213,9 +214,8 @@ export const FormContainer = styled.div`
   }
   &.full-width {
     width: 100% !important;
-  
   }
-
+  &.reduce-padding { padding: 2vh 0;}
 `;
 
 export const ContactCard = styled(SemanticCard)`
