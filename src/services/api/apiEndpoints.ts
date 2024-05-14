@@ -25,3 +25,5 @@ export const COST_CONTAINER_RESOURCES = 'CostContainers';
 export const DOCS = 'Docs';
 export const FEEDBACK = 'Feedback/SubmitFeedback';
 export const DEMO_REQUEST = 'Feedback/SubmitDemoRequest';
+export const PRICE_REQUEST = 'Feedback/SubmitPriceEnquiryRequest';
+export const GENERAL_ENQUIRY = 'Feedback/SubmitGeneralEnquiryRequest';

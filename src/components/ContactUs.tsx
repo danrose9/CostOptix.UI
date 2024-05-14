@@ -3,13 +3,13 @@ import PageWrapper from './pages/PageWrapper';
 import { PageSection } from './pages/DefaultPageStyles';
 import { Button, Form } from 'semantic-ui-react';
 import { validateEmail } from 'src/utils/formValidation';
-import { submitFeedback } from 'src/services/api/apiFeedback';
+import { submitEnquiry } from 'src/services/api/apiFeedback';
 import {
   DescriptionContainer,
   Segment,
-  Card,
+  ContactCard,
   FormContainer,
-  CardHeader,
+  ContactCardHeader,
   Message,
 } from '../components/__styles__/ExternalPageStyles';
 
@@ -66,7 +66,7 @@ export const ContactUs = () => {
     event.preventDefault();
     if (isFormValid) {
       const { firstName, lastName, emailAddress, comments } = formData;
-      await submitFeedback({
+      await submitEnquiry({
         contact: { firstName, lastName, email: emailAddress },
         message: comments,
         isCallbackRequested,
@@ -108,10 +108,10 @@ export const ContactUs = () => {
           </DescriptionContainer>
         </Segment>
         <Segment>
-          <Card>
-            <CardHeader>
+          <ContactCard>
+            <ContactCardHeader>
               <p>Get in contact with us if you have any questions or comments</p>
-            </CardHeader>
+            </ContactCardHeader>
             <FormContainer>
               <Form unstackable>
                 <Form.Group widths={2}>
@@ -158,7 +158,7 @@ export const ContactUs = () => {
                 </Button>
               </Form>
             </FormContainer>
-          </Card>
+          </ContactCard>
         </Segment>
       </PageSection>
     </PageWrapper>

@@ -15,3 +15,5 @@ export { default as CHECKLIST_ICON } from './icons/checklist.png';
 export { default as TRAFFIC_LIGHT_ICON } from './icons/trafficlight.png';
 export { default as MONEY_BAG_ICON } from './icons/moneybag.png';
 export { default as CHART_ICON } from './icons/chart.png';
+export { default as TARGET } from './icons/target.png';
+export { default as CERTIFICATE } from './icons/certificate.png';

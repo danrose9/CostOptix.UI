@@ -191,7 +191,6 @@ export const Segment = styled.div`
 export const FormContainer = styled.div`
   width: 80%;
   align-self: center;
-  padding: 4vh 0;
   * label {
     font-weight: 400 !important;
     text-align: left !important;
@@ -212,16 +211,21 @@ export const FormContainer = styled.div`
   .ui.form .field {
     text-align: left !important;
   }
+  &.full-width {
+    width: 100% !important;
+  
+  }
+
 `;
 
-export const Card = styled(SemanticCard)`
+export const ContactCard = styled(SemanticCard)`
   width: auto !important;
   border-radius: 25px !important;
   box-shadow: 0 0 10px 0 ${COLORS.PRIMARY} !important;
   overflow: hidden;
 `;
 
-export const CardHeader = styled.div`
+export const ContactCardHeader = styled.div`
   background-color: ${COLORS.PRIMARY};
   height: 7em;
 

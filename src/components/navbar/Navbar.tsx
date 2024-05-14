@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Label } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import { ToggleButton } from './__styles__/StyledNavbarItems';
 import { StyledNavbar } from '../../styles/AppStyles';
 import NavbarItems from './NavbarItems';
@@ -7,15 +7,9 @@ import styled from 'styled-components';
 import HomePageNavLogin from '../pages/homepage/HomePageNavLogin';
 import { withDemo } from '../hoc/withDemo';
 
-const BetaLabelColor = 'blue';
-
 interface INavbarProps {
   onClick: () => void;
 }
-
-const BetaLabel = styled(Label)`
-  font-size: 1.1em !important;
-`;
 
 const LoginButtonGroup = styled.div`
   display: flex;
@@ -32,9 +26,7 @@ const Navbar: React.FC<INavbarProps> = ({ onClick }) => {
           <LoginButtonGroup>
             <HomePageNavLoginWithDemo />
           </LoginButtonGroup>
-          <Menu.Item>
-            <BetaLabel color={BetaLabelColor}>Beta</BetaLabel>
-          </Menu.Item>
+          <Menu.Item>{/* <BetaLabel color={BetaLabelColor}>Beta</BetaLabel> */}</Menu.Item>
           <NavbarItems />
         </Menu.Menu>
       </StyledNavbar>
