@@ -9,6 +9,7 @@ import { FormContainer } from './__styles__/ExternalPageStyles';
 import * as images from '../assets/index';
 import { validateEmail } from 'src/utils/formValidation';
 import { submitPricingRequest, ContactInfo } from 'src/services/api/apiFeedback';
+import { TRIAL_LENGTH } from 'src/app/constants/application';
 
 export const Pricing = () => {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ export const Pricing = () => {
           subscriptionType="Try It"
           strapline="Get a complete initial overview of your cost model for Azure and AWS cloud spend in as little as 10 minutes"
           features={[
-            'Free no obligation 30 day trial',
+            `Free no obligation ${TRIAL_LENGTH} trial`,
             'Quick, easy, initial setup',
             'Cost overview dashboard',
             'In depth resource cost breakdown',
