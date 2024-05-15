@@ -23,3 +23,5 @@ export const TITLE = {
 };
 
 export const defaultPageSize = 10;
+
+export const TRIAL_LENGTH = '30 day';

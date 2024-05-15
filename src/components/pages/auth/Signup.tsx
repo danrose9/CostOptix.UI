@@ -17,9 +17,10 @@ import CloseButton from '../../buttons/CloseButton';
 import styled from 'styled-components';
 import LegalDeclarationsModal from 'src/components/modals/LegalDeclarationsModal';
 import { TermsOfService } from 'src/app/constants';
+import { TRIAL_LENGTH } from 'src/app/constants/application';
 
 const SignUpHeader = 'Start your trial';
-const SignUpSubHeader = 'Free 3-month trial, no obligation!';
+const SignUpSubHeader = `Free ${TRIAL_LENGTH} trial, no obligation!`;
 const SignUpDescription =
   'To get started for free, please provide the name of your organization and a contact email address.';
 const SignupFooterMessage = 'Already signed up? Log in with single sign on';
