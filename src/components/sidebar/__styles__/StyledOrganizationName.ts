@@ -9,7 +9,7 @@ export const StyledOrganizationName = styled.div`
   text-align: center;
   justify-content: center;
   align-content: center;
-  color: ${FONT.PRIMARY_COLOR};
+  color: ${FONT.TERNARY_COLOR};
   font-size: 1.2em;
   margin: auto;
   font-weight: 300;

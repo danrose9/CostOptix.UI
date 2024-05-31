@@ -1,27 +1,14 @@
 import styled from 'styled-components';
 import { Container, Menu, Card as SemanticCard, Message as SemanticMessage } from 'semantic-ui-react';
 import backgroundImage from '../../assets/home-background.png';
+import { EXTERNAL_BACKGROUND } from 'src/assets/index';
 import { COLORS, FONT } from '../../app/constants';
 
 export const PageContainer = styled(Container)`
-  overflow: hidden;
-  height: 100%;
+  overflow: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  &.home-page {
-    background-image: url(${backgroundImage});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-
-    @media only screen and (max-width: 600px) {
-      background-image: none;
-      background-color: ${COLORS.BACKGROUND};
-      margin: unset !important;
-    }
-  }
 }
 `;
 
@@ -47,6 +34,22 @@ export const HomePageMainContent = styled.div`
   }
 `;
 
+export const ExternalPageWrapper = styled.div`
+  height: 90vh;
+  overflow-y: scroll;
+  background-color: ${COLORS.BACKGROUND};
+  &.external-page {
+    background-image: url(${EXTERNAL_BACKGROUND});
+    background-size: cover;
+  }
+  &.home-page {
+    // overflow-x: hidden;
+    // background-image: url(${backgroundImage});
+    // background-size: cover;
+    // background-position: center;
+  }
+`;
+
 export const StyledHeader = styled.h1`
   color: #5f6675;
   font-size: calc(2vw + 2vh + 1vmin);
@@ -69,8 +72,17 @@ export const StyledSubHeader = styled.p`
   }
 `;
 
+export const HomePageWrapper = styled.div`
+  width: auto;
+  height: 90vh;
+  overflow-x: hidden;
+  background-image: url(${backgroundImage});
+  background-size: contain;
+  background-position: top;
+`;
+
 export const HomePageMainLeft = styled.div`
-  width: 43%;
+  width: 40vw;
   display: flex;
   flex-direction: column;
 
@@ -104,8 +116,7 @@ export const HomePageSubTitle = styled.div`
 
 export const HomePageActions = styled.div`
   flex-grow: 3;
-  position: relative;
-  left: 3em;
+  padding: 0 1.5em;
   display: flex;
 `;
 
