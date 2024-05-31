@@ -1,41 +1,37 @@
 import React from 'react';
-import { PageContainer } from '../__styles__/ExternalPageStyles';
+import { PageContainer, ExternalPageWrapper } from '../__styles__/ExternalPageStyles';
 import HomePageNav from './homepage/HomePageNav';
 import styled from 'styled-components';
-import { Container as SemanticContainer } from 'semantic-ui-react';
-import { COLORS, FONT } from 'src/app/constants';
-import { EXTERNAL_BACKGROUND } from 'src/assets/index';
+import { FONT } from 'src/app/constants';
+import ApplicationFooter from '../ApplicationFooter';
 
-const ExternalPageWrapper = styled.div`
-  height: 100%;
-  overflow-y: scroll;
-  background-color: ${COLORS.BACKGROUND};
-  &.show-background-image {
-    background-image: url(${EXTERNAL_BACKGROUND});
-    background-size: cover;
-  }
-`;
-
-const Container = styled(SemanticContainer)`
-  padding: 2em 0;
+const ChildrenContainer = styled.div`
   p,
   li {
     color: ${FONT.SECONDARY_COLOR} !important;
+  }
+  &.external-page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    padding: 2em 0;
+    min-height: 90vh;
   }
 `;
 
 interface ExternalPageProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const ExternalPage: React.FC<ExternalPageProps> = ({ children }) => {
+const ExternalPage: React.FC<ExternalPageProps> = ({ children, className = 'external-page' }) => {
   return (
     <>
-      <PageContainer fluid className="external-page">
-        <HomePageNav className="nav-border" />
-
-        <ExternalPageWrapper className="show-background-image">
-          <Container>{children}</Container>
+      <PageContainer fluid>
+        <HomePageNav className={`nav-border, ${className}`} />
+        <ExternalPageWrapper className={className}>
+          <ChildrenContainer className={className}>{children}</ChildrenContainer>
+          <ApplicationFooter />
         </ExternalPageWrapper>
       </PageContainer>
     </>

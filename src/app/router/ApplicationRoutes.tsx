@@ -10,6 +10,7 @@ import Pricing from 'src/components/Pricing';
 import HelpCenter from 'src/components/help-center/HelpCenter';
 import ContactUs from 'src/components/ContactUs';
 import ScheduleDemo from 'src/components/ScheduleDemo';
+import HomePage from 'src/components/pages/homepage/HomePage';
 
 export const HIDE_NAV_SIDEBAR_ROUTES = [
   appRoutes.HOME,
@@ -32,11 +33,11 @@ export const ApplicationRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<page.Home />} />
+      <Route path="/" element={<page.ExternalPage children={<HomePage />} className="home-page" />} />
       <Route path={appRoutes.SIGNUP} element={<page.Signup />} />
       <Route path={appRoutes.LOGIN} element={<page.Login />} />
       <Route path={appRoutes.AUTH_RESPONSE} element={<page.AuthResponse />} />
-      <Route path={appRoutes.HOME} element={<page.Home />} />
+      <Route path={appRoutes.HOME} element={<page.ExternalPage children={<HomePage />} className="home-page" />} />
       <Route path={appRoutes.TERMS} element={<page.ExternalPage children={<TermsOfService />} />} />
       <Route path={appRoutes.PRIVACY} element={<page.ExternalPage children={<PrivacyPolicy />} />} />
 

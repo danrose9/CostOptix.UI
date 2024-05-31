@@ -2,16 +2,14 @@ import React from 'react';
 import {
   StyledHeader,
   StyledSubHeader,
-  PageContainer,
-  HomePageMainContent,
   HomePageMainLeft,
   HomePageTitle,
   HomePageSubTitle,
   HomePageActions,
   HomePageButton,
+  HomePageWrapper,
 } from '../../__styles__/ExternalPageStyles';
 import { BASE, DEMO_LOGIN } from '../../../services/api/apiEndpoints';
-import HomePageNav from './HomePageNav';
 import { AppDispatch } from 'src/services/redux/store';
 import { useDispatch } from 'react-redux';
 import { setIsDemo } from '../../../services/redux/reducers/userProfileSlice';
@@ -75,23 +73,19 @@ const HomePage = () => {
 
   return (
     <>
-      <PageContainer fluid data-testid="homePage-2" className="home-page">
-        <HomePageNav />
-
-        <HomePageMainContent>
-          <HomePageMainLeft>
-            <HomePageTitle>
-              <StyledHeader>{content.TITLE}</StyledHeader>
-            </HomePageTitle>
-            {MobileMessageBox}
-            <HomePageSubTitle>
-              <StyledSubHeader>{content.SUBTITLE}</StyledSubHeader>
-            </HomePageSubTitle>
-            {LoginDemoButton}
-          </HomePageMainLeft>
-          <CookieBanner />
-        </HomePageMainContent>
-      </PageContainer>
+      <HomePageWrapper>
+        <HomePageMainLeft>
+          <HomePageTitle>
+            <StyledHeader>{content.TITLE}</StyledHeader>
+          </HomePageTitle>
+          {MobileMessageBox}
+          <HomePageSubTitle>
+            <StyledSubHeader>{content.SUBTITLE}</StyledSubHeader>
+          </HomePageSubTitle>
+          {LoginDemoButton}
+        </HomePageMainLeft>
+        <CookieBanner />
+      </HomePageWrapper>
     </>
   );
 };
