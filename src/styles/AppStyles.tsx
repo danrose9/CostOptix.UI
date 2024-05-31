@@ -6,7 +6,7 @@ interface StyledSidebarProps {
   toggleSidebar: boolean;
 }
 
-export const Container = styled.div`
+export const ApplicationContainer = styled.div`
   width: 100vw;
   display: flex;
   overflow: hidden;
@@ -43,7 +43,7 @@ export const StyledSidebar = styled.div<StyledSidebarProps>`
     `}
 `;
 
-export const Main = styled.div`
+export const ApplicationContent = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -52,17 +52,18 @@ export const Main = styled.div`
 export const StyledNavbar = styled(SemanticMenu)`
   &&& {
     background-color: ${COLORS.BACKGROUND};
-    height: 70px;
+    min-height: auto;
     margin: 0;
     align-items: center;
   }
 `;
 
 export const MainPage = styled.div`
-  overflow-y: auto !important;
+  // overflow-y: auto !important;
   background: rgb(255, 255, 255);
   background: linear-gradient(0deg, rgba(255, 255, 255, 1) 36%, rgba(174, 238, 228, 0.5503151944371498) 100%);
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   height: 100%;
+  padding: 0 0 6em;
 `;

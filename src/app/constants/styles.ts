@@ -5,6 +5,7 @@ export const COLORS = {
   HIGHLIGHT: '#DEB35B',
   LOWLIGHT: '#E4CCD9',
   BACKGROUND: '#E9F9F7',
+  BACKGROUND_IMAGE: '#E3E8F9',
   WHITE: '#FFFFFF',
   OFFWHITE: '#FAEBD7',
   //   ERROR: '#e74c3c',

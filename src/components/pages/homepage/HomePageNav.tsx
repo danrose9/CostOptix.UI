@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../app/router/appRoutes';
 import styled from 'styled-components';
 import { COLORS } from 'src/app/constants';
-// import { HomePageDropdownItems } from './HomePageDropdownItems';
 import { HomePageDropdown } from './HomePageDropdown';
 import ReactGA from 'react-ga4';
 import { eventTypes } from 'src/hooks/useTrackEvent';
@@ -17,12 +16,14 @@ import { supportDropdownItems } from './supportDropdownItems';
 const PRICING_PAGE = 'Pricing';
 
 const Navbar = styled.div`
-  height: 10%;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
-
+  &.home-page {
+    background-color: ${COLORS.BACKGROUND_IMAGE};
+  }
   &.nav-border {
     border-bottom: 2px solid ${COLORS.SECONDARY};
   }
@@ -63,7 +64,7 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
 
   return (
     <>
-      <Navbar>
+      <Navbar className={className}>
         <Menu fluid secondary color="green">
           <Menu.Item>
             <ImageWrapper>

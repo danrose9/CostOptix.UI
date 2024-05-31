@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as appRoutes from './router/appRoutes';
-import { Container, MainPage, Main } from '../styles/AppStyles';
-import ApplicationFooter from 'src/components/ApplicationFooter';
+import { ApplicationContainer, MainPage, ApplicationContent } from '../styles/AppStyles';
 import Navbar from '../components/navbar/Navbar';
 import AppSidebar from '../components/sidebar/AppSidebar';
 import ApplicationRoutes, { HIDE_NAV_SIDEBAR_ROUTES } from './router/ApplicationRoutes';
@@ -71,16 +70,15 @@ export const AppContent = () => {
         }}
       >
         <Tour shouldStart={startTour} tourType={'default'} />
-        <Container>
+        <ApplicationContainer className="application-container">
           {!shouldHideNavSidebar && <AppSidebar sidebarState={sidebarState} />}
-          <Main>
+          <ApplicationContent className="application-content">
             {!shouldHideNavSidebar && <Navbar onClick={showSidebar} />}
-            <MainPage>
+            <MainPage className="main-page">
               <ApplicationRoutes />
             </MainPage>
-            <ApplicationFooter />
-          </Main>
-        </Container>
+          </ApplicationContent>
+        </ApplicationContainer>
       </ErrorBoundary>
     </>
   );

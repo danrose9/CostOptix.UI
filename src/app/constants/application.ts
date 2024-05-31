@@ -8,7 +8,8 @@ export const APP = {
 };
 
 export const APP_FOOTER = {
-  CONTENT: `${APP.NAME} v${APP.VERSION} ${APP.RELEASE} ${APP.COPYRIGHT}`,
+  LONG: `${APP.NAME} v${APP.VERSION} ${APP.RELEASE} ${APP.COPYRIGHT}`,
+  SHORT: `${APP.RELEASE}  ${APP.COPYRIGHT}`,
 };
 
 export const ENVIRONMENT = {
