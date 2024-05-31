@@ -42,12 +42,6 @@ export const ExternalPageWrapper = styled.div`
     background-image: url(${EXTERNAL_BACKGROUND});
     background-size: cover;
   }
-  &.home-page {
-    // overflow-x: hidden;
-    // background-image: url(${backgroundImage});
-    // background-size: cover;
-    // background-position: center;
-  }
 `;
 
 export const StyledHeader = styled.h1`
@@ -77,7 +71,7 @@ export const HomePageWrapper = styled.div`
   height: 90vh;
   overflow-x: hidden;
   background-image: url(${backgroundImage});
-  background-size: contain;
+  background-size: cover;
   background-position: top;
 `;
 
