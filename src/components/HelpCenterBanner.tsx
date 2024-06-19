@@ -4,7 +4,7 @@ import { Icon, Image } from 'semantic-ui-react';
 import * as images from '../assets/index';
 import * as colors from '../app/constants';
 
-const StyledIcon = styled(Icon)`
+export const StyledIcon = styled(Icon)`
   &.icon {
     font-size: 3em;
     line-height: 1em;
@@ -51,25 +51,23 @@ const BannerWrapper = styled.div`
 interface IHelpCenterBannerProps {
   className?: string;
   heading: string;
+  image?: string;
+  strapline: string;
+  content: React.ReactNode;
 }
 
-const HelpCenterBanner: React.FC<IHelpCenterBannerProps> = ({ className, heading }) => {
+const HelpCenterBanner: React.FC<IHelpCenterBannerProps> = ({ className, heading, image, strapline, content }) => {
   return (
     <BannerWrapper>
       <SupportHeaderSection className={className}>
         <div>
           <Title>{heading}</Title>
-          <p>Want to get in touch? We'd love to hear from you. Here's is how you can reach us..</p>
+          <p>{strapline}</p>
         </div>
-        <SupportHeaderContent>
-          <StyledIcon name="talk" />
-          <p>
-            Get in contact at <a href="mailto:support@ddiware.com">support@ddiware.com</a>
-          </p>
-        </SupportHeaderContent>
+        <SupportHeaderContent>{content}</SupportHeaderContent>
       </SupportHeaderSection>
       <div>
-        <StyledImage src={images.SUPPORT} />
+        <StyledImage src={image} />
       </div>
     </BannerWrapper>
   );

@@ -1,13 +1,14 @@
 import React from 'react';
 import useFetchDocumentById from 'src/hooks/useFetchDocumentById';
-import { Document } from '../help-center/HelpCentreStyles';
+import { Document } from '../__styles__/DocumentStyles';
 import { Loader } from 'src/components/Loader';
 import { LegalDocumentWrapper } from '../__styles__/ExternalPageStyles';
+import { DOCS } from 'src/services/api/apiEndpoints';
 
 const documentId = '65c8cdbe67367cae14bbabb9';
 
 export const PrivacyPolicy = () => {
-  const { document, isLoading, error } = useFetchDocumentById(documentId);
+  const { document, isLoading, error } = useFetchDocumentById(documentId, DOCS);
 
   if (isLoading) {
     return <Loader text="Loading document.." />;

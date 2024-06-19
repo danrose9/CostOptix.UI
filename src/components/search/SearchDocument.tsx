@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useCallback, useContext } from 'react';
 import _ from 'lodash';
 import { searchReducer, initialState } from '../../reducers/searchReducer';
 import SearchInput from './SearchInput';
-import { DocumentData, DocumentType } from 'src/services/api/fetchDocs';
+import { DocumentData } from 'src/types/document-types';
+import { Document } from 'src/types/document-types';
 import { DocumentContext } from '../help-center/DocumentContext';
 
 interface ISearchDocumentProps {
@@ -45,7 +46,7 @@ const SearchDocument: React.FC<ISearchDocumentProps> = ({ placeholder, options, 
   const { setDocumentId, setCategory } = useContext(DocumentContext);
 
   const handleResultSelect = useCallback(
-    (e: any, { result }: { result: DocumentType }) => {
+    (e: any, { result }: { result: Document }) => {
       const handleSelect = (id: string, category: string) => {
         setDocumentId(id);
         setCategory(category);

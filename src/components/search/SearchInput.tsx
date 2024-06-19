@@ -6,6 +6,7 @@ const StyledSearchInput = styled(SemanticSearch)`
   &.ui.search .prompt {
     border-radius: unset !important;
   }
+  // font-size: 2em !important;
 `;
 
 interface ISearchInputProps {

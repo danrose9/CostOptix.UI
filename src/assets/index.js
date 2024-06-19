@@ -11,6 +11,7 @@ export { default as HOME_BACKGROUND } from './home-background.png';
 export { default as EXTERNAL_BACKGROUND } from './external-background.png';
 export { default as CHECKLIST } from './checklist.png';
 export { default as SUPPORT } from './support.png';
+export { default as BLOG } from './blog.png';
 export { default as CHECKLIST_ICON } from './icons/checklist.png';
 export { default as TRAFFIC_LIGHT_ICON } from './icons/trafficlight.png';
 export { default as MONEY_BAG_ICON } from './icons/moneybag.png';

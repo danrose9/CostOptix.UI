@@ -4,15 +4,18 @@ import HelpCenterBanner from '../HelpCenterBanner';
 import { COLORS } from '../../app/constants';
 import HelpCenterArticle from './HelpCenterArticle';
 import { Sidebar } from '../sidebar/Sidebar';
-import { SearchDocumentsResponseType } from 'src/services/api/fetchDocs';
-
+import { SearchDocumentsResponseType } from 'src/types/document-types';
+import * as images from '../../assets/index';
 import GetStartedDocument from './GetStartedDocument';
 import { DocumentContext } from './DocumentContext';
 import { useFetchDocumentById, useFetchDocumentCategories, useSearchDocuments } from 'src/hooks/index';
 import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
 import SearchDocument from '../search/SearchDocument';
+import { DOCS } from 'src/services/api/apiEndpoints';
+import { StyledIcon } from '../HelpCenterBanner';
 
-const HELP_CENTER = 'Help Center';
+const TITLE = 'Help Center';
+const STRAPLINE = "Want to get in touch? We'd love to hear from you. Here's is how you can reach us..";
 
 const SidebarWrapper = styled.div`
   width: 20%;
@@ -55,12 +58,12 @@ const HelpCenterWrapper = styled.div`
 export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
   const [showGetStarted, setShowGetStarted] = useState(true);
   const [searchString, setSearchString] = React.useState('');
-  const searchResponse: SearchDocumentsResponseType = useSearchDocuments({ search: searchString });
+  const searchResponse: SearchDocumentsResponseType = useSearchDocuments({ search: searchString, endpoint: DOCS });
 
   const categories = useFetchDocumentCategories();
 
   const { documentId, category, setDocumentId } = useContext(DocumentContext);
-  const documentRecord = useFetchDocumentById(documentId);
+  const documentRecord = useFetchDocumentById(documentId, DOCS);
 
   const renderGetStartedDocument = useCallback(() => {
     setShowGetStarted(true);
@@ -84,9 +87,26 @@ export const HelpCenter: React.FC<IHelpCenterProps> = ({ title }) => {
     documentRecord,
   });
 
+  const SupportHeaderContent = () => {
+    return (
+      <>
+        <StyledIcon name="talk" />
+        <p>
+          Get in contact at <a href="mailto:support@ddiware.com">support@ddiware.com</a>
+        </p>
+      </>
+    );
+  };
+
   return (
     <>
-      <HelpCenterBanner className="min-left-padding" heading={HELP_CENTER} />
+      <HelpCenterBanner
+        className="min-left-padding"
+        heading={TITLE}
+        image={images.SUPPORT}
+        strapline={STRAPLINE}
+        content={<SupportHeaderContent />}
+      />
       <HelpCenterWrapper>
         <SidebarWrapper>
           <SearchDocument placeholder="Search" options={searchResponse.documents} setSearchString={setSearchString} />

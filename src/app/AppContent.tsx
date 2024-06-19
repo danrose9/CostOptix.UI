@@ -3,7 +3,7 @@ import * as appRoutes from './router/appRoutes';
 import { ApplicationContainer, MainPage, ApplicationContent } from '../styles/AppStyles';
 import Navbar from '../components/navbar/Navbar';
 import AppSidebar from '../components/sidebar/AppSidebar';
-import ApplicationRoutes, { HIDE_NAV_SIDEBAR_ROUTES } from './router/ApplicationRoutes';
+import ApplicationRoutes, { SHOW_NAV_SIDEBAR_ROUTES } from './router/ApplicationRoutes';
 import { useIdleTimer } from 'react-idle-timer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ErrorDefault from '../components/pages/ErrorDefault';
@@ -57,7 +57,7 @@ export const AppContent = () => {
     }
   }, [startTimer, start, pause]);
 
-  const shouldHideNavSidebar = HIDE_NAV_SIDEBAR_ROUTES.includes(location.pathname);
+  const showNavSidebar = SHOW_NAV_SIDEBAR_ROUTES.includes(location.pathname);
 
   return (
     <>
@@ -71,9 +71,9 @@ export const AppContent = () => {
       >
         <Tour shouldStart={startTour} tourType={'default'} />
         <ApplicationContainer className="application-container">
-          {!shouldHideNavSidebar && <AppSidebar sidebarState={sidebarState} />}
+          {showNavSidebar && <AppSidebar sidebarState={sidebarState} />}
           <ApplicationContent className="application-content">
-            {!shouldHideNavSidebar && <Navbar onClick={showSidebar} />}
+            {showNavSidebar && <Navbar onClick={showSidebar} />}
             <MainPage className="main-page">
               <ApplicationRoutes />
             </MainPage>

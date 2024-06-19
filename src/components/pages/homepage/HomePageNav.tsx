@@ -14,6 +14,7 @@ import HomePageNavLogin from './HomePageNavLogin';
 import { supportDropdownItems } from './supportDropdownItems';
 
 const PRICING_PAGE = 'Pricing';
+const BLOGS = 'Blogs';
 
 const Navbar = styled.div`
   height: 10vh;
@@ -55,6 +56,13 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
       >
         {PRICING_PAGE}
       </HomePageButton>
+      {/* <HomePageButton
+        className="transparent shift-right"
+        onClick={() => handleButtonClick(appRoutes.BLOGS, eventTypes.BLOGS_BUTTON_CLICK)}
+        role="button"
+      >
+        {BLOGS}
+      </HomePageButton> */}
       <HomePageDropdown title="Support" items={supportDropdownItems} />
       <HomePageNavLogin />
     </Menu.Menu>,
