@@ -13,8 +13,8 @@ const ChildrenContainer = styled.div`
   &.external-page {
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
-    padding: 2em 0;
+    width: 60%;
+    padding: 0;
     min-height: 90vh;
   }
 `;

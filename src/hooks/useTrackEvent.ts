@@ -9,6 +9,7 @@ export const eventTypes = {
   SIGNUP_BUTTON: 'signup_button',
   HELP_CENTER_BUTTON_CLICK: 'hc_button_click',
   PRICING_PAGE_BUTTON_CLICK: 'pricing_page_button_click',
+  BLOGS_BUTTON_CLICK: 'blogs_button_click',
 };
 
 export const userTypes = {

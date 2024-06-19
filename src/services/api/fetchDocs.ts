@@ -1,44 +1,7 @@
 import { DOCS, BASE } from './apiEndpoints';
 
-export type DocumentType = {
-  adoFilePath: string;
-  category: string;
-  htmlContent: string;
-  id: string;
-  lastUpdatedDate: string;
-  summary: string;
-  tags: string[] | null;
-  title: string;
-};
-
-type Category = {
-  name: string;
-  documents: DocumentType[];
-};
-
-export type DocumentStructure = {
-  [key: string]: Category;
-};
-
-export type DocumentData = {
-  totalCount: number;
-  data: DocumentStructure;
-};
-
-export type SearchDocumentsResponseType = {
-  documents: DocumentData;
-  error?: any;
-  isLoading: boolean;
-};
-
-export interface SearchDocsParams {
-  search?: string;
-  top?: number | undefined;
-  skip?: number | undefined;
-}
-
-export const fetchDocById = async (documentId: string) => {
-  const url = `${BASE}${DOCS}/${documentId}`;
+export const fetchDocById = async (documentId: string, endpoint: string) => {
+  const url = `${BASE}${endpoint}/${documentId}`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -55,14 +18,14 @@ export const fetchDocById = async (documentId: string) => {
   }
 };
 
-export const searchDocs = async ({ search = '', top = 10, skip = 0 } = {}) => {
+export const searchDocs = async ({ search = '', top = 10, skip = 0, endpoint = DOCS } = {}) => {
   const queryParams = new URLSearchParams({
     $search: search,
     $top: String(top),
     $skip: String(skip),
   });
 
-  const url = `${BASE}${DOCS}?${queryParams.toString()}`;
+  const url = `${BASE}${endpoint}?${queryParams.toString()}`;
 
   const response = await fetch(url, {
     method: 'GET',

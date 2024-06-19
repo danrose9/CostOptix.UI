@@ -11,19 +11,18 @@ import HelpCenter from 'src/components/help-center/HelpCenter';
 import ContactUs from 'src/components/ContactUs';
 import ScheduleDemo from 'src/components/ScheduleDemo';
 import HomePage from 'src/components/pages/homepage/HomePage';
+import Blogs from 'src/components/blogs/Blogs';
+import Blog from 'src/components/blogs/Blog';
 
-export const HIDE_NAV_SIDEBAR_ROUTES = [
-  appRoutes.HOME,
-  appRoutes.LOGIN,
-  appRoutes.SIGNUP,
-  appRoutes.NOT_FOUND_404_PAGE,
-  appRoutes.DEFAULT_ERROR_PAGE,
-  appRoutes.TERMS,
-  appRoutes.PRIVACY,
-  appRoutes.HELP_CENTER,
-  appRoutes.CONTACT_PAGE,
-  appRoutes.PRICING_PAGE,
-  appRoutes.SCHEDULE_DEMO,
+export const SHOW_NAV_SIDEBAR_ROUTES = [
+  appRoutes.QUERYFILTER,
+  appRoutes.SETTINGS,
+  appRoutes.COST_DASHBOARD,
+  appRoutes.RESOURCES,
+  appRoutes.RESOURCE_VIEW,
+  appRoutes.QUERYFILTER,
+  appRoutes.COST_CONTAINERS,
+  appRoutes.SERVICE_PROVIDERS,
 ];
 
 export const ApplicationRoutes = () => {
@@ -44,6 +43,9 @@ export const ApplicationRoutes = () => {
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
       <Route path={appRoutes.HELP_CENTER} element={<page.ExternalPage children={<HelpCenter />} />} />
+      <Route path={appRoutes.BLOGS} element={<page.ExternalPage children={<Blogs />} />} />
+      <Route path={appRoutes.BLOG} element={<page.ExternalPage children={<Blog />} />} />
+
       <Route path={appRoutes.PRICING_PAGE} element={<page.ExternalPage children={<Pricing />} />} />
       <Route path={appRoutes.CONTACT_PAGE} element={<page.ExternalPage children={<ContactUs />} />} />
       <Route path={appRoutes.SCHEDULE_DEMO} element={<page.ExternalPage children={<ScheduleDemo />} />} />
