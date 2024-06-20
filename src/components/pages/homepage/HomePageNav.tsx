@@ -49,20 +49,20 @@ export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
   const HomePageActionButtons = useMobileDevice(
     <Menu.Menu position="right">
       <HomePageButton
-        className="transparent shift-right"
+        className="transparent"
         onClick={() => handleButtonClick(appRoutes.PRICING_PAGE, eventTypes.PRICING_PAGE_BUTTON_CLICK)}
         role="button"
         data-testid="support-button"
       >
         {PRICING_PAGE}
       </HomePageButton>
-      {/* <HomePageButton
+      <HomePageButton
         className="transparent shift-right"
         onClick={() => handleButtonClick(appRoutes.BLOGS, eventTypes.BLOGS_BUTTON_CLICK)}
         role="button"
       >
         {BLOGS}
-      </HomePageButton> */}
+      </HomePageButton>
       <HomePageDropdown title="Support" items={supportDropdownItems} />
       <HomePageNavLogin />
     </Menu.Menu>,
