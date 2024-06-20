@@ -2,12 +2,10 @@ import React from 'react';
 import { Label, SemanticCOLORS } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-const TAGS = {
-  DEFAULT: 'green' as SemanticCOLORS,
-};
-
 const tagColors: { [key: string]: SemanticCOLORS } = {
-  default: TAGS.DEFAULT,
+  Azure: 'blue',
+  AWS: 'yellow',
+  default: 'green',
 };
 const BlogTagsSection = styled.div`
   display: flex;
