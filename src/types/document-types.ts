@@ -1,30 +1,21 @@
 export type Document = {
-  adoFilePath: string;
-  category: string;
-  htmlContent: string;
-  id: string;
-  lastUpdatedDate: string;
-  summary: string;
-  tags: string[] | null;
-  title: string;
-};
-
-export type Blog = {
   id: string;
   adoFilePath: string;
+  author?: string;
+  webPath?: string;
   title: string;
   lastUpdatedDate: string;
-  createdDate: string;
+  createdDate?: string;
   category: string;
   tags: string[] | null;
   summary: string;
   htmlContent: string;
-  lengthInMinutes: number;
+  lengthInMinutes?: number;
 };
 
 export type Category = {
   name: string;
-  documents: Document[] | Blog[];
+  documents: Document[];
 };
 
 export type DocumentStructure = {

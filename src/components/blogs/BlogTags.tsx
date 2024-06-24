@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const tagColors: { [key: string]: SemanticCOLORS } = {
   Azure: 'blue',
   AWS: 'yellow',
+  Google: 'red',
   default: 'green',
 };
 const BlogTagsSection = styled.div`

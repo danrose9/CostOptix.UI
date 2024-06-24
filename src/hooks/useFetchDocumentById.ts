@@ -12,7 +12,7 @@ const useFetchDocumentById = (documentId: string, endpoint: string) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const data = await fetchDocById(documentId, endpoint);
+        const data = await fetchDocById({ documentId, endpoint });
         setDocument(data);
       } catch (error: any) {
         setError(error.message);

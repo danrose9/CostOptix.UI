@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaginationProps } from 'semantic-ui-react';
 import { PaginationContainer, RowCounter, PageSelector } from '../../styles/StyledPageLoader';
-import { usePagination } from './PaginationContext';
+import { usePagination } from '../tables/PaginationContext';
 
 interface ITablePaginationProps {
   totalItems: number;

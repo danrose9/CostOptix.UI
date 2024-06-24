@@ -8,7 +8,7 @@ import {
   TableTitle,
   TableDescription,
 } from './DefaultTableStyles';
-import TablePagination from './TablePagination';
+import TablePagination from '../pagination/TablePagination';
 import TableActionBar from './TableActionBar';
 import TableHeaderOptions from './TableHeaderOptions';
 import { Loader } from '../Loader';

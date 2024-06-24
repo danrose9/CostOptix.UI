@@ -1,6 +1,9 @@
-import { DOCS, BASE } from './apiEndpoints';
+import { DOCS, BLOGS, BASE } from './apiEndpoints';
 
-export const fetchDocById = async (documentId: string, endpoint: string) => {
+type DocumentType = { documentId: string; endpoint: string };
+
+export const fetchDocById = async (args: DocumentType) => {
+  const { documentId, endpoint } = args;
   const url = `${BASE}${endpoint}/${documentId}`;
 
   const response = await fetch(url, {

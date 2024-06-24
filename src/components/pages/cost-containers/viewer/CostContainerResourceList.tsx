@@ -2,7 +2,7 @@ import React from 'react';
 import { IResource } from '../../../../types/resource-types';
 import { Table, Header } from 'semantic-ui-react';
 import { ProviderImage } from '../../../ProviderImage';
-import TablePagination from '../../../tables/TablePagination';
+import TablePagination from '../../../pagination/TablePagination';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from '../../../../app/router/appRoutes';
 import { RESET_ISAVAILABLE } from '../../../../services/redux/reducers/resourceSlice';
