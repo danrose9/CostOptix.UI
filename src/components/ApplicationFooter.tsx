@@ -28,11 +28,6 @@ const footerLinks = [
         path: appRoutes.LOGIN,
         active: true,
       },
-      {
-        title: 'Blog',
-        path: appRoutes.LOGIN,
-        active: false,
-      },
     ],
   },
   {
@@ -41,6 +36,11 @@ const footerLinks = [
       {
         title: 'Help Center',
         path: appRoutes.HELP_CENTER,
+        active: true,
+      },
+      {
+        title: 'Blogs',
+        path: appRoutes.BLOGS,
         active: true,
       },
     ],
