@@ -45,12 +45,13 @@ const Blogs: React.FC<IBlogProps> = () => {
         image={images.BLOG}
       />
       <BlogSection blogs={searchResponse.documents} />
-
-      <DocumentPagination
-        totalDocuments={totalCount}
-        isLoading={searchResponse.isLoading}
-        handlePageChange={handlePageChange}
-      />
+      {totalCount <= top ? null : (
+        <DocumentPagination
+          totalDocuments={totalCount}
+          isLoading={searchResponse.isLoading}
+          handlePageChange={handlePageChange}
+        />
+      )}
     </>
   );
 };
