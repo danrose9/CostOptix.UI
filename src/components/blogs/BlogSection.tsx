@@ -39,8 +39,6 @@ const BlogFooterSection = styled.div`
   border-bottom: 1px solid ${COLORS.HIGHLIGHT};
 `;
 
-const BlogAuthorSection = styled.div``;
-
 interface IBlogSectionProps {
   blogs?: DocumentData;
 }

@@ -1,4 +1,4 @@
-import { DOCS, BLOGS, BASE } from './apiEndpoints';
+import { DOCS, BASE } from './apiEndpoints';
 
 type DocumentType = { documentId: string; endpoint: string };
 

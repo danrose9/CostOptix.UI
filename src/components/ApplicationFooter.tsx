@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import { COLORS, FONT } from '../app/constants';
 import { APP_FOOTER } from '../app/constants';
 import * as appRoutes from '../app/router/appRoutes';
-import { ProductName } from './ProductName';
 import * as images from '../assets/index';
-import { useNavigate } from 'react-router-dom';
 
 const socialMediaLinks: { [key: string]: { name: SemanticICONS; link: string } } = {
   YOUTUBE: {
@@ -136,8 +134,6 @@ interface IApplicationFooterProps {
 }
 
 const ApplicationFooter: React.FC<IApplicationFooterProps> = ({ content }) => {
-  const navigate = useNavigate();
-
   const onSocialMediaClick = (link: string) => {
     window.open(link, '_blank');
   };
