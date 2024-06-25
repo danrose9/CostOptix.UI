@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Icon, Image } from 'semantic-ui-react';
-import * as images from '../assets/index';
 import * as colors from '../app/constants';
 
 export const StyledIcon = styled(Icon)`
