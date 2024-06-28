@@ -65,5 +65,5 @@ export const MainPage = styled.div`
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   height: 100%;
-  padding: 0 0 6em;
+  overflow: auto;
 `;

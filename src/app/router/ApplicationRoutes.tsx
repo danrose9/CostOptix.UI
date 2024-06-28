@@ -13,6 +13,7 @@ import ScheduleDemo from 'src/components/ScheduleDemo';
 import HomePage from 'src/components/pages/homepage/HomePage';
 import Blogs from 'src/components/blogs/Blogs';
 import Blog from 'src/components/blogs/Blog';
+import InternalHelpPageWrapper from 'src/components/pages/InternalHelpPageWrapper';
 
 export const SHOW_NAV_SIDEBAR_ROUTES = [
   appRoutes.QUERYFILTER,
@@ -23,6 +24,7 @@ export const SHOW_NAV_SIDEBAR_ROUTES = [
   appRoutes.QUERYFILTER,
   appRoutes.COST_CONTAINERS,
   appRoutes.SERVICE_PROVIDERS,
+  appRoutes.INTERNAL_HELP_PAGE,
 ];
 
 export const ApplicationRoutes = () => {
@@ -43,6 +45,7 @@ export const ApplicationRoutes = () => {
       <Route path={appRoutes.INITIALIZE_APP} element={<page.InitializeApp />} />
       <Route path={appRoutes.LANDING_PAGE} element={<page.LandingPage />} />
       <Route path={appRoutes.HELP_CENTER} element={<page.ExternalPage children={<HelpCenter />} />} />
+      <Route path={appRoutes.INTERNAL_HELP_PAGE} element={<InternalHelpPageWrapper />} />
       <Route path={appRoutes.BLOGS} element={<page.ExternalPage children={<Blogs />} />} />
       <Route path={appRoutes.BLOG} element={<page.ExternalPage children={<Blog />} />} />
 
@@ -98,7 +101,7 @@ export const ApplicationRoutes = () => {
         }
       />
       <Route
-        path={appRoutes.HELP_PAGE}
+        path={appRoutes.INTERNAL_HELP_PAGE}
         element={
           <PrivateRoute>
             <page.HelpPage />

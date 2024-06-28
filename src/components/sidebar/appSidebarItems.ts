@@ -141,7 +141,7 @@ export const appSidebarItems: ISidebarItem[] = [
   },
   {
     title: 'Help Center',
-    path: appRoutes.HELP_PAGE,
+    path: appRoutes.INTERNAL_HELP_PAGE,
     icon: 'help',
     active: true,
     extra: true,
