@@ -42,6 +42,7 @@ const StyledImage = styled(Image)`
 `;
 
 const BannerWrapper = styled.div`
+  padding: 2em 0;
   display: flex;
   justify-content: space-between;
   color: ${colors.FONT.PRIMARY_COLOR};
