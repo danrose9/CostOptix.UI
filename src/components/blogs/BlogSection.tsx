@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Category } from 'src/types/document-types';
 import BlogInformation from './BlogInformation';
-import { DocumentData } from 'src/types/document-types';
 import { COLORS } from 'src/app/constants';
 import { useNavigate } from 'react-router-dom';
 import * as appRoutes from 'src/app/router/appRoutes';
+import DocumentPagination from '../pagination/DocumentPagination';
+import { SearchDocumentsResponseType } from 'src/types/document-types';
+import { useSearchDocuments } from 'src/hooks/index';
+import { BLOGS } from 'src/services/api/apiEndpoints';
+import { PaginationProps } from 'semantic-ui-react';
 
 const BlogContainer = styled(Container)`
   margin: 1em;
@@ -39,13 +43,23 @@ const BlogFooterSection = styled.div`
   border-bottom: 1px solid ${COLORS.HIGHLIGHT};
 `;
 
-interface IBlogSectionProps {
-  blogs?: DocumentData;
-}
+const BlogSection = () => {
+  const top = 10;
+  const [skip, setSkip] = useState(0);
+  const fetchBlogs: SearchDocumentsResponseType = useSearchDocuments({
+    search: ' ',
+    top: top,
+    skip: skip,
+    endpoint: BLOGS,
+  });
 
-const BlogSection: React.FC<IBlogSectionProps> = ({ blogs }) => {
+  const handlePageChange = (event: React.MouseEvent<HTMLAnchorElement>, data: PaginationProps) => {
+    setSkip((data.activePage as number) * top - 10);
+  };
+
   const navigate = useNavigate();
-  if (!blogs || !blogs.data) {
+
+  if (!fetchBlogs.documents || !fetchBlogs.documents.data) {
     return <div>Loading...</div>;
   }
 
@@ -55,7 +69,7 @@ const BlogSection: React.FC<IBlogSectionProps> = ({ blogs }) => {
 
   return (
     <>
-      {Object.values(blogs.data).map((category: Category) =>
+      {Object.values(fetchBlogs.documents.data).map((category: Category) =>
         category.documents.map((document) => (
           <BlogSectionContainer key={document.id} onClick={() => handleClick(document.webPath)}>
             <BlogContainer>
@@ -70,6 +84,8 @@ const BlogSection: React.FC<IBlogSectionProps> = ({ blogs }) => {
           </BlogSectionContainer>
         ))
       )}
+
+      <DocumentPagination totalDocuments={20} isLoading={false} handlePageChange={handlePageChange} />
     </>
   );
 };

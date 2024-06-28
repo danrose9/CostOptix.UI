@@ -50,6 +50,7 @@ const SearchDocument: React.FC<ISearchDocumentProps> = ({ placeholder, options, 
       const handleSelect = (id: string, category: string) => {
         setDocumentId(id);
         setCategory(category);
+        // console.log('Selected Document: ', result);
       };
 
       handleSelect(result.id, result.category);

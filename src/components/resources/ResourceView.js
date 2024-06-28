@@ -13,6 +13,7 @@ import { reduxState } from '../../services/redux/reduxState';
 import { currencySymbol } from '../../utils/helper';
 import { DashboardCardGroup } from '../__styles__/CardStyles';
 import { formatGrowthValue } from '../../utils/valueFormatter';
+import WarningMessage from '../messages/WarningMessage';
 
 const dashboardCards = [
   {
@@ -40,14 +41,17 @@ export const ResourceView = () => {
   const resource = location.state.resource;
 
   const dispatch = useDispatch();
-  const { data, isLoading, isAvailable } = useSelector((state) => state[reduxState.RESOURCES]).view;
+  const { data, error, isLoading, isAvailable } = useSelector((state) => state[reduxState.RESOURCES]).view;
 
+  console.log('xxx', error);
   const args = `${resource.billingAccountId}/${resource.id}`;
 
   const RenderView = () => {
     return (
       <>
-        {data.length === 0 ? null : (
+        {error || data.length === 0 ? (
+          <WarningMessage content="Oops! seems there is a problem reading data for that resource, please try again!" />
+        ) : (
           <>
             <Grid data-testid="resource-view">
               <Grid.Row centered columns={3}>
