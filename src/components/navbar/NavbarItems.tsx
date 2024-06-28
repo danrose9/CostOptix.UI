@@ -43,7 +43,7 @@ export const NavbarItems = () => {
       key: 'help',
       text: 'Help',
       image: <SemanticIcon name="help" color="green" />,
-      onClick: () => navigate(appRoutes.HELP_PAGE),
+      onClick: () => navigate(appRoutes.INTERNAL_HELP_PAGE),
     },
     {
       id: 3,
