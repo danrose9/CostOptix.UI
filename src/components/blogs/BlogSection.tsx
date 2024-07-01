@@ -53,6 +53,8 @@ const BlogSection = () => {
     endpoint: BLOGS,
   });
 
+  const blogCount = fetchBlogs.documents?.totalCount || 0;
+
   const handlePageChange = (event: React.MouseEvent<HTMLAnchorElement>, data: PaginationProps) => {
     setSkip((data.activePage as number) * top - 10);
   };
@@ -84,8 +86,9 @@ const BlogSection = () => {
           </BlogSectionContainer>
         ))
       )}
-
-      <DocumentPagination totalDocuments={20} isLoading={false} handlePageChange={handlePageChange} />
+      {blogCount <= top ? null : (
+        <DocumentPagination totalDocuments={blogCount} isLoading={false} handlePageChange={handlePageChange} />
+      )}
     </>
   );
 };
