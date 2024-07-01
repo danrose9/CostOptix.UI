@@ -9,10 +9,10 @@ const SegmentWrapper = styled.div`
 `;
 
 const DOCUMENT = {
-  SETUP: '65f6ce12d771f28cb3a17878',
-  CONNECT_CLOUD: '65c8cdbe67367cae14bbabbb',
-  COST_CONTAINER: '65c8cdbe67367cae14bbabbc',
-  ANALYZE_SPEND: '65e9bb10ab0e70a192c0703b',
+  SETUP: '665a40047178639a4f388427',
+  CONNECT_CLOUD: '665a40057178639a4f388429',
+  COST_CONTAINER: '665a40057178639a4f38842b',
+  ANALYZE_SPEND: '665a40057178639a4f388428',
 };
 
 const GetStartedDocument = () => {
