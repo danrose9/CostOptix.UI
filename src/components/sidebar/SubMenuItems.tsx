@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StyledSubMenu, StyledSpan, StyledMenuItem } from './__styles__/StyledSidebarItems';
 import './__styles__/sidebar.css';
 import { ISubmenuItem } from 'src/types/menu-types';
-import { DocumentContext } from '../help-center/DocumentContext';
+import { DocumentContext } from '../context/DocumentContext';
 
 interface ISubMenuItemsProps {
   submenuItems: ISubmenuItem[];
@@ -14,8 +14,8 @@ const SubMenuItems: React.FC<ISubMenuItemsProps> = ({ submenuItems, dropdown, cl
   const { setDocumentId, setCategory } = useContext(DocumentContext);
 
   // passing back the category and documentId to the parent component to set breadcrumb and render document
-  const handleSelect = (id: string, category: string) => {
-    setDocumentId(id);
+  const handleSelect = (webPath: string, category: string) => {
+    setDocumentId(webPath);
     setCategory(category);
   };
 
@@ -27,9 +27,9 @@ const SubMenuItems: React.FC<ISubMenuItemsProps> = ({ submenuItems, dropdown, cl
           <StyledMenuItem
             key={index}
             onClick={() => {
-              if (item.id !== undefined) {
-                if (item.id !== undefined && item.category !== undefined) {
-                  handleSelect(item.id, item.category);
+              if (item.webPath !== undefined) {
+                if (item.webPath !== undefined && item.category !== undefined) {
+                  handleSelect(item.webPath, item.category);
                 }
               }
             }}

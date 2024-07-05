@@ -7,7 +7,7 @@ import { Sidebar } from '../sidebar/Sidebar';
 import { SearchDocumentsResponseType } from 'src/types/document-types';
 import * as images from '../../assets/index';
 import GetStartedDocument from './GetStartedDocument';
-import { DocumentContext } from './DocumentContext';
+import { DocumentContext } from '../context/DocumentContext';
 import { useFetchDocumentById, useFetchDocumentCategories, useSearchDocuments } from 'src/hooks/index';
 import Breadcrumb, { buildBreadcrumbSections } from '../Breadcrumb';
 import SearchDocument from '../search/SearchDocument';

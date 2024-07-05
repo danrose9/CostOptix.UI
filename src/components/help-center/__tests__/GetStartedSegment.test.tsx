@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { GetStartedSegment } from '../GetStartedSegment';
-import { DocumentContext } from '../DocumentContext';
+import { DocumentContext } from '../../context/DocumentContext';
 
 // Mock for the context provider value
 const mockSetDocumentId = jest.fn();

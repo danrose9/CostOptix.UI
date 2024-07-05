@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { DocumentProvider, useDocument } from '../DocumentContext';
+import { DocumentProvider, useDocument } from '../../context/DocumentContext';
 
 // Mock component that uses the useDocument hook
 const MockConsumerComponent = () => {

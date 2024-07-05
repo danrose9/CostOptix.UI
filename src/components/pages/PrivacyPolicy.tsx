@@ -5,7 +5,7 @@ import { Loader } from 'src/components/Loader';
 import { LegalDocumentWrapper } from '../__styles__/ExternalPageStyles';
 import { DOCS } from 'src/services/api/apiEndpoints';
 
-const documentId = '665a40047178639a4f388426';
+const documentId = 'Legal-Privacy-Policy';
 
 export const PrivacyPolicy = () => {
   const { document, isLoading, error } = useFetchDocumentById(documentId, DOCS);

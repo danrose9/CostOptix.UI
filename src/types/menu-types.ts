@@ -13,6 +13,7 @@ export interface ISidebarItem {
 
 export interface ISubmenuItem {
   id?: string;
+  webPath?: string;
   title?: string;
   path?: string;
   icon?: string;

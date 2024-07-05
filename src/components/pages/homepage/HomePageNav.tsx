@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { HomePageButton } from '../../__styles__/ExternalPageStyles';
 import { Image, Menu } from 'semantic-ui-react';
 import * as images from '../../../assets/index';
@@ -12,6 +12,7 @@ import { eventTypes } from 'src/hooks/useTrackEvent';
 import { useMobileDevice } from 'src/hooks/useMobileDevice';
 import HomePageNavLogin from './HomePageNavLogin';
 import { supportDropdownItems } from './supportDropdownItems';
+import { DocumentContext } from '../../context/DocumentContext';
 
 const PRICING_PAGE = 'Pricing';
 const BLOGS = 'Blogs';
@@ -40,8 +41,10 @@ interface INavbarProps {
 
 export const HomePageNav: React.FC<INavbarProps> = ({ className }) => {
   const navigate = useNavigate();
+  const { setDocumentId } = useContext(DocumentContext);
 
   const handleButtonClick = (route: string, eventType: string) => {
+    setDocumentId('');
     ReactGA.event(eventType);
     navigate(route);
   };
