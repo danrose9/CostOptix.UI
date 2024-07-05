@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Segment as SemanticSegment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { COLORS } from 'src/app/constants';
-import { DocumentContext } from './DocumentContext';
+import { DocumentContext } from '../context/DocumentContext';
 
 interface IGetStartedSegmentProps {
   heading: string;

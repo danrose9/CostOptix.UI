@@ -19,6 +19,7 @@ const useFetchDocumentCategories = () => {
           title: category,
           items: response.data[category].documents.map((doc: ISubmenuItem) => ({
             id: doc.id,
+            webPath: doc.webPath,
             title: doc.title,
             category: doc.category,
             active: true,

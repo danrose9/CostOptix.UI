@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ApplicationContextProvider } from './app/ApplicationContext';
-import { DocumentProvider } from './components/help-center/DocumentContext';
+import { DocumentProvider } from './components/context/DocumentContext';
 import AppContent from './app/AppContent';
 
 export const App = () => {

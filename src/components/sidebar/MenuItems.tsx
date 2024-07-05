@@ -12,7 +12,6 @@ interface IMenuItemsProps {
 
 const MenuItems: React.FC<IMenuItemsProps> = ({ items, showIcon, className }) => {
   const [dropdown, setDropdown] = useState(false);
-
   let ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { searchReducer, initialState } from '../../reducers/searchReducer';
 import SearchInput from './SearchInput';
 import { DocumentData } from 'src/types/document-types';
 import { Document } from 'src/types/document-types';
-import { DocumentContext } from '../help-center/DocumentContext';
+import { DocumentContext } from '../context/DocumentContext';
 
 interface ISearchDocumentProps {
   placeholder?: string;
@@ -38,6 +38,7 @@ const SearchDocument: React.FC<ISearchDocumentProps> = ({ placeholder, options, 
           title: doc.title,
           category: doc.category,
           id: doc.id,
+          webPath: doc.webPath,
         })),
       };
     });
@@ -46,15 +47,23 @@ const SearchDocument: React.FC<ISearchDocumentProps> = ({ placeholder, options, 
   const { setDocumentId, setCategory } = useContext(DocumentContext);
 
   const handleResultSelect = useCallback(
+    /*
+      webPath throws this error.
+      Warning: React does not recognize the `webPath` prop on a DOM element.
+      If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `webpath` instead.
+    */
     (e: any, { result }: { result: Document }) => {
-      const handleSelect = (id: string, category: string) => {
-        setDocumentId(id);
+      const handleSelect = (webPath: string, category: string) => {
+        console.log('webPath', webPath);
+        setDocumentId(webPath);
         setCategory(category);
-        // console.log('Selected Document: ', result);
       };
 
-      handleSelect(result.id, result.category);
+      handleSelect(result.webPath!, result.category);
       dispatch({ type: 'UPDATE_SELECTION', selection: result.title });
+
+      // clear the search query
+      dispatch({ type: 'CLEAN_QUERY' });
     },
     [setDocumentId, setCategory]
   );

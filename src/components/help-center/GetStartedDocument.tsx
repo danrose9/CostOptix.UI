@@ -9,10 +9,10 @@ const SegmentWrapper = styled.div`
 `;
 
 const DOCUMENT = {
-  SETUP: '665a40047178639a4f388427',
-  CONNECT_CLOUD: '665a40057178639a4f388429',
-  COST_CONTAINER: '665a40057178639a4f38842b',
-  ANALYZE_SPEND: '665a40057178639a4f388428',
+  SETUP: 'User-Guides-Setup',
+  CONNECT_CLOUD: 'User-Guides-Add-Azure-Service-Connection',
+  COST_CONTAINER: 'User-Guides-Working-With-Cost-Containers',
+  ANALYZE_SPEND: 'User-Guides-cost-dashboard',
 };
 
 const GetStartedDocument = () => {
